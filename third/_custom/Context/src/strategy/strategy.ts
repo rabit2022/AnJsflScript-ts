@@ -20,7 +20,8 @@ interface StrategyConfig<T extends any[] = any[], R = any> {
 /**
  * 优先级策略项接口
  */
-interface PriorityStrategy<T extends any[] = any[], R = any> extends StrategyConfig<T, R> {
+interface PriorityStrategy<T extends any[] = any[], R = any>
+    extends StrategyConfig<T, R> {
     priority: number;
 }
 
@@ -37,8 +38,8 @@ class StrategyManager<T extends any[] = any[], R = any> {
     constructor() {
         this.strategies = {
             default: () => {
-                throw new Error('未知的策略类型');
-            },
+                throw new Error("未知的策略类型");
+            }
         };
     }
 
@@ -49,11 +50,11 @@ class StrategyManager<T extends any[] = any[], R = any> {
      * @returns 返回当前实例以支持链式调用
      */
     add(name: StrategyName, strategy: StrategyFunction<T, R>): this {
-        if (typeof strategy !== 'function') {
-            throw new TypeError('策略必须是函数');
+        if (typeof strategy !== "function") {
+            throw new TypeError("策略必须是函数");
         }
-        if (!name || typeof name !== 'string') {
-            throw new TypeError('策略名称必须是非空字符串');
+        if (!name || typeof name !== "string") {
+            throw new TypeError("策略名称必须是非空字符串");
         }
         this.strategies[name] = strategy;
         return this;
@@ -150,7 +151,11 @@ class PriorityStrategyManager<T extends any[], R = any> extends StrategyManager<
      * @param priority 优先级（数值越大优先级越高）
      * @returns 返回当前实例以支持链式调用
      */
-    addPriority(name: StrategyName, strategy: StrategyFunction<T, R>, priority: number): this {
+    addPriority(
+        name: StrategyName,
+        strategy: StrategyFunction<T, R>,
+        priority: number
+    ): this {
         this.priorityStrategies.push({ name, fn: strategy, priority });
         this.priorityStrategies.sort((a, b) => b.priority - a.priority);
         return this;
@@ -206,9 +211,14 @@ class CompositeStrategyManager<T extends any[], R = any> extends StrategyManager
                 const nArgs = [result as T[0], ...args.slice(1)] as T[1];
                 return strategy(...nArgs);
             },
-            args[0] as T[0],
+            args[0] as T[0]
         );
     }
 }
 
-export { StrategyManager, PolicyManager, PriorityStrategyManager, CompositeStrategyManager };
+export {
+    StrategyManager,
+    PolicyManager,
+    PriorityStrategyManager,
+    CompositeStrategyManager
+};

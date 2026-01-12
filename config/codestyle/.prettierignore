@@ -1,15 +1,6 @@
 # .prettierignore
 
-# 第三方库
-Third/
-node_modules/
-
-# test/
-
-# 类型定义文件
-types/
-
-# 打包的文件夹
+# dist
 dist/
 output/
 
@@ -18,10 +9,27 @@ output/
 **/**config**
 **/**webpack**
 
-# ts 函数文件
-**/**skip**
+# IDE 配置文件
+.idea/
+.run/
 
-# ts 生成的文件 04.安全保存.generated.jsfl
-**/**.generated.jsfl
-**/**.define.jsfl
+
+# 依赖包
+node_modules/
+
+# 日志文件
+**/Log/**
+**.log
+
+# 类型定义文件
+types/
+
+
+# out 文件夹
+src/lib/out/
+out/
+
+# 忽略整个目录（任何层级）
+config/
+third/
 

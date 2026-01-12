@@ -3,7 +3,7 @@
     "target": "es5",
     "module": "AMD",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["es6","dom"],
 
     /* Bundler mode */
 //    "moduleResolution": "bundler",
@@ -30,7 +30,7 @@
     "preserveConstEnums": true,
     "skipLibCheck": true, // 启用跳过类型定义文件的检查
     "allowJs": true,
-    "incremental": true,// 增量编译,只重新编译那些被修改的文件及其依赖项
+//    "incremental": true,// 增量编译,只重新编译那些被修改的文件及其依赖项
 
 
     "esModuleInterop": false,      // 避免注入 __importDefault
@@ -38,13 +38,46 @@
     "noEmitHelpers": true,         // 不生成 tslib 辅助函数（旧环境不支持）
 
 
-    // 生成相同的目录结构
-    "rootDir": "./src",
+    /* 生成相同的目录结构 */
+//    "rootDir": "./src",
     "outDir": "./dist",   // ← 输出目录
 
-
+    /* 路径映射 */
     "baseUrl": ".", // 设置 baseUrl 为项目根目录
-    "paths": {}
+    "paths":
+    // region REQUIRE MODULES PATHS
+    {
+      "console": ["third/_custom/xjsfl/console.jsfl"],
+      "JSFLConstants": ["third/_custom/xjsfl/JSFLConstants.jsfl"],
+      "JSFLInterface": ["third/_custom/xjsfl/JSFLInterface.jsfl"],
+      "linqUtil": ["third/_custom/utils/linqUtil.jsfl"],
+      "satUtil": ["third/_custom/utils/satUtil.jsfl"],
+      "SAT": ["third/_custom/sat-js/SAT.jsfl"],
+      "Context": ["third/_custom/Context/Context.jsfl"],
+      "exports": ["third/_bridge/exports/exports.jsfl"],
+      "document-cookie": ["third/_bridge/document-cookie/document-cookie.jsfl"],
+      "store-js": ["third/utils/store-js/store-js.jsfl"],
+      "progress": ["third/utils/progress/progress.jsfl"],
+      "lodash": ["third/utils/lodash/lodash.jsfl"],
+      "linq": ["third/utils/linq/linq.jsfl"],
+      "text": ["third/require/text/text.jsfl"],
+      "require-js": ["third/require/requirejs/require-js.jsfl"],
+      "typedarray": ["third/polyfill/typedarray/typedarray.jsfl"],
+      "symbol-es6": ["third/polyfill/symbol-es6/symbol-es6.jsfl"],
+      "es2017": ["third/polyfill/js-polyfills/es2017.jsfl"],
+      "es7-shim": ["third/polyfill/es7-shim/es7-shim.jsfl"],
+      "es6-sham": ["third/polyfill/es6-shim/es6-sham.jsfl"],
+      "es6-shim": ["third/polyfill/es6-shim/es6-shim.jsfl"],
+      "es5-sham": ["third/polyfill/es5-shim/es5-sham.jsfl"],
+      "es5-shim": ["third/polyfill/es5-shim/es5-shim.jsfl"],
+      "path-browserify": ["third/nodejs/path-browserify/path-browserify.jsfl"],
+      "assert": ["third/nodejs/assert/assert.jsfl"],
+      "loglevel": ["third/log/loglevel/loglevel.jsfl"],
+      "universal-cookie": ["third/cookie/universal-cookie/universal-cookie.jsfl"],
+      "checkUtil": ["src/lib/out/checkUtil.jsfl"]
+    }
+    
+// endregion REQUIRE MODULES PATHS
   },
   "include": ["src"],
   "typeRoots": [

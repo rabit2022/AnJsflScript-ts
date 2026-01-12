@@ -17,20 +17,22 @@
     "Design"
   ],
   "scripts": {
-    "format": "prettier --write \"**/*.{js,ts,jsfl}\" --ignore-path config/codestyle/.prettierignore",
-    "build:require": "tsc && node ./config/typescript/rename-require.js",
-    "build:define": "tsc && node ./config/typescript/rename-define.js",
+    "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
+    "generate_config": "tsx ./config/require/generate_config.ts",
+    "build:require": "tsc && tsx ./config/typescript/require.ts",
+    "build:define": "tsc && tsx ./config/typescript/define.ts",
     "build": "npm run build:require && npm run build:define"
   },
   "devDependencies": {
-    "typescript": "^5.2.2",
-    "prettier": "3.5.2",
+    "@types/minimatch": "6.0.0",
+    "@types/node": "25.0.6",
     "eslint": "8.57.1",
-    "eslint-config-airbnb": "19.0.4",
     "eslint-config-prettier": "10.0.1",
-    "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-jsx-a11y": "6.10.2",
-    "eslint-plugin-prettier": "5.2.3"
+    "eslint-plugin-prettier": "5.2.3",
+    "minimatch": "10.1.1",
+    "prettier": "3.5.2",
+    "tsx": "4.21.0",
+    "typescript": "^5.2.2"
   },
   "repository": {
     "type": "git",

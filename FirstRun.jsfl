@@ -124,10 +124,6 @@
         // 导入模块,相对路径导入
         window.AnJsflScript.importFlashScripts(config["require-js"]);
 
-        // 由于setTimeout的polyfill，与原生有差别，导致require.js加载失败，所以必须先加载require.js
-        // 想要使用Promise(es6-shim或es6-sham),需要在 setTimeout
-        // window.setTimeout = setTimeout;
-
         require([
             // 导入配置文件
             "./config/require/require.config",
@@ -143,7 +139,7 @@
             // "es2017", // es8,es2017
 
             // "json3",
-            "console",
+            "console", // loglevel 依赖 console
 
             "document-cookie" // loglevel,store.js 依赖 document.cookie
         ]);
