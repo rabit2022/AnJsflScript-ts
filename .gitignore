@@ -18,8 +18,6 @@ EvalScript error.tmp/**
 # 缓存文件
 **/Cache/**
 .eslintcache
-~$计划更新.xlsx
-**/Save/**
 tsconfig.tsbuildinfo
 
 # dist
