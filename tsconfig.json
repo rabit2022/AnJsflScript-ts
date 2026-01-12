@@ -74,13 +74,31 @@
       "assert": ["third/nodejs/assert/assert.jsfl"],
       "loglevel": ["third/log/loglevel/loglevel.jsfl"],
       "universal-cookie": ["third/cookie/universal-cookie/universal-cookie.jsfl"],
-      "checkUtil": ["src/lib/out/checkUtil.jsfl"],
-      "Tips": ["src/lib/out/Tips.jsfl"]
+      "checkUtil": ["src/lib/core/checkUtil"],
+      "Tips": ["src/lib/core/Tips"],
+      "CheckDocument": ["src/lib/core/flash/check/CheckDocument"],
+      "CheckInSymbol": ["src/lib/core/flash/check/CheckInSymbol"],
+      "CheckSelectedItems": ["src/lib/core/flash/check/CheckSelectedItems"],
+      "CheckSelectedLayers": ["src/lib/core/flash/check/CheckSelectedLayers"],
+      "conditionTypes": ["src/lib/core/flash/check/conditionTypes"],
+      "CheckSelectionRules": ["src/lib/core/flash/check/rules/CheckSelectionRules"],
+      "ruleTypes": ["src/lib/core/flash/check/rules/ruleTypes"],
+      "ruleUtils": ["src/lib/core/flash/check/rules/ruleUtils"],
+      "CheckVariableRedeclaration": ["src/lib/core/base/check/CheckVariableRedeclaration"],
+      "CheckSelection": ["src/lib/core/base/check/selections/CheckSelection"],
+      "selectionTypes": ["src/lib/core/base/check/selections/selectionTypes"],
+      "selectionUtils": ["src/lib/core/base/check/selections/selectionUtils"]
     }
     
 // endregion REQUIRE MODULES PATHS
   },
-  "include": ["src"],
+  "include": [
+    "src",
+
+    // 全局的 类型定义文件
+    "./types/jsfl-typescript/jsfl.d.ts",
+    "types/myShim/global.d.ts"
+  ],
   "typeRoots": [
     "./node_modules/@types",
     "./types"

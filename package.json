@@ -18,12 +18,16 @@
   ],
   "scripts": {
     "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
-    "generate_config": "tsx ./config/require/generate_config.ts",
-    "build:require": "tsc && tsx ./config/typescript/require.ts",
-    "build:define": "tsc && tsx ./config/typescript/define.ts",
-    "build": "npm run build:require && npm run build:define"
+    "generate_config": "tsx ./tools/project/require/generate_config.ts",
+    "build:require": "tsc && tsx ./tools/project/typescript/require.ts",
+    "build:define": "tsc && tsx ./tools/project/typescript/define.ts",
+    "build": "npm run build:require && npm run build:define",
+    "clearAll": "tsx ./tools/project/clean/CleanAll.ts",
+    "ReBuild" : "npm run clearAll && npm run build",
+    "addHeaders": "tsx ./tools/project/headers/addFileHeader.ts"
   },
   "devDependencies": {
+    "@types/jest": "30.0.0",
     "@types/lodash": "4.17.15",
     "@types/loglevel": "1.6.3",
     "@types/minimatch": "6.0.0",
@@ -31,10 +35,14 @@
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.0.1",
     "eslint-plugin-prettier": "5.2.3",
+    "jest": "30.2.0",
     "minimatch": "10.1.1",
     "prettier": "3.5.2",
+    "strip-json-comments": "3.1.1",
+    "ts-jest": "29.4.6",
+    "tsconfig-paths": "4.2.0",
     "tsx": "4.21.0",
-    "typescript": "^5.2.2"
+    "typescript": "5.9.3"
   },
   "repository": {
     "type": "git",

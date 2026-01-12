@@ -42,8 +42,7 @@ export async function buildRequireConfig(): Promise<void> {
     };
 
     const map: Record<string, string> = {};
-    for await (const p of walk(thirdMoudules))
-        Object.assign(map, toRequireModulePaths(p));
+    for await (const p of walk(thirdMoudules))Object.assign(map, toRequireModulePaths(p));
     for await (const p of walk(libMoudules)) Object.assign(map, toRequireModulePaths(p));
 
     const indented =

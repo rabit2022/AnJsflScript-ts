@@ -8,322 +8,233 @@
  * @see: https://github.com/davestewart/xJSFL
  */
 
+/**
+ * @file: console.jsfl
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2025/2/21
+ * @project: AnJsflScript
+ * @description: 增强型控制台日志模块（兼容 JSFL）
+ */
 
-define(function() {
-
-    // --------------------------------------------------------------------------------
-    // Log constants
+define(function () {
+    // ========================================================================
+    // 工具函数
+    // ========================================================================
 
     /**
-     * @type {Object}    A selection of constants that can be used with xjsfl.output.log
-     * @private
+     * 左侧填充字符串（兼容 JSFL）
      */
-    var Log = {
-        // logged to main log, output panel, and an alert box
-        TRACE: "TRACE",
+    function padLeft(input, width, padChar) {
+        padChar = padChar || '0';
+        var str = String(input);
+        while (str.length < width) str = padChar + str;
+        return str;
+    }
 
-        // debug
-        DEBUG: "DEBUG",
+    /**
+     * 将 URI 转为本地路径（处理 file:///H|/ → H:/）
+     */
+    function uriToPath(uri) {
+        if (uri.indexOf("file:///") === 0) uri = uri.substring(8);
+        if (uri.length >= 2 && uri.charAt(1) === '|') {
+            uri = uri.charAt(0) + ':' + uri.substring(2);
+        }
+        return uri.replace(/\\/g, '/');
+    }
 
-        // log
-        LOG: "LOG",
+    /**
+     * 获取当前脚本相对于项目根目录的相对路径
+     */
+    function getCurrentScriptRelativePath() {
+        try {
+            var scriptURI = fl.scriptURI;
+            var baseDir = window.AnJsflScript.$ProjectFileDir$;
 
-        // logged to main log
-        INFO: "INFO",
+            var scriptPath = uriToPath(scriptURI);
+            var basePath = uriToPath(baseDir);
 
-        // logged to main log, output panel, and an alert box
-        WARN: "WARN",
+            if (basePath.charAt(basePath.length - 1) !== '/') basePath += '/';
 
-        // error
-        ERROR: "ERROR",
+            if (scriptPath.indexOf(basePath) !== 0) {
+                fl.trace("⚠️ 脚本不在项目目录下");
+                return scriptPath;
+            }
 
-        // logged to main log and file.log
-        FILE: "FILE"
-    };
+            return scriptPath.substring(basePath.length);
+        } catch (e) {
+            return "unknown.jsfl";
+        }
+    }
 
-    // --------------------------------------------------------------------------------
-    // 常量
+    /**
+     * 格式化消息（支持多参数）
+     */
+    function formatMessage(args) {
+        return Array.prototype.slice.call(args).join(' ');
+    }
+
+    // ========================================================================
+    // 日志配置
+    // ========================================================================
+
     const trace = fl.trace;
     const LOG_FOLDER = window.AnJsflScript.FOLDERS.Log;
-
-
     const MAIN_LOG = LOG_FOLDER + "/main.log";
     const FILE_LOG = LOG_FOLDER + "/file.log";
 
-    function formatMessage() {
-        // 把类数组 arguments 转成真数组，然后统一用空格拼接
-        return Array.prototype.slice.call(arguments).join(' ');
+    const Log = {
+        TRACE: "TRACE",
+        DEBUG: "DEBUG",
+        LOG: "LOG",
+        INFO: "INFO",
+        WARN: "WARN",
+        ERROR: "ERROR",
+        FILE: "FILE"
+    };
+
+    // ========================================================================
+    // 日志写入核心
+    // ========================================================================
+
+    /**
+     * 写入日志到文件
+     */
+    function writeToLog(message, type, level) {
+        // 参数标准化
+        type = (typeof type === "string") ? type : Log.INFO;
+        level = (typeof level === "number") ? level : (level === true ? 1 : 0);
+
+        // 时间：YYYY-MM-DD HH:mm:ss.SSS
+        var now = new Date();
+        var asctime =
+            now.getFullYear() + "-" +
+            padLeft(now.getMonth() + 1, 2) + "-" +
+            padLeft(now.getDate(), 2) + " " +
+            padLeft(now.getHours(), 2) + ":" +
+            padLeft(now.getMinutes(), 2) + ":" +
+            padLeft(now.getSeconds(), 2) + "." +
+            padLeft(now.getMilliseconds(), 3);
+
+        // 日志级别（左对齐 8 字符）
+        var levelname = (type || "INFO").toUpperCase();
+        while (levelname.length < 8) levelname += " ";
+
+        // 文件信息（JSFL 无法获取行号/函数名，使用占位）
+        var short_path = getCurrentScriptRelativePath();
+        // var lineno = "000";
+        // var class_func = "[user]";
+
+        // 构建日志行
+        var logLine = asctime + " | " + levelname + " | " +
+            short_path +
+            // ":" +lineno + " | " +class_func +
+            " | " + message;
+
+        // 写入主日志
+        FLfile.write(MAIN_LOG, logLine + "\n", "append");
+
+        // 额外写入 file.log（仅当类型为 FILE）
+        if (type === Log.FILE) {
+            FLfile.write(FILE_LOG, logLine + "\n", "append");
+        }
     }
 
-    // region file
-    /**
-     * Creates the text that will be traced or logged
-     * @param    {String}    prefix        The message prefix
-     * @param    {String}    message        The message to trace or log
-     * @param    {Number}    level        An optional Number to accentuate the message. 1 = capitals, 2 = horizontal rule & capitals
-     * @param    {Boolean}    addNewline    An optional Boolean to add a new line to the traced output
-     * @returns    {String}                The created message
-     * @private
-     */
-    function formatLine(prefix, message, level, addNewline) {
-        // new line
-        var newLine = fl.version.substr(0, 3).toLowerCase() === "win" ? "\r\n" : "\n";
-        var output = "";
+    // ========================================================================
+    // 计时器 & 计数器
+    // ========================================================================
 
-        // level
-        if (level > 0) {
-            if (level === 1 || level === 2) {
-                message = message.toUpperCase();
-            }
-            if (level >= 2) {
-                output = "----------------------------------------------------------------------------------------------------" + newLine;
-            }
-            if (level === 3) {
-                message += "----------------------------------------------------------------------------------------------------" + newLine;
-            }
-        }
-
-        // trailing newline
-        if (addNewline) {
-            message += newLine;
-        }
-
-        // return
-        return (level > 0 ? newLine : "") + output + prefix + "\t" + message;
-    };
-
-    /**
-     * Logs a message to the xjsfl or file log, and optionally traces it
-     * @param    {String}    message        The text of the log message
-     * @param    {String}    $type        An optional Log.CONSTANT type for the log message. Defaults to Log.INFO
-     * @param    {Boolean}    $level        An optional Boolean to accentuate the message with a new line and capitals
-     * @param    {Number}    $level        An optional Number to accentuate the message with a new line and: 1 = capitals, 2 = horizontal rule & capitals
-     * @note     如果LOG_FOLDER  文件夹不存在，不会创建日志文件，只会输出到控制台
-     *           如果开发者需要创建日志文件，请在项目的主目录下创建 Logs 文件夹
-     * @private
-     */
-    function writeToLog(message, $type, $level) {
-        // parameters
-        var params = [$type, $level], type, level;
-        params.forEach(function(param) {
-            if (typeof param === "string") type = param;
-            if (typeof param === "number") level = param;
-            if (typeof param === "boolean") level = param === true ? 1 : 0;
-        });
-        type = type || Log.INFO;
-
-        // date
-        var date = new Date();
-        var time = date.toString().match(/\d{2}:\d{2}:\d{2}/) + ":" + (date.getMilliseconds() / 1000).toFixed(3).substr(2);
-
-        // log to main
-        // var uri = LOG_FOLDER + 'main.log';
-        var output = formatLine(time, type + "\t" + message, level, true);
-        FLfile.write(MAIN_LOG, output, "append");
-
-        // extra logging for file
-        if (type === Log.FILE) {
-            // var uri = projectFolder + '/Logs/file.log';
-            // var indent = new Array(xjsfl.file.stack.length + 1).join('	');
-            // var output = this.create(time, indent + message, level, true);
-            var output = formatLine(time, message, level, true);
-            FLfile.write(FILE_LOG, output, "append");
-        }
-    };
-
-    // endregion file
-
-// 存储计时器的起始时间
     const timers = {};
-// 存储计数器的计数
     const counters = {};
+
+    // ========================================================================
+    // Console 对象
+    // ========================================================================
+
     var console = {
-
-        // /**
-        //  * 打印调用栈信息,可以把报错地方替换为console.stack()，以显示报错的调用栈信息
-        //  * @param message
-        //  */
-        // stack: function(message) {
-        //     require(["error-stack-parser"], function(ErrorStackParser) {
-        //         try {
-        //             throw new Error(message || "Default stack trace");
-        //         } catch (e) {
-        //             var stack = ErrorStackParser.parse(e);
-        //             console.info(stack);
-        //         }
-        //     });
-        // },
-
-        trace: function() {
-            var message = formatMessage.apply(null, arguments); // 使用 formatMessage 处理 arguments
-
-            trace("\n⚡admin  TRACE  ❯❯ " + message + "\n");
-            writeToLog(message + "\n", Log.TRACE, 3);
-        },
-        // trace: trace,
-
-        debug: function() {
-            var message = formatMessage.apply(null, arguments); // 使用 formatMessage 处理 arguments
-
-            trace("\n⚡admin  DEBUG  ❯❯ " + message + "\n");
-            writeToLog(message + "\n", Log.DEBUG, 3);
+        trace: function () {
+            var msg = formatMessage(arguments);
+            trace("\n⚡admin TRACE ❯❯ " + msg + "\n");
+            writeToLog(msg, Log.TRACE, 3);
         },
 
-        log: function() {
-            var message = formatMessage.apply(null, arguments); // 使用 formatMessage 处理 arguments
-
-            trace("\n⚡admin  LOG  ❯❯ " + message + "\n");
-            writeToLog(message + "\n", Log.LOG, 3);
+        debug: function () {
+            var msg = formatMessage(arguments);
+            trace("\n⚡admin DEBUG ❯❯ " + msg + "\n");
+            writeToLog(msg, Log.DEBUG, 3);
         },
 
-        info: function() {
-            var message = formatMessage.apply(null, arguments); // 使用 formatMessage 处理 arguments
-
-            trace("\n⚡admin  INFO  ❯❯ " + message + "\n");
-            writeToLog(message + "\n", Log.INFO, 3);
+        log: function () {
+            var msg = formatMessage(arguments);
+            trace("\n⚡admin LOG ❯❯ " + msg + "\n");
+            writeToLog(msg, Log.LOG, 3);
         },
 
-        warn: function() {
-            var message = formatMessage.apply(null, arguments); // 使用 formatMessage 处理 arguments
-
-            trace("\n⚡admin  WARNING  ❯❯ " + message + "\n");
-            alert("WARNING  ❯❯ " + message + "\n");
-            writeToLog(message + "\n", Log.WARN, 3);
+        info: function () {
+            var msg = formatMessage(arguments);
+            trace("\n⚡admin INFO ❯❯ " + msg + "\n");
+            writeToLog(msg, Log.INFO, 3);
         },
 
-        error: function() {
-            var message = formatMessage.apply(null, arguments); // 使用 formatMessage 处理 arguments
-
-            trace("\n⚡admin  ERROR  ❯❯ " + message + "\n");
-            alert("⚡⚡⚡ ERROR ⚡⚡⚡ " + message + "\n");
-            writeToLog(message + "\n", Log.ERROR, 3);
+        warn: function () {
+            var msg = formatMessage(arguments);
+            trace("\n⚡admin WARNING ❯❯ " + msg + "\n");
+            alert("WARNING ❯❯ " + msg + "\n");
+            writeToLog(msg, Log.WARN, 3);
         },
 
-        /**
-         * Clears a log file
-         * @param    {String}    type    The type of log file to reset
-         */
-        clear: function(type) {
-            // 清空控制台
+        error: function () {
+            var msg = formatMessage(arguments);
+            trace("\n⚡admin ERROR ❯❯ " + msg + "\n");
+            alert("⚡⚡⚡ ERROR ⚡⚡⚡ " + msg + "\n");
+            writeToLog(msg, Log.ERROR, 3);
+        },
+
+        clear: function (type) {
             fl.output.clear();
-
-            // 清空日志文件
-            var name = type === Log.FILE ? "file" : "main";
-            FLfile.remove(LOG_FOLDER + name + ".log");
+            var name = (type === Log.FILE) ? "file" : "main";
+            FLfile.remove(LOG_FOLDER + "/" + name + ".log");
             trace(name + ".log reset");
         },
 
-        table: function(data) {
-            // 检查输入是否为数组或对象
-            if (!Array.isArray(data) && typeof data !== "object") {
-                throw new Error("table expects an array or an object");
-            }
-
-            // 如果是对象，将其转换为键值对数组
-            if (typeof data === "object" && !Array.isArray(data)) {
-                data = Object.entries(data).map(// ([key, value]) => ({ key, value }));
-                    function([key, value]) {
-                        return { key: key, value: value };
-                    });
-            }
-
-            // 检查数据是否为空
-            if (data.length === 0) {
-                this.log("TABLE\nNo data to display.");
-                return;
-            }
-
-            // 判断数据类型：普通数组或对象数组
-            const isSimpleArray = Array.isArray(data) && typeof data[0] !== "object";
-
-            // 获取所有列名（即对象的键）
-            const columns = new Set();
-            if (!isSimpleArray) {
-                data.forEach(function(item) {
-                    if (typeof item === "object") {
-                        Object.keys(item).forEach(function(key) {
-                            columns.add(key);
-                        });
-                    }
-                });
-            } else {
-                columns.add("index");
-                columns.add("value");
-            }
-
-            // 将列名转换为数组
-            const columnNames = Array.from(columns);
-
-            // 构建表格的表头
-            const header = columnNames.join("\t");
-
-            // 构建表格的每一行
-            const rows = data.map(function(item, index) {
-                if (isSimpleArray) {
-                    // 处理普通数组
-                    return [index, item].join("\t");
-                } else {
-                    // 处理对象数组
-                    return columnNames
-                        .map(function(column) {
-                            return item[column] !== undefined ? String(item[column]) : "";
-                        })
-                        .join("\t");
-                }
-            });
-
-            // 将表头和行内容拼接成最终的表格字符串
-            const table = ["TABLE", header].concat(rows).join("\n");
-
-            // 打印到控制台
-            this.info(table);
-        },
-
-        time: function(label) {
-            if (label === undefined) label = "default";
+        time: function (label) {
+            label = label || "default";
             if (timers[label]) {
-                // console.warn(`Timer "${label}" already exists.`);
-                this.warn("Timer \"%s\" already exists.", label);
+                this.warn('Timer "' + label + '" already exists.');
                 return;
             }
             timers[label] = Date.now();
-            // console.log(`Timer "${label}" started.`);
-            this.info("Timer \"%s\" started.", label);
+            this.info('Timer "' + label + '" started.');
         },
-        timeEnd: function(label) {
-            if (label === undefined) label = "default";
+
+        timeEnd: function (label) {
+            label = label || "default";
             if (!timers[label]) {
-                // console.warn(`Timer "${label}" does not exist.`);
-                this.warn("Timer \"%s\" does not exist.", label);
+                this.warn('Timer "' + label + '" does not exist.');
                 return;
             }
-            const endTime = Date.now();
-            const duration = endTime - timers[label];
+            var duration = Date.now() - timers[label];
             delete timers[label];
-            // console.log(`Timer "${label}": ${duration}ms`);
-            this.info("Timer \"%s\": %sms", label, duration);
+            this.info('Timer "' + label + '": ' + duration + 'ms');
         },
-        count: function(label) {
-            if (label === undefined) label = "default";
-            if (!counters[label]) {
-                counters[label] = 0;
-            }
-            counters[label]++;
-            // console.log(`"${label}" was called ${counters[label]} times.`);
-            this.info("\"%s\" was called %s times.", label, counters[label]);
+
+        count: function (label) {
+            label = label || "default";
+            counters[label] = (counters[label] || 0) + 1;
+            this.info('"' + label + '" was called ' + counters[label] + ' times.');
         },
-        countReset: function(label) {
-            if (label === undefined) label = "default";
-            if (!counters[label]) {
-                // console.warn(`Counter "${label}" does not exist.`);
-                this.warn("Counter \"%s\" does not exist.", label);
+
+        countReset: function (label) {
+            label = label || "default";
+            if (counters[label] === undefined) {
+                this.warn('Counter "' + label + '" does not exist.');
                 return;
             }
             delete counters[label];
-            // console.log(`Counter "${label}" has been reset.`);
-            this.info("Counter \"%s\" has been reset.", label);
+            this.info('Counter "' + label + '" has been reset.');
         },
-        assert: function(expression, message) {
+
+        assert: function (expression, message) {
             if (!expression) {
                 throw new Error(message || "Assertion failed");
             }

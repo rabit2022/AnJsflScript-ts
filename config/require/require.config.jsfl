@@ -43,7 +43,19 @@ require.config({
         "loglevel": "third/log/loglevel/loglevel",
         "universal-cookie": "third/cookie/universal-cookie/universal-cookie",
         "checkUtil": "src/lib/out/checkUtil",
-        "Tips": "src/lib/out/Tips"
+        "Tips": "src/lib/out/Tips",
+        "CheckDocument": "src/lib/out/flash/check/CheckDocument",
+        "CheckInSymbol": "src/lib/out/flash/check/CheckInSymbol",
+        "CheckSelectedItems": "src/lib/out/flash/check/CheckSelectedItems",
+        "CheckSelectedLayers": "src/lib/out/flash/check/CheckSelectedLayers",
+        "conditionTypes": "src/lib/out/flash/check/conditionTypes",
+        "CheckSelectionRules": "src/lib/out/flash/check/rules/CheckSelectionRules",
+        "ruleTypes": "src/lib/out/flash/check/rules/ruleTypes",
+        "ruleUtils": "src/lib/out/flash/check/rules/ruleUtils",
+        "CheckVariableRedeclaration": "src/lib/out/base/check/CheckVariableRedeclaration",
+        "CheckSelection": "src/lib/out/base/check/selections/CheckSelection",
+        "selectionTypes": "src/lib/out/base/check/selections/selectionTypes",
+        "selectionUtils": "src/lib/out/base/check/selections/selectionUtils"
     },
 // endregion REQUIRE MODULES PATHS
 

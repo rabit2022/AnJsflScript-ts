@@ -7,15 +7,6 @@
  * @description:
  */
 
-// define(["assert"], function (assert) {
-
-
-
-
-
-// const assert = require("assert");
-    import * as assert from "assert";
-
 const author = "作者：@穹的兔兔\n QQ：3101829204";
 const alertMessageConfig = {
     XUL:
@@ -37,58 +28,9 @@ const alertMessageConfig = {
         "\n 地址：https://github.com/rabit2022/AnJsflScript"
 };
 
-// 动态模块，打包不允许使用
-// function TryLoad(moduleName) {
-//     var msg =
-//         alertMessageConfig[moduleName] || alertMessageConfig["default!"] + moduleName;
-//     var ok = confirm(msg);
-//     if (!ok) return;
-//
-//     // 加载模块
-//     var XUL;
-//     try {
-//         require([moduleName], function (module) {
-//             XUL = module;
-//         });
-//     } catch (e) {
-//         alert(alertMessageConfig["failed!"] + moduleName + "\n\n" + e.message);
-//     }
-//
-//     return XUL;
-// }
-
-/**
- * 检查变量是否被重新声明
- * @param {any} variable 被重复声明的变量
- * @param {string} name 变量名
- */
-export function checkVariableRedeclaration(variable, name) {
-    // var assert;
-    // require(["assert"], function (module) {
-    //     assert = module;
-    // });
-    if (typeof variable === "undefined") {
-        var msg = "参数 " + name + "在函数内被重新声明，可能覆盖了外部变量。";
-        console.info(msg);
-        // assert.fail(variable, undefined, msg, "==", checkVariableRedeclaration);
-        assert.fail(variable);
-    }
-}
-
 export function alertMessage(mode) {
     var msg = alertMessageConfig[mode];
     if (msg) {
         alert(msg);
     }
 }
-
-//
-//     return {
-//         // TryLoad: TryLoad,
-//         checkVariableRedeclaration: checkVariableRedeclaration,
-//         alertMessage: alertMessage
-//     };
-// });
-
-
-
