@@ -30,7 +30,7 @@
     "preserveConstEnums": true,
     "skipLibCheck": true, // 启用跳过类型定义文件的检查
     "allowJs": true,
-//    "incremental": true,// 增量编译,只重新编译那些被修改的文件及其依赖项
+    "incremental": true,// 增量编译,只重新编译那些被修改的文件及其依赖项
 
 
     "esModuleInterop": false,      // 避免注入 __importDefault
@@ -54,7 +54,7 @@
       "satUtil": ["third/_custom/utils/satUtil.jsfl"],
       "SAT": ["third/_custom/sat-js/SAT.jsfl"],
       "Context": ["third/_custom/Context/Context.jsfl"],
-      "exports": ["third/_bridge/exports/exports.jsfl"],
+      "_exports": ["third/_bridge/exports/_exports.jsfl"],
       "document-cookie": ["third/_bridge/document-cookie/document-cookie.jsfl"],
       "store-js": ["third/utils/store-js/store-js.jsfl"],
       "progress": ["third/utils/progress/progress.jsfl"],
@@ -74,7 +74,8 @@
       "assert": ["third/nodejs/assert/assert.jsfl"],
       "loglevel": ["third/log/loglevel/loglevel.jsfl"],
       "universal-cookie": ["third/cookie/universal-cookie/universal-cookie.jsfl"],
-      "checkUtil": ["src/lib/out/checkUtil.jsfl"]
+      "checkUtil": ["src/lib/out/checkUtil.jsfl"],
+      "Tips": ["src/lib/out/Tips.jsfl"]
     }
     
 // endregion REQUIRE MODULES PATHS

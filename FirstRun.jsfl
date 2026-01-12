@@ -119,7 +119,7 @@
         };
 
         var config = {
-            "require-js": "Third/modules/requirejs-2.3.7/require-js"
+            "require-js": "third/require/requirejs/require-js",
         };
         // 导入模块,相对路径导入
         window.AnJsflScript.importFlashScripts(config["require-js"]);

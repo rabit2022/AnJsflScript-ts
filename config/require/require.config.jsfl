@@ -22,7 +22,7 @@ require.config({
         "satUtil": "third/_custom/utils/satUtil",
         "SAT": "third/_custom/sat-js/SAT",
         "Context": "third/_custom/Context/Context",
-        "exports": "third/_bridge/exports/exports",
+        "_exports": "third/_bridge/exports/_exports",
         "document-cookie": "third/_bridge/document-cookie/document-cookie",
         "store-js": "third/utils/store-js/store-js",
         "progress": "third/utils/progress/progress",
@@ -42,7 +42,8 @@ require.config({
         "assert": "third/nodejs/assert/assert",
         "loglevel": "third/log/loglevel/loglevel",
         "universal-cookie": "third/cookie/universal-cookie/universal-cookie",
-        "checkUtil": "src/lib/out/checkUtil"
+        "checkUtil": "src/lib/out/checkUtil",
+        "Tips": "src/lib/out/Tips"
     },
 // endregion REQUIRE MODULES PATHS
 

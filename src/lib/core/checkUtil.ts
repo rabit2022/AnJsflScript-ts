@@ -12,6 +12,10 @@
 // //     const { FrameRange, FrameRangeList } = SAT;
 // //     const { getSelectedFrs } = kfq;
 //
+// // @ts-expect-error
+// import { checkVariableRedeclaration } from "Tips";
+//
+//
 // /**
 //  * 检查选择的元件或帧是否符合指定的模式和条件。
 //  *
@@ -429,7 +433,5 @@
 // //         CheckSelectionAny: CheckSelectionAny
 // //     };
 // // });
-
-export function main() {
-    console.log("hello world");
-}
+//
+//
