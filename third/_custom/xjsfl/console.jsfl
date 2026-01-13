@@ -4,18 +4,10 @@
  * @email: 3101829204@qq.com
  * @date: 2025/2/21 17:59
  * @project: AnJsflScript
- * @description:
+ * @description:增强型控制台日志模块（兼容 JSFL）
  * @see: https://github.com/davestewart/xJSFL
  */
 
-/**
- * @file: console.jsfl
- * @author: 穹的兔兔
- * @email: 3101829204@qq.com
- * @date: 2025/2/21
- * @project: AnJsflScript
- * @description: 增强型控制台日志模块（兼容 JSFL）
- */
 
 define(function () {
     // ========================================================================
