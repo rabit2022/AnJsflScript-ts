@@ -1,7 +1,8 @@
 // generate_config.ts
-import { $ProjectFileDir$, LIB_OUT, REQUIRE_CONFIG_FILE, THIRD } from "../ProjectFileDir";
+import { $ProjectFileDir$, LIB_OUT, PACKAGES, REQUIRE_CONFIG_FILE, THIRD } from "../ProjectFileDir";
 import * as path from "path";
 import * as fs from "fs/promises";
+// import * as fs from 'fs'; // ← 使用普通 fs，不是 fs/promises
 import { ScanSpec, walk } from "../nodejs/walk";
 
 /* ---------- 1. 路径与文件常量 ---------- */
@@ -21,6 +22,26 @@ function toRequireModulePaths(
     return { [name]: posix.replace(/\.[^.]+$/, "") };
 }
 
+
+async function toPackageModulePaths(
+    absoluteFile: string,
+    root = $ProjectFileDir$ // 注意：这个语法可能不合法，见下方说明
+): Promise<Record<string, string>> {
+    const rel = path.relative(root, absoluteFile);
+    const posix = rel.split(path.sep).join("/");
+
+    // 上一级目录（其实是上两级？根据你的逻辑）
+    const parentDir = path.resolve(absoluteFile, '../..');
+
+    // 读取 package.json
+    const pkgContent = await fs.readFile(path.join(parentDir, "package.json"), "utf-8");
+    const pkg = JSON.parse(pkgContent);
+    const name = pkg.name;
+    // console.log(name);
+
+    return { [name]: posix.replace(/\.[^.]+$/, "") };
+}
+
 /** 把 region 中间替换成新正文 */
 async function replaceRequireRegion(body: string): Promise<void> {
     const config = REQUIRE_CONFIG_FILE;
@@ -28,8 +49,12 @@ async function replaceRequireRegion(body: string): Promise<void> {
     await fs.writeFile(config, raw.replace(REGION_RE, `$1\n${body}$2`), "utf-8");
 }
 
+
+
 /* ---------- 3. 主流程 ---------- */
 export async function buildRequireConfig(): Promise<void> {
+    // "console": "third/_custom/xjsfl/console",
+
     const thirdMoudules: ScanSpec = {
         roots: [THIRD],
         dirBlack: { part: ["node_modules"] },
@@ -40,10 +65,16 @@ export async function buildRequireConfig(): Promise<void> {
         dirBlack: { part: ["node_modules"] },
         fileWhite: { part: [".jsfl"] }
     };
+    const packageModules: ScanSpec = {
+        roots: [PACKAGES],
+        dirBlack: { part: ["node_modules"] },
+        fileWhite: { part: [".jsfl"] }
+    };
 
     const map: Record<string, string> = {};
     for await (const p of walk(thirdMoudules))Object.assign(map, toRequireModulePaths(p));
     for await (const p of walk(libMoudules)) Object.assign(map, toRequireModulePaths(p));
+    for await (const p of walk(packageModules)) Object.assign(map,await toPackageModulePaths(p));
 
     const indented =
         JSON.stringify(map, null, 4)
@@ -59,5 +90,12 @@ export async function buildRequireConfig(): Promise<void> {
 if (require.main === module) {
     (async () => {
         await buildRequireConfig();
+
+
+
+
     })();
 }
+
+
+

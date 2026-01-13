@@ -1,0 +1,39 @@
+//npm run build -w @anjsfl/validation
+
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "./dist",
+    // 避免和 webpack 的 dist 冲突
+
+    //    "type": "module",
+//    "paths": [],
+
+//    "importHelpers": true,
+
+    "types": [
+      "node",
+      "jest"
+    ],
+    "target": "es5",
+    "lib": [
+      "es5",
+      "es6"
+    ],
+    // 👈 关键！只允许 ES5 的全局 API
+
+    // 👇 关键修复
+    "composite": true,
+    "declaration": true,
+    // 必须为 true
+    "declarationMap": true,
+    "emitDeclarationOnly": false
+  },
+  "include": [
+    "src",
+    // 全局的 类型定义文件
+    "../../types/jsfl-typescript/jsfl.d.ts",
+    "../../types/myShim/global.d.ts"
+  ]
+}

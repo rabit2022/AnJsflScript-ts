@@ -16,6 +16,14 @@
     "Creativity",
     "Design"
   ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "references": [
+    {
+      "path": "packages/validation"
+    }
+  ],
   "scripts": {
     "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
     "generate_config": "tsx ./tools/project/require/generate_config.ts",
@@ -23,15 +31,16 @@
     "build:define": "tsc && tsx ./tools/project/typescript/define.ts",
     "build": "npm run build:require && npm run build:define",
     "clearAll": "tsx ./tools/project/clean/CleanAll.ts",
-    "ReBuild" : "npm run clearAll && npm run build",
+    "ReBuild": "npm run clearAll && npm run build",
     "addHeaders": "tsx ./tools/project/headers/addFileHeader.ts"
   },
   "devDependencies": {
+    "@types/glob": "9.0.0",
     "@types/jest": "30.0.0",
     "@types/lodash": "4.17.15",
     "@types/loglevel": "1.6.3",
     "@types/minimatch": "6.0.0",
-    "@types/node": "25.0.6",
+    "@types/node": "25.0.7",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.0.1",
     "eslint-plugin-prettier": "5.2.3",
@@ -48,5 +57,8 @@
     "type": "git",
     "url": "https://github.com/rabit2022/AnJsflScript-ts"
   },
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "glob": "13.0.0"
+  }
 }

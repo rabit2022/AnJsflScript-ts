@@ -3,14 +3,16 @@
     "target": "es5",
     "module": "AMD",
     "useDefineForClassFields": true,
-    "lib": ["es6","dom"],
+    "lib": [
+      "es5",
+//      "es6", // es6shim
+      "dom", // console
+    ],
 
-    /* Bundler mode */
-//    "moduleResolution": "bundler",
-//    "allowImportingTsExtensions": true,
-//    "resolveJsonModule": true,
-//    "isolatedModules": true,
-//    "noEmit": true,  // 不生成js文件
+    "skipLibCheck": false,   // 👈 先关掉，看是否有错误
+
+    /*  防止es2017等代码不报错 */
+    "types": [] ,             // 👈 关键！不自动包含任何全局类型
 
 
     /* Linting */
@@ -19,8 +21,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    /* Module Resolution */
+//    @anjsfl/validation
     "moduleResolution": "node",
     "isolatedModules": false,
+
+
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declaration": false,
@@ -28,14 +34,15 @@
     "removeComments": true,
     "noLib": false,
     "preserveConstEnums": true,
-    "skipLibCheck": true, // 启用跳过类型定义文件的检查
+//    "skipLibCheck": true, // 启用跳过类型定义文件的检查
     "allowJs": true,
     "incremental": true,// 增量编译,只重新编译那些被修改的文件及其依赖项
 
 
-    "esModuleInterop": false,      // 避免注入 __importDefault
-    "importHelpers": false,
-    "noEmitHelpers": true,         // 不生成 tslib 辅助函数（旧环境不支持）
+    // test
+//    "esModuleInterop": false,      // 避免注入 __importDefault
+//    "importHelpers": false,
+//    "noEmitHelpers": true,         // 不生成 tslib 辅助函数（旧环境不支持）
 
 
     /* 生成相同的目录结构 */
@@ -74,20 +81,7 @@
       "assert": ["third/nodejs/assert/assert.jsfl"],
       "loglevel": ["third/log/loglevel/loglevel.jsfl"],
       "universal-cookie": ["third/cookie/universal-cookie/universal-cookie.jsfl"],
-      "checkUtil": ["src/lib/core/checkUtil"],
-      "Tips": ["src/lib/core/Tips"],
-      "CheckDocument": ["src/lib/core/flash/check/CheckDocument"],
-      "CheckInSymbol": ["src/lib/core/flash/check/CheckInSymbol"],
-      "CheckSelectedItems": ["src/lib/core/flash/check/CheckSelectedItems"],
-      "CheckSelectedLayers": ["src/lib/core/flash/check/CheckSelectedLayers"],
-      "conditionTypes": ["src/lib/core/flash/check/conditionTypes"],
-      "CheckSelectionRules": ["src/lib/core/flash/check/rules/CheckSelectionRules"],
-      "ruleTypes": ["src/lib/core/flash/check/rules/ruleTypes"],
-      "ruleUtils": ["src/lib/core/flash/check/rules/ruleUtils"],
-      "CheckVariableRedeclaration": ["src/lib/core/base/check/CheckVariableRedeclaration"],
-      "CheckSelection": ["src/lib/core/base/check/selections/CheckSelection"],
-      "selectionTypes": ["src/lib/core/base/check/selections/selectionTypes"],
-      "selectionUtils": ["src/lib/core/base/check/selections/selectionUtils"]
+      "Tips": ["src/lib/core/Tips"]
     }
     
 // endregion REQUIRE MODULES PATHS
@@ -97,10 +91,11 @@
 
     // 全局的 类型定义文件
     "./types/jsfl-typescript/jsfl.d.ts",
-    "types/myShim/global.d.ts"
+    "./types/myShim/global.d.ts"
   ],
   "typeRoots": [
     "./node_modules/@types",
     "./types"
   ]
 }
+

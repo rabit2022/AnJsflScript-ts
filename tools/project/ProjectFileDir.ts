@@ -31,5 +31,5 @@ export const REQUIRE_CONFIG_FILE = path.resolve(
 );
 export const TS_CONFIG_FILE = path.resolve($ProjectFileDir$, "tsconfig.json");
 
-// console.log(REQUIRE_CONFIG_FILE);
-// console.log(TS_CONFIG_FILE);
+
+export const PACKAGES = path.resolve($ProjectFileDir$, "packages");

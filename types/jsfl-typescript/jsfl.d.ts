@@ -1,3 +1,6 @@
+// @ts-nocheck
+
+
 interface FlashPoint {
     x: number;
     y: number;
