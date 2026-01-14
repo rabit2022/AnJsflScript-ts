@@ -3,108 +3,11 @@
 // Released under the MIT License.
 
 declare namespace sat {
-    type Corner =
-        | "top right"
-        | "top left"
-        | "bottom right"
-        | "bottom left"
-        | "top center"
-        | "right center"
-        | "bottom center"
-        | "left center"
-        | "center"
-    type Part = Corner | "top" | "right" | "bottom" | "left"
-    type DirectionType = "all" | "left" | "top" | "right" | "bottom"
 
     interface SObjectLike {
     }
     
-    interface VectorLike extends SObjectLike {
-        x: number
-        y: number
-    }
 
-
-    interface RectangleLike extends SObjectLike {
-        left: number
-        top: number
-        right: number
-        bottom: number
-    }
-
-    interface RectangleConstructor {
-        new(): Rectangle
-
-        new(rect: Rectangle | RectangleLike): Rectangle
-
-        new(doc: Document): Rectangle
-
-        new(element: Element): Rectangle
-
-        new(symbolItem: SymbolItem): Rectangle
-
-        new(radius: number): Rectangle
-
-        new(elements: Element[]): Rectangle
-
-        new(width: number, height: number): Rectangle
-
-        new(centerPos: Vector, radius: number): Rectangle
-
-        new(left: number, top: number, right: number, bottom: number): Rectangle
-
-        fromTopLeft(left: number, top: number, width: number, height: number): Rectangle
-
-        fromTopLeft(leftTop: Vector | VectorLike, size: Size | SizeLike): Rectangle
-
-        fromCenter(centerX: number, centerY: number, width: number, height: number): Rectangle
-
-        fromCenter(center: Vector | VectorLike, size: Size | SizeLike): Rectangle
-
-        fromVectors(vectors: Vector[]): Rectangle
-
-        fromElements(elements: Array<Element>): Rectangle
-
-        fromRects(rects: Rectangle[]): Rectangle
-    }
-
-    /**
-     * This is a simple rectangle class,Rectangle has four parameters {left},{top},{right},{bottom}.
-     */
-    export interface Rectangle extends RectangleLike, SObject<Rectangle> {
-        readonly width: number
-        readonly height: number
-
-        readonly center: Vector
-        readonly size: Size
-
-        addOffset(offset: number | Vector | Rectangle): Rectangle
-
-        subOffset(offset: number | Vector | Rectangle): Rectangle
-
-        expand(size: number, whichDirection?: DirectionType): Rectangle
-
-        shrink(size: number, whichDirection?: DirectionType): Rectangle
-
-        getCenterVector(): Vector
-
-        getSize(): Size
-
-        contains(rect: Rectangle): boolean
-
-        getCorner(whichCorner: Corner): Vector
-
-        getPart(whichPart: Part, widthRatio?: number, heightRatio?: number): Rectangle
-
-        union(other: Rectangle): Rectangle
-
-
-        rotate(angle: number, whichCorner?: Corner): Rectangle
-
-    }
-
-    // 将 Rectangle 的构造函数类型指定为 RectangleConstructor
-    export const Rectangle: RectangleConstructor
 
     interface SizeLike extends SObjectLike {
         width: number
@@ -134,22 +37,6 @@ declare namespace sat {
         static from(element: Element | Document | Size | SizeLike): Size
     }
 
-
-    interface ScaleLike extends SObjectLike {
-        scaleX: number
-        scaleY: number
-    }
-
-    /**
-     * This is a simple scale class,Scale has two parameters {scaleX},{scaleY}.
-     */
-    export class Scale extends ScaleLike, SObject<Scale> {
-        constructor(scaleX: number, scaleY: number)
-
-        toVector(): Vector
-
-        static from(element: Element | ScaleLike | Scale): Scale
-    }
 
     interface SkewLike extends SObjectLike {
         skewX: number
@@ -251,7 +138,7 @@ declare namespace sat {
     export class LineSegment extends LineSegmentLike, SObject<LineSegment> {
         constructor(startPoint: Vector, endPoint: Vector)
 
-        getBounds(): Rectangle
+        getBounds(): Bounds
 
         getCenter(): Vector
 
@@ -290,7 +177,7 @@ declare namespace sat {
 
         constructor(pos?: Vector, r?: number)
 
-        getBounds(): Rectangle
+        getBounds(): Bounds
 
         getArea(): number
 
@@ -315,7 +202,7 @@ declare namespace sat {
         export class SYMBOL {
             static getCenter(element: ElementBoundsLike | Element): Vector
 
-            static getBounds(element: ElementBoundsLike | Element): Rectangle
+            static getBounds(element: ElementBoundsLike | Element): Bounds
 
             static getSize(element: ElementBoundsLike | Element): Size
         }
@@ -323,13 +210,13 @@ declare namespace sat {
         export class STAGE {
             static getCenter(): Vector
 
-            static getBounds(): Rectangle
+            static getBounds(): Bounds
 
             static getSize(): Size
         }
 
         export class CAMERA {
-            static getBounds(timeline: Timeline, frameIndex: number): Rectangle
+            static getBounds(timeline: Timeline, frameIndex: number): Bounds
 
             static getCenter(timeline: Timeline, frameIndex: number): Vector
         }
@@ -367,7 +254,7 @@ declare namespace sat {
         /**
          * @deprecated use {@link ENTITY.STAGE.getBounds} instead.
          */
-        export function getStageBounds(): Rectangle
+        export function getStageBounds(): Bounds
 
         /**
          * @deprecated use {@link ENTITY.STAGE.getBounds} instead.
@@ -377,7 +264,7 @@ declare namespace sat {
         /**
          * @deprecated use {@link ENTITY.SYMBOL.getBounds} instead.
          */
-        export function getSymbolBounds(element: ElementBoundsLike | Element): Rectangle
+        export function getSymbolBounds(element: ElementBoundsLike | Element): Bounds
 
         /**
          * @deprecated use {@link ENTITY.SYMBOL.getBounds} instead.
@@ -392,7 +279,7 @@ declare namespace sat {
         /**
          * @deprecated use {@link ENTITY.CAMERA.getBounds} instead.
          */
-        export function getCameraRect(timeline: Timeline, frameIndex: number): Rectangle
+        export function getCameraRect(timeline: Timeline, frameIndex: number): Bounds
 
         /**
          * @deprecated use {@link ENTITY.CAMERA.getBounds} instead.
@@ -406,38 +293,38 @@ declare namespace sat {
 
 
         /**
-         * @deprecated use {@link Rectangle.fromTopLeft} instead.
+         * @deprecated use {@link Bounds.fromTopLeft} instead.
          */
         export function wrapRectByTopLeft(
             left: number,
             top: number,
             width: number,
             height: number
-        ): Rectangle
+        ): Bounds
         /**
-         * @deprecated use {@link Rectangle.fromTopLeft} instead.
+         * @deprecated use {@link Bounds.fromTopLeft} instead.
          */
         export function wrapRectByTopLeft(
             leftTop: Vector | VectorLike,
             size: Size | SizeLike
-        ): Rectangle
+        ): Bounds
 
         /**
-         * @deprecated use {@link Rectangle.fromCenter} instead.
+         * @deprecated use {@link Bounds.fromCenter} instead.
          */
         export function wrapRectByCenter(
             centerX: number,
             centerY: number,
             width: number,
             height: number
-        ): Rectangle
+        ): Bounds
         /**
-         * @deprecated use {@link Rectangle.fromCenter} instead.
+         * @deprecated use {@link Bounds.fromCenter} instead.
          */
         export function wrapRectByCenter(
             center: Vector | VectorLike,
             size: Size | SizeLike
-        ): Rectangle
+        ): Bounds
 
         /**
          * @deprecated use {@link Size.from} instead.
@@ -478,7 +365,7 @@ declare namespace sat {
     export namespace TYPES {
         export type T_Element = Element
         export type T_Vector = Vector
-        export type T_Rectangle = Rectangle
+        export type T_Rectangle = Bounds
         export type T_Size = Size
         export type T_Transform = Transform
         export type T_FrameRange = FrameRange
@@ -491,7 +378,7 @@ declare namespace sat {
 
     // 别名
     export { Vector as V }
-    export { Rectangle as R }
+    export { Bounds as R }
     export { Size as S }
     export { Transform as TR } // T与泛型冲突
     export { FrameRange as FR }

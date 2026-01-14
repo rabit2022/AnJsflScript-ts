@@ -10,6 +10,10 @@ require(["require", "_exports", "@anjsfl/validation"], function (require, export
             console.error("check faied");
             return;
         }
+
+        toCheckes.includes()
+        toCheckes.map()
+
         console.log("check success");
     }
     Main();

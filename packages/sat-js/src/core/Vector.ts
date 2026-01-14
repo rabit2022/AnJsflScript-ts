@@ -10,14 +10,19 @@
 //
 // Represents a vector in two dimensions with `x` and `y` properties.
 
-import {SObject} from "./SObject";
 
 
 // Create a new Vector, optionally passing in the `x` and `y` coordinates. If
 // a coordinate is not specified, it will be set to `0`
 
 
-export class Vector extends SObject {
+
+import {VectorLike} from "../types/vectorType";
+import {SObject} from "../base/SObject";
+import {RelativePosition} from "../enum/vectorEnums";
+import {Bounds} from "./Bounds/Bounds";
+
+export class Vector extends SObject implements VectorLike{
     x: number;
     y: number;
 
@@ -203,6 +208,72 @@ export class Vector extends SObject {
         return Math.sqrt(this.len2());
     };
 
+    // --------------------------------------------------------------------------------
+    // # Calculation methods
+
+    // 如果 this 表示尺寸（如 width/height）
+    halfSize(): Vector {
+        return new Vector(this.x / 2, this.y / 2);
+    }
+
+    // 如果 this 表示一个点，求与另一个点的中点
+    midpointTo(other: Vector): Vector {
+        return new Vector(
+            (this.x + other.x) / 2,
+            (this.y + other.y) / 2
+        );
+    }
+
+    /**
+     * 计算两个向量之间的角度
+     * @param {Vector} other - 另一个向量
+     * @returns {number} 角度值，单位为弧度
+     */
+    angleTo(other: Vector): number {
+        var dot = this.dot(other);
+        var len1 = this.len();
+        var len2 = other.len();
+        var angle = Math.acos(dot / (len1 * len2));
+        return angle;
+    };
+
+    /**
+     * 计算两个向量之间的距离
+     * @param {Vector} other - 另一个向量
+     * @returns {number} 距离值，单位为像素
+     */
+    distanceTo(other: Vector): number {
+        var x = this.x - other.x;
+        var y = this.y - other.y;
+        return Math.sqrt(x * x + y * y);
+    };
+
+    /** 取各分量绝对值 */
+    abs(): Vector {
+        return new Vector(Math.abs(this.x), Math.abs(this.y));
+    }
+
+    /** 分量最小值 */
+    min(other: Vector): Vector {
+        return new Vector(Math.min(this.x, other.x), Math.min(this.y, other.y));
+    }
+
+    /** 分量最大值 */
+    max(other: Vector): Vector {
+        return new Vector(Math.max(this.x, other.x), Math.max(this.y, other.y));
+    }
+
+    /** 叉积（2D 叉积结果为标量） */
+    cross(other: Vector): number {
+        return this.x * other.y - this.y * other.x;
+    }
+
+    /** 获取向量角度（弧度），相对于 X 轴正方向 */
+    angle(): number {
+        return Math.atan2(this.y, this.x);
+    }
+
+
     /**
      * 四舍五入
      * @returns {Vector}
@@ -258,74 +329,6 @@ export class Vector extends SObject {
         return this;
     };
 
-    // --------------------------------------------------------------------------------
-    // # Calculation methods
-
-    /**
-     * 取中心点
-     * @returns {Vector}
-     */
-    getCenter(): Vector {
-        return new Vector(this.x / 2, this.y / 2);
-    };
-
-    /**
-     * 判断是否  在 另一个点 的 某个方向上
-     * @param {Vector} point 另一个点
-     * @param {"top right"|"top left"|"bottom right"|"bottom left"|"top center"|"right center"|"bottom center"|"left center"|"center"} whichCorner 方向
-     * @returns {boolean}
-     */
-    IsInDirectionOf(point: Vector, whichCorner: Corner): boolean {
-        var deltaX = this.x - point.x;
-        var deltaY = this.y - point.y;
-        // y轴向下，x轴向右
-        switch (whichCorner) {
-            case "top right":
-                return deltaX > 0 && deltaY < 0;
-            case "top left":
-                return deltaX < 0 && deltaY < 0;
-            case "bottom right":
-                return deltaX > 0 && deltaY > 0;
-            case "bottom left":
-                return deltaX < 0 && deltaY > 0;
-            case "top center":
-                return deltaY < 0;
-            case "right center":
-                return deltaX > 0;
-            case "bottom center":
-                return deltaY > 0;
-            case "left center":
-                return deltaX < 0;
-            case "center":
-                return deltaX === 0 && deltaY === 0;
-            default:
-                throw new Error("Invalid direction: " + whichCorner);
-        }
-    };
-
-    /**
-     * 计算两个向量之间的角度
-     * @param {Vector} other - 另一个向量
-     * @returns {number} 角度值，单位为弧度
-     */
-    angleTo(other: Vector): number {
-        var dot = this.dot(other);
-        var len1 = this.len();
-        var len2 = other.len();
-        var angle = Math.acos(dot / (len1 * len2));
-        return angle;
-    };
-
-    /**
-     * 计算两个向量之间的距离
-     * @param {Vector} other - 另一个向量
-     * @returns {number} 距离值，单位为像素
-     */
-    distanceTo(other: Vector): number {
-        var x = this.x - other.x;
-        var y = this.y - other.y;
-        return Math.sqrt(x * x + y * y);
-    };
 
     //interpolate
     /**
@@ -338,6 +341,33 @@ export class Vector extends SObject {
         f = typeof f === "undefined" ? 1 : f;
         return new Vector((this.x + other.x) * f, (this.y + other.y) * f);
     };
+
+
+    private static readonly REGION_CHECKS: Record<RelativePosition, (dx: number, dy: number) => boolean> = {
+        [RelativePosition.TopRight]:      (dx, dy) => dx > 0 && dy < 0,
+        [RelativePosition.TopLeft]:       (dx, dy) => dx < 0 && dy < 0,
+        [RelativePosition.BottomRight]:   (dx, dy) => dx > 0 && dy > 0,
+        [RelativePosition.BottomLeft]:    (dx, dy) => dx < 0 && dy > 0,
+        [RelativePosition.TopCenter]:     (dx, dy) => dy < 0,               // 宽松：上方任意 x
+        [RelativePosition.BottomCenter]:  (dx, dy) => dy > 0,
+        [RelativePosition.LeftCenter]:    (dx, dy) => dx < 0,
+        [RelativePosition.RightCenter]:   (dx, dy) => dx > 0,
+        [RelativePosition.Center]:        (dx, dy) => dx === 0 && dy === 0,
+    };
+
+    /**
+     * 判断当前点是否位于指定参考点的某个相对区域中。
+     * 坐标系：x 向右为正，y 向下为正（如 Canvas / DOM）。
+     * @param referencePoint 参考点
+     * @param region 目标相对区域
+     * @returns 若当前点落在该区域内，返回 true
+     */
+    isInRegionRelativeTo(referencePoint: Vector, region: RelativePosition): boolean {
+        const dx = this.x - referencePoint.x;
+        const dy = this.y - referencePoint.y;
+        return Vector.REGION_CHECKS[region](dx, dy);
+    }
+
 
     // --------------------------------------------------------------------------------
     // # Utility methods
@@ -352,10 +382,10 @@ export class Vector extends SObject {
 
     /**
      * 转换为Rectangle对象
-     * @returns {Rectangle}
+     * @returns {Bounds}
      */
-    toRectangle(): Rectangle {
-        return new Rectangle(0, 0, this.x, this.y);
+    toBounds(): Bounds {
+        return new Bounds(0, 0, this.x, this.y);
     };
 
     /**
@@ -437,34 +467,43 @@ export class Vector extends SObject {
         return Math.sqrt(x * x + y * y);
     };
 
+    // ----------------------------------------------------------------------------------------------------
+    // # 工厂函数
+
+    /** 从角度创建向量（静态工厂） */
+    static fromAngle(angleRadians: number): Vector {
+        return new Vector(Math.cos(angleRadians), Math.sin(angleRadians));
+    }
+
+    // ----------------------------------------------------------------------------------------------------
+    // # from flash element
+
     static from(element: Element | VectorLike | Vector): Vector {
         return new Vector(element.x, element.y);
     }
+
+    // ----------------------------------------------------------------------------------------------------
+    // # Constants
+
+    static readonly ZERO = new Vector(0, 0);
+    static readonly ONE = new Vector(1, 1);
+    static readonly LEFT = new Vector(-1, 0);
+    static readonly RIGHT = new Vector(1, 0);
+    static readonly UP = new Vector(0, -1);
+    static readonly DOWN = new Vector(0, 1);
+
+    /** 判断是否为零向量 */
+    isZero(): boolean {
+        return this.x === 0 && this.y === 0;
+    }
+
+
+
+
 }
 
-// ----------------------------------------------------------------------------------------------------
-// # Wrappers for Vector
 
 
-/**
- * 取零点
- * @returns {Vector}
- */
-function getOrigin() {
-    return new Vector(0, 0);
-}
-
-/**
- * 取元素的左上角坐标
- * @param {Element} element 元素
- * @returns {Vector}
- */
-function getTopLeft(element) {
-    return new Vector(element.left, element.top);
-}
 
 
-function IsVectorLike(obj) {
-    return obj && typeof obj.x === "number" && typeof obj.y === "number";
-}
 
