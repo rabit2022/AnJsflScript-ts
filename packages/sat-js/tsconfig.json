@@ -22,7 +22,7 @@
 
     // 必须为 true
     "declarationMap": true,
-    "emitDeclarationOnly": false,
+    "emitDeclarationOnly": false
 
   },
   "include": [

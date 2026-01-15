@@ -8,31 +8,29 @@
 //
 // ------------------------------------------------------------------------------------------------------------------------
 // Skew
-function Skew(skewX, skewY) {
-    this.skewX = skewX;
-    this.skewY = skewY;
-}
 
-SAT["Skew"] = Skew;
-SAT["SK"] = Skew;
 
-INHERIT_MACRO(Scale, SObject);
-
-Skew.prototype.toVector = function() {
-    return new Vector(this.skewX, this.skewY);
-};
-
-function IsSkewLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.skewX === "number" && typeof obj.skewY === "number");
-}
-
-SAT_CHECk["IsSkewLike"] = IsSkewLike;
+import {SObject} from "../../base/SObject";
+import {SkewLike} from "../../types/skewType";
 
 /**
- * 转换为Skew对象
- * @param {Element|Skew|SkewLike} element 斜切对象
- * @return {Skew}
+ * This is a simple skew class,Skew has two parameters {skewX},{skewY}.
  */
-function wrapSkew(element) {
-    return new Skew(element.skewX, element.skewY);
+export class Skew  extends SObject implements SkewLike{
+    public skewX: number = 0;
+    public skewY: number = 0;
+    constructor(skewX: number, skewY: number) {
+        super();
+        this.skewX = skewX;
+        this.skewY = skewY;
+    }
+
+    static fromElement(element: FlashElement | SkewLike | Skew): Skew{
+        return new Skew(element.skewX, element.skewY);
+    }
 }
+
+
+
+
+

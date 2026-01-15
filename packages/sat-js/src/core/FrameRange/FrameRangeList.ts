@@ -1,4 +1,3 @@
-
 // ------------------------------------------------------------------------------------------------------------------------
 //  ______   ______     ______     __    __     ______     ______     ______
 // /\  ___\ /\  == \   /\  __ \   /\ "-./  \   /\  ___\   /\  == \   /\  __ \
@@ -15,96 +14,124 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // FrameRangeList
 
-/**
- * 帧列表类，继承自 Array
- * @constructor
- */
-function FrameRangeList() {
-    Array.apply(this, arguments); // 调用 Array 的构造函数
-    SObject.apply(this, arguments);
-}
 
-SAT["FrameRangeList"] = FrameRangeList;
-SAT["FRL"] = FrameRangeList;
-
-INHERIT_MACRO(FrameRangeList, Array);
-// INHERIT_MACRO(FrameRangeList, SObject);
-Object.assign(FrameRangeList.prototype, SObject.prototype);
-Object.assign(FrameRangeList, SObject);
-
-
-Object.defineProperty(FrameRangeList.prototype, "firstSlFrameIndex", {
-    get: function() {
-        if (this.length === 0) {
-            return null;
-        }
-        return this[0].startFrame;
-    }
-});
-Object.defineProperty(FrameRangeList.prototype, "firstSlLayerIndex", {
-    get: function() {
-        if (this.length === 0) {
-            return null;
-        }
-        return this[0].layerIndex;
-    }
-});
-Object.defineProperty(FrameRangeList.prototype, "firstSlLayer", {
-    get: function() {
-        if (this.length === 0) {
-            return null;
-        }
-        var doc = fl.getDocumentDOM(); //文档对象
-        var timeline = doc.getTimeline(); //时间轴
-        var layers = timeline.layers; //图层
-
-        var layerIndex = this.firstSlLayerIndex;
-
-        return layers[layerIndex];
-    }
-});
-Object.defineProperty(FrameRangeList.prototype, "firstSlFrame", {
-    get: function() {
-        if (this.length === 0) {
-            return null;
-        }
-        var doc = fl.getDocumentDOM(); //文档对象
-        var timeline = doc.getTimeline(); //时间轴
-
-        var layers = timeline.layers; //图层
-        var curLayerIndex = timeline.currentLayer; //当前图层索引
-        var curLayer = layers[curLayerIndex]; //当前图层
-
-        var frames = curLayer.frames; //当前图层的帧列表
-        var curFrameIndex = timeline.currentFrame; //当前帧索引
-        var curFrame = frames[curFrameIndex]; //当前帧
-
-        var frameIndex = this.firstSlFrameIndex;
-        // console.log("firstSlFrameIndex=" + frameIndex);
-
-        return frames[frameIndex];
-    }
-});
-
+import {FrameRange} from "./FrameRange";
+import {SObject} from "../../base/SObject";
+import {FrameRangeLike} from "../../types/framerangeType";
 
 /**
- * 从列表中过滤出不重复的 layerIndex
- * @returns {Array<number>} 不重复的 layerIndex 列表
+ * FrameRangeList 是一个 FrameRange 的列表容器，
+ * 提供便捷的只读属性和工具方法。
  */
-FrameRangeList.prototype.getUniqueLayerIndexes = function() {
-    var uniqueLayerIndexes = [];
-    for (var i = 0; i < this.length; i++) {
-        var currentLayerIndex = this[i].layerIndex;
-        if (!uniqueLayerIndexes.includes(currentLayerIndex)) {
-            uniqueLayerIndexes.push(currentLayerIndex);
-        }
+export class FrameRangeList extends SObject {
+    private _items: FrameRange[] = [];
+
+    // --- 构造函数 ---
+    constructor(items: Iterable<FrameRange> = []) {
+        super();
+        this._items = Array.from(items);
     }
-    return uniqueLayerIndexes;
-};
 
+    // --- 数组代理方法（按需添加）---
+    get length(): number {
+        return this._items.length;
+    }
 
-function IsElementBoundsLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.left === "number" && typeof obj.top === "number" && typeof obj.width === "number" && typeof obj.height === "number");
+    [Symbol.iterator](): Iterator<FrameRange> {
+        return this._items[Symbol.iterator]();
+    }
+
+    at(index: number): FrameRange | undefined {
+        // return this._items.at(index);
+        if (index < 0) {
+            index = this._items.length + index;
+        }
+        return this._items[index];
+    }
+
+    forEach(callback: (item: FrameRange, index: number, array: FrameRangeList) => void): void {
+        this._items.forEach((item, i) => callback(item, i, this));
+    }
+
+    map<T>(callback: (item: FrameRange, index: number) => T): T[] {
+        return this._items.map(callback);
+    }
+
+    // 如果需要修改，可添加 push/pop 等，但建议保持不可变（immutable）
+
+    // --- 只读属性（带缓存）---
+    private _cachedFirstSlFrameIndex: number | null = null;
+    private _cachedFirstSlLayerIndex: number | null = null;
+    private _cachedFirstSlLayer: FlashLayer | null = null;
+    private _cachedFirstSlFrame: FlashFrame | null = null;
+
+    get firstSlFrameIndex(): number | null {
+        if (this._items.length === 0) return null;
+        if (this._cachedFirstSlFrameIndex === null) {
+            this._cachedFirstSlFrameIndex = this._items[0].startFrame;
+        }
+        return this._cachedFirstSlFrameIndex;
+    }
+
+    get firstSlLayerIndex(): number | null {
+        if (this._items.length === 0) return null;
+        if (this._cachedFirstSlLayerIndex === null) {
+            this._cachedFirstSlLayerIndex = this._items[0].layerIndex;
+        }
+        return this._cachedFirstSlLayerIndex;
+    }
+
+    get firstSlLayer(): FlashLayer | null {
+        if (this._items.length === 0) return null;
+        if (this._cachedFirstSlLayer === null) {
+            const doc = fl.getDocumentDOM();
+            const timeline = doc.getTimeline();
+            const layers = timeline.layers;
+            const layerIndex = this.firstSlLayerIndex;
+            this._cachedFirstSlLayer = layerIndex !== null ? layers[layerIndex] : null;
+        }
+        return this._cachedFirstSlLayer;
+    }
+
+    get firstSlFrame(): FlashFrame | null {
+        if (this._items.length === 0) return null;
+        if (this._cachedFirstSlFrame === null) {
+            const doc = fl.getDocumentDOM();
+            const timeline = doc.getTimeline();
+            const curLayerIndex = timeline.currentLayer;
+            const curLayer = timeline.layers[curLayerIndex];
+            const frameIndex = this.firstSlFrameIndex;
+            this._cachedFirstSlFrame = frameIndex !== null ? curLayer.frames[frameIndex] : null;
+        }
+        return this._cachedFirstSlFrame;
+    }
+
+    // --- 工具方法 ---
+    // /**
+    //  * @deprecated use {@link Timeline.prototype.getSelectedLayers} instead.
+    //  */
+    // getUniqueLayerIndexes(): number[] {
+    //     const seen = new Set<number>();
+    //     const result: number[] = [];
+    //     for (const range of this._items) {
+    //         if (!seen.has(range.layerIndex)) {
+    //             seen.add(range.layerIndex);
+    //             result.push(range.layerIndex);
+    //         }
+    //     }
+    //     return result;
+    // }
+
+    // --- 静态辅助方法（可选）---
+    static fromFrameRanges(ranges: FrameRangeLike[]): FrameRangeList {
+        return new FrameRangeList(ranges.map(r =>
+            r instanceof FrameRange ? r : new FrameRange(r.layerIndex, r.startFrame, r.endFrame)
+        ));
+    }
 }
 
-SAT_CHECk["IsElementBoundsLike"] = IsElementBoundsLike;
+
+
+
+
+

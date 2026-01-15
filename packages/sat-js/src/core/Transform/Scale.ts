@@ -11,7 +11,6 @@
 
 import {SObject} from "../../base/SObject";
 import {ScaleLike} from "../../types/scaleType";
-import {Vector} from "../Vector";
 
 export class Scale extends SObject implements ScaleLike{
     public scaleX: number;
@@ -24,11 +23,7 @@ export class Scale extends SObject implements ScaleLike{
         this.scaleY = scaleY;
     }
 
-    toVector(): Vector {
-        return new Vector(this.scaleX, this.scaleY);
-    };
-
-    static fromElement(element: Element | ScaleLike | Scale): Scale {
+    static fromElement(element: FlashElement | ScaleLike | Scale): Scale {
         return new Scale(element.scaleX, element.scaleY);
     }
 }

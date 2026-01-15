@@ -27,6 +27,15 @@ export class SObject {
         return this;
     }
 
+    assign(props: Record<string, any>): this {
+        for (const key in props) {
+            if (Object.prototype.hasOwnProperty.call(props, key)) {
+                (this as any)[key] = props[key];
+            }
+        }
+        return this;
+    }
+
     /**
      * 克隆当前对象（浅拷贝）
      * @returns 新的克隆实例

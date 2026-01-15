@@ -9,9 +9,7 @@
 
     //    "type": "module",
     "paths": [],
-
     "importHelpers": true,
-
     "types": [
       "node",
       "jest"
@@ -32,6 +30,7 @@
   },
   "include": [
     "test",
+    "src",
     // 全局的 类型定义文件
     "../../types/jsfl-typescript/jsfl.d.ts",
     "../../types/myShim/global.d.ts"

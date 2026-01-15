@@ -37,7 +37,7 @@ function main() {
     // }
     //
     // const baseName = args[0]; // e.g., "Vector"
-    const baseName = "Scale"; // e.g., "Vector"
+    const baseName = "Circle"; // e.g., "Vector"
     // const lowerName = baseName.charAt(0).toLowerCase() + baseName.slice(1); // "vector"
     const lowerName = baseName.toLowerCase();
 

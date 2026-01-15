@@ -11,20 +11,18 @@
 // Represents a vector in two dimensions with `x` and `y` properties.
 
 
-
 // Create a new Vector, optionally passing in the `x` and `y` coordinates. If
 // a coordinate is not specified, it will be set to `0`
-
 
 
 import {VectorLike} from "../types/vectorType";
 import {SObject} from "../base/SObject";
 import {RelativePosition} from "../enum/vectorEnums";
-import {Bounds} from "./Bounds/Bounds";
 
-export class Vector extends SObject implements VectorLike{
-    x: number;
-    y: number;
+
+export class Vector extends SObject implements VectorLike {
+    public x: number;
+    public y: number;
 
     /**
      * @param {?number=} x The x position.
@@ -98,7 +96,7 @@ export class Vector extends SObject implements VectorLike{
      * @param {Vector} other The other Vector.
      * @return {Vector} This for chaining.
      */
-    add(other: Vector): Vector {
+    add(other: Vector | VectorLike): this {
         this["x"] += other["x"];
         this["y"] += other["y"];
         return this;
@@ -273,6 +271,10 @@ export class Vector extends SObject implements VectorLike{
         return Math.atan2(this.y, this.x);
     }
 
+    // multiply= scale;
+    multiply(other: number): Vector {
+        return this.scale(other);
+    }
 
     /**
      * 四舍五入
@@ -344,15 +346,15 @@ export class Vector extends SObject implements VectorLike{
 
 
     private static readonly REGION_CHECKS: Record<RelativePosition, (dx: number, dy: number) => boolean> = {
-        [RelativePosition.TopRight]:      (dx, dy) => dx > 0 && dy < 0,
-        [RelativePosition.TopLeft]:       (dx, dy) => dx < 0 && dy < 0,
-        [RelativePosition.BottomRight]:   (dx, dy) => dx > 0 && dy > 0,
-        [RelativePosition.BottomLeft]:    (dx, dy) => dx < 0 && dy > 0,
-        [RelativePosition.TopCenter]:     (dx, dy) => dy < 0,               // 宽松：上方任意 x
-        [RelativePosition.BottomCenter]:  (dx, dy) => dy > 0,
-        [RelativePosition.LeftCenter]:    (dx, dy) => dx < 0,
-        [RelativePosition.RightCenter]:   (dx, dy) => dx > 0,
-        [RelativePosition.Center]:        (dx, dy) => dx === 0 && dy === 0,
+        [RelativePosition.TopRight]: (dx, dy) => dx > 0 && dy < 0,
+        [RelativePosition.TopLeft]: (dx, dy) => dx < 0 && dy < 0,
+        [RelativePosition.BottomRight]: (dx, dy) => dx > 0 && dy > 0,
+        [RelativePosition.BottomLeft]: (dx, dy) => dx < 0 && dy > 0,
+        [RelativePosition.TopCenter]: (_dx, dy) => dy < 0,               // 宽松：上方任意 x
+        [RelativePosition.BottomCenter]: (_dx, dy) => dy > 0,
+        [RelativePosition.LeftCenter]: (dx, _dy) => dx < 0,
+        [RelativePosition.RightCenter]: (dx, _dy) => dx > 0,
+        [RelativePosition.Center]: (dx, dy) => dx === 0 && dy === 0,
     };
 
     /**
@@ -373,38 +375,6 @@ export class Vector extends SObject implements VectorLike{
     // # Utility methods
 
     /**
-     * 转换为Size对象
-     * @returns {Size}
-     */
-    toSize(): Size {
-        return new Size(this.x, this.y);
-    };
-
-    /**
-     * 转换为Rectangle对象
-     * @returns {Bounds}
-     */
-    toBounds(): Bounds {
-        return new Bounds(0, 0, this.x, this.y);
-    };
-
-    /**
-     * 转换为Scale对象
-     * @returns {Scale}
-     */
-    toScale(): Scale {
-        return new Scale(this.x, this.y);
-    };
-
-    /**
-     * 转换为Skew对象
-     * @returns {Skew}
-     */
-    toSkew(): Skew {
-        return new Skew(this.x, this.y);
-    };
-
-    /**
      * 转换为符号向量
      * @returns {Vector}
      */
@@ -415,9 +385,6 @@ export class Vector extends SObject implements VectorLike{
         return new Vector(x, y);
     };
 
-    toVector() {
-        return this;
-    };
 
     /**
      * (-1)**n
@@ -478,7 +445,7 @@ export class Vector extends SObject implements VectorLike{
     // ----------------------------------------------------------------------------------------------------
     // # from flash element
 
-    static from(element: Element | VectorLike | Vector): Vector {
+    static fromElement(element: FlashElement | VectorLike | Vector): Vector {
         return new Vector(element.x, element.y);
     }
 
@@ -491,13 +458,6 @@ export class Vector extends SObject implements VectorLike{
     static readonly RIGHT = new Vector(1, 0);
     static readonly UP = new Vector(0, -1);
     static readonly DOWN = new Vector(0, 1);
-
-    /** 判断是否为零向量 */
-    isZero(): boolean {
-        return this.x === 0 && this.y === 0;
-    }
-
-
 
 
 }

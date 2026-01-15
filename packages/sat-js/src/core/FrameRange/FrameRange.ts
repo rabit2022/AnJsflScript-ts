@@ -1,4 +1,3 @@
-
 // ------------------------------------------------------------------------------------------------------------------------
 //  ______   ______     ______     __    __     ______     ______     ______
 // /\  ___\ /\  == \   /\  __ \   /\ "-./  \   /\  ___\   /\  == \   /\  __ \
@@ -14,6 +13,13 @@
 //
 // ------------------------------------------------------------------------------------------------------------------------
 // FrameRange
+
+
+import {SObject} from "../../base/SObject";
+import {FrameRangeLike} from "../../types/framerangeType";
+import {CHECK} from "../../check/check";
+import IsFrameRangeLike = CHECK.IsFrameRangeLike;
+
 /**
  * 帧范围类
  * 左闭右开区间 [startFrame, endFrame)
@@ -22,79 +28,74 @@
  * @param {number} [endFrame=startFrame+1] 结束帧
  * @constructor
  */
-function FrameRange(layerIndex, startFrame, endFrame) {
-    SObject.apply(this, arguments);
+export class FrameRange extends SObject implements FrameRangeLike {
+    public layerIndex: number
+    public startFrame: number
+    public endFrame: number
 
-    this.layerIndex = layerIndex;
-    this.startFrame = startFrame;
-    this.endFrame = endFrame || startFrame + 1;
-}
+    constructor(layerIndex: number, startFrame: number, endFrame?: number) {
+        super();
 
-SAT["FrameRange"] = FrameRange;
-SAT["FR"] = FrameRange;
+        this.layerIndex = layerIndex;
+        this.startFrame = startFrame;
+        this.endFrame = endFrame || startFrame + 1;
+    }
 
-INHERIT_MACRO(FrameRange, SObject);
-
-/**
- * 帧范围的持续时间
- * @property {number} duration
- * @type {number}
- */
-Object.defineProperty(FrameRange.prototype, "duration", {
-    get: function() {
+    get duration(): number {
         return this.endFrame - this.startFrame;
     }
-});
 
+    /**
+     * 获取当前帧范围的第一帧
+     * @return {FrameRange} 第一帧范围
+     */
+    get firstFrame(): FrameRange {
+        const fr = this.clone();
+        fr.endFrame = fr.startFrame + 1;
+        return fr;
+    };
 
-/**
- * 判断两个帧范围是否有重叠
- * @param {FrameRange} other 另一个帧范围
- * @return {boolean} 是否有重叠
- */
-FrameRange.prototype.intersects = function(other) {
-    return this.startFrame <= other.endFrame && other.startFrame <= this.endFrame;
-};
+    /**
+     * 判断两个帧范围是否有重叠
+     * @param {FrameRange} other 另一个帧范围
+     * @return {boolean} 是否有重叠
+     */
+    intersects(other: FrameRange): boolean {
+        return this.startFrame <= other.endFrame && other.startFrame <= this.endFrame;
+    };
 
-/**
- * 判断 当前 FrameRange 是否包含   fr2 选中范围
- * @param {FrameRange|number} fr2 选中范围数组
- * @return {boolean} 是否包含
- */
-FrameRange.prototype.contain = function(fr2) {
-    // contain(frameIndex: number) : boolean;
-    if (typeof fr2 === "number") {
-        return this.startFrame <= fr2 && this.endFrame > fr2;
-    } else if (IsFrameRangeLike(fr2)) {
-        if (this.layerIndex !== fr2.layerIndex) {
-            return false;
+    contain(frameIndex: number): boolean;
+    /**
+     * 判断 当前 FrameRange 是否包含   fr2 选中范围
+     * @param fr2 选中范围数组
+     * @return {boolean} 是否包含
+     */
+    contain(fr2: FrameRange | FrameRangeLike): boolean;
+
+    // 实现
+    contain(arg: number | FrameRange | FrameRangeLike): boolean {
+        if (typeof arg === "number") {
+            return this.startFrame <= arg && arg < this.endFrame;
         }
-        return this.startFrame <= fr2.startFrame && this.endFrame >= fr2.endFrame;
-    } else {
-        throw new Error("Invalid argument type : " + fr2);
+
+        if (IsFrameRangeLike(arg)) {
+            if (this.layerIndex !== arg.layerIndex) {
+                return false;
+            }
+            return this.startFrame <= arg.startFrame && this.endFrame >= arg.endFrame;
+        }
+
+        // 类型系统理论上不会让代码走到这里
+        throw new Error(`Invalid argument type: ${typeof arg}`);
     }
-};
 
-/**
- * 转换为数组
- * @return {[number, number, number]} 数组
- */
-FrameRange.prototype.toArray = function() {
-    return [this.layerIndex, this.startFrame, this.endFrame];
-};
+    toArray(): [number, number, number] {
+        return [this.layerIndex, this.startFrame, this.endFrame];
+    };
 
-/**
- * 获取当前帧范围的第一帧
- * @return {FrameRange} 第一帧范围
- */
-FrameRange.prototype.getFirstFrame = function() {
-    var fr = this.clone();
-    fr.endFrame = fr.startFrame + 1;
-    return fr;
-};
 
-function IsFrameRangeLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.layerIndex === "number" && typeof obj.startFrame === "number" && typeof obj.endFrame === "number");
 }
 
-SAT_CHECk["IsFrameRangeLike"] = IsFrameRangeLike;
+
+
+

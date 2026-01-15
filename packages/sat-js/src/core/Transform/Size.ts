@@ -1,4 +1,3 @@
-
 // ------------------------------------------------------------------------------------------------------------------------
 //  ______     __     ______     ______
 // /\  ___\   /\ \   /\___  \   /\  ___\
@@ -10,81 +9,54 @@
 // Size
 //
 // Represents a size with `width` and `height` properties.
+import {SObject} from "../../base/SObject";
+import {SizeLike} from "../../types/sizeType";
 
-/**
- * 尺寸
- * @param {number} width 宽度
- * @param {number} height 高度
- * @constructor
- * @class {Size} Size
- */
-function Size(width, height) {
-    SObject.apply(this, arguments);
+export class Size extends SObject implements SizeLike {
+    public width: number = 0;
+    public height: number = 0;
 
-    this.width = width;
-    this.height = height;
-}
-
-SAT["Size"] = Size;
-SAT["S"] = Size;
-
-INHERIT_MACRO(Size, SObject);
-
-Object.defineProperty(Size.prototype, "ratio", {
-    get: function() {
+    get ratio(): number {
         return this.width / this.height;
     }
-});
-Object.defineProperty(Size.prototype, "max_size", {
-    get: function() {
+
+    get max_size(): number {
         return Math.max(this.width, this.height);
     }
-});
-Object.defineProperty(Size.prototype, "min_size", {
-    get: function() {
+
+    get min_size(): number {
         return Math.min(this.width, this.height);
     }
-});
 
+    constructor(width: number, height: number) {
+        super();
 
-/**
- * 相加两个尺寸
- * @param {Size} size 尺寸
- * @returns {Size} 尺寸
- */
-Size.prototype.add = function(size) {
-    return new Size(this.width + size.width, this.height + size.height);
-};
-/**
- * 相减两个尺寸
- * @param {Size} size 尺寸
- * @returns {Size} 尺寸
- */
-Size.prototype.sub = function(size) {
-    return new Size(this.width - size.width, this.height - size.height);
-};
+        this.width = width;
+        this.height = height;
+    }
 
-Size.prototype.getRatioWidth = function(nowHeight) {
-    return this.ratio * nowHeight;
-};
+    add(size: Size): Size {
+        return new Size(this.width + size.width, this.height + size.height);
+    };
 
-Size.prototype.getRatioHeight = function(nowWidth) {
-    return nowWidth / this.ratio;
-};
+    sub(size: Size): Size {
+        return new Size(this.width - size.width, this.height - size.height);
+    };
 
-Size.prototype.toVector = function() {
-    return new Vector(this.width, this.height);
-};
-Size.from = wrapSize;
+    getRatioWidth(nowHeight: number): number {
+        return this.ratio * nowHeight;
+    };
 
-function wrapSize(element) {
-    return new Size(element.width, element.height);
+    getRatioHeight(nowWidth: number): number {
+        return nowWidth / this.ratio;
+    };
+
+    static fromElement(element: FlashElement | FlashDocument | Size | SizeLike): Size {
+        return new Size(element.width, element.height);
+    }
 }
 
-SAT_GLOBALS["wrapSize"] = wrapSize;
 
-function IsSizeLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.width === "number" && typeof obj.height === "number");
-}
 
-SAT_CHECk["IsSizeLike"] = IsSizeLike;
+
+
