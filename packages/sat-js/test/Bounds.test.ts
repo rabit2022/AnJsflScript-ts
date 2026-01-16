@@ -2,10 +2,10 @@
 
 // === Mock global fl (for default constructor) ===
 import {SAT} from "../src";
-import Bounds = SAT.Bounds;
-import Vector = SAT.Vector;
 import {RelativePosition} from "../src/enum/vectorEnums";
 import {RectanglePart} from "../src/enum/boundsEnum";
+import Bounds = SAT.Bounds;
+import Vector = SAT.Vector;
 
 const mockDoc = { width: 800, height: 600 };
 (global as any).fl = {
@@ -218,17 +218,17 @@ describe("Bounds", () => {
 
     test("getCorner", () => {
         const b = new Bounds(10, 20, 30, 40);
-        expect(b.getCorner(<RelativePosition>"TopLeft")).toEqual(new Vector(10, 20));
-        expect(b.getCorner(<RelativePosition>"BottomRight")).toEqual(new Vector(30, 40));
-        expect(b.getCorner(<RelativePosition>"Center")).toEqual(new Vector(20, 30));
+        expect(b.getCorner(RelativePosition.TopLeft)).toEqual(new Vector(10, 20));
+        expect(b.getCorner(RelativePosition.BottomRight)).toEqual(new Vector(30, 40));
+        expect(b.getCorner(RelativePosition.Center)).toEqual(new Vector(20, 30));
     });
 
     test("getPart", () => {
         const b = new Bounds(0, 0, 100, 100);
-        const topLeft = b.getPart(<RectanglePart>"TopLeft", 0.5, 0.5);
+        const topLeft = b.getPart(RectanglePart.TopLeft, 0.5, 0.5);
         expect(topLeft).toEqual({ left: 0, top: 0, right: 50, bottom: 50 });
 
-        const center = b.getPart(<RectanglePart>"Center", 0.2, 0.2);
+        const center = b.getPart(RectanglePart.Center, 0.2, 0.2);
         expect(center).toEqual({ left: 40, top: 40, right: 60, bottom: 60 });
     });
 

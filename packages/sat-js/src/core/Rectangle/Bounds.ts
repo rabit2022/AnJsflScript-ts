@@ -48,7 +48,7 @@ export class Bounds extends SObject implements BoundsLike {
     // ===== 实际构造器实现 =====
     constructor(...args: any[]) {
         super(); // 调用 SObject 构造器
-        console.log("args",args);
+        // console.log("args",args);
 
         const $dom = fl.getDocumentDOM();
 
@@ -75,7 +75,7 @@ export class Bounds extends SObject implements BoundsLike {
                     this.top = -arg;
                     this.right = arg;
                     this.bottom = arg;
-                } else if (Array.isArray(arg) && arg.length > 0) {
+                } else if (Array.isArray(arg) ) {
                     const rect = findBoundingRectangle(arg as FlashElement[]);
                     this.copy(rect);
                 } else if (typeof arg === 'object') {

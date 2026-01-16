@@ -1316,6 +1316,7 @@ interface FlashCompilerErrors {
     save();
 }
 
+
 interface FlashComponentsPanel {
     addItemToDocument();
     reload();

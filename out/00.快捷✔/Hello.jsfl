@@ -13,6 +13,7 @@ require(["require", "_exports", "@anjsfl/validation"], function (require, export
 
         toCheckes.includes()
         toCheckes.map()
+        var tweenObj = fl.getDocumentDOM().getTimeline().layers[0].frames[0].tweenObj;
 
         console.log("check success");
     }
