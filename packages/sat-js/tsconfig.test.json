@@ -1,7 +1,7 @@
 //npm run build -w @anjsfl/validation
 
 {
-  "extends": "../../tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "./dist",
@@ -11,7 +11,6 @@
     "paths": [],
     "importHelpers": true,
     "types": [
-      "node",
       "jest"
     ],
     "target": "es5",
@@ -31,8 +30,10 @@
   "include": [
     "test",
     "src",
+
+    // jsfl
+    "../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
-    "../../types/jsfl-typescript/jsfl.d.ts",
-    "../../types/myShim/global.d.ts"
+    "../../types/myShim/*.d.ts"
   ]
 }

@@ -2,7 +2,7 @@ import {Bounds} from "../core/Rectangle/Bounds";
 import {Size} from "../core/Transform/Size";
 
 export class FlashStageWrapper {
-    public doc: FlashDocument = fl.getDocumentDOM();
+    public doc: FlashDocument = fl.getDocumentDOM()!;
 
 
     /**

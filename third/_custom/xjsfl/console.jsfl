@@ -236,3 +236,4 @@ define(function () {
     window.console = console;
     return console;
 });
+

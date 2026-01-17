@@ -610,7 +610,8 @@ declare class XMLList extends Array<XML> {
      * const xmlList = new XMLList("<root><child1/><child2/></root>");
      * const length = xmlList.length();
      */
-    length(): number;
+    // length(): number;
+    length: number;
 
     /**
      * 将此 XMLList 对象及其所有后代节点规范化。
@@ -716,59 +717,59 @@ declare class XMLList extends Array<XML> {
     xpath?(XPathExpression: string): XMLList | TypeError;
 }
 
-// 全局对象扩展
-declare global {
-    /**
-     * 创建一个新的 XML 对象。
-     * @param value XML 数据的初始值，可以是字符串、XML 对象或 XMLList 对象。
-     * @returns 返回一个新的 XML 对象。
-     * @example
-     * const xml = new XML("<root><child/></root>");
-     */
-    const XML: {
-        new(value?: string | XML | XMLList): XML;
-        (value?: string | XML | XMLList): XML;
-        prototype: XML;
-    };
-
-    /**
-     * 创建一个新的 XMLList 对象。
-     * @param value XML 数据列表的初始值，可以是字符串、XML 对象或 XMLList 对象。
-     * @returns 返回一个新的 XMLList 对象。
-     * @example
-     * const xmlList = new XMLList("<root><child1/><child2/></root>");
-     */
-    const XMLList: {
-        new(value?: string | XML | XMLList): XMLList;
-        (value?: string | XML | XMLList): XMLList;
-        prototype: XMLList;
-    };
-
-    /**
-     * 创建一个新的 Namespace 对象。
-     * @param uri 命名空间的 URI。
-     * @param prefix 命名空间的前缀（可选）。
-     * @returns 返回一个新的 Namespace 对象。
-     * @example
-     * const ns = new Namespace("http://example.com", "ex");
-     */
-    const Namespace: {
-        new(uri?: string, prefix?: string): Namespace;
-        (uri?: string, prefix?: string): Namespace;
-        prototype: Namespace;
-    };
-
-    /**
-     * 创建一个新的 QName 对象。
-     * @param namespace 命名空间对象或命名空间的 URI。
-     * @param localName QName 的本地名。
-     * @returns 返回一个新的 QName 对象。
-     * @example
-     * const qname = new QName("http://example.com", "localName");
-     */
-    const QName: {
-        new(namespace?: Namespace | string, localName?: string): QName;
-        (namespace?: Namespace | string, localName?: string): QName;
-        prototype: QName;
-    };
-}
+// // 全局对象扩展
+// declare global {
+//     /**
+//      * 创建一个新的 XML 对象。
+//      * @param value XML 数据的初始值，可以是字符串、XML 对象或 XMLList 对象。
+//      * @returns 返回一个新的 XML 对象。
+//      * @example
+//      * const xml = new XML("<root><child/></root>");
+//      */
+//    declare const XML: {
+//         new(value?: string | XML | XMLList): XML;
+//         (value?: string | XML | XMLList): XML;
+//         prototype: XML;
+//     };
+//
+//     /**
+//      * 创建一个新的 XMLList 对象。
+//      * @param value XML 数据列表的初始值，可以是字符串、XML 对象或 XMLList 对象。
+//      * @returns 返回一个新的 XMLList 对象。
+//      * @example
+//      * const xmlList = new XMLList("<root><child1/><child2/></root>");
+//      */
+//     const XMLList: {
+//         new(value?: string | XML | XMLList): XMLList;
+//         (value?: string | XML | XMLList): XMLList;
+//         prototype: XMLList;
+//     };
+//
+//     /**
+//      * 创建一个新的 Namespace 对象。
+//      * @param uri 命名空间的 URI。
+//      * @param prefix 命名空间的前缀（可选）。
+//      * @returns 返回一个新的 Namespace 对象。
+//      * @example
+//      * const ns = new Namespace("http://example.com", "ex");
+//      */
+//     const Namespace: {
+//         new(uri?: string, prefix?: string): Namespace;
+//         (uri?: string, prefix?: string): Namespace;
+//         prototype: Namespace;
+//     };
+//
+//     /**
+//      * 创建一个新的 QName 对象。
+//      * @param namespace 命名空间对象或命名空间的 URI。
+//      * @param localName QName 的本地名。
+//      * @returns 返回一个新的 QName 对象。
+//      * @example
+//      * const qname = new QName("http://example.com", "localName");
+//      */
+//     const QName: {
+//         new(namespace?: Namespace | string, localName?: string): QName;
+//         (namespace?: Namespace | string, localName?: string): QName;
+//         prototype: QName;
+//     };
+// }

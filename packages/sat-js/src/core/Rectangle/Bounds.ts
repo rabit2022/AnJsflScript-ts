@@ -38,7 +38,7 @@ export class Bounds extends SObject implements BoundsLike {
     constructor();
     constructor(rect: BoundsLike);
     constructor(doc: FlashDocument);
-    constructor(element: FlashElement | FlashSymbolItem);
+    constructor(element: FlashElement | SymbolItem);
     constructor(radius: number);
     constructor(elements: FlashElement[]);
     constructor(width: number, height: number);
@@ -51,6 +51,9 @@ export class Bounds extends SObject implements BoundsLike {
         // console.log("args",args);
 
         const $dom = fl.getDocumentDOM();
+        if (!$dom) {
+            throw new Error("No document is open in Flash.");
+        }
 
         switch (args.length) {
             case 0:

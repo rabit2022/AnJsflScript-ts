@@ -8,7 +8,7 @@ import Bounds = SAT.Bounds;
 import Vector = SAT.Vector;
 
 const mockDoc = { width: 800, height: 600 };
-(global as any).fl = {
+(globalThis as any).fl = {
     getDocumentDOM: () => mockDoc,
 };
 

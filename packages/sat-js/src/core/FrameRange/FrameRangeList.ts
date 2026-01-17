@@ -85,7 +85,11 @@ export class FrameRangeList extends SObject {
         if (this._items.length === 0) return null;
         if (this._cachedFirstSlLayer === null) {
             const doc = fl.getDocumentDOM();
+            if (!doc) {
+                throw new Error("No document is open in Flash.");
+            }
             const timeline = doc.getTimeline();
+
             const layers = timeline.layers;
             const layerIndex = this.firstSlLayerIndex;
             this._cachedFirstSlLayer = layerIndex !== null ? layers[layerIndex] : null;
@@ -97,6 +101,9 @@ export class FrameRangeList extends SObject {
         if (this._items.length === 0) return null;
         if (this._cachedFirstSlFrame === null) {
             const doc = fl.getDocumentDOM();
+            if (!doc) {
+                throw new Error("No document is open in Flash.");
+            }
             const timeline = doc.getTimeline();
             const curLayerIndex = timeline.currentLayer;
             const curLayer = timeline.layers[curLayerIndex];

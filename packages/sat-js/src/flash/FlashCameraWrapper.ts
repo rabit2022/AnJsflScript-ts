@@ -3,14 +3,14 @@ import {Vector} from "../core/Vector";
 import {FlashStageWrapper} from "./FlashStageWrapper";
 
 export class FlashCameraWrapper {
-    public doc: FlashDocument = fl.getDocumentDOM();
+    public doc: FlashDocument = fl.getDocumentDOM()!;
 
-    public timeline: FlashTimeline = this.doc.getTimeline();
+    public timeline: Timeline = this.doc.getTimeline();
     public frameIndex: number = 0;
 
     private stage :FlashStageWrapper = new FlashStageWrapper();
 
-    constructor(timeline?: FlashTimeline, frameIndex?: number){
+    constructor(timeline?: Timeline, frameIndex?: number){
         // this.timeline = timeline;
         // this.frameIndex = frameIndex;
         if(timeline){

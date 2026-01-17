@@ -16,12 +16,11 @@ require.config({
     // region REQUIRE MODULES PATHS
     {
         "console": "third/_custom/xjsfl/console",
+        "Context": "third/_custom/xjsfl/Context",
         "JSFLConstants": "third/_custom/xjsfl/JSFLConstants",
         "JSFLInterface": "third/_custom/xjsfl/JSFLInterface",
         "linqUtil": "third/_custom/utils/linqUtil",
         "satUtil": "third/_custom/utils/satUtil",
-        "SAT": "third/_custom/sat-js/SAT",
-        "Context": "third/_custom/Context/Context",
         "_exports": "third/_bridge/exports/_exports",
         "document-cookie": "third/_bridge/document-cookie/document-cookie",
         "store-js": "third/utils/store-js/store-js",
@@ -43,7 +42,8 @@ require.config({
         "loglevel": "third/log/loglevel/loglevel",
         "universal-cookie": "third/cookie/universal-cookie/universal-cookie",
         "Tips": "src/lib/out/Tips",
-        "@anjsfl/validation": "packages/validation/out/validation"
+        "@anjsfl/validation": "packages/validation/out/validation",
+        "@anjsfl/sat": "packages/sat-js/out/SAT"
     },
 // endregion REQUIRE MODULES PATHS
 

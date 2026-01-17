@@ -33,6 +33,7 @@ async function toPackageModulePaths(
     // 上一级目录（其实是上两级？根据你的逻辑）
     const parentDir = path.resolve(absoluteFile, '../..');
 
+
     // 读取 package.json
     const pkgContent = await fs.readFile(path.join(parentDir, "package.json"), "utf-8");
     const pkg = JSON.parse(pkgContent);

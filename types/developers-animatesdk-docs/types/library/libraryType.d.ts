@@ -1,1 +1,0 @@
-export type LibItemType = "video" | "movie clip" | "button" | "graphic" | "bitmap" | "screen" | "folder"

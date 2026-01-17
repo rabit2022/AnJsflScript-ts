@@ -4,9 +4,9 @@
     "module": "AMD",
     "useDefineForClassFields": true,
     "lib": [
-      "es5",
+      "es5"
 //      "es6", // es6shim
-      "dom", // console
+//      "dom", // console
     ],
 
     "skipLibCheck": false,   // 👈 先关掉，看是否有错误
@@ -55,12 +55,11 @@
     // region REQUIRE MODULES PATHS
     {
       "console": ["third/_custom/xjsfl/console.jsfl"],
+      "Context": ["third/_custom/xjsfl/Context.jsfl"],
       "JSFLConstants": ["third/_custom/xjsfl/JSFLConstants.jsfl"],
       "JSFLInterface": ["third/_custom/xjsfl/JSFLInterface.jsfl"],
       "linqUtil": ["third/_custom/utils/linqUtil.jsfl"],
       "satUtil": ["third/_custom/utils/satUtil.jsfl"],
-      "SAT": ["third/_custom/sat-js/SAT.jsfl"],
-      "Context": ["third/_custom/Context/Context.jsfl"],
       "_exports": ["third/_bridge/exports/_exports.jsfl"],
       "document-cookie": ["third/_bridge/document-cookie/document-cookie.jsfl"],
       "store-js": ["third/utils/store-js/store-js.jsfl"],
@@ -88,10 +87,11 @@
   },
   "include": [
     "src",
+    "types",
 
     // 全局的 类型定义文件
-    "./types/jsfl-typescript/jsfl.d.ts",
-    "./types/myShim/global.d.ts"
+    "./types/jsfl/types/**/*.d.ts",
+    "./types/myShim/*.d.ts"
   ],
   "typeRoots": [
     "./node_modules/@types",
