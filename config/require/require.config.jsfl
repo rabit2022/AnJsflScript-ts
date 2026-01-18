@@ -44,8 +44,11 @@ require.config({
         "Events": "src/lib/out/Events",
         "test": "src/lib/out/test",
         "Tips": "src/lib/out/Tips",
+        "@anjsfl/Events": "packages/xjsfl/dist/Events",
         "@anjsfl/validation": "packages/validation/out/validation",
-        "@anjsfl/sat": "packages/sat-js/out/SAT"
+        "@anjsfl/sat": "packages/sat-js/out/SAT",
+        "@jsfl/es6-checker": "packages/es6-checker/out/fl-checker",
+        "@jsfl/es5-checker": "packages/es5-checker/out/fl-checker"
     },
 // endregion REQUIRE MODULES PATHS
 

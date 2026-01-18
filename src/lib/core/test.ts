@@ -1,7 +1,7 @@
 // test.ts
 
 // 1. 导入我们需要的类
-import { Events, DocumentEvent, LayerEvent, FrameEvent, MouseEvent } from "./Events";
+import { Events, DocumentEvent, LayerEvent, FrameEvent, MouseEvent } from "Events";
 
 // --------------------------------------------------
 // 📝 初始化 / 启动测试

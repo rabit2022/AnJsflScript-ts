@@ -20,3 +20,7 @@ declare const an: Flash;
  * @bug 如果第三方库，使用了html5的document，会出现跳进不正常的分支的情况,容易出现bug。
  */
 declare const document: Document;
+
+// FLfile = new FlashFile();
+declare const FLfile:FLfile;
+

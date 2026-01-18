@@ -133,8 +133,8 @@
             // 导入shims, 避免其他模块依赖时报错
             "es5-shim", // es5,es2009
             "es5-sham",
-            "es6-shim", // es6,es2015
-            "es6-sham",
+            // "es6-shim", // es6,es2015
+            // "es6-sham",
             // "es7-shim", // es7,es2016
             // "es2017", // es8,es2017
 

@@ -80,6 +80,8 @@
       "assert": ["third/nodejs/assert/assert.jsfl"],
       "loglevel": ["third/log/loglevel/loglevel.jsfl"],
       "universal-cookie": ["third/cookie/universal-cookie/universal-cookie.jsfl"],
+      "Events": ["src/lib/core/Events"],
+      "test": ["src/lib/core/test"],
       "Tips": ["src/lib/core/Tips"]
     }
     

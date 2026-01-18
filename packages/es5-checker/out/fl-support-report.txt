@@ -1,0 +1,55 @@
+=== ECMAScript 特性支持情况 ===
+es5ArrayIsArray: ❌ 不支持
+es5ArrayEvery: ✅ 支持
+es5ArrayFilter: ✅ 支持
+es5ArrayForEach: ✅ 支持
+es5ArrayIndexOf: ✅ 支持
+es5ArrayLastIndexOf: ✅ 支持
+es5ArrayMap: ✅ 支持
+es5ArraySome: ✅ 支持
+es5ArrayReduce: ✅ 支持
+es5ArrayReduceRight: ✅ 支持
+es5ObjectKeys: ❌ 不支持
+es5FunctionBind: ❌ 不支持
+es5StringTrim: ❌ 不支持
+es5DateNow: ✅ 支持
+es5DateToISOString: ❌ 不支持
+es5DateToJSON: ✅ 支持
+es5DateParseISO: ✅ 支持
+es5NumberToFixed: ✅ 支持
+es5NumberToPrecision: ✅ 支持
+es5NumberToExponential: ✅ 支持
+es5ParseInt: ❌ 不支持
+es5ParseFloat: ❌ 不支持
+es5ErrorToString: ✅ 支持
+es5ErrorName: ✅ 支持
+es5ErrorMessage: ✅ 支持
+es5RegExpToString: ✅ 支持
+
+=== 中文版支持情况 ===
+Array.isArray 方法: ❌
+Array.prototype.every 方法: ✅
+Array.prototype.filter 方法: ✅
+Array.prototype.forEach 方法: ✅
+Array.prototype.indexOf 方法: ✅
+Array.prototype.lastIndexOf 方法: ✅
+Array.prototype.map 方法: ✅
+Array.prototype.some 方法: ✅
+Array.prototype.reduce 方法: ✅
+Array.prototype.reduceRight 方法: ✅
+Object.keys 方法: ❌
+Function.prototype.bind 方法: ❌
+String.prototype.trim 方法: ❌
+Date.now 方法: ✅
+Date.prototype.toISOString 方法: ❌
+Date.prototype.toJSON 方法: ✅
+Date.parse 支持 ISO 8601 格式: ✅
+Number.prototype.toFixed 方法: ✅
+Number.prototype.toPrecision 方法: ✅
+Number.prototype.toExponential 方法: ✅
+全局 parseInt 函数: ❌
+全局 parseFloat 函数: ❌
+Error.prototype.toString 方法: ✅
+Error.prototype.name 属性: ✅
+Error.prototype.message 属性: ✅
+RegExp.prototype.toString 方法: ✅

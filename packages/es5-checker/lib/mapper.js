@@ -1,0 +1,30 @@
+// ====== ES5 特性中文映射 ======
+var mapper ={}
+mapper.es5ArrayIsArray = { cn: 'Array.isArray 方法' };
+mapper.es5ArrayEvery = { cn: 'Array.prototype.every 方法' };
+mapper.es5ArrayFilter = { cn: 'Array.prototype.filter 方法' };
+mapper.es5ArrayForEach = { cn: 'Array.prototype.forEach 方法' };
+mapper.es5ArrayIndexOf = { cn: 'Array.prototype.indexOf 方法' };
+mapper.es5ArrayLastIndexOf = { cn: 'Array.prototype.lastIndexOf 方法' };
+mapper.es5ArrayMap = { cn: 'Array.prototype.map 方法' };
+mapper.es5ArraySome = { cn: 'Array.prototype.some 方法' };
+mapper.es5ArrayReduce = { cn: 'Array.prototype.reduce 方法' };
+mapper.es5ArrayReduceRight = { cn: 'Array.prototype.reduceRight 方法' };
+mapper.es5ObjectKeys = { cn: 'Object.keys 方法' };
+mapper.es5FunctionBind = { cn: 'Function.prototype.bind 方法' };
+mapper.es5StringTrim = { cn: 'String.prototype.trim 方法' };
+mapper.es5DateNow = { cn: 'Date.now 方法' };
+mapper.es5DateToISOString = { cn: 'Date.prototype.toISOString 方法' };
+mapper.es5DateToJSON = { cn: 'Date.prototype.toJSON 方法' };
+mapper.es5DateParseISO = { cn: 'Date.parse 支持 ISO 8601 格式' };
+mapper.es5NumberToFixed = { cn: 'Number.prototype.toFixed 方法' };
+mapper.es5NumberToPrecision = { cn: 'Number.prototype.toPrecision 方法' };
+mapper.es5NumberToExponential = { cn: 'Number.prototype.toExponential 方法' };
+mapper.es5ParseInt = { cn: '全局 parseInt 函数' };
+mapper.es5ParseFloat = { cn: '全局 parseFloat 函数' };
+mapper.es5ErrorToString = { cn: 'Error.prototype.toString 方法' };
+mapper.es5ErrorName = { cn: 'Error.prototype.name 属性' };
+mapper.es5ErrorMessage = { cn: 'Error.prototype.message 属性' };
+mapper.es5RegExpToString = { cn: 'RegExp.prototype.toString 方法' };
+
+module.exports = mapper;
