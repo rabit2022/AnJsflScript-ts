@@ -6,13 +6,17 @@ type PathURI = string;
 /** Represents a generic object returned by various search functions */
 interface FoundObject {
     /** The actual element found */
-    obj: FlashElement;
+    obj: Element;
     /** The keyframe the element is on */
-    keyframe: FlashFrame;
+    keyframe: Frame;
     /** The layer the keyframe is on */
-    layer: FlashLayer;
+    layer: Layer;
     /** The timeline the layer is on */
     timeline: Timeline;
     /** The parent of the timeline (e.g., a symbol instance) */
-    parent: FlashDocument | SymbolInstance; // Could be Document or SymbolInstance
+    parent: Document | SymbolInstance; // Could be Document or SymbolInstance
 }
+
+type EventType =  "documentNew" | "documentOpened" | "documentClosed" | "mouseMove" | "documentChanged" | "layerChanged" | "timelineChanged" | "frameChanged";
+
+type ListenerID = number;

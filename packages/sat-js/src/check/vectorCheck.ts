@@ -1,8 +1,7 @@
 // ----------------------------------------------------------------------------------------------------
 // # Wrappers for Vector
 
-
-import {VectorLike} from "../types/vectorType";
+import { VectorLike } from "../types/vectorType";
 
 /**
  * 类型守卫：判断对象是否具有 Vector 结构（含 x, y 数值属性）。
@@ -12,8 +11,8 @@ import {VectorLike} from "../types/vectorType";
 export function IsVectorLike(obj): obj is VectorLike {
     return (
         obj !== null &&
-        typeof obj === 'object' &&
-        typeof obj.x === 'number' &&
-        typeof obj.y === 'number'
+        typeof obj === "object" &&
+        typeof obj.x === "number" &&
+        typeof obj.y === "number"
     );
 }

@@ -4,7 +4,7 @@ import { XYWHRect } from "./XYWHRect";
 import { CornerRect } from "./CornerRect";
 import { Box } from "./Box";
 import { Vector } from "../Vector";
-import {Bounds} from "./Bounds";
+import { Bounds } from "./Bounds";
 
 export namespace BoundsConverter {
     // === 从 Bounds (LTRB) 转换 ===

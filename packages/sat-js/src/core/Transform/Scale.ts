@@ -1,4 +1,3 @@
-
 // ------------------------------------------------------------------------------------------------------------------------
 //  ______     ______     ______     __         ______
 // /\  ___\   /\  ___\   /\  __ \   /\ \       /\  ___\
@@ -9,10 +8,10 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // Scale
 
-import {SObject} from "../../base/SObject";
-import {ScaleLike} from "../../types/scaleType";
+import { SObject } from "../../base/SObject";
+import { ScaleLike } from "../../types/scaleType";
 
-export class Scale extends SObject implements ScaleLike{
+export class Scale extends SObject implements ScaleLike {
     public scaleX: number;
     public scaleY: number;
 
@@ -27,8 +26,3 @@ export class Scale extends SObject implements ScaleLike{
         return new Scale(element.scaleX, element.scaleY);
     }
 }
-
-
-
-
-

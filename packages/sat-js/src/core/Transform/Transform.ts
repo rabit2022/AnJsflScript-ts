@@ -15,30 +15,29 @@
 // Transform
 //
 // Represents a transform with `rotation`, `scale`, `position`, `size`, and `skew` properties.
-import {SObject} from "../../base/SObject";
-import {TransformLike} from "../../types/transformType";
-import {ScaleLike} from "../../types/scaleType";
-import {VectorLike} from "../../types/vectorType";
-import {SizeLike} from "../../types/sizeType";
-import {SkewLike} from "../../types/skewType";
-import {Size} from "./Size";
-import {Skew} from "./Skew";
-import {Scale} from "./Scale";
-import {IsVectorLike} from "../../check/vectorCheck";
-import {IsScaleLike} from "../../check/scaleCheck";
-import {IsSkewLike} from "../../check/skewCheck";
-import {IsSizeLike} from "../../check/sizeCheck";
-import {Vector} from "../Vector";
+import { SObject } from "../../base/SObject";
+import { TransformLike } from "../../types/transformType";
+import { ScaleLike } from "../../types/scaleType";
+import { VectorLike } from "../../types/vectorType";
+import { SizeLike } from "../../types/sizeType";
+import { SkewLike } from "../../types/skewType";
+import { Size } from "./Size";
+import { Skew } from "./Skew";
+import { Scale } from "./Scale";
+import { IsVectorLike } from "../../check/vectorCheck";
+import { IsScaleLike } from "../../check/scaleCheck";
+import { IsSkewLike } from "../../check/skewCheck";
+import { IsSizeLike } from "../../check/sizeCheck";
+import { Vector } from "../Vector";
 
 export class Transform extends SObject implements TransformLike {
-    public rotation: number
-    public scale: Scale
-    public position: Vector
-    public size: Size
-    public skew: Skew
+    public rotation: number;
+    public scale: Scale;
+    public position: Vector;
+    public size: Size;
+    public skew: Skew;
 
-
-    element: FlashElement
+    element: FlashElement;
 
     constructor(element: FlashElement) {
         super();
@@ -60,7 +59,7 @@ export class Transform extends SObject implements TransformLike {
         this.element.rotation = rotation;
         this.rotation = rotation;
         return this;
-    };
+    }
 
     setScale(scale: Scale | ScaleLike): this {
         let finalScale: Scale;
@@ -72,7 +71,9 @@ export class Transform extends SObject implements TransformLike {
         } else if (IsScaleLike(scale)) {
             finalScale = new Scale(scale.scaleX, scale.scaleY);
         } else {
-            throw new Error('Invalid scale input: must be Scale, ScaleLike, or VectorLike');
+            throw new Error(
+                "Invalid scale input: must be Scale, ScaleLike, or VectorLike"
+            );
         }
 
         this.element.scaleX = finalScale.scaleX;
@@ -89,7 +90,7 @@ export class Transform extends SObject implements TransformLike {
         } else if (IsVectorLike(position)) {
             finalPosition = new Vector(position.x, position.y);
         } else {
-            throw new Error('Invalid position input: must be VectorLike');
+            throw new Error("Invalid position input: must be VectorLike");
         }
 
         this.element.x = finalPosition.x;
@@ -99,7 +100,6 @@ export class Transform extends SObject implements TransformLike {
     }
 
     setSize(size: Size | SizeLike): this {
-
         let finalSize: Size;
         if (size instanceof Size) {
             finalSize = size;
@@ -108,7 +108,7 @@ export class Transform extends SObject implements TransformLike {
         } else if (IsSizeLike(size)) {
             finalSize = new Size(size.width, size.height);
         } else {
-            throw new Error('Invalid size input: must be VectorLike');
+            throw new Error("Invalid size input: must be VectorLike");
         }
 
         this.element.width = finalSize.width;
@@ -127,7 +127,7 @@ export class Transform extends SObject implements TransformLike {
         } else if (IsSkewLike(skew)) {
             finalSkew = new Skew(skew.skewX, skew.skewY);
         } else {
-            throw new Error('Invalid skew input');
+            throw new Error("Invalid skew input");
         }
 
         this.element.skewX = finalSkew.skewX;
@@ -141,12 +141,9 @@ export class Transform extends SObject implements TransformLike {
         this.element.y += distanceToMove.y;
         this.position = this.position.clone().add(distanceToMove);
         return this;
-    };
+    }
 
     static fromElement(element: FlashElement): Transform {
         return new Transform(element);
     }
 }
-
-
-

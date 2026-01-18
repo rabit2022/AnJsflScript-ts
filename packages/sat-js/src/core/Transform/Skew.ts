@@ -1,4 +1,3 @@
-
 // ------------------------------------------------------------------------------------------------------------------------
 //  ______     __  __     ______     __     __
 // /\  ___\   /\ \/ /    /\  ___\   /\ \  _ \ \
@@ -9,14 +8,13 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // Skew
 
-
-import {SObject} from "../../base/SObject";
-import {SkewLike} from "../../types/skewType";
+import { SObject } from "../../base/SObject";
+import { SkewLike } from "../../types/skewType";
 
 /**
  * This is a simple skew class,Skew has two parameters {skewX},{skewY}.
  */
-export class Skew  extends SObject implements SkewLike{
+export class Skew extends SObject implements SkewLike {
     public skewX: number = 0;
     public skewY: number = 0;
     constructor(skewX: number, skewY: number) {
@@ -25,12 +23,7 @@ export class Skew  extends SObject implements SkewLike{
         this.skewY = skewY;
     }
 
-    static fromElement(element: FlashElement | SkewLike | Skew): Skew{
+    static fromElement(element: FlashElement | SkewLike | Skew): Skew {
         return new Skew(element.skewX, element.skewY);
     }
 }
-
-
-
-
-

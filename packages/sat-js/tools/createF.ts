@@ -1,16 +1,16 @@
 // generate-ts-files.js
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 function findProjectRoot(startDir) {
     let current = startDir;
     while (current !== path.dirname(current)) {
-        if (fs.existsSync(path.join(current, 'package.json'))) {
+        if (fs.existsSync(path.join(current, "package.json"))) {
             return current;
         }
         current = path.dirname(current);
     }
-    throw new Error('Could not find package.json in parent directories.');
+    throw new Error("Could not find package.json in parent directories.");
 }
 
 function ensureDirectory(dir) {
@@ -19,9 +19,9 @@ function ensureDirectory(dir) {
     }
 }
 
-function createFileIfNotExists(filePath, content = '') {
+function createFileIfNotExists(filePath, content = "") {
     if (!fs.existsSync(filePath)) {
-        fs.writeFileSync(filePath, content.trim() + '\n', 'utf8');
+        fs.writeFileSync(filePath, content.trim() + "\n", "utf8");
         console.log(`✅ Created: ${filePath}`);
     } else {
         console.log(`⚠️  Already exists: ${filePath}`);
@@ -46,10 +46,10 @@ function main() {
     const typesFileName = `${lowerName}Type.ts`;
 
     const projectRoot = findProjectRoot(process.cwd());
-    const srcDir = path.join(projectRoot, 'src');
-    const checkDir = path.join(srcDir, 'check');
-    const enumDir = path.join(srcDir, 'enum');
-    const typesDir = path.join(srcDir, 'types');
+    const srcDir = path.join(projectRoot, "src");
+    const checkDir = path.join(srcDir, "check");
+    const enumDir = path.join(srcDir, "enum");
+    const typesDir = path.join(srcDir, "types");
 
     ensureDirectory(checkDir);
     ensureDirectory(enumDir);

@@ -1,4 +1,3 @@
-
 // src/check/check.ts
 import { IsBoundsLike as _IsBoundsLike } from "./boundsCheck";
 import { IsVectorLike as _IsVectorLike } from "./vectorCheck";

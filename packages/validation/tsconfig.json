@@ -5,12 +5,10 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "./dist",
-    // 避免和 webpack 的 dist 冲突
 
-    //    "type": "module",
-//    "paths": [],
-
-//    "importHelpers": true,
+    // 无法打包
+//    "outFile": "./dist/validation.js",
+//    "module": "AMD",
 
     "types": [
       "node",
@@ -32,8 +30,9 @@
   },
   "include": [
     "src",
+    // jsfl
+    "../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
-    "../../types/jsfl-typescript/jsfl.d.ts",
-    "../../types/myShim/global.d.ts"
+    "../../types/myShim/*.d.ts"
   ]
 }

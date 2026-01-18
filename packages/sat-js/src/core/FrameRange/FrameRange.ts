@@ -14,10 +14,9 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // FrameRange
 
-
-import {SObject} from "../../base/SObject";
-import {FrameRangeLike} from "../../types/framerangeType";
-import {CHECK} from "../../check/check";
+import { SObject } from "../../base/SObject";
+import { FrameRangeLike } from "../../types/framerangeType";
+import { CHECK } from "../../check/check";
 import IsFrameRangeLike = CHECK.IsFrameRangeLike;
 
 /**
@@ -29,9 +28,9 @@ import IsFrameRangeLike = CHECK.IsFrameRangeLike;
  * @constructor
  */
 export class FrameRange extends SObject implements FrameRangeLike {
-    public layerIndex: number
-    public startFrame: number
-    public endFrame: number
+    public layerIndex: number;
+    public startFrame: number;
+    public endFrame: number;
 
     constructor(layerIndex: number, startFrame: number, endFrame?: number) {
         super();
@@ -53,7 +52,7 @@ export class FrameRange extends SObject implements FrameRangeLike {
         const fr = this.clone();
         fr.endFrame = fr.startFrame + 1;
         return fr;
-    };
+    }
 
     /**
      * 判断两个帧范围是否有重叠
@@ -62,7 +61,7 @@ export class FrameRange extends SObject implements FrameRangeLike {
      */
     intersects(other: FrameRange): boolean {
         return this.startFrame <= other.endFrame && other.startFrame <= this.endFrame;
-    };
+    }
 
     contain(frameIndex: number): boolean;
     /**
@@ -91,11 +90,5 @@ export class FrameRange extends SObject implements FrameRangeLike {
 
     toArray(): [number, number, number] {
         return [this.layerIndex, this.startFrame, this.endFrame];
-    };
-
-
+    }
 }
-
-
-
-

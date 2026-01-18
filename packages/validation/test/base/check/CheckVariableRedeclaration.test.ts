@@ -1,4 +1,4 @@
-import {CheckVariableRedeclaration} from "../../../src";
+import { CheckVariableRedeclaration } from "../../../src";
 
 describe("CheckVariableRedeclaration", () => {
     let originalWarn: typeof console.warn;

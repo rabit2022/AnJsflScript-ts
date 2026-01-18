@@ -1,8 +1,6 @@
 // CheckDocument.test.ts
 
-
-import {CheckDocument} from "../../../src";
-
+import { CheckDocument } from "../../../src";
 
 describe("CheckDocument", () => {
     test("should return success when valid doc is provided", () => {

@@ -3,7 +3,7 @@
  *
  * @see {@link https://helpx.adobe.com/animate/using/flash-javascript-api.html}
  */
-interface FlashLayer {
+interface Layer {
     /**
      * Read-only property; a string value indicating the animation type of the layer.
      * Possible values include: `"none"`, `"motion object"`, `"IK pose"`.
@@ -66,7 +66,7 @@ interface FlashLayer {
      * }
      * ```
      */
-    readonly frames: FlashFrame[];
+    readonly frames: Frame[];
 
     /**
      * An integer that specifies the percentage layer height;
@@ -145,7 +145,7 @@ interface FlashLayer {
      * fl.getDocumentDOM().getTimeline().layers[1].parentLayer = parLayer;
      * ```
      */
-    parentLayer: FlashLayer | null;
+    parentLayer: Layer | null;
 
     /**
      * A Boolean value that specifies whether the layer’s objects on the Stage are shown or hidden.

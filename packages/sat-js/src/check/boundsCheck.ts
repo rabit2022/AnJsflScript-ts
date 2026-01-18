@@ -1,4 +1,4 @@
-import {BoundsLike} from "../types/boundsType";
+import { BoundsLike } from "../types/boundsType";
 
 /**
  * 当前对象是否与 BoundsLike 对象相等
@@ -7,8 +7,12 @@ import {BoundsLike} from "../types/boundsType";
  * @private
  */
 export function IsBoundsLike(obj): obj is BoundsLike {
-    return (obj && typeof obj === "object" && typeof obj.left === "number" && typeof obj.top === "number" && typeof obj.right === "number" && typeof obj.bottom === "number");
+    return (
+        obj &&
+        typeof obj === "object" &&
+        typeof obj.left === "number" &&
+        typeof obj.top === "number" &&
+        typeof obj.right === "number" &&
+        typeof obj.bottom === "number"
+    );
 }
-
-
-

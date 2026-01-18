@@ -1,9 +1,9 @@
 /**
- * The `folderItem` object is a subclass of the {@link Item} object.
+ * The `folderItem` object is a subclass of the {@link LibraryItem} object.
  * It represents a folder inside the Flash/Animate library.
  *
  * **Important**: The `folderItem` object does **not** define any unique properties or methods of its own.
- * All functionality is inherited from the base {@link Item} class.
+ * All functionality is inherited from the base {@link LibraryItem} class.
  *
  * This type is available starting with Flash MX 2004.
  *
@@ -35,7 +35,7 @@
  * }
  * ```
  */
-interface folderItem extends Item {
+interface folderItem extends LibraryItem {
     // No additional properties or methods.
     // All members are inherited from the `Item` base class.
 }

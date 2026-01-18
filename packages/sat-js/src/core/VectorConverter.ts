@@ -1,10 +1,9 @@
 // VectorConverter.ts
 
 import { Vector } from "./Vector";
-import {Scale} from "./Transform/Scale";
-import {Size} from "./Transform/Size";
-import {Skew} from "./Transform/Skew";
-
+import { Scale } from "./Transform/Scale";
+import { Size } from "./Transform/Size";
+import { Skew } from "./Transform/Skew";
 
 export namespace VectorConverter {
     // --- From Vector ---
@@ -66,14 +65,20 @@ export namespace VectorConverter {
     // --- 通用：从任意 {x,y} 或 {a,b} 对象字面量转为 Vector ---
     // （可选，增强灵活性）
 
-    export function toVector(obj: { x: number; y: number } | { width: number; height: number } | { scaleX: number; scaleY: number } | { skewX: number; skewY: number }): Vector {
-        if ('x' in obj && 'y' in obj) {
+    export function toVector(
+        obj:
+            | { x: number; y: number }
+            | { width: number; height: number }
+            | { scaleX: number; scaleY: number }
+            | { skewX: number; skewY: number }
+    ): Vector {
+        if ("x" in obj && "y" in obj) {
             return new Vector(obj.x, obj.y);
-        } else if ('width' in obj && 'height' in obj) {
+        } else if ("width" in obj && "height" in obj) {
             return new Vector(obj.width, obj.height);
-        } else if ('scaleX' in obj && 'scaleY' in obj) {
+        } else if ("scaleX" in obj && "scaleY" in obj) {
             return new Vector(obj.scaleX, obj.scaleY);
-        } else if ('skewX' in obj && 'skewY' in obj) {
+        } else if ("skewX" in obj && "skewY" in obj) {
             return new Vector(obj.skewX, obj.skewY);
         } else {
             throw new Error("Unsupported object structure for Vector conversion");

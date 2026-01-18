@@ -2,14 +2,13 @@
 //
 // Represents an axis-aligned box, with a width and height.
 
-
 // Create a new box, with the specified position, width, and height. If no position
 // is given, the position will be `(0,0)`. If no width or height are given, they will
 // be set to `0`.
-import {SObject} from "../../base/SObject";
-import {BoxTypeLike} from "../../types/boxType";
-import {VectorLike} from "../../types/vectorType";
-import {Vector} from "../Vector";
+import { SObject } from "../../base/SObject";
+import { BoxTypeLike } from "../../types/boxType";
+import { VectorLike } from "../../types/vectorType";
+import { Vector } from "../Vector";
 
 /**
  * @param {Vector=} pos A vector representing the bottom-left of the box (i.e. the smallest x and smallest y value).

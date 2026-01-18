@@ -2,7 +2,7 @@
  * The SymbolItem object is a subclass of the Item object.
  * @see {@link https://help.adobe.com/en_US/flash/cs6/scripting_dictionary.pdf} Adobe Flash Professional Scripting API
  */
-interface SymbolItem extends Item {
+interface SymbolItem extends LibraryItem {
     /**
      * Converts a symbol item in the library to a compiled movie clip.
      *

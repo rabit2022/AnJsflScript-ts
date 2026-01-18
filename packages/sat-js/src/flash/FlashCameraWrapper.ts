@@ -1,6 +1,6 @@
-import {Bounds} from "../core/Rectangle/Bounds";
-import {Vector} from "../core/Vector";
-import {FlashStageWrapper} from "./FlashStageWrapper";
+import { Bounds } from "../core/Rectangle/Bounds";
+import { Vector } from "../core/Vector";
+import { FlashStageWrapper } from "./FlashStageWrapper";
 
 export class FlashCameraWrapper {
     public doc: FlashDocument = fl.getDocumentDOM()!;
@@ -8,15 +8,15 @@ export class FlashCameraWrapper {
     public timeline: Timeline = this.doc.getTimeline();
     public frameIndex: number = 0;
 
-    private stage :FlashStageWrapper = new FlashStageWrapper();
+    private stage: FlashStageWrapper = new FlashStageWrapper();
 
-    constructor(timeline?: Timeline, frameIndex?: number){
+    constructor(timeline?: Timeline, frameIndex?: number) {
         // this.timeline = timeline;
         // this.frameIndex = frameIndex;
-        if(timeline){
+        if (timeline) {
             this.timeline = timeline;
         }
-        if(frameIndex){
+        if (frameIndex) {
             this.frameIndex = frameIndex;
         }
     }
@@ -26,7 +26,7 @@ export class FlashCameraWrapper {
      * @return {Bounds} 矩形对象
      */
     get bounds(): Bounds {
-        const {width: stageWidth, height: stageHeight} = this.stage.size;
+        const { width: stageWidth, height: stageHeight } = this.stage.size;
 
         let timeline = this.timeline;
         let frameIndex = this.frameIndex;
@@ -35,10 +35,14 @@ export class FlashCameraWrapper {
         var cameraZoomRatio = timeline.camera.getZoom(frameIndex) / 100;
         // var stageWidth = doc.width;
         // var stageHeight = doc.height;
-        var cameraRect = new Bounds(-cameraPos.x, -cameraPos.y, -cameraPos.x + stageWidth / cameraZoomRatio, -cameraPos.y + stageHeight / cameraZoomRatio);
+        var cameraRect = new Bounds(
+            -cameraPos.x,
+            -cameraPos.y,
+            -cameraPos.x + stageWidth / cameraZoomRatio,
+            -cameraPos.y + stageHeight / cameraZoomRatio
+        );
         return cameraRect;
     }
-
 
     /**
      * 获取摄像机中心点坐标

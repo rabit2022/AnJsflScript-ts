@@ -1,7 +1,7 @@
 /**
  * Represents a layer in Adobe Animate timeline that supports rig parenting.
  */
-interface FlashLayer {
+interface Layer {
     /**
      * Returns the rig matrix of the particular frame.
      *
@@ -24,7 +24,7 @@ interface FlashLayer {
      * // The following example gets the layer parent from the first frame of the ninth layer:
      * var myparent = an.getDocumentDOM().getTimeline().layers[8].getRigParentAtFrame(0);
      */
-    getRigParentAtFrame(frameIndex: number): FlashLayer;
+    getRigParentAtFrame(frameIndex: number): Layer;
 
     /**
      * Sets the layer parent of the particular frame.
@@ -49,7 +49,7 @@ interface FlashLayer {
      * @bug 参数顺序错误，导致无法设置父级。
      * @bug 当 layer 是Layer无法工作时，可以传入数字，具体原因未知。
      */
-    setRigParentAtFrame(layer:number, frameIndex:FlashLayer|number): void;
+    setRigParentAtFrame(layer:number, frameIndex:Layer|number): void;
 
 }
 

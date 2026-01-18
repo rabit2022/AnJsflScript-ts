@@ -17,8 +17,8 @@
  * @note 此函数依赖 Adobe Animate/Flash 的 JSFL 环境（`fl` 对象）。
  */
 export function CheckInSymbol(): {
-    currentTimeline: FlashTimeline;
-    mainTimeline: FlashTimeline;
+    currentTimeline: Timeline;
+    mainTimeline: Timeline;
 } | null {
     const doc = fl.getDocumentDOM();
     if (!doc) {

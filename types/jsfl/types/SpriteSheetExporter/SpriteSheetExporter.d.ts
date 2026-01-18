@@ -2,7 +2,7 @@
  * The SpriteSheetExporter object is a subclass of the Item object.
  * It is used to generate sprite sheets from symbols and bitmaps in Flash Pro CS6.
  */
-interface SpriteSheetExporter extends Item {
+interface SpriteSheetExporter extends LibraryItem {
     /**
      * Read-only property; A string indicating the name of the application that is generating the sprite sheet.
      * This property is provided for use by any future sprite sheet generator plugins.

@@ -1,16 +1,14 @@
-import {Bounds} from "../core/Rectangle/Bounds";
-import {Size} from "../core/Transform/Size";
+import { Bounds } from "../core/Rectangle/Bounds";
+import { Size } from "../core/Transform/Size";
 
 export class FlashStageWrapper {
     public doc: FlashDocument = fl.getDocumentDOM()!;
-
 
     /**
      * 获取舞台中心点坐标
      * @return {Vector} 点
      */
     get center() {
-
         var rect = new Bounds(this.doc);
         var stageCenter = rect.center;
         return stageCenter;
@@ -30,7 +28,7 @@ export class FlashStageWrapper {
      * @return {Size} 尺寸对象
      */
 
-    get size():Size {
+    get size(): Size {
         return Size.fromElement(this.doc);
     }
 }

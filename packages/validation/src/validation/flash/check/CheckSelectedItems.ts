@@ -9,8 +9,6 @@
 
 // types.ts 或当前文件顶部
 
-
-
 import { LibraryCondition } from "../../../types/validation/conditionTypes";
 import { CheckMode } from "../../../types/validation/selectionTypes";
 import { CheckSelection } from "../../base/check/selections/CheckSelection";
@@ -36,7 +34,7 @@ export function CheckSelectedItems(
     library: FlashLibrary,
     condition: LibraryCondition = LibraryCondition.NotZero,
     exTips?: string
-): FlashItem[] | null {
+): Item[] | null {
     const selectedItems = library.getSelectedItems();
 
     const isValid = CheckSelection(

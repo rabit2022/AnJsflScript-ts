@@ -15,7 +15,7 @@
  *
  * @see {@link library}
  */
-interface Item //extends SymbolItem, FolderItem, FontItem, SoundItem, VideoItem, BitmapItem, BitmapItem
+interface LibraryItem //extends SymbolItem, FolderItem, FontItem, SoundItem, VideoItem, BitmapItem, BitmapItem
 {
     // -----------------------------------------------------------------
     // Methods

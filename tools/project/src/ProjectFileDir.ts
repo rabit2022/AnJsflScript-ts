@@ -1,7 +1,7 @@
 // main.ts
 import * as path from "path";
 
-export const $ProjectFileDir$ = path.resolve(__filename, "../../../");
+export const $ProjectFileDir$ = path.resolve(__filename, "../../../../");
 
 // third 文件夹
 export const THIRD = path.resolve($ProjectFileDir$, "third");
@@ -30,6 +30,5 @@ export const REQUIRE_CONFIG_FILE = path.resolve(
     "config/require/require.config.jsfl"
 );
 export const TS_CONFIG_FILE = path.resolve($ProjectFileDir$, "tsconfig.json");
-
 
 export const PACKAGES = path.resolve($ProjectFileDir$, "packages");

@@ -6,7 +6,7 @@
  */
 
 
-interface FlashObject {
+interface Flash {
     // ==========================
     // Methods
     // ==========================
@@ -18,7 +18,7 @@ interface FlashObject {
      * @returns An integer ID for the listener, which can be used with `removeEventListener`.
      * @since Flash CS3 Professional
      */
-    addEventListener(eventType: "documentNew" | "documentOpened" | "documentClosed" | "mouseMove" | "documentChanged" | "layerChanged" | "timelineChanged" | "frameChanged", callback: Function): number;
+    addEventListener(eventType: EventType, callback: Function): ListenerID;
 
     /**
      * Adds the specified tool from the master toolbar to the main toolbar, appending it at the end.
@@ -82,7 +82,7 @@ interface FlashObject {
      * @returns `true` if the document was closed; `false` if the user cancels.
      * @since Flash MX 2004
      */
-    closeDocument(documentObject: FlashDocument, bPromptToSaveChanges?: boolean): boolean;
+    closeDocument(documentObject: Document, bPromptToSaveChanges?: boolean): boolean;
 
     /**
      * Silently copies a library item from a document without exposing it in the UI.
@@ -114,7 +114,7 @@ interface FlashObject {
      * fl.createDocument("htmlcanvas");
      * ```
      */
-    createDocument(docType?: "timeline" | "htmlcanvas" | "vrPanoDoc" | "vr360Doc"): FlashDocument | undefined;
+    createDocument(docType?: "timeline" | "htmlcanvas" | "vrPanoDoc" | "vr360Doc"): Document | undefined;
 
     /**
      * Returns a specific document’s publishing profile without opening the file.
@@ -164,7 +164,7 @@ interface FlashObject {
      * targetDoc.height = 400;
      * ```
      */
-    findDocumentDOM(id: number): FlashDocument | null;
+    findDocumentDOM(id: number): Document | null;
 
     /**
      * Returns an array of integers representing the position(s) of a document in the `fl.documents` array.
@@ -201,7 +201,7 @@ interface FlashObject {
      * }
      * ```
      */
-    findObjectInDocByName(instanceName: string, document: FlashDocument): FoundObject[];
+    findObjectInDocByName(instanceName: string, document: Document): FoundObject[];
 
     /**
      * Exposes elements of a specified element type in a document.
@@ -225,7 +225,7 @@ interface FlashObject {
      * }
      * ```
      */
-    findObjectInDocByType(elementType: string, document: FlashDocument): FoundObject[];
+    findObjectInDocByType(elementType: string, document: Document): FoundObject[];
 
     /**
      * Returns memory usage information for the Flash application (Windows only).
@@ -252,7 +252,7 @@ interface FlashObject {
      * fl.trace(currentDoc.name);
      * ```
      */
-    getDocumentDOM(): FlashDocument | null;
+    getDocumentDOM(): Document | null;
 
     /**
      * Returns the SWFPanel object based on the panel's localized name or its SWF filename.
@@ -355,7 +355,7 @@ interface FlashObject {
      * var doc = fl.openDocument("file:///c|/FlashDocument.fla");
      * ```
      */
-    openDocument(fileURI: FileURI): FlashDocument;
+    openDocument(fileURI: FileURI): Document;
 
     /**
      * Opens a script (JSFL, AS, ASC) or other file (XML, TXT) in the Flash text editor.
@@ -405,19 +405,6 @@ interface FlashObject {
      */
     reloadTools(): void;
 
-    /**
-     * Unregisters a function that was registered using `addEventListener()`.
-     * @param eventType The event type to remove.
-     * @param id The listener ID returned by `addEventListener()`.
-     * @returns `true` if the listener was removed; `false` if it wasn't found.
-     * @since Flash CS3 Professional
-     *
-     * @example
-     * ```javascript
-     * fl.removeEventListener("documentClosed", eventID);
-     * ```
-     */
-    removeEventListener(eventType: string, id: number): boolean;
 
     /**
      * Resets the global Classpath setting in the ActionScript 3.0 Settings dialog to the default value.
@@ -483,7 +470,7 @@ interface FlashObject {
      * alert(fl.saveDocument(fl.documents[1],"file:///C|/example2.fla"));
      * ```
      */
-    saveDocument(document: FlashDocument, fileURI?: FileURI): boolean;
+    saveDocument(document: Document, fileURI?: FileURI): boolean;
 
     /**
      * Displays the Save As dialog box for the specified document.
@@ -496,7 +483,7 @@ interface FlashObject {
      * alert(fl.saveDocumentAs(fl.documents[1]));
      * ```
      */
-    saveDocumentAs(document: FlashDocument): boolean;
+    saveDocumentAs(document: Document): boolean;
 
     /**
      * Enables selection or editing of an element.
@@ -522,7 +509,7 @@ interface FlashObject {
      * }
      * ```
      */
-    selectElement(elementObject: FlashElement, editMode: boolean): boolean;
+    selectElement(elementObject: Element, editMode: boolean): boolean;
 
     /**
      * Selects the specified tool in the Tools panel.
@@ -549,7 +536,7 @@ interface FlashObject {
      * fl.setActiveWindow(fl.documents[theIndex]);
      * ```
      */
-    setActiveWindow(document: FlashDocument, bActivateFrame?: any): void;
+    setActiveWindow(document: Document, bActivateFrame?: any): void;
 
     /**
      * Lets you disable the warning about a script running too long.
@@ -771,7 +758,7 @@ interface FlashObject {
      * }
      * ```
      */
-    readonly documents: FlashDocument[];
+    readonly documents: Document[];
 
     /**
      * The drawingLayer object for extensible tools to use for temporary drawing.
@@ -992,7 +979,7 @@ interface FlashObject {
      * @description Read-only property; an array of Tools objects.
      * Used only when creating extensible tools.
      */
-    readonly tools: Tools[];
+    readonly tools: Tools;
 
     /**
      * @availability Flash MX 2004
@@ -1089,7 +1076,7 @@ interface FlashObject {
      * fl.removeEventListener("documentClosed", eventID);
      * ```
      */
-    removeEventListener(eventType: string, id: number): boolean;
+    removeEventListener(eventType: EventType, id: ListenerID): boolean;
 
     /**
      * @availability Flash CS3 Professional
@@ -1122,7 +1109,7 @@ interface FlashObject {
      * fl.revertDocument(fl.getDocumentDOM());
      * ```
      */
-    revertDocument(documentObject: FlashDocument): boolean;
+    revertDocument(documentObject: Document): boolean;
 
     /**
      * @availability Flash MX 2004
@@ -1161,7 +1148,7 @@ interface FlashObject {
      * alert(fl.saveDocument(fl.documents[0], "file:///C|/example1.fla"));
      * ```
      */
-    saveDocument(document: FlashDocument | null, fileURI?: string | null): boolean;
+    saveDocument(document: Document | null, fileURI?: string | null): boolean;
 
     /**
      * @availability Flash MX 2004
@@ -1173,7 +1160,7 @@ interface FlashObject {
      * alert(fl.saveDocumentAs(fl.documents[1]));
      * ```
      */
-    saveDocumentAs(document: FlashDocument | null): boolean;
+    saveDocumentAs(document: Document | null): boolean;
 
     /**
      * @availability Flash CS3 Professional
@@ -1187,7 +1174,7 @@ interface FlashObject {
      * if (results.length > 0) fl.selectElement(results[0], false);
      * ```
      */
-    selectElement(elementObject: FlashElement, editMode: boolean): boolean;
+    selectElement(elementObject: Element, editMode: boolean): boolean;
 
     /**
      * @availability Flash CS3 Professional
@@ -1212,7 +1199,7 @@ interface FlashObject {
      * fl.setActiveWindow(fl.documents[0]);
      * ```
      */
-    setActiveWindow(document: FlashDocument, bActivateFrame?: boolean): void;
+    setActiveWindow(document: Document, bActivateFrame?: boolean): void;
 
     /**
      * @availability Adobe Animate

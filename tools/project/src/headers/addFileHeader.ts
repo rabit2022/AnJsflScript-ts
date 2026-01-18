@@ -1,6 +1,6 @@
-import { readFile, writeFile } from 'fs/promises';
-import { basename } from 'path';
-import { pathToFileURL } from 'url';
+import { readFile, writeFile } from "fs/promises";
+import { basename } from "path";
+import { pathToFileURL } from "url";
 import { ScanSpec, walk } from "../nodejs/walk";
 import { BUSINESS, LIB_CORE } from "../ProjectFileDir";
 
@@ -8,9 +8,9 @@ import { BUSINESS, LIB_CORE } from "../ProjectFileDir";
 const SCAN_DIRS = [LIB_CORE, BUSINESS];
 
 // 配置信息
-const AUTHOR = '穹的兔兔';
-const EMAIL = '3101829204@qq.com';
-const PROJECT = 'AnJsflScript-ts';
+const AUTHOR = "穹的兔兔";
+const EMAIL = "3101829204@qq.com";
+const PROJECT = "AnJsflScript-ts";
 
 /**
  * 获取格式化日期：2025/1/30 14:24
@@ -21,7 +21,7 @@ function getFormattedDate(): string {
     const m = now.getMonth() + 1;
     const d = now.getDate();
     const h = now.getHours();
-    const min = now.getMinutes().toString().padStart(2, '0');
+    const min = now.getMinutes().toString().padStart(2, "0");
     return `${y}/${m}/${d} ${h}:${min}`;
 }
 
@@ -45,8 +45,8 @@ function generateHeader(filename: string): string {
  */
 async function hasFileHeader(filePath: string): Promise<boolean> {
     try {
-        const content = await readFile(filePath, 'utf8');
-        return content.includes('@file:');
+        const content = await readFile(filePath, "utf8");
+        return content.includes("@file:");
     } catch {
         return false;
     }
@@ -63,10 +63,10 @@ async function processJsflFile(filePath: string): Promise<boolean> {
 
     const filename = basename(filePath);
     const header = generateHeader(filename);
-    const content = await readFile(filePath, 'utf8');
+    const content = await readFile(filePath, "utf8");
     const newContent = header + content;
 
-    await writeFile(filePath, newContent, 'utf8');
+    await writeFile(filePath, newContent, "utf8");
     console.log(`✅ 已添加文件头: ${filename}`);
     return true;
 }
@@ -100,7 +100,7 @@ async function* mergeAsyncIterables<T>(
 async function main() {
     try {
         // ✅ 用 map 批量获取所有目录的文件流
-        const fileStreams = await Promise.all(SCAN_DIRS.map(dir => getAllTsFiles(dir)));
+        const fileStreams = await Promise.all(SCAN_DIRS.map((dir) => getAllTsFiles(dir)));
 
         // 合并所有流
         const allFiles = mergeAsyncIterables(...fileStreams);
@@ -115,10 +115,11 @@ async function main() {
             }
         }
 
-        console.log(`\n🎉 完成！共找到 ${total} 个 .jsfl 文件，新增文件头 ${processed} 个。`);
-
+        console.log(
+            `\n🎉 完成！共找到 ${total} 个 .jsfl 文件，新增文件头 ${processed} 个。`
+        );
     } catch (err) {
-        console.error('❌ 扫描或处理过程中出错:', err);
+        console.error("❌ 扫描或处理过程中出错:", err);
         process.exit(1);
     }
 }

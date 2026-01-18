@@ -9,7 +9,6 @@
 
 // ruleUtils.ts
 
-
 import { ParsedRule } from "../../../../types/validation/ruleTypes";
 
 /**

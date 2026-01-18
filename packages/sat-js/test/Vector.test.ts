@@ -1,7 +1,6 @@
 // Vector.test.ts
 
-
-import {SAT} from "../src";
+import { SAT } from "../src";
 import Vector = SAT.Vector;
 
 describe("Vector", () => {

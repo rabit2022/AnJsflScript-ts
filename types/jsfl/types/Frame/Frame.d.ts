@@ -3,7 +3,7 @@
  *
  * @note All examples from the original documentation are preserved as inline comments.
  */
-interface FlashFrame {
+interface Frame {
     /**
      * A string representing ActionScript code attached to this frame.
      * To insert a new line character, use "\n".
@@ -29,7 +29,7 @@ interface FlashFrame {
      * @example
      * var myElements = fl.getDocumentDOM().getTimeline().layers[0].frames[0].elements;
      */
-    readonly elements: FlashElement[];
+    readonly elements: Element[];
 
     /**
      * A Boolean value that specifies whether the frame gets its ease information from the custom ease curve.

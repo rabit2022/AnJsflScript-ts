@@ -345,8 +345,7 @@ define(function () {
 						if(value instanceof Timeline || value === true || value === undefined)
 						{
 							timeline = value === true ? this.dom.getTimeline() : value;
-							// for each(var _item in this.dom.library.items)
-							for (var _item in this.dom.library.items)
+							for each(var _item in this.dom.library.items)
 							{
 								if(_item instanceof SymbolItem && _item.timeline === timeline)
 								{

@@ -5,13 +5,13 @@
 
 
 // flash = fl = App = app = animate = an = new Flash();
-declare const fl: FlashObject;
+declare const fl: Flash;
 // flash = fl = App = app = animate = an = new Flash();
-declare const flash: FlashObject;
-declare const App: FlashObject;
-declare const app: FlashObject;
-declare const animate: FlashObject;
-declare const an: FlashObject;
+declare const flash: Flash;
+declare const App: Flash;
+declare const app: Flash;
+declare const animate: Flash;
+declare const an: Flash;
 
 
 /**
@@ -19,4 +19,4 @@ declare const an: FlashObject;
  * @deprecated 使用fl.getDocumentDOM()代替
  * @bug 如果第三方库，使用了html5的document，会出现跳进不正常的分支的情况,容易出现bug。
  */
-declare const document: FlashDocument;
+declare const document: Document;

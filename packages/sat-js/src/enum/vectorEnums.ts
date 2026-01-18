@@ -7,5 +7,5 @@ export enum RelativePosition {
     RightCenter = "right center",
     BottomCenter = "bottom center",
     LeftCenter = "left center",
-    Center = "center",
+    Center = "center"
 }

@@ -3,7 +3,7 @@
  * It represents a library item used to create a sound.
  * Available since Flash MX 2004.
  */
-interface SoundItem extends Item {
+interface SoundItem extends LibraryItem {
     /**
      * A string that specifies the bit rate of a sound in the library.
      * Available only for the MP3 compression type.

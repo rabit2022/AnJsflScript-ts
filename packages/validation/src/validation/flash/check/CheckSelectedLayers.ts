@@ -7,7 +7,6 @@
  * @description:
  */
 
-
 import { LayerCondition } from "../../../types/validation/conditionTypes";
 import { CheckSelection } from "../../base/check/selections/CheckSelection";
 import { CheckMode } from "../../../types/validation/selectionTypes";
@@ -30,10 +29,10 @@ import { CheckMode } from "../../../types/validation/selectionTypes";
  * ```
  */
 export function CheckSelectedLayers(
-    timeline: FlashTimeline,
+    timeline: Timeline,
     condition: LayerCondition = LayerCondition.NotZero,
     exTips?: string
-): FlashLayer[] | null {
+): number[] | null {
     const selectedLayers = timeline.getSelectedLayers();
 
     const isValid = CheckSelection(

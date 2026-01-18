@@ -14,10 +14,9 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // FrameRangeList
 
-
-import {FrameRange} from "./FrameRange";
-import {SObject} from "../../base/SObject";
-import {FrameRangeLike} from "../../types/framerangeType";
+import { FrameRange } from "./FrameRange";
+import { SObject } from "../../base/SObject";
+import { FrameRangeLike } from "../../types/framerangeType";
 
 /**
  * FrameRangeList 是一个 FrameRange 的列表容器，
@@ -49,7 +48,9 @@ export class FrameRangeList extends SObject {
         return this._items[index];
     }
 
-    forEach(callback: (item: FrameRange, index: number, array: FrameRangeList) => void): void {
+    forEach(
+        callback: (item: FrameRange, index: number, array: FrameRangeList) => void
+    ): void {
         this._items.forEach((item, i) => callback(item, i, this));
     }
 
@@ -108,7 +109,8 @@ export class FrameRangeList extends SObject {
             const curLayerIndex = timeline.currentLayer;
             const curLayer = timeline.layers[curLayerIndex];
             const frameIndex = this.firstSlFrameIndex;
-            this._cachedFirstSlFrame = frameIndex !== null ? curLayer.frames[frameIndex] : null;
+            this._cachedFirstSlFrame =
+                frameIndex !== null ? curLayer.frames[frameIndex] : null;
         }
         return this._cachedFirstSlFrame;
     }
@@ -131,14 +133,12 @@ export class FrameRangeList extends SObject {
 
     // --- 静态辅助方法（可选）---
     static fromFrameRanges(ranges: FrameRangeLike[]): FrameRangeList {
-        return new FrameRangeList(ranges.map(r =>
-            r instanceof FrameRange ? r : new FrameRange(r.layerIndex, r.startFrame, r.endFrame)
-        ));
+        return new FrameRangeList(
+            ranges.map((r) =>
+                r instanceof FrameRange
+                    ? r
+                    : new FrameRange(r.layerIndex, r.startFrame, r.endFrame)
+            )
+        );
     }
 }
-
-
-
-
-
-

@@ -1,15 +1,15 @@
 // Bounds.test.ts
 
 // === Mock global fl (for default constructor) ===
-import {SAT} from "../src";
-import {RelativePosition} from "../src/enum/vectorEnums";
-import {RectanglePart} from "../src/enum/boundsEnum";
+import { SAT } from "../src";
+import { RelativePosition } from "../src/enum/vectorEnums";
+import { RectanglePart } from "../src/enum/boundsEnum";
 import Bounds = SAT.Bounds;
 import Vector = SAT.Vector;
 
 const mockDoc = { width: 800, height: 600 };
 (globalThis as any).fl = {
-    getDocumentDOM: () => mockDoc,
+    getDocumentDOM: () => mockDoc
 };
 
 // === Mock FlashElement for testing ===
@@ -24,7 +24,10 @@ interface MockFlashElement {
 
 // Helper to create mock element
 const makeElement = (l: number, t: number, w: number, h: number): MockFlashElement => ({
-    left: l, top: t, width: w, height: h
+    left: l,
+    top: t,
+    width: w,
+    height: h
 });
 
 describe("Bounds", () => {
@@ -93,10 +96,7 @@ describe("Bounds", () => {
     });
 
     test("array of FlashElements", () => {
-        const elems = [
-            makeElement(10, 10, 20, 20),
-            makeElement(50, 50, 30, 30)
-        ];
+        const elems = [makeElement(10, 10, 20, 20), makeElement(50, 50, 30, 30)];
         const b = new Bounds(elems as any);
         expect(b).toEqual({ left: 10, top: 10, right: 80, bottom: 80 });
     });
@@ -204,10 +204,7 @@ describe("Bounds", () => {
     });
 
     test("fromElements", () => {
-        const elems = [
-            makeElement(10, 10, 20, 20),
-            makeElement(50, 50, 30, 30)
-        ];
+        const elems = [makeElement(10, 10, 20, 20), makeElement(50, 50, 30, 30)];
         const b = Bounds.fromElements(elems as any);
         expect(b).toEqual({ left: 10, top: 10, right: 80, bottom: 80 });
     });
@@ -244,7 +241,9 @@ describe("Bounds", () => {
     });
 
     test("invalid two args", () => {
-        expect(() => makeBounds("a", "b")).toThrow("Invalid arguments for 2-arg constructor");
+        expect(() => makeBounds("a", "b")).toThrow(
+            "Invalid arguments for 2-arg constructor"
+        );
     });
 
     test("unsupported arg count", () => {
@@ -252,6 +251,8 @@ describe("Bounds", () => {
     });
 
     test("empty elements array", () => {
-        expect(() => makeBounds([])).toThrow("findBoundingRectangle: elements array is empty");
+        expect(() => makeBounds([])).toThrow(
+            "findBoundingRectangle: elements array is empty"
+        );
     });
 });

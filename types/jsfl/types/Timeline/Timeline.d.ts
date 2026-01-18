@@ -60,7 +60,7 @@ interface Timeline {
      * @example
      * var currentLayers = fl.getDocumentDOM().getTimeline().layers;
      */
-    readonly layers: FlashLayer[];
+    readonly layers: Layer[];
 
     /**
      * Read-only property:
@@ -74,7 +74,7 @@ interface Timeline {
      * else
      *   fl.trace("scene name: " + fl.getDocumentDOM().getTimeline().name);
      */
-    readonly libraryItem: Item | null;
+    readonly libraryItem: LibraryItem | null;
 
     /**
      * String: name of current timeline (scene, screen, or symbol name).
@@ -506,7 +506,7 @@ interface Timeline {
      * // Merge layers 0-3
      * fl.getDocumentDOM().getTimeline().mergeLayers(0, 3);
      */
-    mergeLayers(startLayerNum: number, endLayerNum: number): FlashLayer;
+    mergeLayers(startLayerNum: number, endLayerNum: number): Layer;
 
     /**
      * Pastes frames from clipboard into specified location.

@@ -1,10 +1,10 @@
 /**
  * Represents a bitmap asset in the Flash/Animate document library.
  *
- * @extends Item
+ * @extends LibraryItem
  * @availability Flash MX 2004 and later
  */
-interface BitmapItem extends Item {
+interface BitmapItem extends LibraryItem {
     // --- Properties ---
 
     /**

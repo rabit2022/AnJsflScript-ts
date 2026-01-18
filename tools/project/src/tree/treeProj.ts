@@ -4,13 +4,12 @@ import * as path from "path";
 import { minimatch } from "minimatch";
 import { $ProjectFileDir$ } from "../ProjectFileDir";
 
-
 const ignorePath = path.join(__dirname, ".treeignore");
 
 /**
  * 读取 .treeignore 文件并解析为忽略规则数组
  */
-function loadIgnorePatterns(repoRoot: string): string[] {
+function loadIgnorePatterns(): string[] {
     if (!fs.existsSync(ignorePath)) {
         // 如果没有 .treeignore，使用默认规则
         throw new Error("Ignore pattern not found.");
@@ -19,9 +18,9 @@ function loadIgnorePatterns(repoRoot: string): string[] {
     const content = fs.readFileSync(ignorePath, "utf-8");
     return content
         .split(/\r?\n/)
-        .map(line => line.trim())
-        .filter(line => line && !line.startsWith("#"))
-        .filter(line => !line.startsWith("!")); // 暂不支持白名单（negation）
+        .map((line) => line.trim())
+        .filter((line) => line && !line.startsWith("#"))
+        .filter((line) => !line.startsWith("!")); // 暂不支持白名单（negation）
 }
 
 /**
@@ -33,7 +32,7 @@ function shouldIgnore(relativePath: string, patterns: string[]): boolean {
     // 规范化路径分隔符为 /
     const normalized = relativePath.replace(/\\/g, "/");
 
-    return patterns.some(pattern => {
+    return patterns.some((pattern) => {
         // minimatch 默认不匹配以 . 开头的文件，除非显式开启 dot: true
         return minimatch(normalized, pattern, { dot: true, matchBase: true });
     });
@@ -53,21 +52,18 @@ function tree(
         throw new Error(`Directory does not exist: ${currentDir}`);
     }
 
-    const items = fs.readdirSync(currentDir)
-        .map(name => {
+    const items = fs
+        .readdirSync(currentDir)
+        .map((name) => {
             const fullPath = path.join(currentDir, name);
             const isFile = fs.statSync(fullPath).isFile();
             return { name, fullPath, isFile };
         })
         .sort((a, b) =>
-            a.isFile === b.isFile
-                ? a.name.localeCompare(b.name)
-                : a.isFile ? 1 : -1
+            a.isFile === b.isFile ? a.name.localeCompare(b.name) : a.isFile ? 1 : -1
         );
 
-    const pointers = items.map((_, i) =>
-        i === items.length - 1 ? "└── " : "├── "
-    );
+    const pointers = items.map((_, i) => (i === items.length - 1 ? "└── " : "├── "));
 
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
@@ -111,9 +107,10 @@ function findRepoRoot(start: string): string {
 function main(): void {
     // 获取当前脚本所在目录（兼容 Windows）
     const __filename = new URL(import.meta.url).pathname;
-    const scriptPath = process.platform === "win32" && __filename.startsWith("/")
-        ? __filename.slice(1)
-        : __filename;
+    const scriptPath =
+        process.platform === "win32" && __filename.startsWith("/")
+            ? __filename.slice(1)
+            : __filename;
     const __dirname = path.dirname(scriptPath);
 
     const startDir = $ProjectFileDir$;
@@ -123,7 +120,7 @@ function main(): void {
     console.log("Repository root found at:", repoRoot);
 
     // 加载忽略规则
-    const ignorePatterns = loadIgnorePatterns(repoRoot);
+    const ignorePatterns = loadIgnorePatterns();
     console.log(`Loaded ${ignorePatterns.length} ignore patterns.`);
 
     const rootName = path.basename(repoRoot);

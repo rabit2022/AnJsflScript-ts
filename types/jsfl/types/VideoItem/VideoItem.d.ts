@@ -1,9 +1,9 @@
 /**
  * The VideoItem object is a subclass of the Item object.
  *
- * @see Item
+ * @see LibraryItem
  */
-interface VideoItem extends Item {
+interface VideoItem extends LibraryItem {
     /**
      * Read-only; a string containing a hexadecimal number that represents the number of seconds
      * that have elapsed between January 1, 1970, and the modification date of the original file (on disk)

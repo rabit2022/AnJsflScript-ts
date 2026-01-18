@@ -10,15 +10,12 @@
 //
 // Represents a vector in two dimensions with `x` and `y` properties.
 
-
 // Create a new Vector, optionally passing in the `x` and `y` coordinates. If
 // a coordinate is not specified, it will be set to `0`
 
-
-import {VectorLike} from "../types/vectorType";
-import {SObject} from "../base/SObject";
-import {RelativePosition} from "../enum/vectorEnums";
-
+import { VectorLike } from "../types/vectorType";
+import { SObject } from "../base/SObject";
+import { RelativePosition } from "../enum/vectorEnums";
 
 export class Vector extends SObject implements VectorLike {
     public x: number;
@@ -47,7 +44,6 @@ export class Vector extends SObject implements VectorLike {
         return this;
     }
 
-
     // Rotate this vector (counter-clockwise) by the specified angle (in radians).
     /**
      * @param {number} angle The angle to rotate (in radians)
@@ -59,7 +55,7 @@ export class Vector extends SObject implements VectorLike {
         this["x"] = x * Math.cos(angle) - y * Math.sin(angle);
         this["y"] = x * Math.sin(angle) + y * Math.cos(angle);
         return this;
-    };
+    }
 
     // Reverse this vector.
     /**
@@ -69,14 +65,14 @@ export class Vector extends SObject implements VectorLike {
         this["x"] = -this["x"];
         this["y"] = -this["y"];
         return this;
-    };
+    }
 
     invert() {
         if (this.x === 0 || this.y === 0) {
             throw new Error("x and y must not be zero");
         }
         return new Vector(1 / this.x, 1 / this.y);
-    };
+    }
 
     // Normalize this vector.  (make it have length of `1`)
     /**
@@ -89,7 +85,7 @@ export class Vector extends SObject implements VectorLike {
             this["y"] = this["y"] / d;
         }
         return this;
-    };
+    }
 
     // Add another vector to this one.
     /**
@@ -100,7 +96,7 @@ export class Vector extends SObject implements VectorLike {
         this["x"] += other["x"];
         this["y"] += other["y"];
         return this;
-    };
+    }
 
     // Subtract another vector from this one.
     /**
@@ -111,7 +107,7 @@ export class Vector extends SObject implements VectorLike {
         this["x"] -= other["x"];
         this["y"] -= other["y"];
         return this;
-    };
+    }
 
     // Scale this vector. An independent scaling factor can be provided
     // for each axis, or a single scaling factor that will scale both `x` and `y`.
@@ -125,7 +121,7 @@ export class Vector extends SObject implements VectorLike {
         this["x"] *= x;
         this["y"] *= typeof y !== "undefined" ? y : x;
         return this;
-    };
+    }
 
     // Project this vector on to another vector.
     /**
@@ -137,7 +133,7 @@ export class Vector extends SObject implements VectorLike {
         this["x"] = amt * other["x"];
         this["y"] = amt * other["y"];
         return this;
-    };
+    }
 
     // Project this vector onto a vector of unit length. This is slightly more efficient
     // than `project` when dealing with unit vectors.
@@ -150,7 +146,7 @@ export class Vector extends SObject implements VectorLike {
         this["x"] = amt * other["x"];
         this["y"] = amt * other["y"];
         return this;
-    };
+    }
 
     // Reflect this vector on an arbitrary axis.
     /**
@@ -164,7 +160,7 @@ export class Vector extends SObject implements VectorLike {
         this["x"] -= x;
         this["y"] -= y;
         return this;
-    };
+    }
 
     // Reflect this vector on an arbitrary axis (represented by a unit vector). This is
     // slightly more efficient than `reflect` when dealing with an axis that is a unit vector.
@@ -179,7 +175,7 @@ export class Vector extends SObject implements VectorLike {
         this["x"] -= x;
         this["y"] -= y;
         return this;
-    };
+    }
 
     // Get the dot product of this vector and another.
     /**
@@ -188,7 +184,7 @@ export class Vector extends SObject implements VectorLike {
      */
     dot(other: Vector): number {
         return this["x"] * other["x"] + this["y"] * other["y"];
-    };
+    }
 
     // Get the squared length of this vector.
     /**
@@ -196,7 +192,7 @@ export class Vector extends SObject implements VectorLike {
      */
     len2(): number {
         return this.dot(this);
-    };
+    }
 
     // Get the length of this vector.
     /**
@@ -204,7 +200,7 @@ export class Vector extends SObject implements VectorLike {
      */
     len(): number {
         return Math.sqrt(this.len2());
-    };
+    }
 
     // --------------------------------------------------------------------------------
     // # Calculation methods
@@ -216,10 +212,7 @@ export class Vector extends SObject implements VectorLike {
 
     // 如果 this 表示一个点，求与另一个点的中点
     midpointTo(other: Vector): Vector {
-        return new Vector(
-            (this.x + other.x) / 2,
-            (this.y + other.y) / 2
-        );
+        return new Vector((this.x + other.x) / 2, (this.y + other.y) / 2);
     }
 
     /**
@@ -233,7 +226,7 @@ export class Vector extends SObject implements VectorLike {
         var len2 = other.len();
         var angle = Math.acos(dot / (len1 * len2));
         return angle;
-    };
+    }
 
     /**
      * 计算两个向量之间的距离
@@ -244,7 +237,7 @@ export class Vector extends SObject implements VectorLike {
         var x = this.x - other.x;
         var y = this.y - other.y;
         return Math.sqrt(x * x + y * y);
-    };
+    }
 
     /** 取各分量绝对值 */
     abs(): Vector {
@@ -285,7 +278,7 @@ export class Vector extends SObject implements VectorLike {
         this["x"] = Math.round(this["x"]);
         this["y"] = Math.round(this["y"]);
         return this;
-    };
+    }
 
     /**
      * timeline.camera.setPosition(curFrameIndex, newCameraPos.x, newCameraPos.y);
@@ -296,7 +289,7 @@ export class Vector extends SObject implements VectorLike {
         this["x"] = this["x"] ? this["x"] : 1;
         this["y"] = this["y"] ? this["y"] : 1;
         return this;
-    };
+    }
 
     // equals
     /**
@@ -306,7 +299,7 @@ export class Vector extends SObject implements VectorLike {
      */
     equals(other: Vector): boolean {
         return this.x === other.x && this.y === other.y;
-    };
+    }
 
     /**
      * 让一个点围绕另一个点沿椭圆轨道旋转
@@ -329,8 +322,7 @@ export class Vector extends SObject implements VectorLike {
 
         // 返回当前点对象，其坐标已更新为旋转后的新位置
         return this;
-    };
-
+    }
 
     //interpolate
     /**
@@ -342,19 +334,21 @@ export class Vector extends SObject implements VectorLike {
     interpolate(other: Vector, f?: number): Vector {
         f = typeof f === "undefined" ? 1 : f;
         return new Vector((this.x + other.x) * f, (this.y + other.y) * f);
-    };
+    }
 
-
-    private static readonly REGION_CHECKS: Record<RelativePosition, (dx: number, dy: number) => boolean> = {
+    private static readonly REGION_CHECKS: Record<
+        RelativePosition,
+        (dx: number, dy: number) => boolean
+    > = {
         [RelativePosition.TopRight]: (dx, dy) => dx > 0 && dy < 0,
         [RelativePosition.TopLeft]: (dx, dy) => dx < 0 && dy < 0,
         [RelativePosition.BottomRight]: (dx, dy) => dx > 0 && dy > 0,
         [RelativePosition.BottomLeft]: (dx, dy) => dx < 0 && dy > 0,
-        [RelativePosition.TopCenter]: (_dx, dy) => dy < 0,               // 宽松：上方任意 x
+        [RelativePosition.TopCenter]: (_dx, dy) => dy < 0, // 宽松：上方任意 x
         [RelativePosition.BottomCenter]: (_dx, dy) => dy > 0,
         [RelativePosition.LeftCenter]: (dx, _dy) => dx < 0,
         [RelativePosition.RightCenter]: (dx, _dy) => dx > 0,
-        [RelativePosition.Center]: (dx, dy) => dx === 0 && dy === 0,
+        [RelativePosition.Center]: (dx, dy) => dx === 0 && dy === 0
     };
 
     /**
@@ -370,7 +364,6 @@ export class Vector extends SObject implements VectorLike {
         return Vector.REGION_CHECKS[region](dx, dy);
     }
 
-
     // --------------------------------------------------------------------------------
     // # Utility methods
 
@@ -383,18 +376,17 @@ export class Vector extends SObject implements VectorLike {
         var x = Math.sign(this.x);
         var y = Math.sign(this.y);
         return new Vector(x, y);
-    };
-
+    }
 
     /**
      * (-1)**n
      * @returns {Vector}
      */
     signPow(): Vector {
-        this.x = (Math.abs(this.x) & 1) ? -1 : 1;
-        this.y = (Math.abs(this.y) & 1) ? -1 : 1;
+        this.x = Math.abs(this.x) & 1 ? -1 : 1;
+        this.y = Math.abs(this.y) & 1 ? -1 : 1;
         return this;
-    };
+    }
 
     // ----------------------------------------------------------------------------------------------------
     // # Static methods
@@ -410,7 +402,7 @@ export class Vector extends SObject implements VectorLike {
     static interpolate(pt1: Vector, pt2: Vector, f?: number): Vector {
         f = typeof f === "undefined" ? 1 : f;
         return new Vector((pt1.x + pt2.x) * f, (pt1.y + pt2.y) * f);
-    };
+    }
 
     /**
      * Returns a new Vector, based on an angle around and length from the Origin (0, 0)
@@ -420,7 +412,7 @@ export class Vector extends SObject implements VectorLike {
      */
     static polar(length: number, angle: number): Vector {
         return new Vector(length * Math.sin(angle), length * Math.cos(angle));
-    };
+    }
 
     /**
      * Gets the distance in pixels from a source Vector a target Vector
@@ -432,7 +424,7 @@ export class Vector extends SObject implements VectorLike {
         var x = pt1.x - pt2.x;
         var y = pt1.y - pt2.y;
         return Math.sqrt(x * x + y * y);
-    };
+    }
 
     // ----------------------------------------------------------------------------------------------------
     // # 工厂函数
@@ -458,12 +450,4 @@ export class Vector extends SObject implements VectorLike {
     static readonly RIGHT = new Vector(1, 0);
     static readonly UP = new Vector(0, -1);
     static readonly DOWN = new Vector(0, 1);
-
-
 }
-
-
-
-
-
-

@@ -1,7 +1,7 @@
 /**
  * Represents a document in Adobe Animate/Flash.
  */
-interface FlashDocument {
+interface Document {
     /**
      * Swaps the Stroke and Fill colors.
      * @example
@@ -2374,7 +2374,7 @@ interface FlashDocument {
      * fl.documents[2].addItem({x:0,y:0}, theItem);
      * ```
      */
-    addItem(position: FlashPoint, item: Item): boolean;
+    addItem(position: FlashPoint, item: LibraryItem): boolean;
 
     /**
      * Adds a new path between two points. The method uses the document’s current stroke attributes

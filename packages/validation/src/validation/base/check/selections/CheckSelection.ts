@@ -8,10 +8,13 @@
  */
 
 // 类型定义
-import { CheckCondition, CheckMode, Selection } from "../../../../types/validation/selectionTypes";
+import {
+    CheckCondition,
+    CheckMode,
+    Selection
+} from "../../../../types/validation/selectionTypes";
 import { CheckVariableRedeclaration } from "../CheckVariableRedeclaration";
 import { checkCondition, CONDITION_ALIAS_MAP, MESSAGES } from "./selectionUtils";
-
 
 // polyfill
 /**
@@ -28,15 +31,14 @@ function IsEnumValue<T extends Record<string, string | number>>(
     // Object.values(CheckCondition).includes(condition as CheckCondition)
 
     // 先确保 value 是 string 或 number
-    if (typeof value !== 'string' && typeof value !== 'number') {
+    if (typeof value !== "string" && typeof value !== "number") {
         return false;
     }
 
     // 使用 Object.keys + map 模拟 Object.values（兼容 ES5+）
-    const values = Object.keys(enumObj).map(key => enumObj[key]);
+    const values = Object.keys(enumObj).map((key) => enumObj[key]);
     return values.indexOf(value) !== -1;
 }
-
 
 /**
  * 检查选择的元件或帧是否符合指定的模式和条件。

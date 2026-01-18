@@ -5,12 +5,12 @@ interface FlashLibrary {
     /**
      * An array of all Item objects in the library.
      */
-    readonly items: Item[];
+    readonly items: LibraryItem[];
 
     /**
      * An array of library Items that are not used in the document.
      */
-    readonly unusedItems: Item[];
+    readonly unusedItems: LibraryItem[];
 
     /**
      * Adds the current or specified item to the Stage at the specified position.
@@ -103,7 +103,7 @@ interface FlashLibrary {
      * @example
      * var selItems = fl.getDocumentDOM().library.getSelectedItems(); selItems[0].sampleRate = "11 kHz";
      */
-    getSelectedItems(): Item[];
+    getSelectedItems(): LibraryItem[];
 
     /**
      * Checks to see if a specified item exists in the library.

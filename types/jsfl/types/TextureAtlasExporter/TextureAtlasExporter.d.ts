@@ -1,8 +1,8 @@
 /**
  * The TextureAtlasExporter object is a subclass of the Item object.
- * @see {@link Item}
+ * @see {@link LibraryItem}
  */
-interface TextureAtlasExporter extends Item {
+interface TextureAtlasExporter extends LibraryItem {
     /**
      * Sets the encoding algorithm for the TextureAtlas.
      * Valid values are "basic", and "maxRects" (the default).

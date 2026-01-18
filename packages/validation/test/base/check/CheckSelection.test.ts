@@ -1,8 +1,8 @@
 // src/__tests__/CheckSelection.test.ts
 
 // Mock alert 全局函数
-import {CheckCondition, CheckMode, CheckSelection} from "../../../src";
-import {MESSAGES} from "../../../src/validation/base/check/selections/selectionUtils";
+import { CheckCondition, CheckMode, CheckSelection } from "../../../src";
+import { MESSAGES } from "../../../src/validation/base/check/selections/selectionUtils";
 
 const originalAlert = global.alert;
 beforeAll(() => {

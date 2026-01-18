@@ -16,17 +16,16 @@
 //
 // Represents a rectangle with `left`, `top`, `right`, and `bottom` properties.
 
-
-import {SObject} from "../../base/SObject";
-import {Vector} from "../Vector";
-import {RelativePosition} from "../../enum/vectorEnums";
-import {InsetDirection, RectanglePart} from "../../enum/boundsEnum";
-import {BoundsLike} from "../../types/boundsType";
-import {VectorLike} from "../../types/vectorType";
-import {IsBoundsLike} from "../../check/boundsCheck";
-import {Size} from "../Transform/Size";
-import {SizeLike} from "../../types/sizeType";
-import {IsVectorLike} from "../../check/vectorCheck";
+import { SObject } from "../../base/SObject";
+import { Vector } from "../Vector";
+import { RelativePosition } from "../../enum/vectorEnums";
+import { InsetDirection, RectanglePart } from "../../enum/boundsEnum";
+import { BoundsLike } from "../../types/boundsType";
+import { VectorLike } from "../../types/vectorType";
+import { IsBoundsLike } from "../../check/boundsCheck";
+import { Size } from "../Transform/Size";
+import { SizeLike } from "../../types/sizeType";
+import { IsVectorLike } from "../../check/vectorCheck";
 
 export class Bounds extends SObject implements BoundsLike {
     public left = 0;
@@ -72,20 +71,19 @@ export class Bounds extends SObject implements BoundsLike {
                     this.copy(arg); // 复制 SObject
                 } else if (IsBoundsLike(arg)) {
                     this.assign(arg); // 赋值 plain object
-                } else if (typeof arg === 'number') {
+                } else if (typeof arg === "number") {
                     // radius
                     this.left = -arg;
                     this.top = -arg;
                     this.right = arg;
                     this.bottom = arg;
-                } else if (Array.isArray(arg) ) {
+                } else if (Array.isArray(arg)) {
                     const rect = findBoundingRectangle(arg as FlashElement[]);
                     this.copy(rect);
-                } else if (typeof arg === 'object') {
-                    if (arg  === null){
-                        throw new Error('Invalid argument 1');
-                    }
-                    else if ('width' in arg && 'left' in arg) {
+                } else if (typeof arg === "object") {
+                    if (arg === null) {
+                        throw new Error("Invalid argument 1");
+                    } else if ("width" in arg && "left" in arg) {
                         // FlashElement or FlashSymbolItem
                         this.left = arg.left;
                         this.top = arg.top;
@@ -93,17 +91,17 @@ export class Bounds extends SObject implements BoundsLike {
                         this.bottom = arg.top + arg.height;
                     }
                     // 假设是 FlashDocument
-                    else if ('width' in arg && 'height' in arg) {
+                    else if ("width" in arg && "height" in arg) {
                         // FlashDocument
                         this.left = 0;
                         this.top = 0;
                         this.right = (arg as FlashDocument).width;
                         this.bottom = (arg as FlashDocument).height;
-                    } else  {
-                        throw new Error('Invalid argument 1');
+                    } else {
+                        throw new Error("Invalid argument 1");
                     }
                 } else {
-                    throw new Error('Invalid argument 1');
+                    throw new Error("Invalid argument 1");
                 }
                 break;
             }
@@ -111,19 +109,19 @@ export class Bounds extends SObject implements BoundsLike {
             case 2: {
                 const [a, b] = args;
 
-                if (typeof a === 'number' && typeof b === 'number') {
+                if (typeof a === "number" && typeof b === "number") {
                     // width, height
                     this.left = 0;
                     this.top = 0;
                     this.right = a;
                     this.bottom = b;
-                } else if ((a as VectorLike).x !== undefined && typeof b === 'number') {
+                } else if ((a as VectorLike).x !== undefined && typeof b === "number") {
                     // center, radius
                     const radiusRect = new Bounds(b);
-                    const finalRect =  radiusRect.addOffset(a)
+                    const finalRect = radiusRect.addOffset(a);
                     this.copy(finalRect);
                 } else {
-                    throw new Error('Invalid arguments for 2-arg constructor');
+                    throw new Error("Invalid arguments for 2-arg constructor");
                 }
                 break;
             }
@@ -160,12 +158,11 @@ export class Bounds extends SObject implements BoundsLike {
      */
     get center(): Vector {
         return new Vector((this.left + this.right) / 2, (this.top + this.bottom) / 2);
-    };
+    }
 
     get size(): Size {
         return new Size(this.width, this.height);
-    };
-
+    }
 
     /**
      * 矩形 偏移后的 矩形
@@ -179,8 +176,13 @@ export class Bounds extends SObject implements BoundsLike {
         } else if (IsVectorLike(offset)) {
             offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
         }
-        return new Bounds(this.left + offset.left, this.top + offset.top, this.right + offset.right, this.bottom + offset.bottom);
-    };
+        return new Bounds(
+            this.left + offset.left,
+            this.top + offset.top,
+            this.right + offset.right,
+            this.bottom + offset.bottom
+        );
+    }
 
     /**
      * 矩形 偏移前的 矩形
@@ -194,13 +196,21 @@ export class Bounds extends SObject implements BoundsLike {
         } else if (offset instanceof Vector) {
             offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
         }
-        return new Bounds(this.left - offset.left, this.top - offset.top, this.right - offset.right, this.bottom - offset.bottom);
-    };
+        return new Bounds(
+            this.left - offset.left,
+            this.top - offset.top,
+            this.right - offset.right,
+            this.bottom - offset.bottom
+        );
+    }
 
     /**
      * 根据方向和大小生成偏移矩形（用于 expand/shrink）
      */
-    private static createDirectionalOffset(size: number, direction: InsetDirection): Bounds {
+    private static createDirectionalOffset(
+        size: number,
+        direction: InsetDirection
+    ): Bounds {
         const offset = new Bounds(0, 0, 0, 0); // left, top, right, bottom
 
         switch (direction) {
@@ -251,16 +261,19 @@ export class Bounds extends SObject implements BoundsLike {
         return this.subOffset(offset);
     }
 
-
-
     /**
      * 是否包含,当前矩形 是否 在 目标矩形 内部
      * @param {Bounds} rect 矩形
      * @returns {boolean} 包含返回true，否则返回false
      */
     contains(rect: Bounds): boolean {
-        return (this.left <= rect.left && this.top <= rect.top && this.right >= rect.right && this.bottom >= rect.bottom);
-    };
+        return (
+            this.left <= rect.left &&
+            this.top <= rect.top &&
+            this.right >= rect.right &&
+            this.bottom >= rect.bottom
+        );
+    }
 
     /**
      * 获取矩形指定相对位置的坐标点
@@ -268,7 +281,7 @@ export class Bounds extends SObject implements BoundsLike {
      * @returns 对应位置的向量坐标
      */
     getCorner(whichCorner: RelativePosition): Vector {
-        const {left, right, top, bottom} = this;
+        const { left, right, top, bottom } = this;
         const centerX = (left + right) / 2;
         const centerY = (top + bottom) / 2;
 
@@ -293,7 +306,9 @@ export class Bounds extends SObject implements BoundsLike {
                 return new Vector(centerX, centerY);
             default:
                 // TypeScript 会提示 exhaustive check，但保留运行时防护
-                throw new Error(`Invalid RelativePosition: ${whichCorner satisfies never}`);
+                throw new Error(
+                    `Invalid RelativePosition: ${whichCorner satisfies never}`
+                );
         }
     }
 
@@ -309,8 +324,12 @@ export class Bounds extends SObject implements BoundsLike {
      * @returns 新的 Bounds 子矩形
      * @throws {Error} 如果 whichPart 无效
      */
-    getPart(whichPart: RectanglePart, widthRatio: number = 0.5, heightRatio: number = widthRatio): Bounds {
-        const {left, right, top, bottom, width, height} = this;
+    getPart(
+        whichPart: RectanglePart,
+        widthRatio: number = 0.5,
+        heightRatio: number = widthRatio
+    ): Bounds {
+        const { left, right, top, bottom, width, height } = this;
         const centerX = (left + right) / 2;
         const centerY = (top + bottom) / 2;
 
@@ -339,17 +358,42 @@ export class Bounds extends SObject implements BoundsLike {
 
             // —————— 边中点 ——————
             case RectanglePart.TopCenter:
-                return new Bounds(centerX - halfW, top, centerX + halfW, top + partHeight);
+                return new Bounds(
+                    centerX - halfW,
+                    top,
+                    centerX + halfW,
+                    top + partHeight
+                );
             case RectanglePart.RightCenter:
-                return new Bounds(right - invWidth, centerY - halfH, right, centerY + halfH);
+                return new Bounds(
+                    right - invWidth,
+                    centerY - halfH,
+                    right,
+                    centerY + halfH
+                );
             case RectanglePart.BottomCenter:
-                return new Bounds(centerX - halfW, bottom - partHeight, centerX + halfW, bottom);
+                return new Bounds(
+                    centerX - halfW,
+                    bottom - partHeight,
+                    centerX + halfW,
+                    bottom
+                );
             case RectanglePart.LeftCenter:
-                return new Bounds(left, centerY - halfH, left + partWidth, centerY + halfH);
+                return new Bounds(
+                    left,
+                    centerY - halfH,
+                    left + partWidth,
+                    centerY + halfH
+                );
 
             // —————— 中心 ——————
             case RectanglePart.Center:
-                return new Bounds(centerX - halfW, centerY - halfH, centerX + halfW, centerY + halfH);
+                return new Bounds(
+                    centerX - halfW,
+                    centerY - halfH,
+                    centerX + halfW,
+                    centerY + halfH
+                );
 
             // —————— 整条边 ——————
             case RectanglePart.Top:
@@ -368,8 +412,8 @@ export class Bounds extends SObject implements BoundsLike {
         }
     }
 
-// --------------------------------------------------------------------------------
-// # Utility methods
+    // --------------------------------------------------------------------------------
+    // # Utility methods
 
     /**
      * 合并两个矩形，返回一个能够包含两个矩形的最小矩形。
@@ -384,7 +428,7 @@ export class Bounds extends SObject implements BoundsLike {
         const maxBottom = Math.max(this.bottom, other.bottom);
 
         return new Bounds(minLeft, minTop, maxRight, maxBottom);
-    };
+    }
 
     /**
      * 旋转矩形
@@ -392,7 +436,10 @@ export class Bounds extends SObject implements BoundsLike {
      * @param whichCorner 旋转中心点，默认为矩形中心
      * @returns 旋转后的新矩形边界（轴对齐包围盒 AABB）
      */
-    rotate(angle: number, whichCorner: RelativePosition = RelativePosition.Center): Bounds {
+    rotate(
+        angle: number,
+        whichCorner: RelativePosition = RelativePosition.Center
+    ): Bounds {
         // 将角度转换为弧度
         const radians = angle * (Math.PI / 180);
 
@@ -415,20 +462,19 @@ export class Bounds extends SObject implements BoundsLike {
             rotatePoint(topLeft),
             rotatePoint(topRight),
             rotatePoint(bottomRight),
-            rotatePoint(bottomLeft),
+            rotatePoint(bottomLeft)
         ];
 
         // 从旋转后的点集计算新的轴对齐包围盒
         return Bounds.fromVectors(points);
     }
 
-// --------------------------------------------------------------------------------
-// # 工厂
+    // --------------------------------------------------------------------------------
+    // # 工厂
 
+    static fromTopLeft(left: number, top: number, width: number, height: number): Bounds;
 
-    static fromTopLeft(left: number, top: number, width: number, height: number): Bounds
-
-    static fromTopLeft(leftTop: Vector | VectorLike, size: Size | SizeLike): Bounds
+    static fromTopLeft(leftTop: Vector | VectorLike, size: Size | SizeLike): Bounds;
 
     /**
      * 由左上角坐标和宽高创建矩形
@@ -454,13 +500,16 @@ export class Bounds extends SObject implements BoundsLike {
             default:
                 throw new Error("Invalid arguments");
         }
-
     }
 
+    static fromCenter(
+        centerX: number,
+        centerY: number,
+        width: number,
+        height: number
+    ): Bounds;
 
-    static fromCenter(centerX: number, centerY: number, width: number, height: number): Bounds
-
-    static fromCenter(center: Vector | VectorLike, size: Size | SizeLike): Bounds
+    static fromCenter(center: Vector | VectorLike, size: Size | SizeLike): Bounds;
 
     /**
      * 由中心点坐标和宽高创建矩形
@@ -480,13 +529,17 @@ export class Bounds extends SObject implements BoundsLike {
                 const centerY = args[1];
                 const width = args[2];
                 const height = args[3];
-                return new Bounds(centerX - width / 2, centerY - height / 2, centerX + width / 2, centerY + height / 2);
+                return new Bounds(
+                    centerX - width / 2,
+                    centerY - height / 2,
+                    centerX + width / 2,
+                    centerY + height / 2
+                );
 
             default:
                 throw new Error("Invalid arguments");
         }
     }
-
 
     static fromVectors(vectors: Vector[]): Bounds {
         // 创建一个初始矩形
@@ -511,7 +564,7 @@ export class Bounds extends SObject implements BoundsLike {
             }
         }
         return rect;
-    };
+    }
 
     static fromRects(rects: Bounds[]): Bounds {
         // 创建一个初始矩形
@@ -536,14 +589,12 @@ export class Bounds extends SObject implements BoundsLike {
             }
         }
         return rect;
-
-    };
+    }
 
     //  findBoundingRectangle
     static fromElements(elements: Array<FlashElement>): Bounds {
-        return findBoundingRectangle(elements)
+        return findBoundingRectangle(elements);
     }
-
 }
 
 /**
@@ -555,7 +606,7 @@ export class Bounds extends SObject implements BoundsLike {
 function findBoundingRectangle(elements: Array<FlashElement>): Bounds {
     if (!elements.length) {
         // return null; // 如果数组为空，返回null
-        throw new Error('findBoundingRectangle: elements array is empty');
+        throw new Error("findBoundingRectangle: elements array is empty");
     }
 
     let top = elements[0].top;
@@ -578,8 +629,3 @@ function findBoundingRectangle(elements: Array<FlashElement>): Bounds {
 
     return new Bounds(left, top, right, bottom);
 }
-
-
-
-
-

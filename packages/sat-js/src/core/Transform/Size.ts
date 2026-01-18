@@ -9,8 +9,8 @@
 // Size
 //
 // Represents a size with `width` and `height` properties.
-import {SObject} from "../../base/SObject";
-import {SizeLike} from "../../types/sizeType";
+import { SObject } from "../../base/SObject";
+import { SizeLike } from "../../types/sizeType";
 
 export class Size extends SObject implements SizeLike {
     public width: number = 0;
@@ -37,26 +37,21 @@ export class Size extends SObject implements SizeLike {
 
     add(size: Size): Size {
         return new Size(this.width + size.width, this.height + size.height);
-    };
+    }
 
     sub(size: Size): Size {
         return new Size(this.width - size.width, this.height - size.height);
-    };
+    }
 
     getRatioWidth(nowHeight: number): number {
         return this.ratio * nowHeight;
-    };
+    }
 
     getRatioHeight(nowWidth: number): number {
         return nowWidth / this.ratio;
-    };
+    }
 
     static fromElement(element: FlashElement | FlashDocument | Size | SizeLike): Size {
         return new Size(element.width, element.height);
     }
 }
-
-
-
-
-

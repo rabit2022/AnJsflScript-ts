@@ -1,12 +1,11 @@
-
 /**
  * 矩形的四条边（不包含角点或中心）
  */
 export enum RectangleSide {
-    Top = 'top',
-    Right = 'right',
-    Bottom = 'bottom',
-    Left = 'left',
+    Top = "top",
+    Right = "right",
+    Bottom = "bottom",
+    Left = "left"
 }
 
 // /**
@@ -33,17 +32,16 @@ export enum RectanglePart {
     RightCenter = "right center",
     BottomCenter = "bottom center",
     LeftCenter = "left center",
-    Center = "center",
+    Center = "center"
 }
-
 
 /**
  * 矩形扩展/收缩的方向
  */
 export enum InsetDirection {
-    All = 'all',
-    Left = 'left',
-    Top = 'top',
-    Right = 'right',
-    Bottom = 'bottom',
+    All = "all",
+    Left = "left",
+    Top = "top",
+    Right = "right",
+    Bottom = "bottom"
 }

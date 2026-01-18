@@ -20,7 +20,10 @@ export class SObject {
      */
     copy<T extends SObject>(this: T, other: SObject): T {
         for (const prop in other) {
-            if (Object.prototype.hasOwnProperty.call(other, prop) && typeof other[prop] !== 'function') {
+            if (
+                Object.prototype.hasOwnProperty.call(other, prop) &&
+                typeof other[prop] !== "function"
+            ) {
                 (this as any)[prop] = other[prop];
             }
         }
@@ -55,11 +58,14 @@ export class SObject {
     toString(): string {
         const props: string[] = [];
         for (const prop in this) {
-            if (Object.prototype.hasOwnProperty.call(this, prop) && typeof this[prop] !== 'function') {
+            if (
+                Object.prototype.hasOwnProperty.call(this, prop) &&
+                typeof this[prop] !== "function"
+            ) {
                 props.push(`${prop}=${this[prop]}`);
             }
         }
-        return `${this.constructor.name}(${props.join(', ')})`;
+        return `${this.constructor.name}(${props.join(", ")})`;
     }
 
     /**
@@ -68,7 +74,10 @@ export class SObject {
     toObj(): Record<string, any> {
         const obj: Record<string, any> = {};
         for (const prop in this) {
-            if (Object.prototype.hasOwnProperty.call(this, prop) && typeof this[prop] !== 'function') {
+            if (
+                Object.prototype.hasOwnProperty.call(this, prop) &&
+                typeof this[prop] !== "function"
+            ) {
                 obj[prop] = this[prop];
             }
         }

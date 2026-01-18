@@ -1,6 +1,5 @@
-import {SObject} from "../../base/SObject";
-import {XYWHRectLike} from "../../types/xywhrectType";
-
+import { SObject } from "../../base/SObject";
+import { XYWHRectLike } from "../../types/xywhrectType";
 
 // Canvas 绘图、UI 布局、游戏对象
 export class XYWHRect extends SObject implements XYWHRectLike {

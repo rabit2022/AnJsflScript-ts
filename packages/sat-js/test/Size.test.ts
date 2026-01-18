@@ -1,7 +1,7 @@
 // Size.test.ts
 
 // === Mock FlashElement / FlashDocument ===
-import {SAT} from "../src";
+import { SAT } from "../src";
 import Size = SAT.Size;
 
 interface MockFlashElement {
@@ -10,7 +10,6 @@ interface MockFlashElement {
 }
 
 const mockDoc = { width: 1920, height: 1080 };
-
 
 describe("Size", () => {
     // --------------------------------------------------------------------------

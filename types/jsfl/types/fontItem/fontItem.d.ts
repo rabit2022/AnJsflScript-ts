@@ -9,7 +9,7 @@
  * Represents a Font item in the Flash Library.
  * Availability: Flash MX 2004+
  */
-interface FontItem extends Item {
+interface FontItem extends LibraryItem {
     /**
      * Specifies whether the Font item is bitmapped.
      * - `true`: Font is rendered as bitmap (device font not used).

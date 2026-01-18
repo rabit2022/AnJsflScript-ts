@@ -41,6 +41,8 @@ require.config({
         "assert": "third/nodejs/assert/assert",
         "loglevel": "third/log/loglevel/loglevel",
         "universal-cookie": "third/cookie/universal-cookie/universal-cookie",
+        "Events": "src/lib/out/Events",
+        "test": "src/lib/out/test",
         "Tips": "src/lib/out/Tips",
         "@anjsfl/validation": "packages/validation/out/validation",
         "@anjsfl/sat": "packages/sat-js/out/SAT"

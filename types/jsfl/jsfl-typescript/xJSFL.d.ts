@@ -19,11 +19,11 @@ declare class _Folder {
 
 declare class _Context {
 	static create(): _Context;
-	static from(frame: FlashFrame): _Context;
-	layer: FlashLayer;
-	frame: FlashFrame;
-	keyframes: FlashFrame[];
-	elements: FlashElement[];
+	static from(frame: Frame): _Context;
+	layer: Layer;
+	frame: Frame;
+	keyframes: Frame[];
+	elements: Element[];
 	setLayer(index: number);
 	update();
 	goto();
@@ -39,7 +39,7 @@ interface GenericCollection<T> {
 	each(callback: (element: T, index?: number, elements?: T[]) => void );
 }
 
-interface ElementCollection extends GenericCollection<FlashElement> {
+interface ElementCollection extends GenericCollection<Element> {
 }
 
 interface ItemCollection extends GenericCollection<FlashItem> {
@@ -59,10 +59,10 @@ declare class _URI {
 declare var xjsfl: _xjsfl;
 
 // Global variables
-declare var $dom: FlashDocument;
+declare var $dom: Document;
 declare var $timeline: FlashTimeline;
 declare var $library: FlashLibrary;
-declare var $selection: FlashElement[];
+declare var $selection: Element[];
 
 // Global functions
 

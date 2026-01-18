@@ -16,38 +16,50 @@
     "Creativity",
     "Design"
   ],
+  "//": "子模块，提供给ts使用，名字在子模块下的package.json name字段中",
+  "//": "运行npm intall 即可把子模块安装到node modules中",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "tools/project/*"
   ],
   "references": [
     {
       "path": "packages/validation"
+    },
+    {
+      "path": "packages/sat-js"
     }
   ],
   "scripts": {
+    "//": "format",
     "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
-    "generate_config": "tsx ./tools/project/require/generate_config.ts",
-    "build:require": "tsc && tsx ./tools/project/typescript/require.ts",
-    "build:define": "tsc && tsx ./tools/project/typescript/define.ts",
+    "//": "生成模块，包括require,tsconfig文件的修改",
+    "generate_config": "tsx ./tools/project/src/require/generate_config.ts",
+    "//": "build脚本",
+    "build:require": "tsc && tsx ./tools/project/src/typescript/require.ts",
+    "build:define": "tsc && tsx ./tools/project/src/typescript/define.ts",
     "build": "npm run build:require && npm run build:define",
+    "//": "重新build",
     "clearAll": "tsx ./tools/project/clean/CleanAll.ts",
     "ReBuild": "npm run clearAll && npm run build",
-    "addHeaders": "tsx ./tools/project/headers/addFileHeader.ts"
+    "//": "添加文件头",
+    "addHeaders": "tsx ./tools/project/src/headers/addFileHeader.ts"
   },
   "devDependencies": {
-    "@types/glob": "9.0.0",
     "@types/jest": "30.0.0",
-    "@types/lodash": "4.17.15",
+    "@types/lodash": "4.17.23",
     "@types/loglevel": "1.6.3",
-    "@types/minimatch": "6.0.0",
+    "@types/node": "25.0.7",
+    "@types/path-browserify": "1.0.3",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.0.1",
     "eslint-plugin-prettier": "5.2.3",
     "jest": "30.2.0",
     "minimatch": "10.1.1",
     "prettier": "3.5.2",
-    "strip-json-comments": "3.1.1",
+    "strip-json-comments": "3.1.0",
     "ts-jest": "29.4.6",
+    "ts-loader": "9.5.4",
     "tsconfig-paths": "4.2.0",
     "tsx": "4.21.0",
     "typescript": "5.9.3"
@@ -56,8 +68,5 @@
     "type": "git",
     "url": "https://github.com/rabit2022/AnJsflScript-ts"
   },
-  "readmeFilename": "README.md",
-  "dependencies": {
-    "glob": "13.0.0"
-  }
+  "readmeFilename": "README.md"
 }

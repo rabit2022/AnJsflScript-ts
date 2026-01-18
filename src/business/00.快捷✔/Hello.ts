@@ -7,7 +7,7 @@
  * @description:
  */
 
-import { CheckSelection, CheckMode, CheckCondition } from '@anjsfl/validation';
+import { CheckSelection, CheckMode, CheckCondition } from "@anjsfl/validation";
 
 console.log("Hello World!");
 
@@ -18,9 +18,14 @@ console.log("Hello World!");
 
 function Main() {
     // alert("动作已生成！（请进入元件手动微调速度）");
-    const toCheckes :string[] = ["目标图层", "起始图层", "结束图层"];
-    const toChheck:boolean = CheckSelection(toCheckes, CheckMode.SelectElement, CheckCondition.OnlyOne,"额外的提示信息")
-    if (!toChheck){
+    const toCheckes: string[] = ["目标图层", "起始图层", "结束图层"];
+    const toChheck: boolean = CheckSelection(
+        toCheckes,
+        CheckMode.SelectElement,
+        CheckCondition.OnlyOne,
+        "额外的提示信息"
+    );
+    if (!toChheck) {
         console.error("check faied");
         return;
     }
