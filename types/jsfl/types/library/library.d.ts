@@ -1,7 +1,7 @@
 /**
  * Represents the current document's library panel.
  */
-interface FlashLibrary {
+interface Library {
     /**
      * An array of all Item objects in the library.
      */
@@ -198,4 +198,6 @@ interface FlashLibrary {
      * alert(fl.getDocumentDOM().library.updateItem());
      */
     updateItem(namePath?: string): boolean;
+
+
 }

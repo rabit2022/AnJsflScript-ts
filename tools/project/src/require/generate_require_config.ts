@@ -6,7 +6,6 @@ import * as fs from "fs/promises";
 import { ScanSpec, walk } from "../nodejs/walk";
 
 /* ---------- 1. 路径与文件常量 ---------- */
-
 const REGION_RE =
     /(\/\/ region REQUIRE MODULES PATHS)[\s\S]*?(\/\/ endregion REQUIRE MODULES PATHS)/;
 
@@ -22,26 +21,80 @@ function toRequireModulePaths(
     return { [name]: posix.replace(/\.[^.]+$/, "") };
 }
 
+// region toPackageModulePaths
+// 可配置的忽略目录集合（小写，用于匹配）
+const IGNORED_DIRS = new Set(['test', 'tests', 'dist', 'build', '__tests__', 'coverage']);
 
-async function toPackageModulePaths(
-    absoluteFile: string,
-    root = $ProjectFileDir$ // 注意：这个语法可能不合法，见下方说明
-): Promise<Record<string, string>> {
-    const rel = path.relative(root, absoluteFile);
-    const posix = rel.split(path.sep).join("/");
-
-    // 上一级目录（其实是上两级？根据你的逻辑）
-    const parentDir = path.resolve(absoluteFile, '../..');
-
-
-    // 读取 package.json
-    const pkgContent = await fs.readFile(path.join(parentDir, "package.json"), "utf-8");
-    const pkg = JSON.parse(pkgContent);
-    const name = pkg.name;
-    // console.log(name);
-
-    return { [name]: posix.replace(/\.[^.]+$/, "") };
+/**
+ * 判断路径中是否包含需要忽略的目录（如 test, dist 等）
+ */
+function shouldIgnoreFile(absoluteFile: string): boolean {
+    const parts = absoluteFile.split(path.sep);
+    return parts.some(part => IGNORED_DIRS.has(part.toLowerCase()));
 }
+
+/**
+ * 从 startDir 开始向上查找 package.json，直到根目录
+ */
+async function findNearestPackageJson(startDir: string): Promise<{ dir: string; pkg: any } | null> {
+    let current = startDir;
+    while (true) {
+        const pkgPath = path.join(current, 'package.json');
+        try {
+            await fs.access(pkgPath); // 检查是否存在
+            const content = await fs.readFile(pkgPath, 'utf-8');
+            const pkg = JSON.parse(content);
+            return { dir: current, pkg };
+        } catch {
+            // 无法读取或不存在，继续向上
+        }
+
+        const parent = path.dirname(current);
+        if (parent === current) {
+            // 已到达根目录（如 / 或 C:\）
+            break;
+        }
+        current = parent;
+    }
+    return null;
+}
+
+/**
+ * 将绝对文件路径映射为模块路径：{ [moduleName]: relativePosixPathWithoutExt }
+ */
+export async function toPackageModulePaths(
+    absoluteFile: string,
+    root: string = $ProjectFileDir$ // 假设 $ProjectFileDir$ 是项目根目录，用 process.cwd() 替代
+): Promise<Record<string, string>> {
+    // 1. 忽略 test/dist 等目录中的文件
+    if (shouldIgnoreFile(absoluteFile)) {
+        return {};
+    }
+
+    const fileDir = path.dirname(absoluteFile);
+
+    // 2. 查找最近的 package.json
+    const found = await findNearestPackageJson(fileDir);
+
+    // 3. 确定模块名
+    let moduleName: string;
+    if (found?.pkg?.name) {
+        moduleName = found.pkg.name;
+    } else {
+        // 使用文件名（不含扩展名）作为 fallback
+        moduleName = path.basename(absoluteFile, path.extname(absoluteFile));
+    }
+
+    // 4. 计算相对于 root 的 POSIX 路径（不含扩展名）
+    const rel = path.relative(root, absoluteFile);
+    const posix = rel.split(path.sep).join('/');
+    const posixWithoutExt = posix.replace(/\.[^.]+$/, '');
+
+    return { [moduleName]: posixWithoutExt };
+}
+// endregion toPackageModulePaths
+
+
 
 /** 把 region 中间替换成新正文 */
 async function replaceRequireRegion(body: string): Promise<void> {

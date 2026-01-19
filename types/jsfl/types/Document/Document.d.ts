@@ -14,7 +14,7 @@ interface Document {
      * @example
      * fl.trace("current profile's JPEG Quality is: " + fl.getDocumentDOM().swfJPEGQuality);
      */
-    readonly swfJPEGQuality: number;
+    swfJPEGQuality: number;
 
     /**
      * Executes a Test Movie operation on the document.
@@ -41,7 +41,7 @@ interface Document {
      *   ++i;
      * }
      */
-    readonly timelines: Timeline[];
+    timelines: Timeline[];
 
     /**
      * Performs a trace bitmap on the current selection.
@@ -305,7 +305,7 @@ interface Document {
      * @example
      * var mat = fl.getDocumentDOM().viewMatrix;
      */
-    readonly viewMatrix: Matrix;
+    viewMatrix: Matrix;
 
     /**
      * Width of the Stage in pixels.
@@ -646,7 +646,7 @@ interface Document {
      * var fileName = flash.documents[0].name;
      * ```
      */
-    readonly name: string;
+    name: string;
 
     /**
      * Optimizes smoothing for the current selection.
@@ -671,7 +671,7 @@ interface Document {
      * var filePath = flash.documents[0].path;
      * ```
      */
-    readonly path: string | undefined;
+    path: string | undefined;
 
     /**
      * Read-only property; the file path of the document as a file:/// URI.
@@ -682,7 +682,7 @@ interface Document {
      * var filePathURI = flash.documents[0].pathURI;
      * ```
      */
-    readonly pathURI: PathURI | undefined;
+    pathURI: PathURI | undefined;
 
     /**
      * Smooths the curve of each selected fill outline or curved line.
@@ -716,7 +716,7 @@ interface Document {
      * var myPubProfiles = fl.getDocumentDOM().publishProfiles;
      * ```
      */
-    readonly publishProfiles: string[];
+    publishProfiles: string[];
 
     /**
      * Uses the top selected drawing object to punch through all selected drawing objects underneath it.
@@ -1847,7 +1847,7 @@ interface Document {
      * @availability Flash CS3 Professional
      * Read-only. A unique integer identifying the document during a session.
      */
-    readonly id: number;
+    id: number;
 
     /**
      * @availability Flash CS4 Professional
@@ -1859,7 +1859,7 @@ interface Document {
      * @availability Flash MX 2004
      * Read-only. The Library object for this document.
      */
-    readonly library: FlashLibrary;
+    library: Library;
 
 
     // --- Methods ---

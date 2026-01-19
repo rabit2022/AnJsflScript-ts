@@ -1,41 +1,33 @@
-// /**
-//  * @file: 06.环绕飞行.ts
-//  * @author: 穹的兔兔
-//  * @email: 3101829204@qq.com
-//  * @date: 2025/7/25 18:58
-//  * @project: AnJsflScript
-//  * @description:
-//  */
-//
-// // region import
-// // ===============Core Library======================
-// // prettier-ignore
-// // import { CheckDom, CheckSelection, CheckSelectedFrames, CheckSelectedLayers } from "checkUtil";
-// // @ts-expect-error
-// import { generateNameUntilUnique, generateNameUseLast } from "SymbolNameGenerator";
-// // @ts-expect-error
-// import { SelectAll, OnlySelectCurrent } from "ElementSelect";
-// // @ts-expect-error
-// import { swapLayers } from "LayerOperation";
-// // @ts-expect-error
-// import JSFLConstants = require("JSFLConstants");
-// // @ts-expect-error
-// import { convertToKeyframesSafety } from "KeyFrameOperation";
-// // @ts-expect-error
-// import { playLoop } from "ElementAnim";
-// import { CheckSelection } from "CheckSelection";
-// import { CheckCondition, CheckMode } from "selectionTypes";
-//
-// function Main() {
-//     // alert("动作已生成！（请进入元件手动微调速度）");
-//     const toCheckes :string[] = ["目标图层", "起始图层", "结束图层"];
-//     const toChheck:boolean = CheckSelection(toCheckes, CheckMode.SelectElement, CheckCondition.NoLimit,"额外的提示信息")
-//     if (!CheckSelection(toCheckes)){
-//         console.error("check faied");
-//         return;
-//     }
-//
-//     console.log("check success");
-// }
-//
-// Main();
+// path-to-uri.mjs (ESM) or .js (CommonJS)
+import { fileURLToPath, pathToFileURL } from "url";
+
+
+// 方法 1：使用 pathToFileURL（推荐）
+function pathToUri(path) {
+    // pathToFileURL 自动处理跨平台、编码、前导斜杠等
+    return pathToFileURL(path).href;
+}
+
+// 示例
+console.log(pathToUri("C:\\docs\\file.txt"));
+// 输出: file:///C:/docs/file.txt
+
+console.log(pathToUri("/home/user/file.txt"));
+// 输出: file:///home/user/file.txt
+
+
+// 方法 1：使用 fileURLToPath（推荐）
+function uriToPath(uri) {
+    if (!uri.startsWith("file://")) {
+        throw new Error("Not a file URI");
+    }
+    return fileURLToPath(uri);
+}
+
+// 示例
+console.log(uriToPath("file:///C:/docs/file.txt"));
+// 输出: C:\docs\file.txt （Windows）
+// 输出: /home/user/file.txt （Linux/macOS）
+
+// console.log(uriToPath("file:///home/user/file.txt"));
+// 输出: /home/user/file.txt

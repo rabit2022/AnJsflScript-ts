@@ -61,7 +61,7 @@ declare var xjsfl: _xjsfl;
 // Global variables
 declare var $dom: Document;
 declare var $timeline: FlashTimeline;
-declare var $library: FlashLibrary;
+declare var $library: Library;
 declare var $selection: Element[];
 
 // Global functions

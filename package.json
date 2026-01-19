@@ -16,7 +16,6 @@
     "Creativity",
     "Design"
   ],
-  "//": "子模块，提供给ts使用，名字在子模块下的package.json name字段中",
   "//": "运行npm intall 即可把子模块安装到node modules中",
   "workspaces": [
     "packages/*",
@@ -31,18 +30,14 @@
     }
   ],
   "scripts": {
-    "//": "format",
+    "//": "添加文件头",
     "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
-    "//": "生成模块，包括require,tsconfig文件的修改",
     "generate_config": "tsx ./tools/project/src/require/generate_config.ts",
-    "//": "build脚本",
     "build:require": "tsc && tsx ./tools/project/src/typescript/require.ts",
     "build:define": "tsc && tsx ./tools/project/src/typescript/define.ts",
     "build": "npm run build:require && npm run build:define",
-    "//": "重新build",
     "clearAll": "tsx ./tools/project/clean/CleanAll.ts",
     "ReBuild": "npm run clearAll && npm run build",
-    "//": "添加文件头",
     "addHeaders": "tsx ./tools/project/src/headers/addFileHeader.ts"
   },
   "devDependencies": {

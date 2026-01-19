@@ -5,15 +5,14 @@
     "useDefineForClassFields": true,
     "lib": [
       "es5"
-//      "es6", // es6shim
-//      "dom", // console
+      //      "es6", // es6shim
+      //      "dom", // console
     ],
+    "skipLibCheck": false,
 
-    "skipLibCheck": false,   // 👈 先关掉，看是否有错误
 
     /*  防止es2017等代码不报错 */
-    "types": [] ,             // 👈 关键！不自动包含任何全局类型
-
+    "types": ["node"],
 
     /* Linting */
     "strict": true,
@@ -22,11 +21,9 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Module Resolution */
-//    @anjsfl/validation
+    // @anjsfl/validation
     "moduleResolution": "node",
     "isolatedModules": false,
-
-
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declaration": false,
@@ -34,54 +31,29 @@
     "removeComments": true,
     "noLib": false,
     "preserveConstEnums": true,
-//    "skipLibCheck": true, // 启用跳过类型定义文件的检查
+    //    "skipLibCheck": true, // 启用跳过类型定义文件的检查
     "allowJs": true,
-    "incremental": true,// 增量编译,只重新编译那些被修改的文件及其依赖项
+    "incremental": true,
+    // 增量编译,只重新编译那些被修改的文件及其依赖项
 
 
     // test
-//    "esModuleInterop": false,      // 避免注入 __importDefault
-//    "importHelpers": false,
-//    "noEmitHelpers": true,         // 不生成 tslib 辅助函数（旧环境不支持）
+    //    "esModuleInterop": false,      // 避免注入 __importDefault
+    //    "importHelpers": false,
+    //    "noEmitHelpers": true,         // 不生成 tslib 辅助函数（旧环境不支持）
 
 
     /* 生成相同的目录结构 */
-//    "rootDir": "./src",
-    "outDir": "./dist",   // ← 输出目录
+    //    "rootDir": "./src",
+    "outDir": "./dist",
+    // ← 输出目录
 
     /* 路径映射 */
-    "baseUrl": ".", // 设置 baseUrl 为项目根目录
+    "baseUrl": ".",
+    // 设置 baseUrl 为项目根目录
     "paths":
     // region REQUIRE MODULES PATHS
     {
-      "console": ["third/_custom/xjsfl/console.jsfl"],
-      "Context": ["third/_custom/xjsfl/Context.jsfl"],
-      "JSFLConstants": ["third/_custom/xjsfl/JSFLConstants.jsfl"],
-      "JSFLInterface": ["third/_custom/xjsfl/JSFLInterface.jsfl"],
-      "linqUtil": ["third/_custom/utils/linqUtil.jsfl"],
-      "satUtil": ["third/_custom/utils/satUtil.jsfl"],
-      "_exports": ["third/_bridge/exports/_exports.jsfl"],
-      "document-cookie": ["third/_bridge/document-cookie/document-cookie.jsfl"],
-      "store-js": ["third/utils/store-js/store-js.jsfl"],
-      "progress": ["third/utils/progress/progress.jsfl"],
-      "lodash": ["third/utils/lodash/lodash.jsfl"],
-      "linq": ["third/utils/linq/linq.jsfl"],
-      "text": ["third/require/text/text.jsfl"],
-      "require-js": ["third/require/requirejs/require-js.jsfl"],
-      "typedarray": ["third/polyfill/typedarray/typedarray.jsfl"],
-      "symbol-es6": ["third/polyfill/symbol-es6/symbol-es6.jsfl"],
-      "es2017": ["third/polyfill/js-polyfills/es2017.jsfl"],
-      "es7-shim": ["third/polyfill/es7-shim/es7-shim.jsfl"],
-      "es6-sham": ["third/polyfill/es6-shim/es6-sham.jsfl"],
-      "es6-shim": ["third/polyfill/es6-shim/es6-shim.jsfl"],
-      "es5-sham": ["third/polyfill/es5-shim/es5-sham.jsfl"],
-      "es5-shim": ["third/polyfill/es5-shim/es5-shim.jsfl"],
-      "path-browserify": ["third/nodejs/path-browserify/path-browserify.jsfl"],
-      "assert": ["third/nodejs/assert/assert.jsfl"],
-      "loglevel": ["third/log/loglevel/loglevel.jsfl"],
-      "universal-cookie": ["third/cookie/universal-cookie/universal-cookie.jsfl"],
-      "Events": ["src/lib/core/Events"],
-      "test": ["src/lib/core/test"],
       "Tips": ["src/lib/core/Tips"]
     }
     
@@ -89,7 +61,7 @@
   },
   "include": [
     "src",
-    "types",
+//    "types",
 
     // 全局的 类型定义文件
     "./types/jsfl/types/**/*.d.ts",

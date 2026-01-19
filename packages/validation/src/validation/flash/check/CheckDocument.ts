@@ -17,8 +17,8 @@
  *   - `{ success: false, message }` 如果不存在。
  */
 export function CheckDocument(
-    doc?: FlashDocument
-): { success: true; doc: FlashDocument } | { success: false; message: string } {
+    doc?: Document
+): { success: true; doc: Document } | { success: false; message: string } {
     const currentDoc = doc ?? (typeof fl !== "undefined" ? fl.getDocumentDOM() : null);
 
     if (!currentDoc) {

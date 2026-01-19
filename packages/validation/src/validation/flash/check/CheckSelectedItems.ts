@@ -34,7 +34,7 @@ export function CheckSelectedItems(
     library: FlashLibrary,
     condition: LibraryCondition = LibraryCondition.NotZero,
     exTips?: string
-): Item[] | null {
+): LibraryItem[] | null {
     const selectedItems = library.getSelectedItems();
 
     const isValid = CheckSelection(

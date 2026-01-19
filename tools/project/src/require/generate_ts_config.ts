@@ -1,5 +1,5 @@
 // generate_config.ts
-import { $ProjectFileDir$, LIB_CORE, THIRD, TS_CONFIG_FILE } from "../ProjectFileDir";
+import { $ProjectFileDir$, LIB_CORE, TS_CONFIG_FILE } from "../ProjectFileDir";
 import * as path from "path";
 import * as fs from "fs/promises";
 import { ScanSpec, walk } from "../nodejs/walk";
@@ -18,17 +18,17 @@ function toSingleLineJson(m: Record<string, string[]>): string {
 
 /* ---------- 2. 工具 ---------- */
 
-function toJsflPaths(
-    absoluteFile: string,
-    root = $ProjectFileDir$
-): Record<string, string[]> {
-    const rel = path.relative(root, absoluteFile);
-    const posix = rel.split(path.sep).join("/");
-    const name = path.parse(absoluteFile).name;
-    const noExt = posix.replace(/\.[^.]+$/, "") + ".jsfl"; // 保持.jsfl后缀
-
-    return { [name]: [noExt] }; // ✅ 数组包字符串
-}
+// function toJsflPaths(
+//     absoluteFile: string,
+//     root = $ProjectFileDir$
+// ): Record<string, string[]> {
+//     const rel = path.relative(root, absoluteFile);
+//     const posix = rel.split(path.sep).join("/");
+//     const name = path.parse(absoluteFile).name;
+//     const noExt = posix.replace(/\.[^.]+$/, "") + ".jsfl"; // 保持.jsfl后缀
+//
+//     return { [name]: [noExt] }; // ✅ 数组包字符串
+// }
 
 function toTsPaths(
     absoluteFile: string,
@@ -52,11 +52,11 @@ async function replaceTsRegion(body: string): Promise<void> {
 
 export async function buildTsConfig(): Promise<void> {
     /* ---------- 1. 收集路径 ---------- */
-    const thirdModules: ScanSpec = {
-        roots: [THIRD],
-        dirBlack: { part: ["node_modules"] },
-        fileWhite: { part: [".jsfl"] }
-    };
+    // const thirdModules: ScanSpec = {
+    //     roots: [THIRD],
+    //     dirBlack: { part: ["node_modules"] },
+    //     fileWhite: { part: [".jsfl"] }
+    // };
     const libModules: ScanSpec = {
         roots: [LIB_CORE],
         dirBlack: { part: ["node_modules"] },
@@ -65,7 +65,7 @@ export async function buildTsConfig(): Promise<void> {
 
     // 注意：这里用 string[] 做 value
     const map: Record<string, string[]> = {};
-    for await (const p of walk(thirdModules)) Object.assign(map, toJsflPaths(p));
+    // for await (const p of walk(thirdModules)) Object.assign(map, toJsflPaths(p));
     for await (const p of walk(libModules)) Object.assign(map, toTsPaths(p));
 
     const body = toSingleLineJson(map) + "\n";

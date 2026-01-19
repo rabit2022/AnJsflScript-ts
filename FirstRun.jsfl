@@ -151,7 +151,7 @@
             // 显示提示信息
             const { alertMessage } = Tips;
             alertMessage("loading success!");
-            if (!window.AnJsflScript.$ProjectFileDir$.includes("AnJsflScript")) {
+            if (!(window.AnJsflScript.$ProjectFileDir$.indexOf("AnJsflScript") !== -1)) {
                 alertMessage("loading might be not allowed!");
             }
         });

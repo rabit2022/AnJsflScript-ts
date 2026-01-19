@@ -15,9 +15,7 @@ require.config({
 
     // region REQUIRE MODULES PATHS
     {
-        "console": "third/_custom/xjsfl/console",
         "Context": "third/_custom/xjsfl/Context",
-        "JSFLConstants": "third/_custom/xjsfl/JSFLConstants",
         "JSFLInterface": "third/_custom/xjsfl/JSFLInterface",
         "linqUtil": "third/_custom/utils/linqUtil",
         "satUtil": "third/_custom/utils/satUtil",
@@ -44,11 +42,12 @@ require.config({
         "Events": "src/lib/out/Events",
         "test": "src/lib/out/test",
         "Tips": "src/lib/out/Tips",
-        "@anjsfl/Events": "packages/xjsfl/dist/Events",
         "@anjsfl/validation": "packages/validation/out/validation",
         "@anjsfl/sat": "packages/sat-js/out/SAT",
-        "@jsfl/es6-checker": "packages/es6-checker/out/fl-checker",
-        "@jsfl/es5-checker": "packages/es5-checker/out/fl-checker"
+        "process": "packages/process/out/process",
+        "fs": "packages/fs/out/fs",
+        "@xjsfl/Constants": "packages/Constants/out/Constants",
+        "console": "packages/console/console"
     },
 // endregion REQUIRE MODULES PATHS
 
