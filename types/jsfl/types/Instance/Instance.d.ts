@@ -11,7 +11,7 @@
  * Represents an instance of a library item (symbol, bitmap, video, etc.) on the Flash Stage.
  * Availability: Flash MX 2004+
  */
-interface Instance extends Element {
+interface Instance extends FlashElement {
     /**
      * Read-only; a string that represents the type of this instance.
      * Possible values:

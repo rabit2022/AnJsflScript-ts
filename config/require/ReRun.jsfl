@@ -14,17 +14,9 @@ fl.outputPanel.clear();
 window.setTimeout = undefined;
 
 
-
-
-// // if (typeof require !== "undefined") {
 require(["loglevel"], function(log) {
-    // fl.trace("ReRun: Reloading RequireJS");
-
-
-    // fl.trace("ReRun: Reloading RequireJS");
     log.setLevel(log.levels.TRACE);
 });
-// // }
 
 
 // 清除当前的 RequireJS 实例

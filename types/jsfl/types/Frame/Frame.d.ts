@@ -29,7 +29,7 @@ interface Frame {
      * @example
      * var myElements = fl.getDocumentDOM().getTimeline().layers[0].frames[0].elements;
      */
-    readonly elements: Element[];
+    readonly elements: FlashElement[];
 
     /**
      * A Boolean value that specifies whether the frame gets its ease information from the custom ease curve.

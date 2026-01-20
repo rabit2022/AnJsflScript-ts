@@ -59,7 +59,11 @@ module.exports = {
         ]
     },
     // 关键：不打包任何外部依赖（JSFL 无 npm）
-    externals: [],
+    externals: ["lodash"],
+
+    // externals: {
+    //     lodash: '_',
+    // },
     // 禁用 Node.js 注入
     target: ['web', 'es5'], // 实际上 JSFL 不是 web，但这样可禁用 node polyfill
     stats: {

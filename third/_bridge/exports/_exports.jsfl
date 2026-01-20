@@ -8,7 +8,6 @@
  */
 
 /**
- * @example: {@link AnJsflScript/types/jsfl-typescript/samples/test.ts}
  * @description
  * ```JavaScript
  * require(["require", "exports", "SAT"], function (require, exports, SAT_1) {

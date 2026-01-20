@@ -3,7 +3,7 @@
  * @see https://help.adobe.com/en_US/flash/cs3/jsapi/
  */
 // export interface Element {
-interface Element {
+interface FlashElement {
     /**
      * Read-only; an integer that has a value greater than 0 for the depth of the object in the view.
      * The drawing order of objects on the Stage specifies which one is on top of the others.

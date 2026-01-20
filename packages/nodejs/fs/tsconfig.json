@@ -7,6 +7,8 @@
     "removeComments": true,
     //    "outFile": "./dist/Events.js", // JSFL 通常是一个文件，所以用 outFile 合并
 
+//    "noUnusedParameters": false,
+
 
     "rootDir": "src",
     "outDir": "./dist",
@@ -21,9 +23,11 @@
   },
   "include": [
     "src",
+
+
     // jsfl
-    "../../types/jsfl/types/**/*.d.ts",
+    "../../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
-    "../../types/myShim/*.d.ts"
+    "../../../types/myShim/*.d.ts"
   ]
 }

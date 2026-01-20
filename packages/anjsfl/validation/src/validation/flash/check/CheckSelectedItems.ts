@@ -31,7 +31,7 @@ import { CheckSelection } from "../../base/check/selections/CheckSelection";
  * ```
  */
 export function CheckSelectedItems(
-    library: FlashLibrary,
+    library: Library,
     condition: LibraryCondition = LibraryCondition.NotZero,
     exTips?: string
 ): LibraryItem[] | null {

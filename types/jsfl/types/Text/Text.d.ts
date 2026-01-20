@@ -9,7 +9,7 @@
  * // Set x value of selected text field's registration point to 50
  * fl.getDocumentDOM().setElementProperty("x", 50);
  */
-interface Text extends Element {
+interface Text extends FlashElement {
     // --- Properties ---
 
     /**

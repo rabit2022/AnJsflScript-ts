@@ -82,7 +82,7 @@ interface Flash {
      * @returns `true` if the document was closed; `false` if the user cancels.
      * @since Flash MX 2004
      */
-    closeDocument(documentObject: Document, bPromptToSaveChanges?: boolean): boolean;
+    closeDocument(documentObject: FlashDocument, bPromptToSaveChanges?: boolean): boolean;
 
     /**
      * Silently copies a library item from a document without exposing it in the UI.
@@ -114,7 +114,7 @@ interface Flash {
      * fl.createDocument("htmlcanvas");
      * ```
      */
-    createDocument(docType?: "timeline" | "htmlcanvas" | "vrPanoDoc" | "vr360Doc"): Document | undefined;
+    createDocument(docType?: "timeline" | "htmlcanvas" | "vrPanoDoc" | "vr360Doc"): FlashDocument | undefined;
 
     /**
      * Returns a specific document’s publishing profile without opening the file.
@@ -164,7 +164,7 @@ interface Flash {
      * targetDoc.height = 400;
      * ```
      */
-    findDocumentDOM(id: number): Document | null;
+    findDocumentDOM(id: number): FlashDocument | null;
 
     /**
      * Returns an array of integers representing the position(s) of a document in the `fl.documents` array.
@@ -201,7 +201,7 @@ interface Flash {
      * }
      * ```
      */
-    findObjectInDocByName(instanceName: string, document: Document): FoundObject[];
+    findObjectInDocByName(instanceName: string, document: FlashDocument): FoundObject[];
 
     /**
      * Exposes elements of a specified element type in a document.
@@ -225,7 +225,7 @@ interface Flash {
      * }
      * ```
      */
-    findObjectInDocByType(elementType: string, document: Document): FoundObject[];
+    findObjectInDocByType(elementType: string, document: FlashDocument): FoundObject[];
 
     /**
      * Returns memory usage information for the Flash application (Windows only).
@@ -252,7 +252,7 @@ interface Flash {
      * fl.trace(currentDoc.name);
      * ```
      */
-    getDocumentDOM(): Document | null;
+    getDocumentDOM(): FlashDocument | null;
 
     /**
      * Returns the SWFPanel object based on the panel's localized name or its SWF filename.
@@ -355,7 +355,7 @@ interface Flash {
      * var doc = fl.openDocument("file:///c|/FlashDocument.fla");
      * ```
      */
-    openDocument(fileURI: FileURI): Document;
+    openDocument(fileURI: FileURI): FlashDocument;
 
     /**
      * Opens a script (JSFL, AS, ASC) or other file (XML, TXT) in the Flash text editor.
@@ -470,7 +470,7 @@ interface Flash {
      * alert(fl.saveDocument(fl.documents[1],"file:///C|/example2.fla"));
      * ```
      */
-    saveDocument(document: Document, fileURI?: FileURI): boolean;
+    saveDocument(document: FlashDocument, fileURI?: FileURI): boolean;
 
     /**
      * Displays the Save As dialog box for the specified document.
@@ -483,7 +483,7 @@ interface Flash {
      * alert(fl.saveDocumentAs(fl.documents[1]));
      * ```
      */
-    saveDocumentAs(document: Document): boolean;
+    saveDocumentAs(document: FlashDocument): boolean;
 
     /**
      * Enables selection or editing of an element.
@@ -509,7 +509,7 @@ interface Flash {
      * }
      * ```
      */
-    selectElement(elementObject: Element, editMode: boolean): boolean;
+    selectElement(elementObject: FlashElement, editMode: boolean): boolean;
 
     /**
      * Selects the specified tool in the Tools panel.
@@ -536,7 +536,7 @@ interface Flash {
      * fl.setActiveWindow(fl.documents[theIndex]);
      * ```
      */
-    setActiveWindow(document: Document, bActivateFrame?: any): void;
+    setActiveWindow(document: FlashDocument, bActivateFrame?: any): void;
 
     /**
      * Lets you disable the warning about a script running too long.
@@ -758,7 +758,7 @@ interface Flash {
      * }
      * ```
      */
-    readonly documents: Document[];
+    readonly documents: FlashDocument[];
 
     /**
      * The drawingLayer object for extensible tools to use for temporary drawing.
@@ -1109,7 +1109,7 @@ interface Flash {
      * fl.revertDocument(fl.getDocumentDOM());
      * ```
      */
-    revertDocument(documentObject: Document): boolean;
+    revertDocument(documentObject: FlashDocument): boolean;
 
     /**
      * @availability Flash MX 2004
@@ -1148,7 +1148,7 @@ interface Flash {
      * alert(fl.saveDocument(fl.documents[0], "file:///C|/example1.fla"));
      * ```
      */
-    saveDocument(document: Document | null, fileURI?: string | null): boolean;
+    saveDocument(document: FlashDocument | null, fileURI?: string | null): boolean;
 
     /**
      * @availability Flash MX 2004
@@ -1160,7 +1160,7 @@ interface Flash {
      * alert(fl.saveDocumentAs(fl.documents[1]));
      * ```
      */
-    saveDocumentAs(document: Document | null): boolean;
+    saveDocumentAs(document: FlashDocument | null): boolean;
 
     /**
      * @availability Flash CS3 Professional
@@ -1174,7 +1174,7 @@ interface Flash {
      * if (results.length > 0) fl.selectElement(results[0], false);
      * ```
      */
-    selectElement(elementObject: Element, editMode: boolean): boolean;
+    selectElement(elementObject: FlashElement, editMode: boolean): boolean;
 
     /**
      * @availability Flash CS3 Professional
@@ -1199,7 +1199,7 @@ interface Flash {
      * fl.setActiveWindow(fl.documents[0]);
      * ```
      */
-    setActiveWindow(document: Document, bActivateFrame?: boolean): void;
+    setActiveWindow(document: FlashDocument, bActivateFrame?: boolean): void;
 
     /**
      * @availability Adobe Animate

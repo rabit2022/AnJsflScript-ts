@@ -1,7 +1,7 @@
 /**
  * Represents the fill color settings of the Tools panel or a selected shape in Adobe Flash.
  *
- * Retrieve a Fill object using {@link Document.getCustomFill}.
+ * Retrieve a Fill object using {@link FlashDocument.getCustomFill}.
  *
  * @availability Flash MX 2004 (with individual properties added in later versions as noted)
  * @see {@link https://help.adobe.com/en_US/flash/cs/extend/}

@@ -7488,10 +7488,21 @@ summary table for the [Element object](../Element_object/element_summary.md).
 #### Example
 
 ```javascript
-The following example gets the name of the Element property for the current selection:
+The
+following
+example
+gets
+the
+name
+of
+the
+FElement
+property
+for the current
+selection:
 
 // elementName = the instance name of the selected object.
-var elementName = fl.getDocumentDOM().getElementProperty("name");
+    var elementName = fl.getDocumentDOM().getElementProperty("name");
 
 ```
 

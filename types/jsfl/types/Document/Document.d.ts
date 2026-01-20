@@ -1,7 +1,7 @@
 /**
  * Represents a document in Adobe Animate/Flash.
  */
-interface Document {
+interface FlashDocument {
     /**
      * Swaps the Stroke and Fill colors.
      * @example

@@ -21,9 +21,10 @@
   },
   "include": [
     "src",
+
     // jsfl
-    "../../types/jsfl/types/**/*.d.ts",
+    "../../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
-    "../../types/myShim/*.d.ts"
+    "../../../types/myShim/*.d.ts"
   ]
 }

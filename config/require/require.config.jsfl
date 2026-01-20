@@ -10,7 +10,6 @@
 require.config({
     // context: 'Core', // 设置模块的加载上下文
     baseUrl: window.AnJsflScript.$ProjectFileDir$, // 设置模块的基础路径
-    // baseUrl: '.', // 设置模块的基础路径
     paths:
 
     // region REQUIRE MODULES PATHS
@@ -21,33 +20,29 @@ require.config({
         "satUtil": "third/_custom/utils/satUtil",
         "_exports": "third/_bridge/exports/_exports",
         "document-cookie": "third/_bridge/document-cookie/document-cookie",
-        "store-js": "third/utils/store-js/store-js",
         "progress": "third/utils/progress/progress",
-        "lodash": "third/utils/lodash/lodash",
         "linq": "third/utils/linq/linq",
         "text": "third/require/text/text",
         "require-js": "third/require/requirejs/require-js",
-        "typedarray": "third/polyfill/typedarray/typedarray",
-        "symbol-es6": "third/polyfill/symbol-es6/symbol-es6",
-        "es2017": "third/polyfill/js-polyfills/es2017",
-        "es7-shim": "third/polyfill/es7-shim/es7-shim",
         "es6-sham": "third/polyfill/es6-shim/es6-sham",
         "es6-shim": "third/polyfill/es6-shim/es6-shim",
         "es5-sham": "third/polyfill/es5-shim/es5-sham",
         "es5-shim": "third/polyfill/es5-shim/es5-shim",
-        "path-browserify": "third/nodejs/path-browserify/path-browserify",
-        "assert": "third/nodejs/assert/assert",
         "loglevel": "third/log/loglevel/loglevel",
         "universal-cookie": "third/cookie/universal-cookie/universal-cookie",
         "Events": "src/lib/out/Events",
         "test": "src/lib/out/test",
         "Tips": "src/lib/out/Tips",
-        "@anjsfl/validation": "packages/validation/out/validation",
-        "@anjsfl/sat": "packages/sat-js/out/SAT",
-        "process": "packages/process/out/process",
-        "fs": "packages/fs/out/fs",
-        "@xjsfl/Constants": "packages/Constants/out/Constants",
-        "console": "packages/console/console"
+        "@xjsfl/UI": "packages/xjsfl/UI/out/UI",
+        "@xjsfl/Constants": "packages/xjsfl/Constants/out/Constants",
+        "@nodejs/__filename": "packages/nodejs/__filename/out/__filename",
+        "url": "packages/nodejs/url/out/url",
+        "process": "packages/nodejs/process/out/process",
+        "fs": "packages/nodejs/fs/out/fs",
+        "assert": "packages/nodejs/assert/assert",
+        "console": "packages/dom/console/console",
+        "@anjsfl/validation": "packages/anjsfl/validation/out/validation",
+        "@anjsfl/sat": "packages/anjsfl/sat-js/out/SAT"
     },
 // endregion REQUIRE MODULES PATHS
 

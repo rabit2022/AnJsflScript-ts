@@ -18,15 +18,15 @@
   ],
   "//": "运行npm intall 即可把子模块安装到node modules中",
   "workspaces": [
-    "packages/*",
+    "packages/**/*",
     "tools/project/*"
   ],
   "references": [
     {
-      "path": "packages/validation"
+      "path": "packages/anjsfl/validation"
     },
     {
-      "path": "packages/sat-js"
+      "path": "packages/anjsflsat-js"
     }
   ],
   "scripts": {
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@types/jest": "30.0.0",
-    "@types/lodash": "4.17.23",
+    "@types/lodash-es": "4.17.12",
     "@types/loglevel": "1.6.3",
     "@types/node": "25.0.7",
     "@types/path-browserify": "1.0.3",
@@ -63,5 +63,8 @@
     "type": "git",
     "url": "https://github.com/rabit2022/AnJsflScript-ts"
   },
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "lodash-es": "4.17.22"
+  }
 }

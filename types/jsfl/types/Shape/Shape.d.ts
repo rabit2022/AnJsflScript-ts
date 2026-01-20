@@ -6,7 +6,7 @@
  * All Shape methods and properties that change a shape or any of its subordinate parts
  * must be placed between `shape.beginEdit()` and `shape.endEdit()` calls to function correctly.
  */
-interface Shape extends Element {
+interface Shape extends FlashElement {
     /**
      * Read-only property; an array of Contour objects for the shape.
      *

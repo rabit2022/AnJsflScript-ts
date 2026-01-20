@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+//    "module": "AMD",
+    "module": "commonjs",
+
+
+    "strict": true,
+    "noEmitOnError": false,
+    "removeComments": true,
+    //    "outFile": "./dist/Events.js", // JSFL 通常是一个文件，所以用 outFile 合并
+
+
+    "rootDir": "src",
+    "outDir": "./lib",        // 编译输出目录
+    "types": [
+      "jest",
+      "node"
+    ],
+    "target": "es5",
+    "lib": [
+      "es5",
+    ]
+  },
+  "include": [
+    "src",
+
+    // jsfl
+    "../../../types/jsfl/types/**/*.d.ts",
+    // 全局的 类型定义文件
+    "../../../types/myShim/*.d.ts"
+  ]
+}

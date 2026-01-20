@@ -1,6 +1,6 @@
 /**
  * Specifies how Flash fits curves when tracing a bitmap.
- * Used in {@link Document.traceBitmap}.
+ * Used in {@link FlashDocument.traceBitmap}.
  */
 type CurveFit =
     | 'pixels'

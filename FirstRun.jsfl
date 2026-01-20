@@ -7,7 +7,7 @@
  * @description:每一次打开An时，都要 执行此脚本，用于初始化一些必要的模块。
  */
 
-(function () {
+(function() {
     /**
      * 获取当前 文件夹 路径
      */
@@ -37,15 +37,6 @@
             return str.lastIndexOf(suffix) === str.length - suffix.length;
         }
 
-        // 获取当前脚本文件的所在文件夹路径
-        function getcwd() {
-            var scriptURI = fl.scriptURI;
-            // 斜杠符号的位置
-            var lastSlashIndex = scriptURI.lastIndexOf("/");
-            // 获取脚本文件所在的文件夹路径
-            var folderPath = scriptURI.substring(0, lastSlashIndex);
-            return folderPath;
-        }
 
         // 检查文件是否存在
         var fileExists = FLfile.exists;
@@ -69,7 +60,7 @@
         var paths = Array.prototype.slice.call(arguments);
         var curWorkingDirectory = getcwd();
 
-        paths.forEach(function (path) {
+        paths.forEach(function(path) {
             // 转换为绝对路径
             var scriptURI = isAbsolute(path) ? path : curWorkingDirectory + "/" + path;
 
@@ -89,10 +80,7 @@
             if (exists) {
                 fl.runScript(scriptURI);
             } else {
-                var message =
-                    "[importFlashScripts] Error: Cannot find script file [" +
-                    scriptURI +
-                    "]";
+                var message = "[importFlashScripts] Error: Cannot find script file [" + scriptURI + "]";
                 fl.trace(message);
                 // console.stack(message);
                 throw new Error(message);
@@ -110,7 +98,7 @@
         window.AnJsflScript.$ProjectFileDir$ = getcwd();
 
         window.AnJsflScript.FOLDERS = {
-            Log: window.AnJsflScript.$ProjectFileDir$ + "/config/Log", // console.log 输出日志
+            Log: window.AnJsflScript.$ProjectFileDir$ + "/config/Log" // console.log 输出日志
             // Cache: window.AnJsflScript.$ProjectFileDir$ + "/config/Cache", // 12.#磁力粘贴.jsfl,缓存文件夹
             // AsciiArtLibrary:
             //     window.AnJsflScript.$ProjectFileDir$ + "/config/ascii_art_library", // 02.排兵布阵_ascii_art.jsfl 字体库文件夹
@@ -119,32 +107,38 @@
         };
 
         var config = {
-            "require-js": "third/require/requirejs/require-js",
+            "require-js": "third/require/requirejs/require-js"
         };
         // 导入模块,相对路径导入
         window.AnJsflScript.importFlashScripts(config["require-js"]);
 
-        require([
-            // 导入配置文件
+        require([// 导入配置文件
             "./config/require/require.config",
+
+            "@nodejs/__filename",
 
             // "es6-promise", // babel 转译 依赖 Promise
 
             // 导入shims, 避免其他模块依赖时报错
             "es5-shim", // es5,es2009
             "es5-sham",
-            // "es6-shim", // es6,es2015
-            // "es6-sham",
+
+            // @nodejs/url need es6
+            "es6-shim", // es6,es2015
+            "es6-sham",
+
             // "es7-shim", // es7,es2016
             // "es2017", // es8,es2017
 
             // "json3",
-            "console", // loglevel 依赖 console
 
-            "document-cookie" // loglevel,store.js 依赖 document.cookie
-        ]);
+            // loglevel 依赖 console
+            "console",
 
-        require(["loglevel", "Tips"], function (log, Tips) {
+            // loglevel,store.js 依赖 document.cookie
+            "document-cookie"]);
+
+        require(["loglevel", "Tips"], function(log, Tips) {
             // 禁用log
             log.setDefaultLevel(log.levels.SILENT);
 

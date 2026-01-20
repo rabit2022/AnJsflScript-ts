@@ -37,11 +37,10 @@
     // 增量编译,只重新编译那些被修改的文件及其依赖项
 
 
-    // test
-    //    "esModuleInterop": false,      // 避免注入 __importDefault
-    //    "importHelpers": false,
-    //    "noEmitHelpers": true,         // 不生成 tslib 辅助函数（旧环境不支持）
 
+    // es import
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
 
     /* 生成相同的目录结构 */
     //    "rootDir": "./src",
@@ -66,6 +65,10 @@
     // 全局的 类型定义文件
     "./types/jsfl/types/**/*.d.ts",
     "./types/myShim/*.d.ts"
+  ],
+  "exclude": [
+    "packages/**",
+    "src/business_packages/**"
   ],
   "typeRoots": [
     "./node_modules/@types",
