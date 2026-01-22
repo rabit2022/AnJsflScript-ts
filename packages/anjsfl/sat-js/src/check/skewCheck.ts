@@ -1,10 +1,10 @@
 import { SkewLike } from "../types/skewType";
 
-export function IsSkewLike(obj): obj is SkewLike {
+export function IsSkewLike(obj: unknown): obj is SkewLike {
     return (
-        obj &&
+        obj !== null &&
         typeof obj === "object" &&
-        typeof obj.skewX === "number" &&
-        typeof obj.skewY === "number"
+        'skewX' in obj && typeof obj.skewX === "number" &&
+        'skewY' in obj && typeof obj.skewY === "number"
     );
 }

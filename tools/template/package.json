@@ -1,5 +1,5 @@
 {
-  "name": "your-new-module-name",
+  "name": "setTimeout",
   "version": "1.0.0",
   "description": "",
   "declaration": true,
@@ -8,10 +8,11 @@
   "files": [
     "dist"
   ],
-  "//": "构建子模块",
   "//": "npm run build -w @anjsfl/validation",
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "test": "jest",
+    "build": "webpack --config webpack.config.js",
+    "build:test": "webpack --config webpack.test.js"
   },
   "publishConfig": {
     "access": "public"
@@ -24,6 +25,8 @@
     "ts-jest": "29.4.6",
     "ts-loader": "9.5.4",
     "typescript": "5.9.3",
+
+
     "webpack": "5.104.1",
     "terser-webpack-plugin": "5.3.16",
     "webpack-cli": "6.0.1"

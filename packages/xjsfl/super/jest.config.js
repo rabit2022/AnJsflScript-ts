@@ -1,5 +1,5 @@
 // jest.config.js
-const { pathsToModuleNameMapper } = require('ts-jest');
+const {pathsToModuleNameMapper} = require('ts-jest');
 const fs = require('fs');
 const path = require('path');
 

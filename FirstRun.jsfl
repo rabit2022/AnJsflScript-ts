@@ -115,7 +115,6 @@
         require([// 导入配置文件
             "./config/require/require.config",
 
-            "@nodejs/__filename",
 
             // "es6-promise", // babel 转译 依赖 Promise
 
@@ -131,6 +130,9 @@
             // "es2017", // es8,es2017
 
             // "json3",
+
+            "@nodejs/__filename",
+
 
             // loglevel 依赖 console
             "console",

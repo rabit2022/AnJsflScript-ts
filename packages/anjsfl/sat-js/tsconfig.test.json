@@ -3,11 +3,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "./dist",
     // 避免和 webpack 的 dist 冲突
 
-    //    "type": "module",
+    "moduleResolution": "node",
+
+
     "paths": [],
     "importHelpers": true,
     "types": [
@@ -18,13 +20,19 @@
       "es5",
       "es6"
     ],
-    // 👈 关键！只允许 ES5 的全局 API
 
-    // 👇 关键修复
-    "composite": true,
-    "declaration": true,
-    // 必须为 true
-    "declarationMap": true,
+
+    // es import
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+
+    // ✅ 关键修复：关闭 composite 和 declaration
+    "composite": false,
+    // ← 必须设为 false
+    "declaration": false,
+    // ← 测试脚本不需要 .d.ts
+    "declarationMap": false,
     "emitDeclarationOnly": false
   },
   "include": [
@@ -38,3 +46,5 @@
     "../../../types/myShim/*.d.ts"
   ]
 }
+
+

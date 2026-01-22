@@ -2,8 +2,9 @@
 
 require(["require", "_exports", "@anjsfl/validation"], function (require, exports, validation_1) {
     "use strict";
-    console.log(__dirname);
-    console.log(__filename);
+    // console.log(__dirname);
+    // console.log(__filename);
+    fl.outputPanel.clear();
 
 
 
@@ -17,4 +18,7 @@ require(["require", "_exports", "@anjsfl/validation"], function (require, export
         console.log("check success");
     }
     Main();
+
+
+
 });

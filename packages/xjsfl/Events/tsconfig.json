@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "module": "AMD",
-    // 或 "CommonJS"，取决于你怎么加载
+
     "strict": true,
     "noEmitOnError": false,
     "removeComments": true,
     //    "outFile": "./dist/Events.js", // JSFL 通常是一个文件，所以用 outFile 合并
+
 
 
     "rootDir": "src",

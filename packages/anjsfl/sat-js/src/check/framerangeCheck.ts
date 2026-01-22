@@ -1,11 +1,11 @@
 import { FrameRangeLike } from "../types/framerangeType";
 
-export function IsFrameRangeLike(obj): obj is FrameRangeLike {
+export function IsFrameRangeLike(obj: unknown): obj is FrameRangeLike {
     return (
-        obj &&
+        obj !== null &&
         typeof obj === "object" &&
-        typeof obj.layerIndex === "number" &&
-        typeof obj.startFrame === "number" &&
-        typeof obj.endFrame === "number"
+        'layerIndex' in obj && typeof obj.layerIndex === "number" &&
+        'startFrame' in obj && typeof obj.startFrame === "number" &&
+        'endFrame' in obj && typeof obj.endFrame === "number"
     );
 }

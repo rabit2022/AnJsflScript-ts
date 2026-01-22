@@ -46,10 +46,10 @@ export class Vector extends SObject implements VectorLike {
 
     // Rotate this vector (counter-clockwise) by the specified angle (in radians).
     /**
-     * @param {number} angle The angle to rotate (in radians)
+     * @param angle The angle to rotate (in radians)
      * @return {Vector} This for chaining.
      */
-    rotate(angle) {
+    rotate(angle:number) {
         var x = this["x"];
         var y = this["y"];
         this["x"] = x * Math.cos(angle) - y * Math.sin(angle);

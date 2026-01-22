@@ -59,59 +59,97 @@ __webpack_require__.d(__webpack_exports__, {
 
 ;// ./src/check/boundsCheck.ts
 function IsBoundsLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.left === "number" && typeof obj.top === "number" && typeof obj.right === "number" && typeof obj.bottom === "number");
+    return (obj !== null &&
+        typeof obj === "object" &&
+        typeof obj.left === "number" &&
+        typeof obj.top === "number" &&
+        typeof obj.right === "number" &&
+        typeof obj.bottom === "number");
 }
 
 ;// ./src/check/vectorCheck.ts
 function IsVectorLike(obj) {
     return (obj !== null &&
-        typeof obj === 'object' &&
-        typeof obj.x === 'number' &&
-        typeof obj.y === 'number');
+        typeof obj === "object" &&
+        'x' in obj && typeof obj.x === "number" &&
+        'y' in obj && typeof obj.y === "number");
 }
 
 ;// ./src/check/sizeCheck.ts
 function IsSizeLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.width === "number" && typeof obj.height === "number");
+    return (obj !== null &&
+        typeof obj === "object" &&
+        'width' in obj && typeof obj.width === "number" &&
+        'height' in obj && typeof obj.height === "number");
 }
 
 ;// ./src/check/transformCheck.ts
 
 
 function IsTransformLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.rotation === "number" && IsVectorLike(obj.scale) && IsVectorLike(obj.position) && IsSizeLike(obj.size) && IsVectorLike(obj.skew));
+    return (obj !== null &&
+        typeof obj === "object" &&
+        'rotation' in obj && typeof obj.rotation === "number" &&
+        'scale' in obj && IsVectorLike(obj.scale) &&
+        'position' in obj && IsVectorLike(obj.position) &&
+        'size' in obj && IsSizeLike(obj.size) &&
+        'skew' in obj && IsVectorLike(obj.skew));
 }
 
 ;// ./src/check/framerangeCheck.ts
 function IsFrameRangeLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.layerIndex === "number" && typeof obj.startFrame === "number" && typeof obj.endFrame === "number");
+    return (obj !== null &&
+        typeof obj === "object" &&
+        'layerIndex' in obj && typeof obj.layerIndex === "number" &&
+        'startFrame' in obj && typeof obj.startFrame === "number" &&
+        'endFrame' in obj && typeof obj.endFrame === "number");
 }
 
 ;// ./src/check/elementboundsCheck.ts
 function IsElementBoundsLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.left === "number" && typeof obj.top === "number" && typeof obj.width === "number" && typeof obj.height === "number");
+    return (obj !== null &&
+        typeof obj === "object" &&
+        typeof obj.left === "number" &&
+        typeof obj.top === "number" &&
+        typeof obj.width === "number" &&
+        typeof obj.height === "number");
 }
 
 ;// ./src/check/scaleCheck.ts
 function IsScaleLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.scaleX === "number" && typeof obj.scaleY === "number");
+    return (obj !== null &&
+        typeof obj === "object" &&
+        'scaleX' in obj && typeof obj.scaleX === "number" &&
+        'scaleY' in obj && typeof obj.scaleY === "number");
 }
 
 ;// ./src/check/skewCheck.ts
 function IsSkewLike(obj) {
-    return (obj && typeof obj === "object" && typeof obj.skewX === "number" && typeof obj.skewY === "number");
+    return (obj !== null &&
+        typeof obj === "object" &&
+        'skewX' in obj && typeof obj.skewX === "number" &&
+        'skewY' in obj && typeof obj.skewY === "number");
 }
 
 ;// ./src/check/linesegmentCheck.ts
 
 function IsLineSegmentLike(obj) {
-    return (obj && typeof obj === "object" && IsVectorLike(obj.startPoint) && IsVectorLike(obj.endPoint));
+    return (obj !== null &&
+        typeof obj === "object" &&
+        'startPoint' in obj &&
+        'endPoint' in obj &&
+        IsVectorLike(obj.startPoint) &&
+        IsVectorLike(obj.endPoint));
 }
 
 ;// ./src/check/circleCheck.ts
 
 function IsCircleLike(obj) {
-    return (obj && typeof obj === "object" && IsVectorLike(obj.pos) && typeof obj.r === "number");
+    return (obj !== null &&
+        typeof obj === "object" &&
+        'pos' in obj && 'r' in obj &&
+        IsVectorLike(obj.pos) &&
+        typeof obj.r === "number");
 }
 
 ;// ./src/check/check.ts
@@ -212,79 +250,55 @@ var ENUM;
 var SObject = (function () {
     function SObject() {
     }
-    Object.defineProperty(SObject.prototype, "copy", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            for (var prop in other) {
-                if (Object.prototype.hasOwnProperty.call(other, prop) && typeof other[prop] !== 'function') {
-                    this[prop] = other[prop];
+    SObject.prototype.copy = function (other) {
+        for (var prop in other) {
+            if (Object.prototype.hasOwnProperty.call(other, prop) &&
+                prop in this) {
+                var key = prop;
+                if (typeof other[key] !== "function") {
+                    this[key] = other[key];
                 }
             }
-            return this;
         }
-    });
-    Object.defineProperty(SObject.prototype, "assign", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (props) {
-            for (var key in props) {
-                if (Object.prototype.hasOwnProperty.call(props, key)) {
-                    this[key] = props[key];
-                }
+        return this;
+    };
+    SObject.prototype.assign = function (props) {
+        for (var key in props) {
+            if (Object.prototype.hasOwnProperty.call(props, key)) {
+                this[key] = props[key];
             }
-            return this;
         }
-    });
-    Object.defineProperty(SObject.prototype, "clone", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            var Constructor = this.constructor;
-            var cloned = new Constructor();
-            cloned.copy(this);
-            return cloned;
-        }
-    });
-    Object.defineProperty(SObject.prototype, "toString", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            var props = [];
-            for (var prop in this) {
-                if (Object.prototype.hasOwnProperty.call(this, prop) && typeof this[prop] !== 'function') {
-                    props.push("".concat(prop, "=").concat(this[prop]));
-                }
+        return this;
+    };
+    SObject.prototype.clone = function () {
+        var Constructor = this.constructor;
+        var cloned = new Constructor();
+        cloned.copy(this);
+        return cloned;
+    };
+    SObject.prototype.toString = function () {
+        var props = [];
+        for (var prop in this) {
+            if (Object.prototype.hasOwnProperty.call(this, prop) &&
+                typeof this[prop] !== "function") {
+                props.push("".concat(prop, "=").concat(this[prop]));
             }
-            return "".concat(this.constructor.name, "(").concat(props.join(', '), ")");
         }
-    });
-    Object.defineProperty(SObject.prototype, "toObj", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            var obj = {};
-            for (var prop in this) {
-                if (Object.prototype.hasOwnProperty.call(this, prop) && typeof this[prop] !== 'function') {
-                    obj[prop] = this[prop];
-                }
+        return "".concat(this.constructor.name, "(").concat(props.join(", "), ")");
+    };
+    SObject.prototype.toObj = function () {
+        var obj = {};
+        for (var prop in this) {
+            if (Object.prototype.hasOwnProperty.call(this, prop) &&
+                typeof this[prop] !== "function") {
+                obj[prop] = this[prop];
             }
-            return obj;
         }
-    });
-    Object.defineProperty(SObject, "toString", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            return "[class ".concat(this.name, "]");
-        }
-    });
+        return obj;
+    };
+    SObject.toString = function () {
+        return "[class ".concat(this.name, "]");
+    };
     return SObject;
 }());
 
@@ -310,30 +324,10 @@ var XYWHRect = (function (_super) {
     __extends(XYWHRect, _super);
     function XYWHRect() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        Object.defineProperty(_this, "x", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(_this, "y", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(_this, "width", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(_this, "height", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
+        _this.x = 0;
+        _this.y = 0;
+        _this.width = 0;
+        _this.height = 0;
         return _this;
     }
     return XYWHRect;
@@ -365,466 +359,203 @@ var Vector = (function (_super) {
         if (x === void 0) { x = 0; }
         if (y === void 0) { y = 0; }
         var _this = _super.call(this) || this;
-        Object.defineProperty(_this, "x", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(_this, "y", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
         _this.x = x;
         _this.y = y;
         return _this;
     }
-    Object.defineProperty(Vector.prototype, "perp", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            var x = this["x"];
-            this["x"] = this["y"];
-            this["y"] = -x;
-            return this;
+    Vector.prototype.perp = function () {
+        var x = this["x"];
+        this["x"] = this["y"];
+        this["y"] = -x;
+        return this;
+    };
+    Vector.prototype.rotate = function (angle) {
+        var x = this["x"];
+        var y = this["y"];
+        this["x"] = x * Math.cos(angle) - y * Math.sin(angle);
+        this["y"] = x * Math.sin(angle) + y * Math.cos(angle);
+        return this;
+    };
+    Vector.prototype.reverse = function () {
+        this["x"] = -this["x"];
+        this["y"] = -this["y"];
+        return this;
+    };
+    Vector.prototype.invert = function () {
+        if (this.x === 0 || this.y === 0) {
+            throw new Error("x and y must not be zero");
         }
-    });
-    Object.defineProperty(Vector.prototype, "rotate", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (angle) {
-            var x = this["x"];
-            var y = this["y"];
-            this["x"] = x * Math.cos(angle) - y * Math.sin(angle);
-            this["y"] = x * Math.sin(angle) + y * Math.cos(angle);
-            return this;
+        return new Vector(1 / this.x, 1 / this.y);
+    };
+    Vector.prototype.normalize = function () {
+        var d = this.len();
+        if (d > 0) {
+            this["x"] = this["x"] / d;
+            this["y"] = this["y"] / d;
         }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "reverse", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            this["x"] = -this["x"];
-            this["y"] = -this["y"];
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "invert", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            if (this.x === 0 || this.y === 0) {
-                throw new Error("x and y must not be zero");
-            }
-            return new Vector(1 / this.x, 1 / this.y);
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "normalize", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            var d = this.len();
-            if (d > 0) {
-                this["x"] = this["x"] / d;
-                this["y"] = this["y"] / d;
-            }
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "add", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            this["x"] += other["x"];
-            this["y"] += other["y"];
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "sub", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            this["x"] -= other["x"];
-            this["y"] -= other["y"];
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "scale", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (x, y) {
-            this["x"] *= x;
-            this["y"] *= typeof y !== "undefined" ? y : x;
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "project", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            var amt = this.dot(other) / other.len2();
-            this["x"] = amt * other["x"];
-            this["y"] = amt * other["y"];
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "projectN", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            var amt = this.dot(other);
-            this["x"] = amt * other["x"];
-            this["y"] = amt * other["y"];
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "reflect", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (axis) {
-            var x = this["x"];
-            var y = this["y"];
-            this.project(axis).scale(2);
-            this["x"] -= x;
-            this["y"] -= y;
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "reflectN", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (axis) {
-            var x = this["x"];
-            var y = this["y"];
-            this.projectN(axis).scale(2);
-            this["x"] -= x;
-            this["y"] -= y;
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "dot", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            return this["x"] * other["x"] + this["y"] * other["y"];
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "len2", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            return this.dot(this);
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "len", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            return Math.sqrt(this.len2());
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "halfSize", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            return new Vector(this.x / 2, this.y / 2);
-        }
-    });
-    Object.defineProperty(Vector.prototype, "midpointTo", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            return new Vector((this.x + other.x) / 2, (this.y + other.y) / 2);
-        }
-    });
-    Object.defineProperty(Vector.prototype, "angleTo", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            var dot = this.dot(other);
-            var len1 = this.len();
-            var len2 = other.len();
-            var angle = Math.acos(dot / (len1 * len2));
-            return angle;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "distanceTo", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            var x = this.x - other.x;
-            var y = this.y - other.y;
-            return Math.sqrt(x * x + y * y);
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "abs", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            return new Vector(Math.abs(this.x), Math.abs(this.y));
-        }
-    });
-    Object.defineProperty(Vector.prototype, "min", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            return new Vector(Math.min(this.x, other.x), Math.min(this.y, other.y));
-        }
-    });
-    Object.defineProperty(Vector.prototype, "max", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            return new Vector(Math.max(this.x, other.x), Math.max(this.y, other.y));
-        }
-    });
-    Object.defineProperty(Vector.prototype, "cross", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            return this.x * other.y - this.y * other.x;
-        }
-    });
-    Object.defineProperty(Vector.prototype, "angle", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            return Math.atan2(this.y, this.x);
-        }
-    });
-    Object.defineProperty(Vector.prototype, "multiply", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            return this.scale(other);
-        }
-    });
-    Object.defineProperty(Vector.prototype, "round", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            this["x"] = Math.round(this["x"]);
-            this["y"] = Math.round(this["y"]);
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "noZero", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            this["x"] = this["x"] ? this["x"] : 1;
-            this["y"] = this["y"] ? this["y"] : 1;
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "equals", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            return this.x === other.x && this.y === other.y;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "orbit", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (pt, arcWidth, arcHeight, degrees) {
-            var radians = degrees * (Math.PI / 180);
-            this.x = pt.x + arcWidth * Math.cos(radians);
-            this.y = pt.y + arcHeight * Math.sin(radians);
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "interpolate", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other, f) {
-            f = typeof f === "undefined" ? 1 : f;
-            return new Vector((this.x + other.x) * f, (this.y + other.y) * f);
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "isInRegionRelativeTo", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (referencePoint, region) {
-            var dx = this.x - referencePoint.x;
-            var dy = this.y - referencePoint.y;
-            return Vector.REGION_CHECKS[region](dx, dy);
-        }
-    });
-    Object.defineProperty(Vector.prototype, "toSignVector", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            var x = Math.sign(this.x);
-            var y = Math.sign(this.y);
-            return new Vector(x, y);
-        }
-    });
-    ;
-    Object.defineProperty(Vector.prototype, "signPow", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            this.x = (Math.abs(this.x) & 1) ? -1 : 1;
-            this.y = (Math.abs(this.y) & 1) ? -1 : 1;
-            return this;
-        }
-    });
-    ;
-    Object.defineProperty(Vector, "interpolate", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (pt1, pt2, f) {
-            f = typeof f === "undefined" ? 1 : f;
-            return new Vector((pt1.x + pt2.x) * f, (pt1.y + pt2.y) * f);
-        }
-    });
-    ;
-    Object.defineProperty(Vector, "polar", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (length, angle) {
-            return new Vector(length * Math.sin(angle), length * Math.cos(angle));
-        }
-    });
-    ;
-    Object.defineProperty(Vector, "distance", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (pt1, pt2) {
-            var x = pt1.x - pt2.x;
-            var y = pt1.y - pt2.y;
-            return Math.sqrt(x * x + y * y);
-        }
-    });
-    ;
-    Object.defineProperty(Vector, "fromAngle", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (angleRadians) {
-            return new Vector(Math.cos(angleRadians), Math.sin(angleRadians));
-        }
-    });
-    Object.defineProperty(Vector, "fromElement", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (element) {
-            return new Vector(element.x, element.y);
-        }
-    });
-    Object.defineProperty(Vector, "REGION_CHECKS", {
-        enumerable: true,
-        configurable: true,
-        writable: true,
-        value: (_a = {},
-            _a[RelativePosition.TopRight] = function (dx, dy) { return dx > 0 && dy < 0; },
-            _a[RelativePosition.TopLeft] = function (dx, dy) { return dx < 0 && dy < 0; },
-            _a[RelativePosition.BottomRight] = function (dx, dy) { return dx > 0 && dy > 0; },
-            _a[RelativePosition.BottomLeft] = function (dx, dy) { return dx < 0 && dy > 0; },
-            _a[RelativePosition.TopCenter] = function (_dx, dy) { return dy < 0; },
-            _a[RelativePosition.BottomCenter] = function (_dx, dy) { return dy > 0; },
-            _a[RelativePosition.LeftCenter] = function (dx, _dy) { return dx < 0; },
-            _a[RelativePosition.RightCenter] = function (dx, _dy) { return dx > 0; },
-            _a[RelativePosition.Center] = function (dx, dy) { return dx === 0 && dy === 0; },
-            _a)
-    });
-    Object.defineProperty(Vector, "ZERO", {
-        enumerable: true,
-        configurable: true,
-        writable: true,
-        value: new Vector(0, 0)
-    });
-    Object.defineProperty(Vector, "ONE", {
-        enumerable: true,
-        configurable: true,
-        writable: true,
-        value: new Vector(1, 1)
-    });
-    Object.defineProperty(Vector, "LEFT", {
-        enumerable: true,
-        configurable: true,
-        writable: true,
-        value: new Vector(-1, 0)
-    });
-    Object.defineProperty(Vector, "RIGHT", {
-        enumerable: true,
-        configurable: true,
-        writable: true,
-        value: new Vector(1, 0)
-    });
-    Object.defineProperty(Vector, "UP", {
-        enumerable: true,
-        configurable: true,
-        writable: true,
-        value: new Vector(0, -1)
-    });
-    Object.defineProperty(Vector, "DOWN", {
-        enumerable: true,
-        configurable: true,
-        writable: true,
-        value: new Vector(0, 1)
-    });
+        return this;
+    };
+    Vector.prototype.add = function (other) {
+        this["x"] += other["x"];
+        this["y"] += other["y"];
+        return this;
+    };
+    Vector.prototype.sub = function (other) {
+        this["x"] -= other["x"];
+        this["y"] -= other["y"];
+        return this;
+    };
+    Vector.prototype.scale = function (x, y) {
+        this["x"] *= x;
+        this["y"] *= typeof y !== "undefined" ? y : x;
+        return this;
+    };
+    Vector.prototype.project = function (other) {
+        var amt = this.dot(other) / other.len2();
+        this["x"] = amt * other["x"];
+        this["y"] = amt * other["y"];
+        return this;
+    };
+    Vector.prototype.projectN = function (other) {
+        var amt = this.dot(other);
+        this["x"] = amt * other["x"];
+        this["y"] = amt * other["y"];
+        return this;
+    };
+    Vector.prototype.reflect = function (axis) {
+        var x = this["x"];
+        var y = this["y"];
+        this.project(axis).scale(2);
+        this["x"] -= x;
+        this["y"] -= y;
+        return this;
+    };
+    Vector.prototype.reflectN = function (axis) {
+        var x = this["x"];
+        var y = this["y"];
+        this.projectN(axis).scale(2);
+        this["x"] -= x;
+        this["y"] -= y;
+        return this;
+    };
+    Vector.prototype.dot = function (other) {
+        return this["x"] * other["x"] + this["y"] * other["y"];
+    };
+    Vector.prototype.len2 = function () {
+        return this.dot(this);
+    };
+    Vector.prototype.len = function () {
+        return Math.sqrt(this.len2());
+    };
+    Vector.prototype.halfSize = function () {
+        return new Vector(this.x / 2, this.y / 2);
+    };
+    Vector.prototype.midpointTo = function (other) {
+        return new Vector((this.x + other.x) / 2, (this.y + other.y) / 2);
+    };
+    Vector.prototype.angleTo = function (other) {
+        var dot = this.dot(other);
+        var len1 = this.len();
+        var len2 = other.len();
+        var angle = Math.acos(dot / (len1 * len2));
+        return angle;
+    };
+    Vector.prototype.distanceTo = function (other) {
+        var x = this.x - other.x;
+        var y = this.y - other.y;
+        return Math.sqrt(x * x + y * y);
+    };
+    Vector.prototype.abs = function () {
+        return new Vector(Math.abs(this.x), Math.abs(this.y));
+    };
+    Vector.prototype.min = function (other) {
+        return new Vector(Math.min(this.x, other.x), Math.min(this.y, other.y));
+    };
+    Vector.prototype.max = function (other) {
+        return new Vector(Math.max(this.x, other.x), Math.max(this.y, other.y));
+    };
+    Vector.prototype.cross = function (other) {
+        return this.x * other.y - this.y * other.x;
+    };
+    Vector.prototype.angle = function () {
+        return Math.atan2(this.y, this.x);
+    };
+    Vector.prototype.multiply = function (other) {
+        return this.scale(other);
+    };
+    Vector.prototype.round = function () {
+        this["x"] = Math.round(this["x"]);
+        this["y"] = Math.round(this["y"]);
+        return this;
+    };
+    Vector.prototype.noZero = function () {
+        this["x"] = this["x"] ? this["x"] : 1;
+        this["y"] = this["y"] ? this["y"] : 1;
+        return this;
+    };
+    Vector.prototype.equals = function (other) {
+        return this.x === other.x && this.y === other.y;
+    };
+    Vector.prototype.orbit = function (pt, arcWidth, arcHeight, degrees) {
+        var radians = degrees * (Math.PI / 180);
+        this.x = pt.x + arcWidth * Math.cos(radians);
+        this.y = pt.y + arcHeight * Math.sin(radians);
+        return this;
+    };
+    Vector.prototype.interpolate = function (other, f) {
+        f = typeof f === "undefined" ? 1 : f;
+        return new Vector((this.x + other.x) * f, (this.y + other.y) * f);
+    };
+    Vector.prototype.isInRegionRelativeTo = function (referencePoint, region) {
+        var dx = this.x - referencePoint.x;
+        var dy = this.y - referencePoint.y;
+        return Vector.REGION_CHECKS[region](dx, dy);
+    };
+    Vector.prototype.toSignVector = function () {
+        var x = Math.sign(this.x);
+        var y = Math.sign(this.y);
+        return new Vector(x, y);
+    };
+    Vector.prototype.signPow = function () {
+        this.x = Math.abs(this.x) & 1 ? -1 : 1;
+        this.y = Math.abs(this.y) & 1 ? -1 : 1;
+        return this;
+    };
+    Vector.interpolate = function (pt1, pt2, f) {
+        f = typeof f === "undefined" ? 1 : f;
+        return new Vector((pt1.x + pt2.x) * f, (pt1.y + pt2.y) * f);
+    };
+    Vector.polar = function (length, angle) {
+        return new Vector(length * Math.sin(angle), length * Math.cos(angle));
+    };
+    Vector.distance = function (pt1, pt2) {
+        var x = pt1.x - pt2.x;
+        var y = pt1.y - pt2.y;
+        return Math.sqrt(x * x + y * y);
+    };
+    Vector.fromAngle = function (angleRadians) {
+        return new Vector(Math.cos(angleRadians), Math.sin(angleRadians));
+    };
+    Vector.fromElement = function (element) {
+        return new Vector(element.x, element.y);
+    };
+    Vector.REGION_CHECKS = (_a = {},
+        _a[RelativePosition.TopRight] = function (dx, dy) { return dx > 0 && dy < 0; },
+        _a[RelativePosition.TopLeft] = function (dx, dy) { return dx < 0 && dy < 0; },
+        _a[RelativePosition.BottomRight] = function (dx, dy) { return dx > 0 && dy > 0; },
+        _a[RelativePosition.BottomLeft] = function (dx, dy) { return dx < 0 && dy > 0; },
+        _a[RelativePosition.TopCenter] = function (_dx, dy) { return dy < 0; },
+        _a[RelativePosition.BottomCenter] = function (_dx, dy) { return dy > 0; },
+        _a[RelativePosition.LeftCenter] = function (dx, _dy) { return dx < 0; },
+        _a[RelativePosition.RightCenter] = function (dx, _dy) { return dx > 0; },
+        _a[RelativePosition.Center] = function (dx, dy) { return dx === 0 && dy === 0; },
+        _a);
+    Vector.ZERO = new Vector(0, 0);
+    Vector.ONE = new Vector(1, 1);
+    Vector.LEFT = new Vector(-1, 0);
+    Vector.RIGHT = new Vector(1, 0);
+    Vector.UP = new Vector(0, -1);
+    Vector.DOWN = new Vector(0, 1);
     return Vector;
 }(SObject));
 
@@ -851,18 +582,8 @@ var CornerRect = (function (_super) {
     CornerRect_extends(CornerRect, _super);
     function CornerRect() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        Object.defineProperty(_this, "topLeft", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: Vector.ZERO
-        });
-        Object.defineProperty(_this, "bottomRight", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: Vector.ZERO
-        });
+        _this.topLeft = Vector.ZERO;
+        _this.bottomRight = Vector.ZERO;
         return _this;
     }
     return CornerRect;
@@ -891,24 +612,9 @@ var Box = (function (_super) {
     Box_extends(Box, _super);
     function Box() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        Object.defineProperty(_this, "pos", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: Vector.ZERO
-        });
-        Object.defineProperty(_this, "width", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(_this, "height", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
+        _this.pos = Vector.ZERO;
+        _this.width = 0;
+        _this.height = 0;
         return _this;
     }
     return Box;
@@ -936,18 +642,8 @@ var Size = (function (_super) {
     Size_extends(Size, _super);
     function Size(width, height) {
         var _this = _super.call(this) || this;
-        Object.defineProperty(_this, "width", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(_this, "height", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
+        _this.width = 0;
+        _this.height = 0;
         _this.width = width;
         _this.height = height;
         return _this;
@@ -973,50 +669,21 @@ var Size = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Size.prototype, "add", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (size) {
-            return new Size(this.width + size.width, this.height + size.height);
-        }
-    });
-    ;
-    Object.defineProperty(Size.prototype, "sub", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (size) {
-            return new Size(this.width - size.width, this.height - size.height);
-        }
-    });
-    ;
-    Object.defineProperty(Size.prototype, "getRatioWidth", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (nowHeight) {
-            return this.ratio * nowHeight;
-        }
-    });
-    ;
-    Object.defineProperty(Size.prototype, "getRatioHeight", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (nowWidth) {
-            return nowWidth / this.ratio;
-        }
-    });
-    ;
-    Object.defineProperty(Size, "fromElement", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (element) {
-            return new Size(element.width, element.height);
-        }
-    });
+    Size.prototype.add = function (size) {
+        return new Size(this.width + size.width, this.height + size.height);
+    };
+    Size.prototype.sub = function (size) {
+        return new Size(this.width - size.width, this.height - size.height);
+    };
+    Size.prototype.getRatioWidth = function (nowHeight) {
+        return this.ratio * nowHeight;
+    };
+    Size.prototype.getRatioHeight = function (nowWidth) {
+        return nowWidth / this.ratio;
+    };
+    Size.fromElement = function (element) {
+        return new Size(element.width, element.height);
+    };
     return Size;
 }(SObject));
 
@@ -1052,30 +719,10 @@ var Bounds = (function (_super) {
             args[_i] = arguments[_i];
         }
         var _this = _super.call(this) || this;
-        Object.defineProperty(_this, "left", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(_this, "top", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(_this, "right", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(_this, "bottom", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
+        _this.left = 0;
+        _this.top = 0;
+        _this.right = 0;
+        _this.bottom = 0;
         var $dom = fl.getDocumentDOM();
         if (!$dom) {
             throw new Error("No document is open in Flash.");
@@ -1095,7 +742,7 @@ var Bounds = (function (_super) {
                 else if (IsBoundsLike(arg)) {
                     _this.assign(arg);
                 }
-                else if (typeof arg === 'number') {
+                else if (typeof arg === "number") {
                     _this.left = -arg;
                     _this.top = -arg;
                     _this.right = arg;
@@ -1105,46 +752,46 @@ var Bounds = (function (_super) {
                     var rect = findBoundingRectangle(arg);
                     _this.copy(rect);
                 }
-                else if (typeof arg === 'object') {
+                else if (typeof arg === "object") {
                     if (arg === null) {
-                        throw new Error('Invalid argument 1');
+                        throw new Error("Invalid argument 1");
                     }
-                    else if ('width' in arg && 'left' in arg) {
+                    else if ("width" in arg && "left" in arg) {
                         _this.left = arg.left;
                         _this.top = arg.top;
                         _this.right = arg.left + arg.width;
                         _this.bottom = arg.top + arg.height;
                     }
-                    else if ('width' in arg && 'height' in arg) {
+                    else if ("width" in arg && "height" in arg) {
                         _this.left = 0;
                         _this.top = 0;
                         _this.right = arg.width;
                         _this.bottom = arg.height;
                     }
                     else {
-                        throw new Error('Invalid argument 1');
+                        throw new Error("Invalid argument 1");
                     }
                 }
                 else {
-                    throw new Error('Invalid argument 1');
+                    throw new Error("Invalid argument 1");
                 }
                 break;
             }
             case 2: {
                 var a = args[0], b = args[1];
-                if (typeof a === 'number' && typeof b === 'number') {
+                if (typeof a === "number" && typeof b === "number") {
                     _this.left = 0;
                     _this.top = 0;
                     _this.right = a;
                     _this.bottom = b;
                 }
-                else if (a.x !== undefined && typeof b === 'number') {
+                else if (a.x !== undefined && typeof b === "number") {
                     var radiusRect = new Bounds(b);
                     var finalRect = radiusRect.addOffset(a);
                     _this.copy(finalRect);
                 }
                 else {
-                    throw new Error('Invalid arguments for 2-arg constructor');
+                    throw new Error("Invalid arguments for 2-arg constructor");
                 }
                 break;
             }
@@ -1181,7 +828,6 @@ var Bounds = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
     Object.defineProperty(Bounds.prototype, "size", {
         get: function () {
             return new Size(this.width, this.height);
@@ -1189,332 +835,253 @@ var Bounds = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
-    Object.defineProperty(Bounds.prototype, "addOffset", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (offset) {
-            if (typeof offset === "number") {
-                offset = new Bounds(offset, offset, offset, offset);
-            }
-            else if (IsVectorLike(offset)) {
-                offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
-            }
-            return new Bounds(this.left + offset.left, this.top + offset.top, this.right + offset.right, this.bottom + offset.bottom);
+    Bounds.prototype.addOffset = function (offset) {
+        if (typeof offset === "number") {
+            offset = new Bounds(offset, offset, offset, offset);
         }
-    });
-    ;
-    Object.defineProperty(Bounds.prototype, "subOffset", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (offset) {
-            if (typeof offset === "number") {
-                offset = new Bounds(offset, offset, offset, offset);
-            }
-            else if (offset instanceof Vector) {
-                offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
-            }
-            return new Bounds(this.left - offset.left, this.top - offset.top, this.right - offset.right, this.bottom - offset.bottom);
+        else if (IsVectorLike(offset)) {
+            offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
         }
-    });
-    ;
-    Object.defineProperty(Bounds, "createDirectionalOffset", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (size, direction) {
-            var offset = new Bounds(0, 0, 0, 0);
-            switch (direction) {
-                case InsetDirection.Left:
-                    offset.left = -size;
-                    break;
-                case InsetDirection.Top:
-                    offset.top = -size;
-                    break;
-                case InsetDirection.Right:
-                    offset.right = size;
-                    break;
-                case InsetDirection.Bottom:
-                    offset.bottom = size;
-                    break;
-                case InsetDirection.All:
-                    offset.left = -size;
-                    offset.top = -size;
-                    offset.right = size;
-                    offset.bottom = size;
-                    break;
-                default:
-                    throw new Error("Invalid direction: ".concat(direction));
-            }
-            return offset;
+        return new Bounds(this.left + offset.left, this.top + offset.top, this.right + offset.right, this.bottom + offset.bottom);
+    };
+    Bounds.prototype.subOffset = function (offset) {
+        if (typeof offset === "number") {
+            offset = new Bounds(offset, offset, offset, offset);
         }
-    });
-    Object.defineProperty(Bounds.prototype, "expand", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (size, whichDirection) {
-            if (whichDirection === void 0) { whichDirection = InsetDirection.All; }
-            var offset = Bounds.createDirectionalOffset(size, whichDirection);
-            return this.addOffset(offset);
+        else if (offset instanceof Vector) {
+            offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
         }
-    });
-    Object.defineProperty(Bounds.prototype, "shrink", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (size, whichDirection) {
-            if (whichDirection === void 0) { whichDirection = InsetDirection.All; }
-            var offset = Bounds.createDirectionalOffset(size, whichDirection);
-            return this.subOffset(offset);
+        return new Bounds(this.left - offset.left, this.top - offset.top, this.right - offset.right, this.bottom - offset.bottom);
+    };
+    Bounds.createDirectionalOffset = function (size, direction) {
+        var offset = new Bounds(0, 0, 0, 0);
+        switch (direction) {
+            case InsetDirection.Left:
+                offset.left = -size;
+                break;
+            case InsetDirection.Top:
+                offset.top = -size;
+                break;
+            case InsetDirection.Right:
+                offset.right = size;
+                break;
+            case InsetDirection.Bottom:
+                offset.bottom = size;
+                break;
+            case InsetDirection.All:
+                offset.left = -size;
+                offset.top = -size;
+                offset.right = size;
+                offset.bottom = size;
+                break;
+            default:
+                throw new Error("Invalid direction: ".concat(direction));
         }
-    });
-    Object.defineProperty(Bounds.prototype, "contains", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (rect) {
-            return (this.left <= rect.left && this.top <= rect.top && this.right >= rect.right && this.bottom >= rect.bottom);
+        return offset;
+    };
+    Bounds.prototype.expand = function (size, whichDirection) {
+        if (whichDirection === void 0) { whichDirection = InsetDirection.All; }
+        var offset = Bounds.createDirectionalOffset(size, whichDirection);
+        return this.addOffset(offset);
+    };
+    Bounds.prototype.shrink = function (size, whichDirection) {
+        if (whichDirection === void 0) { whichDirection = InsetDirection.All; }
+        var offset = Bounds.createDirectionalOffset(size, whichDirection);
+        return this.subOffset(offset);
+    };
+    Bounds.prototype.contains = function (rect) {
+        return (this.left <= rect.left &&
+            this.top <= rect.top &&
+            this.right >= rect.right &&
+            this.bottom >= rect.bottom);
+    };
+    Bounds.prototype.getCorner = function (whichCorner) {
+        var _a = this, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom;
+        var centerX = (left + right) / 2;
+        var centerY = (top + bottom) / 2;
+        switch (whichCorner) {
+            case RelativePosition.TopRight:
+                return new Vector(right, top);
+            case RelativePosition.TopLeft:
+                return new Vector(left, top);
+            case RelativePosition.BottomRight:
+                return new Vector(right, bottom);
+            case RelativePosition.BottomLeft:
+                return new Vector(left, bottom);
+            case RelativePosition.TopCenter:
+                return new Vector(centerX, top);
+            case RelativePosition.RightCenter:
+                return new Vector(right, centerY);
+            case RelativePosition.BottomCenter:
+                return new Vector(centerX, bottom);
+            case RelativePosition.LeftCenter:
+                return new Vector(left, centerY);
+            case RelativePosition.Center:
+                return new Vector(centerX, centerY);
+            default:
+                throw new Error("Invalid RelativePosition: ".concat(whichCorner));
         }
-    });
-    ;
-    Object.defineProperty(Bounds.prototype, "getCorner", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (whichCorner) {
-            var _a = this, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom;
-            var centerX = (left + right) / 2;
-            var centerY = (top + bottom) / 2;
-            switch (whichCorner) {
-                case RelativePosition.TopRight:
-                    return new Vector(right, top);
-                case RelativePosition.TopLeft:
-                    return new Vector(left, top);
-                case RelativePosition.BottomRight:
-                    return new Vector(right, bottom);
-                case RelativePosition.BottomLeft:
-                    return new Vector(left, bottom);
-                case RelativePosition.TopCenter:
-                    return new Vector(centerX, top);
-                case RelativePosition.RightCenter:
-                    return new Vector(right, centerY);
-                case RelativePosition.BottomCenter:
-                    return new Vector(centerX, bottom);
-                case RelativePosition.LeftCenter:
-                    return new Vector(left, centerY);
-                case RelativePosition.Center:
-                    return new Vector(centerX, centerY);
-                default:
-                    throw new Error("Invalid RelativePosition: ".concat(whichCorner));
-            }
+    };
+    Bounds.prototype.getPart = function (whichPart, widthRatio, heightRatio) {
+        if (widthRatio === void 0) { widthRatio = 0.5; }
+        if (heightRatio === void 0) { heightRatio = widthRatio; }
+        var _a = this, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, width = _a.width, height = _a.height;
+        var centerX = (left + right) / 2;
+        var centerY = (top + bottom) / 2;
+        var partWidth = width * widthRatio;
+        var partHeight = height * heightRatio;
+        var invWidth = width - partWidth;
+        var invHeight = height - partHeight;
+        var halfW = partWidth / 2;
+        var halfH = partHeight / 2;
+        switch (whichPart) {
+            case RectanglePart.TopRight:
+                return new Bounds(right - invWidth, top, right, top + partHeight);
+            case RectanglePart.TopLeft:
+                return new Bounds(left, top, left + partWidth, top + partHeight);
+            case RectanglePart.BottomRight:
+                return new Bounds(right - invWidth, bottom - invHeight, right, bottom);
+            case RectanglePart.BottomLeft:
+                return new Bounds(left, bottom - invHeight, left + partWidth, bottom);
+            case RectanglePart.TopCenter:
+                return new Bounds(centerX - halfW, top, centerX + halfW, top + partHeight);
+            case RectanglePart.RightCenter:
+                return new Bounds(right - invWidth, centerY - halfH, right, centerY + halfH);
+            case RectanglePart.BottomCenter:
+                return new Bounds(centerX - halfW, bottom - partHeight, centerX + halfW, bottom);
+            case RectanglePart.LeftCenter:
+                return new Bounds(left, centerY - halfH, left + partWidth, centerY + halfH);
+            case RectanglePart.Center:
+                return new Bounds(centerX - halfW, centerY - halfH, centerX + halfW, centerY + halfH);
+            case RectanglePart.Top:
+                return new Bounds(left, top, right, top + partHeight);
+            case RectanglePart.Right:
+                return new Bounds(right - invWidth, top, right, bottom);
+            case RectanglePart.Bottom:
+                return new Bounds(left, bottom - partHeight, right, bottom);
+            case RectanglePart.Left:
+                return new Bounds(left, top, left + partWidth, bottom);
+            default:
+                throw new Error("Invalid RectanglePart: ".concat(whichPart));
         }
-    });
-    Object.defineProperty(Bounds.prototype, "getPart", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (whichPart, widthRatio, heightRatio) {
-            if (widthRatio === void 0) { widthRatio = 0.5; }
-            if (heightRatio === void 0) { heightRatio = widthRatio; }
-            var _a = this, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, width = _a.width, height = _a.height;
-            var centerX = (left + right) / 2;
-            var centerY = (top + bottom) / 2;
-            var partWidth = width * widthRatio;
-            var partHeight = height * heightRatio;
-            var invWidth = width - partWidth;
-            var invHeight = height - partHeight;
-            var halfW = partWidth / 2;
-            var halfH = partHeight / 2;
-            switch (whichPart) {
-                case RectanglePart.TopRight:
-                    return new Bounds(right - invWidth, top, right, top + partHeight);
-                case RectanglePart.TopLeft:
-                    return new Bounds(left, top, left + partWidth, top + partHeight);
-                case RectanglePart.BottomRight:
-                    return new Bounds(right - invWidth, bottom - invHeight, right, bottom);
-                case RectanglePart.BottomLeft:
-                    return new Bounds(left, bottom - invHeight, left + partWidth, bottom);
-                case RectanglePart.TopCenter:
-                    return new Bounds(centerX - halfW, top, centerX + halfW, top + partHeight);
-                case RectanglePart.RightCenter:
-                    return new Bounds(right - invWidth, centerY - halfH, right, centerY + halfH);
-                case RectanglePart.BottomCenter:
-                    return new Bounds(centerX - halfW, bottom - partHeight, centerX + halfW, bottom);
-                case RectanglePart.LeftCenter:
-                    return new Bounds(left, centerY - halfH, left + partWidth, centerY + halfH);
-                case RectanglePart.Center:
-                    return new Bounds(centerX - halfW, centerY - halfH, centerX + halfW, centerY + halfH);
-                case RectanglePart.Top:
-                    return new Bounds(left, top, right, top + partHeight);
-                case RectanglePart.Right:
-                    return new Bounds(right - invWidth, top, right, bottom);
-                case RectanglePart.Bottom:
-                    return new Bounds(left, bottom - partHeight, right, bottom);
-                case RectanglePart.Left:
-                    return new Bounds(left, top, left + partWidth, bottom);
-                default:
-                    throw new Error("Invalid RectanglePart: ".concat(whichPart));
-            }
+    };
+    Bounds.prototype.union = function (other) {
+        var minLeft = Math.min(this.left, other.left);
+        var minTop = Math.min(this.top, other.top);
+        var maxRight = Math.max(this.right, other.right);
+        var maxBottom = Math.max(this.bottom, other.bottom);
+        return new Bounds(minLeft, minTop, maxRight, maxBottom);
+    };
+    Bounds.prototype.rotate = function (angle, whichCorner) {
+        if (whichCorner === void 0) { whichCorner = RelativePosition.Center; }
+        var radians = angle * (Math.PI / 180);
+        var center = this.getCorner(whichCorner);
+        var topLeft = this.getCorner(RelativePosition.TopLeft);
+        var topRight = this.getCorner(RelativePosition.TopRight);
+        var bottomLeft = this.getCorner(RelativePosition.BottomLeft);
+        var bottomRight = this.getCorner(RelativePosition.BottomRight);
+        var rotatePoint = function (point) {
+            return point.sub(center).rotate(radians).add(center);
+        };
+        var points = [
+            rotatePoint(topLeft),
+            rotatePoint(topRight),
+            rotatePoint(bottomRight),
+            rotatePoint(bottomLeft)
+        ];
+        return Bounds.fromVectors(points);
+    };
+    Bounds.fromTopLeft = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
         }
-    });
-    Object.defineProperty(Bounds.prototype, "union", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            var minLeft = Math.min(this.left, other.left);
-            var minTop = Math.min(this.top, other.top);
-            var maxRight = Math.max(this.right, other.right);
-            var maxBottom = Math.max(this.bottom, other.bottom);
-            return new Bounds(minLeft, minTop, maxRight, maxBottom);
-        }
-    });
-    ;
-    Object.defineProperty(Bounds.prototype, "rotate", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (angle, whichCorner) {
-            if (whichCorner === void 0) { whichCorner = RelativePosition.Center; }
-            var radians = angle * (Math.PI / 180);
-            var center = this.getCorner(whichCorner);
-            var topLeft = this.getCorner(RelativePosition.TopLeft);
-            var topRight = this.getCorner(RelativePosition.TopRight);
-            var bottomLeft = this.getCorner(RelativePosition.BottomLeft);
-            var bottomRight = this.getCorner(RelativePosition.BottomRight);
-            var rotatePoint = function (point) {
-                return point.sub(center).rotate(radians).add(center);
-            };
-            var points = [
-                rotatePoint(topLeft),
-                rotatePoint(topRight),
-                rotatePoint(bottomRight),
-                rotatePoint(bottomLeft),
-            ];
-            return Bounds.fromVectors(points);
-        }
-    });
-    Object.defineProperty(Bounds, "fromTopLeft", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
-            }
-            switch (args.length) {
-                case 2:
-                    var topLeft = args[0];
-                    var size = args[1];
-                    return this.fromTopLeft(topLeft.x, topLeft.y, size.width, size.height);
-                    // removed by dead control flow
+        switch (args.length) {
+            case 2:
+                var topLeft = args[0];
+                var size = args[1];
+                return this.fromTopLeft(topLeft.x, topLeft.y, size.width, size.height);
+                // removed by dead control flow
 
-                case 4:
-                    var left = args[0];
-                    var top = args[1];
-                    var width = args[2];
-                    var height = args[3];
-                    return new Bounds(left, top, left + width, top + height);
-                    // removed by dead control flow
+            case 4:
+                var left = args[0];
+                var top = args[1];
+                var width = args[2];
+                var height = args[3];
+                return new Bounds(left, top, left + width, top + height);
+                // removed by dead control flow
 
-                default:
-                    throw new Error("Invalid arguments");
+            default:
+                throw new Error("Invalid arguments");
+        }
+    };
+    Bounds.fromCenter = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        switch (args.length) {
+            case 2:
+                var center = args[0];
+                var size = args[1];
+                return this.fromCenter(center.x, center.y, size.width, size.height);
+            case 4:
+                var centerX = args[0];
+                var centerY = args[1];
+                var width = args[2];
+                var height = args[3];
+                return new Bounds(centerX - width / 2, centerY - height / 2, centerX + width / 2, centerY + height / 2);
+            default:
+                throw new Error("Invalid arguments");
+        }
+    };
+    Bounds.fromVectors = function (vectors) {
+        var rect = new Bounds(0, 0, 0, 0);
+        for (var i = 0; i < vectors.length; i++) {
+            var vector = vectors[i];
+            if (i === 0) {
+                rect.left = vector.x;
+                rect.top = vector.y;
+                rect.right = vector.x;
+                rect.bottom = vector.y;
+            }
+            else {
+                rect.left = Math.min(rect.left, vector.x);
+                rect.top = Math.min(rect.top, vector.y);
+                rect.right = Math.max(rect.right, vector.x);
+                rect.bottom = Math.max(rect.bottom, vector.y);
             }
         }
-    });
-    Object.defineProperty(Bounds, "fromCenter", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
+        return rect;
+    };
+    Bounds.fromRects = function (rects) {
+        var rect = new Bounds(0, 0, 0, 0);
+        for (var i = 0; i < rects.length; i++) {
+            var r = rects[i];
+            if (i === 0) {
+                rect.left = r.left;
+                rect.top = r.top;
+                rect.right = r.right;
+                rect.bottom = r.bottom;
             }
-            switch (args.length) {
-                case 2:
-                    var center = args[0];
-                    var size = args[1];
-                    return this.fromCenter(center.x, center.y, size.width, size.height);
-                case 4:
-                    var centerX = args[0];
-                    var centerY = args[1];
-                    var width = args[2];
-                    var height = args[3];
-                    return new Bounds(centerX - width / 2, centerY - height / 2, centerX + width / 2, centerY + height / 2);
-                default:
-                    throw new Error("Invalid arguments");
+            else {
+                rect.left = Math.min(rect.left, r.left);
+                rect.top = Math.min(rect.top, r.top);
+                rect.right = Math.max(rect.right, r.right);
+                rect.bottom = Math.max(rect.bottom, r.bottom);
             }
         }
-    });
-    Object.defineProperty(Bounds, "fromVectors", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (vectors) {
-            var rect = new Bounds(0, 0, 0, 0);
-            for (var i = 0; i < vectors.length; i++) {
-                var vector = vectors[i];
-                if (i === 0) {
-                    rect.left = vector.x;
-                    rect.top = vector.y;
-                    rect.right = vector.x;
-                    rect.bottom = vector.y;
-                }
-                else {
-                    rect.left = Math.min(rect.left, vector.x);
-                    rect.top = Math.min(rect.top, vector.y);
-                    rect.right = Math.max(rect.right, vector.x);
-                    rect.bottom = Math.max(rect.bottom, vector.y);
-                }
-            }
-            return rect;
-        }
-    });
-    ;
-    Object.defineProperty(Bounds, "fromRects", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (rects) {
-            var rect = new Bounds(0, 0, 0, 0);
-            for (var i = 0; i < rects.length; i++) {
-                var r = rects[i];
-                if (i === 0) {
-                    rect.left = r.left;
-                    rect.top = r.top;
-                    rect.right = r.right;
-                    rect.bottom = r.bottom;
-                }
-                else {
-                    rect.left = Math.min(rect.left, r.left);
-                    rect.top = Math.min(rect.top, r.top);
-                    rect.right = Math.max(rect.right, r.right);
-                    rect.bottom = Math.max(rect.bottom, r.bottom);
-                }
-            }
-            return rect;
-        }
-    });
-    ;
-    Object.defineProperty(Bounds, "fromElements", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (elements) {
-            return findBoundingRectangle(elements);
-        }
-    });
+        return rect;
+    };
+    Bounds.fromElements = function (elements) {
+        return findBoundingRectangle(elements);
+    };
     return Bounds;
 }(SObject));
 
 function findBoundingRectangle(elements) {
     if (!elements.length) {
-        throw new Error('findBoundingRectangle: elements array is empty');
+        throw new Error("findBoundingRectangle: elements array is empty");
     }
     var top = elements[0].top;
     var left = elements[0].left;
@@ -1620,30 +1187,13 @@ var Scale = (function (_super) {
     Scale_extends(Scale, _super);
     function Scale(scaleX, scaleY) {
         var _this = _super.call(this) || this;
-        Object.defineProperty(_this, "scaleX", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(_this, "scaleY", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
         _this.scaleX = scaleX;
         _this.scaleY = scaleY;
         return _this;
     }
-    Object.defineProperty(Scale, "fromElement", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (element) {
-            return new Scale(element.scaleX, element.scaleY);
-        }
-    });
+    Scale.fromElement = function (element) {
+        return new Scale(element.scaleX, element.scaleY);
+    };
     return Scale;
 }(SObject));
 
@@ -1669,30 +1219,15 @@ var Skew = (function (_super) {
     Skew_extends(Skew, _super);
     function Skew(skewX, skewY) {
         var _this = _super.call(this) || this;
-        Object.defineProperty(_this, "skewX", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(_this, "skewY", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
+        _this.skewX = 0;
+        _this.skewY = 0;
         _this.skewX = skewX;
         _this.skewY = skewY;
         return _this;
     }
-    Object.defineProperty(Skew, "fromElement", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (element) {
-            return new Skew(element.skewX, element.skewY);
-        }
-    });
+    Skew.fromElement = function (element) {
+        return new Skew(element.skewX, element.skewY);
+    };
     return Skew;
 }(SObject));
 
@@ -1753,16 +1288,16 @@ var VectorConverter;
     }
     VectorConverter.skewToSize = skewToSize;
     function toVector(obj) {
-        if ('x' in obj && 'y' in obj) {
+        if ("x" in obj && "y" in obj) {
             return new Vector(obj.x, obj.y);
         }
-        else if ('width' in obj && 'height' in obj) {
+        else if ("width" in obj && "height" in obj) {
             return new Vector(obj.width, obj.height);
         }
-        else if ('scaleX' in obj && 'scaleY' in obj) {
+        else if ("scaleX" in obj && "scaleY" in obj) {
             return new Vector(obj.scaleX, obj.scaleY);
         }
-        else if ('skewX' in obj && 'skewY' in obj) {
+        else if ("skewX" in obj && "skewY" in obj) {
             return new Vector(obj.skewX, obj.skewY);
         }
         else {
@@ -1801,42 +1336,6 @@ var Transform = (function (_super) {
     Transform_extends(Transform, _super);
     function Transform(element) {
         var _this = _super.call(this) || this;
-        Object.defineProperty(_this, "rotation", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(_this, "scale", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(_this, "position", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(_this, "size", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(_this, "skew", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(_this, "element", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
         _this.element = element;
         _this.rotation = element.rotation;
         _this.scale = new Scale(element.scaleX, element.scaleY);
@@ -1845,130 +1344,93 @@ var Transform = (function (_super) {
         _this.skew = new Skew(element.skewX, element.skewY);
         return _this;
     }
-    Object.defineProperty(Transform.prototype, "setRotation", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (rotation) {
-            this.element.rotation = rotation;
-            this.rotation = rotation;
-            return this;
+    Transform.prototype.setRotation = function (rotation) {
+        this.element.rotation = rotation;
+        this.rotation = rotation;
+        return this;
+    };
+    Transform.prototype.setScale = function (scale) {
+        var finalScale;
+        if (scale instanceof Scale) {
+            finalScale = scale;
         }
-    });
-    ;
-    Object.defineProperty(Transform.prototype, "setScale", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (scale) {
-            var finalScale;
-            if (scale instanceof Scale) {
-                finalScale = scale;
-            }
-            else if (IsVectorLike(scale)) {
-                finalScale = new Scale(scale.x, scale.y);
-            }
-            else if (IsScaleLike(scale)) {
-                finalScale = new Scale(scale.scaleX, scale.scaleY);
-            }
-            else {
-                throw new Error('Invalid scale input: must be Scale, ScaleLike, or VectorLike');
-            }
-            this.element.scaleX = finalScale.scaleX;
-            this.element.scaleY = finalScale.scaleY;
-            this.scale = finalScale;
-            return this;
+        else if (IsVectorLike(scale)) {
+            finalScale = new Scale(scale.x, scale.y);
         }
-    });
-    Object.defineProperty(Transform.prototype, "setPosition", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (position) {
-            var finalPosition;
-            if (position instanceof Vector) {
-                finalPosition = position;
-            }
-            else if (IsVectorLike(position)) {
-                finalPosition = new Vector(position.x, position.y);
-            }
-            else {
-                throw new Error('Invalid position input: must be VectorLike');
-            }
-            this.element.x = finalPosition.x;
-            this.element.y = finalPosition.y;
-            this.position = finalPosition;
-            return this;
+        else if (IsScaleLike(scale)) {
+            finalScale = new Scale(scale.scaleX, scale.scaleY);
         }
-    });
-    Object.defineProperty(Transform.prototype, "setSize", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (size) {
-            var finalSize;
-            if (size instanceof Size) {
-                finalSize = size;
-            }
-            else if (IsVectorLike(size)) {
-                finalSize = new Size(size.x, size.y);
-            }
-            else if (IsSizeLike(size)) {
-                finalSize = new Size(size.width, size.height);
-            }
-            else {
-                throw new Error('Invalid size input: must be VectorLike');
-            }
-            this.element.width = finalSize.width;
-            this.element.height = finalSize.height;
-            this.size = finalSize;
-            return this;
+        else {
+            throw new Error("Invalid scale input: must be Scale, ScaleLike, or VectorLike");
         }
-    });
-    Object.defineProperty(Transform.prototype, "setSkew", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (skew) {
-            var finalSkew;
-            if (skew instanceof Skew) {
-                finalSkew = skew;
-            }
-            else if (IsVectorLike(skew)) {
-                finalSkew = new Skew(skew.x, skew.y);
-            }
-            else if (IsSkewLike(skew)) {
-                finalSkew = new Skew(skew.skewX, skew.skewY);
-            }
-            else {
-                throw new Error('Invalid skew input');
-            }
-            this.element.skewX = finalSkew.skewX;
-            this.element.skewY = finalSkew.skewY;
-            this.skew = finalSkew;
-            return this;
+        this.element.scaleX = finalScale.scaleX;
+        this.element.scaleY = finalScale.scaleY;
+        this.scale = finalScale;
+        return this;
+    };
+    Transform.prototype.setPosition = function (position) {
+        var finalPosition;
+        if (position instanceof Vector) {
+            finalPosition = position;
         }
-    });
-    Object.defineProperty(Transform.prototype, "moveSelectionBy", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (distanceToMove) {
-            this.element.x += distanceToMove.x;
-            this.element.y += distanceToMove.y;
-            this.position = this.position.clone().add(distanceToMove);
-            return this;
+        else if (IsVectorLike(position)) {
+            finalPosition = new Vector(position.x, position.y);
         }
-    });
-    ;
-    Object.defineProperty(Transform, "fromElement", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (element) {
-            return new Transform(element);
+        else {
+            throw new Error("Invalid position input: must be VectorLike");
         }
-    });
+        this.element.x = finalPosition.x;
+        this.element.y = finalPosition.y;
+        this.position = finalPosition;
+        return this;
+    };
+    Transform.prototype.setSize = function (size) {
+        var finalSize;
+        if (size instanceof Size) {
+            finalSize = size;
+        }
+        else if (IsVectorLike(size)) {
+            finalSize = new Size(size.x, size.y);
+        }
+        else if (IsSizeLike(size)) {
+            finalSize = new Size(size.width, size.height);
+        }
+        else {
+            throw new Error("Invalid size input: must be VectorLike");
+        }
+        this.element.width = finalSize.width;
+        this.element.height = finalSize.height;
+        this.size = finalSize;
+        return this;
+    };
+    Transform.prototype.setSkew = function (skew) {
+        var finalSkew;
+        if (skew instanceof Skew) {
+            finalSkew = skew;
+        }
+        else if (IsVectorLike(skew)) {
+            finalSkew = new Skew(skew.x, skew.y);
+        }
+        else if (IsSkewLike(skew)) {
+            finalSkew = new Skew(skew.skewX, skew.skewY);
+        }
+        else {
+            throw new Error("Invalid skew input");
+        }
+        this.element.skewX = finalSkew.skewX;
+        this.element.skewY = finalSkew.skewY;
+        this.skew = finalSkew;
+        return this;
+    };
+    Transform.prototype.moveSelectionBy = function (distanceToMove) {
+        this.element.x += distanceToMove.x;
+        this.element.y += distanceToMove.y;
+        this.position = this.position.clone().add(distanceToMove);
+        return this;
+    };
+    Transform.fromElement = function (element) {
+        return new Transform(element);
+    };
     return Transform;
 }(SObject));
 
@@ -1996,18 +1458,8 @@ var Circle = (function (_super) {
     Circle_extends(Circle, _super);
     function Circle(pos, r) {
         var _this = _super.call(this) || this;
-        Object.defineProperty(_this, "pos", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: Vector.ZERO
-        });
-        Object.defineProperty(_this, "r", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
+        _this.pos = Vector.ZERO;
+        _this.r = 0;
         if (pos !== undefined) {
             _this.pos = pos;
         }
@@ -2034,7 +1486,6 @@ var Circle = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
     Object.defineProperty(Circle.prototype, "area", {
         get: function () {
             return Math.PI * this.r * this.r;
@@ -2042,7 +1493,6 @@ var Circle = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
     Object.defineProperty(Circle.prototype, "centroid", {
         get: function () {
             return this.pos.clone();
@@ -2050,47 +1500,23 @@ var Circle = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
-    Object.defineProperty(Circle.prototype, "distanceTo", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (point) {
-            var dx = this.pos.x - point.x;
-            var dy = this.pos.y - point.y;
-            return Math.sqrt(dx * dx + dy * dy) - this.r;
-        }
-    });
-    ;
-    Object.defineProperty(Circle.prototype, "distanceToSegment", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (segment) {
-            var nearestPoint = segment.closestPointTo(this.pos);
-            return this.distanceTo(nearestPoint);
-        }
-    });
-    ;
-    Object.defineProperty(Circle.prototype, "contains", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (point) {
-            var dx = this.pos.x - point.x;
-            var dy = this.pos.y - point.y;
-            return dx * dx + dy * dy <= this.r * this.r;
-        }
-    });
-    Object.defineProperty(Circle.prototype, "toVector", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            return this.pos.clone();
-        }
-    });
-    ;
+    Circle.prototype.distanceTo = function (point) {
+        var dx = this.pos.x - point.x;
+        var dy = this.pos.y - point.y;
+        return Math.sqrt(dx * dx + dy * dy) - this.r;
+    };
+    Circle.prototype.distanceToSegment = function (segment) {
+        var nearestPoint = segment.closestPointTo(this.pos);
+        return this.distanceTo(nearestPoint);
+    };
+    Circle.prototype.contains = function (point) {
+        var dx = this.pos.x - point.x;
+        var dy = this.pos.y - point.y;
+        return dx * dx + dy * dy <= this.r * this.r;
+    };
+    Circle.prototype.toVector = function () {
+        return this.pos.clone();
+    };
     return Circle;
 }(SObject));
 
@@ -2120,18 +1546,6 @@ var LineSegment = (function (_super) {
     LineSegment_extends(LineSegment, _super);
     function LineSegment(startPoint, endPoint) {
         var _this = _super.call(this) || this;
-        Object.defineProperty(_this, "startPoint", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(_this, "endPoint", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
         _this.startPoint = startPoint;
         _this.endPoint = endPoint;
         return _this;
@@ -2147,7 +1561,6 @@ var LineSegment = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
     Object.defineProperty(LineSegment.prototype, "center", {
         get: function () {
             var x = (this.startPoint.x + this.endPoint.x) / 2;
@@ -2157,7 +1570,6 @@ var LineSegment = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
     Object.defineProperty(LineSegment.prototype, "length", {
         get: function () {
             var dx = this.endPoint.x - this.startPoint.x;
@@ -2167,7 +1579,6 @@ var LineSegment = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
     Object.defineProperty(LineSegment.prototype, "angle", {
         get: function () {
             var dx = this.endPoint.x - this.startPoint.x;
@@ -2177,7 +1588,6 @@ var LineSegment = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
     Object.defineProperty(LineSegment.prototype, "normal", {
         get: function () {
             var dx = this.endPoint.x - this.startPoint.x;
@@ -2189,69 +1599,42 @@ var LineSegment = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
-    Object.defineProperty(LineSegment.prototype, "pointAt", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (t) {
-            var vector = this.endPoint.clone().sub(this.startPoint);
-            return this.startPoint.clone().add(vector.clone().multiply(t));
+    LineSegment.prototype.pointAt = function (t) {
+        var vector = this.endPoint.clone().sub(this.startPoint);
+        return this.startPoint.clone().add(vector.clone().multiply(t));
+    };
+    LineSegment.prototype.closestPointTo = function (point) {
+        var dx = this.endPoint.x - this.startPoint.x;
+        var dy = this.endPoint.y - this.startPoint.y;
+        var a = dx * dx + dy * dy;
+        var b = 2 * (dx * (this.startPoint.x - point.x) + dy * (this.startPoint.y - point.y));
+        var c = (this.startPoint.x - point.x) * (this.startPoint.x - point.x) +
+            (this.startPoint.y - point.y) * (this.startPoint.y - point.y) -
+            1;
+        var t = Math.max(0, Math.min(1, (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)));
+        var x = this.startPoint.x + (this.endPoint.x - this.startPoint.x) * t;
+        var y = this.startPoint.y + (this.endPoint.y - this.startPoint.y) * t;
+        return new Vector(x, y);
+    };
+    LineSegment.prototype.distanceTo = function (point) {
+        var nearestPoint = this.closestPointTo(point);
+        var dx = nearestPoint.x - point.x;
+        var dy = nearestPoint.y - point.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    };
+    LineSegment.prototype.toVector = function () {
+        var dx = this.endPoint.x - this.startPoint.x;
+        var dy = this.endPoint.y - this.startPoint.y;
+        return new Vector(dx, dy);
+    };
+    LineSegment.from = function (startPoint, direction, distance) {
+        if (distance < 0) {
+            throw new Error("Distance must be non-negative");
         }
-    });
-    Object.defineProperty(LineSegment.prototype, "closestPointTo", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (point) {
-            var dx = this.endPoint.x - this.startPoint.x;
-            var dy = this.endPoint.y - this.startPoint.y;
-            var a = dx * dx + dy * dy;
-            var b = 2 * (dx * (this.startPoint.x - point.x) + dy * (this.startPoint.y - point.y));
-            var c = (this.startPoint.x - point.x) * (this.startPoint.x - point.x) + (this.startPoint.y - point.y) * (this.startPoint.y - point.y) - 1;
-            var t = Math.max(0, Math.min(1, (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)));
-            var x = this.startPoint.x + (this.endPoint.x - this.startPoint.x) * t;
-            var y = this.startPoint.y + (this.endPoint.y - this.startPoint.y) * t;
-            return new Vector(x, y);
-        }
-    });
-    ;
-    Object.defineProperty(LineSegment.prototype, "distanceTo", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (point) {
-            var nearestPoint = this.closestPointTo(point);
-            var dx = nearestPoint.x - point.x;
-            var dy = nearestPoint.y - point.y;
-            return Math.sqrt(dx * dx + dy * dy);
-        }
-    });
-    ;
-    Object.defineProperty(LineSegment.prototype, "toVector", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            var dx = this.endPoint.x - this.startPoint.x;
-            var dy = this.endPoint.y - this.startPoint.y;
-            return new Vector(dx, dy);
-        }
-    });
-    ;
-    Object.defineProperty(LineSegment, "from", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (startPoint, direction, distance) {
-            if (distance < 0) {
-                throw new Error('Distance must be non-negative');
-            }
-            var offset = getDirectionOffset(direction).clone().multiply(distance);
-            var endPoint = startPoint.clone().add(offset);
-            return new LineSegment(startPoint, endPoint);
-        }
-    });
+        var offset = getDirectionOffset(direction).clone().multiply(distance);
+        var endPoint = startPoint.clone().add(offset);
+        return new LineSegment(startPoint, endPoint);
+    };
     return LineSegment;
 }(SObject));
 
@@ -2292,24 +1675,6 @@ var FrameRange = (function (_super) {
     FrameRange_extends(FrameRange, _super);
     function FrameRange(layerIndex, startFrame, endFrame) {
         var _this = _super.call(this) || this;
-        Object.defineProperty(_this, "layerIndex", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(_this, "startFrame", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(_this, "endFrame", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
         _this.layerIndex = layerIndex;
         _this.startFrame = startFrame;
         _this.endFrame = endFrame || startFrame + 1;
@@ -2331,42 +1696,24 @@ var FrameRange = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ;
-    Object.defineProperty(FrameRange.prototype, "intersects", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (other) {
-            return this.startFrame <= other.endFrame && other.startFrame <= this.endFrame;
+    FrameRange.prototype.intersects = function (other) {
+        return this.startFrame <= other.endFrame && other.startFrame <= this.endFrame;
+    };
+    FrameRange.prototype.contain = function (arg) {
+        if (typeof arg === "number") {
+            return this.startFrame <= arg && arg < this.endFrame;
         }
-    });
-    ;
-    Object.defineProperty(FrameRange.prototype, "contain", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (arg) {
-            if (typeof arg === "number") {
-                return this.startFrame <= arg && arg < this.endFrame;
+        if (FrameRange_IsFrameRangeLike(arg)) {
+            if (this.layerIndex !== arg.layerIndex) {
+                return false;
             }
-            if (FrameRange_IsFrameRangeLike(arg)) {
-                if (this.layerIndex !== arg.layerIndex) {
-                    return false;
-                }
-                return this.startFrame <= arg.startFrame && this.endFrame >= arg.endFrame;
-            }
-            throw new Error("Invalid argument type: ".concat(typeof arg));
+            return this.startFrame <= arg.startFrame && this.endFrame >= arg.endFrame;
         }
-    });
-    Object.defineProperty(FrameRange.prototype, "toArray", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            return [this.layerIndex, this.startFrame, this.endFrame];
-        }
-    });
-    ;
+        throw new Error("Invalid argument type: ".concat(typeof arg));
+    };
+    FrameRange.prototype.toArray = function () {
+        return [this.layerIndex, this.startFrame, this.endFrame];
+    };
     return FrameRange;
 }(SObject));
 
@@ -2394,36 +1741,11 @@ var FrameRangeList = (function (_super) {
     function FrameRangeList(items) {
         if (items === void 0) { items = []; }
         var _this = _super.call(this) || this;
-        Object.defineProperty(_this, "_items", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: []
-        });
-        Object.defineProperty(_this, "_cachedFirstSlFrameIndex", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: null
-        });
-        Object.defineProperty(_this, "_cachedFirstSlLayerIndex", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: null
-        });
-        Object.defineProperty(_this, "_cachedFirstSlLayer", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: null
-        });
-        Object.defineProperty(_this, "_cachedFirstSlFrame", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: null
-        });
+        _this._items = [];
+        _this._cachedFirstSlFrameIndex = null;
+        _this._cachedFirstSlLayerIndex = null;
+        _this._cachedFirstSlLayer = null;
+        _this._cachedFirstSlFrame = null;
         _this._items = Array.from(items);
         return _this;
     }
@@ -2434,42 +1756,22 @@ var FrameRangeList = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(FrameRangeList.prototype, Symbol.iterator, {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function () {
-            return this._items[Symbol.iterator]();
+    FrameRangeList.prototype[Symbol.iterator] = function () {
+        return this._items[Symbol.iterator]();
+    };
+    FrameRangeList.prototype.at = function (index) {
+        if (index < 0) {
+            index = this._items.length + index;
         }
-    });
-    Object.defineProperty(FrameRangeList.prototype, "at", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (index) {
-            if (index < 0) {
-                index = this._items.length + index;
-            }
-            return this._items[index];
-        }
-    });
-    Object.defineProperty(FrameRangeList.prototype, "forEach", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (callback) {
-            var _this = this;
-            this._items.forEach(function (item, i) { return callback(item, i, _this); });
-        }
-    });
-    Object.defineProperty(FrameRangeList.prototype, "map", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (callback) {
-            return this._items.map(callback);
-        }
-    });
+        return this._items[index];
+    };
+    FrameRangeList.prototype.forEach = function (callback) {
+        var _this = this;
+        this._items.forEach(function (item, i) { return callback(item, i, _this); });
+    };
+    FrameRangeList.prototype.map = function (callback) {
+        return this._items.map(callback);
+    };
     Object.defineProperty(FrameRangeList.prototype, "firstSlFrameIndex", {
         get: function () {
             if (this._items.length === 0)
@@ -2526,23 +1828,21 @@ var FrameRangeList = (function (_super) {
                 var curLayerIndex = timeline.currentLayer;
                 var curLayer = timeline.layers[curLayerIndex];
                 var frameIndex = this.firstSlFrameIndex;
-                this._cachedFirstSlFrame = frameIndex !== null ? curLayer.frames[frameIndex] : null;
+                this._cachedFirstSlFrame =
+                    frameIndex !== null ? curLayer.frames[frameIndex] : null;
             }
             return this._cachedFirstSlFrame;
         },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(FrameRangeList, "fromFrameRanges", {
-        enumerable: false,
-        configurable: true,
-        writable: true,
-        value: function (ranges) {
-            return new FrameRangeList(ranges.map(function (r) {
-                return r instanceof FrameRange ? r : new FrameRange(r.layerIndex, r.startFrame, r.endFrame);
-            }));
-        }
-    });
+    FrameRangeList.fromFrameRanges = function (ranges) {
+        return new FrameRangeList(ranges.map(function (r) {
+            return r instanceof FrameRange
+                ? r
+                : new FrameRange(r.layerIndex, r.startFrame, r.endFrame);
+        }));
+    };
     return FrameRangeList;
 }(SObject));
 
@@ -2553,12 +1853,6 @@ var FrameRangeList = (function (_super) {
 
 var FlashElementWrapper = (function () {
     function FlashElementWrapper(element) {
-        Object.defineProperty(this, "element", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
         this.element = element;
     }
     Object.defineProperty(FlashElementWrapper.prototype, "topLeft", {
@@ -2599,12 +1893,7 @@ var FlashElementWrapper = (function () {
 
 var FlashStageWrapper = (function () {
     function FlashStageWrapper() {
-        Object.defineProperty(this, "doc", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: fl.getDocumentDOM()
-        });
+        this.doc = fl.getDocumentDOM();
     }
     Object.defineProperty(FlashStageWrapper.prototype, "center", {
         get: function () {
@@ -2640,30 +1929,10 @@ var FlashStageWrapper = (function () {
 
 var FlashCameraWrapper = (function () {
     function FlashCameraWrapper(timeline, frameIndex) {
-        Object.defineProperty(this, "doc", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: fl.getDocumentDOM()
-        });
-        Object.defineProperty(this, "timeline", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: this.doc.getTimeline()
-        });
-        Object.defineProperty(this, "frameIndex", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(this, "stage", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: new FlashStageWrapper()
-        });
+        this.doc = fl.getDocumentDOM();
+        this.timeline = this.doc.getTimeline();
+        this.frameIndex = 0;
+        this.stage = new FlashStageWrapper();
         if (timeline) {
             this.timeline = timeline;
         }

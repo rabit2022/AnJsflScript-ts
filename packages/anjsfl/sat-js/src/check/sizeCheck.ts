@@ -1,10 +1,10 @@
 import { SizeLike } from "../types/sizeType";
 
-export function IsSizeLike(obj): obj is SizeLike {
+export function IsSizeLike(obj: unknown): obj is SizeLike {
     return (
-        obj &&
+        obj !== null &&
         typeof obj === "object" &&
-        typeof obj.width === "number" &&
-        typeof obj.height === "number"
+        'width' in obj && typeof obj.width === "number" &&
+        'height' in obj && typeof obj.height === "number"
     );
 }

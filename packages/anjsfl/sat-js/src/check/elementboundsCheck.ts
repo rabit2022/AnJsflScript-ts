@@ -1,12 +1,12 @@
 import { ElementBoundsLike } from "../types/elementboundsType";
 
-export function IsElementBoundsLike(obj): obj is ElementBoundsLike {
+export function IsElementBoundsLike(obj: unknown): obj is ElementBoundsLike {
     return (
-        obj &&
+        obj !== null &&
         typeof obj === "object" &&
-        typeof obj.left === "number" &&
-        typeof obj.top === "number" &&
-        typeof obj.width === "number" &&
-        typeof obj.height === "number"
+        typeof (obj as ElementBoundsLike).left === "number" &&
+        typeof (obj as ElementBoundsLike).top === "number" &&
+        typeof (obj as ElementBoundsLike).width === "number" &&
+        typeof (obj as ElementBoundsLike).height === "number"
     );
 }

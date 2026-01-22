@@ -63,8 +63,8 @@ export class FrameRangeList extends SObject {
     // --- 只读属性（带缓存）---
     private _cachedFirstSlFrameIndex: number | null = null;
     private _cachedFirstSlLayerIndex: number | null = null;
-    private _cachedFirstSlLayer: FlashLayer | null = null;
-    private _cachedFirstSlFrame: FlashFrame | null = null;
+    private _cachedFirstSlLayer: Layer | null = null;
+    private _cachedFirstSlFrame: Frame | null = null;
 
     get firstSlFrameIndex(): number | null {
         if (this._items.length === 0) return null;
@@ -82,7 +82,7 @@ export class FrameRangeList extends SObject {
         return this._cachedFirstSlLayerIndex;
     }
 
-    get firstSlLayer(): FlashLayer | null {
+    get firstSlLayer(): Layer | null {
         if (this._items.length === 0) return null;
         if (this._cachedFirstSlLayer === null) {
             const doc = fl.getDocumentDOM();
@@ -98,7 +98,7 @@ export class FrameRangeList extends SObject {
         return this._cachedFirstSlLayer;
     }
 
-    get firstSlFrame(): FlashFrame | null {
+    get firstSlFrame(): Frame | null {
         if (this._items.length === 0) return null;
         if (this._cachedFirstSlFrame === null) {
             const doc = fl.getDocumentDOM();

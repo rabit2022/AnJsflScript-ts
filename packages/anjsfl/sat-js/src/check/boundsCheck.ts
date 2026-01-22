@@ -6,13 +6,13 @@ import { BoundsLike } from "../types/boundsType";
  * @returns {boolean} 相等返回true，否则返回false
  * @private
  */
-export function IsBoundsLike(obj): obj is BoundsLike {
+export function IsBoundsLike(obj: unknown): obj is BoundsLike {
     return (
-        obj &&
+        obj !== null &&
         typeof obj === "object" &&
-        typeof obj.left === "number" &&
-        typeof obj.top === "number" &&
-        typeof obj.right === "number" &&
-        typeof obj.bottom === "number"
+        typeof (obj as BoundsLike).left === "number" &&
+        typeof (obj as BoundsLike).top === "number" &&
+        typeof (obj as BoundsLike).right === "number" &&
+        typeof (obj as BoundsLike).bottom === "number"
     );
 }

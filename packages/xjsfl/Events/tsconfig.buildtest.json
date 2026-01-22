@@ -1,0 +1,43 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist",
+    // 避免和 webpack 的 dist 冲突
+    "target": "ES5",
+    //    "type": "module",
+    "paths": [],
+
+
+    "importHelpers": false,    // ← 非常重要！避免引入 tslib
+    "noEmitHelpers": false ,     // ← 不生成 helper（自己提供或不用）
+
+
+    "types": [
+//      "jest"
+    ],
+    "lib": [
+      "es5",
+      "es6"
+    ],
+    "moduleResolution": "node",
+    // 👈 关键！使用经典 node 模块解析
+
+
+    // ✅ 关键修复：关闭 composite 和 declaration
+    "composite": false,
+    // ← 必须设为 false
+    "declaration": false,
+    // ← 测试脚本不需要 .d.ts
+    "declarationMap": false,
+    "emitDeclarationOnly": false
+  },
+  "include": [
+    "test",
+    "src",
+    // jsfl
+    "../../../types/jsfl/types/**/*.d.ts",
+    // 全局的 类型定义文件
+    "../../../types/myShim/*.d.ts"
+  ]
+}

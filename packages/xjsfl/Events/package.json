@@ -1,16 +1,17 @@
 {
   "name": "@xjsfl/Events",
   "version": "1.0.0",
-  "description": "Validation logic for Adobe Animate JSFL scripts",
+  "description": "",
   "declaration": true,
   "declarationMap": true,
-  "main": "src/Events.ts",
+  "main": "src/index.ts",
   "files": [
     "dist"
   ],
+  "//": "npm run build -w @anjsfl/validation",
   "scripts": {
-    "build": " npm run build:js",
-    "build:js": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "build:test": "webpack --config webpack.test.js"
   },
   "publishConfig": {
     "access": "public"
@@ -23,7 +24,6 @@
     "ts-jest": "29.4.6",
     "ts-loader": "9.5.4",
     "typescript": "5.9.3",
-
     "webpack": "5.104.1",
     "terser-webpack-plugin": "5.3.16",
     "webpack-cli": "6.0.1"

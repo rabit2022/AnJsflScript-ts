@@ -1,0 +1,1 @@
+console.log(fl.scriptURI);

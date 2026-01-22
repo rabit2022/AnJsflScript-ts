@@ -1,7 +1,9 @@
 // Bounds.test.ts
 
 // === Mock global fl (for default constructor) ===
-import { SAT } from "../src";
+
+import {SAT} from "../src";
+
 import { RelativePosition } from "../src/enum/vectorEnums";
 import { RectanglePart } from "../src/enum/boundsEnum";
 import Bounds = SAT.Bounds;

@@ -1,28 +1,20 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "composite": false,     // 👈 关键！打包不需要 composite
-    "declaration": false,   // 现在可以安全关闭
-    "declarationMap": false,   // 👈 显式关闭
+    "composite": false,
+    // 👈 关键！打包不需要 composite
+    "declaration": false,
+    // 现在可以安全关闭
+    "declarationMap": false,
+    // 👈 显式关闭
 
     "sourceMap": false,
     "noEmit": false,
+    "module": "es2020",
+    // 或 commonjs / esnext
 
-    "module": "es2020",        // 或 commonjs / esnext
-//    "target": "es2016",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-//    "sourceMap": true,
-//    "declaration": false
-  },
-  "include": [
-    "src",
-
-
-    // jsfl
-    "../../../types/jsfl/types/**/*.d.ts",
-    // 全局的 类型定义文件
-    "../../../types/myShim/*.d.ts"
-  ]
+    "allowSyntheticDefaultImports": true
+  }
 }

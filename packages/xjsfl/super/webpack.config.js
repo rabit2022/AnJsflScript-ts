@@ -2,15 +2,21 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 
+
+// region MODULE_NAME
+const MODULE_NAME = "super";
+// endregion MODULE_NAME
+
+
 module.exports = {
     mode: 'production',
     entry: './src/index.ts', // 入口文件
     output: {
         path: path.resolve(__dirname, 'out'),
-        filename: 'super.jsfl', // 输出为 .jsfl 文件
-        library: 'super',  // 暴露为全局变量 Validation（可选）
+        filename: MODULE_NAME + '.jsfl', // 输出为 .jsfl 文件
+        library: MODULE_NAME,  // 暴露为全局变量 Validation（可选）
         libraryTarget: 'umd',   // 使用 var 暴露（适合 JSFL）
-        clean: true ,            // 每次构建清空 dist
+        clean: true,            // 每次构建清空 dist
 
         globalObject: 'this', // 👈 关键！告诉 Webpack 使用 `this` 而不是 `self`/`window`
     },
@@ -59,7 +65,7 @@ module.exports = {
         ]
     },
     // 关键：不打包任何外部依赖（JSFL 无 npm）
-    externals: [],
+    externals: ['lodash',"chroma-js"],
     // 禁用 Node.js 注入
     target: ['web', 'es5'], // 实际上 JSFL 不是 web，但这样可禁用 node polyfill
     stats: {
