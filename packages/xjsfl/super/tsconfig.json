@@ -5,8 +5,8 @@
     "noEmitOnError": false,
     "removeComments": true,
     "moduleResolution": "node",
-    "noImplicitAny": false,
-    // ❌ 强烈不建议！整个项目失去隐式 any 保护
+
+    "noImplicitAny": false, // ❌ 强烈不建议！整个项目失去隐式 any 保护
 
     "rootDir": "src",
     "outDir": "./dist",

@@ -502,12 +502,7 @@ export class Bounds extends SObject implements BoundsLike {
         }
     }
 
-    static fromCenter(
-        centerX: number,
-        centerY: number,
-        width: number,
-        height: number
-    ): Bounds;
+    static fromCenter(centerX: number, centerY: number, width: number, height: number): Bounds;
 
     static fromCenter(center: Vector | VectorLike, size: Size | SizeLike): Bounds;
 
@@ -594,6 +589,10 @@ export class Bounds extends SObject implements BoundsLike {
     //  findBoundingRectangle
     static fromElements(elements: Array<FlashElement>): Bounds {
         return findBoundingRectangle(elements);
+    }
+
+    static fromElement(element:FlashElement): Bounds {
+        return new Bounds(element);
     }
 }
 

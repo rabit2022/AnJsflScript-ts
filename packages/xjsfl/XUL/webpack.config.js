@@ -3,7 +3,7 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 
 // region MODULE_NAME
-const MODULE_NAME = "your-new-module-name";
+const MODULE_NAME = "XUL";
 // endregion MODULE_NAME
 
 

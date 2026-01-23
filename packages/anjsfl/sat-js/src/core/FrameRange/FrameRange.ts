@@ -16,7 +16,9 @@
 
 import { SObject } from "../../base/SObject";
 import { FrameRangeLike } from "../../types/framerangeType";
-import { CHECK } from "../../check/check";
+import {CHECK} from "../../check";
+
+
 import IsFrameRangeLike = CHECK.IsFrameRangeLike;
 
 /**

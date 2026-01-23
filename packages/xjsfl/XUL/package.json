@@ -1,5 +1,5 @@
 {
-  "name": "your-new-module-name",
+  "name": "@xjsfl/XUL",
   "version": "1.0.0",
   "description": "",
   "declaration": true,
@@ -8,7 +8,6 @@
   "files": [
     "dist"
   ],
-  "//": "构建子模块",
   "//": "npm run build -w @anjsfl/validation",
   "scripts": {
     "build": "webpack --config webpack.config.js"

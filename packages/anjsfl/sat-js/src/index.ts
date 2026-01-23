@@ -1,6 +1,6 @@
-import { CHECK } from "./check/check";
-import { ENUM } from "./enum/enum";
-import { TYPE } from "./types/type";
+import { CHECK } from "./check";
+import { ENUM } from "./enum";
+import { TYPE } from "./types";
 import { BoundsConverter } from "./core/Rectangle/BoundsConverter";
 import { VectorConverter } from "./core/VectorConverter";
 
@@ -28,6 +28,10 @@ import { Circle as _Circle } from "./core/Circle";
 import { LineSegment as _LineSegment } from "./core/LineSegment";
 import { FrameRange as _FrameRange } from "./core/FrameRange/FrameRange";
 import { FrameRangeList as _FrameRangeList } from "./core/FrameRange/FrameRangeList";
+
+
+
+
 
 // 2. 聚合到 SAT 命名空间（使用 const 赋值）
 export namespace SAT {
@@ -59,6 +63,38 @@ export namespace SAT {
     export const SK = _Skew; // Skew
     export const LS = _LineSegment; // LineSegment
     export const C = _Circle; // Circle
+}
+
+
+// 3. 导出类型别名 - 在同一文件中添加
+export namespace SAT_T {
+    // 使用 InstanceType 获取实例类型
+    export type Vector = InstanceType<typeof SAT.Vector>;
+    export type Scale = InstanceType<typeof SAT.Scale>;
+    export type Size = InstanceType<typeof SAT.Size>;
+    export type Skew = InstanceType<typeof SAT.Skew>;
+    export type Transform = InstanceType<typeof SAT.Transform>;
+    export type Box = InstanceType<typeof SAT.Box>;
+    export type CornerRect = InstanceType<typeof SAT.CornerRect>;
+    export type XYWHRect = InstanceType<typeof SAT.XYWHRect>;
+    export type Bounds = InstanceType<typeof SAT.Bounds>;
+    export type LTRBRect = InstanceType<typeof SAT.LTRBRect>;
+    export type Circle = InstanceType<typeof SAT.Circle>;
+    export type LineSegment = InstanceType<typeof SAT.LineSegment>;
+    export type FrameRange = InstanceType<typeof SAT.FrameRange>;
+    export type FrameRangeList = InstanceType<typeof SAT.FrameRangeList>;
+
+    // === 短别名类型 ===
+    export type V = Vector;
+    export type B = Bounds;
+    export type S = Size;
+    export type TR = Transform;
+    export type FR = FrameRange;
+    export type FRL = FrameRangeList;
+    export type SC = Scale;
+    export type SK = Skew;
+    export type LS = LineSegment;
+    export type C = Circle;
 }
 
 // ------------------------------------------------------------------------------------------------------------------------

@@ -13,7 +13,7 @@ export class FlashElementWrapper {
     /** 获取元素左上角坐标 */
     get topLeft(): Vector {
         // 可选：添加类型守卫或默认值以提高健壮性
-        const { left = 0, top = 0 } = this.element as any;
+        const { left = 0, top = 0 } = this.element;
         return new Vector(left, top);
     }
 
@@ -22,7 +22,8 @@ export class FlashElementWrapper {
     }
 
     get bounds(): Bounds {
-        return Bounds.fromTopLeft(this.topLeft, this.size);
+        // return Bounds.fromTopLeft(this.topLeft, this.size);
+        return Bounds.fromElement(this.element as FlashElement);
     }
 
     get center(): Vector {

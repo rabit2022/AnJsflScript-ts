@@ -1,0 +1,50 @@
+//npm run build -w @anjsfl/validation
+
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist",
+    // 避免和 webpack 的 dist 冲突
+
+    "moduleResolution": "node",
+
+
+    "paths": [],
+    "importHelpers": true,
+    "types": [
+      "jest"
+    ],
+    "target": "es5",
+    "lib": [
+      "es5",
+      "es6"
+    ],
+
+
+    // es import
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+
+    // ✅ 关键修复：关闭 composite 和 declaration
+    "composite": false,
+    // ← 必须设为 false
+    "declaration": false,
+    // ← 测试脚本不需要 .d.ts
+    "declarationMap": false,
+    "emitDeclarationOnly": false
+  },
+  "include": [
+    "test",
+    "src",
+
+
+    // jsfl
+    "../../../types/jsfl/types/**/*.d.ts",
+    // 全局的 类型定义文件
+    "../../../types/myShim/*.d.ts"
+  ]
+}
+
+

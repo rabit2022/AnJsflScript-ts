@@ -152,7 +152,7 @@ function IsCircleLike(obj) {
         typeof obj.r === "number");
 }
 
-;// ./src/check/check.ts
+;// ./src/check/index.ts
 
 
 
@@ -233,7 +233,7 @@ var InsetDirection;
     InsetDirection["Bottom"] = "bottom";
 })(InsetDirection || (InsetDirection = {}));
 
-;// ./src/enum/enum.ts
+;// ./src/enum/index.ts
 
 
 
