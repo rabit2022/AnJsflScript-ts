@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: BrightnessColorTransform.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______     ______     __     ______     __  __     ______   __   __     ______     ______
 // /\  == \   /\  == \   /\ \   /\  ___\   /\ \_\ \   /\__  _\ /\ "-.\ \   /\  ___\   /\  ___\
 // \ \  __<   \ \  __<   \ \ \  \ \ \__ \  \ \  __ \  \/_/\ \/ \ \ \-.  \  \ \  __\   \ \___  \
@@ -20,14 +27,17 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // BrightnessColorTransform
 
-import {BaseColorTransform} from '../base/BaseColorTransform';
-import {IBrightnessColorTransform} from '../types';
+import { BaseColorTransform } from "../base/BaseColorTransform";
+import { IBrightnessColorTransform } from "../types";
 
-export class BrightnessColorTransform extends BaseColorTransform implements IBrightnessColorTransform {
-    public mode: 'brightness' = 'brightness';
+export class BrightnessColorTransform
+    extends BaseColorTransform
+    implements IBrightnessColorTransform
+{
+    public mode: "brightness" = "brightness";
     public brightnessPercent: number = 0;
 
     constructor() {
-        super('brightness');
+        super("brightness");
     }
 }

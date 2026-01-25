@@ -29,4 +29,3 @@ if (typeof require !== "undefined" && require.main === module) {
     clearOutputDirs().catch(console.error);
 }
 
-export { clearOutputDirs };

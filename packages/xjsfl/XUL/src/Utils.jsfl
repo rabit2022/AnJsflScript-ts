@@ -17,7 +17,12 @@
 	 * @instance	Utils
 	 */
 
-	xjsfl.init(this, ['Folder', 'JSON', 'SimpleTemplate', 'URI', 'XML']);
+	// xjsfl.init(this, ['Folder', 'JSON', 'SimpleTemplate', 'URI', 'XML']);
+
+// 'Folder', 'URI', 'JSON'    暂时忽略，报错是在修改
+// 'SimpleTemplate'  没有用到
+// 'XML'  循环引用
+define(function () {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	// class
@@ -2394,4 +2399,7 @@
 	// ---------------------------------------------------------------------------------------------------------------
 	// register
 
-		xjsfl.classes.register('Utils', Utils);
+		// xjsfl.classes.register('Utils', Utils);
+		return Utils;
+
+});

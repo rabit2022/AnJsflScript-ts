@@ -1,4 +1,11 @@
 /**
+ * @file: utils.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ *//**
  * 生成一个数字序列，行为完全类似 Python 的 range() 函数。
  * 注意：生成的序列不包含 'stop' 值。
  *
@@ -7,7 +14,11 @@
  * @param step - 步长，默认为 1。
  * @returns number[] - 返回生成的数字数组。
  */
-export function generateRange(startOrStop: number, stop ?: number, step: number = 1): number[] {
+export function generateRange(
+    startOrStop: number,
+    stop?: number,
+    step: number = 1
+): number[] {
     // 处理参数：如果 stop 是 undefined，说明只传了一个参数，即 range(stop)
     let start: number;
     let end: number;

@@ -1,7 +1,9 @@
 // main.ts
 import * as path from "path";
+import { findRepoRoot } from "./nodejs/findPackage";
 
-export const $ProjectFileDir$ = path.resolve(__filename, "../../../../");
+// export const $ProjectFileDir$ = path.resolve(__filename, "../../../../");
+export const $ProjectFileDir$ = findRepoRoot(__dirname);
 
 // third 文件夹
 export const THIRD = path.resolve($ProjectFileDir$, "third");

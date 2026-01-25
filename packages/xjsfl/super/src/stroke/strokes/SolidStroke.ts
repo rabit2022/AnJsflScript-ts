@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: SolidStroke.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______     ______     __         __     _____     ______     ______
 // /\  ___\   /\  __ \   /\ \       /\ \   /\  __-.  /\  ___\   /\__  _\
 // \ \___  \  \ \ \/\ \  \ \ \____  \ \ \  \ \ \/\ \ \ \___  \  \/_/\ \/
@@ -15,10 +22,10 @@
 // SolidStroke
 // 实线样式
 
-import {BaseStroke} from '../base/BaseStroke';
+import { BaseStroke } from "../base/BaseStroke";
 
 export class SolidStroke extends BaseStroke {
     constructor() {
-        super('solid');
+        super("solid");
     }
 }

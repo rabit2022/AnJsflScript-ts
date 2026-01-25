@@ -1,5 +1,12 @@
-// strategies/NeatArrangement.ts
-import { ArrangementStrategy, ArrangementResult } from './ArrangementStrategy';
+/**
+ * @file: NeatArrangement.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// strategies/NeatArrangement.ts
+import { ArrangementStrategy, ArrangementResult } from "./ArrangementStrategy";
 
 export class NeatArrangement extends ArrangementStrategy {
     calculate(x: number, y: number): ArrangementResult {

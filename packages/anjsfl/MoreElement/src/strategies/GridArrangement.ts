@@ -1,10 +1,17 @@
-// strategies/GridArrangement.ts
-import {ArrangementResult, ArrangementStrategy} from './ArrangementStrategy';
+/**
+ * @file: GridArrangement.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// strategies/GridArrangement.ts
+import { ArrangementResult, ArrangementStrategy } from "./ArrangementStrategy";
 
-import {SAT_T, VectorConverter} from '@anjsfl/sat';
+import { SAT_T, VectorConverter } from "@anjsfl/sat";
 
 type Scale_T = SAT_T.Scale;
-const {vectorToScale} = VectorConverter;
+const { vectorToScale } = VectorConverter;
 
 export class GridArrangement extends ArrangementStrategy {
     calculate(x: number, y: number): ArrangementResult {
@@ -21,9 +28,9 @@ export class GridArrangement extends ArrangementStrategy {
     }
 
     executeGridOperation(): void {
-        const doc = (typeof fl !== 'undefined') ? fl.getDocumentDOM() : null;
+        const doc = typeof fl !== "undefined" ? fl.getDocumentDOM() : null;
         if (!doc) {
-            console.error('FL document not available');
+            console.error("FL document not available");
             return;
         }
 

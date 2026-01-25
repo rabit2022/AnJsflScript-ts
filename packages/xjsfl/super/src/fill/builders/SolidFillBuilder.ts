@@ -1,6 +1,13 @@
-import {SolidFill} from '../fills/SolidFill';
-import chroma from 'chroma-js';
-import {BaseFillBuilder} from "../base/BaseFillBuilder";
+/**
+ * @file: SolidFillBuilder.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */import { SolidFill } from "../fills/SolidFill";
+import chroma from "chroma-js";
+import { BaseFillBuilder } from "../base/BaseFillBuilder";
 
 export class SolidFillBuilder extends BaseFillBuilder<SolidFill> {
     constructor() {

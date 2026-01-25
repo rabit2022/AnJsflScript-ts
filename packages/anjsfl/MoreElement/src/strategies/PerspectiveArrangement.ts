@@ -1,10 +1,16 @@
-// strategies/PerspectiveArrangement.ts
-import { ArrangementStrategy, ArrangementResult } from './ArrangementStrategy';
+/**
+ * @file: PerspectiveArrangement.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// strategies/PerspectiveArrangement.ts
+import { ArrangementStrategy, ArrangementResult } from "./ArrangementStrategy";
 
-import { SAT_T ,SAT} from '@anjsfl/sat';
+import { SAT_T, SAT } from "@anjsfl/sat";
 
-const {Vector,Scale} = SAT;
-
+const { Vector, Scale } = SAT;
 
 export interface PerspectiveConfig {
     horizontalCount: number;
@@ -13,7 +19,7 @@ export interface PerspectiveConfig {
 export class PerspectiveArrangement extends ArrangementStrategy {
     calculate(x: number, y: number, config?: PerspectiveConfig): ArrangementResult {
         if (!config || !config.horizontalCount) {
-            throw new Error('Perspective arrangement requires horizontalCount in config');
+            throw new Error("Perspective arrangement requires horizontalCount in config");
         }
 
         const { horizontalCount } = config;
@@ -25,7 +31,13 @@ export class PerspectiveArrangement extends ArrangementStrategy {
         // 透视偏移
         const horizontalSpacing = this.moveDirection.x;
         const itemWidth = this.element.width;
-        const offsetX = this.getOffset(horizontalCount, horizontalSpacing, itemWidth, x, y);
+        const offsetX = this.getOffset(
+            horizontalCount,
+            horizontalSpacing,
+            itemWidth,
+            x,
+            y
+        );
 
         // 透视缩放
         const scaleFactor = this.getScaleFactor(horizontalCount, y);

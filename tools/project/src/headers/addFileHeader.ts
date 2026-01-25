@@ -2,10 +2,10 @@ import { readFile, writeFile } from "fs/promises";
 import { basename } from "path";
 import { pathToFileURL } from "url";
 import { ScanSpec, walk } from "../nodejs/walk";
-import { BUSINESS, LIB_CORE } from "../ProjectFileDir";
+import {BUSINESS, LIB_CORE, PACKAGES} from "../ProjectFileDir";
 
 // ✅ 统一管理要扫描的目录
-const SCAN_DIRS = [LIB_CORE, BUSINESS];
+const SCAN_DIRS = [LIB_CORE, BUSINESS,PACKAGES];
 
 // 配置信息
 const AUTHOR = "穹的兔兔";
@@ -37,7 +37,9 @@ function generateHeader(filename: string): string {
  * @date: ${date}
  * @project: ${PROJECT}
  * @description:
- */`;
+ */
+
+`;
 }
 
 /**
@@ -55,7 +57,7 @@ async function hasFileHeader(filePath: string): Promise<boolean> {
 /**
  * 处理单个 .jsfl 文件
  */
-async function processJsflFile(filePath: string): Promise<boolean> {
+export async function add_headers_to_file(filePath: string): Promise<boolean> {
     if (await hasFileHeader(filePath)) {
         console.log(`⏭️ 跳过（已存在文件头）: ${basename(filePath)}`);
         return false;
@@ -110,7 +112,7 @@ async function main() {
 
         for await (const filePath of allFiles) {
             total++;
-            if (await processJsflFile(filePath)) {
+            if (await add_headers_to_file(filePath)) {
                 processed++;
             }
         }

@@ -18,7 +18,23 @@
 	 */
 
 	//xjsfl.halted = false;
-	xjsfl.init(this, ['Utils', 'URI', 'File', 'XML', 'String', 'XULControl', 'XULEvent', 'JSFLInterface']);
+	// xjsfl.init(this, ['Utils', 'URI', 'File', 'XML', 'String', 'XULControl', 'XULEvent', 'JSFLInterface']);
+
+// 'Utils', 'XML', 'XULControl', 'XULEvent'
+//  'URI', 'File', 'String'  暂时忽略，报错是在修改
+//  'JSFLInterface' 没有用到
+define([
+	"@xjsfl/XUL/Utils",
+	"@xjsfl/XUL/XULControl",
+	"@xjsfl/XUL/XULEvent",
+	"@xjsfl/XUL/XML",
+	"@xjsfl/XUL/xjsfl"
+
+],function (Utils,XULControl,XULEvent,_,xjsfl) {
+	function loadTemplate() {
+		
+	}
+	
 
 	// --------------------------------------------------------------------------------
 	// constructor
@@ -52,6 +68,7 @@
 
 			// load controls
 				var xml			= xjsfl.file.load('xul/controls.xul', 'template', true);
+				console.log(xml)
 				for each(var node in xml.grid.rows.*)
 				{
 					XUL.templates[node.@template.toString()] = node.copy();
@@ -1868,4 +1885,7 @@
 	// ---------------------------------------------------------------------------------------------------------------
 	// register
 
-		xjsfl.classes.register('XUL', XUL);
+		// xjsfl.classes.register('XUL', XUL);
+		return XUL;
+
+});

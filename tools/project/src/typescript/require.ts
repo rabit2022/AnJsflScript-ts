@@ -2,6 +2,8 @@ import { BUSINESS_OUT, DIST_BUSINESS } from "../ProjectFileDir";
 import { ScanSpec, walk } from "../nodejs/walk";
 import * as fs from "fs/promises";
 import * as path from "path";
+import { add_headers_to_file } from "../headers/addFileHeader";
+import * as console from "node:console";
 
 async function processDefined(fullPath: string) {
     const relPath = path.relative(DIST_BUSINESS, fullPath);
@@ -30,6 +32,13 @@ async function processDefined(fullPath: string) {
 
     await fs.writeFile(targetJsfl, header + replaced, "utf-8");
     console.log(`✅ ${fullPath} -> ${targetJsfl}`);
+
+    await add_headers_to_file(targetJsfl);
+    console.log(`add headers to file ${targetJsfl}`);
+
+    // 增量编译
+    await fs.unlink(fullPath);
+    console.log(`Deleted:  $ {fullPath}`);
 }
 
 /* ---------- 示例 ---------- */

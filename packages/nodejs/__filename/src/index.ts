@@ -1,4 +1,11 @@
-// ========== 工具函数（从 console.ts 复用逻辑）==========
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ========== 工具函数（从 console.ts 复用逻辑）==========
 /**
  * 将 URI 转为本地平台路径（处理 file:///H|/ → H:/）
  */
@@ -28,7 +35,7 @@ Object.defineProperty(window, "__filename", {
         return getFilename();
     },
     configurable: false, // 不能被 delete
-    enumerable: false    // for...in 遍历时不会出现
+    enumerable: false // for...in 遍历时不会出现
 });
 
 Object.defineProperty(window, "__dirname", {
@@ -36,5 +43,5 @@ Object.defineProperty(window, "__dirname", {
         return getDirname();
     },
     configurable: false, // 不能被 delete
-    enumerable: false    // for...in 遍历时不会出现
+    enumerable: false // for...in 遍历时不会出现
 });

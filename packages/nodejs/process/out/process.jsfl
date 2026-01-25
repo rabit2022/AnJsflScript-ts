@@ -51,9 +51,10 @@ __webpack_require__.r(__webpack_exports__);
 function cwd() {
     if (fl.scriptURI) {
         var scriptPath = FLfile.uriToPlatformPath(fl.scriptURI);
-        var lastSlash = Math.max(scriptPath.lastIndexOf('/'), scriptPath.lastIndexOf('\\'));
+        var lastSlash = Math.max(scriptPath.lastIndexOf("/"), scriptPath.lastIndexOf("\\"));
         if (lastSlash === -1)
             return scriptPath;
+        scriptPath = scriptPath.replace(/\\/g, "/");
         return scriptPath.substring(0, lastSlash);
     }
     throw new Error("Could not find script uri");

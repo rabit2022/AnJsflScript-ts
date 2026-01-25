@@ -1,4 +1,11 @@
-﻿/**
+/**
+ * @file: SymbolNameGenerator.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */﻿/**
  * @file SymbolNameGenerator.ts
  * @author 穹的兔兔
  * @email 3101829204@qq.com
@@ -6,9 +13,8 @@
  */
 
 // 假设你有一个 randint 函数（来自你自己的 random 模块）
-import {random} from './random';
-import {padStart} from 'lodash';
-
+import { random } from "./random";
+import { padStart } from "lodash";
 
 /**
  * 随机后缀的位数（例如 001, 123）
@@ -17,7 +23,7 @@ const PAD_DIGITS = 3;
 
 export class SymbolNameGenerator {
     private lastCount: string = this.generateRandomSuffix();
-    private _lastName: string = '';
+    private _lastName: string = "";
 
     /**
      * 生成 N 位随机数字字符串（左补零）
@@ -25,7 +31,7 @@ export class SymbolNameGenerator {
     private generateRandomSuffix(digits: number = PAD_DIGITS): string {
         const num = random.randint(1, Math.pow(10, digits) - 1);
         // return num.toString().padStart(digits, '0');
-        return padStart(num.toString(), digits, '0');
+        return padStart(num.toString(), digits, "0");
     }
 
     /**

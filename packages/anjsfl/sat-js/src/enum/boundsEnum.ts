@@ -1,4 +1,11 @@
 /**
+ * @file: boundsEnum.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ *//**
  * 矩形的四条边（不包含角点或中心）
  */
 export enum RectangleSide {

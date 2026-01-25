@@ -1,5 +1,11 @@
-
-import {findIndex} from 'lodash';
+/**
+ * @file: random.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */import { findIndex } from "lodash";
 
 /**
  * @file Random.ts
@@ -36,7 +42,7 @@ class Random {
             start = 0;
         }
         if (step < 1) {
-            throw new Error('Step must be 1 or greater');
+            throw new Error("Step must be 1 or greater");
         }
         const num = Math.floor(this._random() * Math.ceil((stop - start) / step));
         return start + num * step;
@@ -54,7 +60,7 @@ class Random {
      */
     choice<T>(seq: T[]): T {
         if (seq.length === 0) {
-            throw new Error('Cannot choose from an empty sequence');
+            throw new Error("Cannot choose from an empty sequence");
         }
         return seq[Math.floor(this._random() * seq.length)];
     }
@@ -74,7 +80,7 @@ class Random {
 
         if (weights !== null) {
             if (cumWeights !== null) {
-                throw new Error('Cannot specify both weights and cumWeights');
+                throw new Error("Cannot specify both weights and cumWeights");
             }
             // 构建累积权重
             cumWeights = [];
@@ -87,14 +93,14 @@ class Random {
 
         if (cumWeights !== null) {
             if (cumWeights.length !== population.length) {
-                throw new Error('The number of weights does not match the population');
+                throw new Error("The number of weights does not match the population");
             }
             const result: T[] = [];
             const totalWeight = cumWeights[cumWeights.length - 1];
             for (let i = 0; i < k; i++) {
                 const u = this._random() * totalWeight;
                 // const j = cumWeights.findIndex(cw => cw >= u);
-                const j = findIndex(cumWeights, cw => cw >= u);
+                const j = findIndex(cumWeights, (cw) => cw >= u);
                 result.push(population[j]);
             }
             return result;
@@ -124,7 +130,7 @@ class Random {
      */
     sample<T>(population: T[], k: number): T[] {
         if (k > population.length) {
-            throw new Error('Sample larger than population');
+            throw new Error("Sample larger than population");
         }
         // 创建副本避免修改原数组
         const pool = [...population];
@@ -163,7 +169,7 @@ class Random {
      */
     expovariate(lambd: number): number {
         if (lambd <= 0) {
-            throw new Error('Lambda must be positive');
+            throw new Error("Lambda must be positive");
         }
         return -Math.log(1 - this._random()) / lambd;
     }
@@ -173,7 +179,7 @@ class Random {
      */
     vonmisesvariate(mu: number, kappa: number): number {
         if (kappa <= 0) {
-            throw new Error('Kappa must be positive');
+            throw new Error("Kappa must be positive");
         }
         // 简化实现（实际应使用更精确算法）
         let s = 0;
@@ -192,7 +198,7 @@ class Random {
      */
     paretovariate(alpha: number): number {
         if (alpha <= 0) {
-            throw new Error('Alpha must be positive');
+            throw new Error("Alpha must be positive");
         }
         return 1 / Math.pow(this._random(), 1 / alpha);
     }
@@ -202,7 +208,7 @@ class Random {
      */
     weibullvariate(alpha: number, beta: number): number {
         if (alpha <= 0 || beta <= 0) {
-            throw new Error('Alpha and beta must be positive');
+            throw new Error("Alpha and beta must be positive");
         }
         return alpha * Math.pow(-Math.log(1 - this._random()), 1 / beta);
     }

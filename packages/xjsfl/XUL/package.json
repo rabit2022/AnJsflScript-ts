@@ -4,13 +4,52 @@
   "description": "",
   "declaration": true,
   "declarationMap": true,
-  "main": "src/index.ts",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "import": "./src/XUL.jsfl",
+      "require": "./src/XUL.jsfl",
+      "types": "./types/XUL.d.ts",
+      "default": "./src/XUL.jsfl"
+    },
+    "./XML": {
+      "import": "./src/XML.jsfl",
+      "require": "./src/XML.jsfl",
+      "types": "./types/XML.d.ts",
+      "default": "./src/XML.jsfl"
+    },
+    "./XUL": {
+      "import": "./src/XUL.jsfl",
+      "require": "./src/XUL.jsfl",
+      "types": "./types/XUL.d.ts",
+      "default": "./src/XUL.jsfl"
+    },
+    "./XULControl": {
+      "import": "./src/XULControl.jsfl",
+      "require": "./src/XULControl.jsfl",
+      "types": "./types/XULControl.d.ts",
+      "default": "./src/XULControl.jsfl"
+    },
+    "./XULEvent": {
+      "import": "./src/XULEvent.jsfl",
+      "require": "./src/XULEvent.jsfl",
+      "types": "./types/XULEvent.d.ts",
+      "default": "./src/XULEvent.jsfl"
+    },
+    "./Utils": {
+      "import": "./src/Utils.jsfl",
+      "require": "./src/Utils.jsfl",
+      "types": "./types/Utils.d.ts",
+      "default": "./src/Utils.jsfl"
+    }
+  },
   "//": "npm run build -w @anjsfl/validation",
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "test": "jest",
+    "build": "webpack --config webpack.config.js",
+    "build:test": "webpack --config webpack.test.js"
   },
   "publishConfig": {
     "access": "public"
@@ -19,12 +58,13 @@
     "@types/jest": "30.0.0",
     "@types/node": "25.0.7",
     "jest": "30.2.0",
+    "path-browserify": "1.0.1",
     "strip-json-comments": "3.1.0",
+    "terser-webpack-plugin": "5.3.16",
     "ts-jest": "29.4.6",
     "ts-loader": "9.5.4",
     "typescript": "5.9.3",
     "webpack": "5.104.1",
-    "terser-webpack-plugin": "5.3.16",
     "webpack-cli": "6.0.1"
   }
 }

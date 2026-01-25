@@ -1,7 +1,14 @@
-import {Matrix} from '../types';
-import chroma from 'chroma-js';
-import {BaseFillBuilder} from "../base/BaseFillBuilder";
-import {LinearGradientFill} from "../fills";
+/**
+ * @file: LinearGradientFillBuilder.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */import { Matrix } from "../types";
+import chroma from "chroma-js";
+import { BaseFillBuilder } from "../base/BaseFillBuilder";
+import { LinearGradientFill } from "../fills";
 
 export class LinearGradientFillBuilder extends BaseFillBuilder<LinearGradientFill> {
     constructor() {
@@ -19,13 +26,20 @@ export class LinearGradientFillBuilder extends BaseFillBuilder<LinearGradientFil
         return this;
     }
 
-    public setMatrix(a: number, b: number, c: number, d: number, tx: number, ty: number): this {
-        this.fill.matrix = {a, b, c, d, tx, ty};
+    public setMatrix(
+        a: number,
+        b: number,
+        c: number,
+        d: number,
+        tx: number,
+        ty: number
+    ): this {
+        this.fill.matrix = { a, b, c, d, tx, ty };
         return this;
     }
 
     public setMatrixObject(matrix: Matrix): this {
-        this.fill.matrix = {...matrix};
+        this.fill.matrix = { ...matrix };
         return this;
     }
 
@@ -34,7 +48,7 @@ export class LinearGradientFillBuilder extends BaseFillBuilder<LinearGradientFil
         return this;
     }
 
-    public setOverflow(overflow: 'extend' | 'repeat' | 'reflect'): this {
+    public setOverflow(overflow: "extend" | "repeat" | "reflect"): this {
         this.fill.overflow = overflow;
         return this;
     }

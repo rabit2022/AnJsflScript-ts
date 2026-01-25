@@ -17,8 +17,9 @@
 	 * @instance	control
 	 */
 
-	xjsfl.init(this, ['Utils', 'XUL']);
+	// xjsfl.init(this, ['Utils', 'XUL']);
 
+define(["@xjsfl/XUL/Utils"],function (Utils) {
 	// --------------------------------------------------------------------------------
 	// Constructor
 
@@ -33,7 +34,7 @@
 		{
 			// --------------------------------------------------------------------------------
 			// # Properties
-			
+
 				/**
 				 * @Type	{String}	The node id attribute of the control
 				 * @name	id
@@ -111,7 +112,7 @@
 
 	// --------------------------------------------------------------------------------
 	// Prototype
-	
+
 		//TODO Subclass XULControl with simple and complex types
 		//TODO Add ability to query both indices and values of compound controls
 
@@ -146,7 +147,7 @@
 				get value()
 				{
 					//TODO - see how we can tidy up this settings > open > state chain - it's unweildy!
-					
+
 					// work out if the dialog is open, or closed (existance of settings.dismiss implies it's closed)
 						var settings	= this.getXUL().settings;
 						var open		= settings && settings.dismiss === undefined;
@@ -412,10 +413,10 @@
 				}
 
 		}
-		
+
 	// ---------------------------------------------------------------------------------------------------------------
 	// register
 
-		xjsfl.classes.register('XULControl', XULControl);
-
-
+		// xjsfl.classes.register('XULControl', XULControl);
+		return XULControl;
+});

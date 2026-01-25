@@ -1,10 +1,15 @@
-// fl.ts - 同步文件系统 API（仿 Node.js fs）
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// fl.ts - 同步文件系统 API（仿 Node.js fs）
 
 // lodash
 // import * as _ from "lodash";
-import {includes as _includes,startsWith as _startsWith} from 'lodash';
-
-
+import { includes as _includes, startsWith as _startsWith } from "lodash";
 
 type BufferEncoding = "utf-8";
 

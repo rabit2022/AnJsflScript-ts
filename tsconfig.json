@@ -73,6 +73,18 @@
   "typeRoots": [
     "./node_modules/@types",
     "./types"
+  ],
+
+  "references": [
+    {
+      "path": "packages/anjsfl/validation"
+    },
+    {
+      "path": "packages/anjsfl/sat-js"
+    },
+    {
+      "path": "packages/xjsfl/XUL"
+    }
   ]
 }
 

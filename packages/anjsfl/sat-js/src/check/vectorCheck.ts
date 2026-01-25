@@ -1,4 +1,11 @@
-// ----------------------------------------------------------------------------------------------------
+/**
+ * @file: vectorCheck.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ----------------------------------------------------------------------------------------------------
 // # Wrappers for Vector
 
 import { VectorLike } from "../types/vectorType";
@@ -12,7 +19,9 @@ export function IsVectorLike(obj: unknown): obj is VectorLike {
     return (
         obj !== null &&
         typeof obj === "object" &&
-        'x' in obj && typeof obj.x === "number" &&
-        'y' in obj && typeof obj.y === "number"
+        "x" in obj &&
+        typeof obj.x === "number" &&
+        "y" in obj &&
+        typeof obj.y === "number"
     );
 }

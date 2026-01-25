@@ -1,15 +1,21 @@
-// xjsfl Superdoc
-export {Superdoc} from "./Superdoc";
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// xjsfl Superdoc
+export { Superdoc } from "./Superdoc";
 
 // stroke definations
-export * from './stroke';
+export * from "./stroke";
 // fill
-export * from './fill';
+export * from "./fill";
 // color tranform
-export * from './color-transform';
+export * from "./color-transform";
 
-
-import chroma from 'chroma-js';
+import chroma from "chroma-js";
 
 // 颜色工具函数
 export function parseColor(color: string | number): string {

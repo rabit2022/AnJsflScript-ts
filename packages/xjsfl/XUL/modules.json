@@ -1,0 +1,9 @@
+{
+  "@xjsfl/XUL": "packages/xjsfl/XUL/src/XUL.jsfl",
+  "@xjsfl/XUL/XML": "packages/xjsfl/XUL/src/XML.jsfl",
+  "@xjsfl/XUL/XUL": "packages/xjsfl/XUL/src/XUL.jsfl",
+  "@xjsfl/XUL/XULControl": "packages/xjsfl/XUL/src/XULControl.jsfl",
+  "@xjsfl/XUL/XULEvent": "packages/xjsfl/XUL/src/XULEvent.jsfl",
+  "@xjsfl/XUL/Utils": "packages/xjsfl/XUL/src/Utils.jsfl",
+  "@xjsfl/XUL/xjsfl": "packages/xjsfl/XUL/src/xjsfl.jsfl"
+}

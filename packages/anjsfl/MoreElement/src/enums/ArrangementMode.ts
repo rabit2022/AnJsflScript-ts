@@ -1,12 +1,19 @@
-// enums/ArrangementMode.ts
+/**
+ * @file: ArrangementMode.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// enums/ArrangementMode.ts
 /**
  * 排列模式枚举
  */
 export enum ArrangementMode {
-    NEAT = "neat",          // 整齐排列
+    NEAT = "neat", // 整齐排列
     STAGGERED = "staggered", // 交错排列
-    RANDOM = "random",      // 随机排列
-    GRID = "grid",          // 网格排列
+    RANDOM = "random", // 随机排列
+    GRID = "grid", // 网格排列
     PERSPECTIVE = "perspective" // 透视排列
 
     // 后续可能实现

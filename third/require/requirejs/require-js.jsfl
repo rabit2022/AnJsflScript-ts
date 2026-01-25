@@ -2168,13 +2168,10 @@ var requirejs, require, define;
             //Account for anonymous modules
             context.completeLoad(moduleName);
             try {
+                // var message = '[Requirejs] Flash loading  [' + moduleName + '] at [' + url + ']';
+                // fl.trace(message);
             } catch (e) {
-                var message =
-                    '[Error] Flash loading failed for [' +
-                    moduleName +
-                    '] at [' +
-                    url +
-                    ']';
+                var message = '[Error] Flash loading failed for [' + moduleName + '] at [' + url + ']';
                 fl.trace(message);
                 context.onError(makeError('flash', message, e, [moduleName]));
             }

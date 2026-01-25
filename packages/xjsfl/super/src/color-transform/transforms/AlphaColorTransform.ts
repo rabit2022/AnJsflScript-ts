@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: AlphaColorTransform.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______     __         ______   __  __     ______     ______     ______
 // /\  __ \   /\ \       /\  == \ /\ \_\ \   /\  __ \   /\  ___\   /\  __ \
 // \ \  __ \  \ \ \____  \ \  _-/ \ \  __ \  \ \  __ \  \ \ \____  \ \ \/\ \
@@ -20,14 +27,17 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // AlphaColorTransform
 
-import {BaseColorTransform} from '../base/BaseColorTransform';
-import {IAlphaColorTransform} from '../types';
+import { BaseColorTransform } from "../base/BaseColorTransform";
+import { IAlphaColorTransform } from "../types";
 
-export class AlphaColorTransform extends BaseColorTransform implements IAlphaColorTransform {
-    public mode: 'alpha' = 'alpha';
+export class AlphaColorTransform
+    extends BaseColorTransform
+    implements IAlphaColorTransform
+{
+    public mode: "alpha" = "alpha";
     public alphaPercent: number = 100;
 
     constructor() {
-        super('alpha');
+        super("alpha");
     }
 }

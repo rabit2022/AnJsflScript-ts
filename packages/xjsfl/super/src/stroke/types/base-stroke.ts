@@ -1,4 +1,11 @@
-export interface ShapeFill {
+/**
+ * @file: base-stroke.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */export interface ShapeFill {
     tag: number;
     color: string;
     style: string;

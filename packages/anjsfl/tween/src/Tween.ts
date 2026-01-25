@@ -1,29 +1,39 @@
-
-class TweenSequence {
+/**
+ * @file: Tween.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */class TweenSequence {
     private actions: Action[] = [];
     private loopCount: number = 0; // 外层循环
     private onCompleteCallback: (() => void) | null = null;
 
     // ———————— 公共 API ————————
 
-    doMove(target: { x: number; y: number }, duration: number, ease: EaseFunction = Easing.linear): this {
-        this.actions.push({ type: 'move', target, duration, ease });
+    doMove(
+        target: { x: number; y: number },
+        duration: number,
+        ease: EaseFunction = Easing.linear
+    ): this {
+        this.actions.push({ type: "move", target, duration, ease });
         return this;
     }
 
     doRotate(angle: number, duration: number, ease: EaseFunction = Easing.linear): this {
-        this.actions.push({ type: 'rotate', target: angle, duration, ease });
+        this.actions.push({ type: "rotate", target: angle, duration, ease });
         return this;
     }
 
     goto(frame: number, duration: number = 0): this {
-        this.actions.push({ type: 'gotoFrame', frame, duration });
+        this.actions.push({ type: "gotoFrame", frame, duration });
         return this;
     }
 
     setDelay(time: number): this {
         if (time > 0) {
-            this.actions.push({ type: 'delay', time });
+            this.actions.push({ type: "delay", time });
         }
         return this;
     }
@@ -40,7 +50,7 @@ class TweenSequence {
 
     complete(): this {
         // 立即完成所有动作（跳过动画，直接设终值）
-        console.warn('complete() not fully implemented in skeleton');
+        console.warn("complete() not fully implemented in skeleton");
         return this;
     }
 
@@ -66,7 +76,7 @@ class TweenSequence {
 
     private async executeAction(action: Action, target: TweenTarget): Promise<void> {
         switch (action.type) {
-            case 'move': {
+            case "move": {
                 const start = { x: target.x ?? 0, y: target.y ?? 0 };
                 const { target: end, duration, ease } = action;
                 await this.tween(start, end, duration, ease, (v) => {
@@ -75,7 +85,7 @@ class TweenSequence {
                 });
                 break;
             }
-            case 'rotate': {
+            case "rotate": {
                 const start = target.rotation ?? 0;
                 const { target: end, duration, ease } = action;
                 await this.tween(start, end, duration, ease, (v) => {
@@ -83,7 +93,7 @@ class TweenSequence {
                 });
                 break;
             }
-            case 'gotoFrame': {
+            case "gotoFrame": {
                 // 假设帧是离散状态，这里简化为立即跳转或带 duration 插值
                 if (action.duration <= 0) {
                     // 立即跳转（由外部处理帧逻辑）
@@ -94,10 +104,10 @@ class TweenSequence {
                 await this.sleep(action.duration);
                 break;
             }
-            case 'delay':
+            case "delay":
                 await this.sleep(action.time);
                 break;
-            case 'callback':
+            case "callback":
                 action.fn();
                 break;
             default:
@@ -141,14 +151,15 @@ class TweenSequence {
 
     // 简单插值（支持 number 和 {x,y}）
     private interpolate<T>(from: T, to: T, t: number): T {
-        if (typeof from === 'number' && typeof to === 'number') {
+        if (typeof from === "number" && typeof to === "number") {
             return (from + (to - from) * t) as T;
         }
-        if (typeof from === 'object' && typeof to === 'object' && from && to) {
+        if (typeof from === "object" && typeof to === "object" && from && to) {
             const result: any = {};
             for (const key in from) {
-                if (typeof (from as any)[key] === 'number') {
-                    result[key] = (from as any)[key] + ((to as any)[key] - (from as any)[key]) * t;
+                if (typeof (from as any)[key] === "number") {
+                    result[key] =
+                        (from as any)[key] + ((to as any)[key] - (from as any)[key]) * t;
                 }
             }
             return result as T;

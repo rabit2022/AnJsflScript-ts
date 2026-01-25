@@ -1,10 +1,16 @@
-// types.ts
+/**
+ * @file: types.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// types.ts
 export interface RangeConfig {
     start?: number;
     end?: number;
     step?: number; // 虽然移除了 Linq，但配置接口保留（validateRange 中暂不处理 step）
 }
-
 
 // 简单模拟 DirectionDictionary 结构
 export type DirectionDictionary = { [key: string]: number };
@@ -15,7 +21,6 @@ export interface Result<T> {
     data: T | null;
     message: string;
 }
-
 
 // 解析结果类型
 export interface NumberWithSign {

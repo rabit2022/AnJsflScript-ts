@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: FrameRange.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______   ______     ______     __    __     ______     ______     ______
 // /\  ___\ /\  == \   /\  __ \   /\ "-./  \   /\  ___\   /\  == \   /\  __ \
 // \ \  __\ \ \  __<   \ \  __ \  \ \ \-./\ \  \ \  __\   \ \  __<   \ \  __ \
@@ -16,8 +23,7 @@
 
 import { SObject } from "../../base/SObject";
 import { FrameRangeLike } from "../../types/framerangeType";
-import {CHECK} from "../../check";
-
+import { CHECK } from "../../check";
 
 import IsFrameRangeLike = CHECK.IsFrameRangeLike;
 

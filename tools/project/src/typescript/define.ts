@@ -2,6 +2,8 @@ import { DIST_LIB_CORE, LIB_OUT } from "../ProjectFileDir";
 import { ScanSpec, walk } from "../nodejs/walk";
 import * as fs from "fs/promises";
 import * as path from "path";
+import { add_headers_to_file } from "../headers/addFileHeader";
+import console from "node:console";
 
 async function processDefined(fullPath: string) {
     const relPath = path.relative(DIST_LIB_CORE, fullPath);
@@ -21,6 +23,14 @@ async function processDefined(fullPath: string) {
 
     await fs.writeFile(targetJsfl, header + raw, "utf-8");
     console.log(`✅ ${fullPath} -> ${targetJsfl}`);
+
+    await add_headers_to_file(targetJsfl);
+    console.log(`add headers to file ${targetJsfl}`);
+
+    // 删除fullPath文件
+    // 增量编译
+    await fs.unlink(fullPath);
+    console.log(`Deleted:  $ {fullPath}`);
 }
 
 /* ---------- 示例 ---------- */

@@ -1,7 +1,13 @@
-// @ts-nocheck
+/**
+ * @file: XUL.d.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// @ts-nocheck
 
-declare module "XUL" {
-
+declare module "@xjsfl/XUL" {
     interface TextboxAttr {
         value: string;
         maxlength: number;
@@ -101,12 +107,12 @@ declare module "XUL" {
         accesskey: string;
     }
 
-//     <vbox className="control" groupbox="true">
+    //     <vbox className="control" groupbox="true">
     interface CheckboxGroupAttr {
         groupbox: boolean;
     }
 
-//         <checkbox className="control" id="checkbox[0]" label="Checkbox 1" checked="true" tabindex="" acceskey=""/>
+    //         <checkbox className="control" id="checkbox[0]" label="Checkbox 1" checked="true" tabindex="" acceskey=""/>
     interface CheckboxGroupItemAttr {
         label: string;
         checked: boolean;
@@ -114,7 +120,7 @@ declare module "XUL" {
         accesskey: string;
     }
 
-//     <flash className="control" id="flash" src="assets/flash.swf" width="250" height="100"/>
+    //     <flash className="control" id="flash" src="assets/flash.swf" width="250" height="100"/>
     interface FlashAttr {
         src: string;
         width: number;
@@ -123,9 +129,8 @@ declare module "XUL" {
 
     interface XULAttr {
         name: string;
-        params: string[]
+        params: string[];
     }
-
 
     class XULControl {
         id: string;
@@ -165,9 +170,14 @@ declare module "XUL" {
 
     // interface XUL {
     class XUL {
-        constructor (title?: string): XUL;
-        factory(props: string | Function | XML | URI): XUL;
-        create(props: string | Function, accept?: Function, cancel?: Function, defaults?: Record<string, any>): Record<string, any> | null;
+        constructor(title?: string): XUL;
+        static factory(props?: string | Function | XML | URI): XUL;
+        create(
+            props: string | Function,
+            accept?: Function,
+            cancel?: Function,
+            defaults?: Record<string, any>
+        ): Record<string, any> | null;
         templates: Record<string, XML>;
 
         // Properties
@@ -195,26 +205,111 @@ declare module "XUL" {
         add(str: string): XUL;
 
         // Single controls
-        addTextbox(label: string, id?: string | null, attributes?:TextboxAttr, validation?: any, events?: any): XUL;
-        addSlider(label: string, id?: string | null, values?: any[] | number, attributes?: PopupsliderAttr, validation?: any, events?: any): XUL;
-        addCheckbox(label: string, id?: string | null, attributes?: CheckboxAttr, validation?: any): XUL;
-        addColorchip(label: string, id?: string | null, attributes?:ColorchipAttr, validation?: any, events?: any): XUL;
+        addTextbox(
+            label: string,
+            id?: string | null,
+            attributes?: TextboxAttr,
+            validation?: any,
+            events?: any
+        ): XUL;
+        addSlider(
+            label: string,
+            id?: string | null,
+            values?: any[] | number,
+            attributes?: PopupsliderAttr,
+            validation?: any,
+            events?: any
+        ): XUL;
+        addCheckbox(
+            label: string,
+            id?: string | null,
+            attributes?: CheckboxAttr,
+            validation?: any
+        ): XUL;
+        addColorchip(
+            label: string,
+            id?: string | null,
+            attributes?: ColorchipAttr,
+            validation?: any,
+            events?: any
+        ): XUL;
 
-        addFile(label: string, id?: string | null, attributes?: ChoosefileAttr, validation?: any, events?: any): XUL;
-        addChoosefile(label: string, id?: string | null, attributes?: ChoosefileAttr, validation?: any, events?: any): XUL;
+        addFile(
+            label: string,
+            id?: string | null,
+            attributes?: ChoosefileAttr,
+            validation?: any,
+            events?: any
+        ): XUL;
+        addChoosefile(
+            label: string,
+            id?: string | null,
+            attributes?: ChoosefileAttr,
+            validation?: any,
+            events?: any
+        ): XUL;
 
-        addExpression(label: string, id?: string | null, attributes?: Record<string, any>, validation?: any, events?: any): XUL;
-        addButton(label: string, id?: string | null, attributes?:ButtonAttr, events?: any): XUL;
+        addExpression(
+            label: string,
+            id?: string | null,
+            attributes?: Record<string, any>,
+            validation?: any,
+            events?: any
+        ): XUL;
+        addButton(
+            label: string,
+            id?: string | null,
+            attributes?: ButtonAttr,
+            events?: any
+        ): XUL;
 
         // Multiple-value controls
-        addListbox(label: string, id?: string | null, values?: ListItemAttr[], attributes?: ListboxAttr, validation?: any, events?: any): XUL;
+        addListbox(
+            label: string,
+            id?: string | null,
+            values?: ListItemAttr[],
+            attributes?: ListboxAttr,
+            validation?: any,
+            events?: any
+        ): XUL;
 
-        addDropdown(label: string, id?: string | null, values?: MenuItemAttr[], attributes?: MenulistAttr, validation?: any, events?: any): XUL;
-        addMenuList(label: string, id?: string | null, values?: MenuItemAttr[], attributes?: MenulistAttr, validation?: any, events?: any): XUL;
+        addDropdown(
+            label: string,
+            id?: string | null,
+            values?: MenuItemAttr[],
+            attributes?: MenulistAttr,
+            validation?: any,
+            events?: any
+        ): XUL;
+        addMenuList(
+            label: string,
+            id?: string | null,
+            values?: MenuItemAttr[],
+            attributes?: MenulistAttr,
+            validation?: any,
+            events?: any
+        ): XUL;
 
-        addRadiogroup(label: string, id?: string | null, values?: RadioItemAttr[], attributes?: RadiogroupAttr): XUL;
-        addCheckboxgroup(label: string, id?: string | null, values?: CheckboxGroupItemAttr[], attributes?: CheckboxGroupAttr, validation?: any): XUL;
-        addTargetlist(label: string, id?: string | null, attributes?: TargetlistAttr, validation?: any, events?: any): XUL;
+        addRadiogroup(
+            label: string,
+            id?: string | null,
+            values?: RadioItemAttr[],
+            attributes?: RadiogroupAttr
+        ): XUL;
+        addCheckboxgroup(
+            label: string,
+            id?: string | null,
+            values?: CheckboxGroupItemAttr[],
+            attributes?: CheckboxGroupAttr,
+            validation?: any
+        ): XUL;
+        addTargetlist(
+            label: string,
+            id?: string | null,
+            attributes?: TargetlistAttr,
+            validation?: any,
+            events?: any
+        ): XUL;
         addProperty(id: string): XUL;
         addXML(xml: XML | string, breakOutOfRows?: boolean, dontParse?: boolean): XUL;
 
@@ -225,7 +320,13 @@ declare module "XUL" {
         addScript(script: Function | string): XUL;
 
         // Custom controls
-        setFlash(uriOrPath: string, width?: number, height?: number, data?: any, properties?: string[]): XUL;
+        setFlash(
+            uriOrPath: string,
+            width?: number,
+            height?: number,
+            data?: any,
+            properties?: string[]
+        ): XUL;
         setFlashData(data: any): XUL;
         setXML(xml: XML | string): XUL;
 
@@ -239,7 +340,12 @@ declare module "XUL" {
         setTitle(title: string): XUL;
 
         // Event handling
-        addEvent(ids: string | string[], types: string | string[], callback: Function, scope?: any): XUL;
+        addEvent(
+            ids: string | string[],
+            types: string | string[],
+            callback: Function,
+            scope?: any
+        ): XUL;
         addEvent(type: string, callback: Function): XUL;
         setEventScope(scope: any): XUL;
         handleEvent(type: string, id?: string): void;

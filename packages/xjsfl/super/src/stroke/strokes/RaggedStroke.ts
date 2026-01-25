@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: RaggedStroke.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______     ______     ______     ______     ______     _____     ______
 // /\  == \   /\  __ \   /\  ___\   /\  ___\   /\  ___\   /\  __-.  /\  ___\
 // \ \  __<   \ \  __ \  \ \ \__ \  \ \ \__ \  \ \  __\   \ \ \/\ \ \ \___  \
@@ -14,15 +21,22 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // RaggedStroke
 // 锯齿状线样式
-import {BaseStroke} from '../base/BaseStroke';
-import {IRaggedStroke} from '../types';
+import { BaseStroke } from "../base/BaseStroke";
+import { IRaggedStroke } from "../types";
 
 export class RaggedStroke extends BaseStroke implements IRaggedStroke {
-    public pattern: 'solid' | 'simple' | 'random' | 'dotted' | 'random dotted' | 'triple dotted' | 'random triple dotted' = 'solid';
-    public waveHeight: 'flat' | 'wavy' | 'very wavy' | 'wild' = 'flat';
-    public waveLength: 'very short' | 'short' | 'medium' | 'long' = 'short';
+    public pattern:
+        | "solid"
+        | "simple"
+        | "random"
+        | "dotted"
+        | "random dotted"
+        | "triple dotted"
+        | "random triple dotted" = "solid";
+    public waveHeight: "flat" | "wavy" | "very wavy" | "wild" = "flat";
+    public waveLength: "very short" | "short" | "medium" | "long" = "short";
 
     constructor() {
-        super('ragged');
+        super("ragged");
     }
 }

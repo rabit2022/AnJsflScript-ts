@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: Bounds.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______     ______     ______     ______   ______     __   __     ______
 // /\  == \   /\  ___\   /\  ___\   /\__  _\ /\  __ \   /\ "-.\ \   /\  ___\
 // \ \  __<   \ \  __\   \ \ \____  \/_/\ \/ \ \  __ \  \ \ \-.  \  \ \ \__ \
@@ -502,7 +509,12 @@ export class Bounds extends SObject implements BoundsLike {
         }
     }
 
-    static fromCenter(centerX: number, centerY: number, width: number, height: number): Bounds;
+    static fromCenter(
+        centerX: number,
+        centerY: number,
+        width: number,
+        height: number
+    ): Bounds;
 
     static fromCenter(center: Vector | VectorLike, size: Size | SizeLike): Bounds;
 
@@ -591,7 +603,7 @@ export class Bounds extends SObject implements BoundsLike {
         return findBoundingRectangle(elements);
     }
 
-    static fromElement(element:FlashElement): Bounds {
+    static fromElement(element: FlashElement): Bounds {
         return new Bounds(element);
     }
 }

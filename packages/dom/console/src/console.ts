@@ -8,7 +8,6 @@
  * @see: https://github.com/davestewart/xJSFL
  */
 
-
 // ========================================================================
 // 环境常量
 // ========================================================================
@@ -41,7 +40,7 @@ enum LogLevel {
 /**
  * 左侧填充字符串（兼容 JSFL）
  */
-function padLeft(input: any, width: number, padChar: String = '0') {
+function padLeft(input: any, width: number, padChar: String = "0") {
     // padChar = padChar || '0';
     var str = String(input);
     while (str.length < width) str = padChar + str;
@@ -56,7 +55,6 @@ function pathResolve(target: string, base: string): string {
         var scriptPath = uriToPath(target);
         var basePath = uriToPath(base);
 
-
         // 非子目录
         if (scriptPath.indexOf(basePath) !== 0) {
             fl.trace(`⚠️ 脚本不在项目目录下,可能在事件循环中 ${scriptPath},${basePath}`);
@@ -64,8 +62,7 @@ function pathResolve(target: string, base: string): string {
         }
 
         // 最后补充"/"
-        if (basePath.charAt(basePath.length - 1) !== '/') basePath += '/';
-
+        if (basePath.charAt(basePath.length - 1) !== "/") basePath += "/";
 
         return scriptPath.substring(basePath.length);
     } catch (e) {
@@ -73,33 +70,41 @@ function pathResolve(target: string, base: string): string {
     }
 }
 
-
 /**
  * 格式化消息（支持多参数）
  */
 function formatMessage(args: IArguments): string {
-    return Array.prototype.slice.call(args).join(' ');
+    return Array.prototype.slice.call(args).join(" ");
 }
 
 /**
  * 写入日志到文件
  */
-function writeToLog(message: string, type: string = LogLevel.INFO, level: number | boolean = 0): void {
+function writeToLog(
+    message: string,
+    type: string = LogLevel.INFO,
+    level: number | boolean = 0
+): void {
     // 参数标准化
     const logType: string = typeof type === "string" ? type : LogLevel.INFO;
-    const logLevel: number = typeof level === "number" ? level : (level === true ? 1 : 0);
+    const logLevel: number = typeof level === "number" ? level : level === true ? 1 : 0;
 
     // 时间：YYYY-MM-DD HH:mm:ss.SSS
     const now = new Date();
     var asctime =
-        now.getFullYear() + "-" +
-        padLeft(now.getMonth() + 1, 2) + "-" +
-        padLeft(now.getDate(), 2) + " " +
-        padLeft(now.getHours(), 2) + ":" +
-        padLeft(now.getMinutes(), 2) + ":" +
-        padLeft(now.getSeconds(), 2) + "." +
+        now.getFullYear() +
+        "-" +
+        padLeft(now.getMonth() + 1, 2) +
+        "-" +
+        padLeft(now.getDate(), 2) +
+        " " +
+        padLeft(now.getHours(), 2) +
+        ":" +
+        padLeft(now.getMinutes(), 2) +
+        ":" +
+        padLeft(now.getSeconds(), 2) +
+        "." +
         padLeft(now.getMilliseconds(), 3);
-
 
     // 日志级别（左对齐 8 字符）
     let levelname = (logType || "INFO").toUpperCase();
@@ -185,7 +190,7 @@ class EnhancedConsole {
     clear(type?: string): void {
         // @ts-ignore
         fl.outputPanel.clear();
-        const name = (type === LogLevel.FILE) ? "file" : "main";
+        const name = type === LogLevel.FILE ? "file" : "main";
         FLfile.remove(`${LOG_FOLDER}/${name}.log`);
         trace(name + ".log reset");
     }
@@ -210,7 +215,7 @@ class EnhancedConsole {
         }
         const duration = Date.now() - this.timers[label];
         delete this.timers[label];
-        this.info('Timer "' + label + '": ' + duration + 'ms');
+        this.info('Timer "' + label + '": ' + duration + "ms");
     }
 
     // ========================================================================
@@ -219,7 +224,7 @@ class EnhancedConsole {
 
     count(label: string = "default"): void {
         this.counters[label] = (this.counters[label] || 0) + 1;
-        this.info('"' + label + '" was called ' + this.counters[label] + ' times.');
+        this.info('"' + label + '" was called ' + this.counters[label] + " times.");
     }
 
     countReset(label: string = "default"): void {
@@ -249,14 +254,14 @@ class EnhancedConsole {
      * 获取所有计时器
      */
     getTimers(): Record<string, number> {
-        return {...this.timers};
+        return { ...this.timers };
     }
 
     /**
      * 获取所有计数器
      */
     getCounters(): Record<string, number> {
-        return {...this.counters};
+        return { ...this.counters };
     }
 
     /**
@@ -280,4 +285,4 @@ const console = new EnhancedConsole();
 (window as any).console = console;
 
 // 只导出 console 变量
-export {console};
+export { console };

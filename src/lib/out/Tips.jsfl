@@ -1,4 +1,11 @@
-// 这个文件由脚本 Tips.ts 自动生成，任何手动修改都将会被覆盖.
+/**
+ * @file: Tips.jsfl
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:06
+ * @project: AnJsflScript-ts
+ * @description:
+ */// 这个文件由脚本 Tips.ts 自动生成，任何手动修改都将会被覆盖.
 
 define(["require", "exports"], function (require, exports) {
     "use strict";

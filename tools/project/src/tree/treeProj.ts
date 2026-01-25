@@ -88,20 +88,6 @@ function tree(
 }
 
 /**
- * 向上查找包含 .git 的仓库根目录
- */
-function findRepoRoot(start: string): string {
-    let current = path.resolve(start);
-    while (current !== path.dirname(current)) {
-        if (fs.existsSync(path.join(current, ".git"))) {
-            return current;
-        }
-        current = path.dirname(current);
-    }
-    return path.resolve(start); // fallback
-}
-
-/**
  * 主函数
  */
 function main(): void {
@@ -113,10 +99,11 @@ function main(): void {
             : __filename;
     const __dirname = path.dirname(scriptPath);
 
-    const startDir = $ProjectFileDir$;
-    console.log("Searching repo root from:", startDir);
+    // const startDir = $ProjectFileDir$;
+    // console.log("Searching repo root from:", startDir);
 
-    const repoRoot = findRepoRoot(startDir);
+    // const repoRoot = findRepoRoot(startDir);
+    const repoRoot = $ProjectFileDir$;
     console.log("Repository root found at:", repoRoot);
 
     // 加载忽略规则

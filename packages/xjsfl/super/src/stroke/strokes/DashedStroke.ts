@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: DashedStroke.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  _____     ______     ______     __  __     ______     _____     ______
 // /\  __-.  /\  __ \   /\  ___\   /\ \_\ \   /\  ___\   /\  __-.  /\  ___\
 // \ \ \/\ \ \ \  __ \  \ \___  \  \ \  __ \  \ \  __\   \ \ \/\ \ \ \___  \
@@ -15,14 +22,14 @@
 // DashedStroke
 // 虚线样式
 
-import {BaseStroke} from '../base/BaseStroke';
-import {IDashedStroke} from '../types';
+import { BaseStroke } from "../base/BaseStroke";
+import { IDashedStroke } from "../types";
 
 export class DashedStroke extends BaseStroke implements IDashedStroke {
     public dash1: number = 1;
     public dash2: number = 1;
 
     constructor() {
-        super('dashed');
+        super("dashed");
     }
 }

@@ -1,4 +1,11 @@
-import { SObject } from "../../base/SObject";
+/**
+ * @file: CornerRect.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */import { SObject } from "../../base/SObject";
 import { CornerRectLike } from "../../types/cornerrectType";
 import { Vector } from "../Vector";
 

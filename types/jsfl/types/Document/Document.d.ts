@@ -1394,7 +1394,7 @@ interface FlashDocument {
      * // ... (more complex examples)
      * ```
      */
-    selection: any[];
+    selection: Element[];
 
     /**
      * *Dropped in Adobe Animate.*
@@ -2485,6 +2485,8 @@ interface FlashDocument {
      * ```
      */
     addNewPublishProfile(profileName?: string): number;
+
+
 }
 
 

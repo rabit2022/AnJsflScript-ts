@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: NoneColorTransform.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  __   __     ______     __   __     ______     ______     ______     __
 // /\ "-.\ \   /\  __ \   /\ "-.\ \   /\  ___\   /\  ___\   /\  __ \   /\ \
 // \ \ \-.  \  \ \ \/\ \  \ \ \-.  \  \ \  __\   \ \ \____  \ \ \/\ \  \ \ \____
@@ -20,11 +27,14 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // NoneColorTransform
 
-import {BaseColorTransform} from '../base/BaseColorTransform';
-import {INoneColorTransform} from '../types';
+import { BaseColorTransform } from "../base/BaseColorTransform";
+import { INoneColorTransform } from "../types";
 
-export class NoneColorTransform extends BaseColorTransform implements INoneColorTransform {
-    public mode: 'none' = 'none';
+export class NoneColorTransform
+    extends BaseColorTransform
+    implements INoneColorTransform
+{
+    public mode: "none" = "none";
     public colorAlphaAmount: number = 0;
     public colorAlphaPercent: number = 100;
     public colorRedAmount: number = 0;
@@ -35,6 +45,6 @@ export class NoneColorTransform extends BaseColorTransform implements INoneColor
     public colorBluePercent: number = 100;
 
     constructor() {
-        super('none');
+        super("none");
     }
 }

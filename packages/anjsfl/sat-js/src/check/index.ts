@@ -1,4 +1,11 @@
-// src/check/check.ts
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// src/check/check.ts
 import { IsBoundsLike as _IsBoundsLike } from "./boundsCheck";
 import { IsVectorLike as _IsVectorLike } from "./vectorCheck";
 import { IsSizeLike as _IsSizeLike } from "./sizeCheck";

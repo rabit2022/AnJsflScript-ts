@@ -36,10 +36,8 @@ require.config({
         "Events": "src/lib/out/Events",
         "test": "src/lib/out/test",
         "Tips": "src/lib/out/Tips",
-        "your-new-module-name": "packages/xjsfl/XUL/src/XULEvent",
         "@xjsfl/UI": "packages/xjsfl/UI/out/UI",
-        "Template": "packages/xjsfl/template/Template",
-        "Table": "packages/xjsfl/Table/Table",
+        "@xjsfl/super": "packages/xjsfl/super/out/super",
         "@xjsfl/Events": "packages/xjsfl/Events/out/Events",
         "@xjsfl/Constants": "packages/xjsfl/Constants/out/Constants",
         "setTimeout": "packages/polyfills/setTimeout/out/setTimeout",
@@ -50,8 +48,18 @@ require.config({
         "assert": "packages/nodejs/assert/assert",
         "console": "packages/dom/console/out/console",
         "@anjsfl/validation": "packages/anjsfl/validation/out/validation",
+        "@anjsfl/tween": "packages/anjsfl/tween/src/dp/Tween",
         "@anjsfl/sat": "packages/anjsfl/sat-js/out/SAT",
-        "@jsfl/random": "packages/anjsfl/random/out/random"
+        "@anjsfl/random": "packages/anjsfl/random/out/random",
+        "@anjsfl/more-element": "packages/anjsfl/MoreElement/out/more-element",
+        "@anjsfl/Context": "packages/anjsfl/Context/src/flash/Element/ElementTransform",
+        "@xjsfl/XUL": "packages/xjsfl/XUL/src/XUL",
+        "@xjsfl/XUL/XML": "packages/xjsfl/XUL/src/XML",
+        "@xjsfl/XUL/XUL": "packages/xjsfl/XUL/src/XUL",
+        "@xjsfl/XUL/XULControl": "packages/xjsfl/XUL/src/XULControl",
+        "@xjsfl/XUL/XULEvent": "packages/xjsfl/XUL/src/XULEvent",
+        "@xjsfl/XUL/Utils": "packages/xjsfl/XUL/src/Utils",
+        "@xjsfl/XUL/xjsfl": "packages/xjsfl/XUL/src/xjsfl"
     },
 // endregion REQUIRE MODULES PATHS
 

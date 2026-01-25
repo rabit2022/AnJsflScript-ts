@@ -1,7 +1,6 @@
 function checkXMLPanel() {
     // var panel = getXMLPanel();
-    var panel =
-        __WEBPACK_COMPATIBILITY_XML_PANEL_RELATIVE_PATH__("./01.虾仁摇头.xml");
+    var panel = __WEBPACK_COMPATIBILITY_XML_PANEL_RELATIVE_PATH__("./01.虾仁摇头.xml");
     if (panel === null) return null;
 
     var shakeIntensity = parseNumber(
@@ -19,12 +18,8 @@ function checkXMLPanel() {
     return { shakeIntensity: shakeIntensity, headDirection: headDirection };
 }
 
-
-
 // 配置参数
 var config = checkXMLPanel();
 if (config === null) return;
 var shakeIntensity = config.shakeIntensity;
 var headDirection = config.headDirection;
-
-

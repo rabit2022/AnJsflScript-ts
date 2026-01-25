@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: LinearGradientFill.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  __         __     __   __     ______     ______     ______     ______     ______     ______
 // /\ \       /\ \   /\ "-.\ \   /\  ___\   /\  __ \   /\  == \   /\  ___\   /\  == \   /\  __ \
 // \ \ \____  \ \ \  \ \ \-.  \  \ \  __\   \ \  __ \  \ \  __<   \ \ \__ \  \ \  __<   \ \  __ \
@@ -15,8 +22,8 @@
 // LinearGradientFill
 // 线性渐变填充
 
-import {BaseFill} from '../base/BaseFill';
-import {ILinearGradientFill, Matrix, OverflowType} from '../types';
+import { BaseFill } from "../base/BaseFill";
+import { ILinearGradientFill, Matrix, OverflowType } from "../types";
 
 export class LinearGradientFill extends BaseFill implements ILinearGradientFill {
     public colorArray: (string | number)[] = [];
@@ -30,13 +37,13 @@ export class LinearGradientFill extends BaseFill implements ILinearGradientFill 
         ty: 0
     };
     public linearRGB: boolean = false;
-    public overflow: OverflowType = 'extend';
+    public overflow: OverflowType = "extend";
 
     constructor() {
-        super('linearGradient');
+        super("linearGradient");
     }
 
     public toString(): string {
-        return '[class LinearGradientFill]';
+        return "[class LinearGradientFill]";
     }
 }

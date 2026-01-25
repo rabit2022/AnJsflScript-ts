@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: SolidFill.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______     ______     __         __     _____     ______   __     __         __
 // /\  ___\   /\  __ \   /\ \       /\ \   /\  __-.  /\  ___\ /\ \   /\ \       /\ \
 // \ \___  \  \ \ \/\ \  \ \ \____  \ \ \  \ \ \/\ \ \ \  __\ \ \ \  \ \ \____  \ \ \____
@@ -8,13 +15,13 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // SolidFill
 
-import {BaseFill} from '../base/BaseFill';
-import {ISolidFill} from '../types';
+import { BaseFill } from "../base/BaseFill";
+import { ISolidFill } from "../types";
 
 export class SolidFill extends BaseFill implements ISolidFill {
-    public color: string = '#000000';
+    public color: string = "#000000";
 
     constructor() {
-        super('solid');
+        super("solid");
     }
 }

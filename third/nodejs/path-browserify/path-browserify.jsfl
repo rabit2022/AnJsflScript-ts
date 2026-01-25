@@ -22,14 +22,14 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-define(function () {
+define(['process'],function (process) {
     'use strict';
 
     function assertPath(path) {
         if (typeof path !== 'string') {
             throw new TypeError(
-                'Path must be a string. Received ' + JSON.stringify(path)
-                // 'Path must be a string. Received ' + path
+                // 'Path must be a string. Received ' + JSON.stringify(path)
+                'Path must be a string. Received ' + path
             );
         }
     }
@@ -120,6 +120,7 @@ define(function () {
 
             for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
                 var path;
+                console.log(i)
                 if (i >= 0) path = arguments[i];
                 else {
                     if (cwd === undefined) cwd = process.cwd();

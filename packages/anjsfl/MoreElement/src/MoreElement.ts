@@ -1,21 +1,27 @@
-// MoreElement.ts
-import {ArrangementResult, ArrangementStrategy} from './strategies/ArrangementStrategy';
+/**
+ * @file: MoreElement.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// MoreElement.ts
+import { ArrangementResult, ArrangementStrategy } from "./strategies/ArrangementStrategy";
 import {
     GridArrangement,
     NeatArrangement,
     PerspectiveArrangement,
     PerspectiveConfig,
     StaggeredArrangement
-} from './strategies';
-import {ArrangementMode} from './enums/ArrangementMode';
-import {SAT, SAT_T} from '@anjsfl/sat';
+} from "./strategies";
+import { ArrangementMode } from "./enums/ArrangementMode";
+import { SAT, SAT_T } from "@anjsfl/sat";
 
 type Vector_T = SAT_T.Vector;
 type Scale_T = SAT_T.Scale;
 type Bounds_T = SAT_T.Bounds;
 
-const {Vector, Bounds, Size} = SAT;
-
+const { Vector, Bounds, Size } = SAT;
 
 export class MoreElement {
     // 静态属性
@@ -37,11 +43,7 @@ export class MoreElement {
     constructor(element: Element);
     constructor(element: Element, h: number, v: number);
     constructor(element: Element, vec: Vector_T);
-    constructor(
-        element: Element,
-        arg2?: number | Vector_T,
-        arg3?: number
-    ) {
+    constructor(element: Element, arg2?: number | Vector_T, arg3?: number) {
         this.element = element;
         this.position = new Vector(element.x, element.y);
 
@@ -55,7 +57,7 @@ export class MoreElement {
         } else if (arg2 instanceof Vector) {
             horizontalSpacing = arg2.x;
             verticalSpacing = arg2.y;
-        } else if (typeof arg2 === 'number' && typeof arg3 === 'number') {
+        } else if (typeof arg2 === "number" && typeof arg3 === "number") {
             horizontalSpacing = arg2;
             verticalSpacing = arg3;
         }
@@ -89,8 +91,14 @@ export class MoreElement {
         ] as const;
 
         this.strategyMap.set(ArrangementMode.NEAT, new NeatArrangement(...strategyArgs));
-        this.strategyMap.set(ArrangementMode.STAGGERED, new StaggeredArrangement(...strategyArgs));
-        this.strategyMap.set(ArrangementMode.PERSPECTIVE, new PerspectiveArrangement(...strategyArgs));
+        this.strategyMap.set(
+            ArrangementMode.STAGGERED,
+            new StaggeredArrangement(...strategyArgs)
+        );
+        this.strategyMap.set(
+            ArrangementMode.PERSPECTIVE,
+            new PerspectiveArrangement(...strategyArgs)
+        );
         this.strategyMap.set(ArrangementMode.GRID, new GridArrangement(...strategyArgs));
         // 后续可以添加更多策略
     }
@@ -130,7 +138,7 @@ export class MoreElement {
      * 快捷方法 - 透视排列
      */
     public perspective(x: number, y: number, horizontalCount: number): ArrangementResult {
-        const config: PerspectiveConfig = {horizontalCount};
+        const config: PerspectiveConfig = { horizontalCount };
         return this.arrange(x, y, ArrangementMode.PERSPECTIVE, config);
     }
 
@@ -146,10 +154,10 @@ export class MoreElement {
      */
     public executeGridOperation(): void {
         const strategy = this.strategyMap.get(ArrangementMode.GRID) as GridArrangement;
-        if (strategy && typeof (strategy as any).executeGridOperation === 'function') {
+        if (strategy && typeof (strategy as any).executeGridOperation === "function") {
             (strategy as any).executeGridOperation();
         } else {
-            console.warn('Grid operation is not available');
+            console.warn("Grid operation is not available");
         }
     }
 
@@ -207,15 +215,18 @@ export function createMoreElement(element: Element): MoreElement;
 export function createMoreElement(element: Element, h: number, v: number): MoreElement;
 export function createMoreElement(element: Element, vec: Vector_T): MoreElement;
 
-
-export function createMoreElement(element: Element, arg2?: number | Vector_T, arg3?: number): MoreElement {
-    console.log('Creating MoreElement with arguments:', element, arg2, arg3);
+export function createMoreElement(
+    element: Element,
+    arg2?: number | Vector_T,
+    arg3?: number
+): MoreElement {
+    console.log("Creating MoreElement with arguments:", element, arg2, arg3);
 
     if (arg2 === undefined && arg3 === undefined) {
         return new MoreElement(element);
     } else if (arg2 instanceof Vector) {
         return new MoreElement(element, arg2);
-    } else if (typeof arg2 === 'number' && typeof arg3 === 'number') {
+    } else if (typeof arg2 === "number" && typeof arg3 === "number") {
         return new MoreElement(element, arg2, arg3);
     }
 

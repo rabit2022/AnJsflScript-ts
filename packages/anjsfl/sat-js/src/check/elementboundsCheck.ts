@@ -1,4 +1,11 @@
-import { ElementBoundsLike } from "../types/elementboundsType";
+/**
+ * @file: elementboundsCheck.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */import { ElementBoundsLike } from "../types/elementboundsType";
 
 export function IsElementBoundsLike(obj: unknown): obj is ElementBoundsLike {
     return (

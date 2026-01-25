@@ -1,9 +1,19 @@
-import {BaseStroke} from './BaseStroke';
-import {IBaseStroke, IStrokeBuilder} from '../types';
-import chroma from 'chroma-js';
-import {SObject} from "../../base/SObject";
+/**
+ * @file: BaseStrokeBuilder.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */import { BaseStroke } from "./BaseStroke";
+import { IBaseStroke, IStrokeBuilder } from "../types";
+import chroma from "chroma-js";
+import { SObject } from "../../base/SObject";
 
-export abstract class BaseStrokeBuilder<T extends BaseStroke> extends SObject implements IStrokeBuilder<IBaseStroke> {
+export abstract class BaseStrokeBuilder<T extends BaseStroke>
+    extends SObject
+    implements IStrokeBuilder<IBaseStroke>
+{
     protected stroke: T;
 
     constructor(stroke: T) {
@@ -16,7 +26,7 @@ export abstract class BaseStrokeBuilder<T extends BaseStroke> extends SObject im
         return this;
     }
 
-    public setCapType(capType: 'none' | 'round' | 'square'): this {
+    public setCapType(capType: "none" | "round" | "square"): this {
         this.stroke.capType = capType;
         return this;
     }
@@ -56,12 +66,12 @@ export abstract class BaseStrokeBuilder<T extends BaseStroke> extends SObject im
         return this;
     }
 
-    public setScaleType(scaleType: 'normal' | 'horizontal' | 'vertical' | 'none'): this {
+    public setScaleType(scaleType: "normal" | "horizontal" | "vertical" | "none"): this {
         this.stroke.scaleType = scaleType;
         return this;
     }
 
-    public setJoinType(joinType: 'miter' | 'round' | 'bevel'): this {
+    public setJoinType(joinType: "miter" | "round" | "bevel"): this {
         this.stroke.joinType = joinType;
         return this;
     }

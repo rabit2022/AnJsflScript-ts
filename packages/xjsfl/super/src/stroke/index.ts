@@ -1,5 +1,12 @@
-// 导出所有类型
-export * from './types';
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// 导出所有类型
+export * from "./types";
 
 import {
     DashedStrokeBuilder,
@@ -10,7 +17,15 @@ import {
     SolidStrokeBuilder,
     StippleStrokeBuilder
 } from "./builders";
-import {DashedStroke, DottedStroke, HatchedStroke, NoStroke, RaggedStroke, SolidStroke, StippleStroke} from "./strokes";
+import {
+    DashedStroke,
+    DottedStroke,
+    HatchedStroke,
+    NoStroke,
+    RaggedStroke,
+    SolidStroke,
+    StippleStroke
+} from "./strokes";
 
 // 创建常量（内部使用）
 const STROKES_MAP = {
@@ -32,7 +47,6 @@ const STROKE_BUILDERS_MAP = {
     StippleStrokeBuilder,
     HatchedStrokeBuilder
 };
-
 
 // 导出为对象常量（推荐方式）
 export const STROKES = {
@@ -115,4 +129,3 @@ export function createStrokeBuilder(type: string) {
 
     return new BuilderClass();
 }
-

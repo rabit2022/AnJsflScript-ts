@@ -1,38 +1,42 @@
-// BaseParser.ts
-import chroma from 'chroma-js';
-import {DirectionDictionary, NumberWithSign, RangeConfig, Result} from './types';
-import {generateRange} from "./utils";
-
+/**
+ * @file: BasePaser.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// BaseParser.ts
+import chroma from "chroma-js";
+import { DirectionDictionary, NumberWithSign, RangeConfig, Result } from "./types";
+import { generateRange } from "./utils";
 
 // --- 颜色解析 (保持原样，已符合要求) ---
 // 修改返回类型为 Result
 export function parseColor(inputColor: string | null, alertMsg?: string): Result<string> {
     if (!inputColor) {
         // 修改：返回失败结果，而不是 alert
-        return {success: false, data: null, message: alertMsg || "颜色输入无效"};
+        return { success: false, data: null, message: alertMsg || "颜色输入无效" };
     }
 
     try {
         const color = chroma(inputColor);
         if (!chroma.valid(color)) {
-            return {success: false, data: null, message: alertMsg || "颜色格式不正确"};
+            return { success: false, data: null, message: alertMsg || "颜色格式不正确" };
         }
-        return {success: true, data: color.hex(), message: "成功"};
+        return { success: true, data: color.hex(), message: "成功" };
     } catch (error) {
-        return {success: false, data: null, message: alertMsg || "颜色解析异常"};
+        return { success: false, data: null, message: alertMsg || "颜色解析异常" };
     }
 }
 
 // --- 字符串解析 (保持原样) ---
 // 修改返回类型为 Result
 export function parseString(inputStr: string | null, alertMsg?: string): Result<string> {
-    if (inputStr === null || inputStr.trim() === '') {
-        return {success: false, data: null, message: alertMsg || "字符串不能为空"};
+    if (inputStr === null || inputStr.trim() === "") {
+        return { success: false, data: null, message: alertMsg || "字符串不能为空" };
     }
-    return {success: true, data: inputStr.trim(), message: "成功"};
+    return { success: true, data: inputStr.trim(), message: "成功" };
 }
-
-
 
 /**
  * 解析并验证输入的数字字符串（包含范围和步进校验）
@@ -41,26 +45,37 @@ export function parseString(inputStr: string | null, alertMsg?: string): Result<
  * @param rangeConfig 范围配置 {start, end, step}
  * @returns Result<number>
  */
-export function parseNumber(input: string, errorMessage: string = "请输入合法的数字。", rangeConfig?: RangeConfig): Result<number> {
+export function parseNumber(
+    input: string,
+    errorMessage: string = "请输入合法的数字。",
+    rangeConfig?: RangeConfig
+): Result<number> {
     // 1. 基础校验：空值与格式
     // 注意：这里保持严格，空字符串或 null 直接报错
     // 如果你的需求是 "有range时允许空值做特殊处理"，请在这里修改逻辑
-    if (!input || input.trim() === '') {
-        return {success: false, data: null, message: errorMessage || "输入不能为空"};
+    if (!input || input.trim() === "") {
+        return { success: false, data: null, message: errorMessage || "输入不能为空" };
     }
 
     const numericValue = Number(input);
     if (isNaN(numericValue)) {
-        return {success: false, data: null, message: errorMessage || "无法解析为有效数字"};
+        return {
+            success: false,
+            data: null,
+            message: errorMessage || "无法解析为有效数字"
+        };
     }
 
     // 2. 高级校验：范围与步进
     if (rangeConfig) {
-        const {start: min, end: max, step} = rangeConfig;
+        const { start: min, end: max, step } = rangeConfig;
 
         // A. 尝试解析 "min, max, step" 格式
         // 如果用户输入了逗号分隔的三个数字，尝试将其解析为一个新的范围
-        const parts = input.trim().split(',').map(s => s.trim());
+        const parts = input
+            .trim()
+            .split(",")
+            .map((s) => s.trim());
         if (parts.length === 3) {
             const [p1, p2, p3] = parts;
             const val1 = parseFloat(p1);
@@ -83,12 +98,16 @@ export function parseNumber(input: string, errorMessage: string = "请输入合�
         }
 
         // B. 边界校验 (Min/Max) - 保持不变
-        if ((min !== undefined && numericValue < min) ||
-            (max !== undefined && numericValue > max)) {
+        if (
+            (min !== undefined && numericValue < min) ||
+            (max !== undefined && numericValue > max)
+        ) {
             const rangeDesc = [
                 min !== undefined ? `最小值 ${min}` : "",
                 max !== undefined ? `最大值 ${max}` : ""
-            ].filter(Boolean).join("，");
+            ]
+                .filter(Boolean)
+                .join("，");
             return {
                 success: false,
                 data: null,
@@ -103,7 +122,7 @@ export function parseNumber(input: string, errorMessage: string = "请输入合�
             const validNumbers = generateRange(rangeStart, rangeEnd, step);
 
             const valueStr = numericValue.toFixed(10);
-            const isValidStep = validNumbers.some(num => num.toFixed(10) === valueStr);
+            const isValidStep = validNumbers.some((num) => num.toFixed(10) === valueStr);
 
             if (!isValidStep) {
                 // 修改后的逻辑：提示用户可以输入具体的数字，或者输入 range 格式
@@ -117,17 +136,17 @@ export function parseNumber(input: string, errorMessage: string = "请输入合�
                     数值不符合步进规则。
                     1. 请从合法值中选择，例如: ${sampleValues}...
                     2. 或输入范围格式: "${rangeExample}" (表示从${min ?? 0}到${max ?? 10}，步长为${step})
-                `.replace(/\s+/g, ' ').trim()
+                `
+                        .replace(/\s+/g, " ")
+                        .trim()
                 };
             }
         }
     }
 
-
     // 3. 校验通过
-    return {success: true, data: numericValue, message: "成功"};
+    return { success: true, data: numericValue, message: "成功" };
 }
-
 
 /**
  * 解析输入的方向字符串为数字
@@ -135,9 +154,12 @@ export function parseNumber(input: string, errorMessage: string = "请输入合�
  * @param customDict 可选的自定义方向字典，用于覆盖默认值
  * @returns Result<number>
  */
-export function parseDirection(input: string, customDict?: DirectionDictionary): Result<number> {
+export function parseDirection(
+    input: string,
+    customDict?: DirectionDictionary
+): Result<number> {
     // 1. 定义默认字典
-    const defaultDict: DirectionDictionary = {"右": 1, "左": -1, " ": -1};
+    const defaultDict: DirectionDictionary = { 右: 1, 左: -1, " ": -1 };
 
     // 2. 合并字典：使用传入的字典，否则使用默认
     // 这里直接赋值，意图更清晰
@@ -157,7 +179,7 @@ export function parseDirection(input: string, customDict?: DirectionDictionary):
 
     if (!(trimmedInput in dict)) {
         // 动态生成允许的值列表，基于当前实际使用的字典
-        const validKeys = Object.keys(dict).join('/');
+        const validKeys = Object.keys(dict).join("/");
         return {
             success: false,
             data: null,
@@ -173,7 +195,6 @@ export function parseDirection(input: string, customDict?: DirectionDictionary):
     };
 }
 
-
 /**
  * 核心解析逻辑：解析带符号的数字
  * @param input 用户输入的字符串
@@ -182,7 +203,7 @@ export function parseDirection(input: string, customDict?: DirectionDictionary):
 export function parseNumberWithSignCore(input: string): Result<NumberWithSign> {
     // 1. 空值检查
     if (!input.trim()) {
-        return {success: false, data: null, message: "输入不能为空"};
+        return { success: false, data: null, message: "输入不能为空" };
     }
 
     // 2. 纯数字检查 (包括 123, -123, +123 这种原生格式)
@@ -194,7 +215,7 @@ export function parseNumberWithSignCore(input: string): Result<NumberWithSign> {
         const hasSign = num !== 0 ? Math.sign(num) !== 1 : input.trim().startsWith("+");
         return {
             success: true,
-            data: {num: intNum, hasSign},
+            data: { num: intNum, hasSign },
             message: "解析成功"
         };
     }
@@ -203,14 +224,21 @@ export function parseNumberWithSignCore(input: string): Result<NumberWithSign> {
     const trimmed = input.trim();
     if (trimmed.startsWith("+")) {
         const value = parseInt(trimmed.slice(1), 10);
-        if (isNaN(value)) return {success: false, data: null, message: "无效的数字"};
-        return {success: true, data: {num: value, hasSign: true}, message: "解析成功"};
+        if (isNaN(value)) return { success: false, data: null, message: "无效的数字" };
+        return {
+            success: true,
+            data: { num: value, hasSign: true },
+            message: "解析成功"
+        };
     } else if (trimmed.startsWith("-")) {
         const value = parseInt(trimmed.slice(1), 10);
-        if (isNaN(value)) return {success: false, data: null, message: "无效的数字"};
-        return {success: true, data: {num: -value, hasSign: true}, message: "解析成功"};
+        if (isNaN(value)) return { success: false, data: null, message: "无效的数字" };
+        return {
+            success: true,
+            data: { num: -value, hasSign: true },
+            message: "解析成功"
+        };
     }
 
-    return {success: false, data: null, message: "无法解析为有效数字"};
+    return { success: false, data: null, message: "无法解析为有效数字" };
 }
-

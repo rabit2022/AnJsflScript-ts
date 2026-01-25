@@ -11,7 +11,6 @@ const MODULE_NAME = "fs";
 region中间的部分，正则匹配到，修改为正确的MODULE_NAME
  */
 
-
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -55,7 +54,8 @@ if (!fs.existsSync(webpackPath)) {
     let content = fs.readFileSync(webpackPath, "utf8");
 
     // 使用正则匹配 // region MODULE_NAME ... // endregion MODULE_NAME 之间的内容
-    const regionRegex = /(\/\/ region MODULE_NAME\s*const MODULE_NAME\s*=\s*["'][^"']*["'];\s*\/\/ endregion MODULE_NAME)/gs;
+    const regionRegex =
+        /(\/\/ region MODULE_NAME\s*const MODULE_NAME\s*=\s*["'][^"']*["'];\s*\/\/ endregion MODULE_NAME)/gs;
 
     if (!regionRegex.test(content)) {
         console.error("❌ 未在 webpack.config.js 中找到指定的 MODULE_NAME region 注释块");

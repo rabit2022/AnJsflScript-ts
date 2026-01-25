@@ -1,11 +1,17 @@
-// events.ts
+/**
+ * @file: events.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// events.ts
 export abstract class Event {
     constructor(
         public readonly type: string,
         public readonly subtype: string,
         public readonly time: Date = new Date()
-    ) {
-    }
+    ) {}
 }
 
 export class DocumentEvent extends Event {
@@ -16,23 +22,21 @@ export class DocumentEvent extends Event {
     }
 
     toString(): string {
-        return `[object DocumentEvent type="${this.type}" name="${this.document?.name ?? ''}" id="${this.document?.id ?? ''}"]`;
+        return `[object DocumentEvent type="${this.type}" name="${this.document?.name ?? ""}" id="${this.document?.id ?? ""}"]`;
     }
 
     static toString(): string {
-        return '[class DocumentEvent]';
+        return "[class DocumentEvent]";
     }
 
-
     // 静态常量（挂载到类上）
-    static readonly PUBLISH = 'prePublish';
-    static readonly PUBLISHED = 'postPublish';
-    static readonly SAVED = 'documentSaved';
-    static readonly NEW = 'documentNew';
-    static readonly OPENED = 'documentOpened';
-    static readonly CLOSED = 'documentClosed';
-    static readonly CHANGED = 'documentChanged';
-
+    static readonly PUBLISH = "prePublish";
+    static readonly PUBLISHED = "postPublish";
+    static readonly SAVED = "documentSaved";
+    static readonly NEW = "documentNew";
+    static readonly OPENED = "documentOpened";
+    static readonly CLOSED = "documentClosed";
+    static readonly CHANGED = "documentChanged";
 }
 
 export class LayerEvent extends Event {
@@ -43,18 +47,18 @@ export class LayerEvent extends Event {
         : null;
 
     constructor() {
-        super(LayerEvent.CHANGED, 'changed');
+        super(LayerEvent.CHANGED, "changed");
     }
 
     toString(): string {
-        return `[object LayerEvent timeline="${this.timeline?.name ?? ''}" layer="${this.layer?.name ?? ''}"]`;
+        return `[object LayerEvent timeline="${this.timeline?.name ?? ""}" layer="${this.layer?.name ?? ""}"]`;
     }
 
     static toString(): string {
-        return '[class LayerEvent]';
+        return "[class LayerEvent]";
     }
 
-    static readonly CHANGED = 'layerChanged';
+    static readonly CHANGED = "layerChanged";
 }
 
 export class FrameEvent extends Event {
@@ -68,18 +72,18 @@ export class FrameEvent extends Event {
         : null;
 
     constructor() {
-        super(FrameEvent.CHANGED, 'changed');
+        super(FrameEvent.CHANGED, "changed");
     }
 
     toString(): string {
-        return `[object FrameEvent timeline="${this.timeline?.name ?? ''}" layer="${this.layer?.name ?? ''}" frame="${this.timeline?.currentFrame ?? ''}"]`;
+        return `[object FrameEvent timeline="${this.timeline?.name ?? ""}" layer="${this.layer?.name ?? ""}" frame="${this.timeline?.currentFrame ?? ""}"]`;
     }
 
     static toString(): string {
-        return '[class FrameEvent]';
+        return "[class FrameEvent]";
     }
 
-    static readonly CHANGED = 'frameChanged';
+    static readonly CHANGED = "frameChanged";
 }
 
 export class MouseEvent extends Event {
@@ -90,7 +94,7 @@ export class MouseEvent extends Event {
     public readonly y: number = fl.tools.penLoc.y;
 
     constructor() {
-        super(MouseEvent.MOVE, 'move');
+        super(MouseEvent.MOVE, "move");
     }
 
     toString(): string {
@@ -98,8 +102,8 @@ export class MouseEvent extends Event {
     }
 
     static toString(): string {
-        return '[class MouseEvent]';
+        return "[class MouseEvent]";
     }
 
-    static readonly MOVE = 'mouseMove';
+    static readonly MOVE = "mouseMove";
 }

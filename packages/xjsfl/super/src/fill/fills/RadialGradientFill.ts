@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: RadialGradientFill.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______     ______     _____     __     ______     __         ______     ______     ______
 // /\  == \   /\  __ \   /\  __-.  /\ \   /\  __ \   /\ \       /\  ___\   /\  == \   /\  __ \
 // \ \  __<   \ \  __ \  \ \ \/\ \ \ \ \  \ \  __ \  \ \ \____  \ \ \__ \  \ \  __<   \ \  __ \
@@ -15,8 +22,8 @@
 // RadialGradientFill
 // 径向渐变填充
 
-import {BaseFill} from '../base/BaseFill';
-import {IRadialGradientFill, Matrix, OverflowType} from '../types';
+import { BaseFill } from "../base/BaseFill";
+import { IRadialGradientFill, Matrix, OverflowType } from "../types";
 
 export class RadialGradientFill extends BaseFill implements IRadialGradientFill {
     public colorArray: (string | number)[] = [];
@@ -31,13 +38,13 @@ export class RadialGradientFill extends BaseFill implements IRadialGradientFill 
     };
     public focalPoint: number = 0;
     public linearRGB: boolean = false;
-    public overflow: OverflowType = 'extend';
+    public overflow: OverflowType = "extend";
 
     constructor() {
-        super('radialGradient');
+        super("radialGradient");
     }
 
     public toString(): string {
-        return '[class RadialGradientFill]';
+        return "[class RadialGradientFill]";
     }
 }

@@ -1,13 +1,31 @@
-// 导入所有填充类
-import {BitmapFill, LinearGradientFill, NoFill, RadialGradientFill, SolidFill} from './fills';
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// 导入所有填充类
+import {
+    BitmapFill,
+    LinearGradientFill,
+    NoFill,
+    RadialGradientFill,
+    SolidFill
+} from "./fills";
 
 // 导入所有构建器
-import {BitmapFillBuilder, LinearGradientFillBuilder, RadialGradientFillBuilder, SolidFillBuilder} from './builders';
+import {
+    BitmapFillBuilder,
+    LinearGradientFillBuilder,
+    RadialGradientFillBuilder,
+    SolidFillBuilder
+} from "./builders";
 
 // 导入基类
 
 // 导出所有类型
-export * from './types';
+export * from "./types";
 
 // 创建常量（内部使用）
 const FILLS_MAP = {
@@ -91,4 +109,3 @@ export function createFillBuilder(type: string) {
 
     return new BuilderClass();
 }
-

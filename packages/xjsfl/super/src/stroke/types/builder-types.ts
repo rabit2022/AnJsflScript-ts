@@ -1,4 +1,11 @@
-import {IBaseStroke, IDashedStroke, IDottedStroke, IHatchedStroke, IRaggedStroke, IStippleStroke} from './stroke-types';
+/**
+ * @file: builder-types.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */import {IBaseStroke, IDashedStroke, IDottedStroke, IHatchedStroke, IRaggedStroke, IStippleStroke} from './stroke-types';
 
 export interface IStrokeBuilder<T> {
     setBreakAtCorners(breakAtCorners: boolean): this;

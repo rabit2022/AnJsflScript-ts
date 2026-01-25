@@ -1,9 +1,14 @@
-// --- 测试开始 ---
-import {clearTimeout, setTimeout} from "../src";
+/**
+ * @file: test_more.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// --- 测试开始 ---
+import { clearTimeout, setTimeout } from "../src";
 
 console.log("%c🚀 开始执行 setTimeout 模拟器压力测试", "color: blue; font-weight: bold;");
-
-
 
 // 4. 压力测试：大量任务
 console.log("%c--- 测试 4: 压力测试 (连续创建10个任务)", "color: green;");

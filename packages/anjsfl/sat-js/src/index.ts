@@ -1,4 +1,11 @@
-import { CHECK } from "./check";
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */import { CHECK } from "./check";
 import { ENUM } from "./enum";
 import { TYPE } from "./types";
 import { BoundsConverter } from "./core/Rectangle/BoundsConverter";
@@ -28,10 +35,6 @@ import { Circle as _Circle } from "./core/Circle";
 import { LineSegment as _LineSegment } from "./core/LineSegment";
 import { FrameRange as _FrameRange } from "./core/FrameRange/FrameRange";
 import { FrameRangeList as _FrameRangeList } from "./core/FrameRange/FrameRangeList";
-
-
-
-
 
 // 2. 聚合到 SAT 命名空间（使用 const 赋值）
 export namespace SAT {
@@ -64,7 +67,6 @@ export namespace SAT {
     export const LS = _LineSegment; // LineSegment
     export const C = _Circle; // Circle
 }
-
 
 // 3. 导出类型别名 - 在同一文件中添加
 export namespace SAT_T {

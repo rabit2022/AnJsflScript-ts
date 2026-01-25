@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: AdvancedColorTransform.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______     _____     __   __   ______     __   __     ______     ______     _____     ______
 // /\  __ \   /\  __-.  /\ \ / /  /\  __ \   /\ "-.\ \   /\  ___\   /\  ___\   /\  __-.  /\  ___\
 // \ \  __ \  \ \ \/\ \ \ \ \'/   \ \  __ \  \ \ \-.  \  \ \ \____  \ \  __\   \ \ \/\ \ \ \ \____
@@ -20,11 +27,14 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // AdvancedColorTransform
 
-import {BaseColorTransform} from '../base/BaseColorTransform';
-import {IAdvancedColorTransform} from '../types';
+import { BaseColorTransform } from "../base/BaseColorTransform";
+import { IAdvancedColorTransform } from "../types";
 
-export class AdvancedColorTransform extends BaseColorTransform implements IAdvancedColorTransform {
-    public mode: 'advanced' = 'advanced';
+export class AdvancedColorTransform
+    extends BaseColorTransform
+    implements IAdvancedColorTransform
+{
+    public mode: "advanced" = "advanced";
     public colorAlphaAmount: number = 0;
     public colorAlphaPercent: number = 100;
     public colorRedAmount: number = 0;
@@ -35,6 +45,6 @@ export class AdvancedColorTransform extends BaseColorTransform implements IAdvan
     public colorBluePercent: number = 100;
 
     constructor() {
-        super('advanced');
+        super("advanced");
     }
 }

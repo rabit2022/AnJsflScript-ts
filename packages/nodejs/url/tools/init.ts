@@ -1,4 +1,11 @@
-/*
+/**
+ * @file: init.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ *//*
 修改模块名字
 建立模块名字变量：MODULE_NAME，在当前文件中手动修改
 1.确定PROJECT路径，向上查找，有package.json的位置
@@ -10,7 +17,6 @@ const MODULE_NAME = "fs";
 
 region中间的部分，正则匹配到，修改为正确的MODULE_NAME
  */
-
 
 import fs from "fs";
 import path from "path";
@@ -55,7 +61,8 @@ if (!fs.existsSync(webpackPath)) {
     let content = fs.readFileSync(webpackPath, "utf8");
 
     // 使用正则匹配 // region MODULE_NAME ... // endregion MODULE_NAME 之间的内容
-    const regionRegex = /(\/\/ region MODULE_NAME\s*const MODULE_NAME\s*=\s*["'][^"']*["'];\s*\/\/ endregion MODULE_NAME)/gs;
+    const regionRegex =
+        /(\/\/ region MODULE_NAME\s*const MODULE_NAME\s*=\s*["'][^"']*["'];\s*\/\/ endregion MODULE_NAME)/gs;
 
     if (!regionRegex.test(content)) {
         console.error("❌ 未在 webpack.config.js 中找到指定的 MODULE_NAME region 注释块");

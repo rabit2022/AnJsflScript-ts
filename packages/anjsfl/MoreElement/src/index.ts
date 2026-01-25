@@ -1,4 +1,10 @@
-// index.ts
-export {MoreElement, createMoreElement} from './MoreElement';
-export {ArrangementMode} from './enums/ArrangementMode';
-
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// index.ts
+export { MoreElement, createMoreElement } from "./MoreElement";
+export { ArrangementMode } from "./enums/ArrangementMode";

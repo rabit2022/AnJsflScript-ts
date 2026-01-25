@@ -1,8 +1,15 @@
-// Bounds.test.ts
+/**
+ * @file: Bounds.test.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// Bounds.test.ts
 
 // === Mock global fl (for default constructor) ===
 
-import {SAT} from "../src";
+import { SAT } from "../src";
 
 import { RelativePosition } from "../src/enum/vectorEnums";
 import { RectanglePart } from "../src/enum/boundsEnum";

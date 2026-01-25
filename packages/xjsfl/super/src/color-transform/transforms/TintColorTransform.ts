@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: TintColorTransform.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______   __     __   __     ______   ______     ______     __         ______     ______
 // /\__  _\ /\ \   /\ "-.\ \   /\__  _\ /\  ___\   /\  __ \   /\ \       /\  __ \   /\  == \
 // \/_/\ \/ \ \ \  \ \ \-.  \  \/_/\ \/ \ \ \____  \ \ \/\ \  \ \ \____  \ \ \/\ \  \ \  __<
@@ -14,17 +21,20 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // TintColorTransform
 
-import {BaseColorTransform} from '../base/BaseColorTransform';
-import {ITintColorTransform} from '../types';
+import { BaseColorTransform } from "../base/BaseColorTransform";
+import { ITintColorTransform } from "../types";
 
-export class TintColorTransform extends BaseColorTransform implements ITintColorTransform {
-    public mode: 'tint' = 'tint';
+export class TintColorTransform
+    extends BaseColorTransform
+    implements ITintColorTransform
+{
+    public mode: "tint" = "tint";
     public tintPercent: number = 0;
     public tintRed: number = 0;
     public tintGreen: number = 0;
     public tintBlue: number = 0;
 
     constructor() {
-        super('tint');
+        super("tint");
     }
 }

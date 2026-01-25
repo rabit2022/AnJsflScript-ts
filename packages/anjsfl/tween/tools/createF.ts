@@ -1,4 +1,11 @@
-// generate-ts-files.js
+/**
+ * @file: createF.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// generate-ts-files.js
 const fs = require("fs");
 const path = require("path");
 

@@ -1,10 +1,16 @@
-// strategies/ArrangementStrategy.ts
-import { SAT_T } from '@anjsfl/sat';
+/**
+ * @file: ArrangementStrategy.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// strategies/ArrangementStrategy.ts
+import { SAT_T } from "@anjsfl/sat";
 
 type Vector_T = SAT_T.Vector;
 type Scale_T = SAT_T.Scale;
 type Bounds_T = SAT_T.Bounds;
-
 
 export interface ArrangementResult {
     position: Vector_T;

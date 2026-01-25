@@ -17,10 +17,11 @@
 	 * @instance	xml
 	 */
 
+define(['@xjsfl/XUL/Utils'],function(Utils){
 (function xml()
 {
 	// includes
-		xjsfl.init(this, ['Utils']);
+	// 	xjsfl.init(this, ['Utils']);
 
 	// --------------------------------------------------------------------------------
 	// RegExps
@@ -654,4 +655,4 @@ var xml =
 */
 	
 	
-
+});

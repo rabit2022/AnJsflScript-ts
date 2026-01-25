@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: BaseColorTransform.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  ______     ______     ______     ______     ______     ______     __         ______     ______
 // /\  == \   /\  __ \   /\  ___\   /\  ___\   /\  ___\   /\  __ \   /\ \       /\  __ \   /\  == \
 // \ \  __<   \ \  __ \  \ \___  \  \ \  __\   \ \ \____  \ \ \/\ \  \ \ \____  \ \ \/\ \  \ \  __<
@@ -13,13 +20,13 @@
 //
 // ------------------------------------------------------------------------------------------------------------------------
 // BaseColorTransform
-import {IBaseColorTransform} from '../types';
-import {SObject} from "../../base/SObject";
+import { IBaseColorTransform } from "../types";
+import { SObject } from "../../base/SObject";
 
 export abstract class BaseColorTransform extends SObject implements IBaseColorTransform {
-    public mode: 'none' | 'tint' | 'brightness' | 'alpha' | 'advanced';
+    public mode: "none" | "tint" | "brightness" | "alpha" | "advanced";
 
-    constructor(mode: 'none' | 'tint' | 'brightness' | 'alpha' | 'advanced') {
+    constructor(mode: "none" | "tint" | "brightness" | "alpha" | "advanced") {
         super();
         this.mode = mode;
     }

@@ -16,6 +16,7 @@
 	 * @overview	A XUL Event class to pass parameters to event callbacks
 	 * @instance	event
 	 */
+define(function () {
 
 	// --------------------------------------------------------------------------------
 	// Constructor
@@ -59,6 +60,7 @@
 	// ---------------------------------------------------------------------------------------------------------------
 	// register
 
-		xjsfl.classes.register('XULEvent', XULEvent);
-
+		// xjsfl.classes.register('XULEvent', XULEvent);
+		return XULEvent;
+});
 

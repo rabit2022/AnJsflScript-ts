@@ -16,28 +16,16 @@
     "Creativity",
     "Design"
   ],
-  "//": "运行npm intall 即可把子模块安装到node modules中",
   "workspaces": [
     "packages/**/*",
     "tools/project/*"
   ],
-  "references": [
-    {
-      "path": "packages/anjsfl/validation"
-    },
-    {
-      "path": "packages/anjsfl/sat-js"
-    }
-  ],
+
   "scripts": {
-    "//": "添加文件头",
     "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
     "generate_config": "tsx ./tools/project/src/require/generate_config.ts",
-    "build:require": "tsc && tsx ./tools/project/src/typescript/require.ts",
-    "build:define": "tsc && tsx ./tools/project/src/typescript/define.ts",
-    "build": "npm run build:require && npm run build:define",
+    "build": "npx tsc && tsx ./tools/project/src/typescript/build_all.ts",
     "clearAll": "tsx ./tools/project/clean/CleanAll.ts",
-    "ReBuild": "npm run clearAll && npm run build",
     "addHeaders": "tsx ./tools/project/src/headers/addFileHeader.ts"
   },
   "devDependencies": {
@@ -63,8 +51,5 @@
     "type": "git",
     "url": "https://github.com/rabit2022/AnJsflScript-ts"
   },
-  "readmeFilename": "README.md",
-  "dependencies": {
-    "lodash-es": "4.17.22"
-  }
+  "readmeFilename": "README.md"
 }

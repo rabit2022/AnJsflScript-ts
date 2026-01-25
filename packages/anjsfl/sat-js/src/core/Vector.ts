@@ -1,4 +1,11 @@
-// ------------------------------------------------------------------------------------------------------------------------
+/**
+ * @file: Vector.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// ------------------------------------------------------------------------------------------------------------------------
 //  __   __   ______     ______     ______   ______     ______
 // /\ \ / /  /\  ___\   /\  ___\   /\__  _\ /\  __ \   /\  == \
 // \ \ \'/   \ \  __\   \ \ \____  \/_/\ \/ \ \ \/\ \  \ \  __<
@@ -49,7 +56,7 @@ export class Vector extends SObject implements VectorLike {
      * @param angle The angle to rotate (in radians)
      * @return {Vector} This for chaining.
      */
-    rotate(angle:number) {
+    rotate(angle: number) {
         var x = this["x"];
         var y = this["y"];
         this["x"] = x * Math.cos(angle) - y * Math.sin(angle);

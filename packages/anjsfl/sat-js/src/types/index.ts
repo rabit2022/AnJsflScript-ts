@@ -1,4 +1,11 @@
-// src/type.ts
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */// src/type.ts
 
 // 1. 导入所有类型（使用 type-only import）
 import type { XYWHRectLike as _XYWHRectLike } from "./xywhrectType";

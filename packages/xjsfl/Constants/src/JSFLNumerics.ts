@@ -1,4 +1,11 @@
-function getRate() {
+/**
+ * @file: JSFLNumerics.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/25 21:10
+ * @project: AnJsflScript-ts
+ * @description:
+ */function getRate() {
     var doc = fl.getDocumentDOM(); //文档
 
     const frameRate = doc!.frameRate; //帧率
