@@ -1,12 +1,20 @@
 interface AnJsflScript {
     importFlashScripts: (scripts: string[]) => void;
-    $ProjectFileDir$: string;
-    FOLDERS: {
-        Log: string;
-        Cache: string;
-        AsciiArtLibrary: string;
-        Save: string;
-        Scripts: string;
+    // $ProjectFileDir$: string;
+    app: {
+        platform: string,
+        version: number,
+        name: string,
+        os: {
+            mac: boolean,
+            win: boolean
+        }
+    };
+    folders: {
+        AnJsflScript: string,
+        Log: string,
+        flash: string,
+        swf: string
     };
 }
 

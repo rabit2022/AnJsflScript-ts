@@ -1,0 +1,25 @@
+[
+  {
+    "lineNumber": 6,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\stack\\error-stack-parser-3.0.0\\test\\test.jsfl",
+    "functionName": "Main",
+    "source": "Main()",
+    "args": []
+  },
+  {
+    "lineNumber": 22,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\stack\\error-stack-parser-3.0.0\\test\\test.jsfl",
+    "functionName": "() => {}",
+    "source": "([object Object])",
+    "args": [
+      "[object Object]"
+    ]
+  },
+  {
+    "lineNumber": 1,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\stack\\error-stack-parser-3.0.0\\test\\test.jsfl",
+    "functionName": "() => {}",
+    "args": []
+  }
+]
+

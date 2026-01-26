@@ -1,0 +1,39 @@
+
+Error("Something went wrong!")@:0
+Main()@H:\project\js\AnJsflScript-ts\third\stack\error-stack-parser-3.0.0\test\test.jsfl:6
+([object Object])@H:\project\js\AnJsflScript-ts\third\stack\error-stack-parser-3.0.0\test\test.jsfl:22
+("_@r7",(function (ErrorStackParser) {
+function Main() {try {throw new Error("Something went wrong!");} catch (err) {console.log(err.stack);const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}
+
+Main();}),[object Array],(void 0))@H:\project\js\AnJsflScript-ts\third\require\requirejs\require-js.jsfl:1852
+()@H:\project\js\AnJsflScript-ts\third\require\requirejs\require-js.jsfl:944
+()@H:\project\js\AnJsflScript-ts\third\require\requirejs\require-js.jsfl:1290
+([object Array],(function (ErrorStackParser) {
+function Main() {try {throw new Error("Something went wrong!");} catch (err) {console.log(err.stack);const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}
+
+Main();}),(void 0),[object Object])@H:\project\js\AnJsflScript-ts\third\require\requirejs\require-js.jsfl:834
+()@H:\project\js\AnJsflScript-ts\third\require\requirejs\require-js.jsfl:1592
+
+
+((function () {intakeDefines();
+requireMod = getModule(makeModuleMap(null, relMap));
+requireMod.skipMap = options.skipMap;
+requireMod.init(deps, callback, errback, {enabled: true});
+checkLoaded();}))
+@H:\project\js\AnJsflScript-ts\third\require\requirejs\require-js.jsfl:1986
+
+
+localRequire([object Array],(function (ErrorStackParser) {
+function Main() {try {throw new Error("Something went wrong!");} catch (err) {console.log(err.stack);const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}
+
+Main();}),(void 0))@H:\project\js\AnJsflScript-ts\third\require\requirejs\require-js.jsfl:1580
+
+
+
+
+
+([object Array],(function (ErrorStackParser) {
+function Main() {try {throw new Error("Something went wrong!");} catch (err) {console.log(err.stack);const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}
+
+Main();}))@H:\project\js\AnJsflScript-ts\third\require\requirejs\require-js.jsfl:1963
+@H:\project\js\AnJsflScript-ts\third\stack\error-stack-parser-3.0.0\test\test.jsfl:1

@@ -68,7 +68,7 @@ define([
 
 			// load controls
 				var xml			= xjsfl.file.load('xul/controls.xul', 'template', true);
-				console.log(xml)
+				// console.log(xml)
 				for each(var node in xml.grid.rows.*)
 				{
 					XUL.templates[node.@template.toString()] = node.copy();
@@ -1635,6 +1635,7 @@ define([
 				{
 					// --------------------------------------------------------------------------------
 					// force a document open if none is
+						var $dom =fl.getDocumentDOM();
 
 						if( ! $dom )
 						{

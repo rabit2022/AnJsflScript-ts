@@ -66,7 +66,7 @@ var __assign = (undefined && undefined.__assign) || function () {
 };
 var trace = fl.trace;
 var uriToPath = FLfile.uriToPlatformPath;
-var LOG_FOLDER = AnJsflScript.FOLDERS.Log;
+var LOG_FOLDER = AnJsflScript.folders.Log;
 var MAIN_LOG = "".concat(LOG_FOLDER, "/main.log");
 var FILE_LOG = "".concat(LOG_FOLDER, "/file.log");
 var LogLevel;
@@ -80,7 +80,7 @@ var LogLevel;
     LogLevel["FILE"] = "FILE";
 })(LogLevel || (LogLevel = {}));
 function padLeft(input, width, padChar) {
-    if (padChar === void 0) { padChar = '0'; }
+    if (padChar === void 0) { padChar = "0"; }
     var str = String(input);
     while (str.length < width)
         str = padChar + str;
@@ -94,8 +94,8 @@ function pathResolve(target, base) {
             fl.trace("\u26A0\uFE0F \u811A\u672C\u4E0D\u5728\u9879\u76EE\u76EE\u5F55\u4E0B,\u53EF\u80FD\u5728\u4E8B\u4EF6\u5FAA\u73AF\u4E2D ".concat(scriptPath, ",").concat(basePath));
             return scriptPath;
         }
-        if (basePath.charAt(basePath.length - 1) !== '/')
-            basePath += '/';
+        if (basePath.charAt(basePath.length - 1) !== "/")
+            basePath += "/";
         return scriptPath.substring(basePath.length);
     }
     catch (e) {
@@ -103,27 +103,21 @@ function pathResolve(target, base) {
     }
 }
 function formatMessage(args) {
-    return Array.prototype.slice.call(args).join(' ');
+    return Array.prototype.slice.call(args).join(" ");
 }
 function writeToLog(message, type, level) {
     if (type === void 0) { type = LogLevel.INFO; }
     if (level === void 0) { level = 0; }
     var logType = typeof type === "string" ? type : LogLevel.INFO;
-    var logLevel = typeof level === "number" ? level : (level === true ? 1 : 0);
+    var logLevel = typeof level === "number" ? level : level === true ? 1 : 0;
     var now = new Date();
-    var asctime = now.getFullYear() + "-" +
-        padLeft(now.getMonth() + 1, 2) + "-" +
-        padLeft(now.getDate(), 2) + " " +
-        padLeft(now.getHours(), 2) + ":" +
-        padLeft(now.getMinutes(), 2) + ":" +
-        padLeft(now.getSeconds(), 2) + "." +
-        padLeft(now.getMilliseconds(), 3);
+    var asctime = now.getFullYear() + "-" + padLeft(now.getMonth() + 1, 2) + "-" + padLeft(now.getDate(), 2) + " " + padLeft(now.getHours(), 2) + ":" + padLeft(now.getMinutes(), 2) + ":" + padLeft(now.getSeconds(), 2) + "." + padLeft(now.getMilliseconds(), 3);
     var levelname = (logType || "INFO").toUpperCase();
     while (levelname.length < 8) {
         levelname += " ";
     }
     var scriptURI = fl.scriptURI;
-    var baseDir = AnJsflScript.$ProjectFileDir$;
+    var baseDir = AnJsflScript.folders.AnJsflScript;
     var short_path = pathResolve(scriptURI, baseDir);
     var logLine = "".concat(asctime, " | ").concat(levelname, " | ").concat(short_path, " | ").concat(message);
     FLfile.write(MAIN_LOG, logLine + "\n", "append");
@@ -200,7 +194,7 @@ var EnhancedConsole = (function () {
     };
     EnhancedConsole.prototype.clear = function (type) {
         fl.outputPanel.clear();
-        var name = (type === LogLevel.FILE) ? "file" : "main";
+        var name = type === LogLevel.FILE ? "file" : "main";
         FLfile.remove("".concat(LOG_FOLDER, "/").concat(name, ".log"));
         trace(name + ".log reset");
     };
@@ -221,12 +215,12 @@ var EnhancedConsole = (function () {
         }
         var duration = Date.now() - this.timers[label];
         delete this.timers[label];
-        this.info('Timer "' + label + '": ' + duration + 'ms');
+        this.info('Timer "' + label + '": ' + duration + "ms");
     };
     EnhancedConsole.prototype.count = function (label) {
         if (label === void 0) { label = "default"; }
         this.counters[label] = (this.counters[label] || 0) + 1;
-        this.info('"' + label + '" was called ' + this.counters[label] + ' times.');
+        this.info('"' + label + '" was called ' + this.counters[label] + " times.");
     };
     EnhancedConsole.prototype.countReset = function (label) {
         if (label === void 0) { label = "default"; }

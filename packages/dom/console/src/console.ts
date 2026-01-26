@@ -15,7 +15,7 @@
 const trace = fl.trace;
 const uriToPath = FLfile.uriToPlatformPath;
 
-const LOG_FOLDER = AnJsflScript.FOLDERS.Log;
+const LOG_FOLDER = AnJsflScript.folders.Log;
 const MAIN_LOG = `${LOG_FOLDER}/main.log`;
 const FILE_LOG = `${LOG_FOLDER}/file.log`;
 
@@ -91,20 +91,7 @@ function writeToLog(
 
     // 时间：YYYY-MM-DD HH:mm:ss.SSS
     const now = new Date();
-    var asctime =
-        now.getFullYear() +
-        "-" +
-        padLeft(now.getMonth() + 1, 2) +
-        "-" +
-        padLeft(now.getDate(), 2) +
-        " " +
-        padLeft(now.getHours(), 2) +
-        ":" +
-        padLeft(now.getMinutes(), 2) +
-        ":" +
-        padLeft(now.getSeconds(), 2) +
-        "." +
-        padLeft(now.getMilliseconds(), 3);
+    var asctime = now.getFullYear() + "-" + padLeft(now.getMonth() + 1, 2) + "-" + padLeft(now.getDate(), 2) + " " + padLeft(now.getHours(), 2) + ":" + padLeft(now.getMinutes(), 2) + ":" + padLeft(now.getSeconds(), 2) + "." + padLeft(now.getMilliseconds(), 3);
 
     // 日志级别（左对齐 8 字符）
     let levelname = (logType || "INFO").toUpperCase();
@@ -115,7 +102,7 @@ function writeToLog(
     // 文件信息（JSFL 无法获取行号/函数名，使用占位）
     // NOTE:fl.addEventListener注册的函数，调用打印时 fl.scriptURI = unknown
     var scriptURI = fl.scriptURI;
-    var baseDir = AnJsflScript.$ProjectFileDir$;
+    var baseDir = AnJsflScript.folders.AnJsflScript;
 
     // fl.trace(scriptURI);
     // fl.trace(baseDir);

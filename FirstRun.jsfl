@@ -97,23 +97,15 @@
          */
         window.AnJsflScript.$ProjectFileDir$ = getcwd();
 
-        window.AnJsflScript.FOLDERS = {
-            Log: window.AnJsflScript.$ProjectFileDir$ + "/config/Log" // console.log 输出日志
-            // Cache: window.AnJsflScript.$ProjectFileDir$ + "/config/Cache", // 12.#磁力粘贴.jsfl,缓存文件夹
-            // AsciiArtLibrary:
-            //     window.AnJsflScript.$ProjectFileDir$ + "/config/ascii_art_library", // 02.排兵布阵_ascii_art.jsfl 字体库文件夹
-            // Save: window.AnJsflScript.$ProjectFileDir$ + "/config/Save", // 存档文件夹
-            // Scripts: window.AnJsflScript.$ProjectFileDir$ + "/config/Scripts" // 脚本文件夹
-        };
-
         var config = {
             "require-js": "third/require/requirejs/require-js"
         };
         // 导入模块,相对路径导入
-        window.AnJsflScript.importFlashScripts(config["require-js"]);
+        importFlashScripts(config["require-js"]);
 
-        require([// 导入配置文件
-            "./config/require/require.config",
+        require([
+            "./config/require/require.config",// 导入require模块配置文件
+            "./config/settings/settings",// AnJsflScript settings
 
 
             // "es6-promise", // babel 转译 依赖 Promise

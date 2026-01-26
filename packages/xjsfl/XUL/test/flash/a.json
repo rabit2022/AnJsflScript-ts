@@ -1,0 +1,94 @@
+[
+  {
+    "functionName": "Main",
+    "args": [],
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\stack\\error-stack-parser-3.0.0\\test\\test.jsfl",
+    "lineNumber": 6,
+    "source": "Main()"
+  },
+  {
+    "functionName": "() => {}",
+    "args": [
+      "[object Object]"
+    ],
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\stack\\error-stack-parser-3.0.0\\test\\test.jsfl",
+    "lineNumber": 22,
+    "source": "([object Object])"
+  },
+  {
+    "functionName": "() => {}",
+    "args": [
+      "\"_@r7\"",
+      "(function (ErrorStackParser) {\nfunction Main() {try {throw new Error(\"Something went wrong!\");} catch (err) {const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}\n\nMain();})",
+      "[object Array]",
+      "(void 0)"
+    ],
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "lineNumber": 1852,
+    "source": "(\"_@r7\",(function (ErrorStackParser) {\nfunction Main() {try {throw new Error(\"Something went wrong!\");} catch (err) {const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}\n\nMain();}),[object Array],(void 0))"
+  },
+  {
+    "functionName": "() => {}",
+    "args": [],
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "lineNumber": 944,
+    "source": "()"
+  },
+  {
+    "functionName": "() => {}",
+    "args": [],
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "lineNumber": 1290,
+    "source": "()"
+  },
+  {
+    "functionName": "() => {}",
+    "args": [
+      "[object Array]",
+      "(function (ErrorStackParser) {\nfunction Main() {try {throw new Error(\"Something went wrong!\");} catch (err) {const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}\n\nMain();})",
+      "(void 0)",
+      "[object Object]"
+    ],
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "lineNumber": 834,
+    "source": "([object Array],(function (ErrorStackParser) {\nfunction Main() {try {throw new Error(\"Something went wrong!\");} catch (err) {const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}\n\nMain();}),(void 0),[object Object])"
+  },
+  {
+    "functionName": "() => {}",
+    "args": [],
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "lineNumber": 1592,
+    "source": "()"
+  },
+  {
+    "functionName": "() => {}",
+    "args": [
+      "(function () {intakeDefines();requireMod = getModule(makeModuleMap(null, relMap));requireMod.skipMap = options.skipMap;requireMod.init(deps, callback, errback, {enabled: true});checkLoaded();})"
+    ],
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "lineNumber": 1986,
+    "source": "((function () {intakeDefines();requireMod = getModule(makeModuleMap(null, relMap));requireMod.skipMap = options.skipMap;requireMod.init(deps, callback, errback, {enabled: true});checkLoaded();}))"
+  },
+  {
+    "functionName": "localRequire",
+    "args": [
+      "[object Array]",
+      "(function (ErrorStackParser) {\nfunction Main() {try {throw new Error(\"Something went wrong!\");} catch (err) {const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}\n\nMain();})",
+      "(void 0)"
+    ],
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "lineNumber": 1580,
+    "source": "localRequire([object Array],(function (ErrorStackParser) {\nfunction Main() {try {throw new Error(\"Something went wrong!\");} catch (err) {const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}\n\nMain();}),(void 0))"
+  },
+  {
+    "functionName": "() => {}",
+    "args": [
+      "[object Array]",
+      "(function (ErrorStackParser) {\nfunction Main() {try {throw new Error(\"Something went wrong!\");} catch (err) {const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}\n\nMain();})"
+    ],
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "lineNumber": 1963,
+    "source": "([object Array],(function (ErrorStackParser) {\nfunction Main() {try {throw new Error(\"Something went wrong!\");} catch (err) {const frames = ErrorStackParser.parse(err);console.log(JSON.stringify(frames));frames.forEach(function (frame) {});}}\n\nMain();}))"
+  }
+]
+
