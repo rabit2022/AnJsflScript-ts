@@ -27,6 +27,8 @@ dist/**
 output/**
 **/dist/**
 
+types/jsfl/**
+
 # 清除缓存
 # git rm -r --cached .
 

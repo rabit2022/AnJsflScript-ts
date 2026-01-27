@@ -1,7 +1,0 @@
-// tsconfig.json 中设置:
-{
-  "compilerOptions": {
-    "lib": [],
-    "esModuleInterop": true
-  }
-}
