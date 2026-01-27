@@ -5,13 +5,13 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist",
-    // 避免和 webpack 的 dist 冲突
 
-    "moduleResolution": "node",
 
+    // 防止生成helper,导致报错
+    "importHelpers": false,
 
     "paths": [],
-    "importHelpers": true,
+
     "types": [
       "jest"
     ],
@@ -21,29 +21,30 @@
       "es6"
     ],
 
-
+    // 解析相对路径
+    "moduleResolution": "node",
+    
     // es import
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,//运行时
+    "allowSyntheticDefaultImports": true,//类型检查
 
 
     // ✅ 关键修复：关闭 composite 和 declaration
-    "composite": false,
-    // ← 必须设为 false
-    "declaration": false,
-    // ← 测试脚本不需要 .d.ts
-    "declarationMap": false,
-    "emitDeclarationOnly": false
+    "composite": false,     // ✅ 单文件脚本，不需要项目引用
+    "declaration": false,   // ✅ 不需要给其他人提供类型定义
+    "declarationMap": false, // ✅ 节省空间
+    "emitDeclarationOnly": false // ✅ 需要生成可运行的 JS 文件
   },
   "include": [
     "test",
     "src",
 
-
+    // region TYPES
     // jsfl
-    "../../../types/jsfl/types/**/*.d.ts",
+    "../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
-    "../../../types/myShim/*.d.ts"
+    "../../types/myShim/*.d.ts"
+// endregion TYPES
   ]
 }
 

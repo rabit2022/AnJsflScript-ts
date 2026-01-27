@@ -25,7 +25,7 @@
     "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
     "generate_config": "tsx ./tools/project/src/require/generate_config.ts",
     "build": "npx tsc && tsx ./tools/project/src/typescript/build_all.ts",
-    "clearAll": "tsx ./tools/project/clean/CleanAll.ts",
+    "clean": "npx tsc --build --clean && tsx ./tools/project/clean/CleanAll.ts",
     "addHeaders": "tsx ./tools/project/src/headers/addFileHeader.ts"
   },
   "devDependencies": {

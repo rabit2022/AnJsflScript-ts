@@ -107,42 +107,9 @@
             "./config/require/require.config",// 导入require模块配置文件
             "./config/settings/settings",// AnJsflScript settings
 
+            "./config/settings/anjsfl-polyfills"// polyfills
 
-            // "es6-promise", // babel 转译 依赖 Promise
-
-            // 导入shims, 避免其他模块依赖时报错
-            "es5-shim", // es5,es2009
-            "es5-sham",
-
-            // @nodejs/url need es6
-            "es6-shim", // es6,es2015
-            "es6-sham",
-
-            // "es7-shim", // es7,es2016
-            // "es2017", // es8,es2017
-
-            // "json3",
-
-            "@nodejs/__filename",
-
-
-            // loglevel 依赖 console
-            "console",
-
-            // loglevel,store.js 依赖 document.cookie
-            "document-cookie"]);
-
-        require(["loglevel", "Tips"], function(log, Tips) {
-            // 禁用log
-            log.setDefaultLevel(log.levels.SILENT);
-
-            // 显示提示信息
-            const { alertMessage } = Tips;
-            alertMessage("loading success!");
-            if (!(window.AnJsflScript.$ProjectFileDir$.indexOf("AnJsflScript") !== -1)) {
-                alertMessage("loading might be not allowed!");
-            }
-        });
+        ]);
     }
 
     Main();

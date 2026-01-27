@@ -3,7 +3,7 @@
 {
 //  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src",
+    "rootDir": "./src",
     "outDir": "./dist",
 
     // 无法打包

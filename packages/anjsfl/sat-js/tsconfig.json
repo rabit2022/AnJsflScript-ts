@@ -2,6 +2,10 @@
   "compilerOptions": {
     "module": "AMD",
 
+    // 允许 TypeScript 将项目作为依赖进行增量编译
+    "composite": true,
+    "declaration": true,
+
     "strict": true,
     "noEmitOnError": false,
     "removeComments": true,

@@ -21,71 +21,52 @@
 
     /**
      * 解析函数调用字符串，提取函数名和参数
-     * @param {string} callStr - 函数调用字符串，格式如 "func(arg1, arg2, arg3)"
-     * @returns {object} 包含functionName和args的对象，解析失败返回null
      */
-    function parseFunctionCall(callStr) {
-        if (typeof callStr !== "string") {
-            return null;
-        }
+    function parseFlashFunctionCall(callStr) {
+        if (typeof callStr !== "string") return null;
 
-        // 匹配函数名和参数部分
-        // const funcMatch = callStr.match(/^(\w+)?\s*\((.*)\)$/s);
-        // const funcMatch = callStr.match(/^(\w+)?\s*\((.*)\)$/s);
+        // 处理换行
+        const trimmedStr = callStr.replace(/\n/g, "");
+        const funcMatch = trimmedStr.match(/^(\w+)?\s*\(([\s\S]*)\)$/);
+        if (!funcMatch) return null;
 
-
-        // 使用[\s\S]代替.来匹配所有字符（包括换行）
-        const funcMatch = callStr.match(/^(\w+)?\s*\(([\s\S]*)\)$/);
-        if (!funcMatch) {
-            return null;
-        }
-
-        const functionName = funcMatch[1] || ""; // 处理匿名函数情况
-        const argumentsStr = funcMatch[2];
-
-        // 分割参数，处理嵌套括号、引号和转义
+        const functionName = funcMatch[1] || "";
         const args = [];
-        var depth = 0; // 括号嵌套深度
-        var currentArg = "";
-        var inString = false; // 是否在字符串内
-        var stringChar = ""; // 当前字符串引号类型
-        var isEscaped = false; // 是否转义字符
+        var depth = 0, currentArg = "";
+        var inString = false, stringChar = "", isEscaped = false;
+        const argumentsStr = funcMatch[2];
 
         for (var i = 0; i < argumentsStr.length; i++) {
             const char = argumentsStr[i];
-            const prevChar = argumentsStr[i - 1];
 
-            // 处理转义字符
-            if (inString && char === "\\" && !isEscaped) {
-                isEscaped = true;
+            // 处理转义
+            if (inString && char === "\\") {
+                isEscaped = !isEscaped;
                 currentArg += char;
                 continue;
             }
 
-            if (!inString && !isEscaped) {
-                // 不在字符串内，检查括号
-                if (char === "(" || char === "[" || char === "{") {
-                    depth++;
-                } else if (char === ")" || char === "]" || char === "}") {
-                    depth--;
-                } else if ((char === "'" || char === "\"" || char === "`") && !isEscaped) {
+            // 处理字符串
+            if (!isEscaped) {
+                if (!inString && (char === "'" || char === "\"" || char === "`")) {
                     inString = true;
                     stringChar = char;
-                }
-            } else if (inString && !isEscaped) {
-                // 在字符串内，检查字符串结束
-                if (char === stringChar) {
+                } else if (inString && char === stringChar) {
                     inString = false;
                 }
             }
 
-            // 重置转义状态
-            if (isEscaped) {
-                isEscaped = false;
+            // 处理括号（非字符串内）
+            if (!inString && !isEscaped) {
+                if (char === "(" || char === "[" || char === "{") depth++;
+                else if (char === ")" || char === "]" || char === "}") depth--;
             }
 
-            // 根据逗号分割参数
-            if (char === "," && depth === 0 && !inString) {
+            // 重置转义状态
+            if (isEscaped && char !== "\\") isEscaped = false;
+
+            // 分割参数
+            if (char === "," && depth === 0 && !inString && !isEscaped) {
                 args.push(currentArg.trim());
                 currentArg = "";
             } else {
@@ -94,16 +75,10 @@
         }
 
         // 添加最后一个参数
-        if (currentArg.trim()) {
-            args.push(currentArg.trim());
-        }
+        if (currentArg.trim()) args.push(currentArg.trim());
 
-        return {
-            functionName: functionName,
-            args: args.length === 1 && args[0] === "" ? [] : args // 处理无参数情况
-        };
+        return { functionName: functionName, args: args };
     }
-
 
     return {
         /**
@@ -161,23 +136,15 @@
                 // 去除左边的所有空白字符（包括空格、换行、制表符等）
                 functionPart = functionPart.replace(/^\s+/, "");
 
-                // console.log(lineNumber, functionPart);
-                const functionCall = parseFunctionCall(functionPart);
-                // console.log(config.functionName,config.args);
-
-                // @H:\project\js\AnJsflScript-ts\third\stack\error-stack-parser-3.0.0\test\test.jsfl:1
-                // 此时functionCall=null
-                var functionName = "() => {}";
-                var args = [];
-                if (functionCall) {
-                    functionName = functionCall.functionName;
-                    args = functionCall.args;
+                if (functionPart) {
+                    const { functionName, args } = parseFlashFunctionCall(functionPart);
                 }
+
 
                 // stack object
                 return new StackFrame({
                     functionName: functionName || "() => {}",
-                    args: args,
+                    args: args || [],
                     fileName: fileName || undefined,
                     lineNumber: parseInt(lineNumber) || undefined,
                     source: functionPart || undefined
@@ -185,13 +152,15 @@
                     // path: path.replace(/\\/g, '/'),
                     // uri: FLfile.platformPathToURI(path + file)
                 });
-            }).filter(function(stackFrame) {
-                // 删除requirejs的调用栈信息
-                if (stackFrame.fileName.includes("requirejs")) {
-                    return false;
-                }
-                return true;
             });
+
+            //     .filter(function(stackFrame) {
+            //     // 删除requirejs的调用栈信息
+            //     if (stackFrame.fileName.includes("requirejs")) {
+            //         return false;
+            //     }
+            //     return true;
+            // });
         },
 
         parseV8OrIE: function ErrorStackParser$$parseV8OrIE(error) {

@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 
 // region MODULE_NAME
-const MODULE_NAME = "SAT";
+const MODULE_NAME = "stack";
 // endregion MODULE_NAME
 
 

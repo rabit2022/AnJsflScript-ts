@@ -2,24 +2,57 @@
   {
     "lineNumber": 6,
     "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\stack\\error-stack-parser-3.0.0\\test\\test.jsfl",
-    "functionName": "Main",
-    "source": "Main()",
-    "args": []
+    "functionName": "Main"
   },
   {
-    "lineNumber": 22,
+    "lineNumber": 25,
     "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\stack\\error-stack-parser-3.0.0\\test\\test.jsfl",
-    "functionName": "() => {}",
-    "source": "([object Object])",
-    "args": [
-      "[object Object]"
-    ]
+    "functionName": "() => {}"
+  },
+  {
+    "lineNumber": 1852,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "functionName": "() => {}"
+  },
+  {
+    "lineNumber": 944,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "functionName": "() => {}"
+  },
+  {
+    "lineNumber": 1290,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "functionName": "() => {}"
+  },
+  {
+    "lineNumber": 834,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "functionName": "() => {}"
+  },
+  {
+    "lineNumber": 1592,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "functionName": "() => {}"
+  },
+  {
+    "lineNumber": 1986,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "functionName": "() => {}"
+  },
+  {
+    "lineNumber": 1580,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "functionName": "localRequire"
+  },
+  {
+    "lineNumber": 1963,
+    "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\require\\requirejs\\require-js.jsfl",
+    "functionName": "() => {}"
   },
   {
     "lineNumber": 1,
     "fileName": "H:\\project\\js\\AnJsflScript-ts\\third\\stack\\error-stack-parser-3.0.0\\test\\test.jsfl",
-    "functionName": "() => {}",
-    "args": []
+    "functionName": "() => {}"
   }
 ]
 

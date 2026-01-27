@@ -16,7 +16,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 // ========== 配置区 ==========
-const MODULE_NAME = "your-new-module-name"; // ←←← 手动修改这里！
+const MODULE_NAME = "stack"; // ←←← 手动修改这里！
 // ==========================
 
 // 获取当前脚本所在目录
