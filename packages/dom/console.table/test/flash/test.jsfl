@@ -12,11 +12,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         { name: 'Bob', age: 30, email: 'bob@example.com' },
         { name: 'Charlie', age: 35 }
     ];
-    var c = console;
-    c.table(users);
-    c.table(users, ['name', 'age']);
-    c.table(['apple', 'banana']);
-    c.table({ foo: 'bar', count: 42, active: true });
+    console.table(users);
+    console.table(users, ['name', 'age']);
+    console.table(['apple', 'banana']);
+    console.table({ foo: 'bar', count: 42, active: true });
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 

@@ -39,7 +39,7 @@ require.config({
         "json3": "third/json/json3/json3",
         "circular-json.amd": "third/json/circular-json-0.5.9/circular-json.amd",
         "universal-cookie": "third/cookie/universal-cookie/universal-cookie",
-        "table": "third/console/table/table",
+        "cli-table3": "third/console/cli-table3/cli-table3",
         "chroma-js": "third/color/chroma.js/chroma-js",
         "Tips": "src/lib/out/Tips",
         "@xjsfl/UI": "packages/xjsfl/UI/out/UI",

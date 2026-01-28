@@ -1,11 +1,12 @@
 import * as fs from 'fs';
-import * as path from 'path';
+
+import * as ErrorStackParser from 'error-stack-parser';
 
 // 错误记录文件路径
 const ALL_ERRORS_FILE = 'all-errors.json';
 const CURRENT_ERRORS_FILE = 'current-errors.json';
 
-console.stack = function(message = 'Stack trace', options = {}) {
+console.stack = function (message = 'Stack trace', options = {}) {
     const defaultOptions = {
         includeSource: false,
         includeArgs: false,
@@ -73,7 +74,7 @@ console.stack = function(message = 'Stack trace', options = {}) {
             default:
                 console.group('Stack Trace:');
                 cleanedFrames.forEach((frame, i) => {
-                    console.log(`${i + 1}. ${frame.function} (${frame.file}:${frame.line}:${frame.column})`);
+                    console.log(`${i + 1}. ${frame.functionName} (${frame.fileName}:${frame.lineNumber})`);
                     if (frame.source) console.log(`   ↳ ${frame.source}`);
                 });
                 console.groupEnd();
@@ -156,11 +157,15 @@ function saveErrorToFiles(frames: any[], message: string): void {
     }
 }
 
+
+console.stack('Stack trace:');
+
+
 /**
  * 清除错误记录文件
  * @param clearAll 是否清除所有错误文件（true: 清除所有，false: 只清除当前错误）
  */
-console.clearErrors = function(clearAll = false): void {
+console.clearErrors = function (clearAll = false): void {
     try {
         if (clearAll) {
             if (fs.existsSync(ALL_ERRORS_FILE)) {
@@ -182,7 +187,7 @@ console.clearErrors = function(clearAll = false): void {
  * 读取错误记录
  * @param readAll 是否读取所有错误（true: 所有错误，false: 当前错误）
  */
-console.getErrors = function(readAll = false): any {
+console.getErrors = function (readAll = false): any {
     try {
         const filePath = readAll ? ALL_ERRORS_FILE : CURRENT_ERRORS_FILE;
 

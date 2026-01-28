@@ -1,23 +1,21 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("table"));
-	else if(typeof define === 'function' && define.amd) {
-        console.log("amd ");
-        require(["table"], factory);
-    }
+		module.exports = factory(require("cli-table3"));
+	else if(typeof define === 'function' && define.amd)
+		define(["cli-table3"], factory);
 	else if(typeof exports === 'object')
-		exports["console-table"] = factory(require("table"));
+		exports["console-table"] = factory(require("cli-table3"));
 	else
-		root["console-table"] = factory(root["table"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE__552__) {
+		root["console-table"] = factory(root["cli-table3"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE__420__) {
 return /******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 552:
+/***/ 420:
 /***/ (function(module) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__552__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__420__;
 
 /***/ })
 
@@ -48,12 +46,60 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__552__;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	!function() {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = function(module) {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	!function() {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	!function() {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = function(exports) {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/************************************************************************/
 var __webpack_exports__ = {};
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
 
-// EXTERNAL MODULE: external "table"
-var external_table_ = __webpack_require__(552);
-console.log(external_table_)
-;// ./src/tablePrinter.ts
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  tableToString: function() { return /* reexport */ tableToString; }
+});
+
+// EXTERNAL MODULE: external "cli-table3"
+var external_cli_table3_ = __webpack_require__(420);
+var external_cli_table3_default = /*#__PURE__*/__webpack_require__.n(external_cli_table3_);
+;// ./src/table.ts
 var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
@@ -64,50 +110,132 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 
-function ensureRows(data, columns) {
-    if (data == null)
-        return [['null']];
-    var items = Array.isArray(data) ? data : [data];
-    if (items.length === 0)
-        return [['(empty)']];
-    var cols = columns || (typeof items[0] === 'object' && items[0] !== null
-        ? Object.keys(items[0])
-        : ['value']);
-    var head = cols;
-    var body = items.map(function (item) {
-        return cols.map(function (col) {
-            return String(typeof item === 'object' && item !== null
-                ? item[col]
-                : item);
-        });
-    });
-    return __spreadArray([head], body, true);
+function formatValue(value) {
+    if (value === null)
+        return 'null';
+    if (value === undefined)
+        return 'undefined';
+    if (typeof value === 'string')
+        return value;
+    if (typeof value === 'number' || typeof value === 'boolean')
+        return String(value);
+    if (Array.isArray(value))
+        return "[ $ {value.length} items]";
+    if (typeof value === 'object')
+        return '{...}';
+    return String(value);
 }
-var ConsoleTablePrinter = (function () {
-    function ConsoleTablePrinter(indentLevel, indentChar) {
-        if (indentLevel === void 0) { indentLevel = 0; }
-        if (indentChar === void 0) { indentChar = ' '; }
-        this.indent = indentChar.repeat(indentLevel);
+function printArrayTable(array, columns) {
+    if (array.length === 0)
+        return '[]';
+    var firstItem = array[0];
+    if (firstItem !== null && typeof firstItem === 'object' && !Array.isArray(firstItem)) {
+        var allKeys_1 = new Set();
+        for (var _i = 0, array_1 = array; _i < array_1.length; _i++) {
+            var item = array_1[_i];
+            if (item && typeof item === 'object' && !Array.isArray(item)) {
+                Object.keys(item).forEach(function (key) { return allKeys_1.add(key); });
+            }
+        }
+        var columnList_1 = columns
+            ? columns.filter(function (col) { return allKeys_1.has(col); })
+            : Array.from(allKeys_1);
+        var table_1 = new (external_cli_table3_default())({
+            head: __spreadArray(['(index)'], columnList_1, true),
+            chars: {
+                top: '─', 'top-mid': '┬', 'top-left': '┌', 'top-right': '┐',
+                bottom: '─', 'bottom-mid': '┴', 'bottom-left': '└', 'bottom-right': '┘',
+                left: '│', 'left-mid': '├', 'mid': '─', 'mid-mid': '┼',
+                right: '│', 'right-mid': '┤', middle: '│'
+            },
+            style: { head: [], border: [] }
+        });
+        array.forEach(function (item, index) {
+            var row = [index];
+            for (var _i = 0, columnList_2 = columnList_1; _i < columnList_2.length; _i++) {
+                var col = columnList_2[_i];
+                var val = item === null || item === void 0 ? void 0 : item[col];
+                row.push(formatValue(val));
+            }
+            table_1.push(row);
+        });
+        return table_1.toString();
     }
-    ConsoleTablePrinter.prototype.table = function (data, columns) {
-        var _this = this;
-        var rows = ensureRows(data, columns);
-        var output = (0,external_table_.table)(rows);
+    var table = new (external_cli_table3_default())({
+        head: ['(index)', 'Value'],
+        chars: {
+            top: '─', 'top-mid': '┬', 'top-left': '┌', 'top-right': '┐',
+            bottom: '─', 'bottom-mid': '┴', 'bottom-left': '└', 'bottom-right': '┘',
+            left: '│', 'left-mid': '├', 'mid': '─', 'mid-mid': '┼',
+            right: '│', 'right-mid': '┤', middle: '│'
+        }
+    });
+    array.forEach(function (item, index) {
+        table.push([index, formatValue(item)]);
+    });
+    return table.toString();
+}
+function printObjectTable(obj, columns) {
+    var keys = columns !== null && columns !== void 0 ? columns : Object.keys(obj);
+    var table = new (external_cli_table3_default())({
+        head: ['Key', 'Value'],
+        chars: {
+            top: '─', 'top-mid': '┬', 'top-left': '┌', 'top-right': '┐',
+            bottom: '─', 'bottom-mid': '┴', 'bottom-left': '└', 'bottom-right': '┘',
+            left: '│', 'left-mid': '├', 'mid': '─', 'mid-mid': '┼',
+            right: '│', 'right-mid': '┤', middle: '│'
+        }
+    });
+    for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+        var key = keys_1[_i];
+        if (obj.hasOwnProperty(key)) {
+            table.push([key, formatValue(obj[key])]);
+        }
+    }
+    return table.toString();
+}
+function tableToString(data, columns) {
+    if (data == null) {
+        return 'undefined';
+    }
+    if (Array.isArray(data)) {
+        if (data.length === 0) {
+            return '[]';
+        }
+        return printArrayTable(data, columns);
+    }
+    if (typeof data === 'object') {
+        return printObjectTable(data, columns);
+    }
+    return String(data);
+}
+var CustomConsole = (function () {
+    function CustomConsole(indentLevel, indentStr) {
+        if (indentLevel === void 0) { indentLevel = 0; }
+        if (indentStr === void 0) { indentStr = ' '; }
+        this._indentLevel = indentLevel;
+        this._indentStr = indentStr;
+    }
+    CustomConsole.prototype.table = function (data, columns) {
+        var output = tableToString(data, columns);
+        var indent = this._indentStr.repeat(this._indentLevel);
         var indented = output
             .split('\n')
-            .map(function (line) { return line ? _this.indent + line : ''; })
+            .map(function (line) { return line ? indent + line : ''; })
             .join('\n');
-        console.log(indented);
+        console.log("\n".concat(indented));
     };
-    return ConsoleTablePrinter;
+    return CustomConsole;
 }());
 
 
 ;// ./src/index.ts
 
-    console.log("Hello")
-var c = new ConsoleTablePrinter(2);
-c.table([{ name: 'Alice', age: 30 }], ['name', 'age']);
+var customConsole = new CustomConsole(1);
+if (typeof window !== 'undefined' && window.console) {
+    window.console.table = customConsole.table.bind(customConsole);
+}
+
 
 /******/ 	return __webpack_exports__;
 /******/ })()

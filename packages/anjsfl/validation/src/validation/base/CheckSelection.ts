@@ -7,14 +7,10 @@
  * @description:
  */
 
-// 类型定义
-import {
-    CheckCondition,
-    CheckMode,
-    Selection
-} from "../../../../types/validation/selectionTypes";
-import { CheckVariableRedeclaration } from "../CheckVariableRedeclaration";
-import { checkCondition, CONDITION_ALIAS_MAP, MESSAGES } from "./selectionUtils";
+
+import { checkCondition, MESSAGES } from "./selectionUtils";
+import {CheckCondition, CheckMode, Selection} from "../../types/selectionTypes";
+import {CheckVariableRedeclaration} from "./CheckVariableRedeclaration";
 
 // polyfill
 /**
@@ -87,9 +83,11 @@ export function CheckSelection(
         // if (Object.values(CheckCondition).includes(condition as CheckCondition)) {
         if (IsEnumValue(CheckCondition, condition)) {
             resolvedCondition = condition as CheckCondition;
-        } else if (CONDITION_ALIAS_MAP[condition]) {
-            resolvedCondition = CONDITION_ALIAS_MAP[condition];
-        } else {
+        }
+        // else if (CONDITION_ALIAS_MAP[condition]) {
+        //     resolvedCondition = CONDITION_ALIAS_MAP[condition];
+        // }
+        else {
             alert("无效的条件：" + condition);
             return false;
         }

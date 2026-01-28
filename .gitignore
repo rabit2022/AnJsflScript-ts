@@ -1,5 +1,4 @@
-# test
-test/**
+
 
 # 配置文件
 .idea/**
@@ -28,6 +27,9 @@ output/**
 **/dist/**
 
 types/jsfl/**
+
+# xlsx运行时,git报错
+**/~$**.xlsx
 
 # 清除缓存
 # git rm -r --cached .

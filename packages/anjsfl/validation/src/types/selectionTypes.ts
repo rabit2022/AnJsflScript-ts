@@ -19,11 +19,27 @@ export enum CheckMode {
     SelectedFrameFirstDuration = "selectedFrameFirstDuration"
 }
 
+/**
+ * 图层选择数量条件枚举
+ * 定义了针对“选中图层数量”的校验规则
+ */
 export enum CheckCondition {
+    /** 无限制 */
     NoLimit = "No limit",
-    NotZero = "Not Zero", // >0
-    Zero = "Zero", // =0
-    OnlyOne = "Only one", // =1
-    OnlyTwo = "Only two", // =2
-    More = "More" // >2
+
+    /** 至少选中一个 (数量 > 0) */
+    AtLeastOne = "At least one",
+
+    /** 未选中任何图层 (数量 == 0) */
+    NoneSelected = "None selected",
+
+    /** 必须且仅选中一个 (数量 == 1) */
+    ExactlyOne = "Exactly one",
+
+    /** 必须选中两个 (数量 == 2) */
+    ExactlyTwo = "Exactly two",
+
+    /** 选中多个 (数量 > 1) */
+    MultipleSelected = "Multiple selected",
+
 }
