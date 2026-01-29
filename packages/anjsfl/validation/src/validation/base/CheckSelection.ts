@@ -8,11 +8,10 @@
  */
 
 
-import { checkCondition, MESSAGES } from "./selectionUtils";
-import {CheckCondition, CheckMode, Selection} from "../../types/selectionTypes";
+import {CheckCondition, CheckMode, Selection} from "../../types";
 import {CheckVariableRedeclaration} from "./CheckVariableRedeclaration";
+import { MESSAGES } from "./Message";
 
-// polyfill
 /**
  * 判断 value 是否是某个 TypeScript 枚举（字符串/数字）的合法值
  * @example
@@ -112,4 +111,24 @@ export function CheckSelection(
     }
 
     return true;
+}
+
+// 条件校验逻辑
+export function checkCondition(condition: CheckCondition, length: number): boolean {
+    switch (condition) {
+        case CheckCondition.NoLimit:
+            return true;
+        case CheckCondition.AtLeastOne:
+            return length > 0;
+        case CheckCondition.NoneSelected:
+            return length === 0;
+        case CheckCondition.ExactlyOne:
+            return length === 1;
+        case CheckCondition.ExactlyTwo:
+            return length === 2;
+        case CheckCondition.MultipleSelected:
+            return length > 2;
+        default:
+            throw new Error(`未知条件: ${condition satisfies never}`);
+    }
 }

@@ -4,8 +4,7 @@
   "description": "Validation logic for Adobe Animate JSFL scripts",
   "declaration": true,
   "declarationMap": true,
-  "//": "src/index.ts",
-  "main": "console.jsfl",
+  "main": "src/index.ts",
   "files": [
     "dist"
   ],

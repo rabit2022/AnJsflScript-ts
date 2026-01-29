@@ -2,7 +2,7 @@
  * @file: Hello.jsfl
  * @author: 穹的兔兔
  * @email: 3101829204@qq.com
- * @date: 2026/1/27 21:25
+ * @date: 2026/1/29 23:15
  * @project: AnJsflScript-ts
  * @description:
  */
@@ -12,14 +12,14 @@
 require(["require", "_exports", "@anjsfl/validation"], function (require, exports, validation_1) {
     "use strict";
     console.log("Hello World!");
-    function Main() {
-        var toCheckes = ["目标图层", "起始图层", "结束图层"];
-        var toChheck = (0, validation_1.CheckSelection)(toCheckes, validation_1.CheckMode.SelectElement, validation_1.CheckCondition.OnlyOne, "额外的提示信息");
-        if (!toChheck) {
-            console.error("check faied");
-            return;
-        }
-        console.log("check success");
+    var dom = fl.getDocumentDOM();
+    var check = (0, validation_1.CheckDocument)(dom);
+    if (check.isOk()) {
+        var doc = check.unwrap();
+        console.log("文档有效:", doc);
     }
-    Main();
+    else {
+        var errorMsg = check.unwrapErr();
+        console.log("文档无效:", errorMsg);
+    }
 });

@@ -5,12 +5,8 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */﻿/**
- * @file SymbolNameGenerator.ts
- * @author 穹的兔兔
- * @email 3101829204@qq.com
- * @description 用于生成 Flash 元件库中唯一名称的工具类（无 sprintf 依赖）
  */
+
 
 // 假设你有一个 randint 函数（来自你自己的 random 模块）
 import { random } from "./random";

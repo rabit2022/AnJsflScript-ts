@@ -28,7 +28,7 @@
     "emitDeclarationOnly": false
   },
   "include": [
-    "test",
+    "test/flash/ts",
     "src",
     // jsfl
     "../../../types/jsfl/types/**/*.d.ts",

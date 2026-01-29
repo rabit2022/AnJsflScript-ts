@@ -9,17 +9,15 @@
       //      "dom", // console
     ],
     "skipLibCheck": false,
-
-
     /*  防止es2017等代码不报错 */
-    "types": ["node"],
-
+    "types": [
+      "node"
+    ],
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
     /* Module Resolution */
     // @anjsfl/validation
     "moduleResolution": "node",
@@ -41,7 +39,6 @@
     // es import
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-
     /* 生成相同的目录结构 */
     //    "rootDir": "./src",
     "outDir": "./dist",
@@ -50,8 +47,7 @@
     /* 路径映射 */
     "baseUrl": ".",
     // 设置 baseUrl 为项目根目录
-    "paths":
-    // region REQUIRE MODULES PATHS
+    "paths": // region REQUIRE MODULES PATHS
     {
       "Tips": ["src/lib/core/Tips"]
     }
@@ -60,7 +56,7 @@
   },
   "include": [
     "src",
-//    "types",
+    //    "types",
 
     // 全局的 类型定义文件
     "./types/jsfl/types/**/*.d.ts",
@@ -74,17 +70,9 @@
     "./node_modules/@types",
     "./types"
   ],
-
   "references": [
-    {
-      "path": "packages/anjsfl/validation"
-    },
-    {
-      "path": "packages/anjsfl/sat-js"
-    },
-    {
-      "path": "packages/xjsfl/XUL"
-    }
+
+
   ]
 }
 

@@ -7,36 +7,17 @@
  * @description:
  */
 
-import { CheckSelection, CheckMode, CheckCondition } from "@anjsfl/validation";
+import { CheckDocument } from "@anjsfl/validation";
 
 console.log("Hello World!");
 
-// function alert(message: string): void {
-//     console.error(message);
-// }
-// globalThis.alert = alert;
+const dom = fl.getDocumentDOM();
+const check = CheckDocument(dom);
 
-
-
-
-function Main() {
-    // alert("动作已生成！（请进入元件手动微调速度）");
-    const toCheckes: string[] = ["目标图层", "起始图层", "结束图层"];
-    const toChheck: boolean = CheckSelection(
-        toCheckes,
-        CheckMode.SelectElement,
-        CheckCondition.OnlyOne,
-        "额外的提示信息"
-    );
-    if (!toChheck) {
-        console.error("check faied");
-        return;
-    }
-
-    // toCheckes.includes("")
-    // Object.values(toCheckes)
-
-    console.log("check success");
+if (check.isOk()) {
+    const doc = check.unwrap(); // 类型是 Document
+    console.log("文档有效:", doc);
+} else {
+    const errorMsg = check.unwrapErr(); // 类型是 string
+    console.log("文档无效:", errorMsg);
 }
-
-Main();

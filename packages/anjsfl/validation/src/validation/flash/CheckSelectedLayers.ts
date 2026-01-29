@@ -1,7 +1,7 @@
 import { Result, Ok, Err } from "oxide.ts";
-import {CheckSelection} from "../base/CheckSelection";
-import {CheckMode} from "../../types/selectionTypes";
-import {LayerCondition} from "../../types/conditionTypes";
+import {CheckSelection} from "../base";
+import {CheckMode} from "../../types";
+import {LayerCondition} from "../../types";
 
 /**
  * 检查传入的选中图层索引数组是否符合指定条件。

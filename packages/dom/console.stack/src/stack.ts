@@ -1,203 +1,125 @@
 import * as fs from 'fs';
-
 import * as ErrorStackParser from 'error-stack-parser';
+import {tableToString} from 'console.table';
+import {ConsoleStackFrame, Options, SaveData} from "./types"; // 👈 你明确要求使用的工具
 
-// 错误记录文件路径
-const ALL_ERRORS_FILE = 'all-errors.json';
-const CURRENT_ERRORS_FILE = 'current-errors.json';
+// ====== 你辛苦写好的 buildCleanedFrames（完全保留！） ======
+function buildCleanedFrames(
+    frames: ErrorStackParser.StackFrame[],
+    message: string,
+    options: Options
+): ConsoleStackFrame[] {
+    // 过滤
+    if (options.skipSelf) {
+        frames = frames.filter(f => !f.functionName?.includes('console.stack'));
+    }
+    if (options.skipRequireJs) {
+        frames = frames.filter(f => !f.fileName?.includes('requirejs'));
+    }
+    if (options.depth) {
+        frames = frames.slice(0, options.depth);
+    }
+    return frames.map(frame => {
+        const {functionName, fileName, lineNumber, source, args} = frame;
+        return {
+            functionName: functionName,
+            fileName: fileName,
+            lineNumber: lineNumber,
+            timestamp: new Date().toISOString(),
+            message: message,
+            source: (options.includeSource && source) ? source : undefined,
+            args: (options.includeArgs && args) ? args : undefined
+        };
+    });
+}
 
-console.stack = function (message = 'Stack trace', options = {}) {
-    const defaultOptions = {
+// ====== 格式化函数（使用你的 cleanedFrames + tableToString） ======
+export function formatOutput(frames: ConsoleStackFrame[], format: 'table' | 'list' | 'json'): string {
+    switch (format) {
+        case 'table':
+            // 使用 console.table 的字符串化版本（你指定的）
+            return tableToString(frames);
+        case 'list':
+            return frames.map((f, i) =>
+                `${i + 1}. ${f.functionName || '<anonymous>'} (${f.fileName}:${f.lineNumber})`
+            ).join('\n');
+        case 'json':
+            return JSON.stringify(frames, null, 2);
+        default:
+            return tableToString(frames);
+    }
+}
+
+// ====== 主函数：console.stack ======
+(console as any).stack = function (message = 'Stack trace', userOptions: Options = {}) {
+    const defaults: Required<Options> = {
         includeSource: false,
         includeArgs: false,
         depth: 5,
         skipSelf: true,
-        format: 'table', // 'table', 'list', 'json'
+        format: 'table',
         skipRequireJs: true,
-        logToFile: true // 新增参数：是否记录到文件
+        logToFile: true
     };
 
-    const opts = {
-        ...defaultOptions,
-        ...options
-    };
+    const options = {...defaults, ...userOptions};
 
     try {
         const error = new Error(message);
-        const frames = ErrorStackParser.parse(error);
+        const rawFrames = ErrorStackParser.parse(error);
+        const cleanedFrames = buildCleanedFrames(rawFrames, message, options);
 
-        let filteredFrames = opts.skipSelf ?
-            frames.filter(f => !f.functionName?.includes('console.stack')) :
-            frames;
+        // 打印到控制台（使用你指定的格式）
+        const outputStr = formatOutput(cleanedFrames, options.format);
+        console.log(`Stack Trace (${options.format}):`);
+        console.log(outputStr);
 
-        filteredFrames = opts.skipRequireJs ?
-            frames.filter(f => !f.fileName?.includes('requirejs')) :
-            frames;
-
-        if (opts.depth) {
-            filteredFrames = filteredFrames.slice(0, opts.depth);
-        }
-
-        // 清理不需要的属性
-        const cleanedFrames = filteredFrames.map(frame => {
-            const {
-                functionName,
-                fileName,
-                lineNumber,
-                source,
-                args
-            } = frame;
-            const result = {
-                functionName: functionName,
-                fileName: fileName,
-                lineNumber: lineNumber,
-                // columnNumber: columnNumber,
-                timestamp: new Date().toISOString(), // 添加时间戳
-                message: message, // 添加错误消息
-                source: (opts.includeSource && source) ? source : undefined,
-                args: (opts.includeArgs && args) ? args : undefined
+        // 保存到文件：始终保存完整结构（含元数据），JSON 格式
+        if (options.logToFile) {
+            const record = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                message,
+                frames: cleanedFrames,
+                count: 1
             };
-
-
-            return result;
-        });
-
-        // 根据格式输出
-        switch (opts.format) {
-            case 'table':
-                console.table(cleanedFrames);
-                break;
-            case 'json':
-                console.log(JSON.stringify(cleanedFrames, null, 2));
-                break;
-            case 'list':
-            default:
-                console.group('Stack Trace:');
-                cleanedFrames.forEach((frame, i) => {
-                    console.log(`${i + 1}. ${frame.functionName} (${frame.fileName}:${frame.lineNumber})`);
-                    if (frame.source) console.log(`   ↳ ${frame.source}`);
-                });
-                console.groupEnd();
+            writeToFile(record);
         }
 
-        // 新增：如果允许记录到文件，则保存错误信息
-        if (opts.logToFile) {
-            saveErrorToFiles(cleanedFrames, message);
-        }
-
-        return cleanedFrames;
+        // return cleanedFrames;
     } catch (err) {
-        console.warn('Failed to parse stack trace:', err);
-        console.trace(); // 回退到原生trace
+        console.warn('Failed to capture stack:', err);
+        // return [];
     }
 };
 
-/**
- * 保存错误信息到文件
- * @param frames 堆栈帧数组
- * @param message 错误消息
- */
-function saveErrorToFiles(frames: any[], message: string): void {
-    try {
-        const errorRecord = {
-            id: Date.now(), // 使用时间戳作为唯一ID
-            timestamp: new Date().toISOString(),
-            message: message,
-            frames: frames,
-            count: 1
-        };
+function writeToFile(record:SaveData) {
 
-        // 1. 保存到当前错误文件（覆盖写入）
-        fs.writeFileSync(CURRENT_ERRORS_FILE, JSON.stringify(errorRecord, null, 2), 'utf8');
+    // current-errors.json（覆盖）
+    fs.writeFileSync('current-errors.json', JSON.stringify(record, null, 2));
 
-        // 2. 保存到所有错误文件（追加到数组）
-        let allErrors: any[] = [];
-
-        // 如果文件已存在，读取现有错误
-        if (fs.existsSync(ALL_ERRORS_FILE)) {
-            try {
-                const existingData = fs.readFileSync(ALL_ERRORS_FILE, 'utf8');
-                allErrors = JSON.parse(existingData);
-
-                // 检查是否已存在相同错误，如果存在则增加计数
-                const existingErrorIndex = allErrors.findIndex(err =>
-                    err.message === message &&
-                    JSON.stringify(err.frames) === JSON.stringify(frames)
-                );
-
-                if (existingErrorIndex !== -1) {
-                    // 更新现有错误计数和时间戳
-                    allErrors[existingErrorIndex].count += 1;
-                    allErrors[existingErrorIndex].lastOccurrence = new Date().toISOString();
-                    errorRecord.count = allErrors[existingErrorIndex].count;
-                } else {
-                    // 添加新错误
-                    allErrors.push(errorRecord);
-                }
-            } catch (readErr) {
-                console.warn('Failed to read all errors file, creating new:', readErr);
-                allErrors = [errorRecord];
-            }
-        } else {
-            allErrors = [errorRecord];
+    // all-errors.json（追加/去重）
+    let allRecords: typeof record[] = [];
+    if (fs.existsSync('all-errors.json')) {
+        try {
+            allRecords = JSON.parse(fs.readFileSync('all-errors.json', 'utf8'));
+        } catch (e) {
+            console.warn('Failed to parse all-errors.json, resetting.');
         }
-
-        // 限制错误记录数量（例如最多1000条）
-        if (allErrors.length > 1000) {
-            allErrors = allErrors.slice(-1000);
-        }
-
-        // 保存更新后的所有错误
-        fs.writeFileSync(ALL_ERRORS_FILE, JSON.stringify(allErrors, null, 2), 'utf8');
-
-        console.log(`Error logged to files: ${CURRENT_ERRORS_FILE}, ${ALL_ERRORS_FILE}`);
-
-    } catch (fsErr) {
-        console.warn('Failed to save error to files:', fsErr);
     }
+
+    const existing = allRecords.find(r =>
+        r.message === record.message &&
+        JSON.stringify(r.frames) === JSON.stringify(record.frames)
+    );
+
+    if (existing) {
+        existing.count++;
+    } else {
+        allRecords.push(record);
+        if (allRecords.length > 1000) allRecords = allRecords.slice(-1000);
+    }
+
+    fs.writeFileSync('all-errors.json', JSON.stringify(allRecords, null, 2));
+
 }
-
-
-console.stack('Stack trace:');
-
-
-/**
- * 清除错误记录文件
- * @param clearAll 是否清除所有错误文件（true: 清除所有，false: 只清除当前错误）
- */
-console.clearErrors = function (clearAll = false): void {
-    try {
-        if (clearAll) {
-            if (fs.existsSync(ALL_ERRORS_FILE)) {
-                fs.unlinkSync(ALL_ERRORS_FILE);
-                console.log('Cleared all errors file');
-            }
-        }
-
-        if (fs.existsSync(CURRENT_ERRORS_FILE)) {
-            fs.unlinkSync(CURRENT_ERRORS_FILE);
-            console.log('Cleared current errors file');
-        }
-    } catch (err) {
-        console.warn('Failed to clear error files:', err);
-    }
-};
-
-/**
- * 读取错误记录
- * @param readAll 是否读取所有错误（true: 所有错误，false: 当前错误）
- */
-console.getErrors = function (readAll = false): any {
-    try {
-        const filePath = readAll ? ALL_ERRORS_FILE : CURRENT_ERRORS_FILE;
-
-        if (fs.existsSync(filePath)) {
-            const data = fs.readFileSync(filePath, 'utf8');
-            return JSON.parse(data);
-        }
-        return null;
-    } catch (err) {
-        console.warn('Failed to read error files:', err);
-        return null;
-    }
-};

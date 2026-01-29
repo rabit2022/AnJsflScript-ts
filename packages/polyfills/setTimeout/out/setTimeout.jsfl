@@ -49,77 +49,186 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
+  clearInterval: function() { return /* reexport */ setInterval_clearInterval; },
   clearTimeout: function() { return /* reexport */ setTimeout_clearTimeout; },
+  setInterval: function() { return /* reexport */ setInterval_setInterval; },
   setTimeout: function() { return /* reexport */ setTimeout_setTimeout; }
 });
 
-;// ./src/setTimeout.ts
-var taskQueue = [];
-var globalId = 0;
-var currentListenerId = null;
-function updateMonitoring() {
-    var shouldMonitor = taskQueue.length > 0;
-    if (shouldMonitor && currentListenerId === null) {
-        var id = fl.addEventListener("mouseMove", checkQueue);
-        currentListenerId = id;
-        console.log("[Monitor] 已开启 mouseMove 监听");
+;// ./src/task_queue.ts
+var TaskQueue = (function () {
+    function TaskQueue() {
+        this.tasks = [];
     }
-    else if (!shouldMonitor && currentListenerId !== null) {
-        fl.removeEventListener("mouseMove", currentListenerId);
-        currentListenerId = null;
-        console.log("[Monitor] 已关闭 mouseMove 监听，队列空闲");
+    TaskQueue.prototype.add = function (task) {
+        this.tasks.push(task);
+    };
+    TaskQueue.prototype.remove = function (id) {
+        var index = this.tasks.findIndex(function (t) { return t.id === id; });
+        if (index !== -1) {
+            this.tasks.splice(index, 1);
+            return true;
+        }
+        return false;
+    };
+    TaskQueue.prototype.getDueTasks = function () {
+        var now = Date.now();
+        return this.tasks
+            .filter(function (task) { return now - task.startTimeRecord >= task.delay; })
+            .map(function (task) { return task.id; });
+    };
+    TaskQueue.prototype.getMinRemainingTime = function () {
+        if (this.tasks.length === 0)
+            return null;
+        var now = Date.now();
+        return Math.min.apply(Math, this.tasks.map(function (task) { return task.startTimeRecord + task.delay - now; }));
+    };
+    TaskQueue.prototype.size = function () {
+        return this.tasks.length;
+    };
+    return TaskQueue;
+}());
+
+
+;// ./src/manager.ts
+var EventListenerManager = (function () {
+    function EventListenerManager(taskQueue) {
+        this.taskQueue = taskQueue;
+        this.currentListenerId = null;
+        this.currentEventType = null;
+        this.boundExecuteTasks = null;
     }
-}
-function checkQueue() {
+    EventListenerManager.prototype.updateStrategy = function () {
+        var _this = this;
+        var minRemainingTime = this.taskQueue.getMinRemainingTime();
+        var targetEvent = null;
+        if (minRemainingTime === null) {
+            targetEvent = null;
+        }
+        else if (minRemainingTime < 10000) {
+            targetEvent = EventListenerManager.MOUSE_MOVE;
+        }
+        else if (minRemainingTime >= 60000) {
+            targetEvent = EventListenerManager.LAYER_CHANGED;
+        }
+        else {
+            targetEvent = EventListenerManager.FRAME_CHANGED;
+        }
+        if (targetEvent !== this.currentEventType) {
+            if (this.currentListenerId !== null && this.currentEventType !== null) {
+                fl.removeEventListener(this.currentEventType, this.currentListenerId);
+            }
+            this.currentListenerId = null;
+            this.currentEventType = null;
+            this.boundExecuteTasks = null;
+            if (targetEvent !== null) {
+                this.boundExecuteTasks = function () { return executeTasks(_this.taskQueue); };
+                var id = fl.addEventListener(targetEvent, this.boundExecuteTasks);
+                this.currentListenerId = id;
+                this.currentEventType = targetEvent;
+                console.log("[Monitor] \u5207\u6362\u76D1\u542C\u5668\u81F3: ".concat(targetEvent));
+            }
+            else {
+                console.log("[Monitor] \u6240\u6709\u4EFB\u52A1\u7ED3\u675F\uFF0C\u76D1\u542C\u5668\u5DF2\u5173\u95ED");
+            }
+        }
+    };
+    EventListenerManager.MOUSE_MOVE = 'mouseMove';
+    EventListenerManager.FRAME_CHANGED = 'frameChanged';
+    EventListenerManager.LAYER_CHANGED = 'layerChanged';
+    return EventListenerManager;
+}());
+
+function executeTasks(taskQueue) {
     var now = Date.now();
-    for (var i = taskQueue.length - 1; i >= 0; i--) {
-        var task = taskQueue[i];
-        var actualElapsed = now - task.startTimeRecord;
-        var timeDiff = actualElapsed - task.delay;
-        if (actualElapsed >= task.delay) {
-            taskQueue.splice(i, 1);
-            updateMonitoring();
-            console.log("[Timer] \u4EFB\u52A1\u89E6\u53D1 | " +
-                "ID: ".concat(task.id, " | ") +
-                "\u8BBE\u5B9A\u5EF6\u8FDF: ".concat(task.delay, "ms | ") +
-                "\u5B9E\u9645\u8017\u65F6: ".concat(actualElapsed, "ms | ") +
-                "\u65F6\u95F4\u504F\u5DEE: ".concat(timeDiff, "ms"));
-            try {
-                task.callback();
-            }
-            catch (error) {
-                console.error("[Timer] \u56DE\u8C03\u6267\u884C\u51FA\u9519 | ID: ".concat(task.id), error);
-            }
+    var tasksToRemove = [];
+    var tasksToExecute = [];
+    for (var _i = 0, _a = taskQueue['tasks']; _i < _a.length; _i++) {
+        var task = _a[_i];
+        var elapsed = now - task.startTimeRecord;
+        if (elapsed >= task.delay) {
+            console.log('[Timer] 触发回调:', JSON.stringify({
+                taskId: task.id,
+                注册时间: new Date(task.startTimeRecord).toISOString(),
+                当前时间: new Date(now).toISOString(),
+                延迟设定: "".concat(task.delay, "ms"),
+                实际耗时: "".concat(elapsed, "ms"),
+                是否超时: elapsed > task.delay,
+                参数: task.args
+            }));
+            tasksToRemove.push(task.id);
+            tasksToExecute.push({
+                callback: task.callback,
+                args: task.args
+            });
+        }
+    }
+    for (var _b = 0, tasksToRemove_1 = tasksToRemove; _b < tasksToRemove_1.length; _b++) {
+        var id = tasksToRemove_1[_b];
+        taskQueue.remove(id);
+    }
+    for (var _c = 0, tasksToExecute_1 = tasksToExecute; _c < tasksToExecute_1.length; _c++) {
+        var task = tasksToExecute_1[_c];
+        try {
+            task.callback.apply(task, task.args);
+        }
+        catch (error) {
+            console.error('[Timer] 回调执行错误', error);
         }
     }
 }
+
+;// ./src/setTimeout.ts
+
+
+var globalId = 0;
+var taskQueue = new TaskQueue();
+var eventManager = new EventListenerManager(taskQueue);
 function setTimeout_setTimeout(callback, delay) {
+    var args = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        args[_i - 2] = arguments[_i];
+    }
     var id = globalId++;
     var task = {
         id: id,
         callback: callback,
         startTimeRecord: Date.now(),
         delay: delay,
+        args: args
     };
-    taskQueue.push(task);
-    updateMonitoring();
-    console.log("[Timer] \u6CE8\u518C #".concat(id, " (\u961F\u5217\u957F\u5EA6: ").concat(taskQueue.length, ")"));
+    taskQueue.add(task);
+    eventManager.updateStrategy();
     return id;
 }
 function setTimeout_clearTimeout(id) {
-    for (var i = 0; i < taskQueue.length; i++) {
-        if (taskQueue[i].id === id) {
-            taskQueue.splice(i, 1);
-            console.log("[Timer] \u53D6\u6D88 #".concat(id));
-            updateMonitoring();
-            return;
-        }
+    var wasRemoved = taskQueue.remove(id);
+    if (wasRemoved) {
+        eventManager.updateStrategy();
     }
 }
-window.setTimeout = setTimeout_setTimeout;
-window.clearTimeout = setTimeout_clearTimeout;
+
+;// ./src/setInterval.ts
+
+function setInterval_setInterval(callback, delay) {
+    var args = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        args[_i - 2] = arguments[_i];
+    }
+    var timerId;
+    function loop() {
+        callback.apply(void 0, args);
+        timerId = setTimeout_setTimeout(loop, delay);
+    }
+    timerId = setTimeout_setTimeout(loop, delay);
+    return timerId;
+}
+function setInterval_clearInterval(timerId) {
+    return setTimeout_clearTimeout(timerId);
+}
 
 ;// ./src/index.ts
+
 
 
 /******/ 	return __webpack_exports__;

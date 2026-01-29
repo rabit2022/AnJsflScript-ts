@@ -7,7 +7,7 @@
  * @description:
  */
 
-import {CheckCondition, CheckMode} from "../../types/selectionTypes";
+import {CheckCondition, CheckMode} from "../../types";
 
 
 // 提示消息配置（按模式组织）
@@ -70,22 +70,3 @@ export const MESSAGES: Record<CheckMode, Record<CheckCondition, string | null>> 
     }
 };
 
-// 条件校验逻辑
-export function checkCondition(condition: CheckCondition, length: number): boolean {
-    switch (condition) {
-        case CheckCondition.NoLimit:
-            return true;
-        case CheckCondition.AtLeastOne:
-            return length > 0;
-        case CheckCondition.NoneSelected:
-            return length === 0;
-        case CheckCondition.ExactlyOne:
-            return length === 1;
-        case CheckCondition.ExactlyTwo:
-            return length === 2;
-        case CheckCondition.MultipleSelected:
-            return length > 2;
-        default:
-            throw new Error(`未知条件: ${condition satisfies never}`);
-    }
-}

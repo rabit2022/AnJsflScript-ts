@@ -7,9 +7,9 @@
  * @description:
  */
 import { Result, Ok, Err } from "oxide.ts";
-import {LibraryCondition} from "../../../types/conditionTypes";
-import {CheckSelection} from "../../base/CheckSelection";
-import {CheckMode} from "../../../types/selectionTypes";
+import { LibraryCondition } from "../../types";
+import { CheckSelection } from "../base";
+import { CheckMode } from "../../types";
 
 /**
  * 检查传入的选中项目数组是否符合指定条件。
