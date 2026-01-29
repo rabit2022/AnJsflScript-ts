@@ -1,28 +1,23 @@
-
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "composite": false,     // 👈 关键！打包不需要 composite
-    "declaration": false,   // 现在可以安全关闭
-    "declarationMap": false,   // 👈 显式关闭
+        // ✅ 关键修复：关闭 composite 和 declaration
+    "composite": false,     // ✅ 单文件脚本，不需要项目引用
+    "declaration": false,   // ✅ 不需要给其他人提供类型定义
+    "declarationMap": false, // ✅ 节省空间
+    "emitDeclarationOnly": false, // ✅ 需要生成可运行的 JS 文件
 
-    "sourceMap": false,
-    "noEmit": false,
+    "sourceMap": false,  // ✅ JSFL 脚本通常不需要调试
+    "noEmit": false ,     // ✅ 需要生成 .js 文件运行
 
     "module": "es2020",        // 或 commonjs / esnext
-//    "target": "es2016",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-//    "sourceMap": true,
-//    "declaration": false
-  },
-  "include": [
-    "src",
 
-    // jsfl
-    "../../types/jsfl/types/**/*.d.ts",
-    // 全局的 类型定义文件
-    "../../types/myShim/*.d.ts"
-  ]
+    // 解析相对路径
+    "moduleResolution": "node",
+    
+    // es import
+    "esModuleInterop": true,//运行时
+    "allowSyntheticDefaultImports": true,//类型检查
+
+  }
 }

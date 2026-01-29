@@ -7,18 +7,26 @@ import {ScanSpec, walk} from "../nodejs/walk";
 import console from "node:console";
 import {toXULModulePaths} from "./toXULPaths";
 import {toPackageModulePaths} from "./toPackageModulePaths";
+import { shouldIgnoreFile } from "../nodejs/shouldIgnoreFile";
 
 /* ---------- 1. 路径与文件常量 ---------- */
 const REGION_RE =
     /(\/\/ region REQUIRE MODULES PATHS)[\s\S]*?(\/\/ endregion REQUIRE MODULES PATHS)/;
 
-/* ---------- 2. 工具 ---------- */
+const BLACK_LIST = new Set(['node_modules', 'Third', 'temp', '.git','test']); // 黑名单目录名
+
+
 /** 单文件 -> { 模块名: 相对 POSIX 路径(无扩展) } */
 function toRequireModulePaths(
     absoluteFile: string,
     root = $ProjectFileDir$
 ): Record<string, string> {
     const rel = path.relative(root, absoluteFile);
+    if (shouldIgnoreFile(absoluteFile,  BLACK_LIST)) {
+        // console.log('Excluded:', absoluteFile);
+        return {};
+    }
+
     const posix = rel.split(path.sep).join("/");
     const name = path.parse(absoluteFile).name;
     return {[name]: posix.replace(/\.[^.]+$/, "")};

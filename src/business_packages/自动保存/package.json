@@ -1,5 +1,5 @@
 {
-  "name": "01.虾仁摇头",
+  "name": "自动保存",
   "version": "1.0.0",
   "description": "",
   "declaration": true,
@@ -10,7 +10,9 @@
   ],
   "//": "npm run build -w @anjsfl/validation",
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "test": "jest",
+    "build": "webpack --config webpack.config.js",
+    "build:test": "webpack --config webpack.test.js"
   },
   "publishConfig": {
     "access": "public"

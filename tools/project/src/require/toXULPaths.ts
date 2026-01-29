@@ -16,7 +16,7 @@ export async function toXULModulePaths(
         const moduleMappings = JSON.parse(jsonContent);
 
         // 获取 JSON 文件所在目录的绝对路径
-        const jsonDir = path.dirname(absoluteFile);
+        // const jsonDir = path.dirname(absoluteFile);
 
         // 转换相对路径为绝对路径
         const result: Record<string, string> = {};
@@ -39,24 +39,3 @@ export async function toXULModulePaths(
     }
 }
 
-// 使用示例
-async function main() {
-    const jsonPath = 'H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL\\modules.json';
-    const modulePaths = await toPackageModulePaths(jsonPath);
-
-    console.log('Module Paths:', modulePaths);
-    // 输出示例:
-    // {
-    //   "@xjsfl/XUL": "H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL\\src\\XUL.jsfl",
-    //   "@xjsfl/XUL/XML": "H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL\\src\\XML.jsfl",
-    //   ...
-    // }
-
-    return modulePaths;
-}
-
-if (require.main === module) {
-    (async () => {
-        await main()
-    })();
-}

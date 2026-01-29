@@ -45,39 +45,10 @@ export function findRepoRoot(start: string): string {
     return path.resolve(start); // fallback
 }
 
-// if (require.main === module) {
-//     // (async () => {
-//     //
-//     // })();
-//     const repo = findRepoRoot(__dirname);
-//     console.log(repo);
-// }
-
-
-
-
-/**
- * 尝试读取指定目录下的 modules.json 文件并解析为 JSON 对象。
- * 如果文件不存在或无法解析，返回 null。
- */
-export async function readModulesJson(dir: string): Promise<Record<string, any> | null> {
-    const modulesPath = path.join(dir, 'modules.json');
-    try {
-        const content = await fs_promise.readFile(modulesPath, 'utf-8');
-        try {
-            return JSON.parse(content);
-        } catch (parseError) {
-            console.warn(`Warning: modules.json at ${modulesPath} is invalid JSON.`, parseError.message);
-            return null;
-        }
-    } catch (error) {
-        // 文件不存在或无权限等
-        if (error.code === 'ENOENT') {
-            // 可选：不打印，静默忽略
-            // console.debug(`modules.json not found in ${dir}`);
-        } else {
-            console.warn(`Failed to read modules.json in ${dir}:`, error.message);
-        }
-        return null;
-    }
+if (require.main === module) {
+    // (async () => {
+    //
+    // })();
+    const repo = findRepoRoot(__dirname);
+    console.log(repo);
 }

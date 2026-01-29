@@ -1,14 +1,17 @@
+//npm run build -w @anjsfl/validation
 
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "./dist",
-    // 避免和 webpack 的 dist 冲突
 
-    //    "type": "module",
+
+    // 防止生成helper,导致报错
+    "importHelpers": false,
+
     "paths": [],
-    "importHelpers": true,
+
     "types": [
       "jest"
     ],
@@ -17,22 +20,32 @@
       "es5",
       "es6"
     ],
-    // 👈 关键！只允许 ES5 的全局 API
 
-    // 👇 关键修复
-    "composite": true,
-    "declaration": true,
-    // 必须为 true
-    "declarationMap": true,
-    "emitDeclarationOnly": false
+    // 解析相对路径
+    "moduleResolution": "node",
+    
+    // es import
+    "esModuleInterop": true,//运行时
+    "allowSyntheticDefaultImports": true,//类型检查
+
+
+    // ✅ 关键修复：关闭 composite 和 declaration
+    "composite": false,     // ✅ 单文件脚本，不需要项目引用
+    "declaration": false,   // ✅ 不需要给其他人提供类型定义
+    "declarationMap": false, // ✅ 节省空间
+    "emitDeclarationOnly": false // ✅ 需要生成可运行的 JS 文件
   },
   "include": [
     "test",
     "src",
 
+    // region TYPES
     // jsfl
-    "../../types/jsfl/types/**/*.d.ts",
+    "../../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
-    "../../types/myShim/*.d.ts"
+    "../../../types/myShim/*.d.ts"
+// endregion TYPES
   ]
 }
+
+

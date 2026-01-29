@@ -7,6 +7,7 @@
     "removeComments": true,
     //    "outFile": "./dist/Events.js", // JSFL 通常是一个文件，所以用 outFile 合并
 
+    "moduleResolution": "node",
 
     "rootDir": "src",
     "outDir": "./dist",

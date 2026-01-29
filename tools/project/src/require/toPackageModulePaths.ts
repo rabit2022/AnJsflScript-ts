@@ -2,18 +2,12 @@
 // 可配置的忽略目录集合（小写，用于匹配）
 import path from "path";
 import { $ProjectFileDir$ } from "../ProjectFileDir";
-import { findNearestPackageJson } from "../nodejs/findPackage";
+import { findNearestPackageJson, readModulesJson } from "../nodejs/findPackage";
+import { shouldIgnoreFile } from "../nodejs/shouldIgnoreFile";
 
-const ignoredDirsArray = ["test", "tests", "dist", "build", "__tests__", "coverage", "XUL"];
+const ignoredDirsArray = ["test", "tests", "dist", "build", "__tests__", "coverage"];
 const IGNORED_DIRS = new Set(ignoredDirsArray.map(dir => dir.toLowerCase()));
 
-/**
- * 判断路径中是否包含需要忽略的目录（如 test, dist 等）
- */
-function shouldIgnoreFile(absoluteFile: string): boolean {
-    const parts = absoluteFile.split(path.sep);
-    return parts.some((part) => IGNORED_DIRS.has(part.toLowerCase()));
-}
 
 /**
  * 将绝对文件路径映射为模块路径：{ [moduleName]: relativePosixPathWithoutExt }
@@ -24,7 +18,7 @@ export async function toPackageModulePaths(
 ): Promise<Record<string, string>> {
     // console.log(absoluteFile)
     // 1. 忽略 test/dist 等目录中的文件
-    if (shouldIgnoreFile(absoluteFile)) {
+    if (shouldIgnoreFile(absoluteFile, IGNORED_DIRS)) {
         // console.log(absoluteFile)
         return {};
     }
@@ -37,6 +31,15 @@ export async function toPackageModulePaths(
     // 3. 确定模块名
     let moduleName: string;
     if (found?.pkg?.name) {
+        // const { dir } = found;
+
+        // 尝试读取同目录下的 modules.json
+        const modulesPath = readModulesJson(found.dir);
+        // 有这个文件，忽略
+        if (modulesPath === null) {
+            return {};
+        }
+
         moduleName = found.pkg.name;
     } else {
         // 使用文件名（不含扩展名）作为 fallback
@@ -50,4 +53,5 @@ export async function toPackageModulePaths(
 
     return { [moduleName]: posixWithoutExt };
 }
+
 // endregion toPackageModulePaths
