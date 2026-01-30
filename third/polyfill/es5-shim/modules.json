@@ -1,0 +1,4 @@
+{
+  "es5-sham": "third/polyfill/es5-shim/es5-sham.jsfl",
+  "es5-shim":"third/polyfill/es5-shim/es5-shim.jsfl"
+}

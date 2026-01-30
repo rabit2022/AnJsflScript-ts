@@ -61,7 +61,7 @@
  * 4. **跨域问题**：
  *    - Cookie 默认只在设置它们的域名下可用。如果需要跨域访问，需要在设置 cookie 时指定 `domain` 属性。
  */
-define(["universal-cookie"], function(Cookie) {
+define(["@third/universal-cookie"], function(Cookie) {
 // document.cookie
     /**
      * 由于 `document.cookie` 的 特殊性，我们需要自定义一个属性来访问和操作 cookie。

@@ -7,7 +7,7 @@ import path from 'path';
  * @param absoluteFile Absolute path to the modules.json file
  * @returns Promise with Record<string, string> mapping module names to absolute paths
  */
-export async function toXULModulePaths(
+export async function toPackageModuleJsons(
     absoluteFile: string,
 ): Promise<Record<string, string>> {
     try {

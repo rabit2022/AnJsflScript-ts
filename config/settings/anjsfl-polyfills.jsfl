@@ -33,7 +33,7 @@
         "console",
 
         // loglevel,store.js 依赖 document.cookie
-        "document-cookie"
+        "@polyfill/cookie"
     ]);
 
     require(["loglevel", "Tips","lodash"], function(log, Tips,_) {

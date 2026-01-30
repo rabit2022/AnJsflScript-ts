@@ -1,0 +1,4 @@
+{
+  "@third/universal-cookie": "third/polyfill/cookie/universal-cookie/universal-cookie.jsfl",
+  "@polyfill/cookie":"third/polyfill/cookie/universal-cookie/document-cookie.jsfl"
+}

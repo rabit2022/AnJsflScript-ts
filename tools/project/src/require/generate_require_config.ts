@@ -5,8 +5,8 @@ import * as fs from "fs/promises";
 // import * as fs from 'fs'; // ← 使用普通 fs，不是 fs/promises
 import {ScanSpec, walk} from "../nodejs/walk";
 import console from "node:console";
-import {toXULModulePaths} from "./toXULPaths";
-import {toPackageModulePaths} from "./toPackageModulePaths";
+import {toPackageModuleJsons} from "./toXULPaths";
+import {toPackageModules} from "./toPackageModules";
 import { shouldIgnoreFile } from "../nodejs/shouldIgnoreFile";
 
 /* ---------- 1. 路径与文件常量 ---------- */
@@ -50,19 +50,27 @@ export async function buildRequireConfig(): Promise<void> {
         dirBlack: {part: ["node_modules"]},
         fileWhite: {part: [".jsfl"]}
     };
+    const thirdMouduleJsons: ScanSpec = {
+        roots: [THIRD],
+        dirBlack: {part: ["node_modules"]},
+        fileWhite: {part: ["modules.json"]}
+    };
+
+
     const libMoudules: ScanSpec = {
         roots: [LIB_OUT],
         dirBlack: {part: ["node_modules"]},
         fileWhite: {part: [".jsfl"]}
     };
+
+
     const packageModules: ScanSpec = {
         roots: [PACKAGES],
         dirBlack: {part: ["node_modules"]},
         fileWhite: {part: [".jsfl"]}
     };
-
     // const XULModules = path.join(PACKAGES, "xjsfl","XUL");
-    const packageXULModules: ScanSpec = {
+    const packageModulesJsons: ScanSpec = {
         roots: [PACKAGES],
         dirBlack: {part: ["node_modules"]},
         fileWhite: {part: ["modules.json"]}
@@ -71,11 +79,13 @@ export async function buildRequireConfig(): Promise<void> {
 
 
     const map: Record<string, string> = {};
-    for await (const p of walk(thirdMoudules))Object.assign(map, toRequireModulePaths(p));
+    for await (const p of walk(thirdMoudules))Object.assign(map,await toPackageModules(p));
+    for await (const p of walk(thirdMouduleJsons))Object.assign(map,await toPackageModuleJsons(p));
     for await (const p of walk(libMoudules)) Object.assign(map, toRequireModulePaths(p));
-    for await (const p of walk(packageModules)) Object.assign(map,await toPackageModulePaths(p));
-    for await (const p of walk(packageXULModules)) Object.assign(map,await toXULModulePaths(p));
+    for await (const p of walk(packageModules)) Object.assign(map,await toPackageModules(p));
+    for await (const p of walk(packageModulesJsons)) Object.assign(map,await toPackageModuleJsons(p));
 
+    // console.log(map)
     const indented =
         JSON.stringify(map, null, 4)
             .split("\n")

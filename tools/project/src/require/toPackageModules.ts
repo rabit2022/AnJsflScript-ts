@@ -12,7 +12,7 @@ const IGNORED_DIRS = new Set(ignoredDirsArray.map(dir => dir.toLowerCase()));
 /**
  * 将绝对文件路径映射为模块路径：{ [moduleName]: relativePosixPathWithoutExt }
  */
-export async function toPackageModulePaths(
+export async function toPackageModules(
     absoluteFile: string,
     root: string = $ProjectFileDir$ // 假设 $ProjectFileDir$ 是项目根目录，用 process.cwd() 替代
 ): Promise<Record<string, string>> {
@@ -23,10 +23,13 @@ export async function toPackageModulePaths(
         return {};
     }
 
+    // console.log(absoluteFile)
     const fileDir = path.dirname(absoluteFile);
 
     // 2. 查找最近的 package.json
     const found = await findNearestPackageJson(fileDir);
+
+    // console.log(found)
 
     // 3. 确定模块名
     let moduleName: string;
@@ -34,9 +37,10 @@ export async function toPackageModulePaths(
         // const { dir } = found;
 
         // 尝试读取同目录下的 modules.json
-        const modulesPath = readModulesJson(found.dir);
+        const modulesPath = await readModulesJson(found.dir);
+        // console.log(modulesPath);
         // 有这个文件，忽略
-        if (modulesPath === null) {
+        if (modulesPath !== null) {
             return {};
         }
 
@@ -46,10 +50,14 @@ export async function toPackageModulePaths(
         moduleName = path.basename(absoluteFile, path.extname(absoluteFile));
     }
 
+    // console.log(moduleName);
+
     // 4. 计算相对于 root 的 POSIX 路径（不含扩展名）
     const rel = path.relative(root, absoluteFile);
     const posix = rel.split(path.sep).join("/");
     const posixWithoutExt = posix.replace(/\.[^.]+$/, "");
+    // console.log(posix);
+    // console.log(posixWithoutExt);
 
     return { [moduleName]: posixWithoutExt };
 }

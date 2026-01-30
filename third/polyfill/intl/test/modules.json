@@ -1,0 +1,5 @@
+{
+  "@third/Intl": "third/polyfill/intl/Intl.jsfl",
+  "@third/intl-locale-data":"third/polyfill/intl/intl-locale-data.jsfl",
+  "Intl": "third/polyfill/intl/Intl-config.jsfl"
+}

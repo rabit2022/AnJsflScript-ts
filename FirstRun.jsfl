@@ -98,10 +98,10 @@
         window.AnJsflScript.$ProjectFileDir$ = getcwd();
 
         var config = {
-            "require-js": "third/require/requirejs/require-js"
+            "requirejs": "third/require/requirejs/require-js"
         };
         // 导入模块,相对路径导入
-        importFlashScripts(config["require-js"]);
+        importFlashScripts(config["requirejs"]);
 
         require([
             "./config/require/require.config",// 导入require模块配置文件
