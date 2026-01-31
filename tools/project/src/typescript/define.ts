@@ -19,9 +19,9 @@ async function processDefined(fullPath: string) {
     const srcTsRelPath = relPath.replace(/\.js$/, ".ts");
     const header = `// 这个文件由脚本 ${srcTsRelPath} 自动生成，任何手动修改都将会被覆盖.\n\n`;
 
-    // const wrapped = `(function(){\n${raw}\n})();`;
+    const wrapped = `(function(){\n${raw}\n})();`;
 
-    await fs.writeFile(targetJsfl, header + raw, "utf-8");
+    await fs.writeFile(targetJsfl, header + wrapped, "utf-8");
     console.log(`✅ ${fullPath} -> ${targetJsfl}`);
 
     await add_headers_to_file(targetJsfl);

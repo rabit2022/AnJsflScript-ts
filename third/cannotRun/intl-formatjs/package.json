@@ -1,5 +1,5 @@
 {
-  "name": "@formatjs/intl-datetimeformat",
+  "name": "@formatjs/intl",
   "description": "Intl.DateTimeFormat polyfill",
   "version": "7.2.0",
   "license": "MIT",

@@ -55,6 +55,7 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "@xjsfl/UI": "1.0.0",
+    "micromatch": "4.0.8",
     "oxide.ts": "1.1.0"
   }
 }

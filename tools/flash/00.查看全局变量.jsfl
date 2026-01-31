@@ -10,11 +10,11 @@
 (function() {
     var PROPERTY = window;
 
-    var PROPERTY = FLAirAndroidExt;
-
-    // var PROPERTY = Array
-    // var PROPERTY = XML;
-    var PROPERTY = document;
+    // var PROPERTY = FLAirAndroidExt;
+    //
+    // // var PROPERTY = Array
+    // // var PROPERTY = XML;
+    // var PROPERTY = document;
 
 
     // var doc = fl.getDocumentDOM(); //文档

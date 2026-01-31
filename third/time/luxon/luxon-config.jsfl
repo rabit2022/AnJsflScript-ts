@@ -7,6 +7,8 @@
  * @description:
  */
 
-define(["symbol-es6","intl","es7-shim","@third/luxon"], function(Symbol,Intl,_,luxon) {
+// "@formatjs/intl"
+define(["symbol-es6","intl","es7-shim","@third/luxon"],
+    function(Symbol,Intl,_,luxon) {
     return luxon;
 });

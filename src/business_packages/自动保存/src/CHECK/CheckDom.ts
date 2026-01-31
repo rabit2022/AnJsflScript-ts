@@ -31,4 +31,5 @@ if (result.isOk()) {
 } else {
     const errorMsg = result.unwrapErr(); // 类型是 string
     console.error("文档无效:", errorMsg);
+    process.exit();
 }
