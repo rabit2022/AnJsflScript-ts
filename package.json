@@ -32,6 +32,7 @@
     "@types/jest": "30.0.0",
     "@types/lodash-es": "4.17.12",
     "@types/loglevel": "1.6.3",
+    "@types/micromatch": "4.0.10",
     "@types/node": "25.0.7",
     "@types/path-browserify": "1.0.3",
     "@types/xregexp": "4.4.0",
