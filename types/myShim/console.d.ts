@@ -58,6 +58,8 @@ interface Console {
 
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/console/warn_static) */
     warn(...data: any[]): void;
+
+    stack(...data: any[]): void;
 }
 
 declare var console: Console;

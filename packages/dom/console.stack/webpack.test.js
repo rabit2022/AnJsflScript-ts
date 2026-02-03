@@ -116,7 +116,7 @@ module.exports = {
 
 
     // 👇 关键：将 lodash 标记为外部依赖（不打包）
-    externals:["lodash"],
+    externals:["lodash",'console.stack'],
     target: ['web', 'es5'],
     stats: {
         modules: false,

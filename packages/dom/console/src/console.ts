@@ -57,7 +57,7 @@ function pathResolve(target: string, base: string): string {
 
         // 非子目录
         if (scriptPath.indexOf(basePath) !== 0) {
-            fl.trace(`⚠️ 脚本不在项目目录下,可能在事件循环中 ${scriptPath},${basePath}`);
+            // fl.trace(`⚠️ 脚本不在项目目录下,可能在事件循环中 ${scriptPath},${basePath}`);
             return scriptPath;
         }
 
@@ -133,11 +133,11 @@ class EnhancedConsole {
     // 日志方法
     // ========================================================================
 
-    trace(...args: any[]): void {
-        const msg = formatMessage(arguments);
-        trace("\n⚡admin TRACE ❯❯ " + msg + "\n");
-        writeToLog(msg, LogLevel.TRACE, 3);
-    }
+    // trace(...args: any[]): void {
+    //     const msg = formatMessage(arguments);
+    //     trace("\n⚡admin TRACE ❯❯ " + msg + "\n");
+    //     writeToLog(msg, LogLevel.TRACE, 3);
+    // }
 
     debug(...args: any[]): void {
         const msg = formatMessage(arguments);
@@ -258,6 +258,25 @@ class EnhancedConsole {
         this.timers = {};
         this.counters = {};
         this.info("All timers and counters have been reset.");
+    }
+
+    private groupStack:string[] = [];
+
+    group(label: string = "default"):void {
+        const indent = '  '.repeat(this.groupStack.length);
+        const lineLength = Math.max(30 - label.length - this.groupStack.length * 2, 10);
+
+        trace(`${indent}┌─ ${label} ${'─'.repeat(lineLength)}┐`);
+        this.groupStack.push(label);
+    }
+    groupEnd() {
+        if (this.groupStack.length === 0) return;
+
+        const label = this.groupStack.pop() || "";
+        const indent = '  '.repeat(this.groupStack.length);
+        const lineLength = Math.max(30 - label.length - this.groupStack.length * 2, 10);
+
+        trace(`${indent}└─ ${label} ${'─'.repeat(lineLength)}┘`);
     }
 }
 

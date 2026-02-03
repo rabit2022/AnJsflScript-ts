@@ -1,0 +1,62 @@
+Stack Trace:
+id:1770134229137 timestamp:2026-02-03T15:57:09.137Z message:boom count:1
+
+┌─────────┬────────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┬────────────┬──────────────────────────┬─────────┬───────────┬───────────┐
+│ (index) │ functionName       │ fileName                                                                                                                          │ lineNumber │ timestamp                │ message │ source    │ args      │
+├─────────┼────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────┼─────────┼───────────┼───────────┤
+│ 0       │ StackTracer.trace  │ h:\project\js\AnJsflScript-ts\packages\dom\console.stack\src\api\stackTracer.ts                                                   │ 33         │ 2026-02-03T15:57:09.130Z │ boom    │ undefined │ undefined │
+├─────────┼────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────┼─────────┼───────────┼───────────┤
+│ 1       │ <anonymous>        │ h:\project\js\AnJsflScript-ts\packages\dom\console.stack\test\flash\test.ts                                                       │ 5          │ 2026-02-03T15:57:09.131Z │ boom    │ undefined │ undefined │
+├─────────┼────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────┼─────────┼───────────┼───────────┤
+│ 2       │ Object.<anonymous> │ h:\project\js\AnJsflScript-ts\packages\dom\console.stack\test\flash\test.ts                                                       │ 5          │ 2026-02-03T15:57:09.131Z │ boom    │ undefined │ undefined │
+├─────────┼────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────┼─────────┼───────────┼───────────┤
+│ 3       │ Module._compile    │ node:internal/modules/cjs/loader                                                                                                  │ 1376       │ 2026-02-03T15:57:09.131Z │ boom    │ undefined │ undefined │
+├─────────┼────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────┼─────────┼───────────┼───────────┤
+│ 4       │ Object.transformer │ D:\01_software\06_programme\01_ide\WebStorm 2024.3.5\plugins\nodeJS\js\ts-file-loader\node_modules\tsx\dist\register-DfubRCxM.cjs │ 2          │ 2026-02-03T15:57:09.131Z │ boom    │ undefined │ undefined │
+└─────────┴────────────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┴────────────┴──────────────────────────┴─────────┴───────────┴───────────┘
+
+
+    
+Stack Trace:
+id:1770134412946 timestamp:2026-02-03T16:00:12.946Z message:boom count:1
+
+[
+  {
+    "functionName": "StackTracer.trace",
+    "fileName": "h:\\project\\js\\AnJsflScript-ts\\packages\\dom\\console.stack\\src\\api\\stackTracer.ts",
+    "lineNumber": 32,
+    "timestamp": "2026-02-03T16:00:12.944Z",
+    "message": "boom"
+  },
+  {
+    "functionName": "<anonymous>",
+    "fileName": "h:\\project\\js\\AnJsflScript-ts\\packages\\dom\\console.stack\\test\\flash\\test.ts",
+    "lineNumber": 5,
+    "timestamp": "2026-02-03T16:00:12.946Z",
+    "message": "boom"
+  },
+  {
+    "functionName": "Object.<anonymous>",
+    "fileName": "h:\\project\\js\\AnJsflScript-ts\\packages\\dom\\console.stack\\test\\flash\\test.ts",
+    "lineNumber": 7,
+    "timestamp": "2026-02-03T16:00:12.946Z",
+    "message": "boom"
+  },
+  {
+    "functionName": "Module._compile",
+    "fileName": "node:internal/modules/cjs/loader",
+    "lineNumber": 1376,
+    "timestamp": "2026-02-03T16:00:12.946Z",
+    "message": "boom"
+  },
+  {
+    "functionName": "Object.transformer",
+    "fileName": "D:\\01_software\\06_programme\\01_ide\\WebStorm 2024.3.5\\plugins\\nodeJS\\js\\ts-file-loader\\node_modules\\tsx\\dist\\register-DfubRCxM.cjs",
+    "lineNumber": 2,
+    "timestamp": "2026-02-03T16:00:12.946Z",
+    "message": "boom"
+  }
+]
+
+
+    

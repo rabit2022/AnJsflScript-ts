@@ -12,22 +12,19 @@ return /******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
 var __webpack_exports__ = {};
 
-function uriToPath(uri) {
-    if (uri.indexOf("file:///") === 0) {
-        uri = uri.substring(8);
-    }
-    if (uri.length >= 2 && uri.charAt(1) === "|") {
-        uri = uri.charAt(0) + ":" + uri.substring(2);
-    }
-    return uri.replace(/\//g, "\\");
-}
+var uriToPath = FLfile.uriToPlatformPath;
 function getFilename() {
     return fl.scriptURI ? uriToPath(fl.scriptURI) : "";
 }
 function getDirname() {
     var fp = getFilename();
-    var i = fp.lastIndexOf("\\");
-    return i === -1 ? "" : fp.substring(0, i);
+    if (!fp) {
+        return "";
+    }
+    var winIndex = fp.lastIndexOf("\\");
+    var unixIndex = fp.lastIndexOf("/");
+    var lastIndex = Math.max(winIndex, unixIndex);
+    return lastIndex === -1 ? "" : fp.substring(0, lastIndex);
 }
 Object.defineProperty(window, "__filename", {
     get: function () {

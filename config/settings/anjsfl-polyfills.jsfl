@@ -36,17 +36,17 @@
         "@polyfill/cookie"
     ]);
 
-    require(["loglevel", "Tips","lodash"], function(log, Tips,_) {
+    require(["loglevel", "Tips"], function(log, Tips) {
         // 禁用log
         log.setDefaultLevel(log.levels.SILENT);
 
+
+
         // 显示提示信息
-        const {
-            alertMessage
-        } = Tips;
+        const { alertMessage } = Tips;
         alertMessage("loading success!");
         // if (!(window.AnJsflScript.$ProjectFileDir$.indexOf("AnJsflScript") !== -1)) {
-        if (!_.includes(window.AnJsflScript.$ProjectFileDir$,"AnJsflScript")) {
+        if (!window.AnJsflScript.$ProjectFileDir$.includes("AnJsflScript")) {
             alertMessage("loading might be not allowed!");
         }
     });

@@ -14,7 +14,9 @@ interface AnJsflScript {
         AnJsflScript: string,
         Log: string,
         flash: string,
-        swf: string
+        swf: string,
+
+        [key: string]: string;
     };
 }
 

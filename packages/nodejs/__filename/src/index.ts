@@ -5,19 +5,10 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// ========== 工具函数（从 console.ts 复用逻辑）==========
-/**
- * 将 URI 转为本地平台路径（处理 file:///H|/ → H:/）
  */
-function uriToPath(uri: string): string {
-    if (uri.indexOf("file:///") === 0) {
-        uri = uri.substring(8);
-    }
-    if (uri.length >= 2 && uri.charAt(1) === "|") {
-        uri = uri.charAt(0) + ":" + uri.substring(2);
-    }
-    return uri.replace(/\//g, "\\"); // Windows 风格路径（JSFL 通常运行在 Windows）
-}
+
+const uriToPath=FLfile.uriToPlatformPath;
+
 
 // 可选：添加辅助函数（放在 process.ts 末尾或单独模块）
 function getFilename(): string {
@@ -26,8 +17,16 @@ function getFilename(): string {
 
 function getDirname(): string {
     const fp = getFilename();
-    const i = fp.lastIndexOf("\\");
-    return i === -1 ? "" : fp.substring(0, i);
+    if (!fp) {
+        return "";
+    }
+
+    // 支持 Windows 和 Unix/Linux 路径分隔符
+    const winIndex = fp.lastIndexOf("\\");
+    const unixIndex = fp.lastIndexOf("/");
+    const lastIndex = Math.max(winIndex, unixIndex);
+
+    return lastIndex === -1 ? "" : fp.substring(0, lastIndex);
 }
 
 Object.defineProperty(window, "__filename", {

@@ -91,7 +91,6 @@ function pathResolve(target, base) {
         var scriptPath = uriToPath(target);
         var basePath = uriToPath(base);
         if (scriptPath.indexOf(basePath) !== 0) {
-            fl.trace("\u26A0\uFE0F \u811A\u672C\u4E0D\u5728\u9879\u76EE\u76EE\u5F55\u4E0B,\u53EF\u80FD\u5728\u4E8B\u4EF6\u5FAA\u73AF\u4E2D ".concat(scriptPath, ",").concat(basePath));
             return scriptPath;
         }
         if (basePath.charAt(basePath.length - 1) !== "/")
@@ -129,16 +128,8 @@ var EnhancedConsole = (function () {
     function EnhancedConsole() {
         this.timers = {};
         this.counters = {};
+        this.groupStack = [];
     }
-    EnhancedConsole.prototype.trace = function () {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        var msg = formatMessage(arguments);
-        trace("\n⚡admin TRACE ❯❯ " + msg + "\n");
-        writeToLog(msg, LogLevel.TRACE, 3);
-    };
     EnhancedConsole.prototype.debug = function () {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -246,6 +237,21 @@ var EnhancedConsole = (function () {
         this.timers = {};
         this.counters = {};
         this.info("All timers and counters have been reset.");
+    };
+    EnhancedConsole.prototype.group = function (label) {
+        if (label === void 0) { label = "default"; }
+        var indent = '  '.repeat(this.groupStack.length);
+        var lineLength = Math.max(30 - label.length - this.groupStack.length * 2, 10);
+        trace("".concat(indent, "\u250C\u2500 ").concat(label, " ").concat('─'.repeat(lineLength), "\u2510"));
+        this.groupStack.push(label);
+    };
+    EnhancedConsole.prototype.groupEnd = function () {
+        if (this.groupStack.length === 0)
+            return;
+        var label = this.groupStack.pop() || "";
+        var indent = '  '.repeat(this.groupStack.length);
+        var lineLength = Math.max(30 - label.length - this.groupStack.length * 2, 10);
+        trace("".concat(indent, "\u2514\u2500 ").concat(label, " ").concat('─'.repeat(lineLength), "\u2518"));
     };
     return EnhancedConsole;
 }());

@@ -1,7 +1,7 @@
 // src/storage/fileStore.ts
 
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs';
+import * as  path from 'path-browserify';
 import { Paths } from '../config/paths';
 import { SaveData } from '../types';
 
