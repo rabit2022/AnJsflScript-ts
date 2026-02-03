@@ -5,6 +5,8 @@ import 'console.stack';
 console.stack(new Error('boom'),{
     format:'json'
 });
+console.stack(new Error('boom'));
+
 
 // stackTracer.trace('test', {
 //   format: 'table'
