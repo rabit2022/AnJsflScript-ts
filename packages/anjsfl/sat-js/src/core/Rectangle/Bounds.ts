@@ -33,6 +33,7 @@ import { IsBoundsLike } from "../../check/boundsCheck";
 import { Size } from "../Transform/Size";
 import { SizeLike } from "../../types/sizeType";
 import { IsVectorLike } from "../../check/vectorCheck";
+import {Box} from "./Box";
 
 export class Bounds extends SObject implements BoundsLike {
     public left = 0;
@@ -155,10 +156,6 @@ export class Bounds extends SObject implements BoundsLike {
         return this.bottom - this.top;
     }
 
-    // get center(): Vector {
-    //     return this.centerVector; // 确保这个方法存在
-    // }
-
     /**
      * 矩形中心点
      * @returns {Vector} 点
@@ -171,24 +168,33 @@ export class Bounds extends SObject implements BoundsLike {
         return new Size(this.width, this.height);
     }
 
+    get leftTop(): Vector{
+        return new Vector(this.left, this.top);
+    }
+
     /**
      * 矩形 偏移后的 矩形
      * 移动矩形的边界
      * @param {Number|Vector|Bounds} offset 偏移量
      * @returns {Bounds} 矩形
      */
-    addOffset(offset: number | Vector | Bounds): Bounds {
+    addOffset(offset: number | Vector | Bounds): this {
         if (typeof offset === "number") {
             offset = new Bounds(offset, offset, offset, offset);
         } else if (IsVectorLike(offset)) {
             offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
         }
-        return new Bounds(
-            this.left + offset.left,
-            this.top + offset.top,
-            this.right + offset.right,
-            this.bottom + offset.bottom
-        );
+        // return new Bounds(
+        //     this.left + offset.left,
+        //     this.top + offset.top,
+        //     this.right + offset.right,
+        //     this.bottom + offset.bottom
+        // );
+        this.left += offset.left;
+        this.top += offset.top;
+        this.right += offset.right;
+        this.bottom += offset.bottom;
+        return this;
     }
 
     /**
@@ -197,18 +203,23 @@ export class Bounds extends SObject implements BoundsLike {
      * @param {Number|Vector|Bounds} offset 偏移量
      * @returns {Bounds} 矩形
      */
-    subOffset(offset: number | Vector | Bounds): Bounds {
+    subOffset(offset: number | Vector | Bounds): this {
         if (typeof offset === "number") {
             offset = new Bounds(offset, offset, offset, offset);
         } else if (offset instanceof Vector) {
             offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
         }
-        return new Bounds(
-            this.left - offset.left,
-            this.top - offset.top,
-            this.right - offset.right,
-            this.bottom - offset.bottom
-        );
+        // return new Bounds(
+        //     this.left - offset.left,
+        //     this.top - offset.top,
+        //     this.right - offset.right,
+        //     this.bottom - offset.bottom
+        // );
+        this.left -= offset.left;
+        this.top -= offset.top;
+        this.right -= offset.right;
+        this.bottom -= offset.bottom;
+        return this;
     }
 
     /**
@@ -252,7 +263,7 @@ export class Bounds extends SObject implements BoundsLike {
      * @param whichDirection 扩展方向，默认为所有方向
      * @returns 新的 Bounds 对象
      */
-    expand(size: number, whichDirection: InsetDirection = InsetDirection.All): Bounds {
+    expand(size: number, whichDirection: InsetDirection = InsetDirection.All): this {
         const offset = Bounds.createDirectionalOffset(size, whichDirection);
         return this.addOffset(offset);
     }
@@ -263,7 +274,7 @@ export class Bounds extends SObject implements BoundsLike {
      * @param whichDirection 收缩方向，默认为所有方向
      * @returns 新的 Bounds 对象
      */
-    shrink(size: number, whichDirection: InsetDirection = InsetDirection.All): Bounds {
+    shrink(size: number, whichDirection: InsetDirection = InsetDirection.All): this {
         const offset = Bounds.createDirectionalOffset(size, whichDirection);
         return this.subOffset(offset);
     }
@@ -427,14 +438,19 @@ export class Bounds extends SObject implements BoundsLike {
      * @param {Bounds} other - 要合并的另一个矩形。
      * @return {Bounds} 合并后的矩形。
      */
-    union(other: Bounds): Bounds {
+    union(other: Bounds): this {
         // 计算合并后的矩形的左上角和右下角坐标
         const minLeft = Math.min(this.left, other.left);
         const minTop = Math.min(this.top, other.top);
         const maxRight = Math.max(this.right, other.right);
         const maxBottom = Math.max(this.bottom, other.bottom);
 
-        return new Bounds(minLeft, minTop, maxRight, maxBottom);
+        // return new Bounds(minLeft, minTop, maxRight, maxBottom);
+        this.left = minLeft;
+        this.top = minTop;
+        this.right = maxRight;
+        this.bottom = maxBottom;
+        return this;
     }
 
     /**
@@ -446,7 +462,7 @@ export class Bounds extends SObject implements BoundsLike {
     rotate(
         angle: number,
         whichCorner: RelativePosition = RelativePosition.Center
-    ): Bounds {
+    ): this {
         // 将角度转换为弧度
         const radians = angle * (Math.PI / 180);
 
@@ -473,7 +489,9 @@ export class Bounds extends SObject implements BoundsLike {
         ];
 
         // 从旋转后的点集计算新的轴对齐包围盒
-        return Bounds.fromVectors(points);
+        const bounds = Bounds.fromVectors(points);
+        this.copy(bounds);
+        return this;
     }
 
     // --------------------------------------------------------------------------------
@@ -482,6 +500,7 @@ export class Bounds extends SObject implements BoundsLike {
     static fromTopLeft(left: number, top: number, width: number, height: number): Bounds;
 
     static fromTopLeft(leftTop: Vector | VectorLike, size: Size | SizeLike): Bounds;
+    static fromTopLeft(leftTop: Vector | VectorLike, width: number, height: number): Bounds;
 
     /**
      * 由左上角坐标和宽高创建矩形
@@ -493,15 +512,19 @@ export class Bounds extends SObject implements BoundsLike {
         switch (args.length) {
             // topLeft,size
             case 2:
-                const topLeft = args[0];
-                const size = args[1];
+                var topLeft = args[0];
+                var size = args[1];
                 return this.fromTopLeft(topLeft.x, topLeft.y, size.width, size.height);
-                break;
+            case 3:
+                var topLeft = args[0];
+                var width = args[1];
+                var height = args[2];
+                return this.fromTopLeft(topLeft.x, topLeft.y, width, height);
             case 4:
-                const left = args[0];
-                const top = args[1];
-                const width = args[2];
-                const height = args[3];
+                var left = args[0];
+                var top = args[1];
+                var width = args[2];
+                var height = args[3];
                 return new Bounds(left, top, left + width, top + height);
                 break;
             default:
@@ -509,12 +532,7 @@ export class Bounds extends SObject implements BoundsLike {
         }
     }
 
-    static fromCenter(
-        centerX: number,
-        centerY: number,
-        width: number,
-        height: number
-    ): Bounds;
+    static fromCenter(centerX: number, centerY: number, width: number, height: number): Bounds;
 
     static fromCenter(center: Vector | VectorLike, size: Size | SizeLike): Bounds;
 
@@ -606,6 +624,16 @@ export class Bounds extends SObject implements BoundsLike {
     static fromElement(element: FlashElement): Bounds {
         return new Bounds(element);
     }
+
+    // --------------------------------------------------------------------------------
+    // 转换方法
+
+    toBox() :Box{
+        return new Box(this.leftTop,this.width,this.height);
+    }
+
+
+
 }
 
 /**

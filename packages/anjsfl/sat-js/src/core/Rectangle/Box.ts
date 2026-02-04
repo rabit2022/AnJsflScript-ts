@@ -16,6 +16,7 @@ import { SObject } from "../../base/SObject";
 import { BoxTypeLike } from "../../types/boxType";
 import { VectorLike } from "../../types/vectorType";
 import { Vector } from "../Vector";
+import {Bounds} from "./Bounds";
 
 /**
  * @param {Vector=} pos A vector representing the bottom-left of the box (i.e. the smallest x and smallest y value).
@@ -34,4 +35,15 @@ export class Box extends SObject implements BoxTypeLike {
     public pos: VectorLike = Vector.ZERO;
     public width: number = 0;
     public height: number = 0;
+
+    constructor(pos: VectorLike = Vector.ZERO, width: number = 0, height: number = 0) {
+        super();
+        this.pos = pos;
+        this.width = width;
+        this.height = height;
+    }
+
+    toBounds(): Bounds {
+        return Bounds.fromTopLeft(this.pos,this.width, this.height);
+    }
 }

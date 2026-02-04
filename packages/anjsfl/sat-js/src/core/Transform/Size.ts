@@ -18,6 +18,7 @@
 // Represents a size with `width` and `height` properties.
 import { SObject } from "../../base/SObject";
 import { SizeLike } from "../../types/sizeType";
+import {Vector} from "../Vector";
 
 export class Size extends SObject implements SizeLike {
     public width: number = 0;
@@ -60,5 +61,9 @@ export class Size extends SObject implements SizeLike {
 
     static fromElement(element: FlashElement | FlashDocument | Size | SizeLike): Size {
         return new Size(element.width, element.height);
+    }
+
+    toVector(): Vector {
+        return new Vector(this.width, this.height);
     }
 }

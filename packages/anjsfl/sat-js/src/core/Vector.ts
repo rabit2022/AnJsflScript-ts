@@ -23,6 +23,9 @@
 import { VectorLike } from "../types/vectorType";
 import { SObject } from "../base/SObject";
 import { RelativePosition } from "../enum/vectorEnums";
+import {Scale} from "./Transform/Scale";
+import {Size} from "./Transform/Size";
+import {Skew} from "./Transform/Skew";
 
 export class Vector extends SObject implements VectorLike {
     public x: number;
@@ -44,7 +47,7 @@ export class Vector extends SObject implements VectorLike {
     /**
      * @return {Vector} This for chaining.
      */
-    perp(): Vector {
+    perp(): this {
         var x = this["x"];
         this["x"] = this["y"];
         this["y"] = -x;
@@ -56,7 +59,7 @@ export class Vector extends SObject implements VectorLike {
      * @param angle The angle to rotate (in radians)
      * @return {Vector} This for chaining.
      */
-    rotate(angle: number) {
+    rotate(angle: number): this {
         var x = this["x"];
         var y = this["y"];
         this["x"] = x * Math.cos(angle) - y * Math.sin(angle);
@@ -68,24 +71,27 @@ export class Vector extends SObject implements VectorLike {
     /**
      * @return {Vector} This for chaining.
      */
-    reverse() {
+    reverse(): this {
         this["x"] = -this["x"];
         this["y"] = -this["y"];
         return this;
     }
 
-    invert() {
+    invert(): this {
         if (this.x === 0 || this.y === 0) {
             throw new Error("x and y must not be zero");
         }
-        return new Vector(1 / this.x, 1 / this.y);
+        // return new Vector(1 / this.x, 1 / this.y);
+        this.x = 1/this.x;
+        this.y = 1/this.y;
+        return this;
     }
 
     // Normalize this vector.  (make it have length of `1`)
     /**
      * @return {Vector} This for chaining.
      */
-    normalize() {
+    normalize(): this {
         var d = this.len();
         if (d > 0) {
             this["x"] = this["x"] / d;
@@ -110,7 +116,7 @@ export class Vector extends SObject implements VectorLike {
      * @param {Vector} other The other Vector.
      * @return {Vector} This for chaiing.
      */
-    sub(other: Vector): Vector {
+    sub(other: Vector): this {
         this["x"] -= other["x"];
         this["y"] -= other["y"];
         return this;
@@ -124,7 +130,7 @@ export class Vector extends SObject implements VectorLike {
      *   is not specified, the x scaling factor will be used.
      * @return {Vector} This for chaining.
      */
-    scale(x: number, y?: number): Vector {
+    scale(x: number, y?: number): this {
         this["x"] *= x;
         this["y"] *= typeof y !== "undefined" ? y : x;
         return this;
@@ -135,7 +141,7 @@ export class Vector extends SObject implements VectorLike {
      * @param {Vector} other The vector to project onto.
      * @return {Vector} This for chaining.
      */
-    project(other: Vector): Vector {
+    project(other: Vector): this {
         var amt = this.dot(other) / other.len2();
         this["x"] = amt * other["x"];
         this["y"] = amt * other["y"];
@@ -148,7 +154,7 @@ export class Vector extends SObject implements VectorLike {
      * @param {Vector} other The unit vector to project onto.
      * @return {Vector} This for chaining.
      */
-    projectN(other: Vector): Vector {
+    projectN(other: Vector): this {
         var amt = this.dot(other);
         this["x"] = amt * other["x"];
         this["y"] = amt * other["y"];
@@ -160,7 +166,7 @@ export class Vector extends SObject implements VectorLike {
      * @param {Vector} axis The vector representing the axis.
      * @return {Vector} This for chaining.
      */
-    reflect(axis: Vector): Vector {
+    reflect(axis: Vector): this {
         var x = this["x"];
         var y = this["y"];
         this.project(axis).scale(2);
@@ -175,7 +181,7 @@ export class Vector extends SObject implements VectorLike {
      * @param {Vector} axis The unit vector representing the axis.
      * @return {Vector} This for chaining.
      */
-    reflectN(axis: Vector): Vector {
+    reflectN(axis: Vector): this {
         var x = this["x"];
         var y = this["y"];
         this.projectN(axis).scale(2);
@@ -213,13 +219,19 @@ export class Vector extends SObject implements VectorLike {
     // # Calculation methods
 
     // 如果 this 表示尺寸（如 width/height）
-    halfSize(): Vector {
-        return new Vector(this.x / 2, this.y / 2);
+    halfSize(): this {
+        // return new Vector(this.x / 2, this.y / 2);
+        this.x /=2;
+        this.y /=2;
+        return this;
     }
 
     // 如果 this 表示一个点，求与另一个点的中点
-    midpointTo(other: Vector): Vector {
-        return new Vector((this.x + other.x) / 2, (this.y + other.y) / 2);
+    midpointTo(other: Vector): this {
+        // return new Vector((this.x + other.x) / 2, (this.y + other.y) / 2);
+        this.x = (this.x + other.x) / 2;
+        this.y = (this.y + other.y) / 2;
+        return this;
     }
 
     /**
@@ -247,18 +259,27 @@ export class Vector extends SObject implements VectorLike {
     }
 
     /** 取各分量绝对值 */
-    abs(): Vector {
-        return new Vector(Math.abs(this.x), Math.abs(this.y));
+    abs(): this {
+        // return new Vector(Math.abs(this.x), Math.abs(this.y));
+        this.x  = Math.abs(this.x);
+        this.y  = Math.abs(this.y);
+        return this;
     }
 
     /** 分量最小值 */
-    min(other: Vector): Vector {
-        return new Vector(Math.min(this.x, other.x), Math.min(this.y, other.y));
+    min(other: Vector): this {
+        // return new Vector(Math.min(this.x, other.x), Math.min(this.y, other.y));
+        this.x =  Math.min(this.x, other.x);
+        this.y =  Math.min(this.y, other.y);
+        return this;
     }
 
     /** 分量最大值 */
-    max(other: Vector): Vector {
-        return new Vector(Math.max(this.x, other.x), Math.max(this.y, other.y));
+    max(other: Vector): this {
+        // return new Vector(Math.max(this.x, other.x), Math.max(this.y, other.y));
+        this.x =  Math.max(this.x, other.x);
+        this.y =  Math.max(this.y, other.y);
+        return this;
     }
 
     /** 叉积（2D 叉积结果为标量） */
@@ -272,7 +293,7 @@ export class Vector extends SObject implements VectorLike {
     }
 
     // multiply= scale;
-    multiply(other: number): Vector {
+    multiply(other: number): this {
         return this.scale(other);
     }
 
@@ -280,7 +301,7 @@ export class Vector extends SObject implements VectorLike {
      * 四舍五入
      * @returns {Vector}
      */
-    round(): Vector {
+    round(): this {
         // return new Vector(Math.round(this.x), Math.round(this.y));
         this["x"] = Math.round(this["x"]);
         this["y"] = Math.round(this["y"]);
@@ -292,7 +313,7 @@ export class Vector extends SObject implements VectorLike {
      * 要求x,y必须为非0的整数
      * @returns {Vector}
      */
-    noZero(): Vector {
+    noZero(): this {
         this["x"] = this["x"] ? this["x"] : 1;
         this["y"] = this["y"] ? this["y"] : 1;
         return this;
@@ -316,7 +337,7 @@ export class Vector extends SObject implements VectorLike {
      * @param {Number} degrees - 旋转的角度（0 - 360 度）
      * @returns {Vector} - 返回当前点对象，其坐标已更新为旋转后的新位置
      */
-    orbit(pt: Vector, arcWidth: number, arcHeight: number, degrees: number): Vector {
+    orbit(pt: Vector, arcWidth: number, arcHeight: number, degrees: number): this {
         // 将角度转换为弧度，因为 Math.cos 和 Math.sin 需要弧度作为输入
         var radians = degrees * (Math.PI / 180);
 
@@ -338,9 +359,12 @@ export class Vector extends SObject implements VectorLike {
      * @param {number} f - 0-1之间的数值，表示插值比例
      * @returns {Vector} 两个向量的插值
      */
-    interpolate(other: Vector, f?: number): Vector {
+    interpolate(other: Vector, f?: number): this {
         f = typeof f === "undefined" ? 1 : f;
-        return new Vector((this.x + other.x) * f, (this.y + other.y) * f);
+        // return new Vector((this.x + other.x) * f, (this.y + other.y) * f);
+        this.x = (this.x + other.x) * f;
+        this.y = (this.y + other.y) * f;
+        return this;
     }
 
     private static readonly REGION_CHECKS: Record<
@@ -371,28 +395,40 @@ export class Vector extends SObject implements VectorLike {
         return Vector.REGION_CHECKS[region](dx, dy);
     }
 
-    // --------------------------------------------------------------------------------
-    // # Utility methods
-
     /**
      * 转换为符号向量
      * @returns {Vector}
      */
-    toSignVector(): Vector {
+    toSignVector(): this {
         // Math.sign
-        var x = Math.sign(this.x);
-        var y = Math.sign(this.y);
-        return new Vector(x, y);
+        this.x = Math.sign(this.x);
+        this.y = Math.sign(this.y);
+        // return new Vector(x, y);
+        return this;
     }
 
     /**
      * (-1)**n
      * @returns {Vector}
      */
-    signPow(): Vector {
+    signPow(): this {
         this.x = Math.abs(this.x) & 1 ? -1 : 1;
         this.y = Math.abs(this.y) & 1 ? -1 : 1;
         return this;
+    }
+    // --------------------------------------------------------------------------------
+    // # Utility methods
+
+    toScale(): Scale {
+        return new Scale(this.x, this.y);
+    }
+
+    toSize(): Size {
+        return new Size(this.x, this.y);
+    }
+
+    toSkew(): Skew {
+        return new Skew(this.x, this.y);
     }
 
     // ----------------------------------------------------------------------------------------------------
@@ -441,9 +477,7 @@ export class Vector extends SObject implements VectorLike {
         return new Vector(Math.cos(angleRadians), Math.sin(angleRadians));
     }
 
-    // ----------------------------------------------------------------------------------------------------
     // # from flash element
-
     static fromElement(element: FlashElement | VectorLike | Vector): Vector {
         return new Vector(element.x, element.y);
     }

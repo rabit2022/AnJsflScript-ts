@@ -8,9 +8,17 @@
  */import { SObject } from "../../base/SObject";
 import { CornerRectLike } from "../../types/cornerrectType";
 import { Vector } from "../Vector";
+import {TYPE} from "../../types";
+import VectorLike = TYPE.VectorLike;
 
 // 几何算法、用户框选区域、矢量图形
 export class CornerRect extends SObject implements CornerRectLike {
     public topLeft: Vector = Vector.ZERO;
     public bottomRight: Vector = Vector.ZERO;
+
+    constructor(topLeft: Vector, bottomRight: Vector ) {
+        super();
+        this.topLeft=topLeft;
+        this.bottomRight=bottomRight;
+    }
 }

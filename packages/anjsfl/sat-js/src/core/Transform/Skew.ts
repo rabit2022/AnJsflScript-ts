@@ -15,8 +15,9 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // Skew
 
-import { SObject } from "../../base/SObject";
-import { SkewLike } from "../../types/skewType";
+import {SObject} from "../../base/SObject";
+import {SkewLike} from "../../types/skewType";
+import {Vector} from "../Vector";
 
 /**
  * This is a simple skew class,Skew has two parameters {skewX},{skewY}.
@@ -24,10 +25,15 @@ import { SkewLike } from "../../types/skewType";
 export class Skew extends SObject implements SkewLike {
     public skewX: number = 0;
     public skewY: number = 0;
+
     constructor(skewX: number, skewY: number) {
         super();
         this.skewX = skewX;
         this.skewY = skewY;
+    }
+
+    toVector(): Vector {
+        return new Vector(this.skewX, this.skewY);
     }
 
     static fromElement(element: FlashElement | SkewLike | Skew): Skew {

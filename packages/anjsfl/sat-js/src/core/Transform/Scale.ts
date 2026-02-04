@@ -5,7 +5,9 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// ------------------------------------------------------------------------------------------------------------------------
+ */
+
+// ------------------------------------------------------------------------------------------------------------------------
 //  ______     ______     ______     __         ______
 // /\  ___\   /\  ___\   /\  __ \   /\ \       /\  ___\
 // \ \___  \  \ \ \____  \ \  __ \  \ \ \____  \ \  __\
@@ -17,6 +19,7 @@
 
 import { SObject } from "../../base/SObject";
 import { ScaleLike } from "../../types/scaleType";
+import {Vector} from "../Vector";
 
 export class Scale extends SObject implements ScaleLike {
     public scaleX: number;
@@ -27,6 +30,10 @@ export class Scale extends SObject implements ScaleLike {
 
         this.scaleX = scaleX;
         this.scaleY = scaleY;
+    }
+
+    toVector(): Vector {
+        return new Vector(this.scaleX, this.scaleY);
     }
 
     static fromElement(element: FlashElement | ScaleLike | Scale): Scale {
