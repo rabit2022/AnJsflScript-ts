@@ -1,4 +1,10 @@
-class TimeData {
+import * as  fs from "fs";
+import * as path from "path-browserify";
+import { DateTime } from "luxon";
+import {TIME_FORMAT} from "../CONSTANTS/constants";
+
+
+export class TimeData {
   flaFile: string;
   timeStamp: string;
   fileName: string;

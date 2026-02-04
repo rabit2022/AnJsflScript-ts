@@ -17,8 +17,10 @@
     "Design"
   ],
   "workspaces": [
-    "packages/**/*",
-    "tools/project/*"
+    "packages/anjsfl/*",
+    "packages/polyfills/*",
+    "packages/xjsfl/*",
+    "packages/dom/*"
   ],
   "scripts": {
     "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
@@ -32,6 +34,7 @@
     "@types/jest": "30.0.0",
     "@types/lodash-es": "4.17.12",
     "@types/loglevel": "1.6.3",
+    "@types/luxon": "3.7.1",
     "@types/micromatch": "4.0.10",
     "@types/node": "25.0.7",
     "@types/path-browserify": "1.0.3",

@@ -10,7 +10,8 @@
 // 清除输出面板
 fl.outputPanel.clear();
 
-// 由于setTimeout的polyfill，与原生有差别，导致require.js加载失败，所以也要重置setTimeout
+// 由于setTimeout的polyfill，导致现在的require.js加载失败
+// 所以也要重置setTimeout
 window.setTimeout = undefined;
 
 

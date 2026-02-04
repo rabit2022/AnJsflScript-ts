@@ -9,11 +9,33 @@
 
 (function() {
 
+    require(["loglevel", "Tips"], function(log, Tips) {
+        const { alertMessage } = Tips;// 显示提示信息
+
+        // 禁用log
+        log.setDefaultLevel(log.levels.SILENT);
+
+        const dom = fl.getDocumentDOM();
+        if (!dom) {
+            alertMessage("failed!");
+            return;
+        }
+
+
+        // if (!window.AnJsflScript.$ProjectFileDir$.includes("AnJsflScript")) {
+        if (!window.AnJsflScript || !window.AnJsflScript.$ProjectFileDir$ || window.AnJsflScript.$ProjectFileDir$.indexOf("AnJsflScript") === -1) {
+            alertMessage("loading might be not allowed!");
+            // return;
+        } else {
+            alertMessage("loading success!");
+        }
+    });
+
+    // 导入shims, 避免其他模块依赖时报错
     require([
 
         // "es6-promise", // babel 转译 依赖 Promise
 
-        // 导入shims, 避免其他模块依赖时报错
         "es5-shim", // es5,es2009
         "es5-sham",
 
@@ -21,33 +43,18 @@
         "es6-shim", // es6,es2015
         "es6-sham",
 
-        // "es7-shim", // es7,es2016
-        // "es2017", // es8,es2017
+        // luxon need es7
+        // "es7-shim", // es7,es2016   es8,es2017
 
-        "json3",
+        "json3",// es5,es2009
 
         "@nodejs/__filename",
 
 
-        // loglevel 依赖 console
-        "console",
-
-        // loglevel,store.js 依赖 document.cookie
-        "@polyfill/cookie"
+        // dom 相关
+        "console",// loglevel 依赖 console
+        "@polyfill/cookie"// loglevel依赖 document.cookie
     ]);
 
-    require(["loglevel", "Tips"], function(log, Tips) {
-        // 禁用log
-        log.setDefaultLevel(log.levels.SILENT);
 
-
-
-        // 显示提示信息
-        const { alertMessage } = Tips;
-        alertMessage("loading success!");
-        // if (!(window.AnJsflScript.$ProjectFileDir$.indexOf("AnJsflScript") !== -1)) {
-        if (!window.AnJsflScript.$ProjectFileDir$.includes("AnJsflScript")) {
-            alertMessage("loading might be not allowed!");
-        }
-    });
 })();

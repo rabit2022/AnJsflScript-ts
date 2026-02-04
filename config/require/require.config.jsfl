@@ -32,6 +32,7 @@ require.config({
         "harmony-reflect": "third/polyfill/es6/harmony-reflect/reflect",
         "es6-promise": "third/polyfill/es6/es6-promise/es6-promise.auto",
         "es6-collections": "third/polyfill/es6/es6-collections/es6-collections",
+        "util": "third/nodejs/util/util",
         "path-browserify": "third/nodejs/path-browserify/path-browserify",
         "rxjs": "third/event/rxjs/rxjs.umd",
         "eventemitter3": "third/event/eventemitter3/eventemitter3",
