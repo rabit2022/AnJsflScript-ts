@@ -1,3 +1,5 @@
+import {CURRENT_PROJECT} from "../ProjectFileDir";
+
 `
 
 修改模块名字
@@ -23,7 +25,7 @@ region中间的部分，正则匹配到，修改为正确的路径
 
 import path from "path";
 import fs from "fs/promises";
-import {findNearestPackageJson, findRepoRoot} from "../lib/findPackage"; // 假设上述代码已导出函数
+import {findNearestPackageJson, findRepoRoot} from "../nodejs/findPackage"; // 假设上述代码已导出函数
 
 /**
  * 任务：自动修改 tsconfig 中的类型声明路径
@@ -31,11 +33,11 @@ import {findNearestPackageJson, findRepoRoot} from "../lib/findPackage"; // 假�
 export async function fixTsConfigPaths() {
     try {
         // 1. 确定 PROJECT 路径 (基于 package.json)
-        const projectResult = await findNearestPackageJson(process.cwd());
-        if (!projectResult) {
-            throw new Error("未找到 package.json，无法确定项目根目录");
-        }
-        const PROJECT_DIR = projectResult.dir;
+        // const projectResult = findNearestPackageJson(process.cwd());
+        // if (!projectResult) {
+        //     throw new Error("未找到 package.json，无法确定项目根目录");
+        // }
+        const PROJECT_DIR = CURRENT_PROJECT;
         console.log(`✅ 项目根目录 (PROJECT): ${PROJECT_DIR}`);
 
         // 2. 确定 $ProjectFileDir$ 路径 (基于 .git 目录)
