@@ -1,6 +1,8 @@
 import * as  fs from "fs";
-import * as path from "path-browserify";
+import * as path from "path";
 import * as _ from 'lodash';
+import {AUTHOR} from "../DESC/Descriptions";
+AUTHOR;
 
 /**
  * 获取安全保存目录
@@ -11,7 +13,7 @@ export function getSaveFolder(): string {
 
     const rootDrive = _.includes(drives,"D:") ? "D:" : "C:";
 
-    const saveFolder = path.join(rootDrive, "anJsflScript");
+    const saveFolder = path.join(rootDrive, "AnJsflScript");
 
     if (!fs.existsSync(saveFolder)) {
         fs.mkdirSync(saveFolder, {recursive: true});
@@ -37,3 +39,6 @@ function getWindowsDrives(): string[] {
 
     return drives;
 }
+
+// const drivers = getWindowsDrives();
+// console.log(drivers);

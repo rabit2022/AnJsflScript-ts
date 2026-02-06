@@ -31,7 +31,7 @@ export class TaskQueue {
         return Math.min(...this.tasks.map(task => task.startTimeRecord + task.delay - now));
     }
 
-    size(): number {
+    getSize(): number {
         return this.tasks.length;
     }
 }

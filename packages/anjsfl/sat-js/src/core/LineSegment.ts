@@ -116,39 +116,18 @@ export class LineSegment extends SObject implements LineSegmentLike {
         return new Vector(dx, dy);
     }
 
+    toBounds(): Bounds {
+        return new Bounds(this.startPoint,this.endPoint);
+    }
+
     /**
-     * 从起点出发，沿指定方向延伸一段距离，生成线段
+     * 从起点出发，沿指定方向向量生成线段（方向向量直接作为偏移量）
      * @param startPoint 起点
-     * @param direction 方向（左/上/右/下）
-     * @param distance 距离（必须 ≥ 0）
+     * @param direction 偏移向量（即从起点到终点的向量）
      */
-    static from(
-        startPoint: Vector,
-        direction: OrthogonalDirection,
-        distance: number
-    ): LineSegment {
-        if (distance < 0) {
-            throw new Error("Distance must be non-negative");
-        }
-
-        const offset = getDirectionOffset(direction).clone().multiply(distance);
-        const endPoint = startPoint.clone().add(offset);
-
+    static fromDirectionVector(startPoint: Vector, direction: Vector): LineSegment {
+        const endPoint = startPoint.clone().add(direction);
         return new LineSegment(startPoint, endPoint);
     }
 }
 
-const DIRECTION_OFFSETS: Record<OrthogonalDirection, Vector> = {
-    [OrthogonalDirection.Left]: new Vector(-1, 0),
-    [OrthogonalDirection.Top]: new Vector(0, -1),
-    [OrthogonalDirection.Right]: new Vector(1, 0),
-    [OrthogonalDirection.Bottom]: new Vector(0, 1)
-};
-
-function getDirectionOffset(direction: OrthogonalDirection): Vector {
-    const offset = DIRECTION_OFFSETS[direction];
-    if (!offset) {
-        throw new Error(`Unsupported direction: ${direction}`);
-    }
-    return offset;
-}

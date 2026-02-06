@@ -1,6 +1,8 @@
-import * as  fs from "fs";
-import * as path from "path-browserify";
-import { DateTime } from "luxon";
+
+import {doc} from "../CHECK/CheckDom";
+
 
 export const MAX_SAVE_COUNT = 10;
-export const TIME_FORMAT = "yyyy年MM月dd日HH时mm分ss秒";
+
+
+export const ORIGINAL_DOC_URI = doc.pathURI!;

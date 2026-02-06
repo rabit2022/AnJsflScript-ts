@@ -16,7 +16,6 @@ import { Bounds as _Bounds } from "./Rectangle/Bounds";
 import { Circle as _Circle } from "./Circle";
 import { LineSegment as _LineSegment } from "./LineSegment";
 import { FrameRange as _FrameRange } from "./FrameRange/FrameRange";
-import { FrameRangeList as _FrameRangeList } from "./FrameRange/FrameRangeList";
 
 // 2. 聚合到 SAT 命名空间（使用 const 赋值）
 export namespace SAT {
@@ -35,7 +34,6 @@ export namespace SAT {
     export const Circle = _Circle;
     export const LineSegment = _LineSegment;
     export const FrameRange = _FrameRange;
-    export const FrameRangeList = _FrameRangeList;
 
     // === 短别名（重点）===
     export const V = _Vector; // Vector
@@ -59,5 +57,4 @@ export namespace SAT_T {
     export type T_Circle = InstanceType<typeof SAT.Circle>;
     export type T_LineSegment = InstanceType<typeof SAT.LineSegment>;
     export type T_FrameRange = InstanceType<typeof SAT.FrameRange>;
-    export type T_FrameRangeList = InstanceType<typeof SAT.FrameRangeList>;
 }

@@ -80,4 +80,8 @@ export class Circle extends SObject implements CircleLike {
     toVector(): Vector {
         return this.pos.clone();
     }
+
+    toBounds(): Bounds {
+        return new Bounds(this.pos, this.r);
+    }
 }

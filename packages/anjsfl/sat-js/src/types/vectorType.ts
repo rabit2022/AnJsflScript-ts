@@ -5,7 +5,9 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */export interface VectorLike {
+ */
+
+export interface VectorLike {
     x: number;
     y: number;
 }

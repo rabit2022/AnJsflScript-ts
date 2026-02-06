@@ -1,5 +1,5 @@
 import * as  fs from "fs";
-import * as path from "path-browserify";
+import * as path from "path";
 import {TimeData} from "../time/time_data";
 import {MAX_SAVE_COUNT} from "../CONSTANTS/constants";
 

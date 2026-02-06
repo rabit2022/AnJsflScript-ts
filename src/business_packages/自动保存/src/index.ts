@@ -1,10 +1,15 @@
+import {Main} from "./Main";
+import {setInterval, setTimeout} from "setTimeout";
+import {SAVE_INTERVAL} from "./CONSTANTS/time";
 import {AUTHOR} from "./DESC/Descriptions";
+
 
 AUTHOR;
 
+if (AUTHOR === AUTHOR) {
+// 马上保存一次
+    setTimeout(Main, 0);
 
-// 注册事件
-
-// 保存位置
-
-//
+// 每3分钟保存一次
+    setInterval(Main, SAVE_INTERVAL);
+}

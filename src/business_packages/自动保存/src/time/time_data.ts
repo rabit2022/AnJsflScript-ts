@@ -1,8 +1,10 @@
 import * as  fs from "fs";
-import * as path from "path-browserify";
+import * as path from "path";
 import { DateTime } from "luxon";
-import {TIME_FORMAT} from "../CONSTANTS/constants";
+import {TIME_FORMAT} from "../CONSTANTS/time";
+import {AUTHOR} from "../DESC/Descriptions";
 
+AUTHOR;
 
 export class TimeData {
   flaFile: string;
@@ -17,8 +19,6 @@ export class TimeData {
 
     this.flaFile = flaFile;
     this.fileName = fileName;
-    this.timeStamp = dateTime.isValid
-      ? dateTime.toISO()!
-      : "";
+    this.timeStamp = dateTime.isValid ? dateTime.toISO()! : "";
   }
 }

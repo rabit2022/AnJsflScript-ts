@@ -13,7 +13,7 @@
         const { alertMessage } = Tips;// 显示提示信息
 
         // 禁用log
-        log.setDefaultLevel(log.levels.SILENT);
+        log.setDefaultLevel(log.levels.ERROR);
 
         const dom = fl.getDocumentDOM();
         if (!dom) {

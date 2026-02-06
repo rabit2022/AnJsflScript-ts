@@ -1,36 +1,49 @@
-import * as  fs from "fs";
-import * as path from "path-browserify";
+import {AUTHOR} from "./DESC/Descriptions";
+import {doc} from "./CHECK/CheckDom";
+import {ORIGINAL_DOC_URI} from "./CONSTANTS/constants";
 import {getSavePath} from "./save/save_path";
-import {TimeData} from "./time/time_data";
-import {deleteInvalidFlaFiles, deleteOverflowFiles} from "./delete/delete";
+import {getSaveFolder} from "./save/savefolder";
+import * as fs from "fs";
+
+import {pathToFileURL} from "url";
+import {cleanFolder} from "./clean/clean";
+import {DateTime} from "luxon";
+import {TIME_FORMAT} from "./CONSTANTS/time";
+
+AUTHOR;
 
 
-export function safeSave(
-  originalFilePath: string,
-  saveFolder: string,
-  saveAction: (targetPath: string) => void
-) {
-  if (!fs.existsSync(saveFolder)) {
-    fs.mkdirSync(saveFolder, { recursive: true });
-  }
+// saveAction: (targetPath: string) => void
+function saveDom(targetPath: string): void {
 
-  // 1. 保存副本
-  const savePath = getSavePath(originalFilePath, saveFolder);
-  saveAction(savePath);
+    const url = pathToFileURL(targetPath).href;
+    fl.saveDocument(doc, url);
+
+    // 跳转到原来的文档
+    fl.saveDocument(doc, ORIGINAL_DOC_URI);
+
+}
 
 
+export function Main() {
+
+// D:/AnJsflScript
+    const SAVE_FOLDER = getSaveFolder();
+    if (!fs.existsSync(SAVE_FOLDER)) {
+        fs.mkdirSync(SAVE_FOLDER, {recursive: true});
+    }
 
 
-  // 2. 扫描目录
-  const flaFiles = fs.readdirSync(saveFolder);
-  const timeDataList = flaFiles.map(f => new TimeData(f));
+//  D:/AnJsflScript/${now}_${baseName}.fla
+    const SAVE_PATH = getSavePath(ORIGINAL_DOC_URI, SAVE_FOLDER);
 
-  // 3. 按时间排序
-  timeDataList.sort((a, b) =>
-    a.timeStamp.localeCompare(b.timeStamp)
-  );
+    saveDom(SAVE_PATH);
+    cleanFolder(SAVE_FOLDER);
 
-  // 4. 清理
-  deleteInvalidFlaFiles(timeDataList, saveFolder);
-  deleteOverflowFiles(timeDataList, saveFolder);
+
+    // 下一次保存时间
+    const nextSaveTime = DateTime.now().plus({minutes: 3});
+    const formattedTime = nextSaveTime.toFormat(TIME_FORMAT);
+
+    console.log(`保存成功，保存到 ${SAVE_PATH},下一次保存时间 3分钟后 ${formattedTime}`)
 }

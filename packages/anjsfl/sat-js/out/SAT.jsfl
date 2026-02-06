@@ -49,12 +49,9 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  BoundsConverter: function() { return /* reexport */ BoundsConverter; },
   CHECK: function() { return /* reexport */ CHECK; },
   ENUM: function() { return /* reexport */ ENUM; },
-  FLASH: function() { return /* binding */ FLASH; },
-  SAT: function() { return /* binding */ SAT; },
-  VectorConverter: function() { return /* reexport */ VectorConverter; }
+  SAT: function() { return /* reexport */ SAT; }
 });
 
 ;// ./src/check/boundsCheck.ts
@@ -71,16 +68,20 @@ function IsBoundsLike(obj) {
 function IsVectorLike(obj) {
     return (obj !== null &&
         typeof obj === "object" &&
-        'x' in obj && typeof obj.x === "number" &&
-        'y' in obj && typeof obj.y === "number");
+        "x" in obj &&
+        typeof obj.x === "number" &&
+        "y" in obj &&
+        typeof obj.y === "number");
 }
 
 ;// ./src/check/sizeCheck.ts
 function IsSizeLike(obj) {
     return (obj !== null &&
         typeof obj === "object" &&
-        'width' in obj && typeof obj.width === "number" &&
-        'height' in obj && typeof obj.height === "number");
+        "width" in obj &&
+        typeof obj.width === "number" &&
+        "height" in obj &&
+        typeof obj.height === "number");
 }
 
 ;// ./src/check/transformCheck.ts
@@ -89,20 +90,28 @@ function IsSizeLike(obj) {
 function IsTransformLike(obj) {
     return (obj !== null &&
         typeof obj === "object" &&
-        'rotation' in obj && typeof obj.rotation === "number" &&
-        'scale' in obj && IsVectorLike(obj.scale) &&
-        'position' in obj && IsVectorLike(obj.position) &&
-        'size' in obj && IsSizeLike(obj.size) &&
-        'skew' in obj && IsVectorLike(obj.skew));
+        "rotation" in obj &&
+        typeof obj.rotation === "number" &&
+        "scale" in obj &&
+        IsVectorLike(obj.scale) &&
+        "position" in obj &&
+        IsVectorLike(obj.position) &&
+        "size" in obj &&
+        IsSizeLike(obj.size) &&
+        "skew" in obj &&
+        IsVectorLike(obj.skew));
 }
 
 ;// ./src/check/framerangeCheck.ts
 function IsFrameRangeLike(obj) {
     return (obj !== null &&
         typeof obj === "object" &&
-        'layerIndex' in obj && typeof obj.layerIndex === "number" &&
-        'startFrame' in obj && typeof obj.startFrame === "number" &&
-        'endFrame' in obj && typeof obj.endFrame === "number");
+        "layerIndex" in obj &&
+        typeof obj.layerIndex === "number" &&
+        "startFrame" in obj &&
+        typeof obj.startFrame === "number" &&
+        "endFrame" in obj &&
+        typeof obj.endFrame === "number");
 }
 
 ;// ./src/check/elementboundsCheck.ts
@@ -119,16 +128,20 @@ function IsElementBoundsLike(obj) {
 function IsScaleLike(obj) {
     return (obj !== null &&
         typeof obj === "object" &&
-        'scaleX' in obj && typeof obj.scaleX === "number" &&
-        'scaleY' in obj && typeof obj.scaleY === "number");
+        "scaleX" in obj &&
+        typeof obj.scaleX === "number" &&
+        "scaleY" in obj &&
+        typeof obj.scaleY === "number");
 }
 
 ;// ./src/check/skewCheck.ts
 function IsSkewLike(obj) {
     return (obj !== null &&
         typeof obj === "object" &&
-        'skewX' in obj && typeof obj.skewX === "number" &&
-        'skewY' in obj && typeof obj.skewY === "number");
+        "skewX" in obj &&
+        typeof obj.skewX === "number" &&
+        "skewY" in obj &&
+        typeof obj.skewY === "number");
 }
 
 ;// ./src/check/linesegmentCheck.ts
@@ -136,8 +149,8 @@ function IsSkewLike(obj) {
 function IsLineSegmentLike(obj) {
     return (obj !== null &&
         typeof obj === "object" &&
-        'startPoint' in obj &&
-        'endPoint' in obj &&
+        "startPoint" in obj &&
+        "endPoint" in obj &&
         IsVectorLike(obj.startPoint) &&
         IsVectorLike(obj.endPoint));
 }
@@ -147,7 +160,8 @@ function IsLineSegmentLike(obj) {
 function IsCircleLike(obj) {
     return (obj !== null &&
         typeof obj === "object" &&
-        'pos' in obj && 'r' in obj &&
+        "pos" in obj &&
+        "r" in obj &&
         IsVectorLike(obj.pos) &&
         typeof obj.r === "number");
 }
@@ -303,7 +317,7 @@ var SObject = (function () {
 }());
 
 
-;// ./src/core/Rectangle/XYWHRect.ts
+;// ./src/core/Transform/Scale.ts
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -320,17 +334,131 @@ var __extends = (undefined && undefined.__extends) || (function () {
     };
 })();
 
-var XYWHRect = (function (_super) {
-    __extends(XYWHRect, _super);
-    function XYWHRect() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.x = 0;
-        _this.y = 0;
-        _this.width = 0;
-        _this.height = 0;
+
+var Scale = (function (_super) {
+    __extends(Scale, _super);
+    function Scale(scaleX, scaleY) {
+        var _this = _super.call(this) || this;
+        _this.scaleX = scaleX;
+        _this.scaleY = scaleY;
         return _this;
     }
-    return XYWHRect;
+    Scale.prototype.toVector = function () {
+        return new Vector(this.scaleX, this.scaleY);
+    };
+    Scale.fromElement = function (element) {
+        return new Scale(element.scaleX, element.scaleY);
+    };
+    return Scale;
+}(SObject));
+
+
+;// ./src/core/Transform/Size.ts
+var Size_extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+var Size = (function (_super) {
+    Size_extends(Size, _super);
+    function Size(width, height) {
+        var _this = _super.call(this) || this;
+        _this.width = 0;
+        _this.height = 0;
+        _this.width = width;
+        _this.height = height;
+        return _this;
+    }
+    Object.defineProperty(Size.prototype, "ratio", {
+        get: function () {
+            return this.width / this.height;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Size.prototype, "max_size", {
+        get: function () {
+            return Math.max(this.width, this.height);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Size.prototype, "min_size", {
+        get: function () {
+            return Math.min(this.width, this.height);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Size.prototype.add = function (size) {
+        return new Size(this.width + size.width, this.height + size.height);
+    };
+    Size.prototype.sub = function (size) {
+        return new Size(this.width - size.width, this.height - size.height);
+    };
+    Size.prototype.getRatioWidth = function (nowHeight) {
+        return this.ratio * nowHeight;
+    };
+    Size.prototype.getRatioHeight = function (nowWidth) {
+        return nowWidth / this.ratio;
+    };
+    Size.fromElement = function (element) {
+        return new Size(element.width, element.height);
+    };
+    Size.prototype.toVector = function () {
+        return new Vector(this.width, this.height);
+    };
+    return Size;
+}(SObject));
+
+
+;// ./src/core/Transform/Skew.ts
+var Skew_extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+var Skew = (function (_super) {
+    Skew_extends(Skew, _super);
+    function Skew(skewX, skewY) {
+        var _this = _super.call(this) || this;
+        _this.skewX = 0;
+        _this.skewY = 0;
+        _this.skewX = skewX;
+        _this.skewY = skewY;
+        return _this;
+    }
+    Skew.prototype.toVector = function () {
+        return new Vector(this.skewX, this.skewY);
+    };
+    Skew.fromElement = function (element) {
+        return new Skew(element.skewX, element.skewY);
+    };
+    return Skew;
 }(SObject));
 
 
@@ -351,6 +479,9 @@ var Vector_extends = (undefined && undefined.__extends) || (function () {
     };
 })();
 var _a;
+
+
+
 
 
 var Vector = (function (_super) {
@@ -385,7 +516,9 @@ var Vector = (function (_super) {
         if (this.x === 0 || this.y === 0) {
             throw new Error("x and y must not be zero");
         }
-        return new Vector(1 / this.x, 1 / this.y);
+        this.x = 1 / this.x;
+        this.y = 1 / this.y;
+        return this;
     };
     Vector.prototype.normalize = function () {
         var d = this.len();
@@ -448,10 +581,14 @@ var Vector = (function (_super) {
         return Math.sqrt(this.len2());
     };
     Vector.prototype.halfSize = function () {
-        return new Vector(this.x / 2, this.y / 2);
+        this.x /= 2;
+        this.y /= 2;
+        return this;
     };
     Vector.prototype.midpointTo = function (other) {
-        return new Vector((this.x + other.x) / 2, (this.y + other.y) / 2);
+        this.x = (this.x + other.x) / 2;
+        this.y = (this.y + other.y) / 2;
+        return this;
     };
     Vector.prototype.angleTo = function (other) {
         var dot = this.dot(other);
@@ -466,13 +603,19 @@ var Vector = (function (_super) {
         return Math.sqrt(x * x + y * y);
     };
     Vector.prototype.abs = function () {
-        return new Vector(Math.abs(this.x), Math.abs(this.y));
+        this.x = Math.abs(this.x);
+        this.y = Math.abs(this.y);
+        return this;
     };
     Vector.prototype.min = function (other) {
-        return new Vector(Math.min(this.x, other.x), Math.min(this.y, other.y));
+        this.x = Math.min(this.x, other.x);
+        this.y = Math.min(this.y, other.y);
+        return this;
     };
     Vector.prototype.max = function (other) {
-        return new Vector(Math.max(this.x, other.x), Math.max(this.y, other.y));
+        this.x = Math.max(this.x, other.x);
+        this.y = Math.max(this.y, other.y);
+        return this;
     };
     Vector.prototype.cross = function (other) {
         return this.x * other.y - this.y * other.x;
@@ -504,7 +647,9 @@ var Vector = (function (_super) {
     };
     Vector.prototype.interpolate = function (other, f) {
         f = typeof f === "undefined" ? 1 : f;
-        return new Vector((this.x + other.x) * f, (this.y + other.y) * f);
+        this.x = (this.x + other.x) * f;
+        this.y = (this.y + other.y) * f;
+        return this;
     };
     Vector.prototype.isInRegionRelativeTo = function (referencePoint, region) {
         var dx = this.x - referencePoint.x;
@@ -512,14 +657,23 @@ var Vector = (function (_super) {
         return Vector.REGION_CHECKS[region](dx, dy);
     };
     Vector.prototype.toSignVector = function () {
-        var x = Math.sign(this.x);
-        var y = Math.sign(this.y);
-        return new Vector(x, y);
+        this.x = Math.sign(this.x);
+        this.y = Math.sign(this.y);
+        return this;
     };
     Vector.prototype.signPow = function () {
         this.x = Math.abs(this.x) & 1 ? -1 : 1;
         this.y = Math.abs(this.y) & 1 ? -1 : 1;
         return this;
+    };
+    Vector.prototype.toScale = function () {
+        return new Scale(this.x, this.y);
+    };
+    Vector.prototype.toSize = function () {
+        return new Size(this.x, this.y);
+    };
+    Vector.prototype.toSkew = function () {
+        return new Skew(this.x, this.y);
     };
     Vector.interpolate = function (pt1, pt2, f) {
         f = typeof f === "undefined" ? 1 : f;
@@ -559,753 +713,6 @@ var Vector = (function (_super) {
     return Vector;
 }(SObject));
 
-
-;// ./src/core/Rectangle/CornerRect.ts
-var CornerRect_extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-var CornerRect = (function (_super) {
-    CornerRect_extends(CornerRect, _super);
-    function CornerRect() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.topLeft = Vector.ZERO;
-        _this.bottomRight = Vector.ZERO;
-        return _this;
-    }
-    return CornerRect;
-}(SObject));
-
-
-;// ./src/core/Rectangle/Box.ts
-var Box_extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-var Box = (function (_super) {
-    Box_extends(Box, _super);
-    function Box() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.pos = Vector.ZERO;
-        _this.width = 0;
-        _this.height = 0;
-        return _this;
-    }
-    return Box;
-}(SObject));
-
-
-;// ./src/core/Transform/Size.ts
-var Size_extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-var Size = (function (_super) {
-    Size_extends(Size, _super);
-    function Size(width, height) {
-        var _this = _super.call(this) || this;
-        _this.width = 0;
-        _this.height = 0;
-        _this.width = width;
-        _this.height = height;
-        return _this;
-    }
-    Object.defineProperty(Size.prototype, "ratio", {
-        get: function () {
-            return this.width / this.height;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Size.prototype, "max_size", {
-        get: function () {
-            return Math.max(this.width, this.height);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Size.prototype, "min_size", {
-        get: function () {
-            return Math.min(this.width, this.height);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Size.prototype.add = function (size) {
-        return new Size(this.width + size.width, this.height + size.height);
-    };
-    Size.prototype.sub = function (size) {
-        return new Size(this.width - size.width, this.height - size.height);
-    };
-    Size.prototype.getRatioWidth = function (nowHeight) {
-        return this.ratio * nowHeight;
-    };
-    Size.prototype.getRatioHeight = function (nowWidth) {
-        return nowWidth / this.ratio;
-    };
-    Size.fromElement = function (element) {
-        return new Size(element.width, element.height);
-    };
-    return Size;
-}(SObject));
-
-
-;// ./src/core/Rectangle/Bounds.ts
-var Bounds_extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-
-
-
-
-
-var Bounds = (function (_super) {
-    Bounds_extends(Bounds, _super);
-    function Bounds() {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        var _this = _super.call(this) || this;
-        _this.left = 0;
-        _this.top = 0;
-        _this.right = 0;
-        _this.bottom = 0;
-        var $dom = fl.getDocumentDOM();
-        if (!$dom) {
-            throw new Error("No document is open in Flash.");
-        }
-        switch (args.length) {
-            case 0:
-                _this.left = 0;
-                _this.top = 0;
-                _this.right = $dom.width;
-                _this.bottom = $dom.height;
-                break;
-            case 1: {
-                var arg = args[0];
-                if (arg instanceof Bounds) {
-                    _this.copy(arg);
-                }
-                else if (IsBoundsLike(arg)) {
-                    _this.assign(arg);
-                }
-                else if (typeof arg === "number") {
-                    _this.left = -arg;
-                    _this.top = -arg;
-                    _this.right = arg;
-                    _this.bottom = arg;
-                }
-                else if (Array.isArray(arg)) {
-                    var rect = findBoundingRectangle(arg);
-                    _this.copy(rect);
-                }
-                else if (typeof arg === "object") {
-                    if (arg === null) {
-                        throw new Error("Invalid argument 1");
-                    }
-                    else if ("width" in arg && "left" in arg) {
-                        _this.left = arg.left;
-                        _this.top = arg.top;
-                        _this.right = arg.left + arg.width;
-                        _this.bottom = arg.top + arg.height;
-                    }
-                    else if ("width" in arg && "height" in arg) {
-                        _this.left = 0;
-                        _this.top = 0;
-                        _this.right = arg.width;
-                        _this.bottom = arg.height;
-                    }
-                    else {
-                        throw new Error("Invalid argument 1");
-                    }
-                }
-                else {
-                    throw new Error("Invalid argument 1");
-                }
-                break;
-            }
-            case 2: {
-                var a = args[0], b = args[1];
-                if (typeof a === "number" && typeof b === "number") {
-                    _this.left = 0;
-                    _this.top = 0;
-                    _this.right = a;
-                    _this.bottom = b;
-                }
-                else if (a.x !== undefined && typeof b === "number") {
-                    var radiusRect = new Bounds(b);
-                    var finalRect = radiusRect.addOffset(a);
-                    _this.copy(finalRect);
-                }
-                else {
-                    throw new Error("Invalid arguments for 2-arg constructor");
-                }
-                break;
-            }
-            case 4: {
-                _this.left = args[0];
-                _this.top = args[1];
-                _this.right = args[2];
-                _this.bottom = args[3];
-                break;
-            }
-            default:
-                throw new Error("Unsupported number of arguments: ".concat(args.length));
-        }
-        return _this;
-    }
-    Object.defineProperty(Bounds.prototype, "width", {
-        get: function () {
-            return this.right - this.left;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Bounds.prototype, "height", {
-        get: function () {
-            return this.bottom - this.top;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Bounds.prototype, "center", {
-        get: function () {
-            return new Vector((this.left + this.right) / 2, (this.top + this.bottom) / 2);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Bounds.prototype, "size", {
-        get: function () {
-            return new Size(this.width, this.height);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Bounds.prototype.addOffset = function (offset) {
-        if (typeof offset === "number") {
-            offset = new Bounds(offset, offset, offset, offset);
-        }
-        else if (IsVectorLike(offset)) {
-            offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
-        }
-        return new Bounds(this.left + offset.left, this.top + offset.top, this.right + offset.right, this.bottom + offset.bottom);
-    };
-    Bounds.prototype.subOffset = function (offset) {
-        if (typeof offset === "number") {
-            offset = new Bounds(offset, offset, offset, offset);
-        }
-        else if (offset instanceof Vector) {
-            offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
-        }
-        return new Bounds(this.left - offset.left, this.top - offset.top, this.right - offset.right, this.bottom - offset.bottom);
-    };
-    Bounds.createDirectionalOffset = function (size, direction) {
-        var offset = new Bounds(0, 0, 0, 0);
-        switch (direction) {
-            case InsetDirection.Left:
-                offset.left = -size;
-                break;
-            case InsetDirection.Top:
-                offset.top = -size;
-                break;
-            case InsetDirection.Right:
-                offset.right = size;
-                break;
-            case InsetDirection.Bottom:
-                offset.bottom = size;
-                break;
-            case InsetDirection.All:
-                offset.left = -size;
-                offset.top = -size;
-                offset.right = size;
-                offset.bottom = size;
-                break;
-            default:
-                throw new Error("Invalid direction: ".concat(direction));
-        }
-        return offset;
-    };
-    Bounds.prototype.expand = function (size, whichDirection) {
-        if (whichDirection === void 0) { whichDirection = InsetDirection.All; }
-        var offset = Bounds.createDirectionalOffset(size, whichDirection);
-        return this.addOffset(offset);
-    };
-    Bounds.prototype.shrink = function (size, whichDirection) {
-        if (whichDirection === void 0) { whichDirection = InsetDirection.All; }
-        var offset = Bounds.createDirectionalOffset(size, whichDirection);
-        return this.subOffset(offset);
-    };
-    Bounds.prototype.contains = function (rect) {
-        return (this.left <= rect.left &&
-            this.top <= rect.top &&
-            this.right >= rect.right &&
-            this.bottom >= rect.bottom);
-    };
-    Bounds.prototype.getCorner = function (whichCorner) {
-        var _a = this, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom;
-        var centerX = (left + right) / 2;
-        var centerY = (top + bottom) / 2;
-        switch (whichCorner) {
-            case RelativePosition.TopRight:
-                return new Vector(right, top);
-            case RelativePosition.TopLeft:
-                return new Vector(left, top);
-            case RelativePosition.BottomRight:
-                return new Vector(right, bottom);
-            case RelativePosition.BottomLeft:
-                return new Vector(left, bottom);
-            case RelativePosition.TopCenter:
-                return new Vector(centerX, top);
-            case RelativePosition.RightCenter:
-                return new Vector(right, centerY);
-            case RelativePosition.BottomCenter:
-                return new Vector(centerX, bottom);
-            case RelativePosition.LeftCenter:
-                return new Vector(left, centerY);
-            case RelativePosition.Center:
-                return new Vector(centerX, centerY);
-            default:
-                throw new Error("Invalid RelativePosition: ".concat(whichCorner));
-        }
-    };
-    Bounds.prototype.getPart = function (whichPart, widthRatio, heightRatio) {
-        if (widthRatio === void 0) { widthRatio = 0.5; }
-        if (heightRatio === void 0) { heightRatio = widthRatio; }
-        var _a = this, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, width = _a.width, height = _a.height;
-        var centerX = (left + right) / 2;
-        var centerY = (top + bottom) / 2;
-        var partWidth = width * widthRatio;
-        var partHeight = height * heightRatio;
-        var invWidth = width - partWidth;
-        var invHeight = height - partHeight;
-        var halfW = partWidth / 2;
-        var halfH = partHeight / 2;
-        switch (whichPart) {
-            case RectanglePart.TopRight:
-                return new Bounds(right - invWidth, top, right, top + partHeight);
-            case RectanglePart.TopLeft:
-                return new Bounds(left, top, left + partWidth, top + partHeight);
-            case RectanglePart.BottomRight:
-                return new Bounds(right - invWidth, bottom - invHeight, right, bottom);
-            case RectanglePart.BottomLeft:
-                return new Bounds(left, bottom - invHeight, left + partWidth, bottom);
-            case RectanglePart.TopCenter:
-                return new Bounds(centerX - halfW, top, centerX + halfW, top + partHeight);
-            case RectanglePart.RightCenter:
-                return new Bounds(right - invWidth, centerY - halfH, right, centerY + halfH);
-            case RectanglePart.BottomCenter:
-                return new Bounds(centerX - halfW, bottom - partHeight, centerX + halfW, bottom);
-            case RectanglePart.LeftCenter:
-                return new Bounds(left, centerY - halfH, left + partWidth, centerY + halfH);
-            case RectanglePart.Center:
-                return new Bounds(centerX - halfW, centerY - halfH, centerX + halfW, centerY + halfH);
-            case RectanglePart.Top:
-                return new Bounds(left, top, right, top + partHeight);
-            case RectanglePart.Right:
-                return new Bounds(right - invWidth, top, right, bottom);
-            case RectanglePart.Bottom:
-                return new Bounds(left, bottom - partHeight, right, bottom);
-            case RectanglePart.Left:
-                return new Bounds(left, top, left + partWidth, bottom);
-            default:
-                throw new Error("Invalid RectanglePart: ".concat(whichPart));
-        }
-    };
-    Bounds.prototype.union = function (other) {
-        var minLeft = Math.min(this.left, other.left);
-        var minTop = Math.min(this.top, other.top);
-        var maxRight = Math.max(this.right, other.right);
-        var maxBottom = Math.max(this.bottom, other.bottom);
-        return new Bounds(minLeft, minTop, maxRight, maxBottom);
-    };
-    Bounds.prototype.rotate = function (angle, whichCorner) {
-        if (whichCorner === void 0) { whichCorner = RelativePosition.Center; }
-        var radians = angle * (Math.PI / 180);
-        var center = this.getCorner(whichCorner);
-        var topLeft = this.getCorner(RelativePosition.TopLeft);
-        var topRight = this.getCorner(RelativePosition.TopRight);
-        var bottomLeft = this.getCorner(RelativePosition.BottomLeft);
-        var bottomRight = this.getCorner(RelativePosition.BottomRight);
-        var rotatePoint = function (point) {
-            return point.sub(center).rotate(radians).add(center);
-        };
-        var points = [
-            rotatePoint(topLeft),
-            rotatePoint(topRight),
-            rotatePoint(bottomRight),
-            rotatePoint(bottomLeft)
-        ];
-        return Bounds.fromVectors(points);
-    };
-    Bounds.fromTopLeft = function () {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        switch (args.length) {
-            case 2:
-                var topLeft = args[0];
-                var size = args[1];
-                return this.fromTopLeft(topLeft.x, topLeft.y, size.width, size.height);
-                // removed by dead control flow
-
-            case 4:
-                var left = args[0];
-                var top = args[1];
-                var width = args[2];
-                var height = args[3];
-                return new Bounds(left, top, left + width, top + height);
-                // removed by dead control flow
-
-            default:
-                throw new Error("Invalid arguments");
-        }
-    };
-    Bounds.fromCenter = function () {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        switch (args.length) {
-            case 2:
-                var center = args[0];
-                var size = args[1];
-                return this.fromCenter(center.x, center.y, size.width, size.height);
-            case 4:
-                var centerX = args[0];
-                var centerY = args[1];
-                var width = args[2];
-                var height = args[3];
-                return new Bounds(centerX - width / 2, centerY - height / 2, centerX + width / 2, centerY + height / 2);
-            default:
-                throw new Error("Invalid arguments");
-        }
-    };
-    Bounds.fromVectors = function (vectors) {
-        var rect = new Bounds(0, 0, 0, 0);
-        for (var i = 0; i < vectors.length; i++) {
-            var vector = vectors[i];
-            if (i === 0) {
-                rect.left = vector.x;
-                rect.top = vector.y;
-                rect.right = vector.x;
-                rect.bottom = vector.y;
-            }
-            else {
-                rect.left = Math.min(rect.left, vector.x);
-                rect.top = Math.min(rect.top, vector.y);
-                rect.right = Math.max(rect.right, vector.x);
-                rect.bottom = Math.max(rect.bottom, vector.y);
-            }
-        }
-        return rect;
-    };
-    Bounds.fromRects = function (rects) {
-        var rect = new Bounds(0, 0, 0, 0);
-        for (var i = 0; i < rects.length; i++) {
-            var r = rects[i];
-            if (i === 0) {
-                rect.left = r.left;
-                rect.top = r.top;
-                rect.right = r.right;
-                rect.bottom = r.bottom;
-            }
-            else {
-                rect.left = Math.min(rect.left, r.left);
-                rect.top = Math.min(rect.top, r.top);
-                rect.right = Math.max(rect.right, r.right);
-                rect.bottom = Math.max(rect.bottom, r.bottom);
-            }
-        }
-        return rect;
-    };
-    Bounds.fromElements = function (elements) {
-        return findBoundingRectangle(elements);
-    };
-    return Bounds;
-}(SObject));
-
-function findBoundingRectangle(elements) {
-    if (!elements.length) {
-        throw new Error("findBoundingRectangle: elements array is empty");
-    }
-    var top = elements[0].top;
-    var left = elements[0].left;
-    var right = elements[0].left + elements[0].width;
-    var bottom = elements[0].top + elements[0].height;
-    for (var i = 1; i < elements.length; i++) {
-        var element = elements[i];
-        var elementTop = element.top;
-        var elementLeft = element.left;
-        var elementRight = element.left + element.width;
-        var elementBottom = element.top + element.height;
-        if (elementTop < top)
-            top = elementTop;
-        if (elementLeft < left)
-            left = elementLeft;
-        if (elementRight > right)
-            right = elementRight;
-        if (elementBottom > bottom)
-            bottom = elementBottom;
-    }
-    return new Bounds(left, top, right, bottom);
-}
-
-;// ./src/core/Rectangle/BoundsConverter.ts
-
-
-
-
-
-var BoundsConverter;
-(function (BoundsConverter) {
-    function toXYWH(bounds) {
-        var rect = new XYWHRect();
-        rect.x = bounds.left;
-        rect.y = bounds.top;
-        rect.width = bounds.right - bounds.left;
-        rect.height = bounds.bottom - bounds.top;
-        return rect;
-    }
-    BoundsConverter.toXYWH = toXYWH;
-    function toCorner(bounds) {
-        var rect = new CornerRect();
-        rect.topLeft = new Vector(bounds.left, bounds.top);
-        rect.bottomRight = new Vector(bounds.right, bounds.bottom);
-        return rect;
-    }
-    BoundsConverter.toCorner = toCorner;
-    function toBox(bounds) {
-        var box = new Box();
-        box.pos = new Vector(bounds.left, bounds.bottom);
-        box.width = bounds.right - bounds.left;
-        box.height = bounds.bottom - bounds.top;
-        return box;
-    }
-    BoundsConverter.toBox = toBox;
-    function fromXYWH(rect) {
-        var bounds = new Bounds();
-        bounds.left = rect.x;
-        bounds.top = rect.y;
-        bounds.right = rect.x + rect.width;
-        bounds.bottom = rect.y + rect.height;
-        return bounds;
-    }
-    BoundsConverter.fromXYWH = fromXYWH;
-    function fromCorner(rect) {
-        var bounds = new Bounds();
-        bounds.left = rect.topLeft.x;
-        bounds.top = rect.topLeft.y;
-        bounds.right = rect.bottomRight.x;
-        bounds.bottom = rect.bottomRight.y;
-        return bounds;
-    }
-    BoundsConverter.fromCorner = fromCorner;
-    function fromBox(box) {
-        var bounds = new Bounds();
-        bounds.left = box.pos.x;
-        bounds.bottom = box.pos.y;
-        bounds.right = box.pos.x + box.width;
-        bounds.top = box.pos.y - box.height;
-        return bounds;
-    }
-    BoundsConverter.fromBox = fromBox;
-})(BoundsConverter || (BoundsConverter = {}));
-
-;// ./src/core/Transform/Scale.ts
-var Scale_extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-var Scale = (function (_super) {
-    Scale_extends(Scale, _super);
-    function Scale(scaleX, scaleY) {
-        var _this = _super.call(this) || this;
-        _this.scaleX = scaleX;
-        _this.scaleY = scaleY;
-        return _this;
-    }
-    Scale.fromElement = function (element) {
-        return new Scale(element.scaleX, element.scaleY);
-    };
-    return Scale;
-}(SObject));
-
-
-;// ./src/core/Transform/Skew.ts
-var Skew_extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-var Skew = (function (_super) {
-    Skew_extends(Skew, _super);
-    function Skew(skewX, skewY) {
-        var _this = _super.call(this) || this;
-        _this.skewX = 0;
-        _this.skewY = 0;
-        _this.skewX = skewX;
-        _this.skewY = skewY;
-        return _this;
-    }
-    Skew.fromElement = function (element) {
-        return new Skew(element.skewX, element.skewY);
-    };
-    return Skew;
-}(SObject));
-
-
-;// ./src/core/VectorConverter.ts
-
-
-
-
-var VectorConverter;
-(function (VectorConverter) {
-    function vectorToScale(v) {
-        return new Scale(v.x, v.y);
-    }
-    VectorConverter.vectorToScale = vectorToScale;
-    function vectorToSize(v) {
-        return new Size(v.x, v.y);
-    }
-    VectorConverter.vectorToSize = vectorToSize;
-    function vectorToSkew(v) {
-        return new Skew(v.x, v.y);
-    }
-    VectorConverter.vectorToSkew = vectorToSkew;
-    function scaleToVector(s) {
-        return new Vector(s.scaleX, s.scaleY);
-    }
-    VectorConverter.scaleToVector = scaleToVector;
-    function scaleToSize(s) {
-        return new Size(s.scaleX, s.scaleY);
-    }
-    VectorConverter.scaleToSize = scaleToSize;
-    function scaleToSkew(s) {
-        return new Skew(s.scaleX, s.scaleY);
-    }
-    VectorConverter.scaleToSkew = scaleToSkew;
-    function sizeToVector(s) {
-        return new Vector(s.width, s.height);
-    }
-    VectorConverter.sizeToVector = sizeToVector;
-    function sizeToScale(s) {
-        return new Scale(s.width, s.height);
-    }
-    VectorConverter.sizeToScale = sizeToScale;
-    function sizeToSkew(s) {
-        return new Skew(s.width, s.height);
-    }
-    VectorConverter.sizeToSkew = sizeToSkew;
-    function skewToVector(s) {
-        return new Vector(s.skewX, s.skewY);
-    }
-    VectorConverter.skewToVector = skewToVector;
-    function skewToScale(s) {
-        return new Scale(s.skewX, s.skewY);
-    }
-    VectorConverter.skewToScale = skewToScale;
-    function skewToSize(s) {
-        return new Size(s.skewX, s.skewY);
-    }
-    VectorConverter.skewToSize = skewToSize;
-    function toVector(obj) {
-        if ("x" in obj && "y" in obj) {
-            return new Vector(obj.x, obj.y);
-        }
-        else if ("width" in obj && "height" in obj) {
-            return new Vector(obj.width, obj.height);
-        }
-        else if ("scaleX" in obj && "scaleY" in obj) {
-            return new Vector(obj.scaleX, obj.scaleY);
-        }
-        else if ("skewX" in obj && "skewY" in obj) {
-            return new Vector(obj.skewX, obj.skewY);
-        }
-        else {
-            throw new Error("Unsupported object structure for Vector conversion");
-        }
-    }
-    VectorConverter.toVector = toVector;
-})(VectorConverter || (VectorConverter = {}));
 
 ;// ./src/core/Transform/Transform.ts
 var Transform_extends = (undefined && undefined.__extends) || (function () {
@@ -1435,6 +842,81 @@ var Transform = (function (_super) {
 }(SObject));
 
 
+;// ./src/core/Rectangle/CornerRect.ts
+var CornerRect_extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+var CornerRect = (function (_super) {
+    CornerRect_extends(CornerRect, _super);
+    function CornerRect(topLeft, bottomRight) {
+        var _this = _super.call(this) || this;
+        _this.topLeft = Vector.ZERO;
+        _this.bottomRight = Vector.ZERO;
+        _this.topLeft = topLeft;
+        _this.bottomRight = bottomRight;
+        return _this;
+    }
+    CornerRect.prototype.toBounds = function () {
+        return new Bounds(this.topLeft, this.bottomRight);
+    };
+    return CornerRect;
+}(SObject));
+
+
+;// ./src/core/Rectangle/XYWHRect.ts
+var XYWHRect_extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+var XYWHRect = (function (_super) {
+    XYWHRect_extends(XYWHRect, _super);
+    function XYWHRect(x, y, width, height) {
+        var _this = _super.call(this) || this;
+        _this.x = 0;
+        _this.y = 0;
+        _this.width = 0;
+        _this.height = 0;
+        _this.x = x;
+        _this.y = y;
+        _this.width = width;
+        _this.height = height;
+        return _this;
+    }
+    XYWHRect.prototype.toBounds = function () {
+        return Bounds.fromTopLeft(this.x, this.y, this.width, this.height);
+    };
+    return XYWHRect;
+}(SObject));
+
+
 ;// ./src/core/Circle.ts
 var Circle_extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -1517,6 +999,9 @@ var Circle = (function (_super) {
     Circle.prototype.toVector = function () {
         return this.pos.clone();
     };
+    Circle.prototype.toBounds = function () {
+        return new Bounds(this.pos, this.r);
+    };
     return Circle;
 }(SObject));
 
@@ -1537,8 +1022,6 @@ var LineSegment_extends = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var LineSegment_a;
-
 
 
 
@@ -1627,30 +1110,544 @@ var LineSegment = (function (_super) {
         var dy = this.endPoint.y - this.startPoint.y;
         return new Vector(dx, dy);
     };
-    LineSegment.from = function (startPoint, direction, distance) {
-        if (distance < 0) {
-            throw new Error("Distance must be non-negative");
-        }
-        var offset = getDirectionOffset(direction).clone().multiply(distance);
-        var endPoint = startPoint.clone().add(offset);
+    LineSegment.prototype.toBounds = function () {
+        return new Bounds(this.startPoint, this.endPoint);
+    };
+    LineSegment.fromDirectionVector = function (startPoint, direction) {
+        var endPoint = startPoint.clone().add(direction);
         return new LineSegment(startPoint, endPoint);
     };
     return LineSegment;
 }(SObject));
 
-var DIRECTION_OFFSETS = (LineSegment_a = {},
-    LineSegment_a[OrthogonalDirection.Left] = new Vector(-1, 0),
-    LineSegment_a[OrthogonalDirection.Top] = new Vector(0, -1),
-    LineSegment_a[OrthogonalDirection.Right] = new Vector(1, 0),
-    LineSegment_a[OrthogonalDirection.Bottom] = new Vector(0, 1),
-    LineSegment_a);
-function getDirectionOffset(direction) {
-    var offset = DIRECTION_OFFSETS[direction];
-    if (!offset) {
-        throw new Error("Unsupported direction: ".concat(direction));
+
+;// ./src/core/Rectangle/Bounds.ts
+var Bounds_extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+var Bounds = (function (_super) {
+    Bounds_extends(Bounds, _super);
+    function Bounds() {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        var _this = _super.call(this) || this;
+        _this.left = 0;
+        _this.top = 0;
+        _this.right = 0;
+        _this.bottom = 0;
+        switch (args.length) {
+            case 0:
+                var $dom = fl.getDocumentDOM();
+                if (!$dom) {
+                    throw new Error("No document is open in Flash.");
+                }
+                _this.left = 0;
+                _this.top = 0;
+                _this.right = $dom.width;
+                _this.bottom = $dom.height;
+                break;
+            case 1: {
+                var arg = args[0];
+                if (arg instanceof Bounds) {
+                    _this.copy(arg);
+                }
+                else if (IsBoundsLike(arg)) {
+                    _this.assign(arg);
+                }
+                else if (typeof arg === "number") {
+                    _this.left = -arg;
+                    _this.top = -arg;
+                    _this.right = arg;
+                    _this.bottom = arg;
+                }
+                else if (Array.isArray(arg)) {
+                    var rect = findBoundingRectangle(arg);
+                    _this.copy(rect);
+                }
+                else if (typeof arg === "object") {
+                    if (arg === null) {
+                        throw new Error("Invalid argument 1");
+                    }
+                    else if ("width" in arg && "left" in arg) {
+                        _this.left = arg.left;
+                        _this.top = arg.top;
+                        _this.right = arg.left + arg.width;
+                        _this.bottom = arg.top + arg.height;
+                    }
+                    else if ("width" in arg && "height" in arg) {
+                        _this.left = 0;
+                        _this.top = 0;
+                        _this.right = arg.width;
+                        _this.bottom = arg.height;
+                    }
+                    else {
+                        throw new Error("Invalid argument 1");
+                    }
+                }
+                else {
+                    throw new Error("Invalid argument 1");
+                }
+                break;
+            }
+            case 2: {
+                var a = args[0], b = args[1];
+                if (typeof a === "number" && typeof b === "number") {
+                    _this.left = 0;
+                    _this.top = 0;
+                    _this.right = a;
+                    _this.bottom = b;
+                }
+                else if (a.x !== undefined && typeof b === "number") {
+                    var radiusRect = new Bounds(b);
+                    var finalRect = radiusRect.addOffset(a);
+                    _this.copy(finalRect);
+                }
+                else if (IsVectorLike(a) && IsVectorLike(b)) {
+                    _this.left = a.x;
+                    _this.top = a.y;
+                    _this.bottom = b.y;
+                    _this.right = b.x;
+                }
+                else {
+                    throw new Error("Invalid arguments for 2-arg constructor");
+                }
+                break;
+            }
+            case 4: {
+                _this.left = args[0];
+                _this.top = args[1];
+                _this.right = args[2];
+                _this.bottom = args[3];
+                break;
+            }
+            default:
+                throw new Error("Unsupported number of arguments: ".concat(args.length));
+        }
+        return _this;
     }
-    return offset;
+    Object.defineProperty(Bounds.prototype, "width", {
+        get: function () {
+            return this.right - this.left;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Bounds.prototype, "height", {
+        get: function () {
+            return this.bottom - this.top;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Bounds.prototype, "center", {
+        get: function () {
+            return new Vector((this.left + this.right) / 2, (this.top + this.bottom) / 2);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Bounds.prototype, "size", {
+        get: function () {
+            return new Size(this.width, this.height);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Bounds.prototype, "leftTop", {
+        get: function () {
+            return new Vector(this.left, this.top);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Bounds.prototype, "bottomRight", {
+        get: function () {
+            return new Vector(this.right, this.bottom);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Bounds.prototype.addOffset = function (offset) {
+        if (typeof offset === "number") {
+            offset = new Bounds(offset, offset, offset, offset);
+        }
+        else if (IsVectorLike(offset)) {
+            offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
+        }
+        this.left += offset.left;
+        this.top += offset.top;
+        this.right += offset.right;
+        this.bottom += offset.bottom;
+        return this;
+    };
+    Bounds.prototype.subOffset = function (offset) {
+        if (typeof offset === "number") {
+            offset = new Bounds(offset, offset, offset, offset);
+        }
+        else if (offset instanceof Vector) {
+            offset = new Bounds(offset.x, offset.y, offset.x, offset.y);
+        }
+        this.left -= offset.left;
+        this.top -= offset.top;
+        this.right -= offset.right;
+        this.bottom -= offset.bottom;
+        return this;
+    };
+    Bounds.createDirectionalOffset = function (size, direction) {
+        var offset = new Bounds(0, 0, 0, 0);
+        switch (direction) {
+            case InsetDirection.Left:
+                offset.left = -size;
+                break;
+            case InsetDirection.Top:
+                offset.top = -size;
+                break;
+            case InsetDirection.Right:
+                offset.right = size;
+                break;
+            case InsetDirection.Bottom:
+                offset.bottom = size;
+                break;
+            case InsetDirection.All:
+                offset.left = -size;
+                offset.top = -size;
+                offset.right = size;
+                offset.bottom = size;
+                break;
+            default:
+                throw new Error("Invalid direction: ".concat(direction));
+        }
+        return offset;
+    };
+    Bounds.prototype.expand = function (size, whichDirection) {
+        if (whichDirection === void 0) { whichDirection = InsetDirection.All; }
+        var offset = Bounds.createDirectionalOffset(size, whichDirection);
+        return this.addOffset(offset);
+    };
+    Bounds.prototype.shrink = function (size, whichDirection) {
+        if (whichDirection === void 0) { whichDirection = InsetDirection.All; }
+        var offset = Bounds.createDirectionalOffset(size, whichDirection);
+        return this.subOffset(offset);
+    };
+    Bounds.prototype.contains = function (rect) {
+        return (this.left <= rect.left &&
+            this.top <= rect.top &&
+            this.right >= rect.right &&
+            this.bottom >= rect.bottom);
+    };
+    Bounds.prototype.getCorner = function (whichCorner) {
+        var _a = this, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom;
+        var centerX = (left + right) / 2;
+        var centerY = (top + bottom) / 2;
+        switch (whichCorner) {
+            case RelativePosition.TopRight:
+                return new Vector(right, top);
+            case RelativePosition.TopLeft:
+                return new Vector(left, top);
+            case RelativePosition.BottomRight:
+                return new Vector(right, bottom);
+            case RelativePosition.BottomLeft:
+                return new Vector(left, bottom);
+            case RelativePosition.TopCenter:
+                return new Vector(centerX, top);
+            case RelativePosition.RightCenter:
+                return new Vector(right, centerY);
+            case RelativePosition.BottomCenter:
+                return new Vector(centerX, bottom);
+            case RelativePosition.LeftCenter:
+                return new Vector(left, centerY);
+            case RelativePosition.Center:
+                return new Vector(centerX, centerY);
+            default:
+                throw new Error("Invalid RelativePosition: ".concat(whichCorner));
+        }
+    };
+    Bounds.prototype.getPart = function (whichPart, widthRatio, heightRatio) {
+        if (widthRatio === void 0) { widthRatio = 0.5; }
+        if (heightRatio === void 0) { heightRatio = widthRatio; }
+        var _a = this, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, width = _a.width, height = _a.height;
+        var centerX = (left + right) / 2;
+        var centerY = (top + bottom) / 2;
+        var partWidth = width * widthRatio;
+        var partHeight = height * heightRatio;
+        var invWidth = width - partWidth;
+        var invHeight = height - partHeight;
+        var halfW = partWidth / 2;
+        var halfH = partHeight / 2;
+        switch (whichPart) {
+            case RectanglePart.TopRight:
+                return new Bounds(right - invWidth, top, right, top + partHeight);
+            case RectanglePart.TopLeft:
+                return new Bounds(left, top, left + partWidth, top + partHeight);
+            case RectanglePart.BottomRight:
+                return new Bounds(right - invWidth, bottom - invHeight, right, bottom);
+            case RectanglePart.BottomLeft:
+                return new Bounds(left, bottom - invHeight, left + partWidth, bottom);
+            case RectanglePart.TopCenter:
+                return new Bounds(centerX - halfW, top, centerX + halfW, top + partHeight);
+            case RectanglePart.RightCenter:
+                return new Bounds(right - invWidth, centerY - halfH, right, centerY + halfH);
+            case RectanglePart.BottomCenter:
+                return new Bounds(centerX - halfW, bottom - partHeight, centerX + halfW, bottom);
+            case RectanglePart.LeftCenter:
+                return new Bounds(left, centerY - halfH, left + partWidth, centerY + halfH);
+            case RectanglePart.Center:
+                return new Bounds(centerX - halfW, centerY - halfH, centerX + halfW, centerY + halfH);
+            case RectanglePart.Top:
+                return new Bounds(left, top, right, top + partHeight);
+            case RectanglePart.Right:
+                return new Bounds(right - invWidth, top, right, bottom);
+            case RectanglePart.Bottom:
+                return new Bounds(left, bottom - partHeight, right, bottom);
+            case RectanglePart.Left:
+                return new Bounds(left, top, left + partWidth, bottom);
+            default:
+                throw new Error("Invalid RectanglePart: ".concat(whichPart));
+        }
+    };
+    Bounds.prototype.union = function (other) {
+        var minLeft = Math.min(this.left, other.left);
+        var minTop = Math.min(this.top, other.top);
+        var maxRight = Math.max(this.right, other.right);
+        var maxBottom = Math.max(this.bottom, other.bottom);
+        this.left = minLeft;
+        this.top = minTop;
+        this.right = maxRight;
+        this.bottom = maxBottom;
+        return this;
+    };
+    Bounds.prototype.rotate = function (angle, whichCorner) {
+        if (whichCorner === void 0) { whichCorner = RelativePosition.Center; }
+        var radians = angle * (Math.PI / 180);
+        var center = this.getCorner(whichCorner);
+        var topLeft = this.getCorner(RelativePosition.TopLeft);
+        var topRight = this.getCorner(RelativePosition.TopRight);
+        var bottomLeft = this.getCorner(RelativePosition.BottomLeft);
+        var bottomRight = this.getCorner(RelativePosition.BottomRight);
+        var rotatePoint = function (point) {
+            return point.sub(center).rotate(radians).add(center);
+        };
+        var points = [
+            rotatePoint(topLeft),
+            rotatePoint(topRight),
+            rotatePoint(bottomRight),
+            rotatePoint(bottomLeft)
+        ];
+        var bounds = Bounds.fromVectors(points);
+        this.copy(bounds);
+        return this;
+    };
+    Bounds.fromTopLeft = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        switch (args.length) {
+            case 2:
+                var a = args[0], b = args[1];
+                if (IsVectorLike(a) && IsVectorLike(b)) {
+                    return new Bounds(a, b);
+                }
+                else if (IsVectorLike(a) && IsSizeLike(b)) {
+                    var topLeft_1 = args[0], size = args[1];
+                    return this.fromTopLeft(topLeft_1.x, topLeft_1.y, size.width, size.height);
+                }
+                else {
+                    throw new Error("Invalid RectanglePart satisfies never ".concat(args.length));
+                }
+            case 3:
+                var topLeft = args[0];
+                var width = args[1];
+                var height = args[2];
+                return this.fromTopLeft(topLeft.x, topLeft.y, width, height);
+            case 4:
+                var left = args[0];
+                var top = args[1];
+                var width = args[2];
+                var height = args[3];
+                return new Bounds(left, top, left + width, top + height);
+                // removed by dead control flow
+
+            default:
+                throw new Error("Invalid arguments");
+        }
+    };
+    Bounds.fromCenter = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        switch (args.length) {
+            case 2:
+                var center = args[0];
+                var size = args[1];
+                return this.fromCenter(center.x, center.y, size.width, size.height);
+            case 4:
+                var centerX = args[0];
+                var centerY = args[1];
+                var width = args[2];
+                var height = args[3];
+                return new Bounds(centerX - width / 2, centerY - height / 2, centerX + width / 2, centerY + height / 2);
+            default:
+                throw new Error("Invalid arguments");
+        }
+    };
+    Bounds.fromVectors = function (vectors) {
+        var rect = new Bounds(0, 0, 0, 0);
+        for (var i = 0; i < vectors.length; i++) {
+            var vector = vectors[i];
+            if (i === 0) {
+                rect.left = vector.x;
+                rect.top = vector.y;
+                rect.right = vector.x;
+                rect.bottom = vector.y;
+            }
+            else {
+                rect.left = Math.min(rect.left, vector.x);
+                rect.top = Math.min(rect.top, vector.y);
+                rect.right = Math.max(rect.right, vector.x);
+                rect.bottom = Math.max(rect.bottom, vector.y);
+            }
+        }
+        return rect;
+    };
+    Bounds.fromRects = function (rects) {
+        var rect = new Bounds(0, 0, 0, 0);
+        for (var i = 0; i < rects.length; i++) {
+            var r = rects[i];
+            if (i === 0) {
+                rect.left = r.left;
+                rect.top = r.top;
+                rect.right = r.right;
+                rect.bottom = r.bottom;
+            }
+            else {
+                rect.left = Math.min(rect.left, r.left);
+                rect.top = Math.min(rect.top, r.top);
+                rect.right = Math.max(rect.right, r.right);
+                rect.bottom = Math.max(rect.bottom, r.bottom);
+            }
+        }
+        return rect;
+    };
+    Bounds.fromElements = function (elements) {
+        return findBoundingRectangle(elements);
+    };
+    Bounds.fromElement = function (element) {
+        return new Bounds(element);
+    };
+    Bounds.prototype.toBox = function () {
+        return new Box(this.leftTop, this.width, this.height);
+    };
+    Bounds.prototype.toCornerRect = function () {
+        return new CornerRect(this.leftTop, this.bottomRight);
+    };
+    Bounds.prototype.toXYWHRect = function () {
+        return new XYWHRect(this.left, this.top, this.width, this.height);
+    };
+    Bounds.prototype.toCircle = function () {
+        var r = Math.min(this.width, this.height) / 2;
+        return new Circle(this.center, r);
+    };
+    Bounds.prototype.toLineSegment = function () {
+        return new LineSegment(this.leftTop, this.bottomRight);
+    };
+    return Bounds;
+}(SObject));
+
+function findBoundingRectangle(elements) {
+    if (!elements.length) {
+        throw new Error("findBoundingRectangle: elements array is empty");
+    }
+    var top = elements[0].top;
+    var left = elements[0].left;
+    var right = elements[0].left + elements[0].width;
+    var bottom = elements[0].top + elements[0].height;
+    for (var i = 1; i < elements.length; i++) {
+        var element = elements[i];
+        var elementTop = element.top;
+        var elementLeft = element.left;
+        var elementRight = element.left + element.width;
+        var elementBottom = element.top + element.height;
+        if (elementTop < top)
+            top = elementTop;
+        if (elementLeft < left)
+            left = elementLeft;
+        if (elementRight > right)
+            right = elementRight;
+        if (elementBottom > bottom)
+            bottom = elementBottom;
+    }
+    return new Bounds(left, top, right, bottom);
 }
+
+;// ./src/core/Rectangle/Box.ts
+var Box_extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+var Box = (function (_super) {
+    Box_extends(Box, _super);
+    function Box(pos, width, height) {
+        if (pos === void 0) { pos = Vector.ZERO; }
+        if (width === void 0) { width = 0; }
+        if (height === void 0) { height = 0; }
+        var _this = _super.call(this) || this;
+        _this.pos = Vector.ZERO;
+        _this.width = 0;
+        _this.height = 0;
+        _this.pos = pos;
+        _this.width = width;
+        _this.height = height;
+        return _this;
+    }
+    Box.prototype.toBounds = function () {
+        return Bounds.fromTopLeft(this.pos, this.width, this.height);
+    };
+    return Box;
+}(SObject));
+
 
 ;// ./src/core/FrameRange/FrameRange.ts
 var FrameRange_extends = (undefined && undefined.__extends) || (function () {
@@ -1718,262 +1715,7 @@ var FrameRange = (function (_super) {
 }(SObject));
 
 
-;// ./src/core/FrameRange/FrameRangeList.ts
-var FrameRangeList_extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-var FrameRangeList = (function (_super) {
-    FrameRangeList_extends(FrameRangeList, _super);
-    function FrameRangeList(items) {
-        if (items === void 0) { items = []; }
-        var _this = _super.call(this) || this;
-        _this._items = [];
-        _this._cachedFirstSlFrameIndex = null;
-        _this._cachedFirstSlLayerIndex = null;
-        _this._cachedFirstSlLayer = null;
-        _this._cachedFirstSlFrame = null;
-        _this._items = Array.from(items);
-        return _this;
-    }
-    Object.defineProperty(FrameRangeList.prototype, "length", {
-        get: function () {
-            return this._items.length;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    FrameRangeList.prototype[Symbol.iterator] = function () {
-        return this._items[Symbol.iterator]();
-    };
-    FrameRangeList.prototype.at = function (index) {
-        if (index < 0) {
-            index = this._items.length + index;
-        }
-        return this._items[index];
-    };
-    FrameRangeList.prototype.forEach = function (callback) {
-        var _this = this;
-        this._items.forEach(function (item, i) { return callback(item, i, _this); });
-    };
-    FrameRangeList.prototype.map = function (callback) {
-        return this._items.map(callback);
-    };
-    Object.defineProperty(FrameRangeList.prototype, "firstSlFrameIndex", {
-        get: function () {
-            if (this._items.length === 0)
-                return null;
-            if (this._cachedFirstSlFrameIndex === null) {
-                this._cachedFirstSlFrameIndex = this._items[0].startFrame;
-            }
-            return this._cachedFirstSlFrameIndex;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(FrameRangeList.prototype, "firstSlLayerIndex", {
-        get: function () {
-            if (this._items.length === 0)
-                return null;
-            if (this._cachedFirstSlLayerIndex === null) {
-                this._cachedFirstSlLayerIndex = this._items[0].layerIndex;
-            }
-            return this._cachedFirstSlLayerIndex;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(FrameRangeList.prototype, "firstSlLayer", {
-        get: function () {
-            if (this._items.length === 0)
-                return null;
-            if (this._cachedFirstSlLayer === null) {
-                var doc = fl.getDocumentDOM();
-                if (!doc) {
-                    throw new Error("No document is open in Flash.");
-                }
-                var timeline = doc.getTimeline();
-                var layers = timeline.layers;
-                var layerIndex = this.firstSlLayerIndex;
-                this._cachedFirstSlLayer = layerIndex !== null ? layers[layerIndex] : null;
-            }
-            return this._cachedFirstSlLayer;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(FrameRangeList.prototype, "firstSlFrame", {
-        get: function () {
-            if (this._items.length === 0)
-                return null;
-            if (this._cachedFirstSlFrame === null) {
-                var doc = fl.getDocumentDOM();
-                if (!doc) {
-                    throw new Error("No document is open in Flash.");
-                }
-                var timeline = doc.getTimeline();
-                var curLayerIndex = timeline.currentLayer;
-                var curLayer = timeline.layers[curLayerIndex];
-                var frameIndex = this.firstSlFrameIndex;
-                this._cachedFirstSlFrame =
-                    frameIndex !== null ? curLayer.frames[frameIndex] : null;
-            }
-            return this._cachedFirstSlFrame;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    FrameRangeList.fromFrameRanges = function (ranges) {
-        return new FrameRangeList(ranges.map(function (r) {
-            return r instanceof FrameRange
-                ? r
-                : new FrameRange(r.layerIndex, r.startFrame, r.endFrame);
-        }));
-    };
-    return FrameRangeList;
-}(SObject));
-
-
-;// ./src/flash/FlashElementWrapper.ts
-
-
-
-var FlashElementWrapper = (function () {
-    function FlashElementWrapper(element) {
-        this.element = element;
-    }
-    Object.defineProperty(FlashElementWrapper.prototype, "topLeft", {
-        get: function () {
-            var _a = this.element, _b = _a.left, left = _b === void 0 ? 0 : _b, _c = _a.top, top = _c === void 0 ? 0 : _c;
-            return new Vector(left, top);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(FlashElementWrapper.prototype, "size", {
-        get: function () {
-            return Size.fromElement(this.element);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(FlashElementWrapper.prototype, "bounds", {
-        get: function () {
-            return Bounds.fromTopLeft(this.topLeft, this.size);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(FlashElementWrapper.prototype, "center", {
-        get: function () {
-            return this.bounds.center;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return FlashElementWrapper;
-}());
-
-
-;// ./src/flash/FlashStageWrapper.ts
-
-
-var FlashStageWrapper = (function () {
-    function FlashStageWrapper() {
-        this.doc = fl.getDocumentDOM();
-    }
-    Object.defineProperty(FlashStageWrapper.prototype, "center", {
-        get: function () {
-            var rect = new Bounds(this.doc);
-            var stageCenter = rect.center;
-            return stageCenter;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(FlashStageWrapper.prototype, "bounds", {
-        get: function () {
-            var rect = new Bounds(this.doc);
-            return rect;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(FlashStageWrapper.prototype, "size", {
-        get: function () {
-            return Size.fromElement(this.doc);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return FlashStageWrapper;
-}());
-
-
-;// ./src/flash/FlashCameraWrapper.ts
-
-
-
-var FlashCameraWrapper = (function () {
-    function FlashCameraWrapper(timeline, frameIndex) {
-        this.doc = fl.getDocumentDOM();
-        this.timeline = this.doc.getTimeline();
-        this.frameIndex = 0;
-        this.stage = new FlashStageWrapper();
-        if (timeline) {
-            this.timeline = timeline;
-        }
-        if (frameIndex) {
-            this.frameIndex = frameIndex;
-        }
-    }
-    Object.defineProperty(FlashCameraWrapper.prototype, "bounds", {
-        get: function () {
-            var _a = this.stage.size, stageWidth = _a.width, stageHeight = _a.height;
-            var timeline = this.timeline;
-            var frameIndex = this.frameIndex;
-            var cameraPos = Vector.fromElement(timeline.camera.getPosition(frameIndex));
-            var cameraZoomRatio = timeline.camera.getZoom(frameIndex) / 100;
-            var cameraRect = new Bounds(-cameraPos.x, -cameraPos.y, -cameraPos.x + stageWidth / cameraZoomRatio, -cameraPos.y + stageHeight / cameraZoomRatio);
-            return cameraRect;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(FlashCameraWrapper.prototype, "center", {
-        get: function () {
-            return this.bounds.center;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return FlashCameraWrapper;
-}());
-
-
-;// ./src/index.ts
-
-
-
-
-
-
-
-
-
+;// ./src/core/index.ts
 
 
 
@@ -2001,27 +1743,15 @@ var SAT;
     SAT.Circle = Circle;
     SAT.LineSegment = LineSegment;
     SAT.FrameRange = FrameRange;
-    SAT.FrameRangeList = FrameRangeList;
     SAT.V = Vector;
     SAT.B = Bounds;
-    SAT.S = Size;
-    SAT.TR = Transform;
-    SAT.FR = FrameRange;
-    SAT.FRL = FrameRangeList;
-    SAT.SC = Scale;
-    SAT.SK = Skew;
-    SAT.LS = LineSegment;
     SAT.C = Circle;
 })(SAT || (SAT = {}));
 
+;// ./src/index.ts
 
 
-var FLASH;
-(function (FLASH) {
-    FLASH.FlashElementWrapper = FlashElementWrapper;
-    FLASH.FlashStageWrapper = FlashStageWrapper;
-    FLASH.FlashCameraWrapper = FlashCameraWrapper;
-})(FLASH || (FLASH = {}));
+
 
 /******/ 	return __webpack_exports__;
 /******/ })()

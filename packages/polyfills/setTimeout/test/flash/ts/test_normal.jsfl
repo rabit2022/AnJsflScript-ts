@@ -1,10 +1,35 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 248:
+/***/ 77:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.formatLocalDateTime = formatLocalDateTime;
+    function padZero(num) {
+        return num < 10 ? '0' + num : '' + num;
+    }
+    function formatLocalDateTime(date) {
+        var year = date.getFullYear();
+        var month = padZero(date.getMonth() + 1);
+        var day = padZero(date.getDate());
+        var hours = padZero(date.getHours());
+        var minutes = padZero(date.getMinutes());
+        var seconds = padZero(date.getSeconds());
+        return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hours, ":").concat(minutes, ":").concat(seconds);
+    }
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
+/***/ 248:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(77)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, date_format_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
     exports.EventListenerManager = void 0;
@@ -12,86 +37,118 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         function EventListenerManager(taskQueue) {
             this.taskQueue = taskQueue;
             this.currentListenerId = null;
-            this.currentEventType = null;
             this.boundExecuteTasks = null;
+            this.lastExecutionTime = 0;
+            this.lastMinRemainingTime = 0;
+            this.interval = 0;
         }
         EventListenerManager.prototype.updateStrategy = function () {
+            var taskSize = this.taskQueue.getSize();
+            this.boundExecuteTasks = this.createThrottledCallback();
+            this.currentListenerId = fl.addEventListener(EventListenerManager.MOUSE_MOVE, this.boundExecuteTasks);
+            console.log("[Monitor] \u76D1\u542C\u5668\u5DF2\u5C31\u7EEA (\u5F53\u524D\u4EFB\u52A1\u6570: ".concat(taskSize, ")"));
+        };
+        EventListenerManager.prototype.createThrottledCallback = function () {
             var _this = this;
-            var minRemainingTime = this.taskQueue.getMinRemainingTime();
-            var targetEvent = null;
-            if (minRemainingTime === null) {
-                targetEvent = null;
-            }
-            else if (minRemainingTime < 10000) {
-                targetEvent = EventListenerManager.MOUSE_MOVE;
-            }
-            else if (minRemainingTime >= 60000) {
-                targetEvent = EventListenerManager.LAYER_CHANGED;
-            }
-            else {
-                targetEvent = EventListenerManager.FRAME_CHANGED;
-            }
-            if (targetEvent !== this.currentEventType) {
-                if (this.currentListenerId !== null && this.currentEventType !== null) {
-                    fl.removeEventListener(this.currentEventType, this.currentListenerId);
+            return function () {
+                var now = Date.now();
+                var minRemainingTime = _this.taskQueue.getMinRemainingTime();
+                var taskSize = _this.taskQueue.getSize();
+                if (minRemainingTime === null || taskSize === 0) {
+                    if (_this.currentListenerId !== null) {
+                        fl.removeEventListener(EventListenerManager.MOUSE_MOVE, _this.currentListenerId);
+                        _this.currentListenerId = null;
+                        _this.boundExecuteTasks = null;
+                        console.log("[Monitor] \u4EFB\u52A1\u5217\u8868\u4E3A\u7A7A\uFF0C\u5DF2\u79FB\u9664\u76D1\u542C\u5668");
+                    }
+                    return;
                 }
-                this.currentListenerId = null;
-                this.currentEventType = null;
-                this.boundExecuteTasks = null;
-                if (targetEvent !== null) {
-                    this.boundExecuteTasks = function () { return executeTasks(_this.taskQueue); };
-                    var id = fl.addEventListener(targetEvent, this.boundExecuteTasks);
-                    this.currentListenerId = id;
-                    this.currentEventType = targetEvent;
-                    console.log("[Monitor] \u5207\u6362\u76D1\u542C\u5668\u81F3: ".concat(targetEvent));
+                if (_this.lastMinRemainingTime !== minRemainingTime) {
+                    _this.lastMinRemainingTime = minRemainingTime;
+                    if (minRemainingTime < 2000) {
+                        _this.interval = 0;
+                    }
+                    else if (minRemainingTime < 10000) {
+                        _this.interval = minRemainingTime - 1000;
+                    }
+                    else if (minRemainingTime < 60000) {
+                        _this.interval = 5000;
+                    }
+                    else {
+                        _this.interval = 10000;
+                    }
                 }
-                else {
-                    console.log("[Monitor] \u6240\u6709\u4EFB\u52A1\u7ED3\u675F\uFF0C\u76D1\u542C\u5668\u5DF2\u5173\u95ED");
+                if (_this.interval === 0 || (now - _this.lastExecutionTime) >= _this.interval) {
+                    _this.lastExecutionTime = now;
+                    executeTasks(_this.taskQueue);
                 }
-            }
+            };
         };
         EventListenerManager.MOUSE_MOVE = 'mouseMove';
-        EventListenerManager.FRAME_CHANGED = 'frameChanged';
-        EventListenerManager.LAYER_CHANGED = 'layerChanged';
         return EventListenerManager;
     }());
     exports.EventListenerManager = EventListenerManager;
+    var BATCH_SIZE = 10;
+    var THRESHOLD = 10;
+    var _currentTaskIndex = 0;
     function executeTasks(taskQueue) {
         var now = Date.now();
-        var tasksToRemove = [];
-        var tasksToExecute = [];
-        for (var _i = 0, _a = taskQueue['tasks']; _i < _a.length; _i++) {
-            var task = _a[_i];
+        var tasks = taskQueue['tasks'];
+        var taskCount = tasks.length;
+        if (taskCount <= THRESHOLD) {
+            var tasksToRemove = [];
+            for (var _i = 0, tasks_1 = tasks; _i < tasks_1.length; _i++) {
+                var task = tasks_1[_i];
+                var elapsed = now - task.startTimeRecord;
+                if (elapsed >= task.delay) {
+                    tasksToRemove.push(task.id);
+                    invokeTask(task);
+                }
+            }
+            for (var _a = 0, tasksToRemove_1 = tasksToRemove; _a < tasksToRemove_1.length; _a++) {
+                var id = tasksToRemove_1[_a];
+                taskQueue.remove(id);
+            }
+            return;
+        }
+        else {
+            var endIndex = Math.min(_currentTaskIndex + BATCH_SIZE, taskCount);
+            var tasksToRemove = [];
+            for (var i = _currentTaskIndex; i < endIndex; i++) {
+                var task = tasks[i];
+                var elapsed = now - task.startTimeRecord;
+                if (elapsed >= task.delay) {
+                    tasksToRemove.push(task.id);
+                    invokeTask(task);
+                }
+            }
+            for (var _b = 0, tasksToRemove_2 = tasksToRemove; _b < tasksToRemove_2.length; _b++) {
+                var id = tasksToRemove_2[_b];
+                taskQueue.remove(id);
+            }
+            _currentTaskIndex = endIndex;
+            if (_currentTaskIndex >= taskCount) {
+                _currentTaskIndex = 0;
+            }
+            return;
+        }
+    }
+    function invokeTask(task) {
+        try {
+            var now = Date.now();
             var elapsed = now - task.startTimeRecord;
-            if (elapsed >= task.delay) {
-                console.log('[Timer] 触发回调:', JSON.stringify({
-                    taskId: task.id,
-                    注册时间: new Date(task.startTimeRecord).toISOString(),
-                    当前时间: new Date(now).toISOString(),
-                    延迟设定: "".concat(task.delay, "ms"),
-                    实际耗时: "".concat(elapsed, "ms"),
-                    是否超时: elapsed > task.delay,
-                    参数: task.args
-                }));
-                tasksToRemove.push(task.id);
-                tasksToExecute.push({
-                    callback: task.callback,
-                    args: task.args
-                });
-            }
+            console.log('[Timer] 触发回调:', JSON.stringify({
+                taskId: task.id,
+                注册时间: (0, date_format_1.formatLocalDateTime)(new Date(task.startTimeRecord)),
+                当前时间: (0, date_format_1.formatLocalDateTime)(new Date(now)),
+                延迟设定: "".concat(task.delay, "ms"),
+                实际耗时: "".concat(elapsed, "ms"),
+                超时: elapsed - task.delay,
+            }));
+            task.callback.apply(task, task.args);
         }
-        for (var _b = 0, tasksToRemove_1 = tasksToRemove; _b < tasksToRemove_1.length; _b++) {
-            var id = tasksToRemove_1[_b];
-            taskQueue.remove(id);
-        }
-        for (var _c = 0, tasksToExecute_1 = tasksToExecute; _c < tasksToExecute_1.length; _c++) {
-            var task = tasksToExecute_1[_c];
-            try {
-                task.callback.apply(task, task.args);
-            }
-            catch (error) {
-                console.error('[Timer] 回调执行错误', error);
-            }
+        catch (error) {
+            console.error('[Timer] 回调执行错误', error);
         }
     }
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -174,7 +231,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
             var now = Date.now();
             return Math.min.apply(Math, this.tasks.map(function (task) { return task.startTimeRecord + task.delay - now; }));
         };
-        TaskQueue.prototype.size = function () {
+        TaskQueue.prototype.getSize = function () {
             return this.tasks.length;
         };
         return TaskQueue;

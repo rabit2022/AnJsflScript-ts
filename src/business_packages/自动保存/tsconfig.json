@@ -17,9 +17,9 @@
     "composite": true,
     "declaration": true,
 
-    "rootDir": "src",
+    "rootDir": "./src",
     "outDir": "./dist",
-    "types": [],
+    "types": ["node"],
     "target": "es5",
     "lib": [
       "es5",
@@ -33,7 +33,11 @@
     // jsfl
     "../../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
-    "../../../types/myShim/*.d.ts"
+    "../../../types/myShim/*.d.ts",
 // endregion TYPES
-  ]
+  ],
+//  "typeRoots": [
+//    "../../../node_modules/@types",
+//    "../../../types"
+//  ]
 }

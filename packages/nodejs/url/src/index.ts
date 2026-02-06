@@ -35,4 +35,5 @@ url.fileURLToPath = fileURLToPath;
 // @ts-ignore
 url.pathToFileURL = pathToFileURL;
 
-module.exports = url;
+// module.exports = url;
+export {url};

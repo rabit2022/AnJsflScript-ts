@@ -1,9 +1,11 @@
 import * as  fs from "fs";
-import * as path from "path-browserify";
+import * as path from "path";
 import { DateTime } from "luxon";
-import {TIME_FORMAT} from "../CONSTANTS/constants";
+import {TIME_FORMAT} from "../CONSTANTS/time";
+import {AUTHOR} from "../DESC/Descriptions";
 
 
+AUTHOR;
 
 function getBaseNameWithoutExt(filePath: string): string {
   return path.basename(filePath, path.extname(filePath));

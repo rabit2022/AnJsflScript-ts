@@ -9,15 +9,40 @@ const MODULE_NAME = "自动保存";
 
 
 
+// 👇 新增：用于替换 define -> require
+class ReplaceDefineWithRequire {
+    apply(compiler) {
+        compiler.hooks.emit.tapAsync('ReplaceDefineWithRequire', (compilation, callback) => {
+            for (const filename in compilation.assets) {
+                if (filename.endsWith('.jsfl')) {
+                    const asset = compilation.assets[filename];
+                    let code = asset.source();
+
+
+                    // ✅ 只替换文件开头的 define（最安全）
+                    code = code.replace(/^define\(/, 'require(');
+
+                    // 更新 asset
+                    compilation.assets[filename] = {
+                        source: () => code,
+                        size: () => code.length
+                    };
+                }
+            }
+            callback();
+        });
+    }
+}
+
 module.exports = {
     mode: 'production',
     entry: './src/index.ts', // 入口文件
     output: {
         path: path.resolve(__dirname, 'out'),
         filename: MODULE_NAME + '.jsfl', // 输出为 .jsfl 文件
-        library: MODULE_NAME,  // 暴露为全局变量 Validation（可选）
-        libraryTarget: 'umd',   // 使用 var 暴露（适合 JSFL）
-        clean: true ,            // 每次构建清空 dist
+        // library: MODULE_NAME,  // 暴露为全局变量 Validation（可选）
+        libraryTarget: 'amd',   // 使用 var 暴露（适合 JSFL）
+        clean: true,            // 每次构建清空 dist
 
         globalObject: 'this', // 👈 关键！告诉 Webpack 使用 `this` 而不是 `self`/`window`
     },
@@ -66,11 +91,18 @@ module.exports = {
         ]
     },
     // 关键：不打包任何外部依赖（JSFL 无 npm）
-    externals: ['lodash'],
+    externals: ['lodash', "luxon", "@anjsfl/validation", "@xjsfl/UI",
+        "fs", 'process',"url","setTimeout","loglevel",
+        {"path":"path-browserify"}],
     // 禁用 Node.js 注入
     target: ['web', 'es5'], // 实际上 JSFL 不是 web，但这样可禁用 node polyfill
     stats: {
         modules: false,
         chunks: false
     },
+
+    // 👇 注册自定义插件
+    plugins: [
+        new ReplaceDefineWithRequire()
+    ]
 };
