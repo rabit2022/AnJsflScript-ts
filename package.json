@@ -3,7 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "description": "是一个专为 Adobe Animate 设计的 JavaScript For Flash (JSFL)脚本集合，旨在通过自动化任务提升工作效率，帮助用户更高效地完成重复性工作，从而专注于创意与设计。",
-  "author": "穹的兔兔",
+  "author": {
+    "name": "穹的兔兔",
+    "email": "3101829204@qq.com",
+    "qq": "3101829204",
+    "QQ群": "1040730457"
+  },
   "license": "LGPL-3.0-or-later",
   "keywords": [
     "Adobe Animate",
@@ -17,34 +22,40 @@
     "Design"
   ],
   "workspaces": [
-    "packages/anjsfl/*",
-    "packages/polyfills/*",
     "packages/xjsfl/*",
-    "packages/dom/*"
+    "packages/anjsfl/*",
+    "packages/dom/*",
+    "packages/polyfills/*"
   ],
   "scripts": {
     "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
     "generate_config": "tsx ./tools/project/src/require/generate_config.ts",
+    "preinstall": "npm install json5 && tsx ./tools/project/src/package/sync-package.ts",
     "build": "npx tsc && tsx ./tools/project/src/typescript/build_all.ts",
     "clean": "npx tsc --build --clean && tsx ./tools/project/clean/CleanAll.ts",
     "addHeaders": "tsx ./tools/project/src/headers/addFileHeader.ts"
   },
   "devDependencies": {
-    "@types/error-stack-parser": "2.0.2",
-    "@types/jest": "30.0.0",
-    "@types/lodash-es": "4.17.12",
+    "@types/linq": "2.2.33",
+    "@types/lodash": "4.17.23",
+    "store-js": "2.0.4",
+    "@types/chroma-js": "3.1.2",
+    "cli-table3": "0.6.5",
     "@types/loglevel": "1.6.3",
-    "@types/luxon": "3.7.1",
-    "@types/micromatch": "4.0.10",
-    "@types/node": "25.0.7",
+    "@types/progress": "2.0.7",
+    "@types/error-stack-parser": "2.0.2",
+    "@types/eventemitter3": "2.0.4",
     "@types/path-browserify": "1.0.3",
-    "@types/xregexp": "4.4.0",
-    "eslint": "8.57.1",
+    "@types/luxon": "3.7.1",
+    "oxide.ts": "1.1.0",
+    "@types/node": "25.0.7",
+    "eslint": "9.26.0",
     "eslint-config-prettier": "10.0.1",
     "eslint-plugin-prettier": "5.2.3",
-    "jest": "30.2.0",
-    "minimatch": "10.1.1",
     "prettier": "3.5.2",
+    "jest": "30.2.0",
+    "@types/jest": "30.0.0",
+    "minimatch": "10.1.1",
     "strip-json-comments": "3.1.0",
     "ts-jest": "29.4.6",
     "ts-loader": "9.5.4",
@@ -59,7 +70,6 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "@xjsfl/UI": "1.0.0",
-    "micromatch": "4.0.8",
-    "oxide.ts": "1.1.0"
+    "json5": "2.2.3"
   }
 }

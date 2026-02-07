@@ -1,0 +1,161 @@
+{
+  "name": "AnJsflScript-ts",
+  "private": true,
+  "version": "0.0.0",
+  "description": "是一个专为 Adobe Animate 设计的 JavaScript For Flash (JSFL)脚本集合，旨在通过自动化任务提升工作效率，帮助用户更高效地完成重复性工作，从而专注于创意与设计。",
+  "author": {
+    "name": "穹的兔兔",
+    "email": "3101829204@qq.com",
+    "qq": "3101829204",
+    "QQ群": "1040730457"
+  },
+  "license": "LGPL-3.0-or-later",
+  "keywords": [
+    "Adobe Animate",
+    "JavaScript For Flash",
+    "JSFL",
+    "scripts",
+    "automation",
+    "Efficiency",
+    "Improvement",
+    "Creativity",
+    "Design"
+  ],
+  "workspaces": [
+    //    "H:\project\js\AnJsflScript-ts\packages\xjsfl"
+    // xjsfl相关模块
+    "packages/xjsfl/*",
+    //    "H:\project\js\AnJsflScript-ts\packages\anjsfl"
+    // 当前项目的自定义模块
+    "packages/anjsfl/*",
+    //    "H:\project\js\AnJsflScript-ts\packages\dom"
+    // console,console.stack,console.table等 实现
+    "packages/dom/*",
+    //    "H:\project\js\AnJsflScript-ts\packages\nodejs"
+    // 关于nodejs的兼容层实现
+    // 实现nodejs环境编写，基础测试后 -->  flash环境再次验证    -->  调整兼容层
+
+    //    "H:\project\js\AnJsflScript-ts\packages\polyfills",
+    // 关于Flash的兼容层实现
+    "packages/polyfills/*",
+  ],
+  "scripts": {
+    // 代码质量    prettier
+    "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
+
+    // requirejs  module  注册
+    //    src/out  自定义模块，单文件
+    //    third  第三方模块
+    //    packages  自定义模块
+    // 写入到   config\require\require.config.jsfl
+    "generate_config": "tsx ./tools/project/src/require/generate_config.ts",
+
+
+    // 生成package,json文件，方便注释
+    "preinstall": "npm install json5 && tsx ./tools/project/src/package/sync-package.ts",
+
+
+    // ts编译 jsfl，
+    // src/business脚本文件             -->    out
+    // src/business_packages脚本文件    -->    out
+    // src/lib库文件                   -->    src/out
+    "build": "npx tsc && tsx ./tools/project/src/typescript/build_all.ts",
+
+
+    // 删除build缓存，build文件夹
+    "clean": "npx tsc --build --clean && tsx ./tools/project/clean/CleanAll.ts",
+
+
+    // 添加文件头
+    "addHeaders": "tsx ./tools/project/src/headers/addFileHeader.ts"
+  },
+  "devDependencies": {
+    // npm install @types/rxjs --save-dev
+    // npm install cli-table3 --save-dev
+
+
+    // =================================================================================
+    //  third modules
+    //  "H:\project\js\AnJsflScript-ts\third\utils"
+    "@types/linq": "2.2.33",
+    "@types/lodash": "4.17.23",
+    "store-js": "2.0.4",
+    //    "H:\project\js\AnJsflScript-ts\third\checker"
+    // skip
+
+    //    "H:\project\js\AnJsflScript-ts\third\color"
+    "@types/chroma-js": "3.1.2",
+    //    "H:\project\js\AnJsflScript-ts\third\console"
+    "cli-table3": "0.6.5",
+    "@types/loglevel": "1.6.3",
+    "@types/progress": "2.0.7",
+    "@types/error-stack-parser": "2.0.2",
+
+
+    //    "H:\project\js\AnJsflScript-ts\third\nodejs"
+    "@types/eventemitter3": "2.0.4",
+    // rxjs skip
+    "@types/path-browserify": "1.0.3",
+    // util skip
+
+    //    "H:\project\js\AnJsflScript-ts\third\polyfill"
+    // skip all
+
+    //    "H:\project\js\AnJsflScript-ts\third\require"
+    // requirejs  skip
+    // requirejs是ts转译后的模块，完全的跳过他
+
+
+    //    "H:\project\js\AnJsflScript-ts\third\time"
+    "@types/luxon": "3.7.1",
+    //    "H:\project\js\AnJsflScript-ts\third\types"
+    // rust 风格的Result代码支持
+    "oxide.ts": "1.1.0",
+    // =================================================================================
+    // packages
+    //    "H:\project\js\AnJsflScript-ts\packages\xjsfl"
+    //    "H:\project\js\AnJsflScript-ts\packages\anjsfl"
+    //    "H:\project\js\AnJsflScript-ts\packages\dom"
+    //    "H:\project\js\AnJsflScript-ts\packages\nodejs"
+    "@types/node": "25.0.7",
+    //    "H:\project\js\AnJsflScript-ts\packages\polyfills"
+
+
+
+    // 通配符
+    //    "@types/micromatch": "4.0.10",
+    //    "micromatch": "4.0.8",
+
+    // =================================================================================
+    // 代码质量
+    "eslint": "9.26.0",
+    "eslint-config-prettier": "10.0.1",
+    "eslint-plugin-prettier": "5.2.3",
+    "prettier": "3.5.2",
+    // =================================================================================
+    // jest test相关
+    "jest": "30.2.0",
+    "@types/jest": "30.0.0",
+    "minimatch": "10.1.1",
+    "strip-json-comments": "3.1.0",
+    "ts-jest": "29.4.6",
+    // =================================================================================
+    // ts相关
+    "ts-loader": "9.5.4",
+    "tsconfig-paths": "4.2.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rabit2022/AnJsflScript-ts"
+  },
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "@xjsfl/UI": "1.0.0",
+
+    // "preinstall" 安装json5
+    "json5": "2.2.3"
+
+  }
+}

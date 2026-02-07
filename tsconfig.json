@@ -4,12 +4,12 @@
     "module": "AMD",
     "useDefineForClassFields": true,
     "lib": [
-      "es5"
-      //      "es6", // es6shim
+      "es5",
+      "es6"
+      // es6shim
       //      "dom", // console
     ],
     "skipLibCheck": false,
-    /*  防止es2017等代码不报错 */
     "types": [
       "node"
     ],
@@ -22,20 +22,24 @@
     // @anjsfl/validation
     "moduleResolution": "node",
     "isolatedModules": false,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+
+
+    // 装饰器
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+
+
     "declaration": false,
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
     "preserveConstEnums": true,
     //    "skipLibCheck": true, // 启用跳过类型定义文件的检查
+
+
     "allowJs": true,
-    "incremental": true,
     // 增量编译,只重新编译那些被修改的文件及其依赖项
-
-
-
+    "incremental": true,
     // es import
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -71,8 +75,6 @@
     "./types"
   ],
   "references": [
-
-
   ]
 }
 

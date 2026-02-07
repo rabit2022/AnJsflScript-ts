@@ -1,17 +1,21 @@
-/**
- * @file: #06.环绕飞行.ts
- * @author: 穹的兔兔
- * @email: 3101829204@qq.com
- * @date: 2026/1/25 21:10
- * @project: AnJsflScript-ts
- * @description:
- */// path-to-uri.mjs (ESM) or .js (CommonJS)
-import { fileURLToPath, pathToFileURL } from "url";
 
-const path = "C:\\docs\\file.txt";
-// const path ="file:///C|/docs/file.txt";
-const uri = pathToFileURL(path);
-console.log(uri.href);
+import { Flow } from 'lodash-decorators'
+import { kebabCase } from 'lodash';
 
-const srcPath = fileURLToPath(uri);
-console.log(srcPath);
+class Person {
+    @Flow('getName', kebabCase)
+    logName;
+
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    getName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
+
+const person = new Person('Joe', 'Smith');
+
+person.logName(); // joe-smith
