@@ -10,15 +10,15 @@
 
 # 标记 packages 目录下所有 .jsfl 文件为生成文件
 /packages/**/out/*.jsfl linguist-generated=true
-/packages/**/out/*.js linguist-generated=true
-/packages/**/tools/**/*.ts linguist-generated=true
+/packages/**/*.js linguist-generated=true
+/packages/**/tools/**/* linguist-generated=true
 /packages/**/test/**/* linguist-generated=true
 
 
 # 消费者包
 /src/business_packages/**/out/*.jsfl linguist-generated=true
-/src/business_packages/**/out/*.js linguist-generated=true
-/src/business_packages/**/tools/**/*.ts linguist-generated=true
+/src/business_packages/**/*.js linguist-generated=true
+/src/business_packages/**/tools/**/* linguist-generated=true
 /src/business_packages/**/test/**/* linguist-generated=true
 
 
