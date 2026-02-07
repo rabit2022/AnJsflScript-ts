@@ -3,16 +3,10 @@
 # 标记输出目录为生成文件 (忽略统计)
 /out/**/* linguist-generated=true
 /src/lib/out/**/* linguist-generated=true
+/src/test/**/* linguist-generated=true
 
 # 标记第三方库目录为生成文件 (忽略统计)
 /third/**/* linguist-generated=true
-
-# tools
-/tools/**/* linguist-generated=true
-
-# types
-/types/**/* linguist-generated=true
-
 
 
 # 标记 packages 目录下所有 .jsfl 文件为生成文件
@@ -22,10 +16,6 @@
 /packages/**/tools/**/* linguist-generated=true
 /packages/**/test/**/* linguist-generated=true
 
-
-
-
-
 # 消费者包
 /src/business_packages/**/out/*.jsfl linguist-generated=true
 /src/business_packages/**/*.js linguist-generated=true
@@ -34,7 +24,12 @@
 /src/business_packages/**/test/**/* linguist-generated=true
 
 
+# tools
+/tools/**/*.js linguist-generated=true
+/tools/**/*.json linguist-generated=true
+
+
 # 主目录
-/jest.config.js linguist-generated=true
+/*.js linguist-generated=true
 /*.json linguist-generated=true
 
