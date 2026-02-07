@@ -81,6 +81,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
+  clearAllTimers: function() { return /* reexport */ clearAllTimers; },
   clearInterval: function() { return /* reexport */ setInterval_clearInterval; },
   clearTimeout: function() { return /* reexport */ setTimeout_clearTimeout; },
   setInterval: function() { return /* reexport */ setInterval_setInterval; },
@@ -102,6 +103,10 @@ var TaskQueue = (function () {
             return true;
         }
         return false;
+    };
+    TaskQueue.prototype.removeAll = function () {
+        this.tasks = [];
+        return true;
     };
     TaskQueue.prototype.getDueTasks = function () {
         var now = Date.now();
@@ -286,6 +291,12 @@ function setTimeout_setTimeout(callback, delay) {
 function setTimeout_clearTimeout(id) {
     var wasRemoved = taskQueue.remove(id);
     if (wasRemoved) {
+        eventManager.updateStrategy();
+    }
+}
+function clearAllTimers() {
+    var success = taskQueue.removeAll();
+    if (success) {
         eventManager.updateStrategy();
     }
 }

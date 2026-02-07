@@ -16,6 +16,11 @@ export class TaskQueue {
         return false;
     }
 
+    removeAll(): boolean {
+        this.tasks = [];
+        return true;
+    }
+
     // 核心方法：供全局执行器调用，返回到期的任务ID
     getDueTasks(): number[] {
         const now = Date.now();

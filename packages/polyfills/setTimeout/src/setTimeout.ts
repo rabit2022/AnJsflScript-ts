@@ -28,6 +28,11 @@ export function clearTimeout(id: number): void {
     }
 }
 
-
+export function clearAllTimers(): void {
+    const success = taskQueue.removeAll();
+    if (success) {
+        eventManager.updateStrategy();
+    }
+}
 
 

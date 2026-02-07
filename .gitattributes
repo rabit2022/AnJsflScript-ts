@@ -1,0 +1,12 @@
+# 标记输出目录为生成文件 (忽略统计)
+/out/**/* linguist-generated=true
+/src/lib/out/**/* linguist-generated=true
+
+
+# 标记 packages 目录下所有 .jsfl 文件为生成文件
+/packages/**/out/*.jsfl linguist-generated=true
+
+
+# 标记第三方库目录为生成文件 (忽略统计)
+/third/**/* linguist-generated=true
+

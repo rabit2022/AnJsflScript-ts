@@ -33,7 +33,7 @@ class ReplaceDefineWithRequire {
 
 
 // 使用 ** 递归，并打印调试信息
-const tsFiles = glob.sync('test/flash/*.ts', {
+const tsFiles = glob.sync('test/flash/ts/*.ts', {
     cwd: __dirname,      // 以项目根为基准
     absolute: true,      // 返回绝对路径
     ignore: ['**/node_modules/**']

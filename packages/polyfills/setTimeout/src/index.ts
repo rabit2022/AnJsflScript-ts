@@ -8,6 +8,6 @@
  */
 
 
-export {setTimeout, clearTimeout} from "./setTimeout";
+export {setTimeout, clearTimeout,clearAllTimers} from "./setTimeout";
 export {setInterval, clearInterval} from './setInterval'
 

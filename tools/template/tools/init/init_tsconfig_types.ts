@@ -1,4 +1,4 @@
-import {CURRENT_PROJECT} from "../ProjectFileDir";
+import { CURRENT_PROJECT, TS_CONFIG, TS_CONFIG_TEST } from "../ProjectFileDir";
 
 `
 
@@ -58,10 +58,7 @@ export async function fixTsConfigPaths() {
         console.log(`🔗 计算出的 Shim 路径: ${shimPath}`);
 
         // 4. 定义要修改的文件列表
-        const configFiles = [
-            path.join(PROJECT_DIR, "tsconfig.json"),
-            path.join(PROJECT_DIR, "tsconfig.test.json")
-        ];
+        const configFiles = [TS_CONFIG,TS_CONFIG_TEST];
         // console.log(`🔗 configFiles: ${JSON.stringify(configFiles)}`);
 
         // 正则表达式：匹配 // region TYPES 和 // endregion TYPES 之间的内容
