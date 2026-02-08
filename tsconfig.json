@@ -25,8 +25,8 @@
 
 
     // 装饰器
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
+//        "experimentalDecorators": true,
+//        "emitDecoratorMetadata": true,
 
 
     "declaration": false,
@@ -51,12 +51,16 @@
     /* 路径映射 */
     "baseUrl": ".",
     // 设置 baseUrl 为项目根目录
-    "paths": // region REQUIRE MODULES PATHS
+    "paths":
+
+    // region REQUIRE MODULES PATHS
     {
       "Tips": ["src/lib/core/Tips"]
     }
     
 // endregion REQUIRE MODULES PATHS
+
+
   },
   "include": [
     "src",
@@ -74,7 +78,12 @@
     "./node_modules/@types",
     "./types"
   ],
-  "references": [
-  ]
+//  "references": [
+//    { "path": "../../../packages/anjsfl/parser" },
+//    { "path": "../../../packages/anjsfl/validation" },
+//    { "path": "../../../packages/xjsfl/UI" }
+//  ]
+
+
 }
 

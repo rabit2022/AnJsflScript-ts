@@ -1,3 +1,12 @@
+/**
+ * @file: table.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import Table from 'cli-table3';
 
 // 格式化任意值用于表格显示

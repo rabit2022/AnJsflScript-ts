@@ -1,3 +1,12 @@
+/**
+ * @file: clean.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import * as  fs from "fs";
 import {TimeData} from "../time/time_data";
 import {deleteInvalidFlaFiles, deleteOverflowFiles} from "../delete/delete";

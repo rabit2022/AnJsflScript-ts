@@ -112,7 +112,7 @@ var external_error_stack_parser_ = __webpack_require__(417);
 function parseStack(error, options) {
     var frames = external_error_stack_parser_.parse(error);
     if (options.skipSelf) {
-        frames = frames.filter(function (f) { var _a; return !((_a = f.functionName) === null || _a === void 0 ? void 0 : _a.includes('stack')); });
+        frames = frames.filter(function (f) { var _a; return !((_a = f.fileName) === null || _a === void 0 ? void 0 : _a.includes('console.stack')); });
     }
     if (options.skipRequireJs) {
         frames = frames.filter(function (f) { var _a; return !((_a = f.fileName) === null || _a === void 0 ? void 0 : _a.includes('requirejs')); });
@@ -348,7 +348,6 @@ var StackTracer = (function () {
         output = "Stack Trace:\nid:".concat(record.id, " timestamp:").concat(record.timestamp, " message:").concat(record.message, " count:").concat(record.count, "\n\n").concat(output, "\n\n\n    ");
         console.log(output);
         if (opt.logToFile) {
-            console.log("log to file");
             this.historyStore.save(record, output);
         }
     };

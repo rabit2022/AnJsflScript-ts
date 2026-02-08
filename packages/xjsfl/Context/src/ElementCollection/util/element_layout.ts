@@ -1,4 +1,13 @@
 /**
+ * @file: element_layout.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+/**
  * Lays out the elements one by one in a grid pattern
  * This method positions elements in a grid layout with a specified number of columns.
  * The elements will be arranged with a specified gutter (horizontal spacing) and spacing (vertical spacing).

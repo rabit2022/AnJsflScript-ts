@@ -2,10 +2,10 @@ import { readFile, writeFile } from "fs/promises";
 import { basename } from "path";
 import { pathToFileURL } from "url";
 import { ScanSpec, walk } from "../nodejs/walk";
-import {BUSINESS, LIB_CORE, PACKAGES} from "../ProjectFileDir";
+import { BUSINESS, BUSINESS_PACKAGES, LIB_CORE, PACKAGES } from "../ProjectFileDir";
 
 // ✅ 统一管理要扫描的目录
-const SCAN_DIRS = [LIB_CORE, BUSINESS,PACKAGES];
+const SCAN_DIRS = [LIB_CORE, BUSINESS,PACKAGES,BUSINESS_PACKAGES];
 
 // 配置信息
 const AUTHOR = "穹的兔兔";

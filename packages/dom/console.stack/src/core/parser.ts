@@ -1,3 +1,12 @@
+/**
+ * @file: parser.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import * as ErrorStackParser from 'error-stack-parser';
 import { Options, ConsoleStackFrame } from '../types';
 
@@ -9,7 +18,8 @@ export function parseStack(
   let frames = ErrorStackParser.parse(error);
 
   if (options.skipSelf) {
-    frames = frames.filter(f => !f.functionName?.includes('stack'));
+    // frames = frames.filter(f => !f.functionName?.includes('stack'));
+    frames = frames.filter(f => !f.fileName?.includes('console.stack'));
   }
 
   if (options.skipRequireJs) {

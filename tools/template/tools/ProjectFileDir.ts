@@ -42,6 +42,7 @@ export const CURRENT_PROJECT = findNearestPackageJson(process.cwd())!.dir;
 
 // console.log(CURRENT_PROJECT);
 export const WEBPACK_CONFIG_FILE = path.resolve(CURRENT_PROJECT, "webpack.config.js");
+export const WEBPACK_CONFIG_TEST_FILE = path.resolve(CURRENT_PROJECT, "webpack.test.js");
 
 // path.join(PROJECT_DIR, "tsconfig.json"),
 //     path.join(PROJECT_DIR, "tsconfig.test.json")

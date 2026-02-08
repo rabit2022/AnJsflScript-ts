@@ -50,6 +50,8 @@
 
         "@nodejs/__filename",
 
+        // Symbol    oxide.ts need
+        "symbol-es6",
 
         // dom 相关
         "console",// loglevel 依赖 console

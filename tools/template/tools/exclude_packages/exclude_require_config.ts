@@ -1,4 +1,4 @@
-import {REQUIRE_CONFIG_FILE, WEBPACK_CONFIG_FILE} from "../ProjectFileDir";
+import {REQUIRE_CONFIG_FILE, WEBPACK_CONFIG_FILE, WEBPACK_CONFIG_TEST_FILE} from "../ProjectFileDir";
 `
 1.读取REQUIRE_CONFIG_FILE
 
@@ -30,8 +30,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 import {set_module_name} from "../init/init_module_name";
 
-// const REQUIRE_CONFIG_FILE = path.resolve('./require-config.txt'); // 替换为你的实际路径
-// const WEBPACK_CONFIG_FILE = path.resolve('./webpack.config.js');   // 替换为你的实际路径
 
 function extractRegion(content: string, startMarker: string, endMarker: string): { region: string; startIndex: number; endIndex: number } {
     const startRegex = new RegExp(`^.*${startMarker}.*$`, 'm');
@@ -105,14 +103,19 @@ export async function exclude_require_config() {
     try {
         const requireConfig = fs.readFileSync(REQUIRE_CONFIG_FILE, 'utf8');
         const webpackConfig = fs.readFileSync(WEBPACK_CONFIG_FILE, 'utf8');
+        const webpackTestConfig = fs.readFileSync(WEBPACK_CONFIG_TEST_FILE, 'utf8');
 
         const moduleNames = parseRequireModules(requireConfig);
         // console.log('Extracted module names:', moduleNames);
 
         const updatedWebpack = updateWebpackExclude(webpackConfig, moduleNames);
-
         fs.writeFileSync(WEBPACK_CONFIG_FILE, updatedWebpack, 'utf8');
         console.log('WEBPACK_CONFIG updated successfully.');
+
+        const updatedTestWebpack = updateWebpackExclude(webpackTestConfig, moduleNames);
+        fs.writeFileSync(WEBPACK_CONFIG_TEST_FILE, updatedTestWebpack, 'utf8');
+        console.log('WEBPACK_CONFIG_TEST updated successfully.');
+
     } catch (err) {
         console.error('Error:', err);
     }

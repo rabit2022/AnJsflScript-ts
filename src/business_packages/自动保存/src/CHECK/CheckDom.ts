@@ -1,3 +1,12 @@
+/**
+ * @file: CheckDom.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import * as process from 'process';
 
 import {UI} from "@xjsfl/UI";
@@ -12,7 +21,7 @@ if (result.isOk()) {
     log.log("文档有效:", doc);
 } else {
     const errorMsg = result.unwrapErr(); // 类型是 string
-    console.error("文档无效:", errorMsg);
+    log.error("文档无效:", errorMsg);
     process.exit();
 }
 

@@ -6,6 +6,8 @@
     "noEmitOnError": false,
     "removeComments": true,
 
+    "moduleResolution": "node",
+
     "rootDir": "src",
     "outDir": "./dist",
     "types": [],

@@ -115,8 +115,15 @@ module.exports = {
     },
 
 
-    // 👇 关键：将 lodash 标记为外部依赖（不打包）
-    externals:["lodash"],
+    // 关键：不打包任何外部依赖（JSFL 无 npm）
+    externals: [
+        {"path": "path-browserify"},
+        // region EXCLUDE_MODULE_NAME
+"store-js","lodash","linq","oxide.ts","requirejs","AnJsflScript-ts","es7-shim","typedarray","symbol-es6","intl","harmony-reflect","es6-promise","es6-collections","json5","json3","util","path-browserify","eventemitter3","seedrandom","random-js","chance","stackframe","error-stack-parser","progress","loglevel","cli-table3","chroma-js","@third/luxon","luxon","_exports","@third/Intl","@third/intl-locale-data","Intl","es6-sham","es6-shim","es5-sham","es5-shim","@third/universal-cookie","@polyfill/cookie","Tips","@xjsfl/UI","@xjsfl/super","@xjsfl/Events","Context","@xjsfl/Constants","overload-js","@nodejs/__filename","url","setTimeout","process","fs","assert","console.table","console.stack","console","@anjsfl/validation","@anjsfl/sat","@anjsfl/random","@anjsfl/parser","@anjsfl/more-element","@anjsfl/Context","@xjsfl/XUL","@xjsfl/XUL/XML","@xjsfl/XUL/XUL","@xjsfl/XUL/XULControl","@xjsfl/XUL/XULEvent","@xjsfl/XUL/Utils","@xjsfl/XUL/xjsfl",
+// endregion EXCLUDE_MODULE_NAME
+
+    ],
+
     target: ['web', 'es5'],
     stats: {
         modules: false,

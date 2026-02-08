@@ -1,3 +1,12 @@
+/**
+ * @file: stackTracer.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import {Options, SaveData} from '../types';
 import {parseStack} from '../core/parser';
 import {formatFrames} from '../core/formatter';
@@ -54,7 +63,7 @@ ${output}
         console.log(output);
 
         if (opt.logToFile) {
-            console.log("log to file")
+            // console.log("log to file")
 
             this.historyStore.save(record, output);
         }

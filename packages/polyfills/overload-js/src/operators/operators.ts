@@ -1,3 +1,12 @@
+/**
+ * @file: operators.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import {Custom} from "../matcher/Custom";
 import {normalizeRules} from "./normalize";
 import {matchAny} from "./matchAny";

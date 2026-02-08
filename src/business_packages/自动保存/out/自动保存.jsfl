@@ -127,7 +127,7 @@ if (result.isOk()) {
 }
 else {
     var errorMsg = result.unwrapErr();
-    console.error("文档无效:", errorMsg);
+    external_loglevel_.error("文档无效:", errorMsg);
     external_process_.exit();
 }
 

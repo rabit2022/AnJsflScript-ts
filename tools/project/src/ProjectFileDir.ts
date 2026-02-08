@@ -17,6 +17,7 @@ const SRC = path.resolve($ProjectFileDir$, "src");
 const LIB = path.resolve(SRC, "lib");
 
 export const BUSINESS = path.resolve(SRC, "business");
+export const BUSINESS_PACKAGES = path.resolve(SRC, "business_packages");
 export const LIB_CORE = path.resolve(LIB, "core");
 export const LIB_OUT = path.resolve(LIB, "out");
 

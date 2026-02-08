@@ -1,4 +1,13 @@
 /**
+ * @file: element_random.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+/**
      * Randomizes any valid element properties
      * @param    {Object}            prop        An object containing property name:value pairs
      * @param    {String}            prop        A valid String property names
