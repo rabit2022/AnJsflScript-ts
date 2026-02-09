@@ -36,10 +36,20 @@ class ReplaceDefineWithRequire {
 
 module.exports = {
     mode: 'production',
-    entry: './src/index.ts', // 入口文件
+    // entry: './src/index.ts', // 入口文件
+
+
+    entry: {
+        auto_save: './src/out/index.ts',
+        clearAll: './src/out/clearAll.ts',
+    },
+
+
     output: {
         path: path.resolve(__dirname, 'out'),
-        filename: MODULE_NAME + '.jsfl', // 输出为 .jsfl 文件
+        filename: '[name].jsfl', // [name] 对应 entry 中的 key
+
+        // filename: MODULE_NAME + '.jsfl', // 输出为 .jsfl 文件
         // library: MODULE_NAME,  // 暴露为全局变量 Validation（可选）
         libraryTarget: 'amd',   // 使用 var 暴露（适合 JSFL）
         clean: true,            // 每次构建清空 dist

@@ -72,6 +72,36 @@ export async function* walk(spec: ScanSpec): AsyncIterable<string> {
     }
 }
 
+export async function* walkDir(spec: ScanSpec): AsyncIterable<string> {
+    for (const root of spec.roots) {
+        const stat = await fs.stat(root);
+        if (!stat.isDirectory()) continue;
+
+        const queue: string[] = [root];
+        while (queue.length) {
+            const dir = queue.pop()!;
+            // 👇 如果根目录本身也要被 yield，可以在这里加判断
+            if (dir !== root || dirOk(path.basename(dir), spec)) {
+                yield dir; // 👈 先 yield 当前目录（可选）
+            }
+
+            const entries = await fs.readdir(dir, { withFileTypes: true });
+            for (const ent of entries) {
+                const full = path.join(dir, ent.name);
+                if (ent.isDirectory()) {
+                    if (dirOk(ent.name, spec)) {
+                        queue.push(full);
+                        // 注意：这里不立即 yield，而是在下次循环开头 yield
+                        // 如果想在发现时就 yield，也可以在这里 yield full
+                    }
+                } else if (ent.isFile() && fileOk(ent.name, spec)) {
+                    yield full;
+                }
+            }
+        }
+    }
+}
+
 /* ---------- 示例 ---------- */
 if (require.main === module) {
     (async () => {

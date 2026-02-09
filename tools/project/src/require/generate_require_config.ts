@@ -5,9 +5,9 @@ import * as fs from "fs/promises";
 // import * as fs from 'fs'; // ← 使用普通 fs，不是 fs/promises
 import {ScanSpec, walk} from "../nodejs/walk";
 import console from "node:console";
-import {toPackageModuleJsons} from "./toXULPaths";
-import {toPackageModules} from "./toPackageModules";
 import { shouldIgnoreFile } from "../nodejs/shouldIgnoreFile";
+import {toPackageModuleJsons} from "../nodejs/toXULPaths";
+import {toPackageModules} from "../nodejs/toPackageModules";
 
 /* ---------- 1. 路径与文件常量 ---------- */
 const REGION_RE =

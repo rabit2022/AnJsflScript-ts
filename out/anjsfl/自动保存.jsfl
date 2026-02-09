@@ -287,7 +287,7 @@ function Main() {
 
 // EXTERNAL MODULE: external "setTimeout"
 var external_setTimeout_ = __webpack_require__(991);
-;// ./src/index.ts
+;// ./src/out/index.ts
 
 
 

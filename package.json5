@@ -152,10 +152,22 @@
   },
   "readmeFilename": "README.md",
   "dependencies": {
-    "@xjsfl/UI": "1.0.0",
 
     // "preinstall" 安装json5
-    "json5": "2.2.3"
+    "json5": "2.2.3",
+
+
+//    "H:\project\js\AnJsflScript-ts\packages\xjsfl"
+    "@xjsfl/UI": "1.0.0",
+
+//    "H:\project\js\AnJsflScript-ts\packages\anjsfl"
+    "@anjsfl/validation": "1.0.0",
+
+//    "H:\project\js\AnJsflScript-ts\packages\dom"
+    "setTimeout": "1.0.0"
+
+//    "H:\project\js\AnJsflScript-ts\packages\nodejs"
+//    "H:\project\js\AnJsflScript-ts\packages\polyfills"
 
   }
 }

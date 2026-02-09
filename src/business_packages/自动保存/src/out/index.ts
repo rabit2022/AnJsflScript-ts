@@ -7,10 +7,10 @@
  * @description:
  */
 
-import {Main} from "./Main";
+import {Main} from "../Main";
 import {setInterval, setTimeout} from "setTimeout";
-import {SAVE_INTERVAL} from "./CONSTANTS/time";
-import {AUTHOR} from "./DESC/Descriptions";
+import {SAVE_INTERVAL} from "../CONSTANTS/time";
+import {AUTHOR} from "../DESC/Descriptions";
 
 
 AUTHOR;
