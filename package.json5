@@ -26,8 +26,13 @@
     // xjsfl相关模块
     "packages/xjsfl/*",
     //    "H:\project\js\AnJsflScript-ts\packages\anjsfl"
-    // 当前项目的自定义模块
+    // 当前项目的自定义模块,js相关
     "packages/anjsfl/*",
+    //    "H:\project\js\AnJsflScript-ts\packages\anjsfl-ts"
+    // ts相关
+    "packages/anjsfl-ts/*",
+
+
     //    "H:\project\js\AnJsflScript-ts\packages\dom"
     // console,console.stack,console.table等 实现
     "packages/dom/*",
@@ -163,11 +168,18 @@
 //    "H:\project\js\AnJsflScript-ts\packages\anjsfl"
     "@anjsfl/validation": "1.0.0",
 
+    //    "H:\project\js\AnJsflScript-ts\packages\anjsfl-ts"
+    "@anjsfl-ts/EditSession": "1.0.0",
+
 //    "H:\project\js\AnJsflScript-ts\packages\dom"
-    "setTimeout": "1.0.0"
+    "setTimeout": "1.0.0",
 
 //    "H:\project\js\AnJsflScript-ts\packages\nodejs"
+    // skip all ,using "@types/node"
+
 //    "H:\project\js\AnJsflScript-ts\packages\polyfills"
 
+    // using 语法，TC39 阶段，Explicit Resource Management（显式资源管理）
+    "@polyfills/symbol-dispose": "1.0.0"
   }
 }

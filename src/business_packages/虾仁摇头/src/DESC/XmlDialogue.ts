@@ -18,7 +18,11 @@ if (!IsFlash()) {
 
 AUTHOR
 
-// import DIALOGUE from '../asset/01.虾仁摇头.xml';
 export const DIALOGUE = require('../../asset/01.虾仁摇头.xml');
 
+
+// import DIALOGUE from '../../asset/01.虾仁摇头.xml' with{type:"xml"};
+//
+// export {DIALOGUE};
+//
 // console.log(DIALOGUE)

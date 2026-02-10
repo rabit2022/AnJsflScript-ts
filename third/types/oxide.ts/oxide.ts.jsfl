@@ -1,4 +1,5 @@
-"use strict";
+(function(){
+ "use strict";
 
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -66,8 +67,17 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
       npx babel dist/oxide.ts.js --out-file dist/oxide.ts.jsfl
       
       
+      npm install @formatjs/intl-datetimeformat @formatjs/intl-numberformat @formatjs/intl-listformat @formatjs/intl-relativetimeformat @formatjs/intl-locale @formatjs/intl-getcanonicallocales
+      
+      
+      // webpack
+      // npx babel dist/oxide.ts.js --out-file dist/oxide.ts.jsfl
+      // node wrap-iife.js
+      
+      
        */
-      module.exports = require('oxide.ts');
+
+      module.exports = require("oxide.ts");
     }, {
       "oxide.ts": 3
     }],
@@ -1845,3 +1855,5 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
     }]
   }, {}, [1])(1);
 });
+
+})();

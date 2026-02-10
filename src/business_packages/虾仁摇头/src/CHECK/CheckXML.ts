@@ -75,12 +75,7 @@ if (!config.isOk()) {
 }
 
 
-const {shakeIntensity, headDirection} = config.unwrap();
-
-// log.log("摇头力度:",shakeIntensity);
-// log.log("头部朝向:",headDirection)
-
-export {shakeIntensity, headDirection};
+export const {shakeIntensity, headDirection} = config.unwrap();
 
 
 AUTHOR
