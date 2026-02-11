@@ -9,31 +9,11 @@
 
 
 import {CheckCondition, CheckMode, Selection} from "../../types";
-import {CheckVariableRedeclaration} from "./CheckVariableRedeclaration";
-import { MESSAGES } from "./Message";
+import {MESSAGES} from "./Message";
 
-/**
- * 判断 value 是否是某个 TypeScript 枚举（字符串/数字）的合法值
- * @example
- * enum Status { Active = 'active', Inactive = 'inactive' }
- * isEnumValue(Status, 'active') // true
- * isEnumValue(Status, 'deleted') // false
- */
-function IsEnumValue<T extends Record<string, string | number>>(
-    enumObj: T,
-    value: unknown
-): value is T[keyof T] {
-    // Object.values(CheckCondition).includes(condition as CheckCondition)
+import {Err,Ok, Result} from "oxide.ts";
+import {IsEnumValue} from "./enemUtils";
 
-    // 先确保 value 是 string 或 number
-    if (typeof value !== "string" && typeof value !== "number") {
-        return false;
-    }
-
-    // 使用 Object.keys + map 模拟 Object.values（兼容 ES5+）
-    const values = Object.keys(enumObj).map((key) => enumObj[key]);
-    return values.indexOf(value) !== -1;
-}
 
 /**
  * 检查选择的元件或帧是否符合指定的模式和条件。
@@ -63,17 +43,28 @@ export function CheckSelection(
     mode: CheckMode = CheckMode.SelectElement,
     condition: keyof typeof CheckCondition | string = CheckCondition.NoLimit,
     exTips: string | null = null
-): boolean {
-    CheckVariableRedeclaration(selection, "selection");
+): Result<boolean, string> {
+    // CheckVariableRedeclaration(selection, "selection");
 
     // 禁止传入 null
     if (mode === null) {
-        alert("模式不能为 null，请指定一个有效的模式！");
-        return false;
+        // alert("模式不能为 null，请指定一个有效的模式！");
+        // return false;
+        // 获取所有值并拼接为字符串（例如用逗号分隔）
+        const allValues: string = Object.values(CheckMode).join(',');
+
+        // console.log(allValues);
+        return Err(`模式不能为 null，请指定一个有效的模式！
+可用的模式：${allValues}
+        `)
     }
     if (condition === null) {
-        alert("条件不能为 null，请指定一个有效的条件！");
-        return false;
+        // alert("条件不能为 null，请指定一个有效的条件！");
+        // return false;
+        const allValues: string = Object.values(CheckCondition).join(',');
+        return Err(`条件不能为 null，请指定一个有效的模式！
+可用的条件：${allValues}
+        `)
     }
 
     // 解析 condition：支持别名
@@ -83,12 +74,10 @@ export function CheckSelection(
         if (IsEnumValue(CheckCondition, condition)) {
             resolvedCondition = condition as CheckCondition;
         }
-        // else if (CONDITION_ALIAS_MAP[condition]) {
-        //     resolvedCondition = CONDITION_ALIAS_MAP[condition];
-        // }
         else {
-            alert("无效的条件：" + condition);
-            return false;
+            // alert("无效的条件：" + condition);
+            // return false;
+            return Err(`无效的条件： ${condition}`)
         }
     } else {
         resolvedCondition = condition;
@@ -97,8 +86,9 @@ export function CheckSelection(
     // 校验 mode 是否有效（TS 枚举已保证，但运行时仍可防御）
     // if (!Object.values(CheckMode).includes(mode)) {
     if (!IsEnumValue(CheckMode, mode)) {
-        alert("无效的模式：" + mode);
-        return false;
+        // alert("无效的模式：" + mode);
+        // return false;
+        return Err(`无效的模式： ${mode}`)
     }
 
     // 执行检查
@@ -106,11 +96,14 @@ export function CheckSelection(
     if (!checkCondition(resolvedCondition, length)) {
         const defaultMessage = MESSAGES[mode][resolvedCondition];
         const message = exTips ?? defaultMessage;
-        if (message) alert(message);
-        return false;
+        // if (message) alert(message);
+        // return false;
+        if (message) {
+            return Err(message);
+        }
     }
 
-    return true;
+    return Ok(true);
 }
 
 // 条件校验逻辑

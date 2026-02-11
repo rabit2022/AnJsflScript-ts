@@ -41,5 +41,10 @@ export enum CheckCondition {
 
     /** 选中多个 (数量 > 1) */
     MultipleSelected = "Multiple selected",
-
 }
+
+
+// // 获取所有值并拼接为字符串（例如用逗号分隔）
+// const allValues: string = Object.values(CheckMode).join(',');
+//
+// console.log(allValues);

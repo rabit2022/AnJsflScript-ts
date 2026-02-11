@@ -6,6 +6,7 @@
  * @project: AnJsflScript-ts
  * @description:
  */
+import { Result, Ok, Err } from "oxide.ts";
 
 /**
  * 检查变量是否被意外遮蔽（例如在函数内用 var/let 重声明）。
@@ -27,17 +28,19 @@ export function CheckVariableRedeclaration(
     variable: unknown,
     name: string,
     expectedValue?: unknown
-): void {
+): Result<void,string> {
     if (expectedValue !== undefined) {
         if (variable !== expectedValue) {
-            const msg = `变量 "${name}" 的值被意外修改或遮蔽。期望: ${String(expectedValue)}, 实际: ${String(variable)}`;
-            console.warn("[Redeclaration Check] " + msg);
-            throw new Error(msg); // 或仅 warn，根据需求
+            const msg = `[Redeclaration Check] 变量 "${name}" 的值被意外修改或遮蔽。期望: ${String(expectedValue)}, 实际: ${String(variable)}`;
+            // console.warn("[Redeclaration Check] " + msg);
+            // throw new Error(msg); // 或仅 warn，根据需求
+            return Err(msg);
         }
     } else if (variable === undefined) {
-        const msg = `变量 "${name}" 在作用域内被重新声明（如 var/let），导致其值为 undefined，可能遮蔽了外部变量。`;
-        console.warn("[Redeclaration Check] " + msg);
+        const msg = `[Redeclaration Check] 变量 "${name}" 在作用域内被重新声明（如 var/let），导致其值为 undefined，可能遮蔽了外部变量。`;
+        // console.warn("[Redeclaration Check] " + msg);
         // 可选择抛出错误（中断执行）或仅警告
         // throw new ReferenceError(msg);
+        return Err(msg);
     }
 }

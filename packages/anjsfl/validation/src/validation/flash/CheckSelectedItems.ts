@@ -27,17 +27,17 @@ export function CheckSelectedItems(
 ): Result<LibraryItem[], string> { // ✅ 使用 Result 类型
     
     // 直接使用传入的数组进行检查
-    const isValid = CheckSelection(
+    const check = CheckSelection(
         selectedItems,
         CheckMode.SelectLibItem,
         condition,
         exTips
     );
 
-    // 根据检查结果返回 Ok 或 Err
-    if (isValid) {
+    if (check.isOk()) {
         return Ok(selectedItems);
-    } else {
-        return Err("选中项目不符合条件");
     }
+
+    const err = check.unwrapErr();
+    return Err(err);
 }

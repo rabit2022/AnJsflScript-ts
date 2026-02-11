@@ -8,7 +8,7 @@
  */
 
 import {Main} from "../Main";
-import {setInterval, setTimeout} from "setTimeout";
+import {setInterval, setTimeout} from "@dom/setTimeout";
 import {SAVE_INTERVAL} from "../CONSTANTS/time";
 import {AUTHOR} from "../DESC/Descriptions";
 

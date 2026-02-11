@@ -1,5 +1,5 @@
 {
-  "name": "setTimeout",
+  "name": "@dom/setTimeout",
   "version": "1.0.0",
   "description": "",
   "declaration": true,

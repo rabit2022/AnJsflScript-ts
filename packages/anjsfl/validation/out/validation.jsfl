@@ -178,51 +178,22 @@ var CheckCondition;
     /** 选中多个 (数量 > 1) */
     CheckCondition["MultipleSelected"] = "Multiple selected";
 })(CheckCondition || (CheckCondition = {}));
+// // 获取所有值并拼接为字符串（例如用逗号分隔）
+// const allValues: string = Object.values(CheckMode).join(',');
+//
+// console.log(allValues);
 
 ;// ./src/types/index.ts
-
-
-
-;// ./src/validation/base/CheckVariableRedeclaration.ts
 /**
- * @file: CheckVariableRedeclaration.ts
+ * @file: index.ts
  * @author: 穹的兔兔
  * @email: 3101829204@qq.com
- * @date: 2026/1/13 1:17
+ * @date: 2026/2/8 23:32
  * @project: AnJsflScript-ts
  * @description:
  */
-/**
- * 检查变量是否被意外遮蔽（例如在函数内用 var/let 重声明）。
- *
- * 用法示例：
- * ```ts
- * const x = 42;
- * function foo() {
- *   checkVariableRedeclaration(x, 'x'); // 如果 x 被重声明为 undefined，会报警
- *   let x; // ← 这会导致遮蔽！
- * }
- * ```
- *
- * @param variable - 要检查的变量值
- * @param name - 变量名（用于错误提示）
- * @param expectedValue - （可选）预期的值，如果不传，则只检查是否为 undefined
- */
-function CheckVariableRedeclaration(variable, name, expectedValue) {
-    if (expectedValue !== undefined) {
-        if (variable !== expectedValue) {
-            var msg = "\u53D8\u91CF \"".concat(name, "\" \u7684\u503C\u88AB\u610F\u5916\u4FEE\u6539\u6216\u906E\u853D\u3002\u671F\u671B: ").concat(String(expectedValue), ", \u5B9E\u9645: ").concat(String(variable));
-            console.warn("[Redeclaration Check] " + msg);
-            throw new Error(msg); // 或仅 warn，根据需求
-        }
-    }
-    else if (variable === undefined) {
-        var msg = "\u53D8\u91CF \"".concat(name, "\" \u5728\u4F5C\u7528\u57DF\u5185\u88AB\u91CD\u65B0\u58F0\u660E\uFF08\u5982 var/let\uFF09\uFF0C\u5BFC\u81F4\u5176\u503C\u4E3A undefined\uFF0C\u53EF\u80FD\u906E\u853D\u4E86\u5916\u90E8\u53D8\u91CF\u3002");
-        console.warn("[Redeclaration Check] " + msg);
-        // 可选择抛出错误（中断执行）或仅警告
-        // throw new ReferenceError(msg);
-    }
-}
+
+
 
 ;// ./src/validation/base/Message.ts
 /**
@@ -295,18 +266,9 @@ var MESSAGES = (_a = {},
         _h),
     _a);
 
-;// ./src/validation/base/CheckSelection.ts
-/**
- * @file: CheckSelection.ts
- * @author: 穹的兔兔
- * @email: 3101829204@qq.com
- * @date: 2026/1/13 1:17
- * @project: AnJsflScript-ts
- * @description:
- */
-
-
-
+// EXTERNAL MODULE: external "oxide.ts"
+var external_oxide_ts_ = __webpack_require__(508);
+;// ./src/validation/base/enemUtils.ts
 /**
  * 判断 value 是否是某个 TypeScript 枚举（字符串/数字）的合法值
  * @example
@@ -324,6 +286,20 @@ function IsEnumValue(enumObj, value) {
     var values = Object.keys(enumObj).map(function (key) { return enumObj[key]; });
     return values.indexOf(value) !== -1;
 }
+
+;// ./src/validation/base/CheckSelection.ts
+/**
+ * @file: CheckSelection.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/1/13 1:17
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+
+
+
 /**
  * 检查选择的元件或帧是否符合指定的模式和条件。
  *
@@ -348,18 +324,24 @@ function IsEnumValue(enumObj, value) {
  * - 若需使用默认值，请传入 `undefined` 或直接省略参数。
  */
 function CheckSelection(selection, mode, condition, exTips) {
+    // CheckVariableRedeclaration(selection, "selection");
     if (mode === void 0) { mode = CheckMode.SelectElement; }
     if (condition === void 0) { condition = CheckCondition.NoLimit; }
     if (exTips === void 0) { exTips = null; }
-    CheckVariableRedeclaration(selection, "selection");
     // 禁止传入 null
     if (mode === null) {
-        alert("模式不能为 null，请指定一个有效的模式！");
-        return false;
+        // alert("模式不能为 null，请指定一个有效的模式！");
+        // return false;
+        // 获取所有值并拼接为字符串（例如用逗号分隔）
+        var allValues = Object.values(CheckMode).join(',');
+        // console.log(allValues);
+        return (0,external_oxide_ts_.Err)("\u6A21\u5F0F\u4E0D\u80FD\u4E3A null\uFF0C\u8BF7\u6307\u5B9A\u4E00\u4E2A\u6709\u6548\u7684\u6A21\u5F0F\uFF01\n\u53EF\u7528\u7684\u6A21\u5F0F\uFF1A".concat(allValues, "\n        "));
     }
     if (condition === null) {
-        alert("条件不能为 null，请指定一个有效的条件！");
-        return false;
+        // alert("条件不能为 null，请指定一个有效的条件！");
+        // return false;
+        var allValues = Object.values(CheckCondition).join(',');
+        return (0,external_oxide_ts_.Err)("\u6761\u4EF6\u4E0D\u80FD\u4E3A null\uFF0C\u8BF7\u6307\u5B9A\u4E00\u4E2A\u6709\u6548\u7684\u6A21\u5F0F\uFF01\n\u53EF\u7528\u7684\u6761\u4EF6\uFF1A".concat(allValues, "\n        "));
     }
     // 解析 condition：支持别名
     var resolvedCondition;
@@ -368,12 +350,10 @@ function CheckSelection(selection, mode, condition, exTips) {
         if (IsEnumValue(CheckCondition, condition)) {
             resolvedCondition = condition;
         }
-        // else if (CONDITION_ALIAS_MAP[condition]) {
-        //     resolvedCondition = CONDITION_ALIAS_MAP[condition];
-        // }
         else {
-            alert("无效的条件：" + condition);
-            return false;
+            // alert("无效的条件：" + condition);
+            // return false;
+            return (0,external_oxide_ts_.Err)("\u65E0\u6548\u7684\u6761\u4EF6\uFF1A ".concat(condition));
         }
     }
     else {
@@ -382,19 +362,22 @@ function CheckSelection(selection, mode, condition, exTips) {
     // 校验 mode 是否有效（TS 枚举已保证，但运行时仍可防御）
     // if (!Object.values(CheckMode).includes(mode)) {
     if (!IsEnumValue(CheckMode, mode)) {
-        alert("无效的模式：" + mode);
-        return false;
+        // alert("无效的模式：" + mode);
+        // return false;
+        return (0,external_oxide_ts_.Err)("\u65E0\u6548\u7684\u6A21\u5F0F\uFF1A ".concat(mode));
     }
     // 执行检查
     var length = selection.length;
     if (!checkCondition(resolvedCondition, length)) {
         var defaultMessage = MESSAGES[mode][resolvedCondition];
         var message = exTips !== null && exTips !== void 0 ? exTips : defaultMessage;
-        if (message)
-            alert(message);
-        return false;
+        // if (message) alert(message);
+        // return false;
+        if (message) {
+            return (0,external_oxide_ts_.Err)(message);
+        }
     }
-    return true;
+    return (0,external_oxide_ts_.Ok)(true);
 }
 // 条件校验逻辑
 function checkCondition(condition, length) {
@@ -417,10 +400,16 @@ function checkCondition(condition, length) {
 }
 
 ;// ./src/validation/base/index.ts
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
 
-// EXTERNAL MODULE: external "oxide.ts"
-var external_oxide_ts_ = __webpack_require__(508);
 ;// ./src/validation/flash/CheckDocument.ts
 /**
  * @file: CheckDocument.ts
@@ -469,17 +458,23 @@ function CheckSelectedItems(selectedItems, // ✅ 直接传入数组
 condition, exTips) {
     if (condition === void 0) { condition = LibraryCondition.AtLeastOne; }
     // 直接使用传入的数组进行检查
-    var isValid = CheckSelection(selectedItems, CheckMode.SelectLibItem, condition, exTips);
-    // 根据检查结果返回 Ok 或 Err
-    if (isValid) {
+    var check = CheckSelection(selectedItems, CheckMode.SelectLibItem, condition, exTips);
+    if (check.isOk()) {
         return (0,external_oxide_ts_.Ok)(selectedItems);
     }
-    else {
-        return (0,external_oxide_ts_.Err)("选中项目不符合条件");
-    }
+    var err = check.unwrapErr();
+    return (0,external_oxide_ts_.Err)(err);
 }
 
 ;// ./src/validation/flash/CheckSelectedLayers.ts
+/**
+ * @file: CheckSelectedLayers.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
 
 
@@ -497,17 +492,23 @@ function CheckSelectedLayers(selectedLayers, // ✅ 直接传入数据，不再�
 condition, exTips) {
     if (condition === void 0) { condition = LayerCondition.AtLeastOne; }
     // 直接使用传入的数组进行检查
-    var isValid = CheckSelection(selectedLayers, CheckMode.SelectLayer, condition, exTips);
-    // 根据检查结果返回 Ok 或 Err
-    if (isValid) {
+    var check = CheckSelection(selectedLayers, CheckMode.SelectLayer, condition, exTips);
+    if (check.isOk()) {
         return (0,external_oxide_ts_.Ok)(selectedLayers);
     }
-    else {
-        return (0,external_oxide_ts_.Err)("选中图层不符合条件");
-    }
+    var err = check.unwrapErr();
+    return (0,external_oxide_ts_.Err)(err);
 }
 
 ;// ./src/validation/flash/index.ts
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/8 23:32
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
 
 

@@ -28,17 +28,17 @@ export function CheckSelectedLayers(
 ): Result<number[], string> { // ✅ 使用 Result 类型替代 null
     
     // 直接使用传入的数组进行检查
-    const isValid = CheckSelection(
+    const check = CheckSelection(
         selectedLayers,
         CheckMode.SelectLayer,
         condition,
         exTips
     );
 
-    // 根据检查结果返回 Ok 或 Err
-    if (isValid) {
+    if (check.isOk()) {
         return Ok(selectedLayers);
-    } else {
-        return Err("选中图层不符合条件");
     }
+
+    const err = check.unwrapErr();
+    return Err(err);
 }

@@ -6,7 +6,7 @@
  * @project: AnJsflScript-ts
  * @description:
  */// xjsfl Superdoc
-export { Superdoc } from "./Superdoc";
+export { Superdoc } from "./doc/Superdoc";
 
 // stroke definations
 export * from "./stroke";

@@ -1,0 +1,8 @@
+packages:
+  - 'packages/xjsfl/*'
+  - 'packages/anjsfl/*'
+  - 'packages/anjsfl-ts/*'
+  - 'packages/dom/*'
+  - 'packages/polyfills/*'
+
+#  pnpm add -F <pkg-name> lodash

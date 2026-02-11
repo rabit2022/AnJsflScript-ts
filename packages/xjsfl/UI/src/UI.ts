@@ -50,7 +50,8 @@
 // var elements = curFrame.elements; // Elements
 
 // This module no longer handles alert responsibilities, Validation is responsible for pop-up windows
-const _alert = console.warn;
+// @ts-ignore
+const _alert = function (...args: any[]) {};
 
 /**
  * @class UI
@@ -136,7 +137,11 @@ export const UI = {
      */
     get layers(): Layer[] | undefined {
         if (UI.timeline) {
-            return UI.timeline.layers;
+            const layers = UI.timeline.layers;
+            if (layers.length > 0) {
+                return layers;
+            }
+            _alert("Select some layers in the layers");
         }
         return undefined;
     },
@@ -263,17 +268,29 @@ export const UI = {
     // ----------------------------------------------------------------------------------------------------
     // Timeline Methods (from Flash.jsfl)
 
+    get selectedLayerIndexs():number[]|undefined {
+        if (!UI.timeline) {
+            return undefined;
+        }
+
+        const indices  = UI.timeline.getSelectedLayers();
+        return indices.length > 0 ? indices : undefined;
+    },
+
     /**
      * Gets the selected layers of a Timeline
      * Returns undefined if timeline is unavailable
      * @returns An Array of Layer objects
      */
     get selectedLayers():Layer[]|undefined {
-        if (!UI.timeline) {
+        const indices  = UI.selectedLayerIndexs;
+        if (!indices){
             return undefined;
         }
 
-        const indices  = UI.timeline.getSelectedLayers();
+        const layers  = UI.layers;
+        if (!layers){ return undefined;}
+
         // Sort indices in ascending order
         const sortedIndices = indices.sort((a, b) => a - b);
         const selectedLayers = [];
@@ -281,12 +298,21 @@ export const UI = {
         // Get layers corresponding to sorted indices
         for (let i = 0; i < sortedIndices.length; i++) {
             const index = sortedIndices[i];
-            if (index >= 0 && index < UI.timeline.layers.length) {
-                selectedLayers.push(UI.timeline.layers[index]);
+            if (index >= 0 && index < layers.length) {
+                selectedLayers.push(layers[index]);
             }
         }
 
         return selectedLayers;
+    },
+
+    get selectedFrameIndexs():number[]|undefined {
+        if (!UI.timeline) {
+            return undefined;
+        }
+
+        const indices = UI.timeline.getSelectedFrames();
+        return indices.length > 0 ? indices : undefined;
     },
 
     /**
@@ -295,12 +321,14 @@ export const UI = {
      * @returns An Array of frame objects
      */
     get selectedFrames() {
-        if (!UI.timeline) {
-            return undefined;
-        }
+        const indices = UI.selectedFrameIndexs;
+        if (!indices) { return undefined;}
+
+        const layers  = UI.layers;
+        if (!layers){ return undefined;}
+
 
         const frames = [];
-        const indices = UI.timeline.getSelectedFrames();
 
         // Process indices in groups of 3 (layer index, start frame, end frame)
         for (let i = 0; i < indices.length; i += 3) {
@@ -309,8 +337,8 @@ export const UI = {
                 const start = indices[i + 1];
                 const end = indices[i + 2];
 
-                if (index >= 0 && index < UI.timeline.layers.length) {
-                    const layer = UI.timeline.layers[index];
+                if (index >= 0 && index < layers.length) {
+                    const layer = layers[index];
                     frames.push({ index, start, end, layer });
                 }
             }
@@ -322,23 +350,41 @@ export const UI = {
     // ----------------------------------------------------------------------------------------------------
     // Library Methods (from Flash.jsfl)
 
-    /**
-     * Gets all or optionally selected library items, sorted by name
-     * Returns empty array if library is unavailable
-     * @param selected Optional boolean to return selected items only (defaults to all items)
-     * @returns An Array of LibraryItems sorted alphabetically by name
-     */
-    getLibraryItems(selected?: boolean): LibraryItem[]|undefined {
-        if (!UI.library) {
-            return undefined;
-        }
+    // /**
+    //  * Gets all or optionally selected library items, sorted by name
+    //  * Returns empty array if library is unavailable
+    //  * @param selected Optional boolean to return selected items only (defaults to all items)
+    //  * @returns An Array of LibraryItems sorted alphabetically by name
+    //  */
+    // getLibraryItems(selected?: boolean): LibraryItem[]|undefined {
+    //     if (!UI.library) {
+    //         return undefined;
+    //     }
+    //
+    //     let items: any[];
+    //     if (selected) {
+    //         items = UI.library.getSelectedItems();
+    //     } else {
+    //         items = UI.library.items;
+    //     }
+    //
+    //     // Sort items alphabetically by name (case-insensitive)
+    //     return items.sort((a, b) => {
+    //         const nameA = a.name.toLowerCase();
+    //         const nameB = b.name.toLowerCase();
+    //         if (nameA < nameB) return -1;
+    //         if (nameA > nameB) return 1;
+    //         return 0;
+    //     });
+    // },
 
-        let items: any[];
-        if (selected) {
-            items = UI.library.getSelectedItems();
-        } else {
-            items = UI.library.items;
-        }
+    get selectedItems(): LibraryItem[]|undefined {
+
+        const library = UI.library;
+        if (!library) {return undefined;}
+
+         const   items = library.getSelectedItems();
+
 
         // Sort items alphabetically by name (case-insensitive)
         return items.sort((a, b) => {
@@ -356,7 +402,7 @@ export const UI = {
      * @param item A LibraryItem object
      * @returns The item name without path
      */
-    getItemName(item: any): string {
+    getItemName(item: LibraryItem): string {
         if (!item || !item.name) {
             return "";
         }
