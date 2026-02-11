@@ -1,10 +1,6 @@
 // main.ts
 import * as path from "path";
-import { findRepoRoot } from "./nodejs/findPackage";
-
-
-
-
+import {findNearestPackageJson, findRepoRoot} from "./nodejs/findPackage";
 
 // export const $ProjectFileDir$ = path.resolve(__filename, "../../../../");
 export const $ProjectFileDir$ = findRepoRoot(__dirname);
@@ -17,12 +13,10 @@ const SRC = path.resolve($ProjectFileDir$, "src");
 const LIB = path.resolve(SRC, "lib");
 
 export const BUSINESS = path.resolve(SRC, "business");
-export const BUSINESS_PACKAGES = path.resolve(SRC, "business_packages");
 export const LIB_CORE = path.resolve(LIB, "core");
 export const LIB_OUT = path.resolve(LIB, "out");
 
 export const BUSINESS_OUT = path.resolve($ProjectFileDir$, "out");
-
 
 // dist  文件夹
 export const DIST = path.resolve($ProjectFileDir$, "dist");
@@ -32,11 +26,6 @@ export const DIST_BUSINESS = path.resolve(DIST, "business");
 export const DIST_LIB_CORE = path.resolve(DIST_LIB, "core");
 export const DIST_LIB_OUT = path.resolve(DIST_LIB, "out");
 
-// packages文件夹
-export const PACKAGES = path.resolve($ProjectFileDir$, "packages");
-
-
-
 // config
 export const REQUIRE_CONFIG_FILE = path.resolve(
     $ProjectFileDir$,
@@ -44,8 +33,19 @@ export const REQUIRE_CONFIG_FILE = path.resolve(
 );
 export const TS_CONFIG_FILE = path.resolve($ProjectFileDir$, "tsconfig.json");
 
-// package.json
-export const PACKAGE_JSON_FILE = path.resolve($ProjectFileDir$, "package.json");
-export const PACKAGE_JSON5_FILE = path.resolve($ProjectFileDir$, "package.comments.json5");
+export const PACKAGES = path.resolve($ProjectFileDir$, "packages");
 
-// console.log(PACKAGE_JSON_FILE);
+
+// ==============================================================
+
+export const CURRENT_PROJECT = findNearestPackageJson(process.cwd())!.dir;
+
+// console.log(CURRENT_PROJECT);
+export const WEBPACK_CONFIG_FILE = path.resolve(CURRENT_PROJECT, "webpack.config.js");
+export const WEBPACK_CONFIG_TEST_FILE = path.resolve(CURRENT_PROJECT, "webpack.test.js");
+
+// path.join(PROJECT_DIR, "tsconfig.json"),
+//     path.join(PROJECT_DIR, "tsconfig.test.json")
+
+export const TS_CONFIG = path.resolve(CURRENT_PROJECT, "tsconfig.json");
+export const TS_CONFIG_TEST  = path.resolve(CURRENT_PROJECT, "tsconfig.test.json");

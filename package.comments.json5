@@ -2,6 +2,7 @@
   "name": "AnJsflScript-ts",
   "private": true,
   "version": "0.0.0",
+  "packageManager": "pnpm@10.29.2",
   "description": "是一个专为 Adobe Animate 设计的 JavaScript For Flash (JSFL)脚本集合，旨在通过自动化任务提升工作效率，帮助用户更高效地完成重复性工作，从而专注于创意与设计。",
   "author": {
     "name": "穹的兔兔",
@@ -94,6 +95,7 @@
     //    "H:\project\js\AnJsflScript-ts\third\console"
     "cli-table3": "0.6.5",
     "@types/loglevel": "1.6.3",
+    "loglevel": "1.9.2",
     "@types/progress": "2.0.7",
     "@types/error-stack-parser": "2.0.2",
 
@@ -163,24 +165,30 @@
     "json5": "2.2.3",
 
 
+    // pnpm install @anjsfl/validation@workspace:* -w
+    // pnpm install
+
 //    "H:\project\js\AnJsflScript-ts\packages\xjsfl"
-//    "@xjsfl/UI": "1.0.0",
+    "@xjsfl/UI": "workspace:*",
 
 //    "H:\project\js\AnJsflScript-ts\packages\anjsfl"
-//    "@anjsfl/validation": "1.0.0",
+    "@anjsfl/validation": "workspace:*",
+
 
     //    "H:\project\js\AnJsflScript-ts\packages\anjsfl-ts"
-//    "@anjsfl-ts/EditSession": "1.0.0",
+    "@anjsfl-ts/EditSession": "workspace:*",
 
 //    "H:\project\js\AnJsflScript-ts\packages\dom"
-//    "setTimeout": "1.0.0",
+    "@dom/setTimeout": "workspace:*",
 
-//    "H:\project\js\AnJsflScript-ts\packages\nodejs"
+
+    //    "H:\project\js\AnJsflScript-ts\packages\nodejs"
     // skip all ,using "@types/node"
 
 //    "H:\project\js\AnJsflScript-ts\packages\polyfills"
 
     // using 语法，TC39 阶段，Explicit Resource Management（显式资源管理）
-//    "@polyfills/symbol-dispose": "1.0.0"
+    "@polyfills/symbol-dispose": "workspace:*"
+
   }
 }

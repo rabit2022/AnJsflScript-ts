@@ -1,11 +1,11 @@
-require(["setTimeout"], function(__WEBPACK_EXTERNAL_MODULE__991__) { return /******/ (function() { // webpackBootstrap
+require(["@dom/setTimeout"], function(__WEBPACK_EXTERNAL_MODULE__394__) { return /******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 991:
+/***/ 394:
 /***/ (function(module) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__991__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__394__;
 
 /***/ })
 
@@ -79,10 +79,10 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__991__;
 /************************************************************************/
 var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var setTimeout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(991);
-/* harmony import */ var setTimeout__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(setTimeout__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _dom_setTimeout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(394);
+/* harmony import */ var _dom_setTimeout__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_dom_setTimeout__WEBPACK_IMPORTED_MODULE_0__);
 
-(0,setTimeout__WEBPACK_IMPORTED_MODULE_0__.clearAllTimers)();
+(0,_dom_setTimeout__WEBPACK_IMPORTED_MODULE_0__.clearAllTimers)();
 
 /******/ 	return __webpack_exports__;
 /******/ })()

@@ -1,11 +1,4 @@
-/**
- * @file: init_tsconfig_types.ts
- * @author: 穹的兔兔
- * @email: 3101829204@qq.com
- * @date: 2026/2/8 23:32
- * @project: AnJsflScript-ts
- * @description:
- */
+import { CURRENT_PROJECT, TS_CONFIG, TS_CONFIG_TEST } from "../ProjectFileDir";
 
 `
 
@@ -32,7 +25,7 @@ region中间的部分，正则匹配到，修改为正确的路径
 
 import path from "path";
 import fs from "fs/promises";
-import {findNearestPackageJson, findRepoRoot} from "../lib/findPackage"; // 假设上述代码已导出函数
+import {findNearestPackageJson, findRepoRoot} from "../nodejs/findPackage"; // 假设上述代码已导出函数
 
 /**
  * 任务：自动修改 tsconfig 中的类型声明路径
@@ -40,11 +33,11 @@ import {findNearestPackageJson, findRepoRoot} from "../lib/findPackage"; // 假�
 export async function fixTsConfigPaths() {
     try {
         // 1. 确定 PROJECT 路径 (基于 package.json)
-        const projectResult = await findNearestPackageJson(process.cwd());
-        if (!projectResult) {
-            throw new Error("未找到 package.json，无法确定项目根目录");
-        }
-        const PROJECT_DIR = projectResult.dir;
+        // const projectResult = findNearestPackageJson(process.cwd());
+        // if (!projectResult) {
+        //     throw new Error("未找到 package.json，无法确定项目根目录");
+        // }
+        const PROJECT_DIR = CURRENT_PROJECT;
         console.log(`✅ 项目根目录 (PROJECT): ${PROJECT_DIR}`);
 
         // 2. 确定 $ProjectFileDir$ 路径 (基于 .git 目录)
@@ -65,10 +58,7 @@ export async function fixTsConfigPaths() {
         console.log(`🔗 计算出的 Shim 路径: ${shimPath}`);
 
         // 4. 定义要修改的文件列表
-        const configFiles = [
-            path.join(PROJECT_DIR, "tsconfig.json"),
-            path.join(PROJECT_DIR, "tsconfig.test.json")
-        ];
+        const configFiles = [TS_CONFIG,TS_CONFIG_TEST];
         // console.log(`🔗 configFiles: ${JSON.stringify(configFiles)}`);
 
         // 正则表达式：匹配 // region TYPES 和 // endregion TYPES 之间的内容

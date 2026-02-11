@@ -2,6 +2,7 @@
   "name": "AnJsflScript-ts",
   "private": true,
   "version": "0.0.0",
+  "packageManager": "pnpm@10.29.2",
   "description": "是一个专为 Adobe Animate 设计的 JavaScript For Flash (JSFL)脚本集合，旨在通过自动化任务提升工作效率，帮助用户更高效地完成重复性工作，从而专注于创意与设计。",
   "author": {
     "name": "穹的兔兔",
@@ -36,6 +37,7 @@
     "@types/chroma-js": "3.1.2",
     "cli-table3": "0.6.5",
     "@types/loglevel": "1.6.3",
+    "loglevel": "1.9.2",
     "@types/progress": "2.0.7",
     "@types/error-stack-parser": "2.0.2",
     "@types/eventemitter3": "2.0.4",
@@ -63,6 +65,11 @@
   },
   "readmeFilename": "README.md",
   "dependencies": {
-    "json5": "2.2.3"
+    "json5": "2.2.3",
+    "@xjsfl/UI": "workspace:*",
+    "@anjsfl/validation": "workspace:*",
+    "@anjsfl-ts/EditSession": "workspace:*",
+    "@dom/setTimeout": "workspace:*",
+    "@polyfills/symbol-dispose": "workspace:*"
   }
 }

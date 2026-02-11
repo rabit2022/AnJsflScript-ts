@@ -7,7 +7,7 @@
  * @description:
  */
 
-import { clearAllTimers } from "setTimeout";
+import { clearAllTimers } from "@dom/setTimeout";
 
 clearAllTimers();
 

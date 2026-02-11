@@ -1,4 +1,4 @@
-require(["path-browserify","luxon","process","fs","url","lodash","loglevel","@xjsfl/UI","@anjsfl/validation","setTimeout"], function(__WEBPACK_EXTERNAL_MODULE__12__, __WEBPACK_EXTERNAL_MODULE__32__, __WEBPACK_EXTERNAL_MODULE__53__, __WEBPACK_EXTERNAL_MODULE__87__, __WEBPACK_EXTERNAL_MODULE__209__, __WEBPACK_EXTERNAL_MODULE__241__, __WEBPACK_EXTERNAL_MODULE__356__, __WEBPACK_EXTERNAL_MODULE__628__, __WEBPACK_EXTERNAL_MODULE__964__, __WEBPACK_EXTERNAL_MODULE__991__) { return /******/ (function() { // webpackBootstrap
+require(["path-browserify","luxon","process","fs","url","lodash","loglevel","@dom/setTimeout","@xjsfl/UI","@anjsfl/validation"], function(__WEBPACK_EXTERNAL_MODULE__12__, __WEBPACK_EXTERNAL_MODULE__32__, __WEBPACK_EXTERNAL_MODULE__53__, __WEBPACK_EXTERNAL_MODULE__87__, __WEBPACK_EXTERNAL_MODULE__209__, __WEBPACK_EXTERNAL_MODULE__241__, __WEBPACK_EXTERNAL_MODULE__356__, __WEBPACK_EXTERNAL_MODULE__394__, __WEBPACK_EXTERNAL_MODULE__628__, __WEBPACK_EXTERNAL_MODULE__964__) { return /******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
@@ -51,6 +51,13 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__356__;
 
 /***/ }),
 
+/***/ 394:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__394__;
+
+/***/ }),
+
 /***/ 628:
 /***/ (function(module) {
 
@@ -62,13 +69,6 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__628__;
 /***/ (function(module) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE__964__;
-
-/***/ }),
-
-/***/ 991:
-/***/ (function(module) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE__991__;
 
 /***/ })
 
@@ -285,8 +285,8 @@ function Main() {
     console.log("\u4FDD\u5B58\u6210\u529F\uFF0C\u4FDD\u5B58\u5230 ".concat(SAVE_PATH, ",\u4E0B\u4E00\u6B21\u4FDD\u5B58\u65F6\u95F4 3\u5206\u949F\u540E ").concat(formattedTime));
 }
 
-// EXTERNAL MODULE: external "setTimeout"
-var external_setTimeout_ = __webpack_require__(991);
+// EXTERNAL MODULE: external "@dom/setTimeout"
+var setTimeout_ = __webpack_require__(394);
 ;// ./src/out/index.ts
 
 
@@ -294,8 +294,8 @@ var external_setTimeout_ = __webpack_require__(991);
 
 AUTHOR;
 if (AUTHOR === AUTHOR) {
-    (0,external_setTimeout_.setTimeout)(Main, 0);
-    (0,external_setTimeout_.setInterval)(Main, SAVE_INTERVAL);
+    (0,setTimeout_.setTimeout)(Main, 0);
+    (0,setTimeout_.setInterval)(Main, SAVE_INTERVAL);
 }
 
 /******/ 	return __webpack_exports__;
