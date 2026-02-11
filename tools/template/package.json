@@ -8,11 +8,12 @@
   "files": [
     "dist"
   ],
-  "//": "npm run build -w @anjsfl/validation",
   "scripts": {
     "test": "jest",
     "build": "webpack --config webpack.config.js",
-    "build:test": "webpack --config webpack.test.js"
+    "build:test": "webpack --config webpack.test.js",
+    "generate-test": "npx tsx tools/generate-test/generate-test.ts",
+    "exclude_modules": "npx tsx tools/exclude_packages/exclude_require_config.ts"
   },
   "publishConfig": {
     "access": "public"
