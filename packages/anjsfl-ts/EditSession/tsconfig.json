@@ -26,7 +26,11 @@
     "lib": [
       "es5",
       "es6"
-    ]
+    ],
+
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true  // 配合 reflect-metadata 使用
   },
   "include": [
     "src",

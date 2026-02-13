@@ -4,7 +4,7 @@ import {exclude_require_config} from "./exclude_packages/exclude_require_config"
 
 
 // ========== 配置区 ==========
-const MODULE_NAME = "EditSession"; // ←←← 手动修改这里！
+const MODULE_NAME = "your-new-module-name"; // ←←← 手动修改这里！
 // ==========================
 
 if (require.main === module) {

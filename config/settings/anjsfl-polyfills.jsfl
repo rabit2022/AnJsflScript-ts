@@ -7,13 +7,10 @@
  * @description:每一次打开An时，都要 执行此脚本，用于初始化一些必要的模块。
  */
 
-(function() {
+(function () {
 
-    require(["loglevel", "Tips"], function(log, Tips) {
-        const { alertMessage } = Tips;// 显示提示信息
-
-        // 禁用log
-        log.setDefaultLevel(log.levels.ERROR);
+    require(["Tips"], function (Tips) {
+        const {alertMessage} = Tips;// 显示提示信息
 
         const dom = fl.getDocumentDOM();
         if (!dom) {
@@ -58,5 +55,11 @@
         "@polyfill/cookie"// loglevel依赖 document.cookie
     ]);
 
+    // debug
+    require(["console.stack", "console.table"]);
 
+    require(["loglevel"], function (log) {
+        // 禁用log
+        log.setDefaultLevel(log.levels.ERROR);
+    });
 })();

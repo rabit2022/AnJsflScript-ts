@@ -1,54 +1,57 @@
-require(["tslib","@xjsfl/UI","@anjsfl-ts/EditSession"], function(__WEBPACK_EXTERNAL_MODULE__280__, __WEBPACK_EXTERNAL_MODULE__628__, __WEBPACK_EXTERNAL_MODULE__775__) { return /******/ (function() { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("@xjsfl/UI"), require("tslib"));
+	else if(typeof define === 'function' && define.amd)
+		define(["@xjsfl/UI", "tslib"], factory);
+	else if(typeof exports === 'object')
+		exports["stack"] = factory(require("@xjsfl/UI"), require("tslib"));
+	else
+		root["stack"] = factory(root["@xjsfl/UI"], root["tslib"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE__192__, __WEBPACK_EXTERNAL_MODULE__652__) {
+return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 280:
-/***/ (function(module) {
-
-"use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__280__;
-
-/***/ }),
-
-/***/ 628:
-/***/ (function(module) {
-
-"use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__628__;
-
-/***/ }),
-
-/***/ 671:
+/***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(280), __webpack_require__(775), __webpack_require__(628)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, EditSession_1, UI_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(192)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
-    function testEdit() {
-        var env_1 = { stack: [], error: void 0, hasError: false };
-        try {
-            var edit = tslib_1.__addDisposableResource(env_1, new EditSession_1.EditSession(UI_1.UI.dom), false);
-            console.log("Test edit mode");
+    var Src = (function () {
+        function Src() {
         }
-        catch (e_1) {
-            env_1.error = e_1;
-            env_1.hasError = true;
+        Src.prototype.alert = function () {
+        };
+        return Src;
+    }());
+    var Src1 = (function (_super) {
+        tslib_1.__extends(Src1, _super);
+        function Src1() {
+            return _super !== null && _super.apply(this, arguments) || this;
         }
-        finally {
-            tslib_1.__disposeResources(env_1);
-        }
-    }
-    testEdit();
+        return Src1;
+    }(Src));
+    var src = new Src();
+    console.log(src);
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ }),
 
-/***/ 775:
+/***/ 192:
 /***/ (function(module) {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__775__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__192__;
+
+/***/ }),
+
+/***/ 652:
+/***/ (function(module) {
+
+"use strict";
+module.exports = __WEBPACK_EXTERNAL_MODULE__652__;
 
 /***/ })
 
@@ -83,9 +86,9 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__775__;
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module used 'module' so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__(671);
+/******/ 	var __webpack_exports__ = __webpack_require__(4);
 /******/ 	
 /******/ 	return __webpack_exports__;
 /******/ })()
 ;
-});;
+});

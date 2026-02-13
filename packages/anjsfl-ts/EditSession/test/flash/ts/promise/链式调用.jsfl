@@ -1,54 +1,41 @@
-require(["tslib","@xjsfl/UI","@anjsfl-ts/EditSession"], function(__WEBPACK_EXTERNAL_MODULE__280__, __WEBPACK_EXTERNAL_MODULE__628__, __WEBPACK_EXTERNAL_MODULE__775__) { return /******/ (function() { // webpackBootstrap
+require(["es6-promise"], function(__WEBPACK_EXTERNAL_MODULE__786__) { return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 280:
-/***/ (function(module) {
-
-"use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__280__;
-
-/***/ }),
-
-/***/ 628:
-/***/ (function(module) {
-
-"use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__628__;
-
-/***/ }),
-
-/***/ 671:
+/***/ 255:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(280), __webpack_require__(775), __webpack_require__(628)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, EditSession_1, UI_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(786)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
-    function testEdit() {
-        var env_1 = { stack: [], error: void 0, hasError: false };
-        try {
-            var edit = tslib_1.__addDisposableResource(env_1, new EditSession_1.EditSession(UI_1.UI.dom), false);
-            console.log("Test edit mode");
-        }
-        catch (e_1) {
-            env_1.error = e_1;
-            env_1.hasError = true;
-        }
-        finally {
-            tslib_1.__disposeResources(env_1);
-        }
-    }
-    testEdit();
+    console.log('\n🧪 3. 链式调用');
+    Promise.resolve(1)
+        .then(function (val) {
+        console.assert(val === 1, '第一个 then 接收 1');
+        return val + 1;
+    })
+        .then(function (val) {
+        console.assert(val === 2, '第二个 then 接收 2');
+        throw new Error('中断链');
+    })
+        .catch(function (err) {
+        console.assert(err.message === '中断链', 'catch 捕获错误');
+        return '恢复';
+    })
+        .then(function (val) {
+        console.assert(val === '恢复', '错误恢复后继续');
+        console.log('✅ 链式调用完整通过');
+    });
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ }),
 
-/***/ 775:
+/***/ 786:
 /***/ (function(module) {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__775__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__786__;
 
 /***/ })
 
@@ -83,7 +70,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__775__;
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module used 'module' so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__(671);
+/******/ 	var __webpack_exports__ = __webpack_require__(255);
 /******/ 	
 /******/ 	return __webpack_exports__;
 /******/ })()

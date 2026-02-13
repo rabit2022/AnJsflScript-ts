@@ -1,54 +1,34 @@
-require(["tslib","@xjsfl/UI","@anjsfl-ts/EditSession"], function(__WEBPACK_EXTERNAL_MODULE__280__, __WEBPACK_EXTERNAL_MODULE__628__, __WEBPACK_EXTERNAL_MODULE__775__) { return /******/ (function() { // webpackBootstrap
+require(["es6-promise"], function(__WEBPACK_EXTERNAL_MODULE__786__) { return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 280:
-/***/ (function(module) {
-
-"use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__280__;
-
-/***/ }),
-
-/***/ 628:
-/***/ (function(module) {
-
-"use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__628__;
-
-/***/ }),
-
-/***/ 671:
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(280), __webpack_require__(775), __webpack_require__(628)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, EditSession_1, UI_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(786)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
-    function testEdit() {
-        var env_1 = { stack: [], error: void 0, hasError: false };
-        try {
-            var edit = tslib_1.__addDisposableResource(env_1, new EditSession_1.EditSession(UI_1.UI.dom), false);
-            console.log("Test edit mode");
-        }
-        catch (e_1) {
-            env_1.error = e_1;
-            env_1.hasError = true;
-        }
-        finally {
-            tslib_1.__disposeResources(env_1);
-        }
-    }
-    testEdit();
+    console.log('🧪 1. 基础 Promise 行为');
+    var p1 = Promise.resolve('success');
+    p1.then(function (res) {
+        console.assert(res === 'success', 'Promise.resolve 应返回成功值');
+        console.log('✅ resolve 成功');
+    });
+    var p2 = Promise.reject(new Error('fail'));
+    p2.catch(function (err) {
+        console.assert(err.message === 'fail', 'Promise.reject 应抛出错误');
+        console.log('✅ reject 失败');
+    });
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ }),
 
-/***/ 775:
+/***/ 786:
 /***/ (function(module) {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__775__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__786__;
 
 /***/ })
 
@@ -83,7 +63,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__775__;
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module used 'module' so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__(671);
+/******/ 	var __webpack_exports__ = __webpack_require__(17);
 /******/ 	
 /******/ 	return __webpack_exports__;
 /******/ })()

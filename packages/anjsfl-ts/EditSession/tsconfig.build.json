@@ -11,6 +11,8 @@
     "noEmit": false ,     // ✅ 需要生成 .js 文件运行
 
     "module": "es2020",        // 或 commonjs / esnext
+    "importHelpers": true,
+
 
     // 解析相对路径
     "moduleResolution": "node",

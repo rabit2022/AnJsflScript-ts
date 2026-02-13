@@ -10,7 +10,8 @@
     "sourceMap": false,  // ✅ JSFL 脚本通常不需要调试
     "noEmit": false ,     // ✅ 需要生成 .js 文件运行
 
-    "module": "es2020",        // 或 commonjs / esnext
+
+    "importHelpers": true,       // 👈 关键！启用从 tslib 导入 helpers
 
     // 解析相对路径
     "moduleResolution": "node",

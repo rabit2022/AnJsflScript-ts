@@ -9,6 +9,7 @@
     // node import
     "moduleResolution": "node",
 
+
     // default 报错
 //    // es import
 //    "esModuleInterop": true,

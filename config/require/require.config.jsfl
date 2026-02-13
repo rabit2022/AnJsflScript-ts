@@ -14,9 +14,9 @@ require.config({
 
     // region REQUIRE MODULES PATHS
     {
-        "store-js": "third/utils/store-js/store-js",
         "lodash": "third/utils/lodash/lodash",
         "linq": "third/utils/linq/linq",
+        "tslib": "third/types/tslib/tslib",
         "oxide.ts": "third/types/oxide.ts/oxide.ts",
         "requirejs": "third/require/requirejs/require-js",
         "AnJsflScript-ts": "third/require/exports/_exports",
@@ -35,6 +35,7 @@ require.config({
         "seedrandom": "third/math/seedrandom/seedrandom",
         "random-js": "third/math/random-js/random-js",
         "chance": "third/math/chance/chance",
+        "store-js": "third/dom/store-js/store-js",
         "stackframe": "third/console/stack/stackframe/stackframe",
         "error-stack-parser": "third/console/stack/error-stack-parser/error-stack-parser",
         "progress": "third/console/progress/progress",
@@ -48,8 +49,10 @@ require.config({
         "es6-shim": "third/polyfill/es6/es6-shim/es6-shim",
         "es5-sham": "third/polyfill/es5/es5-shim/es5-sham",
         "es5-shim": "third/polyfill/es5/es5-shim/es5-shim",
-        "@third/universal-cookie": "third/polyfill/cookie/universal-cookie/universal-cookie",
-        "@polyfill/cookie": "third/polyfill/cookie/universal-cookie/document-cookie",
+        "@third/universal-cookie": "third/dom/cookie/universal-cookie/universal-cookie",
+        "@polyfill/cookie": "third/dom/cookie/universal-cookie/document-cookie",
+        "atob": "third/dom/base-64/atob",
+        "base-64": "third/dom/base-64/base-64",
         "Tips": "src/lib/out/Tips",
         "@xjsfl/UI": "packages/xjsfl/UI/out/UI",
         "@xjsfl/super": "packages/xjsfl/super/out/super",

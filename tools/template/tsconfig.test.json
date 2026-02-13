@@ -7,8 +7,8 @@
     "outDir": "./dist",
 
 
-    // 防止生成helper,导致报错
-    "importHelpers": false,
+    // 导入tslib
+    "importHelpers": true,
 
     "paths": [],
 
@@ -36,7 +36,7 @@
     "emitDeclarationOnly": false // ✅ 需要生成可运行的 JS 文件
   },
   "include": [
-    "test",
+    "test/flash/ts",
     "src",
 
     // region TYPES
