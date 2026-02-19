@@ -50,13 +50,17 @@
         // Symbol    oxide.ts need
         "symbol-es6",
 
-        // dom 相关
-        "console",// loglevel 依赖 console
-        "@polyfill/cookie"// loglevel依赖 document.cookie
+
     ]);
 
     // debug
-    require(["console.stack", "console.table"]);
+    require([
+        // dom 相关
+        "console",// loglevel 依赖 console
+        "@polyfill/cookie",// loglevel依赖 document.cookie
+
+        "console.stack", "console.table"
+    ]);
 
     require(["loglevel"], function (log) {
         // 禁用log

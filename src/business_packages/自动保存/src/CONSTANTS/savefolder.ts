@@ -17,7 +17,7 @@ AUTHOR;
  * 获取安全保存目录
  * 优先使用 D 盘，不存在则使用 C 盘
  */
-export function getSaveFolder(): string {
+function getSaveFolder(): string {
     const drives = getWindowsDrives();
 
     const rootDrive = _.includes(drives,"D:") ? "D:" : "C:";
@@ -51,3 +51,6 @@ function getWindowsDrives(): string[] {
 
 // const drivers = getWindowsDrives();
 // console.log(drivers);
+
+// D:/AnJsflScript
+export const SAVE_FOLDER = getSaveFolder();

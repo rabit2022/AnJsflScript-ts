@@ -30,6 +30,6 @@
 
 
 # 主目录
-/*.js linguist-generated=true
-/*.json linguist-generated=true
+*.js linguist-generated=true
+*.json linguist-generated=true
 

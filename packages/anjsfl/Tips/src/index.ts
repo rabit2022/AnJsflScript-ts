@@ -1,0 +1,2 @@
+export {alertMessage} from "./Tips";
+

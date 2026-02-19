@@ -2,7 +2,7 @@
  * @file: Tips.jsfl
  * @author: 穹的兔兔
  * @email: 3101829204@qq.com
- * @date: 2026/2/9 23:02
+ * @date: 2026/2/19 22:58
  * @project: AnJsflScript-ts
  * @description:
  */
@@ -12,7 +12,7 @@
 (function(){
 define(["require", "exports"], function (require, exports) {
     "use strict";
-    // Object.defineProperty(exports, "__esModule", { value: true });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.alertMessage = alertMessage;
     var AUTHOR = "\u4F5C\u8005\uFF1A@\u7A79\u7684\u5154\u5154\nQQ\uFF1A3101829204\nQQ\u7FA4\uFF1A1040730457";
     var alertMessageConfig = {

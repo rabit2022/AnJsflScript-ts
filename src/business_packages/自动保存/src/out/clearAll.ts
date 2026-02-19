@@ -7,9 +7,10 @@
  * @description:
  */
 
-import { clearAllTimers } from "@dom/setTimeout";
+import {clearAllTimers} from "@dom/setTimeout";
 
 clearAllTimers();
+console.log("自动保存任务取消");
 
 
 

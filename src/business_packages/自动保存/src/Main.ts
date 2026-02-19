@@ -10,14 +10,15 @@
 import {AUTHOR} from "./DESC/Descriptions";
 import {doc} from "./CHECK/CheckDom";
 import {ORIGINAL_DOC_URI} from "./CONSTANTS/constants";
-import {getSavePath} from "./save/save_path";
-import {getSaveFolder} from "./save/savefolder";
+
 import * as fs from "fs";
 
 import {pathToFileURL} from "url";
 import {cleanFolder} from "./clean/clean";
 import {DateTime} from "luxon";
 import {TIME_FORMAT} from "./CONSTANTS/time";
+import {SAVE_FOLDER} from "./CONSTANTS/savefolder";
+import {SAVE_PATH} from "./CONSTANTS/save_path";
 
 AUTHOR;
 
@@ -34,17 +35,11 @@ function saveDom(targetPath: string): void {
 }
 
 
-export function Main() {
-
-// D:/AnJsflScript
-    const SAVE_FOLDER = getSaveFolder();
+export function AutoSave() {
     if (!fs.existsSync(SAVE_FOLDER)) {
         fs.mkdirSync(SAVE_FOLDER, {recursive: true});
     }
 
-
-//  D:/AnJsflScript/${now}_${baseName}.fla
-    const SAVE_PATH = getSavePath(ORIGINAL_DOC_URI, SAVE_FOLDER);
 
     saveDom(SAVE_PATH);
     cleanFolder(SAVE_FOLDER);
@@ -56,3 +51,17 @@ export function Main() {
 
     console.log(`保存成功，保存到 ${SAVE_PATH},下一次保存时间 3分钟后 ${formattedTime}`)
 }
+
+export function OnlySave() {
+    if (!fs.existsSync(SAVE_FOLDER)) {
+        fs.mkdirSync(SAVE_FOLDER, {recursive: true});
+    }
+
+
+    saveDom(SAVE_PATH);
+    cleanFolder(SAVE_FOLDER);
+
+    console.log(`保存成功，保存到 ${SAVE_PATH}`)
+
+}
+

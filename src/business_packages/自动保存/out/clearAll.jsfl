@@ -83,6 +83,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dom_setTimeout__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_dom_setTimeout__WEBPACK_IMPORTED_MODULE_0__);
 
 (0,_dom_setTimeout__WEBPACK_IMPORTED_MODULE_0__.clearAllTimers)();
+console.log("自动保存任务取消");
 
 /******/ 	return __webpack_exports__;
 /******/ })()

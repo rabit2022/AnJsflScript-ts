@@ -12,6 +12,8 @@ import * as path from "path";
 import { DateTime } from "luxon";
 import {TIME_FORMAT} from "../CONSTANTS/time";
 import {AUTHOR} from "../DESC/Descriptions";
+import {ORIGINAL_DOC_URI} from "./constants";
+import {SAVE_FOLDER} from "./savefolder";
 
 
 AUTHOR;
@@ -30,3 +32,7 @@ export function getSavePath(
 
   return path.join(saveFolder, fileName);
 }
+
+
+//  D:/AnJsflScript/${now}_${baseName}.fla
+export const SAVE_PATH = getSavePath(ORIGINAL_DOC_URI, SAVE_FOLDER);

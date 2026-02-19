@@ -1,4 +1,5 @@
 {
-  "anjsfl/自动保存": "./out/auto_save.jsfl",
-  "anjsfl/清除所有事件": "./out/clearAll.jsfl"
+  "@anjsfl/00.自动保存": "./out/index.jsfl",
+  "@anjsfl/00.自动保存_清除所有事件": "./out/clearAll.jsfl",
+  "11.高阶/04.安全保存": "./out/onlySave.jsfl"
 }

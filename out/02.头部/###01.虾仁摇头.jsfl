@@ -141,6 +141,7 @@ AUTHOR;
 var DIALOGUE = __webpack_require__(559);
 
 ;// ./src/CHECK/CheckXML.ts
+var _a;
 
 
 
@@ -186,8 +187,7 @@ if (!config.isOk()) {
     external_loglevel_.error("checkXMLPanel 错误:", errorMsg);
     external_process_.exit();
 }
-var _a = config.unwrap(), shakeIntensity = _a.shakeIntensity, headDirection = _a.headDirection;
-
+var shakeIntensity = (_a = config.unwrap(), _a.shakeIntensity), headDirection = _a.headDirection;
 AUTHOR;
 
 ;// ./src/index.ts
