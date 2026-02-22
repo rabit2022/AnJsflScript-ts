@@ -12,7 +12,7 @@
 (function(){
 define(["require", "exports"], function (require, exports) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
+    // Object.defineProperty(exports, "__esModule", { value: true });
     exports.alertMessage = alertMessage;
     var AUTHOR = "\u4F5C\u8005\uFF1A@\u7A79\u7684\u5154\u5154\nQQ\uFF1A3101829204\nQQ\u7FA4\uFF1A1040730457";
     var alertMessageConfig = {

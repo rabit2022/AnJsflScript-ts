@@ -54,7 +54,8 @@ __webpack_require__.d(__webpack_exports__, {
   exitCode: function() { return /* reexport */ exitCode; },
   off: function() { return /* reexport */ off; },
   on: function() { return /* reexport */ on; },
-  once: function() { return /* reexport */ once; }
+  once: function() { return /* reexport */ once; },
+  platform: function() { return /* reexport */ platform; }
 });
 
 ;// ./src/cwd/index.ts
@@ -161,7 +162,22 @@ function off(event, fn) {
 }
 
 
+;// ./src/platform/index.ts
+var platform = (function () {
+    if (typeof AnJsflScript !== 'undefined' && AnJsflScript.app) {
+        var jsflPlatform = AnJsflScript.app.platform;
+        if (jsflPlatform === 'win') {
+            return 'win32';
+        }
+        else if (jsflPlatform === 'mac') {
+            return 'darwin';
+        }
+    }
+    return 'unknown';
+})();
+
 ;// ./src/index.ts
+
 
 
 

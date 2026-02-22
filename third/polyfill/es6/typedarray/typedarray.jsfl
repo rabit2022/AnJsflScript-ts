@@ -282,6 +282,12 @@ function packF32(v) { return packIEEE754(v, 8, 23); }
 		configureProperties(this);
 	}
 
+	ArrayBuffer.isView = function(obj) {
+		return obj &&
+			obj.buffer &&
+			obj.buffer instanceof ArrayBufferView;
+	};
+
 	exports.ArrayBuffer = exports.ArrayBuffer || ArrayBuffer;
 
 	//

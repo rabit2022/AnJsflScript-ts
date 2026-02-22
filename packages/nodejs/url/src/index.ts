@@ -6,7 +6,7 @@
  * @project: AnJsflScript-ts
  * @description:
  */import * as url from "url";
-import { parse } from "url";
+// import { parse } from "url";
 
 // fileURLToPath, pathToFileURL
 function fileURLToPath(url: string | URL): string {
@@ -25,8 +25,9 @@ function pathToFileURL(path: string): URL {
     fileUri = fileUri.replace("|", ":");
 
     // return new URL(fileUri);
-    // @ts-ignore 源码得出parse返回的Uri就是URI对象
-    return parse(fileUri);
+    // 源码得出parse返回的Uri就是URI对象
+    // @ts-ignore
+    return url.parse(fileUri);
 }
 
 // 以下两个函数打包后没有
@@ -34,6 +35,16 @@ function pathToFileURL(path: string): URL {
 url.fileURLToPath = fileURLToPath;
 // @ts-ignore
 url.pathToFileURL = pathToFileURL;
+
+
+// URL
+class aURL{
+    constructor(public urlString: string) {
+        // @ts-ignore
+        return url.parse(urlString);
+    }
+}
+export const URL = aURL;
 
 // module.exports = url;
 export {url};

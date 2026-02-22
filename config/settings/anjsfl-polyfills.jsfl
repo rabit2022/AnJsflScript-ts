@@ -36,6 +36,14 @@
         "es5-shim", // es5,es2009
         "es5-sham",
 
+        "json3",// es5,es2009
+
+
+        // Symbol    oxide.ts need
+        // Set iterator need Symbol,sometimes babel translate code might be use [Symbol.Iterator] function to adjust it.
+        "symbol-es6",
+
+
         // @nodejs/url need es6
         "es6-shim", // es6,es2015
         "es6-sham",
@@ -43,14 +51,8 @@
         // luxon need es7
         // "es7-shim", // es7,es2016   es8,es2017
 
-        "json3",// es5,es2009
 
         "@nodejs/__filename",
-
-        // Symbol    oxide.ts need
-        "symbol-es6",
-
-
     ]);
 
     // debug
@@ -61,6 +63,11 @@
 
         "console.stack", "console.table"
     ]);
+
+    //
+    require(['process'], function (process) {
+        window.process = process;
+    })
 
     require(["loglevel"], function (log) {
         // 禁用log

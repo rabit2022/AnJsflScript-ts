@@ -9,3 +9,4 @@
 
 export * from './cwd';
 export * from './exit';
+export * from "./platform";
