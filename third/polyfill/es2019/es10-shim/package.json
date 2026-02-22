@@ -1,0 +1,35 @@
+{
+  "name": "es10-shim",
+  "version": "1.0.0",
+  "description": "ECMAScript 10 compatibility shims for legacy JavaScript engines",
+  "author": "穹的兔兔",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "browser": "./src/browser.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/es-shims/es7-shim.git"
+  },
+  "keywords": [
+    "ecmascript",
+    "harmony",
+    "es10",
+    "ES2019",
+    "shim",
+    "polyfill"
+  ],
+  "scripts": {
+    "prepublish": "npm run --silent minify",
+    "build": "mkdir dist && npx browserify ./src/index.js > dist/es10-shim.js",
+    "build:browser": "mkdir dist && npx browserify ./src/browser.js > dist/es10-shim.js",
+    "minify": "npm run --silent build && uglifyjs dist/es10-shim.js --comments --source-map=dist/es10-shim.map -m -b ascii_only=true,beautify=false > dist/es10-shim.min.js"
+  },
+  "dependencies": {
+    "array.prototype.flat": "^1.3.3",
+    "array.prototype.flatmap": "^1.3.3",
+    "object.fromentries": "^2.0.8",
+    "string.prototype.trimend": "^1.0.9",
+    "string.prototype.trimstart": "^1.0.8",
+    "symbol.prototype.description": "^2.0.0"
+  }
+}

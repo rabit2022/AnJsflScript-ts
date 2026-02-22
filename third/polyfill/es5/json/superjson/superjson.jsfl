@@ -3,8 +3,11 @@
 
  // shims
  var URL;
- require(["url","es7-shim"],function(url,es7Shim){
+ require(["url","typedarray","es8-shim"],function(url,typedarray,es8Shim){
    URL = url.URL;
+   // typedarray
+   // ArrayBuffer.isView
+   // es8
    // Object.entries
  });
 
