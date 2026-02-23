@@ -282,15 +282,28 @@ var __rewriteRelativeImportExtension;
         return r;
     };
 
-    __spreadArray = function (to, from, pack) {
+    // __spreadArray = function (to, from, pack) {
+    //     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+    //         if (ar || !(i in from)) {
+    //             if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+    //             ar[i] = from[i];
+    //         }
+    //     }
+    //     return to.concat(ar || Array.prototype.slice.call(from));
+    // };
+
+    function _iterableToArray(r) {if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+
+    var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
         if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
             if (ar || !(i in from)) {
                 if (!ar) ar = Array.prototype.slice.call(from, 0, i);
                 ar[i] = from[i];
             }
         }
-        return to.concat(ar || Array.prototype.slice.call(from));
+        return _iterableToArray(from) || to.concat(ar || Array.prototype.slice.call(from));
     };
+
 
     __await = function (v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);

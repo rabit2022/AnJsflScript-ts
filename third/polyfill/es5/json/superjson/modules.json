@@ -1,0 +1,4 @@
+{
+  "@third/superjson": "./superjson.jsfl",
+  "superjson":"./config.jsfl"
+}

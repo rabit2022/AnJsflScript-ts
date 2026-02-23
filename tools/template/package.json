@@ -9,6 +9,7 @@
     "dist"
   ],
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "test": "jest",
     "build": "webpack --config webpack.config.js",
     "build:test": "webpack --config webpack.test.js",

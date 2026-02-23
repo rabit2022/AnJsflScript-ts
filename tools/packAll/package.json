@@ -1,0 +1,45 @@
+{
+  "name": "packAll",
+  "version": "1.0.0",
+  "description": "",
+  "declaration": true,
+  "declarationMap": true,
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "preinstall": "npm install json5 && npx tsx ./tools/package/sync-package.ts",
+    "build:webpack": "webpack --config webpack.config.js && npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
+    "build:browserify": "npx browserify ./src/entry.js -o out/packAll.js && npx babel out/packAll.js --out-file out/packAll.jsfl",
+    "build:ts": "npx tsx tools/package/pack_ts.ts && tsc && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
+    "test": "jest",
+    "build:test": "webpack --config webpack.test.js",
+    "generate-test": "npx tsx tools/generate-test/generate-test.ts",
+    "exclude_modules": "npx tsx tools/exclude_packages/exclude_require_config.ts"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
+    "@types/jest": "30.0.0",
+    "@types/node": "25.0.7",
+    "jest": "30.2.0",
+    "strip-json-comments": "3.1.0",
+    "terser-webpack-plugin": "5.3.16",
+    "ts-jest": "29.4.6",
+    "ts-loader": "9.5.4",
+    "typescript": "5.9.3",
+    "webpack": "5.104.1",
+    "webpack-cli": "6.0.1"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.3.7",
+    "oxide.ts": "^1.1.0",
+    "superjson": "^2.2.6",
+    "xmldom": "^0.6.0"
+  }
+}

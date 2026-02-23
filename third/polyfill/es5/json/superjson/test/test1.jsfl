@@ -25,4 +25,15 @@ require(['superjson'], function (SuperJSON) {
     console.log(parsed.tags instanceof Set);        // true
 // console.log(typeof parsed.bigNum === 'bigint'); // true
 
+
+
+    // // shims
+    // var URL;
+    // require(["url","typedarray","es8-shim"],function(url,typedarray,es8Shim){
+    //     URL = url.URL;
+    //     // typedarray
+    //     // ArrayBuffer.isView
+    //     // es8
+    //     // Object.entries
+    // });
 });

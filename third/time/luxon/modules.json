@@ -1,4 +1,4 @@
 {
   "@third/luxon": "./luxon.jsfl",
-  "luxon": "./luxon-config.jsfl"
+  "luxon": "./config.jsfl"
 }

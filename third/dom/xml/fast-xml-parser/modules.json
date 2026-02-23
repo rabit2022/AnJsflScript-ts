@@ -1,0 +1,4 @@
+{
+  "@third/fast-xml-parser": "./fast-xml-parser.jsfl",
+  "fast-xml-parser": "./config.jsfl"
+}

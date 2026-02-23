@@ -1,0 +1,4 @@
+{
+  "@third/date-fns": "./date-fns.jsfl",
+  "date-fns": "./config.jsfl"
+}
