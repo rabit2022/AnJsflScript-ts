@@ -2,7 +2,9 @@ require(["chance"], function(Chance) {
 
     // import Chance from 'chance';
 
-    const chance = new Chance('my-seed');
+    // seed
+    // const chance = new Chance('my-seed');
+    const chance = new Chance();
 
 // 基础概率判断（需自己写）
     if (chance.bool({ likelihood: 30 })) {

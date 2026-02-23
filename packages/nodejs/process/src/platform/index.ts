@@ -1,5 +1,6 @@
 // var win32 = process.platform === 'win32'
 
+const WIN = "win32", MAC = "darwin", LINUX = "linux", UNKNOWN = "unknown";
 
 // 在 Windows 上输出: 'win32'
 // 在 macOS 上输出: 'darwin'
@@ -9,16 +10,15 @@ export const platform = (function () {
     if (typeof AnJsflScript !== 'undefined' && AnJsflScript.app) {
         // 在 Windows 上输出: 'win'
 // 在 macOS 上输出: 'mac'
-        const jsflPlatform = AnJsflScript.app.platform;
 
-        // JSFL 返回: 'Windows' 或 'Macintosh'
-        if (jsflPlatform === 'win') {
-            return 'win32';
-        } else if (jsflPlatform === 'mac') {
-            return 'darwin';
+        const currentOS = AnJsflScript.app.os;
+        if (currentOS.win) {
+            return WIN;
+        } else if (currentOS.mac) {
+            return MAC;
         }
     }
 
     // 未知环境
-    return 'unknown';
+    return UNKNOWN;
 })();

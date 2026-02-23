@@ -163,17 +163,18 @@ function off(event, fn) {
 
 
 ;// ./src/platform/index.ts
+var WIN = "win32", MAC = "darwin", LINUX = "linux", UNKNOWN = "unknown";
 var platform = (function () {
     if (typeof AnJsflScript !== 'undefined' && AnJsflScript.app) {
-        var jsflPlatform = AnJsflScript.app.platform;
-        if (jsflPlatform === 'win') {
-            return 'win32';
+        var currentOS = AnJsflScript.app.os;
+        if (currentOS.win) {
+            return WIN;
         }
-        else if (jsflPlatform === 'mac') {
-            return 'darwin';
+        else if (currentOS.mac) {
+            return MAC;
         }
     }
-    return 'unknown';
+    return UNKNOWN;
 })();
 
 ;// ./src/index.ts

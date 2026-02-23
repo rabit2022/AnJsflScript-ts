@@ -39,4 +39,6 @@
         ? Symbol.iterator
         : '_es6-shim iterator_';
     fl.trace($iterator$);
+
+    fl.trace(typeof Symbol.iterator)
 })();

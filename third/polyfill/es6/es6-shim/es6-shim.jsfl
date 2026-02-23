@@ -311,7 +311,7 @@
         symbol: function (x) {
             // return typeof globals.Symbol === 'function' && typeof x === 'symbol';
             // Symbol polyfill cannot adjust symbol
-            return typeof globals.Symbol === 'function' && typeof x === 'object';
+            return typeof globals.Symbol === 'function' && ES6.isSymbol(x);
         }
     };
 
@@ -3646,18 +3646,6 @@
                 });
 
                 defineProperties(SetShim.prototype, {
-                    // 已经解决：Symbol 不生效的问题
-                    // // [...items] bavel 转译报错
-                    // _toConsumableArray: function _toConsumableArray() {
-                    //     requireSetSlot(this, '_toConsumableArray');
-                    //     if (this._storage) {
-                    //         var obj = this._storage;
-                    //         // 1. 获取键 → 2. 过滤值为 true 的 → 3. 去除 $ 前缀
-                    //         var list = Object.keys(obj).filter(function(key) {return obj[key] === true;}).map(function(key) {return key.replace(/^\$/, '');});
-                    //         return list;
-                    //     }
-                    //     return [];
-                    // },
                     has: function has(key) {
                         requireSetSlot(this, 'has');
                         var fkey;
