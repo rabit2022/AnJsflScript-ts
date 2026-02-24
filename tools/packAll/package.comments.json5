@@ -18,20 +18,24 @@
     // build
     // babel
     // iife
-    "build:webpack": "webpack --config webpack.config.js && npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
+    "build:01.webpack": "webpack --config webpack.config.js && npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
 
     // 流程2
     // build
     // babel
     // iife
-    "build:browserify":"npx browserify ./src/entry.js -o out/packAll.js && npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
+    "build:01.browserify":"npx browserify ./src/entry.ts -o ./out/packAll.js && npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
 
     // 流程3
     // 复制packAll.js -> index.ts
     // tsc -> dist/index.js
     // babel翻译方法太多，现在直接作为ts，自动翻译，helpers减少很多
-    "build:ts": "npx tsx tools/package/pack_ts.ts && tsc && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
+    // 但是可能不会按照预期执行，此时只能babel方案
+    "build:02.tsc": "npx tsx tools/package/pack_ts.ts && tsc && npx tsx ./tools/copy/copy-js-to-jsfl.ts   && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
 
+    // 独立的ts文件打包
+    "build:11.tsc": "tsc && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
+    "build:21.tsc": "tsc",
 
     "test": "jest",
     "build:test": "webpack --config webpack.test.js",

@@ -1,18 +1,18 @@
 packages:
   #    "H:\project\js\AnJsflScript-ts\packages\xjsfl"
   # xjsfl相关模块
-  - "packages/xjsfl/*",
+  - "packages/xjsfl/*"
   #    "H:\project\js\AnJsflScript-ts\packages\anjsfl"
   # 当前项目的自定义模块,js相关
-  - "packages/anjsfl/*",
+  - "packages/anjsfl/*"
   #    "H:\project\js\AnJsflScript-ts\packages\anjsfl-ts"
   # ts相关
-  - "packages/anjsfl-ts/*",
+  - "packages/anjsfl-ts/*"
 
 
   #    "H:\project\js\AnJsflScript-ts\packages\dom"
   # console,console.stack,console.table等 实现
-  - "packages/dom/*",
+  - "packages/dom/*"
   #    "H:\project\js\AnJsflScript-ts\packages\nodejs"
   # 关于nodejs的兼容层实现
   # 实现nodejs环境编写，基础测试后 -->  flash环境再次验证    -->  调整兼容层
@@ -23,3 +23,4 @@ packages:
 
 
 #  pnpm add -F <pkg-name> lodash
+

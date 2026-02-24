@@ -12,7 +12,7 @@ const MODULE_NAME = "packAll";
 module.exports = {
     mode: 'production',
     // entry: './src/index.ts', // 入口文件
-    entry: './src/entry.js', // 入口文件
+    entry: './src/entry.ts', // 入口文件
     output: {
         path: path.resolve(__dirname, 'out'),
         filename: MODULE_NAME + '.js', // 输出为 .jsfl 文件
@@ -70,6 +70,7 @@ module.exports = {
     // 关键：不打包任何外部依赖（JSFL 无 npm）
     externals: [
         {"path": "path-browserify"},
+        {"@colors/colors/safe":"_exports"},
         // region EXCLUDE_MODULE_NAME
 "lodash","linq","tslib","requirejs","AnJsflScript-ts","es8-shim","es7-shim","typedarray","symbol-es6","intl","harmony-reflect","es6-promise","es6-collections","json5","json3","jsbi","es10-shim","util","path-browserify","eventemitter3","seedrandom","random-js","chance","store-js","stackframe","error-stack-parser","progress","loglevel","chroma-js","@third/luxon","luxon","_exports","es6-sham","es6-shim","es5-sham","es5-shim","@third/universal-cookie","@polyfill/cookie","atob","base-64","Tips","@xjsfl/UI","@xjsfl/super","@xjsfl/Selector","@xjsfl/Events","Context","@xjsfl/Constants","@xjafl/Collection","@polyfills/symbol-dispose","overload-js","@nodejs/__filename","url","process","fs","assert","@dom/setTimeout","console.table","console.stack","console","@anjsfl-ts/EditSession","@anjsfl/validation","@anjsfl/sat","@anjsfl/random","@anjsfl/parser","@anjsfl/more-element","@anjsfl/Context","@xjsfl/XUL","@xjsfl/XUL/XML","@xjsfl/XUL/XUL","@xjsfl/XUL/XULControl","@xjsfl/XUL/XULEvent","@xjsfl/XUL/Utils","@xjsfl/XUL/xjsfl",
 // endregion EXCLUDE_MODULE_NAME

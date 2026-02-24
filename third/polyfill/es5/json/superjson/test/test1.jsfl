@@ -1,15 +1,17 @@
 // requirejs modules file test1.js
-require(['superjson'], function (SuperJSON) {
+require(['superjson','jsbi'], function (SuperJSON,JSBI) {
 
     // import SuperJSON from 'superjson';
 // const SuperJSON = require('superjson');
+
+    const BigInt=JSBI.BigInt;
 
 
 // 包含特殊类型的数据
     const data = {
         createdAt: new Date(),
         tags: new Set(['js', 'ts']),
-        // bigNum: BigInt(9007199254740991),
+        bigNum: BigInt(9007199254740991),
         map: new Map([['key', 'value']]),
         regex: /test/gi,
         error: new Error('Something went wrong')
@@ -23,17 +25,9 @@ require(['superjson'], function (SuperJSON) {
     const parsed = SuperJSON.parse(jsonString);
     console.log(parsed.createdAt instanceof Date);  // true
     console.log(parsed.tags instanceof Set);        // true
-// console.log(typeof parsed.bigNum === 'bigint'); // true
+    console.log(typeof parsed.bigNum === 'bigint'); // true
+    console.log(typeof parsed.bigNum); // true
 
 
 
-    // // shims
-    // var URL;
-    // require(["url","typedarray","es8-shim"],function(url,typedarray,es8Shim){
-    //     URL = url.URL;
-    //     // typedarray
-    //     // ArrayBuffer.isView
-    //     // es8
-    //     // Object.entries
-    // });
 });

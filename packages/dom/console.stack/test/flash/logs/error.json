@@ -1,41 +1,41 @@
 {
-  "id": 1770134412946,
-  "timestamp": "2026-02-03T16:00:12.946Z",
+  "id": 1771941058113,
+  "timestamp": "2026-02-24T13:50:58.113Z",
   "message": "boom",
   "frames": [
-    {
-      "functionName": "StackTracer.trace",
-      "fileName": "h:\\project\\js\\AnJsflScript-ts\\packages\\dom\\console.stack\\src\\api\\stackTracer.ts",
-      "lineNumber": 32,
-      "timestamp": "2026-02-03T16:00:12.944Z",
-      "message": "boom"
-    },
-    {
-      "functionName": "<anonymous>",
-      "fileName": "h:\\project\\js\\AnJsflScript-ts\\packages\\dom\\console.stack\\test\\flash\\test.ts",
-      "lineNumber": 5,
-      "timestamp": "2026-02-03T16:00:12.946Z",
-      "message": "boom"
-    },
-    {
-      "functionName": "Object.<anonymous>",
-      "fileName": "h:\\project\\js\\AnJsflScript-ts\\packages\\dom\\console.stack\\test\\flash\\test.ts",
-      "lineNumber": 7,
-      "timestamp": "2026-02-03T16:00:12.946Z",
-      "message": "boom"
-    },
     {
       "functionName": "Module._compile",
       "fileName": "node:internal/modules/cjs/loader",
       "lineNumber": 1376,
-      "timestamp": "2026-02-03T16:00:12.946Z",
+      "timestamp": "2026-02-24T13:50:58.108Z",
       "message": "boom"
     },
     {
       "functionName": "Object.transformer",
       "fileName": "D:\\01_software\\06_programme\\01_ide\\WebStorm 2024.3.5\\plugins\\nodeJS\\js\\ts-file-loader\\node_modules\\tsx\\dist\\register-DfubRCxM.cjs",
       "lineNumber": 2,
-      "timestamp": "2026-02-03T16:00:12.946Z",
+      "timestamp": "2026-02-24T13:50:58.108Z",
+      "message": "boom"
+    },
+    {
+      "functionName": "Module.load",
+      "fileName": "node:internal/modules/cjs/loader",
+      "lineNumber": 1207,
+      "timestamp": "2026-02-24T13:50:58.108Z",
+      "message": "boom"
+    },
+    {
+      "functionName": "Module._load",
+      "fileName": "node:internal/modules/cjs/loader",
+      "lineNumber": 1023,
+      "timestamp": "2026-02-24T13:50:58.108Z",
+      "message": "boom"
+    },
+    {
+      "functionName": "cjsLoader",
+      "fileName": "node:internal/modules/esm/translators",
+      "lineNumber": 356,
+      "timestamp": "2026-02-24T13:50:58.108Z",
       "message": "boom"
     }
   ],

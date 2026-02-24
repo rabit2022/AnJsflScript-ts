@@ -10,6 +10,5 @@ npx babel out/packAll.js --out-file out/packAll.jsfl
 
  */
 
-// export * from "cli-table3";
-module.exports = require("cli-table3")
+module.exports = require("micromatch")
 

@@ -8,9 +8,9 @@
     else if (typeof define === 'function' && define.amd)
         define([], factory);
     else if (typeof exports === 'object')
-        exports["packAll"] = factory();
+        exports["fast-xml-parser"] = factory();
     else
-        root["packAll"] = factory();
+        root["fast-xml-parser"] = factory();
 })(this, function () {
     return /******/ (function () {
         /******/ var __webpack_modules__ = ({
@@ -2427,11 +2427,11 @@
             /***/ (function (module, __unused_webpack_exports, __webpack_require__) {
                 /*
                 
-                npx browserify ./src/entry.js -o out/packAll.js
-                npx babel out/packAll.js --out-file out/packAll.jsfl
+                npx browserify ./src/entry.js -o out/fast-xml-parser.js
+                npx babel out/fast-xml-parser.js --out-file out/fast-xml-parser.jsfl
                 
                 // webpack
-                // npx babel out/packAll.js --out-file out/packAll.jsfl
+                // npx babel out/fast-xml-parser.js --out-file out/fast-xml-parser.jsfl
                 // node ./tools/iife/wrap-iife.js
                 
                 

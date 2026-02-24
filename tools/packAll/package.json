@@ -10,9 +10,11 @@
   ],
   "scripts": {
     "preinstall": "npm install json5 && npx tsx ./tools/package/sync-package.ts",
-    "build:webpack": "webpack --config webpack.config.js && npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
-    "build:browserify": "npx browserify ./src/entry.js -o out/packAll.js && npx babel out/packAll.js --out-file out/packAll.jsfl",
-    "build:ts": "npx tsx tools/package/pack_ts.ts && tsc && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
+    "build:01.webpack": "webpack --config webpack.config.js && npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
+    "build:01.browserify": "npx browserify ./src/entry.ts -o ./out/packAll.js && npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
+    "build:02.tsc": "npx tsx tools/package/pack_ts.ts && tsc && npx tsx ./tools/copy/copy-js-to-jsfl.ts   && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
+    "build:11.tsc": "tsc && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
+    "build:21.tsc": "tsc",
     "test": "jest",
     "build:test": "webpack --config webpack.test.js",
     "generate-test": "npx tsx tools/generate-test/generate-test.ts",
@@ -37,9 +39,9 @@
     "webpack-cli": "6.0.1"
   },
   "dependencies": {
-    "fast-xml-parser": "^5.3.7",
-    "oxide.ts": "^1.1.0",
-    "superjson": "^2.2.6",
-    "xmldom": "^0.6.0"
+    "chance": "1.1.13",
+    "cli-table3": "0.6.5",
+    "micromatch": "4.0.8",
+    "superjson": "2.2.6"
   }
 }

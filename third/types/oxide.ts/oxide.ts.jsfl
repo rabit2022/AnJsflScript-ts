@@ -1,14 +1,12 @@
-(function(){
- "use strict";
 (function webpackUniversalModuleDefinition(root, factory) {
     if (typeof exports === 'object' && typeof module === 'object')
         module.exports = factory();
     else if (typeof define === 'function' && define.amd)
         define([], factory);
     else if (typeof exports === 'object')
-        exports["packAll"] = factory();
+        exports["oxide.ts"] = factory();
     else
-        root["packAll"] = factory();
+        root["oxide.ts"] = factory();
 })(this, function () {
     return (function () {
         var __webpack_modules__ = ({
@@ -534,5 +532,3 @@
         return __webpack_exports__;
     })();
 });
-
-})();

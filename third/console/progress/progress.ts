@@ -13,7 +13,7 @@ export type ProgressBarOptions = {
 }
 
 
-export default class ProgressBar {
+export class ProgressBar {
     private fmt: string;
     private total: number;
     private curr: number;

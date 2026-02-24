@@ -35,8 +35,7 @@
 
 
     // 生成package,json文件，方便注释
-//    "preinstall": "pnpm install json5 && tsx ./tools/project/src/package/sync-package.ts",
-    "preinstall": "npx only-allow pnpm && pnpm add json5 && tsx ./tools/project/src/package/sync-package.ts",
+    "preinstall": "pnpm add -w json5 && tsx ./tools/project/src/package/sync-package.ts && npx only-allow pnpm ",
 
 
     // ts编译 jsfl，
@@ -158,7 +157,8 @@
 
 //    "H:\project\js\AnJsflScript-ts\packages\dom"
     "@dom/setTimeout": "workspace:*",
-
+    "console.stack": "workspace:*",
+    "console.table": "workspace:*",
 
     //    "H:\project\js\AnJsflScript-ts\packages\nodejs"
     // skip all ,using "@types/node"
