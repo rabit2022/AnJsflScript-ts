@@ -8,35 +8,44 @@
  */
 
 import * as ErrorStackParser from 'error-stack-parser';
-import { Options, ConsoleStackFrame } from '../types';
+
+import {ConsoleStackFrame, Options} from '../types';
+
+
 
 export function parseStack(
-  error: Error,
-  options: Required<Options>
+    error: Error,
+    options: Required<Options>
 ): ConsoleStackFrame[] {
 
-  let frames = ErrorStackParser.parse(error);
+    let frames:ConsoleStackFrame[] = ErrorStackParser.parse(error);
 
-  if (options.skipSelf) {
-    // frames = frames.filter(f => !f.functionName?.includes('stack'));
-    frames = frames.filter(f => !f.fileName?.includes('console.stack'));
-  }
+    if (options.fuck){
+        return frames;
+    }
 
-  if (options.skipRequireJs) {
-    frames = frames.filter(f => !f.fileName?.includes('requirejs'));
-  }
+    if (options.skipSelf) {
+        // frames = frames.filter(f => !f.functionName?.includes('stack'));
+        frames = frames.filter(f => !f.fileName?.includes('console.stack'));
+    }
 
-  if (options.depth) {
-    frames = frames.slice(0, options.depth);
-  }
+    if (options.skipRequireJs) {
+        frames = frames.filter(f => !f.fileName?.includes('requirejs'));
+    }
 
-  return frames.map(f => ({
-    functionName: f.functionName ?? '<anonymous>',
-    fileName: f.fileName ?? '',
-    lineNumber: f.lineNumber ?? 0,
-    timestamp: new Date().toISOString(),
-    message: error.message,
-    source: options.includeSource ? f.source : undefined,
-    args: options.includeArgs ? f.args : undefined
-  }));
+    if (options.depth) {
+        frames = frames.slice(0, options.depth);
+    }
+
+    if (!options.includeSource) {
+        // 使用解构赋值：提取 source (并丢弃)，剩余属性放入 rest
+        frames = frames.map(({ source, ...rest }) => rest);
+    }
+
+    if (!options.includeArgs) {
+        // 使用解构赋值：提取 source (并丢弃)，剩余属性放入 rest
+        frames = frames.map(({ args, ...rest }) => rest);
+    }
+
+    return frames;
 }

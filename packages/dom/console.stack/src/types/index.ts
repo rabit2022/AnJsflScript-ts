@@ -9,6 +9,9 @@
 
 // src/types/index.ts
 
+import * as StackFrame from "stackframe";
+
+
 export interface Options {
   includeSource?: boolean;
   includeArgs?: boolean;
@@ -17,17 +20,19 @@ export interface Options {
   skipRequireJs?: boolean;
   format?: 'table' | 'list' | 'json';
   logToFile?: boolean;
+  fuck?: boolean;
 }
 
-export interface ConsoleStackFrame {
-  functionName: string;
-  fileName: string;
-  lineNumber: number;
-  timestamp: string;
-  message: string;
-  source?: string;
-  args?: unknown[];
-}
+// export interface ConsoleStackFrame {
+//   functionName: string;
+//   fileName: string;
+//   lineNumber: number;
+//   timestamp: string;
+//   message: string;
+//   source?: string;
+//   args?: unknown[];
+// }
+export type ConsoleStackFrame = Partial<StackFrame>;
 
 export interface SaveData {
   id: number;

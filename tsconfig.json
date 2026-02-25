@@ -55,7 +55,7 @@
 
     // region REQUIRE MODULES PATHS
     {
-      "Tips": ["src/lib/core/Tips"]
+    
     }
     
 // endregion REQUIRE MODULES PATHS

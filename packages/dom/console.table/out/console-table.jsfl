@@ -120,7 +120,7 @@ function formatValue(value) {
     if (typeof value === 'number' || typeof value === 'boolean')
         return String(value);
     if (Array.isArray(value))
-        return "[ $ {value.length} items]";
+        return JSON.stringify(Array.from(value));
     if (typeof value === 'object')
         return '{...}';
     return String(value);

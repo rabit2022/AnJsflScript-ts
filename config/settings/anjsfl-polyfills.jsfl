@@ -9,7 +9,7 @@
 
 (function () {
 
-    require(["Tips"], function (Tips) {
+    require(["@anjsfl-ts/Tips"], function (Tips) {
         const {alertMessage} = Tips;// 显示提示信息
 
         const dom = fl.getDocumentDOM();
@@ -18,9 +18,10 @@
             return;
         }
 
-
-        // if (!window.AnJsflScript.$ProjectFileDir$.includes("AnJsflScript")) {
-        if (!window.AnJsflScript || !window.AnJsflScript.$ProjectFileDir$ || window.AnJsflScript.$ProjectFileDir$.indexOf("AnJsflScript") === -1) {
+        // window.AnJsflScript?.$ProjectFileDir$?.includes("AnJsflScript")
+        var _window$AnJsflScript;
+        var IS_INCLUDE = ((_window$AnJsflScript = window.AnJsflScript) === null || _window$AnJsflScript === void 0 || (_window$AnJsflScript = _window$AnJsflScript.$ProjectFileDir$) === null || _window$AnJsflScript === void 0 ? void 0 : _window$AnJsflScript.indexOf("AnJsflScript")) !== -1;
+        if (!IS_INCLUDE) {
             alertMessage("loading might be not allowed!");
             // return;
         } else {
@@ -64,7 +65,7 @@
         "console.stack", "console.table"
     ]);
 
-    //
+    // path-browserify need process global variable
     require(['process'], function (process) {
         window.process = process;
     })

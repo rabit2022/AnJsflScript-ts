@@ -153,14 +153,6 @@
                     // uri: FLfile.platformPathToURI(path + file)
                 });
             });
-
-            //     .filter(function(stackFrame) {
-            //     // 删除requirejs的调用栈信息
-            //     if (stackFrame.fileName.includes("requirejs")) {
-            //         return false;
-            //     }
-            //     return true;
-            // });
         },
 
         parseV8OrIE: function ErrorStackParser$$parseV8OrIE(error) {

@@ -33,6 +33,9 @@
     // 但是可能不会按照预期执行，此时只能babel方案
     "build:02.tsc": "npx tsx tools/package/pack_ts.ts && tsc && npx tsx ./tools/copy/copy-js-to-jsfl.ts   && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
 
+    // 独立的翻译代码
+    "build:12:babel": "npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
+
     // 独立的ts文件打包
     "build:11.tsc": "tsc && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
     "build:21.tsc": "tsc",

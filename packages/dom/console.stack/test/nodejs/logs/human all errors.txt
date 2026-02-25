@@ -1,0 +1,119 @@
+Stack Trace:
+id:1772021666817 timestamp:2026-02-25T12:14:26.817Z message:boom count:1
+
+[
+  {
+    "functionName": "Module._compile",
+    "fileName": "node:internal/modules/cjs/loader",
+    "lineNumber": 1376,
+    "timestamp": "2026-02-25T12:14:26.816Z",
+    "message": "boom"
+  },
+  {
+    "functionName": "Object.transformer",
+    "fileName": "D:\\01_software\\06_programme\\01_ide\\WebStorm 2024.3.5\\plugins\\nodeJS\\js\\ts-file-loader\\node_modules\\tsx\\dist\\register-DfubRCxM.cjs",
+    "lineNumber": 2,
+    "timestamp": "2026-02-25T12:14:26.817Z",
+    "message": "boom"
+  },
+  {
+    "functionName": "Module.load",
+    "fileName": "node:internal/modules/cjs/loader",
+    "lineNumber": 1207,
+    "timestamp": "2026-02-25T12:14:26.817Z",
+    "message": "boom"
+  },
+  {
+    "functionName": "Module._load",
+    "fileName": "node:internal/modules/cjs/loader",
+    "lineNumber": 1023,
+    "timestamp": "2026-02-25T12:14:26.817Z",
+    "message": "boom"
+  },
+  {
+    "functionName": "cjsLoader",
+    "fileName": "node:internal/modules/esm/translators",
+    "lineNumber": 356,
+    "timestamp": "2026-02-25T12:14:26.817Z",
+    "message": "boom"
+  }
+]
+
+
+    
+Stack Trace:
+id:1772021666830 timestamp:2026-02-25T12:14:26.830Z message:boom count:1
+
+┌─────────┬────────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┬────────────┬──────────────────────────┬─────────┬───────────┬───────────┐
+│ (index) │ functionName       │ fileName                                                                                                                          │ lineNumber │ timestamp                │ message │ source    │ args      │
+├─────────┼────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────┼─────────┼───────────┼───────────┤
+│ 0       │ Module._compile    │ node:internal/modules/cjs/loader                                                                                                  │ 1376       │ 2026-02-25T12:14:26.823Z │ boom    │ undefined │ undefined │
+├─────────┼────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────┼─────────┼───────────┼───────────┤
+│ 1       │ Object.transformer │ D:\01_software\06_programme\01_ide\WebStorm 2024.3.5\plugins\nodeJS\js\ts-file-loader\node_modules\tsx\dist\register-DfubRCxM.cjs │ 2          │ 2026-02-25T12:14:26.823Z │ boom    │ undefined │ undefined │
+├─────────┼────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────┼─────────┼───────────┼───────────┤
+│ 2       │ Module.load        │ node:internal/modules/cjs/loader                                                                                                  │ 1207       │ 2026-02-25T12:14:26.823Z │ boom    │ undefined │ undefined │
+├─────────┼────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────┼─────────┼───────────┼───────────┤
+│ 3       │ Module._load       │ node:internal/modules/cjs/loader                                                                                                  │ 1023       │ 2026-02-25T12:14:26.823Z │ boom    │ undefined │ undefined │
+├─────────┼────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────┼─────────┼───────────┼───────────┤
+│ 4       │ cjsLoader          │ node:internal/modules/esm/translators                                                                                             │ 356        │ 2026-02-25T12:14:26.823Z │ boom    │ undefined │ undefined │
+└─────────┴────────────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┴────────────┴──────────────────────────┴─────────┴───────────┴───────────┘
+
+
+    
+Stack Trace:
+id:1772023119606 timestamp:2026-02-25T12:38:39.606Z message:boom count:1
+
+[
+  {
+    "columnNumber": 14,
+    "lineNumber": 1376,
+    "fileName": "node:internal/modules/cjs/loader",
+    "functionName": "Module._compile"
+  },
+  {
+    "columnNumber": 823,
+    "lineNumber": 2,
+    "fileName": "D:\\01_software\\06_programme\\01_ide\\WebStorm 2024.3.5\\plugins\\nodeJS\\js\\ts-file-loader\\node_modules\\tsx\\dist\\register-DfubRCxM.cjs",
+    "functionName": "Object.transformer"
+  },
+  {
+    "columnNumber": 32,
+    "lineNumber": 1207,
+    "fileName": "node:internal/modules/cjs/loader",
+    "functionName": "Module.load"
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 1023,
+    "fileName": "node:internal/modules/cjs/loader",
+    "functionName": "Module._load"
+  },
+  {
+    "columnNumber": 17,
+    "lineNumber": 356,
+    "fileName": "node:internal/modules/esm/translators",
+    "functionName": "cjsLoader"
+  }
+]
+
+
+    
+Stack Trace:
+id:1772023119620 timestamp:2026-02-25T12:38:39.620Z message:boom count:1
+
+┌─────────┬──────────────┬────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┬────────────────────┐
+│ (index) │ columnNumber │ lineNumber │ fileName                                                                                                                          │ functionName       │
+├─────────┼──────────────┼────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────┤
+│ 0       │ 14           │ 1376       │ node:internal/modules/cjs/loader                                                                                                  │ Module._compile    │
+├─────────┼──────────────┼────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────┤
+│ 1       │ 823          │ 2          │ D:\01_software\06_programme\01_ide\WebStorm 2024.3.5\plugins\nodeJS\js\ts-file-loader\node_modules\tsx\dist\register-DfubRCxM.cjs │ Object.transformer │
+├─────────┼──────────────┼────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────┤
+│ 2       │ 32           │ 1207       │ node:internal/modules/cjs/loader                                                                                                  │ Module.load        │
+├─────────┼──────────────┼────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────┤
+│ 3       │ 12           │ 1023       │ node:internal/modules/cjs/loader                                                                                                  │ Module._load       │
+├─────────┼──────────────┼────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────┤
+│ 4       │ 17           │ 356        │ node:internal/modules/esm/translators                                                                                             │ cjsLoader          │
+└─────────┴──────────────┴────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┴────────────────────┘
+
+
+    

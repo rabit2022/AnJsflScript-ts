@@ -1,0 +1,38 @@
+{
+  "id": 1772023119620,
+  "timestamp": "2026-02-25T12:38:39.620Z",
+  "message": "boom",
+  "frames": [
+    {
+      "columnNumber": 14,
+      "lineNumber": 1376,
+      "fileName": "node:internal/modules/cjs/loader",
+      "functionName": "Module._compile"
+    },
+    {
+      "columnNumber": 823,
+      "lineNumber": 2,
+      "fileName": "D:\\01_software\\06_programme\\01_ide\\WebStorm 2024.3.5\\plugins\\nodeJS\\js\\ts-file-loader\\node_modules\\tsx\\dist\\register-DfubRCxM.cjs",
+      "functionName": "Object.transformer"
+    },
+    {
+      "columnNumber": 32,
+      "lineNumber": 1207,
+      "fileName": "node:internal/modules/cjs/loader",
+      "functionName": "Module.load"
+    },
+    {
+      "columnNumber": 12,
+      "lineNumber": 1023,
+      "fileName": "node:internal/modules/cjs/loader",
+      "functionName": "Module._load"
+    },
+    {
+      "columnNumber": 17,
+      "lineNumber": 356,
+      "fileName": "node:internal/modules/esm/translators",
+      "functionName": "cjsLoader"
+    }
+  ],
+  "count": 1
+}

@@ -13,6 +13,7 @@
     "build:01.webpack": "webpack --config webpack.config.js && npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
     "build:01.browserify": "npx browserify ./src/entry.ts -o ./out/packAll.js && npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
     "build:02.tsc": "npx tsx tools/package/pack_ts.ts && tsc && npx tsx ./tools/copy/copy-js-to-jsfl.ts   && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
+    "build:12:babel": "npx babel out/packAll.js --out-file out/packAll.jsfl && npx tsx ./tools/iife/wrap-out-jsfl.ts",
     "build:11.tsc": "tsc && npx tsx ./tools/iife/wrap-dist-jsfl.ts",
     "build:21.tsc": "tsc",
     "test": "jest",
@@ -39,9 +40,7 @@
     "webpack-cli": "6.0.1"
   },
   "dependencies": {
-    "chance": "1.1.13",
-    "cli-table3": "0.6.5",
-    "micromatch": "4.0.8",
-    "superjson": "2.2.6"
+    "@babel/plugin-transform-runtime": "7.29.0",
+    "@babel/runtime-corejs3": "7.29.0"
   }
 }

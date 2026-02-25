@@ -108,9 +108,23 @@ __webpack_require__.d(__webpack_exports__, {
 // EXTERNAL MODULE: external "error-stack-parser"
 var external_error_stack_parser_ = __webpack_require__(417);
 ;// ./src/core/parser.ts
+var __rest = (undefined && undefined.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 
 function parseStack(error, options) {
     var frames = external_error_stack_parser_.parse(error);
+    if (options.fuck) {
+        return frames;
+    }
     if (options.skipSelf) {
         frames = frames.filter(function (f) { var _a; return !((_a = f.fileName) === null || _a === void 0 ? void 0 : _a.includes('console.stack')); });
     }
@@ -120,18 +134,19 @@ function parseStack(error, options) {
     if (options.depth) {
         frames = frames.slice(0, options.depth);
     }
-    return frames.map(function (f) {
-        var _a, _b, _c;
-        return ({
-            functionName: (_a = f.functionName) !== null && _a !== void 0 ? _a : '<anonymous>',
-            fileName: (_b = f.fileName) !== null && _b !== void 0 ? _b : '',
-            lineNumber: (_c = f.lineNumber) !== null && _c !== void 0 ? _c : 0,
-            timestamp: new Date().toISOString(),
-            message: error.message,
-            source: options.includeSource ? f.source : undefined,
-            args: options.includeArgs ? f.args : undefined
+    if (!options.includeSource) {
+        frames = frames.map(function (_a) {
+            var source = _a.source, rest = __rest(_a, ["source"]);
+            return rest;
         });
-    });
+    }
+    if (!options.includeArgs) {
+        frames = frames.map(function (_a) {
+            var args = _a.args, rest = __rest(_a, ["args"]);
+            return rest;
+        });
+    }
+    return frames;
 }
 
 // EXTERNAL MODULE: external "console.table"
@@ -326,7 +341,8 @@ var StackTracer = (function () {
             skipSelf: true,
             skipRequireJs: true,
             format: 'table',
-            logToFile: true
+            logToFile: true,
+            fuck: false
         };
     }
     StackTracer.prototype.trace = function (input, options) {
@@ -366,6 +382,7 @@ console.stack = function () {
     for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
     }
+    var stackTracer = new StackTracer();
     return stackTracer.trace.apply(stackTracer, args);
 };
 

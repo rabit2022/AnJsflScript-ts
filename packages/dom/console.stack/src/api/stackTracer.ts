@@ -23,7 +23,8 @@ export class StackTracer {
         skipSelf: true,
         skipRequireJs: true,
         format: 'table',
-        logToFile: true
+        logToFile: true,
+        fuck:false
     };
 
     trace(

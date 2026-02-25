@@ -1,0 +1,1 @@
+// flash TypeScript file test3.ts
