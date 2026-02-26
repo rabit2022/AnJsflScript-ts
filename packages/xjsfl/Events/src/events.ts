@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// events.ts
+ */ // events.ts
 export abstract class Event {
     constructor(
         public readonly type: string,

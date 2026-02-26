@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// generate-ts-files.js
+ */ // generate-ts-files.js
 const fs = require("fs");
 const path = require("path");
 

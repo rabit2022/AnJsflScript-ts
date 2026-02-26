@@ -7,7 +7,5 @@
  * @description:
  */
 
-
-export {setTimeout, clearTimeout,clearAllTimers} from "./setTimeout";
-export {setInterval, clearInterval} from './setInterval'
-
+export { setTimeout, clearTimeout, clearAllTimers } from "./setTimeout";
+export { setInterval, clearInterval } from "./setInterval";

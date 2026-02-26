@@ -7,7 +7,6 @@
  * @description:
  */
 
-
 // 导出常用方法
 import ChildProcess from "./command";
 

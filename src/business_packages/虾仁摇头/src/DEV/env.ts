@@ -7,7 +7,6 @@
  * @description:
  */
 
-
 export function IsFlash() {
-   return  typeof window !== 'undefined' && typeof fl !== 'undefined';
+    return typeof window !== "undefined" && typeof fl !== "undefined";
 }

@@ -1,11 +1,19 @@
+/**
+ * @file: tasks.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/26 23:26
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import "es6-promise";
 
+console.log("🧪 2. Promise 微任务顺序");
 
-console.log('🧪 2. Promise 微任务顺序');
-
-console.log('同步代码 1');
-Promise.resolve().then(() => console.log('Promise 微任务'));
-console.log('同步代码 2');
+console.log("同步代码 1");
+Promise.resolve().then(() => console.log("Promise 微任务"));
+console.log("同步代码 2");
 
 // 输出顺序应为：
 // 同步代码 1

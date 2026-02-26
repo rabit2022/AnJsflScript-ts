@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { BitmapFill } from "../fills/BitmapFill";
+ */ import { BitmapFill } from "../fills/BitmapFill";
 import { BaseFillBuilder } from "../base/BaseFillBuilder";
 
 export class BitmapFillBuilder extends BaseFillBuilder<BitmapFill> {

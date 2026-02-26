@@ -7,7 +7,7 @@
  * @description:
  */
 
-import {Custom} from "../matcher/Custom";
+import { Custom } from "../matcher/Custom";
 
 // 内建静态规则（带类型守卫）
 interface BuiltInStaticRules {
@@ -38,12 +38,13 @@ interface OperatorMethods {
     any: (...rules: any[]) => Custom<(val: any) => boolean>;
     except: (...rules: any[]) => Custom<(val: any) => boolean>;
     map: (map: Record<string, any>) => Custom<(val: any) => boolean>;
-    instanceOf: <T extends new (...args: any) => any>(Ctor: T) => Custom<(val: any) => val is InstanceType<T>>;
+    instanceOf: <T extends new (...args: any) => any>(
+        Ctor: T
+    ) => Custom<(val: any) => val is InstanceType<T>>;
 }
 
 // 最终的命名空间接口
 export interface TypeNamespace extends BuiltInStaticRules, OperatorMethods {
     // 允许动态添加：字符串 key → Custom 或 工厂函数
-    [key: string]: | Custom<any> | ((...args: any[]) => Custom<any>);
+    [key: string]: Custom<any> | ((...args: any[]) => Custom<any>);
 }
-

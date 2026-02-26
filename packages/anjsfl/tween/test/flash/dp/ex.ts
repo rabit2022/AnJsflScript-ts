@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// 缓动函数类型（简化）
+ */ // 缓动函数类型（简化）
 type EaseFunction = (t: number) => number;
 
 // 内置简单缓动（可扩展）

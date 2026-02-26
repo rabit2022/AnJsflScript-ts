@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// strategies/PerspectiveArrangement.ts
+ */ // strategies/PerspectiveArrangement.ts
 import { ArrangementStrategy, ArrangementResult } from "./ArrangementStrategy";
 
 import { SAT_T, SAT } from "@anjsfl/sat";

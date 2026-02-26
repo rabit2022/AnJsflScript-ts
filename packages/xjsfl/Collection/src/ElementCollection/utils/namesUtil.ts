@@ -7,10 +7,13 @@
  * @description:
  */
 
-
-export function getNextNameInfo(elements: Element[]): { baseName: string; nextNum: number; pad: number; } {
+export function getNextNameInfo(elements: Element[]): {
+    baseName: string;
+    nextNum: number;
+    pad: number;
+} {
     let maxNum = 0;
-    let baseName = 'Item';
+    let baseName = "Item";
     let pad = 0;
 
     for (const el of elements) {
@@ -30,8 +33,6 @@ export function getNextNameInfo(elements: Element[]): { baseName: string; nextNu
     return {
         baseName,
         nextNum: maxNum === 0 ? 1 : maxNum + 1,
-        pad,
+        pad
     };
 }
-
-

@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { SAT } from "@anjsfl/sat";
+ */ import { SAT } from "@anjsfl/sat";
 import Bounds = SAT.Bounds;
 
 // const mockDoc = {width: 800, height: 600};

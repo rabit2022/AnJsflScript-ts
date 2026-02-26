@@ -23,7 +23,7 @@
             console.log("文档无效:", errorMsg);
         }
 
-        var source ='string';
+        var source = 'string';
         var b = typeof source === 'string'
         console.log(b)
     });

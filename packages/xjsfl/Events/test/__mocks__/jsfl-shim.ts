@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// __mocks__/jsfl-shim.ts
+ */ // __mocks__/jsfl-shim.ts
 
 // 存储所有注册的监听器（用于测试时手动触发）
 const eventListeners: Record<string, Array<{ id: number; handler: Function }>> = {

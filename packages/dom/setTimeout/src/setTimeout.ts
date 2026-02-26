@@ -7,15 +7,19 @@
  * @description:
  */
 
-import {TimerTask} from "./types";
-import {TaskQueue} from "./task_queue";
-import {EventListenerManager} from "./manager";
+import { TimerTask } from "./types";
+import { TaskQueue } from "./task_queue";
+import { EventListenerManager } from "./manager";
 
 let globalId = 0;
 const taskQueue = new TaskQueue();
 const eventManager = new EventListenerManager(taskQueue);
 
-export function setTimeout(callback: (...args: any[]) => void, delay: number, ...args: any[]): number {
+export function setTimeout(
+    callback: (...args: any[]) => void,
+    delay: number,
+    ...args: any[]
+): number {
     const id = globalId++;
     const task: TimerTask = {
         id,
@@ -28,7 +32,6 @@ export function setTimeout(callback: (...args: any[]) => void, delay: number, ..
     eventManager.updateStrategy(); // 检查策略
     return id;
 }
-
 
 export function clearTimeout(id: number): void {
     const wasRemoved = taskQueue.remove(id);
@@ -43,5 +46,3 @@ export function clearAllTimers(): void {
         eventManager.updateStrategy();
     }
 }
-
-

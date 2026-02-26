@@ -1,5 +1,5 @@
-require(['util'],function (util) {
-    const DIALOGUE= "<?xml version=\"1.0\"?>\n" +
+require(['util'], function (util) {
+    const DIALOGUE = "<?xml version=\"1.0\"?>\n" +
         "<dialog id=\"characterLayoutDialog\" title=\"人物排列设置\" buttons=\"accept,cancel\">\n" +
         "    <grid>\n" +
         "        <!--                <columns>-->\n" +

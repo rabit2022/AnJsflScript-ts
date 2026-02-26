@@ -7,30 +7,27 @@
  * @description:
  */
 
-import * as ErrorStackParser from 'error-stack-parser';
+import * as ErrorStackParser from "error-stack-parser";
 
-import {ConsoleStackFrame, Options} from '../types';
-
-
+import { ConsoleStackFrame, Options } from "../types";
 
 export function parseStack(
     error: Error,
     options: Required<Options>
 ): ConsoleStackFrame[] {
+    let frames: ConsoleStackFrame[] = ErrorStackParser.parse(error);
 
-    let frames:ConsoleStackFrame[] = ErrorStackParser.parse(error);
-
-    if (options.fuck){
+    if (options.fuck) {
         return frames;
     }
 
     if (options.skipSelf) {
         // frames = frames.filter(f => !f.functionName?.includes('stack'));
-        frames = frames.filter(f => !f.fileName?.includes('console.stack'));
+        frames = frames.filter((f) => !f.fileName?.includes("console.stack"));
     }
 
     if (options.skipRequireJs) {
-        frames = frames.filter(f => !f.fileName?.includes('requirejs'));
+        frames = frames.filter((f) => !f.fileName?.includes("requirejs"));
     }
 
     if (options.depth) {

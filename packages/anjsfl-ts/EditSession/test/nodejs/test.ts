@@ -1,3 +1,12 @@
+/**
+ * @file: test.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/26 23:26
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 // flash TypeScript file test2.ts
 // utils.test.ts 或 test.js
 
@@ -46,32 +55,32 @@
 // console.log(`✅ 中文测试通过 → ${encoded2}\n`);
 
 // 3. encodeURI / decodeURI
-console.log('3. encodeURI / decodeURI:');
-const fullUri = 'https://example.com/路径?name=张三&lang=zh-CN#顶部';
+console.log("3. encodeURI / decodeURI:");
+const fullUri = "https://example.com/路径?name=张三&lang=zh-CN#顶部";
 const encoded3 = encodeURI(fullUri);
 const decoded3 = decodeURI(encoded3);
 // 检查保留字符未被编码
 console.assert(
-    encoded3.includes('https://') &&
-    encoded3.includes('?') &&
-    encoded3.includes('&') &&
-    encoded3.includes('#'),
-    'encodeURI 错误地编码了保留字符'
+    encoded3.includes("https://") &&
+        encoded3.includes("?") &&
+        encoded3.includes("&") &&
+        encoded3.includes("#"),
+    "encodeURI 错误地编码了保留字符"
 );
-console.assert(decoded3 === fullUri, 'decodeURI round-trip 失败');
-console.log('✅ encodeURI/decodeURI 测试通过\n');
+console.assert(decoded3 === fullUri, "decodeURI round-trip 失败");
+console.log("✅ encodeURI/decodeURI 测试通过\n");
 
 // 4. encodeURIComponent / decodeURIComponent
-console.log('4. encodeURIComponent / decodeURIComponent:');
-const paramValue = 'name=张三&age=20';
+console.log("4. encodeURIComponent / decodeURIComponent:");
+const paramValue = "name=张三&age=20";
 const encoded4 = encodeURIComponent(paramValue);
 const decoded4 = decodeURIComponent(encoded4);
 // 检查特殊字符被编码
 console.assert(
-    !encoded4.includes('=') && !encoded4.includes('&'),
-    'encodeURIComponent 未编码保留字符'
+    !encoded4.includes("=") && !encoded4.includes("&"),
+    "encodeURIComponent 未编码保留字符"
 );
-console.assert(decoded4 === paramValue, 'decodeURIComponent round-trip 失败');
+console.assert(decoded4 === paramValue, "decodeURIComponent round-trip 失败");
 console.log(`✅ encodeURIComponent 测试通过 → ${encoded4}\n`);
 
 // // 5. 边界测试：无效 Base64
@@ -84,15 +93,12 @@ console.log(`✅ encodeURIComponent 测试通过 → ${encoded4}\n`);
 // }
 
 // 6. 对比：encodeURI vs encodeURIComponent
-console.log('6. encodeURI vs encodeURIComponent 对比:');
-const uriPart = 'hello world?foo=bar&baz=qux';
-console.log('原始:', uriPart);
-console.log('encodeURI:', encodeURI(uriPart));        // 仅空格变 %20
-console.log('encodeURIComponent:', encodeURIComponent(uriPart)); // 所有特殊字符都被编码
-console.assert(
-    encodeURI(uriPart) !== encodeURIComponent(uriPart),
-    '两者应产生不同结果'
-);
-console.log('✅ 对比测试通过\n');
+console.log("6. encodeURI vs encodeURIComponent 对比:");
+const uriPart = "hello world?foo=bar&baz=qux";
+console.log("原始:", uriPart);
+console.log("encodeURI:", encodeURI(uriPart)); // 仅空格变 %20
+console.log("encodeURIComponent:", encodeURIComponent(uriPart)); // 所有特殊字符都被编码
+console.assert(encodeURI(uriPart) !== encodeURIComponent(uriPart), "两者应产生不同结果");
+console.log("✅ 对比测试通过\n");
 
-console.log('🎉 所有测试通过！');
+console.log("🎉 所有测试通过！");

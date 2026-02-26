@@ -7,20 +7,22 @@
  * @description:
  */
 
-import {overload} from "../src";
+import { overload } from "../src";
 
 const o = overload.o;
 
-
 var method = overload()
-    .len(0).use(function() {
-        console.log('0 args');
+    .len(0)
+    .use(function () {
+        console.log("0 args");
     })
-    .len(1).use(function(a) {
-        console.log('1 arg');
+    .len(1)
+    .use(function (a) {
+        console.log("1 arg");
     })
-    .len(3).use(function(a, b, c) {
-        console.log('3 args');
+    .len(3)
+    .use(function (a, b, c) {
+        console.log("3 args");
     });
 
 method(); // '0 args'

@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// strategies/NeatArrangement.ts
+ */ // strategies/NeatArrangement.ts
 import { ArrangementStrategy, ArrangementResult } from "./ArrangementStrategy";
 
 export class NeatArrangement extends ArrangementStrategy {

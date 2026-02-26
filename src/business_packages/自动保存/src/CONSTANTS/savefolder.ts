@@ -7,10 +7,11 @@
  * @description:
  */
 
-import * as  fs from "fs";
+import * as fs from "fs";
 import * as path from "path";
-import * as _ from 'lodash';
-import {AUTHOR} from "../DESC/Descriptions";
+import * as _ from "lodash";
+import { AUTHOR } from "../DESC/Descriptions";
+
 AUTHOR;
 
 /**
@@ -20,12 +21,12 @@ AUTHOR;
 function getSaveFolder(): string {
     const drives = getWindowsDrives();
 
-    const rootDrive = _.includes(drives,"D:") ? "D:" : "C:";
+    const rootDrive = _.includes(drives, "D:") ? "D:" : "C:";
 
     const saveFolder = path.join(rootDrive, "AnJsflScript");
 
     if (!fs.existsSync(saveFolder)) {
-        fs.mkdirSync(saveFolder, {recursive: true});
+        fs.mkdirSync(saveFolder, { recursive: true });
     }
 
     return saveFolder;

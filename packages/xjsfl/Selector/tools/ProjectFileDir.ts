@@ -1,6 +1,15 @@
+/**
+ * @file: ProjectFileDir.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/26 23:26
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 // main.ts
 import * as path from "path";
-import {findNearestPackageJson, findRepoRoot} from "./nodejs/findPackage";
+import { findNearestPackageJson, findRepoRoot } from "./nodejs/findPackage";
 
 // export const $ProjectFileDir$ = path.resolve(__filename, "../../../../");
 export const $ProjectFileDir$ = findRepoRoot(__dirname);
@@ -35,7 +44,6 @@ export const TS_CONFIG_FILE = path.resolve($ProjectFileDir$, "tsconfig.json");
 
 export const PACKAGES = path.resolve($ProjectFileDir$, "packages");
 
-
 // ==============================================================
 
 export const CURRENT_PROJECT = findNearestPackageJson(process.cwd())!.dir;
@@ -48,4 +56,4 @@ export const WEBPACK_CONFIG_TEST_FILE = path.resolve(CURRENT_PROJECT, "webpack.t
 //     path.join(PROJECT_DIR, "tsconfig.test.json")
 
 export const TS_CONFIG = path.resolve(CURRENT_PROJECT, "tsconfig.json");
-export const TS_CONFIG_TEST  = path.resolve(CURRENT_PROJECT, "tsconfig.test.json");
+export const TS_CONFIG_TEST = path.resolve(CURRENT_PROJECT, "tsconfig.test.json");

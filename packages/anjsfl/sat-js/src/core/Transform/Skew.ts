@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// ------------------------------------------------------------------------------------------------------------------------
+ */ // ------------------------------------------------------------------------------------------------------------------------
 //  ______     __  __     ______     __     __
 // /\  ___\   /\ \/ /    /\  ___\   /\ \  _ \ \
 // \ \___  \  \ \  _"-.  \ \  __\   \ \ \/ ".\ \
@@ -15,9 +15,9 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // Skew
 
-import {SObject} from "../../base/SObject";
-import {SkewLike} from "../../types/skewType";
-import {Vector} from "../Vector";
+import { SObject } from "../../base/SObject";
+import { SkewLike } from "../../types/skewType";
+import { Vector } from "../Vector";
 
 /**
  * This is a simple skew class,Skew has two parameters {skewX},{skewY}.

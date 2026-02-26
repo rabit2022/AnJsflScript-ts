@@ -5,7 +5,7 @@ import { ScanSpec, walk } from "../nodejs/walk";
 import { BUSINESS, BUSINESS_PACKAGES, LIB_CORE, PACKAGES } from "../ProjectFileDir";
 
 // ✅ 统一管理要扫描的目录
-const SCAN_DIRS = [LIB_CORE, BUSINESS,PACKAGES,BUSINESS_PACKAGES];
+const SCAN_DIRS = [LIB_CORE, BUSINESS, PACKAGES, BUSINESS_PACKAGES];
 
 // 配置信息
 const AUTHOR = "穹的兔兔";
@@ -118,7 +118,7 @@ async function main() {
         }
 
         console.log(
-            `\n🎉 完成！共找到 ${total} 个 .jsfl 文件，新增文件头 ${processed} 个。`
+            `\n🎉 完成！共找到 ${total} 个 .ts 文件，新增文件头 ${processed} 个。`
         );
     } catch (err) {
         console.error("❌ 扫描或处理过程中出错:", err);

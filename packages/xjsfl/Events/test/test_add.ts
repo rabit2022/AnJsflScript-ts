@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { EventBus, MouseEvent } from "@xjsfl/Events";
+ */ import { EventBus, MouseEvent } from "@xjsfl/Events";
 
 // 注册监听
 EventBus.add(

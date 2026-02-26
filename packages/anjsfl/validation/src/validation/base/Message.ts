@@ -7,8 +7,7 @@
  * @description:
  */
 
-import {CheckCondition, CheckMode} from "../../types";
-
+import { CheckCondition, CheckMode } from "../../types";
 
 // 提示消息配置（按模式组织）
 export const MESSAGES: Record<CheckMode, Record<CheckCondition, string | null>> = {
@@ -69,4 +68,3 @@ export const MESSAGES: Record<CheckMode, Record<CheckCondition, string | null>> 
         [CheckCondition.MultipleSelected]: "所选帧的 第一段 时长 不能小于 2 帧。"
     }
 };
-

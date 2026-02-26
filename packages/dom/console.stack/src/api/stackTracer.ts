@@ -7,13 +7,12 @@
  * @description:
  */
 
-import {Options, SaveData} from '../types';
-import {parseStack} from '../core/parser';
-import {formatFrames} from '../core/formatter';
-import {HistoryStore} from '../storage/historyStore';
+import { Options, SaveData } from "../types";
+import { parseStack } from "../core/parser";
+import { formatFrames } from "../core/formatter";
+import { HistoryStore } from "../storage/historyStore";
 
 export class StackTracer {
-
     private historyStore = new HistoryStore();
 
     private defaults: Required<Options> = {
@@ -22,22 +21,15 @@ export class StackTracer {
         depth: 5,
         skipSelf: true,
         skipRequireJs: true,
-        format: 'table',
+        format: "table",
         logToFile: true,
-        fuck:false
+        fuck: false
     };
 
-    trace(
-        input: unknown = 'Stack trace',
-        options?: Options
-    ) {
+    trace(input: unknown = "Stack trace", options?: Options) {
+        const opt = { ...this.defaults, ...options };
 
-        const opt = {...this.defaults, ...options};
-
-        const message =
-            input instanceof Error
-                ? input.message
-                : String(input);
+        const message = input instanceof Error ? input.message : String(input);
 
         const error = new Error(message);
 

@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { SelectAll } from "./utils";
+ */ import { SelectAll } from "./utils";
 import { IAdvancedColorTransform } from "../types";
 
 export function setInstanceAdvancedColor(

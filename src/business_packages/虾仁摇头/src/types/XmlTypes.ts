@@ -8,6 +8,6 @@
  */
 
 export interface AnimationConfig {
-    shakeIntensity: number;
-    headDirection: number;
+  shakeIntensity: number;
+  headDirection: number;
 }

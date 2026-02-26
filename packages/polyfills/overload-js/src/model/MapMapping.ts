@@ -7,27 +7,25 @@
  * @description:
  */
 
-import {Mapping} from "./Mapping";
-import {SCORE} from "./Score";
-import {matchMap} from "../matcher/MapMatcher";
+import { Mapping } from "./Mapping";
+import { SCORE } from "./Score";
+import { matchMap } from "../matcher/MapMatcher";
 
 export class MapMapping implements Mapping {
-    type = 'map' as const
-    priority = SCORE.MAP_BASE
+    type = "map" as const;
+    priority = SCORE.MAP_BASE;
 
     constructor(
         private rule: any,
         private fn: Function
-    ) {
-    }
+    ) {}
 
     match(args: any[]) {
-        if (!args.length) return -1
-        return matchMap(this.rule, args[0])
+        if (!args.length) return -1;
+        return matchMap(this.rule, args[0]);
     }
 
     invoke(ctx: any, args: any[]) {
-        return this.fn.apply(ctx, args)
+        return this.fn.apply(ctx, args);
     }
 }
-

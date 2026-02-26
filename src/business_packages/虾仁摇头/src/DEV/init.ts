@@ -7,8 +7,8 @@
  * @description:
  */
 
-import * as log from 'loglevel';
-import {IsFlash} from "./env";
+import * as log from "loglevel";
+import { IsFlash } from "./env";
 
 if (!IsFlash()) {
     log.setLevel(log.levels.TRACE);

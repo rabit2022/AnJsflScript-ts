@@ -7,6 +7,6 @@
  * @description:
  */
 
-export {CheckDocument} from './CheckDocument';
-export {CheckSelectedItems} from './CheckSelectedItems';
-export {CheckSelectedLayers} from './CheckSelectedLayers';
+export { CheckDocument } from "./CheckDocument";
+export { CheckSelectedItems } from "./CheckSelectedItems";
+export { CheckSelectedLayers } from "./CheckSelectedLayers";

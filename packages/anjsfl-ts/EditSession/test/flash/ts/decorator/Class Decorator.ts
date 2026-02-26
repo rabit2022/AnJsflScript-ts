@@ -1,3 +1,12 @@
+/**
+ * @file: Class Decorator.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/26 23:26
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import "url";
 
 // 装饰器定义
@@ -22,5 +31,5 @@ class User {
     }
 }
 
-const user = new User('Alice');
+const user = new User("Alice");
 console.log(user.timestamp); // 输出时间戳

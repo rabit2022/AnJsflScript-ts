@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { BaseStrokeBuilder } from "../base/BaseStrokeBuilder";
+ */ import { BaseStrokeBuilder } from "../base/BaseStrokeBuilder";
 import { DashedStroke } from "../strokes/DashedStroke";
 import { IDashedStrokeBuilder } from "../types";
 

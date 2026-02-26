@@ -9,17 +9,16 @@
 
 // src/index.ts
 // 先加载 XML 加载器（仅在非打包环境）
-import {IsFlash} from "../DEV/env";
+import { IsFlash } from "../DEV/env";
 import { AUTHOR } from "./Descriptions";
 
 if (!IsFlash()) {
-    require('../DEV/dev-xml-loader'); // 👈 注意路径
+    require("../DEV/dev-xml-loader"); // 👈 注意路径
 }
 
-AUTHOR
+AUTHOR;
 
-export const DIALOGUE = require('../../asset/01.虾仁摇头.xml');
-
+export const DIALOGUE = require("../../asset/01.虾仁摇头.xml");
 
 // import DIALOGUE from '../../asset/01.虾仁摇头.xml' with{type:"xml"};
 //

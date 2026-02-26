@@ -5,9 +5,9 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { SObject } from "../../base/SObject";
+ */ import { SObject } from "../../base/SObject";
 import { XYWHRectLike } from "../../types/xywhrectType";
-import {Bounds} from "./Bounds";
+import { Bounds } from "./Bounds";
 
 // Canvas 绘图、UI 布局、游戏对象
 export class XYWHRect extends SObject implements XYWHRectLike {
@@ -25,6 +25,6 @@ export class XYWHRect extends SObject implements XYWHRectLike {
     }
 
     toBounds(): Bounds {
-        return Bounds.fromTopLeft(this.x,this.y,this.width, this.height);
+        return Bounds.fromTopLeft(this.x, this.y, this.width, this.height);
     }
 }

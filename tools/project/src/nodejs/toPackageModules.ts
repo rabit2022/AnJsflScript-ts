@@ -6,8 +6,7 @@ import { findNearestPackageJson, readModulesJson } from "../nodejs/findPackage";
 import { shouldIgnoreFile } from "../nodejs/shouldIgnoreFile";
 
 const ignoredDirsArray = ["test", "tests", "dist", "build", "__tests__", "coverage"];
-const IGNORED_DIRS = new Set(ignoredDirsArray.map(dir => dir.toLowerCase()));
-
+const IGNORED_DIRS = new Set(ignoredDirsArray.map((dir) => dir.toLowerCase()));
 
 /**
  * 将绝对文件路径映射为模块路径：{ [moduleName]: relativePosixPathWithoutExt }

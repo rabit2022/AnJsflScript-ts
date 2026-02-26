@@ -1,7 +1,14 @@
+/**
+ * @file: test2.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/26 23:26
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import { setTimeout } from "@dom/setTimeout";
 import "es6-promise";
-
-
 
 // 模拟一个异步操作（例如请求 API）
 function fetchData() {
@@ -23,10 +30,12 @@ async function main() {
     console.log("结束");
 }
 
-main().then(() => {
-    console.log("成功");
-}).catch((err) => {
-    console.log(err)
-});
+main()
+    .then(() => {
+        console.log("成功");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 // 成功

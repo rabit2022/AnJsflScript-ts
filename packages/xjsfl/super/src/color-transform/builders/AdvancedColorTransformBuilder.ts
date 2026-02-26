@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { BaseColorTransformBuilder } from "../base/BaseColorTransformBuilder";
+ */ import { BaseColorTransformBuilder } from "../base/BaseColorTransformBuilder";
 import { AdvancedColorTransform } from "../transforms/AdvancedColorTransform";
 
 export class AdvancedColorTransformBuilder extends BaseColorTransformBuilder<AdvancedColorTransform> {

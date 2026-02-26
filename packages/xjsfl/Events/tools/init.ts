@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- *//*
+ */ /*
 修改模块名字
 建立模块名字变量：MODULE_NAME，在当前文件中手动修改
 1.确定PROJECT路径，向上查找，有package.json的位置

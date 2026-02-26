@@ -19,7 +19,7 @@
 
 import { SObject } from "../../base/SObject";
 import { ScaleLike } from "../../types/scaleType";
-import {Vector} from "../Vector";
+import { Vector } from "../Vector";
 
 export class Scale extends SObject implements ScaleLike {
     public scaleX: number;

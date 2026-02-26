@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// ------------------------------------------------------------------------------------------------------------------------
+ */ // ------------------------------------------------------------------------------------------------------------------------
 //  __         __     __   __     ______     ______     ______     ______
 // /\ \       /\ \   /\ "-.\ \   /\  ___\   /\  ___\   /\  ___\   /\  ___\
 // \ \ \____  \ \ \  \ \ \-.  \  \ \  __\   \ \___  \  \ \  __\   \ \ \__ \
@@ -117,7 +117,7 @@ export class LineSegment extends SObject implements LineSegmentLike {
     }
 
     toBounds(): Bounds {
-        return new Bounds(this.startPoint,this.endPoint);
+        return new Bounds(this.startPoint, this.endPoint);
     }
 
     /**
@@ -130,4 +130,3 @@ export class LineSegment extends SObject implements LineSegmentLike {
         return new LineSegment(startPoint, endPoint);
     }
 }
-

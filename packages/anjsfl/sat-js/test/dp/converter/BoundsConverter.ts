@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// BoundsConverter.ts
+ */ // BoundsConverter.ts
 
 import { XYWHRect } from "./XYWHRect";
 import { CornerRect } from "./CornerRect";

@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { ElementBoundsLike } from "../types/elementboundsType";
+ */ import { ElementBoundsLike } from "../types/elementboundsType";
 
 export function IsElementBoundsLike(obj: unknown): obj is ElementBoundsLike {
     return (

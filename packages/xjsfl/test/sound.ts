@@ -174,21 +174,29 @@ export class SoundInfoBuilder {
  * @param targetLayer 要检查的目标图层
  * @returns 该图层中所有声音信息的数组
  */
-export function findSoundsInLayer(layers: FlashLayer[], targetLayer: FlashLayer): SoundInfo[] {
+export function findSoundsInLayer(
+    layers: FlashLayer[],
+    targetLayer: FlashLayer
+): SoundInfo[] {
     const soundInfos: SoundInfo[] = [];
 
     const keyFrameRanges: FrameRange[] = getKeyFrameRanges(layers, targetLayer);
-    
+
     for (const frameRange of keyFrameRanges) {
         const keyFrameIndex = frameRange.startFrame;
         const keyFrame = targetLayer.frames[keyFrameIndex];
-        
+
         // 跳过空白帧或无效帧
         if (!keyFrame || !keyFrame.soundName) {
             continue;
         }
 
-        const builder = new SoundInfoBuilder(targetLayer, frameRange, keyFrame, keyFrameIndex);
+        const builder = new SoundInfoBuilder(
+            targetLayer,
+            frameRange,
+            keyFrame,
+            keyFrameIndex
+        );
         soundInfos.push(builder.build());
     }
 
@@ -217,17 +225,17 @@ export function findAllSoundsInTimeline(timeline: FlashTimeline): SoundInfo[] {
  */
 export function groupSoundsByLayer(soundInfos: SoundInfo[]): Map<string, SoundInfo[]> {
     const groupedSounds = new Map<string, SoundInfo[]>();
-    
+
     for (const soundInfo of soundInfos) {
         const layerName = soundInfo.layer.name;
-        
+
         if (!groupedSounds.has(layerName)) {
             groupedSounds.set(layerName, []);
         }
-        
+
         groupedSounds.get(layerName)!.push(soundInfo);
     }
-    
+
     return groupedSounds;
 }
 
@@ -235,20 +243,20 @@ export function groupSoundsByLayer(soundInfos: SoundInfo[]): Map<string, SoundIn
  * 辅助函数：筛选特定时长的声音
  */
 export function filterSoundsByDuration(
-    soundInfos: SoundInfo[], 
-    minDuration?: number, 
+    soundInfos: SoundInfo[],
+    minDuration?: number,
     maxDuration?: number
 ): SoundInfo[] {
-    return soundInfos.filter(info => {
+    return soundInfos.filter((info) => {
         const duration = info.thirdPartyInfo.durationSeconds;
-        
+
         if (duration === undefined) {
             return false; // 跳过没有时长信息的声音
         }
-        
+
         const meetsMin = minDuration === undefined || duration >= minDuration;
         const meetsMax = maxDuration === undefined || duration <= maxDuration;
-        
+
         return meetsMin && meetsMax;
     });
 }

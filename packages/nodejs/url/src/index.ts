@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import * as url from "url";
+ */ import * as url from "url";
 // import { parse } from "url";
 
 // fileURLToPath, pathToFileURL
@@ -36,9 +36,8 @@ url.fileURLToPath = fileURLToPath;
 // @ts-ignore
 url.pathToFileURL = pathToFileURL;
 
-
 // URL
-class aURL{
+class aURL {
     constructor(public urlString: string) {
         // @ts-ignore
         return url.parse(urlString);
@@ -47,4 +46,4 @@ class aURL{
 export const URL = aURL;
 
 // module.exports = url;
-export {url};
+export { url };

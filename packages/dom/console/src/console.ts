@@ -91,7 +91,20 @@ function writeToLog(
 
     // 时间：YYYY-MM-DD HH:mm:ss.SSS
     const now = new Date();
-    var asctime = now.getFullYear() + "-" + padLeft(now.getMonth() + 1, 2) + "-" + padLeft(now.getDate(), 2) + " " + padLeft(now.getHours(), 2) + ":" + padLeft(now.getMinutes(), 2) + ":" + padLeft(now.getSeconds(), 2) + "." + padLeft(now.getMilliseconds(), 3);
+    var asctime =
+        now.getFullYear() +
+        "-" +
+        padLeft(now.getMonth() + 1, 2) +
+        "-" +
+        padLeft(now.getDate(), 2) +
+        " " +
+        padLeft(now.getHours(), 2) +
+        ":" +
+        padLeft(now.getMinutes(), 2) +
+        ":" +
+        padLeft(now.getSeconds(), 2) +
+        "." +
+        padLeft(now.getMilliseconds(), 3);
 
     // 日志级别（左对齐 8 字符）
     let levelname = (logType || "INFO").toUpperCase();
@@ -260,23 +273,23 @@ class EnhancedConsole {
         this.info("All timers and counters have been reset.");
     }
 
-    private groupStack:string[] = [];
+    private groupStack: string[] = [];
 
-    group(label: string = "default"):void {
-        const indent = '  '.repeat(this.groupStack.length);
+    group(label: string = "default"): void {
+        const indent = "  ".repeat(this.groupStack.length);
         const lineLength = Math.max(30 - label.length - this.groupStack.length * 2, 10);
 
-        trace(`${indent}┌─ ${label} ${'─'.repeat(lineLength)}┐`);
+        trace(`${indent}┌─ ${label} ${"─".repeat(lineLength)}┐`);
         this.groupStack.push(label);
     }
     groupEnd() {
         if (this.groupStack.length === 0) return;
 
         const label = this.groupStack.pop() || "";
-        const indent = '  '.repeat(this.groupStack.length);
+        const indent = "  ".repeat(this.groupStack.length);
         const lineLength = Math.max(30 - label.length - this.groupStack.length * 2, 10);
 
-        trace(`${indent}└─ ${label} ${'─'.repeat(lineLength)}┘`);
+        trace(`${indent}└─ ${label} ${"─".repeat(lineLength)}┘`);
     }
 }
 

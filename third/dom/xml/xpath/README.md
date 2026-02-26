@@ -1,4 +1,5 @@
 ## xpath
+
 DOM 3 XPath 1.0 implemention and helper for JavaScript, with node.js support.
 
 Originally written by Cameron McCormack ([blog](http://mcc.id.au/xpathjs)).
@@ -11,6 +12,7 @@ Jimmy Rishe
 and [others](https://github.com/goto100/xpath/graphs/contributors)
 
 ## Install
+
 Install with [npm](http://github.com/isaacs/npm):
 
     npm install xpath
@@ -36,6 +38,7 @@ var nodes = xpath.select("//title", doc);
 console.log(nodes[0].localName + ": " + nodes[0].firstChild.data);
 console.log("Node: " + nodes[0].toString());
 `````
+
 ➡
 
     title: Harry Potter
@@ -65,12 +68,14 @@ while (node) {
     node = result.iterateNext();
 }
 `````
+
 ➡
 
     title: Harry Potter
     Node: <title>Harry Potter</title>
 
 ## Evaluate string values directly:
+
 `````javascript
 var XML = "<book><title>Harry Potter</title></book>";
 var doc = new dom().parseFromString(XML, 'text/XML');
@@ -78,11 +83,13 @@ var title = xpath.select("string(//title)", doc);
 
 console.log(title);
 `````
+
 ➡
 
     Harry Potter
 
 ## Namespaces
+
 `````javascript
 var XML = "<book><title xmlns='myns'>Harry Potter</title></book>";
 var doc = new dom().parseFromString(XML, 'text/XML');
@@ -90,33 +97,39 @@ var node = xpath.select("//*[local-name(.)='title' and namespace-uri(.)='myns']"
 
 console.log(node.namespaceURI);
 `````
+
 ➡
 
     myns
 
 ## Namespaces with easy mappings
+
 `````javascript
 var XML = "<book xmlns:bookml='http://example.com/book'><bookml:title>Harry Potter</bookml:title></book>"
 var select = xpath.useNamespaces({"bookml": "http://example.com/book"});
 
 console.log(select('//bookml:title/text()', doc)[0].nodeValue);
 `````
+
 ➡
 
     Harry Potter
 
 ## Default namespace with mapping
+
 `````javascript
 var XML = "<book xmlns='http://example.com/book'><title>Harry Potter</title></book>"
 var select = xpath.useNamespaces({"bookml": "http://example.com/book"});
 
 console.log(select('//bookml:title/text()', doc)[0].nodeValue);
 `````
+
 ➡
 
     Harry Potter
 
 ## Attributes
+
 `````javascript
 var XML = "<book author='J. K. Rowling'><title>Harry Potter</title></book>";
 var doc = new dom().parseFromString(XML, 'text/XML');
@@ -124,6 +137,7 @@ var author = xpath.select1("/book/@author", doc).value;
 
 console.log(author);
 `````
+
 ➡
 
     J. K. Rowling
@@ -131,4 +145,5 @@ console.log(author);
 [MDN]: https://developer.mozilla.org/en/docs/Web/API/Document/evaluate
 
 ## License
+
 MIT

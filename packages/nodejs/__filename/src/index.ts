@@ -7,8 +7,7 @@
  * @description:
  */
 
-const uriToPath=FLfile.uriToPlatformPath;
-
+const uriToPath = FLfile.uriToPlatformPath;
 
 // 可选：添加辅助函数（放在 process.ts 末尾或单独模块）
 function getFilename(): string {

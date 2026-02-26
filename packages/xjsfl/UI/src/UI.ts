@@ -166,7 +166,12 @@ export const UI = {
     get currentLayer() {
         const layers = UI.layers;
         const layerIndex = UI.currentLayerIndex;
-        if (!layers || layerIndex === undefined || layerIndex < 0 || layerIndex >= layers.length) {
+        if (
+            !layers ||
+            layerIndex === undefined ||
+            layerIndex < 0 ||
+            layerIndex >= layers.length
+        ) {
             _alert("No valid layer is selected in the timeline");
             return undefined;
         }
@@ -205,7 +210,12 @@ export const UI = {
     get currentFrame(): Frame | undefined {
         const frames = UI.frames;
         const frameIdx = UI.currentFrameIndex;
-        if (!frames || frameIdx === undefined || frameIdx < 0 || frameIdx >= frames.length) {
+        if (
+            !frames ||
+            frameIdx === undefined ||
+            frameIdx < 0 ||
+            frameIdx >= frames.length
+        ) {
             _alert("Invalid current frame or no frame selected");
             return undefined;
         }
@@ -217,7 +227,7 @@ export const UI = {
      * Returns undefined if current frame is unavailable
      * @static
      */
-    get elements():FlashElement[] | undefined {
+    get elements(): FlashElement[] | undefined {
         if (UI.currentFrame) {
             return UI.currentFrame.elements;
         }
@@ -229,7 +239,7 @@ export const UI = {
      * Returns undefined if no selection exists
      * @static
      */
-    get firstElement():FlashElement|undefined {
+    get firstElement(): FlashElement | undefined {
         if (UI.selection) {
             const selection = UI.selection;
             return selection.length > 0 ? selection[0] : undefined;
@@ -268,12 +278,12 @@ export const UI = {
     // ----------------------------------------------------------------------------------------------------
     // Timeline Methods (from Flash.jsfl)
 
-    get selectedLayerIndexs():number[]|undefined {
+    get selectedLayerIndexs(): number[] | undefined {
         if (!UI.timeline) {
             return undefined;
         }
 
-        const indices  = UI.timeline.getSelectedLayers();
+        const indices = UI.timeline.getSelectedLayers();
         return indices.length > 0 ? indices : undefined;
     },
 
@@ -282,14 +292,16 @@ export const UI = {
      * Returns undefined if timeline is unavailable
      * @returns An Array of Layer objects
      */
-    get selectedLayers():Layer[]|undefined {
-        const indices  = UI.selectedLayerIndexs;
-        if (!indices){
+    get selectedLayers(): Layer[] | undefined {
+        const indices = UI.selectedLayerIndexs;
+        if (!indices) {
             return undefined;
         }
 
-        const layers  = UI.layers;
-        if (!layers){ return undefined;}
+        const layers = UI.layers;
+        if (!layers) {
+            return undefined;
+        }
 
         // Sort indices in ascending order
         const sortedIndices = indices.sort((a, b) => a - b);
@@ -306,7 +318,7 @@ export const UI = {
         return selectedLayers;
     },
 
-    get selectedFrameIndexs():number[]|undefined {
+    get selectedFrameIndexs(): number[] | undefined {
         if (!UI.timeline) {
             return undefined;
         }
@@ -322,11 +334,14 @@ export const UI = {
      */
     get selectedFrames() {
         const indices = UI.selectedFrameIndexs;
-        if (!indices) { return undefined;}
+        if (!indices) {
+            return undefined;
+        }
 
-        const layers  = UI.layers;
-        if (!layers){ return undefined;}
-
+        const layers = UI.layers;
+        if (!layers) {
+            return undefined;
+        }
 
         const frames = [];
 
@@ -378,13 +393,13 @@ export const UI = {
     //     });
     // },
 
-    get selectedItems(): LibraryItem[]|undefined {
-
+    get selectedItems(): LibraryItem[] | undefined {
         const library = UI.library;
-        if (!library) {return undefined;}
+        if (!library) {
+            return undefined;
+        }
 
-         const   items = library.getSelectedItems();
-
+        const items = library.getSelectedItems();
 
         // Sort items alphabetically by name (case-insensitive)
         return items.sort((a, b) => {

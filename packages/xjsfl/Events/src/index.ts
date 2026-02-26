@@ -5,6 +5,6 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */export { EventBus } from "./events-manager";
+ */ export { EventBus } from "./events-manager";
 
 export * from "./events";

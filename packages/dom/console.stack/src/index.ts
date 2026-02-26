@@ -7,11 +7,9 @@
  * @description:
  */
 
-import {StackTracer} from './api/stackTracer';
-
+import { StackTracer } from "./api/stackTracer";
 
 export const stackTracer = new StackTracer();
-
 
 (console as any).stack = (...args: Parameters<typeof stackTracer.trace>) => {
     const stackTracer = new StackTracer();

@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { SolidFill } from "../fills/SolidFill";
+ */ import { SolidFill } from "../fills/SolidFill";
 import chroma from "chroma-js";
 import { BaseFillBuilder } from "../base/BaseFillBuilder";
 

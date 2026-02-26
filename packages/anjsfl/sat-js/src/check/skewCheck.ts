@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { SkewLike } from "../types/skewType";
+ */ import { SkewLike } from "../types/skewType";
 
 export function IsSkewLike(obj: unknown): obj is SkewLike {
     return (

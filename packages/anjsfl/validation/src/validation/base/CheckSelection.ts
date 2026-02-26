@@ -7,13 +7,11 @@
  * @description:
  */
 
+import { CheckCondition, CheckMode, Selection } from "../../types";
+import { MESSAGES } from "./Message";
 
-import {CheckCondition, CheckMode, Selection} from "../../types";
-import {MESSAGES} from "./Message";
-
-import {Err,Ok, Result} from "oxide.ts";
-import {IsEnumValue} from "./enemUtils";
-
+import { Err, Ok, Result } from "oxide.ts";
+import { IsEnumValue } from "./enemUtils";
 
 /**
  * 检查选择的元件或帧是否符合指定的模式和条件。
@@ -51,20 +49,20 @@ export function CheckSelection(
         // alert("模式不能为 null，请指定一个有效的模式！");
         // return false;
         // 获取所有值并拼接为字符串（例如用逗号分隔）
-        const allValues: string = Object.values(CheckMode).join(',');
+        const allValues: string = Object.values(CheckMode).join(",");
 
         // console.log(allValues);
         return Err(`模式不能为 null，请指定一个有效的模式！
 可用的模式：${allValues}
-        `)
+        `);
     }
     if (condition === null) {
         // alert("条件不能为 null，请指定一个有效的条件！");
         // return false;
-        const allValues: string = Object.values(CheckCondition).join(',');
+        const allValues: string = Object.values(CheckCondition).join(",");
         return Err(`条件不能为 null，请指定一个有效的模式！
 可用的条件：${allValues}
-        `)
+        `);
     }
 
     // 解析 condition：支持别名
@@ -73,11 +71,10 @@ export function CheckSelection(
         // if (Object.values(CheckCondition).includes(condition as CheckCondition)) {
         if (IsEnumValue(CheckCondition, condition)) {
             resolvedCondition = condition as CheckCondition;
-        }
-        else {
+        } else {
             // alert("无效的条件：" + condition);
             // return false;
-            return Err(`无效的条件： ${condition}`)
+            return Err(`无效的条件： ${condition}`);
         }
     } else {
         resolvedCondition = condition;
@@ -88,7 +85,7 @@ export function CheckSelection(
     if (!IsEnumValue(CheckMode, mode)) {
         // alert("无效的模式：" + mode);
         // return false;
-        return Err(`无效的模式： ${mode}`)
+        return Err(`无效的模式： ${mode}`);
     }
 
     // 执行检查

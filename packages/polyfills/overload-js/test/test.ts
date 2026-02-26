@@ -7,31 +7,26 @@
  * @description:
  */
 
-import { overload } from './index'
-const o =overload.o
+import { overload } from "./index";
+const o = overload.o;
 
-const int = overload.define('int', v =>
-  typeof v === 'number' && v % 1 === 0
-)
+const int = overload.define("int", (v) => typeof v === "number" && v % 1 === 0);
 
 overload.defineTypes({
-  str: v => typeof v === 'string',
-  bool: v => typeof v === 'boolean',
-})
-
+    str: (v) => typeof v === "string",
+    bool: (v) => typeof v === "boolean"
+});
 
 const fn = overload()
-  .args(int).use(v => 'int')
-  .args(o.str).use(v => 'string')
+    .args(int)
+    .use((v) => "int")
+    .args(o.str)
+    .use((v) => "string");
 
-const f1 = fn(10)     // int
-const f2 = fn('abc')  // string
-console.log(f1)
-console.log(f2)
-
-
-
-
+const f1 = fn(10); // int
+const f2 = fn("abc"); // string
+console.log(f1);
+console.log(f2);
 
 // const method = overload()
 //   .args(String).use(a => console.log(a))
@@ -39,4 +34,3 @@ console.log(f2)
 //
 // method('hello') // hello
 // method()        // handled!
-

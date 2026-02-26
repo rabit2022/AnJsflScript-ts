@@ -8,26 +8,24 @@
  */
 
 // --- EventListenerManager 类 (修正逻辑) ---
-import {TaskQueue} from "./task_queue";
-import {TimerTask} from "./types";
-import {formatLocalDateTime} from "./date_format";
+import { TaskQueue } from "./task_queue";
+import { TimerTask } from "./types";
+import { formatLocalDateTime } from "./date_format";
 
-import * as log from 'loglevel';
+import * as log from "loglevel";
 
 export class EventListenerManager {
     private currentListenerId: number | null = null;
     private boundExecuteTasks: (() => void) | null = null;
     private lastExecutionTime: number = 0;
 
-    private static readonly MOUSE_MOVE = 'mouseMove';
+    private static readonly MOUSE_MOVE = "mouseMove";
 
-    constructor(private taskQueue: TaskQueue) {
-    }
+    constructor(private taskQueue: TaskQueue) {}
 
     updateStrategy(): void {
         // 获取当前任务数量
         const taskSize = this.taskQueue.getSize();
-
 
         // --- 任务不为空：创建或更新节流回调 ---
 
@@ -35,7 +33,10 @@ export class EventListenerManager {
         this.boundExecuteTasks = this.createThrottledCallback();
 
         // 3. 添加新的监听
-        this.currentListenerId = fl.addEventListener(EventListenerManager.MOUSE_MOVE as EventType, this.boundExecuteTasks);
+        this.currentListenerId = fl.addEventListener(
+            EventListenerManager.MOUSE_MOVE as EventType,
+            this.boundExecuteTasks
+        );
 
         log.log(`[Monitor] 监听器已就绪 (当前任务数: ${taskSize})`);
     }
@@ -54,7 +55,10 @@ export class EventListenerManager {
             // --- 核心修改：只有在任务数为 0 时才移除 ---
             if (minRemainingTime === null || taskSize === 0) {
                 if (this.currentListenerId !== null) {
-                    fl.removeEventListener(EventListenerManager.MOUSE_MOVE as EventType, this.currentListenerId);
+                    fl.removeEventListener(
+                        EventListenerManager.MOUSE_MOVE as EventType,
+                        this.currentListenerId
+                    );
                     this.currentListenerId = null;
                     this.boundExecuteTasks = null;
                     log.log(`[Monitor] 任务列表为空，已移除监听器`);
@@ -62,11 +66,9 @@ export class EventListenerManager {
                 return; // 任务为空，直接返回，不再执行下面的绑定逻辑
             }
 
-
             // 修改 interval
             if (this.lastMinRemainingTime !== minRemainingTime) {
                 this.lastMinRemainingTime = minRemainingTime;
-
 
                 // --- 核心逻辑修改 ---
                 // 1. 如果任务快到期了 (< 2秒)，取消节流，尽可能高频检查 (防止错过)
@@ -77,7 +79,7 @@ export class EventListenerManager {
                 else if (minRemainingTime < 10000) {
                     this.interval = minRemainingTime - 1000;
                 }
-                    // 3. 如果任务很远 (> 10秒)，回归固定间隔策略
+                // 3. 如果任务很远 (> 10秒)，回归固定间隔策略
                 //    目的是防止添加新任务时被“饿死” (确保至少每5/10秒检查一次)
                 else if (minRemainingTime < 60000) {
                     this.interval = 5000;
@@ -86,14 +88,13 @@ export class EventListenerManager {
                 }
             }
 
-            if (this.interval === 0 || (now - this.lastExecutionTime) >= this.interval) {
+            if (this.interval === 0 || now - this.lastExecutionTime >= this.interval) {
                 this.lastExecutionTime = now;
                 executeTasks(this.taskQueue);
             }
         };
     }
 }
-
 
 // --- 配置常量 ---
 const BATCH_SIZE = 10; // 分片大小：每次只处理 10 个任务
@@ -104,12 +105,11 @@ let _currentTaskIndex: number = 0;
 
 function executeTasks(taskQueue: TaskQueue): void {
     const now = Date.now();
-    const tasks = taskQueue['tasks'];
+    const tasks = taskQueue["tasks"];
     const taskCount = tasks.length;
 
     // --- 情况 1：任务数量少于阈值，直接全量执行 (无任何优化) ---
     if (taskCount <= THRESHOLD) {
-
         const tasksToRemove: number[] = [];
 
         // 简单的全量遍历
@@ -160,30 +160,28 @@ function executeTasks(taskQueue: TaskQueue): void {
 
         return;
     }
-
 }
-
 
 function invokeTask(task: TimerTask) {
     try {
         const now = Date.now();
         const elapsed = now - task.startTimeRecord;
 
-        log.log('[Timer] 触发回调:', JSON.stringify({
-            taskId: task.id,
-            注册时间: formatLocalDateTime(new Date(task.startTimeRecord)),
-            当前时间: formatLocalDateTime(new Date(now)),
-            延迟设定: `${task.delay}ms`,
-            实际耗时: `${elapsed}ms`,
-            // 是否超时: elapsed > task.delay,
-            超时: elapsed - task.delay,
-            // 参数: task.args
-        }));
+        log.log(
+            "[Timer] 触发回调:",
+            JSON.stringify({
+                taskId: task.id,
+                注册时间: formatLocalDateTime(new Date(task.startTimeRecord)),
+                当前时间: formatLocalDateTime(new Date(now)),
+                延迟设定: `${task.delay}ms`,
+                实际耗时: `${elapsed}ms`,
+                // 是否超时: elapsed > task.delay,
+                超时: elapsed - task.delay
+                // 参数: task.args
+            })
+        );
         task.callback(...task.args);
     } catch (error) {
-        log.error('[Timer] 回调执行错误', error);
+        log.error("[Timer] 回调执行错误", error);
     }
 }
-
-
-

@@ -53,44 +53,35 @@
 //     });
 // }
 
-
-
-import micromatch from 'micromatch';
+import micromatch from "micromatch";
 
 type FindValue<T, K extends keyof T> =
-    | T[K]        // 精确值
-    | RegExp      // 正则
-    | string;     // micromatch 模式
+    | T[K] // 精确值
+    | RegExp // 正则
+    | string; // micromatch 模式
 
 // ============== 函数重载 ==============
 
 // 1. 不传 property → 默认 name
 export function find<T extends { name: any }>(
     elements: T[],
-    value?: FindValue<T, 'name'>
+    value?: FindValue<T, "name">
 ): T[];
 
 // 2. 传 property
-export function find<
-    T extends Record<string, any>,
-    K extends keyof T
->(
+export function find<T extends Record<string, any>, K extends keyof T>(
     elements: T[],
     value: FindValue<T, K>,
     property: K
 ): T[];
 
 // ============== 实现 ==============
-export function find<
-    T extends Record<string, any>,
-    K extends keyof T
->(
+export function find<T extends Record<string, any>, K extends keyof T>(
     elements: T[],
     value: any,
-    property: K = 'name' as K
+    property: K = "name" as K
 ): T[] {
-
-    return elements.filter(el => {
+    return elements.filter((el) => {
         const propValue = el[property];
 
         // 1. RegExp
@@ -99,7 +90,7 @@ export function find<
         }
 
         // 2. string → micromatch
-        if (typeof value === 'string') {
+        if (typeof value === "string") {
             return micromatch.isMatch(String(propValue), value);
         }
 
@@ -107,7 +98,6 @@ export function find<
         return Object.is(propValue, value);
     });
 }
-
 
 // interface Item {
 //     name: string;

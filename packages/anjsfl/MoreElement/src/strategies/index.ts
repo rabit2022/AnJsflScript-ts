@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// strategies/index.ts
+ */ // strategies/index.ts
 export { ArrangementStrategy } from "./ArrangementStrategy";
 export { NeatArrangement } from "./NeatArrangement";
 export { StaggeredArrangement } from "./StaggeredArrangement";

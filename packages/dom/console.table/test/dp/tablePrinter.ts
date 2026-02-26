@@ -8,25 +8,25 @@
  */
 
 // tablePrinter.ts
-import { table as renderTable } from 'table';
+import { table as renderTable } from "table";
 
 function ensureRows(data: unknown, columns?: string[]) {
-    if (data == null) return [['null']];
+    if (data == null) return [["null"]];
 
     const items = Array.isArray(data) ? data : [data];
-    if (items.length === 0) return [['(empty)']];
+    if (items.length === 0) return [["(empty)"]];
 
-    const cols = columns || (
-        typeof items[0] === 'object' && items[0] !== null
+    const cols =
+        columns ||
+        (typeof items[0] === "object" && items[0] !== null
             ? Object.keys(items[0])
-            : ['value']
-    );
+            : ["value"]);
 
     const head = cols;
-    const body = items.map(item =>
-        cols.map(col =>
+    const body = items.map((item) =>
+        cols.map((col) =>
             String(
-                typeof item === 'object' && item !== null
+                typeof item === "object" && item !== null
                     ? (item as Record<string, unknown>)[col]
                     : item
             )
@@ -39,7 +39,7 @@ function ensureRows(data: unknown, columns?: string[]) {
 export class ConsoleTablePrinter {
     private indent: string;
 
-    constructor(indentLevel = 0, indentChar = ' ') {
+    constructor(indentLevel = 0, indentChar = " ") {
         this.indent = indentChar.repeat(indentLevel);
     }
 
@@ -47,9 +47,9 @@ export class ConsoleTablePrinter {
         const rows = ensureRows(data, columns);
         const output = renderTable(rows);
         const indented = output
-            .split('\n')
-            .map(line => line ? this.indent + line : '')
-            .join('\n');
+            .split("\n")
+            .map((line) => (line ? this.indent + line : ""))
+            .join("\n");
         console.log(indented);
     }
 }

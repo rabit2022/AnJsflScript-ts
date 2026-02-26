@@ -7,4 +7,4 @@
  * @description:
  */
 
-export {CheckSelection} from './CheckSelection';
+export { CheckSelection } from "./CheckSelection";

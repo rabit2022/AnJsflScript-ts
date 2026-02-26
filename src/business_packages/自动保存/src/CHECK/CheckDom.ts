@@ -7,11 +7,11 @@
  * @description:
  */
 
-import * as process from 'process';
+import * as process from "process";
 
-import {UI} from "@xjsfl/UI";
-import {CheckDocument} from "@anjsfl/validation";
-import * as log from 'loglevel';
+import { UI } from "@xjsfl/UI";
+import { CheckDocument } from "@anjsfl/validation";
+import * as log from "loglevel";
 
 const result = CheckDocument(UI.dom);
 
@@ -25,4 +25,4 @@ if (result.isOk()) {
     process.exit();
 }
 
-export {doc};
+export { doc };

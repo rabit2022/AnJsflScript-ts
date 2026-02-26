@@ -14,7 +14,7 @@ import { tableToString, CustomConsole } from "./table";
 const customConsole = new CustomConsole(1);
 
 // 覆盖全局 console.table（仅在浏览器环境）
-if (typeof window !== 'undefined' && (window as any).console) {
+if (typeof window !== "undefined" && (window as any).console) {
     // 注意：c.table 是一个方法，要绑定 this，否则内部 this.#indentLevel 会丢失！
     (window as any).console.table = customConsole.table.bind(customConsole);
 }

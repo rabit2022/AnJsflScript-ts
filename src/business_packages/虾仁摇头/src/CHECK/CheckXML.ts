@@ -7,20 +7,18 @@
  * @description:
  */
 
-
 import * as process from "process";
-import {Err, Ok, Result} from "oxide.ts";
-import * as log from 'loglevel';
-import {parseNumber} from '@anjsfl/parser'
+import { Err, Ok, Result } from "oxide.ts";
+import * as log from "loglevel";
+import { parseNumber } from "@anjsfl/parser";
 
-import {AnimationConfig} from "../types/XmlTypes";
-import {IsFlash} from "../DEV/env";
-import {DIALOGUE} from "../DESC/XmlDialogue";
+import { AnimationConfig } from "../types/XmlTypes";
+import { IsFlash } from "../DEV/env";
+import { DIALOGUE } from "../DESC/XmlDialogue";
 import { AUTHOR } from "../DESC/Descriptions";
 
 function checkXMLPanel(): Result<AnimationConfig, string> {
     // var panel = getXMLPanel();
-
 
     let panel: XMLPanelReturns;
 
@@ -29,9 +27,8 @@ function checkXMLPanel(): Result<AnimationConfig, string> {
         panel = fl.xmlPanelFromString(DIALOGUE);
     } else {
         // 开发 / 打包环境：mock 数据
-        panel = {headDirection: '-1', shakeIntensity: '6', dismiss: 'accept'};
+        panel = { headDirection: "-1", shakeIntensity: "6", dismiss: "accept" };
     }
-
 
     if (panel?.dismiss === "cancel") {
         return Err("取消修改");
@@ -62,7 +59,7 @@ function checkXMLPanel(): Result<AnimationConfig, string> {
         return Err(errorMsg);
     }
 
-    const result = {shakeIntensity, headDirection};
+    const result = { shakeIntensity, headDirection };
     return Ok(result);
 }
 
@@ -74,8 +71,6 @@ if (!config.isOk()) {
     process.exit();
 }
 
+export const { shakeIntensity, headDirection } = config.unwrap();
 
-export const {shakeIntensity, headDirection} = config.unwrap();
-
-
-AUTHOR
+AUTHOR;

@@ -1,43 +1,39 @@
 {
   "compilerOptions": {
     "module": "AMD",
-//    "module": "preserve",        // 👈 关键：必须是支持 import attributes 的值
+    //    "module": "preserve",        // 👈 关键：必须是支持 import attributes 的值
 
     "strict": true,
     "noEmitOnError": false,
     "removeComments": true,
-
     // node import
     "moduleResolution": "node",
-//    // es import
-//    "esModuleInterop": true,
-//    "allowSyntheticDefaultImports": true,
+    //    // es import
+    //    "esModuleInterop": true,
+    //    "allowSyntheticDefaultImports": true,
 
 
     // 允许 TypeScript 将项目作为依赖进行增量编译
     "composite": true,
     "declaration": true,
-
-
-//    "rootDir": "./src",
+    //    "rootDir": "./src",
     "outDir": "./dist",
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "target": "es5",
     "lib": [
       "es5",
       "es6"
-    ],
-
+    ]
   },
   "include": [
     "src",
-
     // region TYPES
     // jsfl
     "../../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
-    "../../../types/myShim/*.d.ts",
-// endregion TYPES
-
+    "../../../types/myShim/*.d.ts"
+    // endregion TYPES
   ]
 }

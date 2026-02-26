@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// types.ts
+ */ // types.ts
 export interface RangeConfig {
     start?: number;
     end?: number;

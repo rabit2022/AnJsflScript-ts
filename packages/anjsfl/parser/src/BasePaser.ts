@@ -13,7 +13,10 @@ import { generateRange } from "./utils";
 import { Result, Ok, Err } from "oxide.ts";
 
 // --- 颜色解析 ---
-export function parseColor(inputColor: string | null, alertMsg?: string): Result<string, string> {
+export function parseColor(
+    inputColor: string | null,
+    alertMsg?: string
+): Result<string, string> {
     if (!inputColor) {
         return Err(alertMsg || "颜色输入无效");
     }
@@ -30,7 +33,10 @@ export function parseColor(inputColor: string | null, alertMsg?: string): Result
 }
 
 // --- 字符串解析 ---
-export function parseString(inputStr: string | null, alertMsg?: string): Result<string, string> {
+export function parseString(
+    inputStr: string | null,
+    alertMsg?: string
+): Result<string, string> {
     if (inputStr === null || inputStr.trim() === "") {
         return Err(alertMsg || "字符串不能为空");
     }
@@ -61,10 +67,16 @@ export function parseNumber(
         const { start: min, end: max, step } = rangeConfig;
 
         // B. 边界校验
-        if ((min !== undefined && numericValue < min) || 
-            (max !== undefined && numericValue > max)) {
-            const rangeDesc = [min !== undefined ? `最小值 ${min}` : "", max !== undefined ? `最大值 ${max}` : ""]
-                .filter(Boolean).join("，");
+        if (
+            (min !== undefined && numericValue < min) ||
+            (max !== undefined && numericValue > max)
+        ) {
+            const rangeDesc = [
+                min !== undefined ? `最小值 ${min}` : "",
+                max !== undefined ? `最大值 ${max}` : ""
+            ]
+                .filter(Boolean)
+                .join("，");
             return Err(`数值超出范围 [${rangeDesc}]`);
         }
 
@@ -75,7 +87,7 @@ export function parseNumber(
             const validNumbers = generateRange(rangeStart, rangeEnd, step);
 
             const valueStr = numericValue.toFixed(10);
-            const isValidStep = validNumbers.some(num => num.toFixed(10) === valueStr);
+            const isValidStep = validNumbers.some((num) => num.toFixed(10) === valueStr);
 
             if (!isValidStep) {
                 const sampleValues = validNumbers.slice(0, 3).join(", ");
@@ -86,7 +98,6 @@ export function parseNumber(
 
     return Ok(numericValue);
 }
-
 
 // --- 方向解析 ---
 export function parseDirection(

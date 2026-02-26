@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// strategies/StaggeredArrangement.ts
+ */ // strategies/StaggeredArrangement.ts
 import { ArrangementStrategy, ArrangementResult } from "./ArrangementStrategy";
 
 export class StaggeredArrangement extends ArrangementStrategy {

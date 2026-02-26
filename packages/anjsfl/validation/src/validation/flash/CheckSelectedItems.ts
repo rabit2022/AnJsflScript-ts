@@ -24,8 +24,9 @@ export function CheckSelectedItems(
     selectedItems: LibraryItem[], // ✅ 直接传入数组
     condition: LibraryCondition = LibraryCondition.AtLeastOne,
     exTips?: string
-): Result<LibraryItem[], string> { // ✅ 使用 Result 类型
-    
+): Result<LibraryItem[], string> {
+    // ✅ 使用 Result 类型
+
     // 直接使用传入的数组进行检查
     const check = CheckSelection(
         selectedItems,

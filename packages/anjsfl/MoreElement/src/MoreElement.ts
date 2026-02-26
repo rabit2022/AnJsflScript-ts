@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// MoreElement.ts
+ */ // MoreElement.ts
 import { ArrangementResult, ArrangementStrategy } from "./strategies/ArrangementStrategy";
 import {
     GridArrangement,

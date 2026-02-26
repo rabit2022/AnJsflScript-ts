@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { IsVectorLike } from "./vectorCheck";
+ */ import { IsVectorLike } from "./vectorCheck";
 import { LineSegmentLike } from "../types/linesegmentType";
 
 export function IsLineSegmentLike(obj: unknown): obj is LineSegmentLike {

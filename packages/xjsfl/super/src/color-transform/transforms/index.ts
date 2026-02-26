@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */export { NoneColorTransform } from "./NoneColorTransform";
+ */ export { NoneColorTransform } from "./NoneColorTransform";
 export { BrightnessColorTransform } from "./BrightnessColorTransform";
 export { TintColorTransform } from "./TintColorTransform";
 export { AdvancedColorTransform } from "./AdvancedColorTransform";

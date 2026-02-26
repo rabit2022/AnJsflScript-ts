@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// strategies/GridArrangement.ts
+ */ // strategies/GridArrangement.ts
 import { ArrangementResult, ArrangementStrategy } from "./ArrangementStrategy";
 
 import { SAT_T, VectorConverter } from "@anjsfl/sat";

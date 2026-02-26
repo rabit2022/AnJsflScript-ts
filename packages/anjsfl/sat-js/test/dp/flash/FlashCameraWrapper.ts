@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { Bounds } from "../core/Rectangle/Bounds";
+ */ import { Bounds } from "../core/Rectangle/Bounds";
 import { Vector } from "../core/Vector";
 import { FlashStageWrapper } from "./FlashStageWrapper";
 

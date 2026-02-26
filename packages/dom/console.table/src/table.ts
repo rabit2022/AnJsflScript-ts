@@ -7,17 +7,17 @@
  * @description:
  */
 
-import Table from 'cli-table3';
+import Table from "cli-table3";
 
 // 格式化任意值用于表格显示
 function formatValue(value: unknown): string {
-    if (value === null) return 'null';
-    if (value === undefined) return 'undefined';
-    if (typeof value === 'string') return value;
-    if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+    if (value === null) return "null";
+    if (value === undefined) return "undefined";
+    if (typeof value === "string") return value;
+    if (typeof value === "number" || typeof value === "boolean") return String(value);
     // if (Array.isArray(value)) return `[ $ {value.length} items]`;
     if (Array.isArray(value)) return JSON.stringify(Array.from(value));
-    if (typeof value === 'object') return '{...}';
+    if (typeof value === "object") return "{...}";
     return String(value);
 }
 
@@ -26,30 +26,45 @@ function printArrayTable<T extends Record<string, unknown> | unknown>(
     array: T[],
     columns?: string[]
 ): string {
-    if (array.length === 0) return '[]';
+    if (array.length === 0) return "[]";
 
     const firstItem = array[0];
 
     // 对象数组
-    if (firstItem !== null && typeof firstItem === 'object' && !Array.isArray(firstItem)) {
+    if (
+        firstItem !== null &&
+        typeof firstItem === "object" &&
+        !Array.isArray(firstItem)
+    ) {
         const allKeys = new Set<string>();
         for (const item of array) {
-            if (item && typeof item === 'object' && !Array.isArray(item)) {
-                Object.keys(item).forEach(key => allKeys.add(key));
+            if (item && typeof item === "object" && !Array.isArray(item)) {
+                Object.keys(item).forEach((key) => allKeys.add(key));
             }
         }
 
         const columnList = columns
-            ? columns.filter(col => allKeys.has(col))
+            ? columns.filter((col) => allKeys.has(col))
             : Array.from(allKeys);
 
         const table = new Table({
-            head: ['(index)', ...columnList],
+            head: ["(index)", ...columnList],
             chars: {
-                top: '─', 'top-mid': '┬', 'top-left': '┌', 'top-right': '┐',
-                bottom: '─', 'bottom-mid': '┴', 'bottom-left': '└', 'bottom-right': '┘',
-                left: '│', 'left-mid': '├', 'mid': '─', 'mid-mid': '┼',
-                right: '│', 'right-mid': '┤', middle: '│'
+                top: "─",
+                "top-mid": "┬",
+                "top-left": "┌",
+                "top-right": "┐",
+                bottom: "─",
+                "bottom-mid": "┴",
+                "bottom-left": "└",
+                "bottom-right": "┘",
+                left: "│",
+                "left-mid": "├",
+                mid: "─",
+                "mid-mid": "┼",
+                right: "│",
+                "right-mid": "┤",
+                middle: "│"
             },
             style: { head: [], border: [] }
         });
@@ -68,12 +83,23 @@ function printArrayTable<T extends Record<string, unknown> | unknown>(
 
     // 基本类型数组
     const table = new Table({
-        head: ['(index)', 'Value'],
+        head: ["(index)", "Value"],
         chars: {
-            top: '─', 'top-mid': '┬', 'top-left': '┌', 'top-right': '┐',
-            bottom: '─', 'bottom-mid': '┴', 'bottom-left': '└', 'bottom-right': '┘',
-            left: '│', 'left-mid': '├', 'mid': '─', 'mid-mid': '┼',
-            right: '│', 'right-mid': '┤', middle: '│'
+            top: "─",
+            "top-mid": "┬",
+            "top-left": "┌",
+            "top-right": "┐",
+            bottom: "─",
+            "bottom-mid": "┴",
+            "bottom-left": "└",
+            "bottom-right": "┘",
+            left: "│",
+            "left-mid": "├",
+            mid: "─",
+            "mid-mid": "┼",
+            right: "│",
+            "right-mid": "┤",
+            middle: "│"
         }
     });
 
@@ -88,12 +114,23 @@ function printArrayTable<T extends Record<string, unknown> | unknown>(
 function printObjectTable(obj: Record<string, unknown>, columns?: string[]): string {
     const keys = columns ?? Object.keys(obj);
     const table = new Table({
-        head: ['Key', 'Value'],
+        head: ["Key", "Value"],
         chars: {
-            top: '─', 'top-mid': '┬', 'top-left': '┌', 'top-right': '┐',
-            bottom: '─', 'bottom-mid': '┴', 'bottom-left': '└', 'bottom-right': '┘',
-            left: '│', 'left-mid': '├', 'mid': '─', 'mid-mid': '┼',
-            right: '│', 'right-mid': '┤', middle: '│'
+            top: "─",
+            "top-mid": "┬",
+            "top-left": "┌",
+            "top-right": "┐",
+            bottom: "─",
+            "bottom-mid": "┴",
+            "bottom-left": "└",
+            "bottom-right": "┘",
+            left: "│",
+            "left-mid": "├",
+            mid: "─",
+            "mid-mid": "┼",
+            right: "│",
+            "right-mid": "┤",
+            middle: "│"
         }
     });
 
@@ -109,15 +146,15 @@ function printObjectTable(obj: Record<string, unknown>, columns?: string[]): str
 // 原 consoleTable 改为 tableToString
 export function tableToString(data: unknown, columns?: string[]): string {
     if (data == null) {
-        return 'undefined';
+        return "undefined";
     }
     if (Array.isArray(data)) {
         if (data.length === 0) {
-            return '[]';
+            return "[]";
         }
         return printArrayTable(data, columns);
     }
-    if (typeof data === 'object') {
+    if (typeof data === "object") {
         return printObjectTable(data as Record<string, unknown>, columns);
     }
     return String(data);
@@ -132,7 +169,7 @@ export class CustomConsole {
     readonly _indentLevel: number;
     readonly _indentStr: string;
 
-    constructor(indentLevel = 0, indentStr = ' ') {
+    constructor(indentLevel = 0, indentStr = " ") {
         this._indentLevel = indentLevel;
         this._indentStr = indentStr;
     }
@@ -141,9 +178,9 @@ export class CustomConsole {
         const output = tableToString(data, columns);
         const indent = this._indentStr.repeat(this._indentLevel);
         const indented = output
-            .split('\n')
-            .map(line => line ? indent + line : '')
-            .join('\n');
+            .split("\n")
+            .map((line) => (line ? indent + line : ""))
+            .join("\n");
         console.log(`\n${indented}`);
     }
 }

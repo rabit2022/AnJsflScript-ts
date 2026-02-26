@@ -8,7 +8,7 @@
  */
 
 // 1. 获取数据（在调用处）
-import {CheckSelectedLayers} from "../../src/validation/flash/CheckSelectedLayers";
+import { CheckSelectedLayers } from "../../src/validation/flash/CheckSelectedLayers";
 
 const currentTimeline = fl.getDocumentDOM().getTimeline();
 const selectedIndices = currentTimeline.getSelectedLayers();

@@ -1,12 +1,17 @@
-import {$ProjectFileDir$, BUSINESS_OUT, BUSINESS_PACKAGES, DIST_BUSINESS} from "../ProjectFileDir";
-import {ScanSpec, walk} from "../nodejs/walk";
+import {
+    $ProjectFileDir$,
+    BUSINESS_OUT,
+    BUSINESS_PACKAGES,
+    DIST_BUSINESS
+} from "../ProjectFileDir";
+import { ScanSpec, walk } from "../nodejs/walk";
 import * as fsp from "fs/promises";
 import * as fs from "fs";
 import * as path from "path";
-import {add_headers_to_file} from "../headers/addFileHeader";
+import { add_headers_to_file } from "../headers/addFileHeader";
 import * as console from "node:console";
-import {toPackageModules} from "../nodejs/toPackageModules";
-import {toPackageModuleJsons} from "../nodejs/toXULPaths";
+import { toPackageModules } from "../nodejs/toPackageModules";
+import { toPackageModuleJsons } from "../nodejs/toXULPaths";
 
 async function processDefined(fullPath: string) {
     const relPath = path.relative(DIST_BUSINESS, fullPath);
@@ -15,7 +20,7 @@ async function processDefined(fullPath: string) {
     const targetJsfl = outPath.replace(/\.js$/, ".jsfl");
 
     // console.log(`🔧 ${fullPath} -> ${targetJsfl}`);
-    await fsp.mkdir(path.dirname(targetJsfl), {recursive: true});
+    await fsp.mkdir(path.dirname(targetJsfl), { recursive: true });
 
     const raw = await fsp.readFile(fullPath, "utf-8");
 
@@ -44,7 +49,6 @@ async function processDefined(fullPath: string) {
     console.log(`Deleted:  $ {fullPath}`);
 }
 
-
 // 处理函数
 function transformPaths(
     map: Record<string, string>,
@@ -68,7 +72,7 @@ function transformPaths(
 // 确保目标目录存在
 function ensureDir(dir: string) {
     if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, {recursive: true});
+        fs.mkdirSync(dir, { recursive: true });
     }
 }
 
@@ -81,7 +85,7 @@ if (require.main === module) {
             dirBlack: {
                 part: ["node_modules"]
             },
-            fileWhite: {part: [".js"]}
+            fileWhite: { part: [".js"] }
         };
 
         // DIST_LIB  生成jsfl文件
@@ -89,26 +93,25 @@ if (require.main === module) {
 
         const businessPackage: ScanSpec = {
             roots: [BUSINESS_PACKAGES],
-            dirBlack: {part: ["node_modules"]},
-            fileWhite: {part: [".jsfl"]}
+            dirBlack: { part: ["node_modules"] },
+            fileWhite: { part: [".jsfl"] }
         };
         const businessPackageModules: ScanSpec = {
             roots: [BUSINESS_PACKAGES],
-            dirBlack: {part: ["node_modules"]},
-            fileWhite: {part: ["modules.json"]}
+            dirBlack: { part: ["node_modules"] },
+            fileWhite: { part: ["modules.json"] }
         };
 
-
         const map: Record<string, string> = {};
-        for await (const p of walk(businessPackage)) Object.assign(map, await toPackageModules(p));
-        for await (const p of walk(businessPackageModules)) Object.assign(map, await toPackageModuleJsons(p));
-
+        for await (const p of walk(businessPackage))
+            Object.assign(map, await toPackageModules(p));
+        for await (const p of walk(businessPackageModules))
+            Object.assign(map, await toPackageModuleJsons(p));
 
         // 执行转换
         const transformed = transformPaths(map, $ProjectFileDir$);
 
-
-// 执行复制
+        // 执行复制
         for (const [dest, src] of Object.entries(transformed)) {
             if (!fs.existsSync(src)) {
                 console.warn(`⚠️ 源文件不存在: ${src}`);
@@ -121,6 +124,5 @@ if (require.main === module) {
             fs.copyFileSync(src, dest);
             console.log(`✅ 已复制: ${src} → ${dest}`);
         }
-
     })();
 }

@@ -5,4 +5,4 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */export * from "./console";
+ */ export * from "./console";

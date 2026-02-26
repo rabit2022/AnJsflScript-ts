@@ -7,5 +7,5 @@
  * @description:
  */
 
-export {BoundsConverter} from "./BoundsConverter";
-export {VectorConverter} from "./VectorConverter";
+export { BoundsConverter } from "./BoundsConverter";
+export { VectorConverter } from "./VectorConverter";

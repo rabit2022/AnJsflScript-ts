@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { BaseColorTransform } from "./BaseColorTransform";
+ */ import { BaseColorTransform } from "./BaseColorTransform";
 import { SObject } from "../../base/SObject";
 
 export abstract class BaseColorTransformBuilder<

@@ -7,9 +7,13 @@
  * @description:
  */
 
-import {clearTimeout, setTimeout} from "./setTimeout";
+import { clearTimeout, setTimeout } from "./setTimeout";
 
-export function setInterval(callback: (...args: any[]) => void, delay: number, ...args: any[]): number {
+export function setInterval(
+    callback: (...args: any[]) => void,
+    delay: number,
+    ...args: any[]
+): number {
     let timerId;
 
     function loop() {

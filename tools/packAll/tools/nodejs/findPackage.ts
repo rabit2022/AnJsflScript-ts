@@ -13,7 +13,7 @@ export function findNearestPackageJson(
     while (true) {
         const pkgPath = path.join(current, "package.json");
         try {
-             fs.accessSync(pkgPath); // 检查是否存在
+            fs.accessSync(pkgPath); // 检查是否存在
             const content = fs.readFileSync(pkgPath, "utf-8");
             const pkg = JSON.parse(content);
             return { dir: current, pkg };

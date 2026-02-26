@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// ------------------------------------------------------------------------------------------------------------------------
+ */ // ------------------------------------------------------------------------------------------------------------------------
 //  __   __   ______     ______     ______   ______     ______
 // /\ \ / /  /\  ___\   /\  ___\   /\__  _\ /\  __ \   /\  == \
 // \ \ \'/   \ \  __\   \ \ \____  \/_/\ \/ \ \ \/\ \  \ \  __<
@@ -23,9 +23,9 @@
 import { VectorLike } from "../types/vectorType";
 import { SObject } from "../base/SObject";
 import { RelativePosition } from "../enum/vectorEnums";
-import {Scale} from "./Transform/Scale";
-import {Size} from "./Transform/Size";
-import {Skew} from "./Transform/Skew";
+import { Scale } from "./Transform/Scale";
+import { Size } from "./Transform/Size";
+import { Skew } from "./Transform/Skew";
 
 export class Vector extends SObject implements VectorLike {
     public x: number;
@@ -82,8 +82,8 @@ export class Vector extends SObject implements VectorLike {
             throw new Error("x and y must not be zero");
         }
         // return new Vector(1 / this.x, 1 / this.y);
-        this.x = 1/this.x;
-        this.y = 1/this.y;
+        this.x = 1 / this.x;
+        this.y = 1 / this.y;
         return this;
     }
 
@@ -221,8 +221,8 @@ export class Vector extends SObject implements VectorLike {
     // 如果 this 表示尺寸（如 width/height）
     halfSize(): this {
         // return new Vector(this.x / 2, this.y / 2);
-        this.x /=2;
-        this.y /=2;
+        this.x /= 2;
+        this.y /= 2;
         return this;
     }
 
@@ -261,24 +261,24 @@ export class Vector extends SObject implements VectorLike {
     /** 取各分量绝对值 */
     abs(): this {
         // return new Vector(Math.abs(this.x), Math.abs(this.y));
-        this.x  = Math.abs(this.x);
-        this.y  = Math.abs(this.y);
+        this.x = Math.abs(this.x);
+        this.y = Math.abs(this.y);
         return this;
     }
 
     /** 分量最小值 */
     min(other: Vector): this {
         // return new Vector(Math.min(this.x, other.x), Math.min(this.y, other.y));
-        this.x =  Math.min(this.x, other.x);
-        this.y =  Math.min(this.y, other.y);
+        this.x = Math.min(this.x, other.x);
+        this.y = Math.min(this.y, other.y);
         return this;
     }
 
     /** 分量最大值 */
     max(other: Vector): this {
         // return new Vector(Math.max(this.x, other.x), Math.max(this.y, other.y));
-        this.x =  Math.max(this.x, other.x);
-        this.y =  Math.max(this.y, other.y);
+        this.x = Math.max(this.x, other.x);
+        this.y = Math.max(this.y, other.y);
         return this;
     }
 

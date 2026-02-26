@@ -8,7 +8,7 @@
  */
 
 // 1. 先获取数据（在调用处）
-import {CheckSelectedItems} from "../../src";
+import { CheckSelectedItems } from "../../src";
 
 const selectedItems = fl.getDocumentDOM().library.getSelectedItems();
 

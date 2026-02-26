@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// CheckDocument.test.ts
+ */ // CheckDocument.test.ts
 
 import { CheckDocument } from "../../../src";
 

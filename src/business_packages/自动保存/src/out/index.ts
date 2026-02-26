@@ -7,18 +7,17 @@
  * @description:
  */
 
-import {AutoSave} from "../Main";
-import {setInterval, setTimeout} from "@dom/setTimeout";
-import {SAVE_INTERVAL} from "../CONSTANTS/time";
-import {AUTHOR} from "../DESC/Descriptions";
-
+import { AutoSave } from "../Main";
+import { setInterval, setTimeout } from "@dom/setTimeout";
+import { SAVE_INTERVAL } from "../CONSTANTS/time";
+import { AUTHOR } from "../DESC/Descriptions";
 
 AUTHOR;
 
 if (AUTHOR === AUTHOR) {
-// 马上保存一次
-    setTimeout(AutoSave, 0);
+  // 马上保存一次
+  setTimeout(AutoSave, 0);
 
-// 每3分钟保存一次
-    setInterval(AutoSave, SAVE_INTERVAL);
+  // 每3分钟保存一次
+  setInterval(AutoSave, SAVE_INTERVAL);
 }

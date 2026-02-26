@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// 简单的继承辅助函数
+ */ // 简单的继承辅助函数
 export const INHERIT_MACRO = (child: any, parent: any) => {
     child.prototype = Object.create(parent.prototype);
     child.prototype.constructor = child;

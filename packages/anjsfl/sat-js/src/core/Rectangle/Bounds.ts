@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// ------------------------------------------------------------------------------------------------------------------------
+ */ // ------------------------------------------------------------------------------------------------------------------------
 //  ______     ______     ______     ______   ______     __   __     ______
 // /\  == \   /\  ___\   /\  ___\   /\__  _\ /\  __ \   /\ "-.\ \   /\  ___\
 // \ \  __<   \ \  __\   \ \ \____  \/_/\ \/ \ \  __ \  \ \ \-.  \  \ \ \__ \
@@ -23,22 +23,22 @@
 //
 // Represents a rectangle with `left`, `top`, `right`, and `bottom` properties.
 
-import {SObject} from "../../base/SObject";
-import {Vector} from "../Vector";
-import {RelativePosition} from "../../enum/vectorEnums";
-import {InsetDirection, RectanglePart} from "../../enum/boundsEnum";
-import {BoundsLike} from "../../types/boundsType";
-import {VectorLike} from "../../types/vectorType";
-import {IsBoundsLike} from "../../check/boundsCheck";
-import {Size} from "../Transform/Size";
-import {SizeLike} from "../../types/sizeType";
-import {IsVectorLike} from "../../check/vectorCheck";
-import {Box} from "./Box";
-import {IsSizeLike} from "../../check/sizeCheck";
-import {CornerRect} from "./CornerRect";
-import {XYWHRect} from "./XYWHRect";
-import {Circle} from "../Circle";
-import {LineSegment} from "../LineSegment";
+import { SObject } from "../../base/SObject";
+import { Vector } from "../Vector";
+import { RelativePosition } from "../../enum/vectorEnums";
+import { InsetDirection, RectanglePart } from "../../enum/boundsEnum";
+import { BoundsLike } from "../../types/boundsType";
+import { VectorLike } from "../../types/vectorType";
+import { IsBoundsLike } from "../../check/boundsCheck";
+import { Size } from "../Transform/Size";
+import { SizeLike } from "../../types/sizeType";
+import { IsVectorLike } from "../../check/vectorCheck";
+import { Box } from "./Box";
+import { IsSizeLike } from "../../check/sizeCheck";
+import { CornerRect } from "./CornerRect";
+import { XYWHRect } from "./XYWHRect";
+import { Circle } from "../Circle";
+import { LineSegment } from "../LineSegment";
 
 export class Bounds extends SObject implements BoundsLike {
     public left = 0;
@@ -187,7 +187,6 @@ export class Bounds extends SObject implements BoundsLike {
         return new Vector(this.right, this.bottom);
     }
 
-
     /**
      * 矩形 偏移后的 矩形
      * 移动矩形的边界
@@ -304,7 +303,7 @@ export class Bounds extends SObject implements BoundsLike {
      * @returns 对应位置的向量坐标
      */
     getCorner(whichCorner: RelativePosition): Vector {
-        const {left, right, top, bottom} = this;
+        const { left, right, top, bottom } = this;
         const centerX = (left + right) / 2;
         const centerY = (top + bottom) / 2;
 
@@ -352,7 +351,7 @@ export class Bounds extends SObject implements BoundsLike {
         widthRatio: number = 0.5,
         heightRatio: number = widthRatio
     ): Bounds {
-        const {left, right, top, bottom, width, height} = this;
+        const { left, right, top, bottom, width, height } = this;
         const centerX = (left + right) / 2;
         const centerY = (top + bottom) / 2;
 
@@ -464,10 +463,7 @@ export class Bounds extends SObject implements BoundsLike {
      * @param whichCorner 旋转中心点，默认为矩形中心
      * @returns 旋转后的新矩形边界（轴对齐包围盒 AABB）
      */
-    rotate(
-        angle: number,
-        whichCorner: RelativePosition = RelativePosition.Center
-    ): this {
+    rotate(angle: number, whichCorner: RelativePosition = RelativePosition.Center): this {
         // 将角度转换为弧度
         const radians = angle * (Math.PI / 180);
 
@@ -507,7 +503,11 @@ export class Bounds extends SObject implements BoundsLike {
     static fromTopLeft(leftTop: Vector | VectorLike, size: Size | SizeLike): Bounds;
     static fromTopLeft(topLeft: Vector, bottomRight: Vector): Bounds;
 
-    static fromTopLeft(leftTop: Vector | VectorLike, width: number, height: number): Bounds;
+    static fromTopLeft(
+        leftTop: Vector | VectorLike,
+        width: number,
+        height: number
+    ): Bounds;
 
     /**
      * 由左上角坐标和宽高创建矩形
@@ -523,9 +523,16 @@ export class Bounds extends SObject implements BoundsLike {
                     return new Bounds(a, b);
                 } else if (IsVectorLike(a) && IsSizeLike(b)) {
                     let [topLeft, size] = args;
-                    return this.fromTopLeft(topLeft.x, topLeft.y, size.width, size.height);
+                    return this.fromTopLeft(
+                        topLeft.x,
+                        topLeft.y,
+                        size.width,
+                        size.height
+                    );
                 } else {
-                    throw new Error(`Invalid RectanglePart satisfies never ${args.length}`);
+                    throw new Error(
+                        `Invalid RectanglePart satisfies never ${args.length}`
+                    );
                 }
 
             case 3:
@@ -545,7 +552,12 @@ export class Bounds extends SObject implements BoundsLike {
         }
     }
 
-    static fromCenter(centerX: number, centerY: number, width: number, height: number): Bounds;
+    static fromCenter(
+        centerX: number,
+        centerY: number,
+        width: number,
+        height: number
+    ): Bounds;
 
     static fromCenter(center: Vector | VectorLike, size: Size | SizeLike): Bounds;
 
@@ -661,7 +673,6 @@ export class Bounds extends SObject implements BoundsLike {
     toLineSegment(): LineSegment {
         return new LineSegment(this.leftTop, this.bottomRight);
     }
-
 }
 
 /**

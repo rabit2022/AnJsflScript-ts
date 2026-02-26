@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// fl.ts - 同步文件系统 API（仿 Node.js fs）
+ */ // fl.ts - 同步文件系统 API（仿 Node.js fs）
 
 // lodash
 // import * as _ from "lodash";

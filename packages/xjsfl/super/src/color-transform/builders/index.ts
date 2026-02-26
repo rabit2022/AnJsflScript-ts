@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */export { BrightnessColorTransformBuilder } from "./BrightnessColorTransformBuilder";
+ */ export { BrightnessColorTransformBuilder } from "./BrightnessColorTransformBuilder";
 export { TintColorTransformBuilder } from "./TintColorTransformBuilder";
 export { AdvancedColorTransformBuilder } from "./AdvancedColorTransformBuilder";
 export { AlphaColorTransformBuilder } from "./AlphaColorTransformBuilder";

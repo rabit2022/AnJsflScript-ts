@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import {
+ */ import {
     COLOR_TRANSFORM_BUILDERS,
     COLOR_TRANSFORMS,
     createColorTransform,

@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { CheckVariableRedeclaration } from "../../../src";
+ */ import { CheckVariableRedeclaration } from "../../../src";
 
 describe("CheckVariableRedeclaration", () => {
     let originalWarn: typeof console.warn;

@@ -1,17 +1,12 @@
 import "@xjsfl/UI";
 
-class Src{
-    constructor() {
-    }
+class Src {
+    constructor() {}
 
-    alert(){
-
-    }
+    alert() {}
 }
 
-class Src1 extends Src{
+class Src1 extends Src {}
 
-}
-
-const src = new Src()
-console.log(src)
+const src = new Src();
+console.log(src);

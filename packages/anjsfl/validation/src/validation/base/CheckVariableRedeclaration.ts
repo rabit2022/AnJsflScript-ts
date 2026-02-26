@@ -28,7 +28,7 @@ export function CheckVariableRedeclaration(
     variable: unknown,
     name: string,
     expectedValue?: unknown
-): Result<void,string> {
+): Result<void, string> {
     if (expectedValue !== undefined) {
         if (variable !== expectedValue) {
             const msg = `[Redeclaration Check] 变量 "${name}" 的值被意外修改或遮蔽。期望: ${String(expectedValue)}, 实际: ${String(variable)}`;

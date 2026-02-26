@@ -7,15 +7,13 @@
  * @description:
  */
 
-import * as  fs from 'fs';
-import {SaveData} from '../types';
-import {Paths} from '../config/paths';
-import {FileStore} from "./fileStore";
+import * as fs from "fs";
+import { SaveData } from "../types";
+import { Paths } from "../config/paths";
+import { FileStore } from "./fileStore";
 
 export class HistoryStore {
-
-
-    save(record: SaveData,output:string) {
+    save(record: SaveData, output: string) {
         const store = new FileStore();
 
         store.writeCurrent(record);
@@ -23,9 +21,10 @@ export class HistoryStore {
 
         let all = store.readAll();
 
-        const exist = all.find(r =>
-            r.message === record.message &&
-            JSON.stringify(r.frames) === JSON.stringify(record.frames)
+        const exist = all.find(
+            (r) =>
+                r.message === record.message &&
+                JSON.stringify(r.frames) === JSON.stringify(record.frames)
         );
 
         if (exist) {
@@ -40,9 +39,8 @@ export class HistoryStore {
     }
 
     clear() {
-        Object.values(Paths).forEach(p => {
+        Object.values(Paths).forEach((p) => {
             if (fs.existsSync(p)) fs.unlinkSync(p);
         });
     }
-
 }

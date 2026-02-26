@@ -7,7 +7,9 @@
  * @description:
  */
 
-import {REQUIRE_CONFIG_FILE, WEBPACK_CONFIG_FILE} from "../ProjectFileDir";
+import { REQUIRE_CONFIG_FILE, WEBPACK_CONFIG_FILE } from "../ProjectFileDir";
+import * as fs from "fs";
+
 `
 1.读取REQUIRE_CONFIG_FILE
 
@@ -31,18 +33,17 @@ import {REQUIRE_CONFIG_FILE, WEBPACK_CONFIG_FILE} from "../ProjectFileDir";
 // endregion EXCLUDE_MODULE_NAME
 
 
-`
+`;
 
-
-
-import * as fs from 'fs';
-import * as path from 'path';
-import {set_module_name} from "../init/init_module_name";
 
 // const REQUIRE_CONFIG_FILE = path.resolve('./require-config.txt'); // 替换为你的实际路径
 // const WEBPACK_CONFIG_FILE = path.resolve('./webpack.config.js');   // 替换为你的实际路径
 
-function extractRegion(content: string, startMarker: string, endMarker: string): { region: string; startIndex: number; endIndex: number } {
+function extractRegion(content: string, startMarker: string, endMarker: string): {
+    region: string;
+    startIndex: number;
+    endIndex: number
+} {
     const startRegex = new RegExp(`^.*${startMarker}.*$`, 'm');
     const endRegex = new RegExp(`^.*${endMarker}.*$`, 'm');
 
@@ -57,7 +58,7 @@ function extractRegion(content: string, startMarker: string, endMarker: string):
     const endIndex = endMatch.index!;
 
     const region = content.slice(startIndex, endIndex);
-    return { region, startIndex, endIndex };
+    return {region, startIndex, endIndex};
 }
 
 
@@ -66,8 +67,9 @@ function cleanJsonTrailingCommas(str: string): string {
     return str
         .replace(/},/g, '}')
 }
+
 function parseRequireModules(configContent: string): string[] {
-    const { region } = extractRegion(
+    const {region} = extractRegion(
         configContent,
         '// region REQUIRE MODULES PATHS',
         '// endregion REQUIRE MODULES PATHS'
@@ -79,7 +81,7 @@ function parseRequireModules(configContent: string): string[] {
         return [];
     }
 
-    jsonStr=cleanJsonTrailingCommas(jsonStr);
+    jsonStr = cleanJsonTrailingCommas(jsonStr);
     // console.log(jsonStr);
 
 
@@ -92,7 +94,7 @@ function parseRequireModules(configContent: string): string[] {
 }
 
 function updateWebpackExclude(webpackContent: string, moduleNames: string[]): string {
-    const { startIndex, endIndex } = extractRegion(
+    const {startIndex, endIndex} = extractRegion(
         webpackContent,
         '// region EXCLUDE_MODULE_NAME',
         '// endregion EXCLUDE_MODULE_NAME'

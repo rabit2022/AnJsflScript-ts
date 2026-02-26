@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// ------------------------------------------------------------------------------------------------------------------------
+ */ // ------------------------------------------------------------------------------------------------------------------------
 //  ______     __     ______     ______
 // /\  ___\   /\ \   /\___  \   /\  ___\
 // \ \___  \  \ \ \  \/_/  /__  \ \  __\
@@ -18,7 +18,7 @@
 // Represents a size with `width` and `height` properties.
 import { SObject } from "../../base/SObject";
 import { SizeLike } from "../../types/sizeType";
-import {Vector} from "../Vector";
+import { Vector } from "../Vector";
 
 export class Size extends SObject implements SizeLike {
     public width: number = 0;

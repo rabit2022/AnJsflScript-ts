@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { BaseStroke } from "./BaseStroke";
+ */ import { BaseStroke } from "./BaseStroke";
 import { IBaseStroke, IStrokeBuilder } from "../types";
 import chroma from "chroma-js";
 import { SObject } from "../../base/SObject";

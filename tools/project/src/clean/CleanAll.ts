@@ -28,4 +28,3 @@ async function clearOutputDirs() {
 if (typeof require !== "undefined" && require.main === module) {
     clearOutputDirs().catch(console.error);
 }
-

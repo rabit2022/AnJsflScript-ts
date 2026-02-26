@@ -10,7 +10,7 @@ require(["fs"], function (fs) {
                 if (fs.existsSync(drive + "/")) {
                     drives.push(drive);
                 }
-            } catch(e) {
+            } catch (e) {
                 // 某些盘可能无权限，直接跳过
             }
         }

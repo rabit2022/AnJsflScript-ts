@@ -8,17 +8,16 @@
  */
 import * as console from "node:console";
 
-class B{
+class B {
     constructor(public urlString: string) {
         this.urlString = urlString;
     }
-
 }
-class A{
+class A {
     constructor(public urlString: string) {
         return new B(urlString);
     }
 }
 
-const a=new A("jjjjj");
-console.log(a)
+const a = new A("jjjjj");
+console.log(a);

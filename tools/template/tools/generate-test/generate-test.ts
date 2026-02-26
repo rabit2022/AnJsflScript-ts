@@ -1,4 +1,4 @@
-import {CURRENT_PROJECT} from "../ProjectFileDir";
+import { CURRENT_PROJECT } from "../ProjectFileDir";
 
 `
 生成文件，在以下目录
@@ -30,24 +30,23 @@ test/nodejs/*.ts
 
 文件名字，test1,test2,检测当前已有的，生成按照顺序的文件名字
 test1,test2    -->    test3
-`
+`;
 
-
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from "fs";
+import * as path from "path";
 
 /**
  * 1. 确保所有目标目录存在
  */
 function ensureDirectories() {
     const directories = {
-        flashJsfl: path.join(CURRENT_PROJECT,'test', 'flash', 'jsfl'),
-        flashRequire: path.join(CURRENT_PROJECT,'test', 'flash', 'require'),
-        flashTs: path.join(CURRENT_PROJECT,'test', 'flash', 'ts'),
-        nodejs: path.join(CURRENT_PROJECT,'test', 'nodejs')
+        flashJsfl: path.join(CURRENT_PROJECT, "test", "flash", "jsfl"),
+        flashRequire: path.join(CURRENT_PROJECT, "test", "flash", "require"),
+        flashTs: path.join(CURRENT_PROJECT, "test", "flash", "ts"),
+        nodejs: path.join(CURRENT_PROJECT, "test", "nodejs")
     };
 
-    Object.values(directories).forEach(dir => {
+    Object.values(directories).forEach((dir) => {
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
         }
@@ -64,11 +63,11 @@ function ensureDirectories() {
 function determineNextIndex(directories: { [key: string]: string }): number {
     let maxIndex = 0;
 
-    Object.values(directories).forEach(dir => {
+    Object.values(directories).forEach((dir) => {
         try {
             if (fs.existsSync(dir)) {
                 const files = fs.readdirSync(dir);
-                files.forEach(file => {
+                files.forEach((file) => {
                     const match = file.match(/^test(\d+)\.(?:jsfl|js|ts)$/);
                     if (match) {
                         const num = parseInt(match[1], 10);
@@ -93,7 +92,7 @@ function determineNextIndex(directories: { [key: string]: string }): number {
 function createFiles(filesToCreate: Array<{ path: string; content: string }>) {
     filesToCreate.forEach(({ path: filePath, content }) => {
         try {
-            fs.writeFileSync(filePath, content, 'utf-8');
+            fs.writeFileSync(filePath, content, "utf-8");
             console.log(`✅ 创建成功: ${filePath}`);
         } catch (err) {
             console.error(`❌ 创建失败 ${filePath}:`, err);
@@ -105,7 +104,7 @@ function createFiles(filesToCreate: Array<{ path: string; content: string }>) {
  * 主函数
  */
 function main() {
-    console.log('开始生成文件...');
+    console.log("开始生成文件...");
 
     // 步骤 1: 创建目录并获取路径
     const directories = ensureDirectories();

@@ -113,14 +113,17 @@ function createTween(timeline, tweenType = "motion tween") {
     }
 }
 
-
 /**
  * 设置旋转缓动
  * @param {Timeline} timeline
  * @param {'none'|'auto'|'clockwise'|'counter-clockwise'} motionTweenRotate 旋转方向
  * @param {number} motionTweenRotateTimes 旋转次数
  */
-function setTweenRotation(timeline, motionTweenRotate = "none", motionTweenRotateTimes = 0) {
+function setTweenRotation(
+    timeline,
+    motionTweenRotate = "none",
+    motionTweenRotateTimes = 0
+) {
     timeline.setFrameProperty("motionTweenRotate", motionTweenRotate);
     timeline.setFrameProperty("motionTweenRotateTimes", motionTweenRotateTimes);
 }
@@ -162,18 +165,21 @@ class Tween {
     }
 
     // --- 1. 旋转设置 ---
-    rotate(motionTweenRotate: 'none' | 'auto' | 'clockwise' | 'counter-clockwise', motionTweenRotateTimes: number = 0): this {
+    rotate(
+        motionTweenRotate: "none" | "auto" | "clockwise" | "counter-clockwise",
+        motionTweenRotateTimes: number = 0
+    ): this {
         // 2. 核心修改：不再立即执行，而是将操作封装为函数推入数组
         this.actions.push((timeline) => {
-            setTweenRotation(timeline, motionTweenRotate, motionTweenRotateTimes)
-
+            setTweenRotation(timeline, motionTweenRotate, motionTweenRotateTimes);
         });
         return this;
     }
 
     // --- 2. 缓动类型设置 ---
     ease(easeName: EaseName): this {
-        this.actions.push((tl) => { // 使用参数 tl 代表传入的 timeline
+        this.actions.push((tl) => {
+            // 使用参数 tl 代表传入的 timeline
             setEaseCurve(tl, easeName); // 修正这里：使用 tl 而不是外部的 timeline
         });
         return this;
@@ -201,7 +207,7 @@ class Tween {
         createTween(this.timeline, "motion tween");
 
         // 3. 执行所有存储的动作
-        this.actions.forEach(action => action(this.timeline));
+        this.actions.forEach((action) => action(this.timeline));
 
         // 4. 模拟 onComplete：由于 JSFL 是立即执行的，设置完属性即视为“完成”
         if (this.onCompleteCallback) {
@@ -209,7 +215,6 @@ class Tween {
             this.onCompleteCallback();
         }
     }
-
 
     // --- 6. 销毁/删除 ---
     kill(): void {
@@ -221,8 +226,6 @@ class Tween {
     }
 }
 
-
-
 // 假设你已经获取了 fl.getDocumentDOM().getTimeline()
 var myTimeline = fl.getDocumentDOM().getTimeline();
 
@@ -230,7 +233,8 @@ var myTimeline = fl.getDocumentDOM().getTimeline();
 new Tween(myTimeline, 1, 30)
     .rotate("clockwise", 2) // 设置顺时针旋转2圈
     .ease("Elastic Ease-Out") // 设置缓动类型
-    .onComplete(() => { // 添加回调
+    .onComplete(() => {
+        // 添加回调
         alert("补间设置已完成！"); // 弹窗提示（JSFL中可用）
         console.log("补间已生成"); // 控制台输出
     })

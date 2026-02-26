@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// Size.test.ts
+ */ // Size.test.ts
 
 // === Mock FlashElement / FlashDocument ===
 import { SAT } from "../src";

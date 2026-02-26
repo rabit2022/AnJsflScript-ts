@@ -1,0 +1,42 @@
+{
+  "name": "@anjsfl-ts/Bootstrap",
+  "version": "1.0.0",
+  "description": "",
+  "declaration": true,
+  "declarationMap": true,
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "test": "jest",
+    "build": "webpack --config webpack.config.js && npx tsx tools/build/delete_Object.ts && npx tsx tools/build/moveToTop.ts",
+    "build:test": "webpack --config webpack.test.js",
+    "generate-test": "npx tsx tools/generate-test/generate-test.ts",
+    "exclude_modules": "npx tsx tools/exclude_packages/exclude_require_config.ts"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/jest": "30.0.0",
+    "@types/node": "25.0.7",
+    "jest": "30.2.0",
+    "strip-json-comments": "3.1.0",
+    "terser-webpack-plugin": "5.3.16",
+    "ts-jest": "29.4.6",
+    "ts-loader": "9.5.4",
+    "typescript": "5.9.3",
+    "webpack": "5.104.1",
+    "webpack-cli": "6.0.1"
+  },
+  "dependencies": {
+    "array.from": "1.1.6",
+    "es-map": "2.0.1",
+    "object-keys": "1.1.1",
+    "string.prototype.endswith": "1.0.2",
+    "string.prototype.includes": "2.0.1",
+    "string.prototype.startswith": "1.0.1"
+  }
+}

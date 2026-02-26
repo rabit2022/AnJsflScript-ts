@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */export enum RelativePosition {
+ */ export enum RelativePosition {
     TopRight = "top right",
     TopLeft = "top left",
     BottomRight = "bottom right",

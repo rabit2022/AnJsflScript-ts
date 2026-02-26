@@ -1,4 +1,13 @@
 /**
+ * @file: enemUtils.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/26 23:26
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+/**
  * 判断 value 是否是某个 TypeScript 枚举（字符串/数字）的合法值
  * @example
  * enum Status { Active = 'active', Inactive = 'inactive' }

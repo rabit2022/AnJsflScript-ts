@@ -7,25 +7,24 @@
  * @description:
  */
 
-import {Mapping} from "./Mapping";
-import {SCORE} from "./Score";
-import {matchLen} from "../matcher/LenMatcher";
+import { Mapping } from "./Mapping";
+import { SCORE } from "./Score";
+import { matchLen } from "../matcher/LenMatcher";
 
 export class LenMapping implements Mapping {
-    type = 'len' as const
-    priority = SCORE.LEN_BASE
+    type = "len" as const;
+    priority = SCORE.LEN_BASE;
 
     constructor(
         private len: number,
         private fn: Function
-    ) {
-    }
+    ) {}
 
     match(args: any[]) {
-        return matchLen(this.len, args)
+        return matchLen(this.len, args);
     }
 
     invoke(ctx: any, args: any[]) {
-        return this.fn.apply(ctx, args)
+        return this.fn.apply(ctx, args);
     }
 }

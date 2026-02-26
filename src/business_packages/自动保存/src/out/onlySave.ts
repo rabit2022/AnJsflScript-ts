@@ -7,14 +7,13 @@
  * @description:
  */
 
-import {OnlySave} from "../Main";
+import { OnlySave } from "../Main";
 
-import {AUTHOR} from "../DESC/Descriptions";
-
+import { AUTHOR } from "../DESC/Descriptions";
 
 AUTHOR;
 
 if (AUTHOR === AUTHOR) {
-// 马上保存一次
-    OnlySave();
+  // 马上保存一次
+  OnlySave();
 }

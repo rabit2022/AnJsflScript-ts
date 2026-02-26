@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { SelectAll } from "./utils";
+ */ import { SelectAll } from "./utils";
 
 export function setInstanceAlpha(elements: any | any[], alphaPercent: number): void {
     if (!Array.isArray(elements)) {

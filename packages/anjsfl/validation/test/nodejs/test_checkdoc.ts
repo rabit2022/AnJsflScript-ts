@@ -8,7 +8,7 @@
  */
 
 // 假设这是从外部获取的文档
-const currentDoc: Document | null = fl.getDocumentDOM(); 
+const currentDoc: Document | null = fl.getDocumentDOM();
 
 const result = checkDocument(currentDoc);
 

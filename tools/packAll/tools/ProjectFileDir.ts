@@ -1,6 +1,6 @@
 // main.ts
 import * as path from "path";
-import {findNearestPackageJson, findRepoRoot} from "./nodejs/findPackage";
+import { findNearestPackageJson, findRepoRoot } from "./nodejs/findPackage";
 
 // export const $ProjectFileDir$ = path.resolve(__filename, "../../../../");
 export const $ProjectFileDir$ = findRepoRoot(__dirname);
@@ -35,7 +35,6 @@ export const TS_CONFIG_FILE = path.resolve($ProjectFileDir$, "tsconfig.json");
 
 export const PACKAGES = path.resolve($ProjectFileDir$, "packages");
 
-
 // ==============================================================
 
 export const CURRENT_PROJECT = findNearestPackageJson(process.cwd())!.dir;
@@ -48,9 +47,7 @@ export const WEBPACK_CONFIG_TEST_FILE = path.resolve(CURRENT_PROJECT, "webpack.t
 //     path.join(PROJECT_DIR, "tsconfig.test.json")
 
 export const TS_CONFIG = path.resolve(CURRENT_PROJECT, "tsconfig.json");
-export const TS_CONFIG_TEST  = path.resolve(CURRENT_PROJECT, "tsconfig.test.json");
-
-
+export const TS_CONFIG_TEST = path.resolve(CURRENT_PROJECT, "tsconfig.test.json");
 
 // package.json
 export const PACKAGE_JSON_FILE = path.resolve(CURRENT_PROJECT, "package.json");
@@ -60,18 +57,14 @@ export const PACKAGE_JSON5_FILE = path.resolve(CURRENT_PROJECT, "package.comment
 
 export const CUR_OUT = path.resolve(CURRENT_PROJECT, "out");
 
-
-export const PACKALLJS_FILE = path.resolve(CUR_OUT,"packAll.js");
-export const PACKALLJSFL_FILE = path.resolve(CUR_OUT,"packAll.jsfl");
-
+export const PACKALLJS_FILE = path.resolve(CUR_OUT, "packAll.js");
+export const PACKALLJSFL_FILE = path.resolve(CUR_OUT, "packAll.jsfl");
 
 export const CUR_SRC = path.resolve(CURRENT_PROJECT, "src");
 
-export const CUR_INDEXTS_FILE = path.resolve(CUR_SRC,"index.ts");
-
+export const CUR_INDEXTS_FILE = path.resolve(CUR_SRC, "index.ts");
 
 export const CUR_DIST = path.resolve(CURRENT_PROJECT, "dist");
 
 export const CUR_DIST_INDEXJS_FILE = path.resolve(CUR_DIST, "index.js");
 export const CUR_DIST_INDEXJSFL_FILE = path.resolve(CUR_DIST, "index.jsfl");
-

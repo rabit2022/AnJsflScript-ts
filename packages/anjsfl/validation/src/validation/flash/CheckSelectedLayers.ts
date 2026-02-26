@@ -8,9 +8,9 @@
  */
 
 import { Result, Ok, Err } from "oxide.ts";
-import {CheckSelection} from "../base";
-import {CheckMode} from "../../types";
-import {LayerCondition} from "../../types";
+import { CheckSelection } from "../base";
+import { CheckMode } from "../../types";
+import { LayerCondition } from "../../types";
 
 /**
  * 检查传入的选中图层索引数组是否符合指定条件。
@@ -25,8 +25,9 @@ export function CheckSelectedLayers(
     selectedLayers: number[], // ✅ 直接传入数据，不再依赖 Timeline
     condition: LayerCondition = LayerCondition.AtLeastOne,
     exTips?: string
-): Result<number[], string> { // ✅ 使用 Result 类型替代 null
-    
+): Result<number[], string> {
+    // ✅ 使用 Result 类型替代 null
+
     // 直接使用传入的数组进行检查
     const check = CheckSelection(
         selectedLayers,

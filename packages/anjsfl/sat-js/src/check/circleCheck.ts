@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { IsVectorLike } from "./vectorCheck";
+ */ import { IsVectorLike } from "./vectorCheck";
 import { CircleLike } from "../types/circleType";
 
 export function IsCircleLike(obj: unknown): obj is CircleLike {

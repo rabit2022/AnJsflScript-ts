@@ -10,12 +10,11 @@
 // import { stackTracer } from 'console.stack';
 // stackTracer.trace(new Error('boom'));
 
-import 'console.stack';
-console.stack(new Error('boom'),{
-    format:'json'
+import "console.stack";
+console.stack(new Error("boom"), {
+    format: "json"
 });
-console.stack(new Error('boom'));
-
+console.stack(new Error("boom"));
 
 // stackTracer.trace('test', {
 //   format: 'table'

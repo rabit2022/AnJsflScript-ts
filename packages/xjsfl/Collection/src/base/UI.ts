@@ -31,5 +31,4 @@ export class UI {
             dom.selection = elements instanceof Array ? elements : [elements];
         }
     }
-}	
-
+}

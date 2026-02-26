@@ -7,7 +7,7 @@
  * @description:
  */
 
-export type BufferEncoding =string;
+export type BufferEncoding = string;
 
 export interface ExecSyncOptions {
     /** 工作目录 */
@@ -15,9 +15,9 @@ export interface ExecSyncOptions {
     /** 环境变量 */
     env?: { [key: string]: string };
     /** 输出编码，默认 'utf8' */
-    encoding?: BufferEncoding | 'buffer';
+    encoding?: BufferEncoding | "buffer";
     /** 标准IO配置 */
-    stdio?: 'pipe' | 'inherit' | 'ignore' | Array<any>;
+    stdio?: "pipe" | "inherit" | "ignore" | Array<any>;
     /** 超时时间（毫秒） */
     timeout?: number;
     /** 最大缓冲区大小（字节） */
@@ -32,17 +32,17 @@ export interface ExecSyncOptions {
 
 export interface ExecSyncResult {
     stdout: string;
-    stderr: string ;
+    stderr: string;
     status: number | null;
     signal: string | null;
     error?: Error;
 }
-export interface ExecSyncError  {
-    status: number;        // 退出码（如 1, 127, 130）
+export interface ExecSyncError {
+    status: number; // 退出码（如 1, 127, 130）
     signal: string | null; // 终止信号（如 'SIGKILL'）
     output: Array<string | null>; // [stdin, stdout, stderr]
-    stdout: string ;
-    stderr: string ;
-    pid: number;           // 进程ID
+    stdout: string;
+    stderr: string;
+    pid: number; // 进程ID
     error?: Error;
 }

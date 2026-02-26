@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { BoundsLike } from "../types/boundsType";
+ */ import { BoundsLike } from "../types/boundsType";
 
 /**
  * 当前对象是否与 BoundsLike 对象相等

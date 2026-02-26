@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { Matrix } from "../types";
+ */ import { Matrix } from "../types";
 import chroma from "chroma-js";
 import { BaseFillBuilder } from "../base/BaseFillBuilder";
 import { LinearGradientFill } from "../fills";

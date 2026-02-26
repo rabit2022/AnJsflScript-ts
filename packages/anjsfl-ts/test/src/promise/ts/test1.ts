@@ -1,11 +1,19 @@
+/**
+ * @file: test1.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/26 23:26
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 // flash TypeScript file test1.ts
 
 import { setTimeout } from "@dom/setTimeout";
 import "es6-promise";
 
-
 // 模拟数据源
-function fetchUserData(userId:number) {
+function fetchUserData(userId: number) {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve({ id: userId, name: "张三" });
@@ -30,12 +38,13 @@ async function getUserInfo() {
 
 // 执行
 console.log("=== 脚本已加载 ===");
-getUserInfo().then((res) => {
-    console.log(res);
-}).catch((err) => {
-    console.log(err)
-});
+getUserInfo()
+    .then((res) => {
+        console.log(res);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 console.log("=== 脚本加载完毕，等待异步结果 ===");
 
 // bug: 无法获取user信息
-

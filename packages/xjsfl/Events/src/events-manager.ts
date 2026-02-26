@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// events-manager.ts
+ */ // events-manager.ts
 import { DocumentEvent, Event, FrameEvent, LayerEvent, MouseEvent } from "./events";
 
 import * as _ from "lodash";

@@ -19,8 +19,8 @@
         }
 
         // window.AnJsflScript?.$ProjectFileDir$?.includes("AnJsflScript")
-        var _window$AnJsflScript;
-        var IS_INCLUDE = ((_window$AnJsflScript = window.AnJsflScript) === null || _window$AnJsflScript === void 0 || (_window$AnJsflScript = _window$AnJsflScript.$ProjectFileDir$) === null || _window$AnJsflScript === void 0 ? void 0 : _window$AnJsflScript.indexOf("AnJsflScript")) !== -1;
+        var _a, _b;
+        var IS_INCLUDE = ((_b = (_a = window.AnJsflScript) === null || _a === void 0 ? void 0 : _a.$ProjectFileDir$) === null || _b === void 0 ? void 0 : _b.indexOf("AnJsflScript")) !== -1;
         if (!IS_INCLUDE) {
             alertMessage("loading might be not allowed!");
             // return;
@@ -54,6 +54,10 @@
 
 
         "@nodejs/__filename",
+
+        // settings for console folders
+        "@anjsfl-ts/Settings",
+
     ]);
 
     // debug

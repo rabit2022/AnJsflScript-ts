@@ -7,10 +7,10 @@
  * @description:
  */
 
-import './DEV/init';
-import {shakeIntensity,headDirection} from "./CHECK/CheckXML";
+import "./DEV/init";
+import { headDirection, shakeIntensity } from "./CHECK/CheckXML";
 import { AUTHOR } from "./DESC/Descriptions";
-AUTHOR
 
+AUTHOR;
 
-console.log(shakeIntensity,headDirection);
+console.log(shakeIntensity, headDirection);

@@ -72,7 +72,6 @@ export async function* walk(spec: ScanSpec): AsyncIterable<string> {
     }
 }
 
-
 /* ---------- 示例 ---------- */
 if (require.main === module) {
     (async () => {

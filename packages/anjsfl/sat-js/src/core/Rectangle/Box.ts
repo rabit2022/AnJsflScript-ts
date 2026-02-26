@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// ## Box
+ */ // ## Box
 //
 // Represents an axis-aligned box, with a width and height.
 
@@ -16,7 +16,7 @@ import { SObject } from "../../base/SObject";
 import { BoxTypeLike } from "../../types/boxType";
 import { VectorLike } from "../../types/vectorType";
 import { Vector } from "../Vector";
-import {Bounds} from "./Bounds";
+import { Bounds } from "./Bounds";
 
 /**
  * @param {Vector=} pos A vector representing the bottom-left of the box (i.e. the smallest x and smallest y value).
@@ -44,6 +44,6 @@ export class Box extends SObject implements BoxTypeLike {
     }
 
     toBounds(): Bounds {
-        return Bounds.fromTopLeft(this.pos,this.width, this.height);
+        return Bounds.fromTopLeft(this.pos, this.width, this.height);
     }
 }

@@ -1,3 +1,12 @@
+/**
+ * @file: init_tsconfig_types.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/26 23:26
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import { CURRENT_PROJECT, TS_CONFIG, TS_CONFIG_TEST } from "../ProjectFileDir";
 
 `

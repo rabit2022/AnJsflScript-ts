@@ -5,9 +5,9 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// --- 测试开始 ---
+ */ // --- 测试开始 ---
 
-import {setTimeout} from "../../../src";
+import { setTimeout } from "../../../src";
 
 console.log("%c🚀 开始执行 setTimeout 模拟器压力测试", "color: blue; font-weight: bold;");
 

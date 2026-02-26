@@ -6,9 +6,7 @@
  * @project: AnJsflScript-ts
  * @description:
  */
-export {CHECK} from "./check";
-export {ENUM} from "./enum";
-export {TYPE} from "./types";
-export {SAT, SAT_T} from './core'
-
-
+export { CHECK } from "./check";
+export { ENUM } from "./enum";
+export { TYPE } from "./types";
+export { SAT, SAT_T } from "./core";

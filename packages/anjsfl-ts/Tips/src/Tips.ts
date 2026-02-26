@@ -12,7 +12,6 @@ QQ：3101829204
 QQ群：1040730457`;
 
 const alertMessageConfig = {
-
     // 特殊模块的提示信息
     "default!": `是否加载模块？
     
@@ -43,8 +42,7 @@ ${AUTHOR}
 
     // Font: Big ASCII 12
     // FirstRun提示信息
-    "loading success!":
-        `
+    "loading success!": `
                                                                                               ##                                                      
    :##:                 #####              :####   ####       :####:                          ##                                   ########           
     ##                  #####              #####   ####      :######                          ##                 ##                ########           
@@ -72,11 +70,9 @@ ${AUTHOR}
 
 `,
 
-
     // Font: Caligraphy
     // 防盗链提示信息
-    "loading might be not allowed!":
-        `
+    "loading might be not allowed!": `
                                                                                                                                                                                      
         **                             ***** **                  ***   ***           *******                                                             ****           *            
      *****                          ******  **** *             ** ***   ***        *       ***                            *                    *        *  *************             

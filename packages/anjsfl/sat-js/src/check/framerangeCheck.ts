@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { FrameRangeLike } from "../types/framerangeType";
+ */ import { FrameRangeLike } from "../types/framerangeType";
 
 export function IsFrameRangeLike(obj: unknown): obj is FrameRangeLike {
     return (

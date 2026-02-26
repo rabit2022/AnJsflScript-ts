@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { SizeLike } from "../types/sizeType";
+ */ import { SizeLike } from "../types/sizeType";
 
 export function IsSizeLike(obj: unknown): obj is SizeLike {
     return (

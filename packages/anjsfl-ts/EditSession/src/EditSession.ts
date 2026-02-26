@@ -1,3 +1,12 @@
+/**
+ * @file: EditSession.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/2/26 23:26
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 // EditSession.ts
 import "@polyfills/symbol-dispose";
 import * as log from "loglevel";
@@ -10,21 +19,21 @@ export class EditSession {
     private exited = false;
 
     constructor(private doc: any) {
-        if (!doc || typeof doc.enterEditMode !== 'function') {
-            throw new Error('Invalid document object: missing enterEditMode');
+        if (!doc || typeof doc.enterEditMode !== "function") {
+            throw new Error("Invalid document object: missing enterEditMode");
         }
-        doc.enterEditMode('inPlace');
-        log.log('✅ Entered in-place edit mode');
+        doc.enterEditMode("inPlace");
+        log.log("✅ Entered in-place edit mode");
     }
 
     /**
      * 确保 exitEditMode 被调用（即使多次调用也安全）
      */
     [Symbol.dispose](): void {
-        if (!this.exited && this.doc && typeof this.doc.exitEditMode === 'function') {
+        if (!this.exited && this.doc && typeof this.doc.exitEditMode === "function") {
             this.doc.exitEditMode();
             this.exited = true;
-            log.log('🔒 Exited in-place edit mode');
+            log.log("🔒 Exited in-place edit mode");
         }
     }
 
@@ -35,5 +44,3 @@ export class EditSession {
     //     return this.doc;
     // }
 }
-
-

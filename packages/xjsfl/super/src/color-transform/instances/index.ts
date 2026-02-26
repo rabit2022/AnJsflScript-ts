@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */export { setInstanceNone } from "./setInstanceNone";
+ */ export { setInstanceNone } from "./setInstanceNone";
 export { setInstanceBrightness } from "./setInstanceBrightness";
 export { setInstanceTint, setInstanceTintRGB } from "./setInstanceTint";
 export { setInstanceAdvancedColor } from "./setInstanceAdvancedColor";

@@ -7,7 +7,6 @@
  * @description: 图层列表类，提供类似Python列表的操作方法
  */
 
-
 /**
  * 图层列表类，提供类似Python列表的操作方法
  */
@@ -20,7 +19,7 @@ class LayerList {
      * @param timeline 时间线对象
      * @param mode 图层模式：'selected' 仅选中的图层，'all' 所有图层
      */
-    constructor(timeline ? : Timeline, mode: "selected" | "all" = "all") {
+    constructor(timeline?: Timeline, mode: "selected" | "all" = "all") {
         const doc = fl.getDocumentDOM();
         this._timeline = timeline || doc.getTimeline();
         this._mode = mode;
@@ -49,7 +48,10 @@ class LayerList {
      * @param layerType 图层类型
      * @returns 新图层的全局索引
      */
-    append(layerName ? : string, layerType: "normal" | "guide" | "guided" | "mask" | "masked" | "folder" = "normal"): number {
+    append(
+        layerName?: string,
+        layerType: "normal" | "guide" | "guided" | "mask" | "masked" | "folder" = "normal"
+    ): number {
         const globalEndIndex = this._toGlobalIndex(this.layers.length - 1);
         this._timeline.currentLayer = globalEndIndex;
 
@@ -70,7 +72,11 @@ class LayerList {
      * @param layerType 图层类型
      * @returns 新图层的全局索引
      */
-    insert(index: number, layerName ? : string, layerType: "normal" | "guide" | "guided" | "mask" | "masked" | "folder" = "normal"): number {
+    insert(
+        index: number,
+        layerName?: string,
+        layerType: "normal" | "guide" | "guided" | "mask" | "masked" | "folder" = "normal"
+    ): number {
         // 选中目标图层位置
         const globalIndex = this._toGlobalIndex(index);
         this._timeline.currentLayer = globalIndex;
@@ -172,7 +178,5 @@ function swapLayers(timeline, layerIndex1, layerIndex2) {
         `layerUtil.js:图层${layerIndex1}(${layers[layerIndex1].name})和图层${layerIndex2}(${layers[layerIndex2].name})交换成功。`
     );
 }
-
-
 
 export default LayerList;

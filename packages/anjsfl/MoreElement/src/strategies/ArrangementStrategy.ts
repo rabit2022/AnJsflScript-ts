@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */// strategies/ArrangementStrategy.ts
+ */ // strategies/ArrangementStrategy.ts
 import { SAT_T } from "@anjsfl/sat";
 
 type Vector_T = SAT_T.Vector;

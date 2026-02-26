@@ -5,7 +5,7 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */import { BaseFill } from "./BaseFill";
+ */ import { BaseFill } from "./BaseFill";
 import { SObject } from "../../base/SObject";
 
 export abstract class BaseFillBuilder<T extends BaseFill> extends SObject {
