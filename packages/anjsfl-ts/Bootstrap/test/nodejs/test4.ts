@@ -6,3 +6,17 @@
  * @project: AnJsflScript-ts
  * @description:
  */
+import {getcwd} from "../../src/FirstRun/cwd";
+import * as process from "node:process";
+
+
+const fl = {
+    scriptURI :process.cwd()
+}
+global.fl = fl;
+
+console.log(global.fl.scriptURI)
+
+const cwd = getcwd();
+console.log("cwd：");
+console.log(cwd);

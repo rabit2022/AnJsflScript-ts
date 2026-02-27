@@ -7,5 +7,49 @@
  * @description:
  */
 
-// export * from "./FirstRun";
+if (typeof fl === "undefined") {
+    throw new Error(
+        "JSFL Error: 'fl' object is not defined. This script must run inside Adobe Animate/Flash."
+    );
+}
+
+// --- 安全获取 fl 数据 ---
+import {SCRIPT_LOAD_QUEUE} from "./FirstRun/config";
 import "./FirstRun";
+import "./Settings";
+import {importFlashScripts} from "./FirstRun/importFlashScripts";
+import {AnJsflScript} from "./AnJsflScript"
+
+const $keys = require("object-keys");
+const globalThis = require('globalthis')();
+
+const bootstrap = () => {
+    try {
+        const scriptPaths = $keys(SCRIPT_LOAD_QUEUE).map(function (key: string) {
+            return SCRIPT_LOAD_QUEUE[key];
+        });
+
+        importFlashScripts(...scriptPaths);
+
+        // fl.trace("[Bootstrap] All scripts loaded successfully.");
+    } catch (e) {
+        const errorMessage = (e as Error).message;
+        fl.trace(`[Bootstrap] CRITICAL ERROR: Initialization failed.`);
+        fl.trace(`[Bootstrap] Details: ${errorMessage}`);
+
+        // 抛出错误停止后续所有操作
+        throw e;
+    }
+};
+
+
+if (!globalThis.AnJsflScript) {
+    globalThis.AnJsflScript = AnJsflScript;
+
+    // requirejs need AnJsflScript
+    bootstrap();
+}
+
+
+// export {AnJsflScript};
+module.exports = AnJsflScript;

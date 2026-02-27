@@ -90,12 +90,12 @@
 
     function Main() {
         window.AnJsflScript = {};
-        window.AnJsflScript.importFlashScripts = importFlashScripts;
+        window.Index.importFlashScripts = importFlashScripts;
         /**
          * 项目文件夹路径
          * @type {string}
          */
-        window.AnJsflScript.$ProjectFileDir$ = getcwd();
+        window.Index.$ProjectFileDir$ = getcwd();
 
         var config = {
             "requirejs": "third/require/requirejs/require-js"

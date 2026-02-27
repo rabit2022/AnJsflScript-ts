@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["@anjsfl-ts/Bootstrap"] = factory();
+		exports["AnJsflScript"] = factory();
 	else
-		root["@anjsfl-ts/Bootstrap"] = factory();
+		root["AnJsflScript"] = factory();
 })(this, function() {
 return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
@@ -110,6 +110,43 @@ module.exports = Object;
 
 /***/ }),
 
+/***/ 455:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+
+
+var define = __webpack_require__(2255);
+var gOPD = __webpack_require__(1686);
+var getPolyfill = __webpack_require__(1993);
+
+module.exports = function shimGlobal() {
+	var polyfill = getPolyfill();
+	if (define.supportsDescriptors) {
+		var descriptor = gOPD(polyfill, 'globalThis');
+		if (
+			!descriptor
+			|| (
+				descriptor.configurable
+				&& (descriptor.enumerable || !descriptor.writable || globalThis !== polyfill)
+			)
+		) {
+			Object.defineProperty(polyfill, 'globalThis', {
+				configurable: true,
+				enumerable: false,
+				value: polyfill,
+				writable: true
+			});
+		}
+	} else if (typeof globalThis !== 'object' || globalThis !== polyfill) {
+		polyfill.globalThis = polyfill;
+	}
+	return polyfill;
+};
+
+
+/***/ }),
+
 /***/ 621:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
@@ -200,30 +237,6 @@ module.exports = function ToPrimitive(input) {
 
 /***/ }),
 
-/***/ 645:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
-    "use strict";
-    // Object.defineProperty(exports, "__esModule", ({ value: true }));
-    exports.isAbsolute = void 0;
-    var startswith = __webpack_require__(8163);
-    var assertPath = function (path) {
-        if (typeof path !== "string") {
-            throw new TypeError("Path must be a string. Received ".concat(JSON.stringify(path), "."));
-        }
-    };
-    var isAbsolute = function (path) {
-        assertPath(path);
-        return startswith(path, 'file:///');
-    };
-    exports.isAbsolute = isAbsolute;
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ }),
-
 /***/ 678:
 /***/ (function(module) {
 
@@ -292,7 +305,7 @@ var $RegExp = GetIntrinsic('%RegExp%');
 var $TypeError = __webpack_require__(1653);
 var $parseInteger = GetIntrinsic('%parseInt%');
 
-var callBound = __webpack_require__(9272);
+var callBound = __webpack_require__(6891);
 var regexTester = __webpack_require__(8863);
 
 var $strSlice = callBound('String.prototype.slice');
@@ -430,6 +443,24 @@ module.exports = function bind(that) {
 
     return bound;
 };
+
+
+/***/ }),
+
+/***/ 1104:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.SCRIPT_LOAD_QUEUE = void 0;
+    exports.SCRIPT_LOAD_QUEUE = {
+        'requirejs-core': 'third/require/requirejs/require-js',
+        'requirejs-config': './config/require/require.config',
+        'polyfills': './config/settings/anjsfl-polyfills'
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ }),
@@ -616,6 +647,24 @@ var hasSymbols = __webpack_require__(4877);
 /** @type {import('.')} */
 module.exports = function hasToStringTagShams() {
 	return hasSymbols() && !!Symbol.toStringTag;
+};
+
+
+/***/ }),
+
+/***/ 1993:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+
+
+var implementation = __webpack_require__(6130);
+
+module.exports = function getPolyfill() {
+	if (typeof __webpack_require__.g !== 'object' || !__webpack_require__.g || __webpack_require__.g.Math !== Math || __webpack_require__.g.Array !== Array) {
+		return implementation;
+	}
+	return __webpack_require__.g;
 };
 
 
@@ -922,6 +971,26 @@ module.exports = reflectApply
 
 /***/ }),
 
+/***/ 3314:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.getcwd = void 0;
+    var SLASH = "/";
+    var getcwd = function () {
+        var scriptURI = fl.scriptURI;
+        var lastSlash = scriptURI.lastIndexOf(SLASH);
+        return lastSlash !== -1 ? scriptURI.substring(0, lastSlash + 1) : "";
+    };
+    exports.getcwd = getcwd;
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
 /***/ 3418:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
@@ -958,6 +1027,19 @@ keysShim.shim = function shimObjectKeys() {
 };
 
 module.exports = keysShim;
+
+
+/***/ }),
+
+/***/ 3480:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(4745), __webpack_require__(5290)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, importFlashScripts_1, AnJsflScript_1) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    AnJsflScript_1.AnJsflScript.importFlashScripts = importFlashScripts_1.importFlashScripts;
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ }),
@@ -1040,6 +1122,66 @@ module.exports = function endsWith(searchString) {
 
 /** @type {import('./round')} */
 module.exports = Math.round;
+
+
+/***/ }),
+
+/***/ 4745:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(3314), __webpack_require__(4763), __webpack_require__(6607)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, cwd_1, isAbsolute_1, normalize_1) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.importFlashScripts = void 0;
+    var importFlashScripts = function () {
+        var paths = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            paths[_i] = arguments[_i];
+        }
+        var cwd = (0, cwd_1.getcwd)();
+        for (var _a = 0, paths_1 = paths; _a < paths_1.length; _a++) {
+            var relativePath = paths_1[_a];
+            var scriptURI = (0, isAbsolute_1.isAbsolute)(relativePath)
+                ? relativePath
+                : "".concat(cwd, "/").concat(relativePath);
+            var finalURI = (0, normalize_1.normalizeScriptPath)(scriptURI);
+            if (FLfile.exists(finalURI)) {
+                fl.runScript(finalURI);
+            }
+            else {
+                var errorMsg = "[importFlashScripts] Error: Cannot find script file [".concat(finalURI, "]");
+                fl.trace(errorMsg);
+                throw new Error(errorMsg);
+            }
+        }
+    };
+    exports.importFlashScripts = importFlashScripts;
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
+/***/ 4763:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.isAbsolute = void 0;
+    var startswith = __webpack_require__(8163);
+    var assertPath = function (path) {
+        if (typeof path !== "string") {
+            throw new TypeError("Path must be a string. Received ".concat(JSON.stringify(path), "."));
+        }
+    };
+    var isAbsolute = function (path) {
+        assertPath(path);
+        return startswith(path, "file:///");
+    };
+    exports.isAbsolute = isAbsolute;
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ }),
@@ -1292,6 +1434,20 @@ module.exports = desc && typeof desc.get === 'function'
 
 /***/ }),
 
+/***/ 5290:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.AnJsflScript = void 0;
+    exports.AnJsflScript = {};
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
 /***/ 5296:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
@@ -1459,21 +1615,21 @@ module.exports = Number.isNaN || function isNaN(a) {
 
 /***/ }),
 
-/***/ 6112:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 6130:
+/***/ (function(module) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
-    "use strict";
-    // Object.defineProperty(exports, "__esModule", ({ value: true }));
-    exports.getcwd = void 0;
-    var getcwd = function () {
-        var scriptURI = fl.scriptURI;
-        var lastSlash = scriptURI.lastIndexOf('/');
-        return lastSlash !== -1 ? scriptURI.substring(0, lastSlash) : '';
-    };
-    exports.getcwd = getcwd;
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+"use strict";
+/* eslint no-negated-condition: 0, no-new-func: 0 */
+
+
+
+if (typeof self !== 'undefined') {
+	module.exports = self;
+} else if (typeof window !== 'undefined') {
+	module.exports = window;
+} else {
+	module.exports = Function('return this')();
+}
 
 
 /***/ }),
@@ -1509,6 +1665,18 @@ module.exports = reflectGetProto
 				return getDunderProto(O);
 			}
 			: null;
+
+
+/***/ }),
+
+/***/ 6282:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(9889)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ }),
@@ -1935,6 +2103,30 @@ module.exports = (typeof Reflect !== 'undefined' && Reflect.getPrototypeOf) || n
 
 /***/ }),
 
+/***/ 6607:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.normalizeScriptPath = void 0;
+    var endswith = __webpack_require__(7718);
+    var normalizeScriptPath = function (uri) {
+        if (endswith(uri, ".js")) {
+            return uri.replace(/\.[^.]*$/, ".jsfl");
+        }
+        if (!endswith(uri, ".jsfl")) {
+            return "".concat(uri, ".jsfl");
+        }
+        return uri;
+    };
+    exports.normalizeScriptPath = normalizeScriptPath;
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
 /***/ 6665:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
@@ -1957,7 +2149,7 @@ module.exports = $Object.getPrototypeOf || null;
 
 var RequireObjectCoercible = __webpack_require__(5296);
 var ToString = __webpack_require__(3539);
-var callBound = __webpack_require__(9272);
+var callBound = __webpack_require__(6891);
 var $replace = callBound('String.prototype.replace');
 
 var mvsIsWS = (/^\s$/).test('\u180E');
@@ -1978,34 +2170,29 @@ module.exports = function trim() {
 
 /***/ }),
 
-/***/ 7215:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 6891:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(6112), __webpack_require__(7974), __webpack_require__(8467)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, cwd_1, config_1, importFlashScripts_1) {
-    "use strict";
-    // Object.defineProperty(exports, "__esModule", ({ value: true }));
-    var keys = __webpack_require__(3418);
-    var bootstrap = function () {
-        window.AnJsflScript = window.AnJsflScript || {};
-        window.AnJsflScript.importFlashScripts = importFlashScripts_1.importFlashScripts;
-        window.AnJsflScript.$ProjectFileDir$ = (0, cwd_1.getcwd)();
-        try {
-            var scriptPaths = keys(config_1.SCRIPT_LOAD_QUEUE).map(function (key) {
-                return config_1.SCRIPT_LOAD_QUEUE[key];
-            });
-            importFlashScripts_1.importFlashScripts.apply(void 0, scriptPaths);
-            fl.trace("[Bootstrap] All scripts loaded successfully.");
-        }
-        catch (e) {
-            var errorMessage = e.message;
-            fl.trace("[Bootstrap] CRITICAL ERROR: Initialization failed.");
-            fl.trace("[Bootstrap] Details: ".concat(errorMessage));
-            throw e;
-        }
-    };
-    bootstrap();
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+"use strict";
+
+
+var GetIntrinsic = __webpack_require__(6409);
+
+var callBindBasic = __webpack_require__(2226);
+
+/** @type {(thisArg: string, searchString: string, position?: number) => number} */
+var $indexOf = callBindBasic([GetIntrinsic('%String.prototype.indexOf%')]);
+
+/** @type {import('.')} */
+module.exports = function callBoundIntrinsic(name, allowMissing) {
+	/* eslint no-extra-parens: 0 */
+
+	var intrinsic = /** @type {(this: unknown, ...args: unknown[]) => unknown} */ (GetIntrinsic(name, !!allowMissing));
+	if (typeof intrinsic === 'function' && $indexOf(name, '.prototype.') > -1) {
+		return callBindBasic(/** @type {const} */ ([intrinsic]));
+	}
+	return intrinsic;
+};
 
 
 /***/ }),
@@ -2016,7 +2203,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 "use strict";
 
 
-var callBound = __webpack_require__(9272);
+var callBound = __webpack_require__(6891);
 
 var getDay = callBound('Date.prototype.getDay');
 /** @type {import('.')} */
@@ -2065,7 +2252,7 @@ module.exports = function isObject(x) {
 "use strict";
 
 
-var callBound = __webpack_require__(9272);
+var callBound = __webpack_require__(6891);
 var $toString = callBound('Object.prototype.toString');
 var hasSymbols = __webpack_require__(2431)();
 var safeRegexTest = __webpack_require__(8863);
@@ -2194,27 +2381,33 @@ module.exports = Error;
 /***/ 7946:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(7215)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(1104), __webpack_require__(4745), __webpack_require__(5290), __webpack_require__(3480), __webpack_require__(6282)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, config_1, importFlashScripts_1, AnJsflScript_1) {
     "use strict";
     // Object.defineProperty(exports, "__esModule", ({ value: true }));
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ }),
-
-/***/ 7974:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
-    "use strict";
-    // Object.defineProperty(exports, "__esModule", ({ value: true }));
-    exports.SCRIPT_LOAD_QUEUE = void 0;
-    exports.SCRIPT_LOAD_QUEUE = {
-        'requirejs-core': 'third/require/requirejs/require-js',
-        'requirejs-config': './config/require/require.config',
-        'polyfills': './config/settings/anjsfl-polyfills'
+    if (typeof fl === "undefined") {
+        throw new Error("JSFL Error: 'fl' object is not defined. This script must run inside Adobe Animate/Flash.");
+    }
+    var $keys = __webpack_require__(3418);
+    var globalThis = __webpack_require__(9272)();
+    var bootstrap = function () {
+        try {
+            var scriptPaths = $keys(config_1.SCRIPT_LOAD_QUEUE).map(function (key) {
+                return config_1.SCRIPT_LOAD_QUEUE[key];
+            });
+            importFlashScripts_1.importFlashScripts.apply(void 0, scriptPaths);
+        }
+        catch (e) {
+            var errorMessage = e.message;
+            fl.trace("[Bootstrap] CRITICAL ERROR: Initialization failed.");
+            fl.trace("[Bootstrap] Details: ".concat(errorMessage));
+            throw e;
+        }
     };
+    if (!globalThis.AnJsflScript) {
+        globalThis.AnJsflScript = AnJsflScript_1.AnJsflScript;
+        bootstrap();
+    }
+    module.exports = AnJsflScript_1.AnJsflScript;
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
@@ -2321,43 +2514,6 @@ module.exports = RangeError;
 
 /***/ }),
 
-/***/ 8467:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(6112), __webpack_require__(645), __webpack_require__(9173)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, cwd_1, isAbsolute_1, normalize_1) {
-    "use strict";
-    // Object.defineProperty(exports, "__esModule", ({ value: true }));
-    exports.importFlashScripts = void 0;
-    var importFlashScripts = function () {
-        var paths = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            paths[_i] = arguments[_i];
-        }
-        var cwd = (0, cwd_1.getcwd)();
-        for (var _a = 0, paths_1 = paths; _a < paths_1.length; _a++) {
-            var relativePath = paths_1[_a];
-            var scriptURI = (0, isAbsolute_1.isAbsolute)(relativePath)
-                ? relativePath
-                : "".concat(cwd, "/").concat(relativePath);
-            var finalURI = (0, normalize_1.normalizeScriptPath)(scriptURI);
-            if (FLfile.exists(finalURI)) {
-                fl.runScript(finalURI);
-            }
-            else {
-                var errorMsg = "[importFlashScripts] Error: Cannot find script file [".concat(finalURI, "]");
-                fl.trace(errorMsg);
-                throw new Error(errorMsg);
-            }
-        }
-        ;
-    };
-    exports.importFlashScripts = importFlashScripts;
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ }),
-
 /***/ 8530:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
@@ -2460,7 +2616,7 @@ module.exports = function ToPrimitive(input) {
 "use strict";
 
 
-var callBound = __webpack_require__(9272);
+var callBound = __webpack_require__(6891);
 var isRegex = __webpack_require__(9941);
 
 var $exec = callBound('RegExp.prototype.exec');
@@ -2526,30 +2682,6 @@ module.exports = function floor(x) {
 
 /***/ }),
 
-/***/ 9173:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
-    "use strict";
-    // Object.defineProperty(exports, "__esModule", ({ value: true }));
-    exports.normalizeScriptPath = void 0;
-    var endswith = __webpack_require__(7718);
-    var normalizeScriptPath = function (uri) {
-        if (endswith(uri, '.js')) {
-            return uri.replace(/\.[^.]*$/, '.jsfl');
-        }
-        if (!endswith(uri, '.jsfl')) {
-            return "".concat(uri, ".jsfl");
-        }
-        return uri;
-    };
-    exports.normalizeScriptPath = normalizeScriptPath;
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ }),
-
 /***/ 9234:
 /***/ (function(module) {
 
@@ -2582,23 +2714,23 @@ module.exports = Object.getOwnPropertyDescriptor;
 "use strict";
 
 
-var GetIntrinsic = __webpack_require__(6409);
+var defineProperties = __webpack_require__(2255);
 
-var callBindBasic = __webpack_require__(2226);
+var implementation = __webpack_require__(6130);
+var getPolyfill = __webpack_require__(1993);
+var shim = __webpack_require__(455);
 
-/** @type {(thisArg: string, searchString: string, position?: number) => number} */
-var $indexOf = callBindBasic([GetIntrinsic('%String.prototype.indexOf%')]);
+var polyfill = getPolyfill();
 
-/** @type {import('.')} */
-module.exports = function callBoundIntrinsic(name, allowMissing) {
-	/* eslint no-extra-parens: 0 */
+var getGlobal = function () { return polyfill; };
 
-	var intrinsic = /** @type {(this: unknown, ...args: unknown[]) => unknown} */ (GetIntrinsic(name, !!allowMissing));
-	if (typeof intrinsic === 'function' && $indexOf(name, '.prototype.') > -1) {
-		return callBindBasic(/** @type {const} */ ([intrinsic]));
-	}
-	return intrinsic;
-};
+defineProperties(getGlobal, {
+	getPolyfill: getPolyfill,
+	implementation: implementation,
+	shim: shim
+});
+
+module.exports = getGlobal;
 
 
 /***/ }),
@@ -2628,13 +2760,72 @@ module.exports = function shimStartsWith() {
 
 /***/ }),
 
+/***/ 9889:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(5290), __webpack_require__(3314)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, AnJsflScript_1, cwd_1) {
+    "use strict";
+    var _a;
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    var VERSION_MAP = {
+        "9": "CS3",
+        "10": "CS4",
+        "11": "CS5",
+        "12": "CS6",
+        "13": "CC",
+        "14": "CC 2014",
+        "15": "CC 2015",
+        "16": "Animate CC",
+        "17": "Animate CC 2017",
+        "18": "Animate CC 2018",
+        "19": "Animate CC 2019",
+        "20": "Animate 2020",
+        "21": "Animate 2021",
+        "22": "Animate 2022",
+        "23": "Animate 2023",
+        "24": "Animate 2024"
+    };
+    var APP_VERSION_STRING = fl.version;
+    var PLATFORM_CODE = APP_VERSION_STRING.length >= 3
+        ? APP_VERSION_STRING.substr(0, 3).toLowerCase()
+        : "unknown";
+    var VERSION_NUMBER = 0;
+    var VERSION_NAME = "Unknown";
+    var versionMatch = APP_VERSION_STRING.match(/\w+\s+(\d+)/);
+    if (versionMatch && versionMatch[1]) {
+        VERSION_NUMBER = parseInt(versionMatch[1], 10);
+        VERSION_NAME = (_a = VERSION_MAP[String(VERSION_NUMBER)]) !== null && _a !== void 0 ? _a : "Unknown";
+    }
+    AnJsflScript_1.AnJsflScript.app = {
+        platform: PLATFORM_CODE,
+        version: VERSION_NUMBER,
+        name: VERSION_NAME,
+        os: {
+            mac: PLATFORM_CODE === "mac",
+            win: PLATFORM_CODE === "win"
+        }
+    };
+    var cwd = (0, cwd_1.getcwd)();
+    AnJsflScript_1.AnJsflScript.folders = {
+        AnJsflScript: cwd,
+        Log: "".concat(cwd, "config/Log"),
+        flash: fl.configURI,
+        swf: "".concat(fl.configURI, "WindowSWF/"),
+        "@xjsfl/XUL": "".concat(cwd, "packages/xjsfl/XUL/")
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
 /***/ 9941:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
 
 
-var callBound = __webpack_require__(9272);
+var callBound = __webpack_require__(6891);
 var hasToStringTag = __webpack_require__(1944)();
 var hasOwn = __webpack_require__(8187);
 var gOPD = __webpack_require__(1686);
@@ -2796,10 +2987,23 @@ module.exports = function defineDataProperty(
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/global */
+/******/ 	!function() {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	}();
+/******/ 	
+/************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module used 'module' so it can't be inlined
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	var __webpack_exports__ = __webpack_require__(7946);
 /******/ 	
 /******/ 	return __webpack_exports__;

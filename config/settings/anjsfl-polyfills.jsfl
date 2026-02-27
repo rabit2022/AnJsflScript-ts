@@ -31,14 +31,10 @@
 
     // 导入shims, 避免其他模块依赖时报错
     require([
-
-        // "es6-promise", // babel 转译 依赖 Promise
-
         "es5-shim", // es5,es2009
         "es5-sham",
 
         "json3",// es5,es2009
-
 
         // Symbol    oxide.ts need
         // Set iterator need Symbol,sometimes babel translate code might be use [Symbol.Iterator] function to adjust it.
@@ -51,30 +47,22 @@
 
         // luxon need es7
         // "es7-shim", // es7,es2016   es8,es2017
-
-
-        "@nodejs/__filename",
-
-        // settings for console folders
-        "@anjsfl-ts/Settings",
-
     ]);
 
-    // debug
+    // dom 相关
     require([
-        // dom 相关
         "console",// loglevel 依赖 console
-        "@polyfill/cookie",// loglevel依赖 document.cookie
 
-        "console.stack", "console.table"
-    ]);
+        // debug
+        "console.stack", "console.table"]);
 
     // path-browserify need process global variable
-    require(['process'], function (process) {
+    require(['process', "@nodejs/__filename"], function (process) {
         window.process = process;
     })
 
-    require(["loglevel"], function (log) {
+    // loglevel依赖 document.cookie
+    require(["@polyfill/cookie", "loglevel"], function (cookie, log) {
         // 禁用log
         log.setDefaultLevel(log.levels.ERROR);
     });

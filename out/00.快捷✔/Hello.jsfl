@@ -11,21 +11,22 @@
 
 (function () {
     require(["require", "_exports", "@anjsfl/validation"], function (require, exports, validation_1) {
-        "use strict";
-        console.log("Hello World!");
-        var dom = fl.getDocumentDOM();
-        var check = (0, validation_1.CheckDocument)(dom);
-        if (check.isOk()) {
-            var doc = check.unwrap();
-            console.log("文档有效:", doc);
-        } else {
-            var errorMsg = check.unwrapErr();
-            console.log("文档无效:", errorMsg);
-        }
-
-        var source = 'string';
-        var b = typeof source === 'string'
-        console.log(b)
+        // "use strict";
+        // console.log("Hello World!");
+        // var dom = fl.getDocumentDOM();
+        // var check = (0, validation_1.CheckDocument)(dom);
+        // if (check.isOk()) {
+        //     var doc = check.unwrap();
+        //     console.log("文档有效:", doc);
+        // } else {
+        //     var errorMsg = check.unwrapErr();
+        //     console.log("文档无效:", errorMsg);
+        // }
+        //
+        // var source = 'string';
+        // var b = typeof source === 'string'
+        // console.log(b)
+        console.log(typeof AnJsflScript.ISRUNNING);
     });
 
 })();

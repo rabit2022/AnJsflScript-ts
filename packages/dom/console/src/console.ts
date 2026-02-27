@@ -24,13 +24,13 @@ const FILE_LOG = `${LOG_FOLDER}/file.log`;
 // ========================================================================
 
 enum LogLevel {
-    TRACE = "TRACE",
-    DEBUG = "DEBUG",
-    LOG = "LOG",
-    INFO = "INFO",
-    WARN = "WARN",
-    ERROR = "ERROR",
-    FILE = "FILE"
+  TRACE = "TRACE",
+  DEBUG = "DEBUG",
+  LOG = "LOG",
+  INFO = "INFO",
+  WARN = "WARN",
+  ERROR = "ERROR",
+  FILE = "FILE",
 }
 
 // ========================================================================
@@ -41,97 +41,97 @@ enum LogLevel {
  * 左侧填充字符串（兼容 JSFL）
  */
 function padLeft(input: any, width: number, padChar: String = "0") {
-    // padChar = padChar || '0';
-    var str = String(input);
-    while (str.length < width) str = padChar + str;
-    return str;
+  // padChar = padChar || '0';
+  var str = String(input);
+  while (str.length < width) str = padChar + str;
+  return str;
 }
 
 /**
  * 路径解析，类似 Node.js 的 path.resolve（私有函数）
  */
 function pathResolve(target: string, base: string): string {
-    try {
-        var scriptPath = uriToPath(target);
-        var basePath = uriToPath(base);
+  try {
+    var scriptPath = uriToPath(target);
+    var basePath = uriToPath(base);
 
-        // 非子目录
-        if (scriptPath.indexOf(basePath) !== 0) {
-            // fl.trace(`⚠️ 脚本不在项目目录下,可能在事件循环中 ${scriptPath},${basePath}`);
-            return scriptPath;
-        }
-
-        // 最后补充"/"
-        if (basePath.charAt(basePath.length - 1) !== "/") basePath += "/";
-
-        return scriptPath.substring(basePath.length);
-    } catch (e) {
-        return "unknown.jsfl";
+    // 非子目录
+    if (scriptPath.indexOf(basePath) !== 0) {
+      // fl.trace(`⚠️ 脚本不在项目目录下,可能在事件循环中 ${scriptPath},${basePath}`);
+      return scriptPath;
     }
+
+    // 最后补充"/"
+    if (basePath.charAt(basePath.length - 1) !== "/") basePath += "/";
+
+    return scriptPath.substring(basePath.length);
+  } catch (e) {
+    return "unknown.jsfl";
+  }
 }
 
 /**
  * 格式化消息（支持多参数）
  */
 function formatMessage(args: IArguments): string {
-    return Array.prototype.slice.call(args).join(" ");
+  return Array.prototype.slice.call(args).join(" ");
 }
 
 /**
  * 写入日志到文件
  */
 function writeToLog(
-    message: string,
-    type: string = LogLevel.INFO,
-    level: number | boolean = 0
+  message: string,
+  type: string = LogLevel.INFO,
+  level: number | boolean = 0,
 ): void {
-    // 参数标准化
-    const logType: string = typeof type === "string" ? type : LogLevel.INFO;
-    const logLevel: number = typeof level === "number" ? level : level === true ? 1 : 0;
+  // 参数标准化
+  const logType: string = typeof type === "string" ? type : LogLevel.INFO;
+  const logLevel: number = typeof level === "number" ? level : level ? 1 : 0;
 
-    // 时间：YYYY-MM-DD HH:mm:ss.SSS
-    const now = new Date();
-    var asctime =
-        now.getFullYear() +
-        "-" +
-        padLeft(now.getMonth() + 1, 2) +
-        "-" +
-        padLeft(now.getDate(), 2) +
-        " " +
-        padLeft(now.getHours(), 2) +
-        ":" +
-        padLeft(now.getMinutes(), 2) +
-        ":" +
-        padLeft(now.getSeconds(), 2) +
-        "." +
-        padLeft(now.getMilliseconds(), 3);
+  // 时间：YYYY-MM-DD HH:mm:ss.SSS
+  const now = new Date();
+  var asctime =
+    now.getFullYear() +
+    "-" +
+    padLeft(now.getMonth() + 1, 2) +
+    "-" +
+    padLeft(now.getDate(), 2) +
+    " " +
+    padLeft(now.getHours(), 2) +
+    ":" +
+    padLeft(now.getMinutes(), 2) +
+    ":" +
+    padLeft(now.getSeconds(), 2) +
+    "." +
+    padLeft(now.getMilliseconds(), 3);
 
-    // 日志级别（左对齐 8 字符）
-    let levelname = (logType || "INFO").toUpperCase();
-    while (levelname.length < 8) {
-        levelname += " ";
-    }
+  // 日志级别（左对齐 8 字符）
+  let levelname = (logType || "INFO").toUpperCase();
+  while (levelname.length < 8) {
+    levelname += " ";
+  }
 
-    // 文件信息（JSFL 无法获取行号/函数名，使用占位）
-    // NOTE:fl.addEventListener注册的函数，调用打印时 fl.scriptURI = unknown
-    var scriptURI = fl.scriptURI;
-    var baseDir = AnJsflScript.folders.AnJsflScript;
+  // 文件信息（JSFL 无法获取行号/函数名，使用占位）
+  // NOTE:fl.addEventListener注册的函数，调用打印时 fl.scriptURI = unknown
+  var scriptURI = fl.scriptURI;
+  var baseDir = AnJsflScript.folders.AnJsflScript;
 
-    // fl.trace(scriptURI);
-    // fl.trace(baseDir);
+  // fl.trace(scriptURI);
+  // fl.trace(baseDir);
 
-    const short_path = pathResolve(scriptURI, baseDir);
+  const short_path = pathResolve(scriptURI, baseDir);
 
-    // 构建日志行
-    const logLine = `${asctime} | ${levelname} | ${short_path} | ${message}`;
+  // 构建日志行
+  const logLine = `${asctime} | ${levelname} | ${short_path} | ${message}`;
 
-    // 写入主日志
-    FLfile.write(MAIN_LOG, logLine + "\n", "append");
+  // 写入主日志
+  FLfile.write(MAIN_LOG, logLine + "\n", "append");
 
-    // 额外写入 file.log（仅当类型为 FILE）
-    if (logType === LogLevel.FILE) {
-        FLfile.write(FILE_LOG, logLine + "\n", "append");
-    }
+  // 额外写入 file.log（仅当类型为 FILE）
+  if (logType === LogLevel.FILE) {
+    FLfile.write(FILE_LOG, logLine + "\n", "append");
+  }
 }
 
 // ========================================================================
@@ -139,158 +139,165 @@ function writeToLog(
 // ========================================================================
 
 class EnhancedConsole {
-    private timers: Record<string, number> = {};
-    private counters: Record<string, number> = {};
+  private timers: Record<string, number> = {};
+  private counters: Record<string, number> = {};
 
-    // ========================================================================
-    // 日志方法
-    // ========================================================================
+  // ========================================================================
+  // 日志方法
+  // ========================================================================
 
-    // trace(...args: any[]): void {
-    //     const msg = formatMessage(arguments);
-    //     trace("\n⚡admin TRACE ❯❯ " + msg + "\n");
-    //     writeToLog(msg, LogLevel.TRACE, 3);
-    // }
+  // trace(...args: any[]): void {
+  //     const msg = formatMessage(arguments);
+  //     trace("\n⚡admin TRACE ❯❯ " + msg + "\n");
+  //     writeToLog(msg, LogLevel.TRACE, 3);
+  // }
 
-    debug(...args: any[]): void {
-        const msg = formatMessage(arguments);
-        trace("\n⚡admin DEBUG ❯❯ " + msg + "\n");
-        writeToLog(msg, LogLevel.DEBUG, 3);
+  debug(...args: any[]): void {
+    const msg = formatMessage(arguments);
+    trace("\n⚡admin DEBUG ❯❯ " + msg + "\n");
+    writeToLog(msg, LogLevel.DEBUG, 3);
+  }
+
+  log(...args: any[]): void {
+    const msg = formatMessage(arguments);
+    trace("\n⚡admin LOG ❯❯ " + msg + "\n");
+    writeToLog(msg, LogLevel.LOG, 3);
+  }
+
+  info(...args: any[]): void {
+    const msg = formatMessage(arguments);
+    trace("\n⚡admin INFO ❯❯ " + msg + "\n");
+    writeToLog(msg, LogLevel.INFO, 3);
+  }
+
+  warn(...args: any[]): void {
+    const msg = formatMessage(arguments);
+    trace("\n⚡admin WARNING ❯❯ " + msg + "\n");
+    writeToLog(msg, LogLevel.WARN, 3);
+  }
+
+  error(...args: any[]): void {
+    const msg = formatMessage(arguments);
+    trace("\n⚡admin ERROR ❯❯ " + msg + "\n");
+    writeToLog(msg, LogLevel.ERROR, 3);
+  }
+
+  file(...args: any[]): void {
+    const msg = formatMessage(arguments);
+    writeToLog(msg, LogLevel.FILE);
+  }
+
+  clear(type?: string): void {
+    // @ts-ignore
+    fl.outputPanel.clear();
+    const name = type === LogLevel.FILE ? "file" : "main";
+    FLfile.remove(`${LOG_FOLDER}/${name}.log`);
+    trace(name + ".log reset");
+  }
+
+  // ========================================================================
+  // 计时器方法
+  // ========================================================================
+
+  time(label: string = "default"): void {
+    if (this.timers[label]) {
+      this.warn('Timer "' + label + '" already exists.');
+      return;
     }
+    this.timers[label] = Date.now();
+    this.info('Timer "' + label + '" started.');
+  }
 
-    log(...args: any[]): void {
-        const msg = formatMessage(arguments);
-        trace("\n⚡admin LOG ❯❯ " + msg + "\n");
-        writeToLog(msg, LogLevel.LOG, 3);
+  timeEnd(label: string = "default"): void {
+    if (!this.timers[label]) {
+      this.warn('Timer "' + label + '" does not exist.');
+      return;
     }
+    const duration = Date.now() - this.timers[label];
+    delete this.timers[label];
+    this.info('Timer "' + label + '": ' + duration + "ms");
+  }
 
-    info(...args: any[]): void {
-        const msg = formatMessage(arguments);
-        trace("\n⚡admin INFO ❯❯ " + msg + "\n");
-        writeToLog(msg, LogLevel.INFO, 3);
+  // ========================================================================
+  // 计数器方法
+  // ========================================================================
+
+  count(label: string = "default"): void {
+    this.counters[label] = (this.counters[label] || 0) + 1;
+    this.info('"' + label + '" was called ' + this.counters[label] + " times.");
+  }
+
+  countReset(label: string = "default"): void {
+    if (this.counters[label] === undefined) {
+      this.warn('Counter "' + label + '" does not exist.');
+      return;
     }
+    delete this.counters[label];
+    this.info('Counter "' + label + '" has been reset.');
+  }
 
-    warn(...args: any[]): void {
-        const msg = formatMessage(arguments);
-        trace("\n⚡admin WARNING ❯❯ " + msg + "\n");
-        writeToLog(msg, LogLevel.WARN, 3);
+  // ========================================================================
+  // 断言方法
+  // ========================================================================
+
+  assert(expression: boolean, message?: string): void {
+    if (!expression) {
+      throw new Error(message || "Assertion failed");
     }
+  }
 
-    error(...args: any[]): void {
-        const msg = formatMessage(arguments);
-        trace("\n⚡admin ERROR ❯❯ " + msg + "\n");
-        writeToLog(msg, LogLevel.ERROR, 3);
-    }
+  // ========================================================================
+  // 工具方法
+  // ========================================================================
 
-    file(...args: any[]): void {
-        const msg = formatMessage(arguments);
-        writeToLog(msg, LogLevel.FILE);
-    }
+  /**
+   * 获取所有计时器
+   */
+  getTimers(): Record<string, number> {
+    return { ...this.timers };
+  }
 
-    clear(type?: string): void {
-        // @ts-ignore
-        fl.outputPanel.clear();
-        const name = type === LogLevel.FILE ? "file" : "main";
-        FLfile.remove(`${LOG_FOLDER}/${name}.log`);
-        trace(name + ".log reset");
-    }
+  /**
+   * 获取所有计数器
+   */
+  getCounters(): Record<string, number> {
+    return { ...this.counters };
+  }
 
-    // ========================================================================
-    // 计时器方法
-    // ========================================================================
+  /**
+   * 重置所有计时器和计数器
+   */
+  resetAll(): void {
+    this.timers = {};
+    this.counters = {};
+    this.info("All timers and counters have been reset.");
+  }
 
-    time(label: string = "default"): void {
-        if (this.timers[label]) {
-            this.warn('Timer "' + label + '" already exists.');
-            return;
-        }
-        this.timers[label] = Date.now();
-        this.info('Timer "' + label + '" started.');
-    }
+  private groupStack: string[] = [];
 
-    timeEnd(label: string = "default"): void {
-        if (!this.timers[label]) {
-            this.warn('Timer "' + label + '" does not exist.');
-            return;
-        }
-        const duration = Date.now() - this.timers[label];
-        delete this.timers[label];
-        this.info('Timer "' + label + '": ' + duration + "ms");
-    }
+  group(label: string = "default"): void {
+    const indent = "  ".repeat(this.groupStack.length);
+    const lineLength = Math.max(
+      30 - label.length - this.groupStack.length * 2,
+      10,
+    );
 
-    // ========================================================================
-    // 计数器方法
-    // ========================================================================
+    trace(`${indent}┌─ ${label} ${"─".repeat(lineLength)}┐`);
+    this.groupStack.push(label);
+  }
 
-    count(label: string = "default"): void {
-        this.counters[label] = (this.counters[label] || 0) + 1;
-        this.info('"' + label + '" was called ' + this.counters[label] + " times.");
-    }
+  groupEnd() {
+    if (this.groupStack.length === 0) return;
 
-    countReset(label: string = "default"): void {
-        if (this.counters[label] === undefined) {
-            this.warn('Counter "' + label + '" does not exist.');
-            return;
-        }
-        delete this.counters[label];
-        this.info('Counter "' + label + '" has been reset.');
-    }
+    const label = this.groupStack.pop() || "";
+    const indent = "  ".repeat(this.groupStack.length);
+    const lineLength = Math.max(
+      30 - label.length - this.groupStack.length * 2,
+      10,
+    );
 
-    // ========================================================================
-    // 断言方法
-    // ========================================================================
-
-    assert(expression: boolean, message?: string): void {
-        if (!expression) {
-            throw new Error(message || "Assertion failed");
-        }
-    }
-
-    // ========================================================================
-    // 工具方法
-    // ========================================================================
-
-    /**
-     * 获取所有计时器
-     */
-    getTimers(): Record<string, number> {
-        return { ...this.timers };
-    }
-
-    /**
-     * 获取所有计数器
-     */
-    getCounters(): Record<string, number> {
-        return { ...this.counters };
-    }
-
-    /**
-     * 重置所有计时器和计数器
-     */
-    resetAll(): void {
-        this.timers = {};
-        this.counters = {};
-        this.info("All timers and counters have been reset.");
-    }
-
-    private groupStack: string[] = [];
-
-    group(label: string = "default"): void {
-        const indent = "  ".repeat(this.groupStack.length);
-        const lineLength = Math.max(30 - label.length - this.groupStack.length * 2, 10);
-
-        trace(`${indent}┌─ ${label} ${"─".repeat(lineLength)}┐`);
-        this.groupStack.push(label);
-    }
-    groupEnd() {
-        if (this.groupStack.length === 0) return;
-
-        const label = this.groupStack.pop() || "";
-        const indent = "  ".repeat(this.groupStack.length);
-        const lineLength = Math.max(30 - label.length - this.groupStack.length * 2, 10);
-
-        trace(`${indent}└─ ${label} ${"─".repeat(lineLength)}┘`);
-    }
+    trace(`${indent}└─ ${label} ${"─".repeat(lineLength)}┘`);
+  }
 }
 
 // ========================================================================

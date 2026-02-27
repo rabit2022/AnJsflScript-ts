@@ -14,6 +14,8 @@ fl.outputPanel.clear();
 // 所以也要重置setTimeout
 window.setTimeout = undefined;
 
+window.AnJsflScript = undefined;
+
 
 require(["loglevel"], function(log) {
     log.setLevel(log.levels.TRACE);
@@ -25,3 +27,4 @@ window.requirejs = undefined;
 window.require = undefined;
 window.define = undefined;
 
+fl.trace("All Parameters Cleared!");

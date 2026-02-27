@@ -15,7 +15,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'out'),
         filename: MODULE_NAME + '.jsfl', // 输出为 .jsfl 文件
-        library: MODULE_NAME,  // 暴露为全局变量 Validation（可选）
+        library:"AnJsflScript",  // 暴露为全局变量 Validation（可选）
         libraryTarget: 'umd',   // 使用 var 暴露（适合 JSFL）
         clean: true ,            // 每次构建清空 dist
 

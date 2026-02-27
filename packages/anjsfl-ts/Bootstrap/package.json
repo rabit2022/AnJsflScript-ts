@@ -32,11 +32,9 @@
     "webpack-cli": "6.0.1"
   },
   "dependencies": {
-    "array.from": "1.1.6",
-    "es-map": "2.0.1",
+    "globalthis": "1.0.4",
     "object-keys": "1.1.1",
     "string.prototype.endswith": "1.0.2",
-    "string.prototype.includes": "2.0.1",
     "string.prototype.startswith": "1.0.1"
   }
 }
