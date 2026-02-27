@@ -36,6 +36,7 @@
 
     // 生成package,json文件，方便注释
     "preinstall": "pnpm add -w json5 && tsx ./tools/project/src/package/sync-package.ts && npx only-allow pnpm ",
+    "update-package-json": "tsx ./tools/project/src/package/sync-package.ts",
 
 
     // ts编译 jsfl，
@@ -120,7 +121,7 @@
     // jest test相关
     "jest": "30.2.0",
     "@types/jest": "30.0.0",
-    "minimatch": "10.1.1",
+//    "minimatch": "10.1.1",
     "strip-json-comments": "3.1.0",
     "ts-jest": "29.4.6",
     // =================================================================================
@@ -153,6 +154,7 @@
 
 //    "H:\project\js\AnJsflScript-ts\packages\anjsfl"
     "@anjsfl/validation": "workspace:*",
+    "@anjsfl/parser": "workspace:*",
 
 
     //    "H:\project\js\AnJsflScript-ts\packages\anjsfl-ts"

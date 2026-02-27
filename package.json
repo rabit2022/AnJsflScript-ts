@@ -26,6 +26,7 @@
     "format": "prettier --write **/*.ts --config config/codestyle/.prettierrc --ignore-path config/codestyle/.prettierignore",
     "generate_config": "tsx ./tools/project/src/require/generate_config.ts",
     "preinstall": "pnpm add -w json5 && tsx ./tools/project/src/package/sync-package.ts && npx only-allow pnpm ",
+    "update-package-json": "tsx ./tools/project/src/package/sync-package.ts",
     "build": "npx tsc && tsx ./tools/project/src/typescript/build_all.ts",
     "clean": "npx tsc --build --clean && tsx ./tools/project/clean/CleanAll.ts",
     "addHeaders": "tsx ./tools/project/src/headers/addFileHeader.ts"
@@ -51,7 +52,6 @@
     "prettier": "3.5.2",
     "jest": "30.2.0",
     "@types/jest": "30.0.0",
-    "minimatch": "10.1.1",
     "strip-json-comments": "3.1.0",
     "ts-jest": "29.4.6",
     "ts-loader": "9.5.4",
@@ -69,6 +69,7 @@
     "json5": "2.2.3",
     "@xjsfl/UI": "workspace:*",
     "@anjsfl/validation": "workspace:*",
+    "@anjsfl/parser": "workspace:*",
     "@anjsfl-ts/EditSession": "workspace:*",
     "@dom/setTimeout": "workspace:*",
     "console.stack": "workspace:*",
