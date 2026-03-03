@@ -1,32 +1,31 @@
 # .gitattributes
 
 # 标记输出目录为生成文件 (忽略统计)
-/out/**/* linguist-generated=true
-/src/lib/out/**/* linguist-generated=true
-/src/test/**/* linguist-generated=true
+/out/** linguist-generated=true
+/src/lib/out/** linguist-generated=true
+/src/test/** linguist-generated=true
 
 # 标记第三方库目录为生成文件 (忽略统计)
-/third/**/* linguist-generated=true
+/third/** linguist-generated=true
 
 
 # 标记 packages 目录下所有 .jsfl 文件为生成文件
 /packages/**/out/*.jsfl linguist-generated=true
 /packages/**/*.js linguist-generated=true
 /packages/**/*.json linguist-generated=true
-/packages/**/tools/**/* linguist-generated=true
-/packages/**/test/**/* linguist-generated=true
+/packages/**/tools/** linguist-generated=true
+/packages/**/test/** linguist-generated=true
 
 # 消费者包
 /src/business_packages/**/out/*.jsfl linguist-generated=true
 /src/business_packages/**/*.js linguist-generated=true
 /src/business_packages/**/*.json linguist-generated=true
-/src/business_packages/**/tools/**/* linguist-generated=true
-/src/business_packages/**/test/**/* linguist-generated=true
+/src/business_packages/**/tools/** linguist-generated=true
+/src/business_packages/**/test/** linguist-generated=true
 
 # types
 # 强制识别为 TypeScript，并声明不是生成的代码
 /types/**/*.d.ts linguist-language=TypeScript linguist-generated=false
-/types/**/*.d.jsfl linguist-language=TypeScript linguist-generated=true
 /types/jsfl/cannotRun/** linguist-generated=true
 
 # tools
