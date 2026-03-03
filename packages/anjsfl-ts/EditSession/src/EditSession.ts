@@ -8,7 +8,7 @@
  */
 
 // EditSession.ts
-import "@polyfills/symbol-dispose";
+import "@polyfill/symbol-dispose";
 import * as log from "loglevel";
 
 /**

@@ -18,7 +18,7 @@ if (!IsFlash()) {
 
 AUTHOR;
 
-export const DIALOGUE = require("../../asset/04.一键魔化.xml");
+export const DIALOGUE = require("../../asset/UI.xml");
 
 // import DIALOGUE from '../../asset/01.虾仁摇头.xml' with{type:"xml"};
 //

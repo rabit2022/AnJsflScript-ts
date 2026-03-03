@@ -2,7 +2,7 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("@polyfills/symbol-dispose"), require("loglevel"));
 	else if(typeof define === 'function' && define.amd)
-		define(["@polyfills/symbol-dispose", "loglevel"], factory);
+		define(["@polyfill/symbol-dispose", "loglevel"], factory);
 	else if(typeof exports === 'object')
 		exports["EditSession"] = factory(require("@polyfills/symbol-dispose"), require("loglevel"));
 	else

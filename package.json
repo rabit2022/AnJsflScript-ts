@@ -74,6 +74,5 @@
     "@dom/setTimeout": "workspace:*",
     "console.stack": "workspace:*",
     "console.table": "workspace:*",
-    "@polyfills/symbol-dispose": "workspace:*"
   }
 }

@@ -170,8 +170,5 @@
 
 //    "H:\project\js\AnJsflScript-ts\packages\polyfills"
 
-    // using 语法，TC39 阶段，Explicit Resource Management（显式资源管理）
-    "@polyfills/symbol-dispose": "workspace:*"
-
   }
 }

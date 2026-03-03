@@ -27,7 +27,7 @@ dist/**
 output/**
 **/dist/**
 
-types/jsfl/**
+#types/jsfl/**
 
 # xlsx运行时,git报错
 **/~$**.xlsx
