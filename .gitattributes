@@ -23,6 +23,9 @@
 /src/business_packages/**/tools/**/* linguist-generated=true
 /src/business_packages/**/test/**/* linguist-generated=true
 
+# types
+/types/** linguist-generated=true
+
 
 # tools
 /tools/**/*.js linguist-generated=true
