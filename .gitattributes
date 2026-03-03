@@ -16,6 +16,8 @@
 /packages/**/tools/** linguist-generated=true
 /packages/**/test/** linguist-generated=true
 
+/packages/xjsfl/**/*.jsfl linguist-language=TypeScript linguist-generated=false
+
 # 消费者包
 /src/business_packages/**/out/*.jsfl linguist-generated=true
 /src/business_packages/**/*.js linguist-generated=true
