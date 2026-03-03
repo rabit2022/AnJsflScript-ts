@@ -27,6 +27,7 @@
 # 强制识别为 TypeScript，并声明不是生成的代码
 /types/**/*.d.ts linguist-language=TypeScript linguist-generated=false
 /types/**/*.d.jsfl linguist-language=TypeScript linguist-generated=true
+/types/jsfl/cannotRun/** linguist-generated=true
 
 # tools
 /tools/**/*.js linguist-generated=true
