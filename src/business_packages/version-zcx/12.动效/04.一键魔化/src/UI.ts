@@ -1,3 +1,12 @@
+/**
+ * @file: UI.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/8 21:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 // import { XMLParser } from "fast-xml-parser";
 // import * as console from "node:console";
 //
@@ -30,8 +39,7 @@
 // console.log(typedData)
 //
 
-
 // import DIALOGUE from '../asset/config.json' with {type: 'json'};
-import DIALOGUE from '../asset/config.json';
+import DIALOGUE from "../asset/config.json";
 
 console.log(DIALOGUE);

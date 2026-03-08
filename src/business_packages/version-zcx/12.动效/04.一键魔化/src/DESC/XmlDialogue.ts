@@ -15,7 +15,6 @@ export const DIALOGUE = require("../../asset/UI.xml");
 
 // console.log(DIALOGUE)
 
-
 // import DIALOGUE from '../../asset/01.虾仁摇头.xml' with{type:"xml"};
 //
 // export {DIALOGUE};

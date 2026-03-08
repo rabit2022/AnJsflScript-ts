@@ -46,4 +46,4 @@ class aURL {
 export const URL = aURL;
 
 // module.exports = url;
-export { fileURLToPath,pathToFileURL };
+export { fileURLToPath, pathToFileURL };

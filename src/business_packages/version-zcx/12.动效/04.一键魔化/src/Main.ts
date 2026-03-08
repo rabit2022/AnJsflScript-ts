@@ -7,6 +7,6 @@
  * @description:
  */
 
-import {squares}  from "./squares";
+import { squares } from "./squares";
 
 console.log(squares);

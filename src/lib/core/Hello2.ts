@@ -7,11 +7,6 @@
  * @description:
  */
 
-
-
-
-
-
 import { CheckDocument } from "@anjsfl/validation";
 
 console.log("Hello World!");

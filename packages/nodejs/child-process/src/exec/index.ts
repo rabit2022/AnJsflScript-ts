@@ -1,7 +1,16 @@
-import {ExecSyncOptions, ExecSyncResult} from "../types";
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/8 21:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+import { ExecSyncOptions, ExecSyncResult } from "../types";
 import * as fs from "fs";
 
-import {fileURLToPath} from "url";
+import { fileURLToPath } from "url";
 import * as log from "loglevel";
 
 export function execSync(command: string, options?: ExecSyncOptions): string {
@@ -28,8 +37,7 @@ export function execSync(command: string, options?: ExecSyncOptions): string {
 
     // 递归创建目录 (recursive: true 表示如果父目录不存在也一并创建)
     // 如果目录已存在，这行代码什么都不会做，也不会报错
-    fs.mkdirSync(tempDir, {recursive: true});
-
+    fs.mkdirSync(tempDir, { recursive: true });
 
     // try {
     // 构建完整的命令
@@ -45,7 +53,6 @@ export function execSync(command: string, options?: ExecSyncOptions): string {
             cmd /c 'echo "Hello, World!"' > "H:/project/js/AnJsflScript-ts/config/Log/cmd/execSync_1772972745857_hyrlggdb.txt" 2> "H:/project/js/AnJsflScript-ts/config/Log/cmd/execSync_1772972745857_hyrlggdb_error.txt"
 
              */
-
         } else if (opts.shell === "powershell") {
             // --- PowerShell 重定向逻辑 (修正版) ---
 
@@ -61,7 +68,7 @@ export function execSync(command: string, options?: ExecSyncOptions): string {
 
             // 3. 处理用户命令中的单引号
             // 如果用户的 command 里有单引号，在 & { ... } 块中也需要转义，防止破坏脚本块结构
-            const safeCommand = command.replace(/"/g,"'").replace(/'/g, "''");
+            const safeCommand = command.replace(/"/g, "'").replace(/'/g, "''");
 
             // 4. 构建 PS 脚本字符串
             // 👇 重点：使用单引号 ' 包裹路径，而不是双引号 "
@@ -70,11 +77,11 @@ export function execSync(command: string, options?: ExecSyncOptions): string {
 
             // 5. 定义参数前缀
             const argumentsPrefix = [
-                '-NoProfile',
-                '-NonInteractive',
-                '-ExecutionPolicy',
-                'Bypass',
-                '-Command'
+                "-NoProfile",
+                "-NonInteractive",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command"
             ];
 
             // 6. 组装最终命令
@@ -87,7 +94,6 @@ export function execSync(command: string, options?: ExecSyncOptions): string {
 
         log.log(`Executing: ${fullCommand}`);
         FLfile.runCommandLine(fullCommand);
-
 
         // 读取输出文件
         const output = fs.readFileSync(tempOutputFile, opts.encoding);
@@ -141,7 +147,10 @@ function cleanupTempFiles(files: string[]): void {
 /**
  * 异步执行命令（模仿 exec 但不支持回调，返回 Promise）
  */
-export function exec(command: string, options?: ExecSyncOptions): Promise<ExecSyncResult> {
+export function exec(
+    command: string,
+    options?: ExecSyncOptions
+): Promise<ExecSyncResult> {
     return new Promise((resolve, reject) => {
         try {
             const stdout = execSync(command, options);
@@ -162,7 +171,6 @@ export function exec(command: string, options?: ExecSyncOptions): Promise<ExecSy
         }
     });
 }
-
 
 /**
  * 简化版 execSync，不抛出异常，返回结果对象

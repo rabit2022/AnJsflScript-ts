@@ -7,23 +7,21 @@
  * @description:
  */
 
-import {isFlash } from "./ENV";
+import { isFlash } from "./ENV";
 
 if (!isFlash) {
-    throw new Error(
-        "JSFL Error: This script must run inside Adobe Animate/Flash."
-    );
+    throw new Error("JSFL Error: This script must run inside Adobe Animate/Flash.");
 }
 
 // --- 安全获取 fl 数据 ---
-import {SCRIPT_LOAD_QUEUE} from "./FirstRun/config";
+import { SCRIPT_LOAD_QUEUE } from "./FirstRun/config";
 import "./FirstRun";
 import "./Settings";
-import {importFlashScripts} from "./FirstRun/importFlashScripts";
-import {AnJsflScript} from "./AnJsflScript"
+import { importFlashScripts } from "./FirstRun/importFlashScripts";
+import { AnJsflScript } from "./AnJsflScript";
 
 const $keys = require("object-keys");
-const globalThis = require('globalthis')();
+const globalThis = require("globalthis")();
 
 const bootstrap = () => {
     try {
@@ -44,14 +42,12 @@ const bootstrap = () => {
     }
 };
 
-
 if (!globalThis.AnJsflScript) {
     globalThis.AnJsflScript = AnJsflScript;
 
     // requirejs need AnJsflScript
     bootstrap();
 }
-
 
 // export {AnJsflScript};
 module.exports = AnJsflScript;

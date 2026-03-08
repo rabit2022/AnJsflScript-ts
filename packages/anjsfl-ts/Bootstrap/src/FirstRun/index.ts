@@ -7,10 +7,8 @@
  * @description:
  */
 
-
-import {importFlashScripts} from "./importFlashScripts";
-import {AnJsflScript} from "../AnJsflScript"
-
+import { importFlashScripts } from "./importFlashScripts";
+import { AnJsflScript } from "../AnJsflScript";
 
 // 暴露 API 和 项目根目录
 AnJsflScript.importFlashScripts = importFlashScripts;

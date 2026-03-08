@@ -8,21 +8,19 @@
  */
 
 import * as process from "process";
-import {Err, Ok, Result} from "oxide.ts";
+import { Err, Ok, Result } from "oxide.ts";
 import * as log from "loglevel";
-import {parseNumber} from "@anjsfl/parser";
+import { parseNumber } from "@anjsfl/parser";
 
-import {isFlash, isNode} from "@anjsfl-ts/dev";
+import { isFlash, isNode } from "@anjsfl-ts/dev";
 
-
-import {DIALOGUE} from "../DESC/XmlDialogue";
-import {AUTHOR} from "../DESC/Descriptions";
+import { DIALOGUE } from "../DESC/XmlDialogue";
+import { AUTHOR } from "../DESC/Descriptions";
 
 export interface AnimationConfig {
     shakeIntensity: number;
     headDirection: number;
 }
-
 
 function checkXMLPanel(): Result<AnimationConfig, string> {
     // var panel = getXMLPanel();
@@ -31,7 +29,7 @@ function checkXMLPanel(): Result<AnimationConfig, string> {
 
     if (isNode) {
         // 开发 / 打包环境：mock 数据
-        panel = {headDirection: "-1", shakeIntensity: "6", dismiss: "accept"};
+        panel = { headDirection: "-1", shakeIntensity: "6", dismiss: "accept" };
     } else if (isFlash) {
         // Adobe Animate 环境：从 XML 面板读取
         panel = fl.xmlPanelFromString(DIALOGUE);
@@ -68,7 +66,7 @@ function checkXMLPanel(): Result<AnimationConfig, string> {
         return Err(errorMsg);
     }
 
-    const result = {shakeIntensity, headDirection};
+    const result = { shakeIntensity, headDirection };
     return Ok(result);
 }
 
@@ -80,6 +78,6 @@ if (!config.isOk()) {
     process.exit();
 }
 
-export const {shakeIntensity, headDirection} = config.unwrap();
+export const { shakeIntensity, headDirection } = config.unwrap();
 
 AUTHOR;

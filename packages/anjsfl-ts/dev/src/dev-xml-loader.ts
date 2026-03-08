@@ -8,7 +8,7 @@
  */
 
 // dev-asset-loader.ts 或直接放在 index.ts 顶部
-import {isNode} from "./ENV";
+import { isNode } from "./ENV";
 
 if (isNode && require.extensions) {
     const fs = require("fs");

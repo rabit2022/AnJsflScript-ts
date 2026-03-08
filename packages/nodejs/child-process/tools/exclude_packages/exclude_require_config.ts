@@ -1,3 +1,12 @@
+/**
+ * @file: exclude_require_config.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/8 21:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import {REQUIRE_CONFIG_FILE, WEBPACK_CONFIG_FILE, WEBPACK_CONFIG_TEST_FILE} from "../ProjectFileDir";
 `
 1.读取REQUIRE_CONFIG_FILE

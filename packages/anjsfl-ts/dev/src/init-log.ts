@@ -8,7 +8,7 @@
  */
 
 import * as log from "loglevel";
-import {isNode} from "./ENV";
+import { isNode } from "./ENV";
 
 if (isNode) {
     log.setLevel(log.levels.TRACE);

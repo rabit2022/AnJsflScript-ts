@@ -7,11 +7,24 @@
  * @description:
  */
 
-
-
-export const
-    isBrowser = !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document),
+export const isBrowser = !!(
+        typeof window !== "undefined" &&
+        typeof navigator !== "undefined" &&
+        window.document
+    ),
     // @ts-ignore
-    isWebWorker = !isBrowser && typeof importScripts !== 'undefined',
-    isNode = !isBrowser && !isWebWorker && !!(typeof process !== 'undefined' && process.release && process.release.name === 'node'),
-    isFlash = !isBrowser && !isNode && !isWebWorker && (typeof window !== "undefined" && typeof fl !== "undefined");
+    isWebWorker = !isBrowser && typeof importScripts !== "undefined",
+    isNode =
+        !isBrowser &&
+        !isWebWorker &&
+        !!(
+            typeof process !== "undefined" &&
+            process.release &&
+            process.release.name === "node"
+        ),
+    isFlash =
+        !isBrowser &&
+        !isNode &&
+        !isWebWorker &&
+        typeof window !== "undefined" &&
+        typeof fl !== "undefined";

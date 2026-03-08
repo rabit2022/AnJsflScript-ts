@@ -18,7 +18,5 @@ export const getcwd = (): string => {
     // 这里为了保持绝对兼容 JSFL 的特殊 URI 格式，推荐使用稳健的手动切片：
     const lastSlash = scriptURI.lastIndexOf(SLASH);
     // lastSlash+1 保留 /
-    return lastSlash !== -1 ? scriptURI.substring(0, lastSlash+1) : "";
+    return lastSlash !== -1 ? scriptURI.substring(0, lastSlash + 1) : "";
 };
-
-

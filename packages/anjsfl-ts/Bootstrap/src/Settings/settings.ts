@@ -7,9 +7,8 @@
  * @description:
  */
 
-import {AnJsflScript} from "../AnJsflScript"
-import {getcwd} from "../FirstRun/cwd";
-
+import { AnJsflScript } from "../AnJsflScript";
+import { getcwd } from "../FirstRun/cwd";
 
 // 1. 版本映射表 (常量)
 const VERSION_MAP: Record<string, string> = {
@@ -55,7 +54,6 @@ if (versionMatch && versionMatch[1]) {
     VERSION_NAME = VERSION_MAP[String(VERSION_NUMBER)] ?? "Unknown";
 }
 
-
 // 赋值 app 信息
 AnJsflScript.app = {
     platform: PLATFORM_CODE,
@@ -79,8 +77,5 @@ AnJsflScript.folders = {
     swf: `${fl.configURI}WindowSWF/`,
     commands: `${fl.configURI}Commands/`,
 
-
     "@xjsfl/XUL": `${cwd}packages/xjsfl/XUL/`
 };
-
-
