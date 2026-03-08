@@ -1,5 +1,5 @@
 /**
- * @file: XmlTypes.ts
+ * @file: init.ts
  * @author: 穹的兔兔
  * @email: 3101829204@qq.com
  * @date: 2026/2/8 23:32
@@ -7,7 +7,9 @@
  * @description:
  */
 
-export interface AnimationConfig {
-  shakeIntensity: number;
-  headDirection: number;
+import * as log from "loglevel";
+import {isNode} from "./ENV";
+
+if (isNode) {
+    log.setLevel(log.levels.TRACE);
 }

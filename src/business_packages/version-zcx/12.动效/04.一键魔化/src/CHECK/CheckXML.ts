@@ -8,26 +8,35 @@
  */
 
 import * as process from "process";
-import { Err, Ok, Result } from "oxide.ts";
+import {Err, Ok, Result} from "oxide.ts";
 import * as log from "loglevel";
-import { parseNumber } from "@anjsfl/parser";
+import {parseNumber} from "@anjsfl/parser";
 
-import { AnimationConfig } from "../types/XmlTypes";
-import { IsFlash } from "../DEV/env";
-import { DIALOGUE } from "../DESC/XmlDialogue";
-import { AUTHOR } from "../DESC/Descriptions";
+import {isFlash, isNode} from "@anjsfl-ts/dev";
+
+
+import {DIALOGUE} from "../DESC/XmlDialogue";
+import {AUTHOR} from "../DESC/Descriptions";
+
+export interface AnimationConfig {
+    shakeIntensity: number;
+    headDirection: number;
+}
+
 
 function checkXMLPanel(): Result<AnimationConfig, string> {
     // var panel = getXMLPanel();
 
     let panel: XMLPanelReturns;
 
-    if (IsFlash()) {
+    if (isNode) {
+        // 开发 / 打包环境：mock 数据
+        panel = {headDirection: "-1", shakeIntensity: "6", dismiss: "accept"};
+    } else if (isFlash) {
         // Adobe Animate 环境：从 XML 面板读取
         panel = fl.xmlPanelFromString(DIALOGUE);
     } else {
-        // 开发 / 打包环境：mock 数据
-        panel = { headDirection: "-1", shakeIntensity: "6", dismiss: "accept" };
+        throw new Error("Invalid XML panel type");
     }
 
     if (panel?.dismiss === "cancel") {
@@ -59,7 +68,7 @@ function checkXMLPanel(): Result<AnimationConfig, string> {
         return Err(errorMsg);
     }
 
-    const result = { shakeIntensity, headDirection };
+    const result = {shakeIntensity, headDirection};
     return Ok(result);
 }
 
@@ -71,6 +80,6 @@ if (!config.isOk()) {
     process.exit();
 }
 
-export const { shakeIntensity, headDirection } = config.unwrap();
+export const {shakeIntensity, headDirection} = config.unwrap();
 
 AUTHOR;

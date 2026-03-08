@@ -1,29 +1,20 @@
-/**
- * @file: findPackage.ts
- * @author: 穹的兔兔
- * @email: 3101829204@qq.com
- * @date: 2026/2/8 23:32
- * @project: AnJsflScript-ts
- * @description:
- */
-
 import path from "path";
-import * as fs_promise from "fs/promises";
+// import * as fs_promise from "fs/promises";
 import * as fs from "fs";
 import * as console from "node:console";
 
 /**
  * 从 startDir 开始向上查找 package.json，直到根目录
  */
-export async function findNearestPackageJson(
+export function findNearestPackageJson(
     startDir: string
-): Promise<{ dir: string; pkg: any } | null> {
+): { dir: string; pkg: any } | null {
     let current = startDir;
     while (true) {
         const pkgPath = path.join(current, "package.json");
         try {
-            await fs_promise.access(pkgPath); // 检查是否存在
-            const content = await fs_promise.readFile(pkgPath, "utf-8");
+            fs.accessSync(pkgPath); // 检查是否存在
+            const content = fs.readFileSync(pkgPath, "utf-8");
             const pkg = JSON.parse(content);
             return { dir: current, pkg };
         } catch {

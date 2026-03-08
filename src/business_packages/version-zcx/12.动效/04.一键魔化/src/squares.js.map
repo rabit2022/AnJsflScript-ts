@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "squares.js",
+  "sourceRoot": "",
+  "sources": [
+    "squares.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAMA;AAAA,MAAA;;EAAA,OAAA,GAAU,CAAC,CAAD,EAAI,CAAJ,EAAO,CAAP,EAAU,CAAV;;EAEV,OAAA;;AAAW;SAAA,yCAAA;;UAA4B,CAAA,GAAI,CAAJ,KAAS;qBAArC,CAAA,GAAI;;AAAJ;;;;EAEX,OAAO,CAAC,OAAR,GAAkB;AAJlB"
+}

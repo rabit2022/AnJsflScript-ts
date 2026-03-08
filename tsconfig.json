@@ -39,7 +39,7 @@
 
     "allowJs": true,
     // 增量编译,只重新编译那些被修改的文件及其依赖项
-    "incremental": true,
+//    "incremental": true,
     // es import
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -77,13 +77,6 @@
   "typeRoots": [
     "./node_modules/@types",
     "./types"
-  ],
-//  "references": [
-//    { "path": "../../../packages/anjsfl/parser" },
-//    { "path": "../../../packages/anjsfl/validation" },
-//    { "path": "../../../packages/xjsfl/UI" }
-//  ]
-
-
+  ]
 }
 

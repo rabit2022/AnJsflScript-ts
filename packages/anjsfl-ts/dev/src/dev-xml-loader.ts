@@ -8,7 +8,9 @@
  */
 
 // dev-asset-loader.ts 或直接放在 index.ts 顶部
-if (typeof window === "undefined" && require.extensions) {
+import {isNode} from "./ENV";
+
+if (isNode && require.extensions) {
     const fs = require("fs");
     const extensions = [".xml", ".txt", ".svg", ".html", ".json5", ".md"]; // 👈 按需添加
 

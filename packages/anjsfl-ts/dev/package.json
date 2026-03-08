@@ -1,5 +1,5 @@
 {
-  "name": "一键魔化",
+  "name": "@anjsfl-ts/dev",
   "version": "1.0.0",
   "description": "",
   "declaration": true,
@@ -8,9 +8,13 @@
   "files": [
     "dist"
   ],
-  "//": "npm run build -w @anjsfl/validation",
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "preinstall": "npx only-allow pnpm",
+    "test": "jest",
+    "build": "webpack --config webpack.config.js",
+    "build:test": "webpack --config webpack.test.js",
+    "generate-test": "npx tsx tools/generate-test/generate-test.ts",
+    "exclude_modules": "npx tsx tools/exclude_packages/exclude_require_config.ts"
   },
   "publishConfig": {
     "access": "public"
@@ -20,14 +24,11 @@
     "@types/node": "25.0.7",
     "jest": "30.2.0",
     "strip-json-comments": "3.1.0",
-    "terser-webpack-plugin": "5.3.16",
     "ts-jest": "29.4.6",
     "ts-loader": "9.5.4",
     "typescript": "5.9.3",
     "webpack": "5.104.1",
+    "terser-webpack-plugin": "5.3.16",
     "webpack-cli": "6.0.1"
-  },
-  "dependencies": {
-    "fast-xml-parser": "5.4.2"
   }
 }

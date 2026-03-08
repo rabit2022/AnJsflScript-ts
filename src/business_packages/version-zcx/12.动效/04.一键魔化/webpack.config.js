@@ -19,7 +19,8 @@ class ReplaceDefineWithRequire {
             let code = asset.source();
 
             // ✅ 只替换文件开头的 define（最安全）
-            code = code.replace(/^define\(/, "require(");
+            // code = code.replace(/^define\(/, "require(");
+            code = code.replace(/define\(/, "require(");
 
             // 更新 asset
             compilation.assets[filename] = {
@@ -79,7 +80,7 @@ module.exports = {
 
     // filename: MODULE_NAME + '.jsfl', // 输出为 .jsfl 文件
     // library: MODULE_NAME,  // 暴露为全局变量 Validation（可选）
-    libraryTarget: "amd", // 使用 var 暴露（适合 JSFL）
+    libraryTarget: "umd", // 使用 var 暴露（适合 JSFL）
     clean: true, // 每次构建清空 dist
 
     globalObject: "this", // 👈 关键！告诉 Webpack 使用 `this` 而不是 `self`/`window`

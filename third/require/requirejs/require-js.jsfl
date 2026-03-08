@@ -27,11 +27,7 @@ var requirejs, require, define;
         op = Object.prototype,
         ostring = op.toString,
         hasOwn = op.hasOwnProperty,
-        isBrowser = !!(
-            typeof window !== 'undefined' &&
-            typeof navigator !== 'undefined' &&
-            window.document
-        ),
+        isBrowser = !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document),
         isWebWorker = !isBrowser && typeof importScripts !== 'undefined',
         isFlash = !isBrowser && !isWebWorker && typeof fl !== 'undefined',
         //PS3 indicates loaded and complete, but need to wait for complete

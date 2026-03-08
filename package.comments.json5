@@ -155,15 +155,17 @@
 //    "H:\project\js\AnJsflScript-ts\packages\anjsfl"
     "@anjsfl/validation": "workspace:*",
     "@anjsfl/parser": "workspace:*",
+    "chroma-js": "3.2.0",
 
 
     //    "H:\project\js\AnJsflScript-ts\packages\anjsfl-ts"
     "@anjsfl-ts/EditSession": "workspace:*",
+    "@anjsfl-ts/dev": "workspace:*",
 
 //    "H:\project\js\AnJsflScript-ts\packages\dom"
     "@dom/setTimeout": "workspace:*",
     "console.stack": "workspace:*",
-    "console.table": "workspace:*",
+    "console.table": "workspace:*"
 
     //    "H:\project\js\AnJsflScript-ts\packages\nodejs"
     // skip all ,using "@types/node"
