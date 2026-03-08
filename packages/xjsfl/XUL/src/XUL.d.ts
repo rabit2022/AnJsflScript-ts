@@ -169,7 +169,7 @@ declare module "@xjsfl/XUL" {
     }
 
     // interface XUL {
-    class XUL {
+    export class XUL {
         constructor(title?: string): XUL;
         static factory(props?: string | Function | XML | URI): XUL;
         create(
@@ -361,14 +361,5 @@ declare module "@xjsfl/XUL" {
     }
 
     // const XUL: XUL;
-    export = XUL;
+    // export = XUL;
 }
-
-// // Global xjsfl objects
-// declare namespace xjsfl {
-//     var uri: string;
-//     namespace ui {
-//         function show(xul: XUL): Record<string, any>;
-//         function handleEvent(xulid: string, type: string, id: string): void;
-//     }
-// }

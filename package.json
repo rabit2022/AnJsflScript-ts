@@ -67,14 +67,21 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "json5": "2.2.3",
+    "@xjsfl/Constants": "workspace:*",
+    "@xjsfl/Context": "workspace:*",
     "@xjsfl/UI": "workspace:*",
+    "@xjsfl/Events": "workspace:*",
+    "@xjsfl/super": "workspace:*",
+    "@xjsfl/XUL": "workspace:*",
     "@anjsfl/validation": "workspace:*",
     "@anjsfl/parser": "workspace:*",
+    "@anjsfl/tween": "workspace:*",
+    "@anjsfl/sat": "workspace:*",
+    "@anjsfl/random": "workspace:*",
+    "@anjsfl/more-element": "workspace:*",
     "chroma-js": "3.2.0",
     "@anjsfl-ts/EditSession": "workspace:*",
     "@anjsfl-ts/dev": "workspace:*",
-    "@dom/setTimeout": "workspace:*",
-    "console.stack": "workspace:*",
-    "console.table": "workspace:*"
+    "@dom/setTimeout": "workspace:*"
   }
 }

@@ -1,10 +1,11 @@
 {
-  "name": "Context",
+  "name": "@xjsfl/Context",
   "version": "1.0.0",
   "description": "",
   "declaration": true,
   "declarationMap": true,
-  "main": "src/index.ts",
+  "main": "src/Context.jsfl",
+  "types": "src/Context.d.ts",
   "files": [
     "dist"
   ],

@@ -1,7 +1,7 @@
 {
   "name": "AnJsflScript-ts",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "packageManager": "pnpm@10.29.2",
   "description": "是一个专为 Adobe Animate 设计的 JavaScript For Flash (JSFL)脚本集合，旨在通过自动化任务提升工作效率，帮助用户更高效地完成重复性工作，从而专注于创意与设计。",
   "author": {
@@ -150,11 +150,22 @@
     // pnpm install
 
 //    "H:\project\js\AnJsflScript-ts\packages\xjsfl"
+    "@xjsfl/Constants": "workspace:*",
+    "@xjsfl/Context": "workspace:*",
     "@xjsfl/UI": "workspace:*",
+    "@xjsfl/Events": "workspace:*",
+    "@xjsfl/super": "workspace:*",
+    "@xjsfl/XUL": "workspace:*",
+
 
 //    "H:\project\js\AnJsflScript-ts\packages\anjsfl"
     "@anjsfl/validation": "workspace:*",
     "@anjsfl/parser": "workspace:*",
+    "@anjsfl/tween": "workspace:*",
+    "@anjsfl/sat": "workspace:*",
+    "@anjsfl/random": "workspace:*",
+    "@anjsfl/parser": "workspace:*",
+    "@anjsfl/more-element": "workspace:*",
     "chroma-js": "3.2.0",
 
 
@@ -164,8 +175,8 @@
 
 //    "H:\project\js\AnJsflScript-ts\packages\dom"
     "@dom/setTimeout": "workspace:*",
-    "console.stack": "workspace:*",
-    "console.table": "workspace:*"
+//    "console.stack": "workspace:*",
+//    "console.table": "workspace:*"
 
     //    "H:\project\js\AnJsflScript-ts\packages\nodejs"
     // skip all ,using "@types/node"

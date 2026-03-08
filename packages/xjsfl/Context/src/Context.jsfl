@@ -17,8 +17,10 @@
 	 * @instance	context
 	 */
 
-	xjsfl.init(this, ['File', 'URI', 'Utils']);
-		
+	// xjsfl.init(this, ['File', 'URI', 'Utils']);
+
+	define(function () {
+
 	// --------------------------------------------------------------------------------
 	// Constructor
 
@@ -131,12 +133,12 @@
 			Context.create('~[layer name,layer name,layer name,layer name]');
 			Context.create('@frame number or name');
 			Context.create('element name');
-			Context.create(URI.toURI());
+			// Context.create(URI.toURI());
 
-			switch(Utils.getClass(value))
-			{
-
-			}
+			// switch(Utils.getClass(value))
+			// {
+			//
+			// }
 		}
 
 	// --------------------------------------------------------------------------------
@@ -278,17 +280,17 @@
 							}
 						}
 					// File
-						else if(value instanceof File)
-						{
-							if(value.exists)
-							{
-								dom = fl.documents.filter(function(doc){ return doc.pathURI == value.uri; })[0]
-								if(dom == undefined)
-								{
-									dom = fl.openDocument(value.uri);
-								}
-							}
-						}
+					// 	else if(value instanceof File)
+					// 	{
+					// 		if(value.exists)
+					// 		{
+					// 			dom = fl.documents.filter(function(doc){ return doc.pathURI == value.uri; })[0]
+					// 			if(dom == undefined)
+					// 			{
+					// 				dom = fl.openDocument(value.uri);
+					// 			}
+					// 		}
+					// 	}
 					// Context
 						else if(value instanceof Context)
 						{
@@ -988,4 +990,6 @@
 	// --------------------------------------------------------------------------------
 	// Register class
 
-		xjsfl.classes.register('Context', Context);
+		//xjsfl.classes.register('Context', Context);
+		return Context;
+});
