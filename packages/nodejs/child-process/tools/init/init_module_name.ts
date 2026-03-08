@@ -1,12 +1,3 @@
-/**
- * @file: init_module_name.ts
- * @author: 穹的兔兔
- * @email: 3101829204@qq.com
- * @date: 2026/2/8 23:32
- * @project: AnJsflScript-ts
- * @description:
- */
-
 /*
 修改模块名字
 建立模块名字变量：MODULE_NAME，在当前文件中手动修改
@@ -22,7 +13,8 @@ region中间的部分，正则匹配到，修改为正确的MODULE_NAME
 
 import fs from "fs";
 import path from "path";
-import { findNearestPackageJson } from "../lib/findPackage";
+import { findNearestPackageJson } from "../nodejs/findPackage";
+import { CURRENT_PROJECT, WEBPACK_CONFIG_FILE } from "../ProjectFileDir";
 
 // // 获取当前脚本所在目录
 // const __filename = fileURLToPath(import.meta.url);
@@ -30,11 +22,11 @@ import { findNearestPackageJson } from "../lib/findPackage";
 
 export async function set_module_name(moduleName: string) {
     // 1. 确定 PROJECT 路径 (基于 package.json)
-    const projectResult = await findNearestPackageJson(process.cwd());
-    if (!projectResult) {
-        throw new Error("未找到 package.json，无法确定项目根目录");
-    }
-    const PROJECT_ROOT = projectResult.dir;
+    //     const projectResult = findNearestPackageJson(process.cwd());
+    //     if (!projectResult) {
+    //         throw new Error("未找到 package.json，无法确定项目根目录");
+    //     }
+    const PROJECT_ROOT = CURRENT_PROJECT;
     console.log(`✅ 项目根目录 (PROJECT): ${PROJECT_ROOT}`);
 
     // 1. 修改 package.json 的 name 字段
@@ -45,7 +37,7 @@ export async function set_module_name(moduleName: string) {
     console.log(`✅ package.json 的 "name" 已更新为: ${moduleName}`);
 
     // 2. 修改 webpack.config.js 中的 MODULE_NAME 区域
-    const webpackPath = path.join(PROJECT_ROOT, "webpack.config.js");
+    const webpackPath = WEBPACK_CONFIG_FILE;
     if (!fs.existsSync(webpackPath)) {
         console.warn("⚠️ webpack.config.js 不存在，跳过修改");
     } else {

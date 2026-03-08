@@ -21,6 +21,9 @@
     "declaration": true,
 
     "rootDir": "./src",
+
+
+
     "outDir": "./dist",
     "types": ["node"],
     "target": "es5",
@@ -31,6 +34,8 @@
   },
   "include": [
     "src",
+//    "node_modules",
+//    "../dev/src",
 
     // region TYPES
     // jsfl

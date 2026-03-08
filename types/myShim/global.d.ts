@@ -13,8 +13,10 @@ interface AnJsflScript {
     folders: {
         AnJsflScript: string,
         Log: string,
+
         flash: string,
         swf: string,
+        commands:string,
 
         [key: string]: string;
     };

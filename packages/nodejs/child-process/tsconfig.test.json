@@ -13,7 +13,7 @@
     "paths": [],
 
     "types": [
-      "jest"
+      "jest","node"
     ],
     "target": "es5",
     "lib": [

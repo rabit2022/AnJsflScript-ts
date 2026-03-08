@@ -36,10 +36,10 @@
     "preserveConstEnums": true,
     //    "skipLibCheck": true, // 启用跳过类型定义文件的检查
 
+    "importHelpers": true,
 
-    "allowJs": true,
     // 增量编译,只重新编译那些被修改的文件及其依赖项
-//    "incremental": true,
+    "incremental": true,
     // es import
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -55,7 +55,7 @@
 
     // region REQUIRE MODULES PATHS
     {
-    
+      "Hello2": ["src/lib/core/Hello2"]
     }
     
 // endregion REQUIRE MODULES PATHS

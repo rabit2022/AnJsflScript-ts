@@ -7,9 +7,11 @@
  * @description:
  */
 
-if (typeof fl === "undefined") {
+import {isFlash } from "./ENV";
+
+if (!isFlash) {
     throw new Error(
-        "JSFL Error: 'fl' object is not defined. This script must run inside Adobe Animate/Flash."
+        "JSFL Error: This script must run inside Adobe Animate/Flash."
     );
 }
 

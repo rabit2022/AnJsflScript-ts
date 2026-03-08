@@ -8,18 +8,21 @@
 
     // node import
     "moduleResolution": "node",
-    // es import
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+
+
+    // default 报错
+//    // es import
+//    "esModuleInterop": true,
+//    "allowSyntheticDefaultImports": true,
 
 
     // 允许 TypeScript 将项目作为依赖进行增量编译
     "composite": true,
     "declaration": true,
 
-    "rootDir": "src",
+    "rootDir": "./src",
     "outDir": "./dist",
-    "types": [],
+    "types": ["node"],
     "target": "es5",
     "lib": [
       "es5",

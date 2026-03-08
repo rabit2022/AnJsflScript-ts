@@ -126,10 +126,10 @@ function parseStack(error, options) {
         return frames;
     }
     if (options.skipSelf) {
-        frames = frames.filter(function (f) { var _a; return !((_a = f.fileName) === null || _a === void 0 ? void 0 : _a.includes('console.stack')); });
+        frames = frames.filter(function (f) { var _a; return !((_a = f.fileName) === null || _a === void 0 ? void 0 : _a.includes("console.stack")); });
     }
     if (options.skipRequireJs) {
-        frames = frames.filter(function (f) { var _a; return !((_a = f.fileName) === null || _a === void 0 ? void 0 : _a.includes('requirejs')); });
+        frames = frames.filter(function (f) { var _a; return !((_a = f.fileName) === null || _a === void 0 ? void 0 : _a.includes("requirejs")); });
     }
     if (options.depth) {
         frames = frames.slice(0, options.depth);
@@ -155,14 +155,14 @@ var external_console_table_ = __webpack_require__(615);
 
 function formatFrames(frames, format) {
     switch (format) {
-        case 'json':
+        case "json":
             return JSON.stringify(frames, null, 2);
-        case 'list':
+        case "list":
             return frames
                 .map(function (f, i) {
                 return "".concat(i + 1, ". ").concat(f.functionName, " (").concat(f.fileName, ":").concat(f.lineNumber, ")");
             })
-                .join('\n');
+                .join("\n");
         default:
             return (0,external_console_table_.tableToString)(frames);
     }
@@ -177,10 +177,10 @@ var Paths;
 if (isJsfl) {
     var Root = AnJsflScript.folders.Log;
     Paths = {
-        currentText: "".concat(Root, "/logs/human error.txt"),
-        allText: "".concat(Root, "/logs/human all errors.txt"),
-        currentJson: "".concat(Root, "/logs/error.json"),
-        allJson: "".concat(Root, "/logs/all errors.json"),
+        currentText: "".concat(Root, "/Errors/human error.txt"),
+        allText: "".concat(Root, "/Errors/human all errors.txt"),
+        currentJson: "".concat(Root, "/Errors/error.json"),
+        allJson: "".concat(Root, "/Errors/all errors.json"),
     };
 }
 else if (typeof process !== 'undefined' && ((_a = process.versions) === null || _a === void 0 ? void 0 : _a.node)) {
@@ -226,11 +226,11 @@ var FileStore = (function () {
     };
     FileStore.prototype.writeCurrentText = function (text) {
         this.ensureDir(Paths.currentText);
-        external_fs_.writeFileSync(Paths.currentText, text, 'utf8');
+        external_fs_.writeFileSync(Paths.currentText, text, "utf8");
     };
     FileStore.prototype.appendAllText = function (text) {
         this.ensureDir(Paths.allText);
-        external_fs_.appendFileSync(Paths.allText, text + '\n', 'utf8');
+        external_fs_.appendFileSync(Paths.allText, text + "\n", "utf8");
     };
     FileStore.prototype.readCurrentText = function () {
         return this.readText(Paths.currentText);
@@ -249,7 +249,7 @@ var FileStore = (function () {
         if (!external_fs_.existsSync(file))
             return null;
         try {
-            var content = external_fs_.readFileSync(file, 'utf8');
+            var content = external_fs_.readFileSync(file, "utf8");
             return JSON.parse(content);
         }
         catch (_a) {
@@ -258,13 +258,13 @@ var FileStore = (function () {
     };
     FileStore.prototype.writeJson = function (file, data) {
         this.ensureDir(file);
-        external_fs_.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
+        external_fs_.writeFileSync(file, JSON.stringify(data, null, 2), "utf8");
     };
     FileStore.prototype.readText = function (file) {
         if (!external_fs_.existsSync(file))
             return null;
         try {
-            return external_fs_.readFileSync(file, 'utf8');
+            return external_fs_.readFileSync(file, "utf8");
         }
         catch (_a) {
             return null;
@@ -340,17 +340,15 @@ var StackTracer = (function () {
             depth: 5,
             skipSelf: true,
             skipRequireJs: true,
-            format: 'table',
+            format: "table",
             logToFile: true,
             fuck: false
         };
     }
     StackTracer.prototype.trace = function (input, options) {
-        if (input === void 0) { input = 'Stack trace'; }
+        if (input === void 0) { input = "Stack trace"; }
         var opt = __assign(__assign({}, this.defaults), options);
-        var message = input instanceof Error
-            ? input.message
-            : String(input);
+        var message = input instanceof Error ? input.message : String(input);
         var error = new Error(message);
         var frames = parseStack(error, opt);
         var output = formatFrames(frames, opt.format);

@@ -30,11 +30,11 @@ function pathToFileURL(path: string): URL {
     return url.parse(fileUri);
 }
 
-// 以下两个函数打包后没有
-// @ts-ignore
-url.fileURLToPath = fileURLToPath;
-// @ts-ignore
-url.pathToFileURL = pathToFileURL;
+// // 以下两个函数打包后没有
+// // @ts-ignore
+// url.fileURLToPath = fileURLToPath;
+// // @ts-ignore
+// url.pathToFileURL = pathToFileURL;
 
 // URL
 class aURL {
@@ -46,4 +46,4 @@ class aURL {
 export const URL = aURL;
 
 // module.exports = url;
-export { url };
+export { fileURLToPath,pathToFileURL };

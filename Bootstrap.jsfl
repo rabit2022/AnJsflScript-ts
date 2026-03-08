@@ -2381,11 +2381,11 @@ module.exports = Error;
 /***/ 7946:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(1104), __webpack_require__(4745), __webpack_require__(5290), __webpack_require__(3480), __webpack_require__(6282)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, config_1, importFlashScripts_1, AnJsflScript_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(8918), __webpack_require__(1104), __webpack_require__(4745), __webpack_require__(5290), __webpack_require__(3480), __webpack_require__(6282)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, ENV_1, config_1, importFlashScripts_1, AnJsflScript_1) {
     "use strict";
     // Object.defineProperty(exports, "__esModule", ({ value: true }));
-    if (typeof fl === "undefined") {
-        throw new Error("JSFL Error: 'fl' object is not defined. This script must run inside Adobe Animate/Flash.");
+    if (!ENV_1.isFlash) {
+        throw new Error("JSFL Error: This script must run inside Adobe Animate/Flash.");
     }
     var $keys = __webpack_require__(3418);
     var globalThis = __webpack_require__(9272)();
@@ -2635,6 +2635,20 @@ module.exports = function regexTester(regex) {
 
 /***/ }),
 
+/***/ 8918:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.isFlash = exports.isNode = exports.isWebWorker = exports.isBrowser = void 0;
+    exports.isBrowser = !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document), exports.isWebWorker = !exports.isBrowser && typeof importScripts !== 'undefined', exports.isNode = !exports.isBrowser && !exports.isWebWorker && !!(typeof process !== 'undefined' && process.release && process.release.name === 'node'), exports.isFlash = !exports.isBrowser && !exports.isNode && !exports.isWebWorker && (typeof window !== "undefined" && typeof fl !== "undefined");
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
 /***/ 8939:
 /***/ (function(module) {
 
@@ -2808,7 +2822,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     var cwd = (0, cwd_1.getcwd)();
     AnJsflScript_1.AnJsflScript.folders = {
         AnJsflScript: cwd,
-        Log: "".concat(cwd, "config/Log"),
+        Log: "".concat(cwd, "config/Log/"),
         flash: fl.configURI,
         swf: "".concat(fl.configURI, "WindowSWF/"),
         "@xjsfl/XUL": "".concat(cwd, "packages/xjsfl/XUL/")

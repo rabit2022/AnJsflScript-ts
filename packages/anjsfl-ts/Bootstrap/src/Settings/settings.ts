@@ -72,11 +72,13 @@ let cwd: string = getcwd();
 
 AnJsflScript.folders = {
     AnJsflScript: cwd,
-    Log: `${cwd}config/Log`, // 防止 cwd 为空导致路径错误
+    Log: `${cwd}config/Log/`, // 防止 cwd 为空导致路径错误
 
     // flash dir (这些是运行时确定的)
     flash: fl.configURI,
     swf: `${fl.configURI}WindowSWF/`,
+    commands: `${fl.configURI}Commands/`,
+
 
     "@xjsfl/XUL": `${cwd}packages/xjsfl/XUL/`
 };
