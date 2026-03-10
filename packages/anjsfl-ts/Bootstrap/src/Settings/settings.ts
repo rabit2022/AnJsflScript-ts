@@ -7,7 +7,6 @@
  * @description:
  */
 
-import { AnJsflScript } from "../AnJsflScript";
 import { getcwd } from "../FirstRun/cwd";
 
 // 1. 版本映射表 (常量)
@@ -54,8 +53,7 @@ if (versionMatch && versionMatch[1]) {
     VERSION_NAME = VERSION_MAP[String(VERSION_NUMBER)] ?? "Unknown";
 }
 
-// 赋值 app 信息
-AnJsflScript.app = {
+export const app = {
     platform: PLATFORM_CODE,
     version: VERSION_NUMBER,
     name: VERSION_NAME,
@@ -68,7 +66,7 @@ AnJsflScript.app = {
 // 4. 初始化文件夹路径
 let cwd: string = getcwd();
 
-AnJsflScript.folders = {
+export const folders = {
     AnJsflScript: cwd,
     Log: `${cwd}config/Log/`, // 防止 cwd 为空导致路径错误
 

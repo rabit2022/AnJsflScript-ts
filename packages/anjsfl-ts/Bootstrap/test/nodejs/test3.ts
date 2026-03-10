@@ -10,7 +10,15 @@
 // nodejs TypeScript file test3.ts
 
 // import * as startswith from "string.prototype.startswith";
-const startswith = require("string.prototype.startswith");
+// const startswith = require("string.prototype.startswith");
+//
+// const a = "hello world";
+// console.log(startswith(a, "he"));
 
-const a = "hello world";
-console.log(startswith(a, "he"));
+
+// const includes = require("string.prototype.includes");
+import includes = require("string.prototype.includes");
+
+
+
+console.log(includes("hello", "hell"));

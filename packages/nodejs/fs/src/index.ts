@@ -9,9 +9,10 @@
 
 // lodash
 // import * as _ from "lodash";
-import { includes as _includes, startsWith as _startsWith } from "lodash";
+import {includes as _includes, startsWith as _startsWith} from "lodash";
+import {BufferEncoding, WriteFileOptions} from "./WriteFileOptions";
+import {PathOrFileDescriptor} from "./Path";
 
-type BufferEncoding = "utf-8";
 
 // --- 辅助函数 ---
 function toFileURI(path: string): string {
@@ -44,7 +45,11 @@ export function existsSync(path: string): boolean {
 /**
  * 同步读取文件内容（始终返回 UTF-8 字符串）
  */
-export function readFileSync(path: string, _encoding?: BufferEncoding): string {
+export function readFileSync(path: string, encoding?: BufferEncoding): string {
+    if (encoding !== "utf-8") {
+        throwErr("ENCODING", `donot supposed encoding: ${encoding}`);
+    }
+
     const uri = toFileURI(path);
     if (!FLfile.exists(uri)) {
         throwErr("ENOENT", `no such file or directory, open '${path}'`);
@@ -56,25 +61,30 @@ export function readFileSync(path: string, _encoding?: BufferEncoding): string {
     return content; // FLfile.read 始终返回 UTF-8 字符串
 }
 
-/**
- * 同步写入文件（覆盖）
- */
-export function writeFileSync(
-    path: string,
+
+function writeFileSync(
+    file: PathOrFileDescriptor,
     data: string,
-    _options?: { encoding?: BufferEncoding }
+    options?: WriteFileOptions,
 ): void {
-    const uri = toFileURI(path);
+    if ((options as any)?.flag === "a") {
+        appendFileSync(file, data, options);
+        return;
+    }
+
+    // "w"
+
+    const uri = toFileURI(file);
     const strData = typeof data === "string" ? data : String(data);
 
     const parentDir = uri.substring(0, uri.lastIndexOf("/"));
     if (parentDir && !FLfile.exists(parentDir)) {
-        throwErr("ENOENT", `no such file or directory, open '${path}'`);
+        throwErr("ENOENT", `no such file or directory, open '${file}'`);
     }
 
     const success = FLfile.write(uri, strData);
     if (!success) {
-        throwErr("EIO", `unable to write file '${path}'`);
+        throwErr("EIO", `unable to write file '${file}'`);
     }
 }
 
@@ -82,24 +92,24 @@ export function writeFileSync(
  * 同步追加写入文件
  */
 export function appendFileSync(
-    path: string,
+    file: PathOrFileDescriptor,
     data: string,
-    _encoding?: BufferEncoding
+    _options?: WriteFileOptions,
 ): void {
-    const uri = toFileURI(path);
-    const strData = typeof data === "string" ? data : String(data);
+    const uri = toFileURI(file);
+    const strData = data;
 
     if (!FLfile.exists(uri)) {
         const parentDir = uri.substring(0, uri.lastIndexOf("/"));
         if (parentDir && !FLfile.exists(parentDir)) {
-            throwErr("ENOENT", `no such file or directory, open '${path}'`);
+            throwErr("ENOENT", `no such file or directory, open '${file}'`);
         }
         FLfile.write(uri, ""); // 创建空文件
     }
 
     const success = FLfile.write(uri, strData, "append");
     if (!success) {
-        throwErr("EIO", `unable to append to file '${path}'`);
+        throwErr("EIO", `unable to append to file '${file}'`);
     }
 }
 

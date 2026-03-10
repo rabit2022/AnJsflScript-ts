@@ -7,4 +7,9 @@
  * @description:
  */
 
-import "./settings";
+import {AnJsflScript} from "../AnJsflScript";
+import {app, folders} from "./settings";
+
+// 赋值 app 信息
+AnJsflScript.app = app;
+AnJsflScript.folders = folders;

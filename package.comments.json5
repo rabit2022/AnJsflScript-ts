@@ -164,13 +164,12 @@
     "@anjsfl/tween": "workspace:*",
     "@anjsfl/sat": "workspace:*",
     "@anjsfl/random": "workspace:*",
-    "@anjsfl/parser": "workspace:*",
     "@anjsfl/more-element": "workspace:*",
     "chroma-js": "3.2.0",
 
 
     //    "H:\project\js\AnJsflScript-ts\packages\anjsfl-ts"
-    "@anjsfl-ts/EditSession": "workspace:*",
+    "@anjsfl-ts/Sessions": "workspace:*",
     "@anjsfl-ts/dev": "workspace:*",
 
 //    "H:\project\js\AnJsflScript-ts\packages\dom"

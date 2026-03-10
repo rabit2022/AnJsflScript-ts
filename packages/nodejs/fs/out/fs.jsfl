@@ -99,8 +99,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   rmSync: function() { return /* binding */ rmSync; },
 /* harmony export */   rmdirSync: function() { return /* binding */ rmdirSync; },
 /* harmony export */   statSync: function() { return /* binding */ statSync; },
-/* harmony export */   unlinkSync: function() { return /* binding */ unlinkSync; },
-/* harmony export */   writeFileSync: function() { return /* binding */ writeFileSync; }
+/* harmony export */   unlinkSync: function() { return /* binding */ unlinkSync; }
 /* harmony export */ });
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(773);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
@@ -122,7 +121,10 @@ function throwErr(code, message) {
 function existsSync(path) {
     return FLfile.exists(toFileURI(path));
 }
-function readFileSync(path, _encoding) {
+function readFileSync(path, encoding) {
+    if (encoding !== "utf-8") {
+        throwErr("ENCODING", "donot supposed encoding: ".concat(encoding));
+    }
     var uri = toFileURI(path);
     if (!FLfile.exists(uri)) {
         throwErr("ENOENT", "no such file or directory, open '".concat(path, "'"));
@@ -133,31 +135,35 @@ function readFileSync(path, _encoding) {
     }
     return content;
 }
-function writeFileSync(path, data, _options) {
-    var uri = toFileURI(path);
+function writeFileSync(file, data, options) {
+    if ((options === null || options === void 0 ? void 0 : options.flag) === "a") {
+        appendFileSync(file, data, options);
+        return;
+    }
+    var uri = toFileURI(file);
     var strData = typeof data === "string" ? data : String(data);
     var parentDir = uri.substring(0, uri.lastIndexOf("/"));
     if (parentDir && !FLfile.exists(parentDir)) {
-        throwErr("ENOENT", "no such file or directory, open '".concat(path, "'"));
+        throwErr("ENOENT", "no such file or directory, open '".concat(file, "'"));
     }
     var success = FLfile.write(uri, strData);
     if (!success) {
-        throwErr("EIO", "unable to write file '".concat(path, "'"));
+        throwErr("EIO", "unable to write file '".concat(file, "'"));
     }
 }
-function appendFileSync(path, data, _encoding) {
-    var uri = toFileURI(path);
-    var strData = typeof data === "string" ? data : String(data);
+function appendFileSync(file, data, _options) {
+    var uri = toFileURI(file);
+    var strData = data;
     if (!FLfile.exists(uri)) {
         var parentDir = uri.substring(0, uri.lastIndexOf("/"));
         if (parentDir && !FLfile.exists(parentDir)) {
-            throwErr("ENOENT", "no such file or directory, open '".concat(path, "'"));
+            throwErr("ENOENT", "no such file or directory, open '".concat(file, "'"));
         }
         FLfile.write(uri, "");
     }
     var success = FLfile.write(uri, strData, "append");
     if (!success) {
-        throwErr("EIO", "unable to append to file '".concat(path, "'"));
+        throwErr("EIO", "unable to append to file '".concat(file, "'"));
     }
 }
 function mkdirSync(path, _options) {

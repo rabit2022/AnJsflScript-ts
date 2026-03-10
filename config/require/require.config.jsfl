@@ -10,7 +10,7 @@
 require.config({
     // context: 'Core', // 设置模块的加载上下文
     // baseUrl: window.AnJsflScript.$ProjectFileDir$, // 设置模块的基础路径
-    baseUrl: window. AnJsflScript.folders.AnJsflScript, // 设置模块的基础路径
+    baseUrl: window.AnJsflScript.folders.AnJsflScript, // 设置模块的基础路径
     paths:
 
     // region REQUIRE MODULES PATHS
@@ -84,14 +84,14 @@ require.config({
         "console.table": "packages/dom/console.table/out/console-table",
         "console.stack": "packages/dom/console.stack/out/stack",
         "console": "packages/dom/console/out/console",
-        "@anjsfl-ts/Tips": "packages/anjsfl-ts/Tips/out/@anjsfl/Tips",
-        "@anjsfl-ts/EditSession": "packages/anjsfl-ts/EditSession/out/EditSession",
+        "@anjsfl-ts/Sessions": "packages/anjsfl-ts/Sessions/out/EditSession",
         "@anjsfl-ts/dev": "packages/anjsfl-ts/dev/out/@anjsfl-ts/dev",
         "@anjsfl/validation": "packages/anjsfl/validation/out/validation",
         "@anjsfl/sat": "packages/anjsfl/sat-js/out/SAT",
         "@anjsfl/random": "packages/anjsfl/random/out/random",
         "@anjsfl/parser": "packages/anjsfl/parser/out/parser",
         "@anjsfl/more-element": "packages/anjsfl/MoreElement/out/more-element",
+        "@anjsfl/checker": "packages/anjsfl/checker/out/@anjsfl/checker",
         "@xjsfl/XUL": "packages/xjsfl/XUL/src/XUL",
         "@xjsfl/XUL/XML": "packages/xjsfl/XUL/src/XML",
         "@xjsfl/XUL/XUL": "packages/xjsfl/XUL/src/XUL",

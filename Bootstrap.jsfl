@@ -670,6 +670,32 @@ module.exports = function getPolyfill() {
 
 /***/ }),
 
+/***/ 2015:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.alertMessage = alertMessage;
+    var AUTHOR = "\u4F5C\u8005\uFF1A@\u7A79\u7684\u5154\u5154\nQQ\uFF1A3101829204\nQQ\u7FA4\uFF1A1040730457";
+    var alertMessageConfig = {
+        "default!": "\u662F\u5426\u52A0\u8F7D\u6A21\u5757\uFF1F\n    \n".concat(AUTHOR, "\n"),
+        "failed!": "\n    ___       ___       ___       ___       ___       ___       ___       ___       ___       ___       ___       ___       ___       ___   \n   /\\  \\     /\\__\\     /\\  \\     /\\  \\     /\\  \\     /\\__\\     /\\  \\     /\\  \\     /\\  \\     /\\  \\     /\\  \\     /\\  \\     /\\  \\     /\\  \\  \n  /::\\  \\   /:| _|_   _\\:\\  \\   /::\\  \\   /::\\  \\   /:/  /    /::\\  \\   /::\\  \\   /::\\  \\   _\\:\\  \\   /::\\  \\    \\:\\  \\    \\:\\  \\   /::\\  \\ \n /::\\:\\__\\ /::|/\\__\\ /\\/::\\__\\ /\\:\\:\\__\\ /::\\:\\__\\ /:/__/    /\\:\\:\\__\\ /:/\\:\\__\\ /::\\:\\__\\ /\\/::\\__\\ /::\\:\\__\\   /::\\__\\   /::\\__\\ /\\:\\:\\__\\\n \\/\\::/  / \\/|::/  / \\::/\\/__/ \\:\\:\\/__/ \\/\\:\\/__/ \\:\\  \\    \\:\\:\\/__/ \\:\\ \\/__/ \\;:::/  / \\::/\\/__/ \\/\\::/  /  /:/\\/__/  /:/\\/__/ \\:\\:\\/__/\n   /:/  /    |:/  /   \\/__/     \\::/  /     \\/__/   \\:\\__\\    \\::/  /   \\:\\__\\    |:\\/__/   \\:\\__\\      \\/__/   \\/__/     \\/__/     \\::/  / \n   \\/__/     \\/__/               \\/__/               \\/__/     \\/__/     \\/__/     \\|__|     \\/__/                                   \\/__/  \n\n\n\u52A0\u8F7D\u6A21\u5757\u5931\u8D25\uFF0C\u8BF7\u8054\u7CFB\u4F5C\u8005\uFF01\uFF01\uFF01\n\n\n\u3010\u53EF\u80FD\u539F\u56E0\u3011\n1.\u89E3\u538B\u5305\u5185\u8FD0\u884C \u2014\u2014 \u8BF7\u89E3\u538B\u540E\u8FD0\u884C\n2.\u6CA1\u6709\u6253\u5F00fla\u6587\u4EF6 \u2014\u2014 \u8BF7\u6253\u5F00\u4E00\u4E2Afla\u6587\u4EF6\n    \n".concat(AUTHOR, "\n\n"),
+        "loading success!": "\n                                                                                              ##                                                      \n   :##:                 #####              :####   ####       :####:                          ##                                   ########           \n    ##                  #####              #####   ####      :######                          ##                 ##                ########           \n   ####                    ##              ##        ##      ##:  :#                                             ##                   ##              \n   ####    ##.####         ##   :#####.  #######     ##      ##           ####:   ##.####   ####     ##.###:   #######                ##      :#####. \n  :#  #:   #######         ##  ########  #######     ##      ###:       #######   #######   ####     #######:  #######                ##     ######## \n   #::#    ###  :##        ##  ##:  .:#    ##        ##      :#####:    ##:  :#   ###.        ##     ###  ###    ##                   ##     ##:  .:# \n  ##  ##   ##    ##        ##  ##### .     ##        ##       .#####:  ##.        ##          ##     ##.  .##    ##                   ##     ##### .  \n  ######   ##    ##        ##  .######:    ##        ##          :###  ##         ##          ##     ##    ##    ##       #####       ##     .######: \n .######.  ##    ##        ##     .: ##    ##        ##            ##  ##.        ##          ##     ##.  .##    ##       #####       ##        .: ## \n :##  ##:  ##    ##  #:   :##  #:.  :##    ##        ##:     #:.  :##   ##:  .#   ##          ##     ###  ###    ##.                  ##     #:.  :## \n ###  ###  ##    ##  #######   ########    ##        #####   #######:   #######   ##       ########  #######:    #####                ##     ######## \n ##:  :##  ##    ##  .#####:   . ####      ##        .####   .#####:      ####:   ##       ########  ##.###:     .####                ##     . ####   \n                                                                                                     ##                                               \n                                                                                                     ##                                               \n                                                                                                     ##                                               \n                                                         \n                                               \n\u3010\u6E29\u99A8\u63D0\u793A\u3011\u5BFC\u5165\u6210\u529F\uFF01\uFF01\uFF01\n\u5982\u679C\u6709bug,\u6216\u8005\u5EFA\u8BAE\uFF0C\u8BF7@\u6211\u3002\n\n\u3010\u6CE8\u610F\u3011\u6BCF\u6B21\u6253\u5F00An\uFF0C\u8FD0\u884C\u6846\u67B6\u65F6\uFF0C\u5FC5\u987B\u5148\u8FD0\u884C \u3010\u542F\u52A8\u6587\u4EF6\u3011Bootstrap.jsfl\n\n".concat(AUTHOR, "\n\n"),
+        "loading might be not allowed!": "\n                                                                                                                                                                                     \n        **                             ***** **                  ***   ***           *******                                                             ****           *            \n     *****                          ******  **** *             ** ***   ***        *       ***                            *                    *        *  *************             \n    *  ***                         **   *  * ****             **   ***   **       *         **                           ***                  **       *     *********               \n       ***                        *    *  *   **              **         **       **        *                             *                   **       *     *  *                    \n      *  **                           *  *            ****    **         **        ***                     ***  ****               ****     ********    **  *  **            ****    \n      *  **       ***  ****          ** **           * **** * ******     **       ** ***           ****     **** **** * ***       * ***  * ********        *  ***           * **** * \n     *    **       **** **** *       ** **          **  ****  *****      **        *** ***        * ***  *   **   ****   ***     *   ****     **          **   **          **  ****  \n     *    **        **   ****      **** **         ****       **         **          *** ***     *   ****    **           **    **    **      **          **   **         ****       \n    *      **       **    **      * *** **           ***      **         **            *** ***  **           **           **    **    **      **          **   **           ***      \n    *********       **    **         ** **             ***    **         **              ** *** **           **           **    **    **      **          **   **             ***    \n   *        **      **    **         ** **               ***  **         **               ** ** **           **           **    **    **      **           **  **               ***  \n   *        **      **    **         ** **          ****  **  **         **                * *  **           **           **    **    **      **            ** *      *    ****  **  \n  *****      **     **    **         ** **         * **** *   **         **      ***        *   ***     *    ***          **    *******       **             ***     *    * **** *   \n *   ****    ** *   ***   ***        *  *             ****    **         *** *  *  *********     *******      ***         *** * ******         **             *******        ****    \n*     **      **     ***   ***   **     *                      **         ***  *     *****        *****                    ***  **                   m          ***                  \n*                               ****   *                                       *                                                **                   i                               \n **                             *  * **                                         **                                              **                   n                               \n                               *    **                                                                                           **                  u                               \n                                    *                                                                                                                s                               \n                     \n\u3010\u6E29\u99A8\u63D0\u793A\u3011\u4F60\u53EF\u80FD\u4F7F\u7528\u7684\u662F\u76D7\u7248\u8F6F\u4EF6\uFF0C\u8FD9\u4E2A\u662F\u5F00\u6E90\u7684\u9879\u76EE\uFF0C\u5982\u679C\u82B1\u8D39\u4E86\u91D1\u94B1\u8D2D\u4E70\uFF0C\u8BF7\u9000\u6B3E\u3002\n\n".concat(AUTHOR, "\n\u5730\u5740\uFF1Ahttps://github.com/rabit2022/AnJsflScript-ts\n\n")
+    };
+    function alertMessage(mode) {
+        var msg = alertMessageConfig[mode];
+        if (msg) {
+            fl.trace(msg);
+        }
+    }
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
 /***/ 2033:
 /***/ (function(module) {
 
@@ -678,6 +704,46 @@ module.exports = function getPolyfill() {
 
 /** @type {import('./abs')} */
 module.exports = Math.abs;
+
+
+/***/ }),
+
+/***/ 2088:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+/*! https://mths.be/includes v2.0.0 by @mathias */
+
+
+
+var callBound = __webpack_require__(8530);
+var RequireObjectCoercible = __webpack_require__(2941);
+var ToString = __webpack_require__(3539);
+var ToIntegerOrInfinity = __webpack_require__(6323);
+var IsRegExp = __webpack_require__(5486);
+
+var min = Math.min;
+var max = Math.max;
+var indexOf = callBound('String.prototype.indexOf');
+
+module.exports = function includes(searchString) {
+	var O = RequireObjectCoercible(this);
+	var S = ToString(O);
+	if (IsRegExp(searchString)) {
+		throw new TypeError('Argument to String.prototype.includes cannot be a RegExp');
+	}
+	var searchStr = String(searchString);
+	var searchLength = searchStr.length;
+	var position = arguments.length > 1 ? arguments[1] : undefined;
+	var pos = ToIntegerOrInfinity(position);
+	var len = S.length;
+	var start = min(max(pos, 0), len);
+	// Avoid the `indexOf` call if no match is possible
+	if (searchLength + start > len) {
+		return false;
+	}
+	return indexOf(S, searchStr, pos) !== -1;
+};
 
 
 /***/ }),
@@ -795,6 +861,35 @@ module.exports = Function.prototype.bind || implementation;
 
 /***/ }),
 
+/***/ 2728:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(1104), __webpack_require__(4745)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, config_1, importFlashScripts_1) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.bootstrap = bootstrap;
+    var $keys = __webpack_require__(3418);
+    function bootstrap() {
+        try {
+            var scriptPaths = $keys(config_1.SCRIPT_LOAD_QUEUE).map(function (key) {
+                return config_1.SCRIPT_LOAD_QUEUE[key];
+            });
+            importFlashScripts_1.importFlashScripts.apply(void 0, scriptPaths);
+        }
+        catch (e) {
+            var errorMessage = e.message;
+            fl.trace("[Bootstrap] CRITICAL ERROR: Initialization failed.");
+            fl.trace("[Bootstrap] Details: ".concat(errorMessage));
+            throw e;
+        }
+    }
+    ;
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
 /***/ 2793:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
@@ -808,6 +903,31 @@ var actualApply = __webpack_require__(2908);
 /** @type {import('./applyBind')} */
 module.exports = function applyBind() {
 	return actualApply(bind, $apply, arguments);
+};
+
+
+/***/ }),
+
+/***/ 2875:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+/*! https://mths.be/includes v2.0.0 by @mathias */
+
+
+
+var define = __webpack_require__(2255);
+
+var getPolyfill = __webpack_require__(7949);
+
+module.exports = function shimIncludes() {
+	var polyfill = getPolyfill();
+
+	if (String.prototype.includes !== polyfill) {
+		define(String.prototype, { includes: polyfill });
+	}
+
+	return polyfill;
 };
 
 
@@ -1601,6 +1721,34 @@ module.exports = function getPolyfill() {
 
 /***/ }),
 
+/***/ 5796:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+/*! https://mths.be/includes v2.0.0 by @mathias */
+
+
+
+var callBind = __webpack_require__(7770);
+var define = __webpack_require__(2255);
+
+var implementation = __webpack_require__(2088);
+var getPolyfill = __webpack_require__(7949);
+var shim = __webpack_require__(2875);
+
+var boundIncludes = callBind(getPolyfill());
+
+define(boundIncludes, {
+	getPolyfill: getPolyfill,
+	implementation: implementation,
+	shim: shim
+});
+
+module.exports = boundIncludes;
+
+
+/***/ }),
+
 /***/ 6012:
 /***/ (function(module) {
 
@@ -1672,9 +1820,11 @@ module.exports = reflectGetProto
 /***/ 6282:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(9889)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(5290), __webpack_require__(9889)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, AnJsflScript_1, settings_1) {
     "use strict";
     // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    AnJsflScript_1.AnJsflScript.app = settings_1.app;
+    AnJsflScript_1.AnJsflScript.folders = settings_1.folders;
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
@@ -2381,35 +2531,37 @@ module.exports = Error;
 /***/ 7946:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(8918), __webpack_require__(1104), __webpack_require__(4745), __webpack_require__(5290), __webpack_require__(3480), __webpack_require__(6282)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, ENV_1, config_1, importFlashScripts_1, AnJsflScript_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(8918), __webpack_require__(5290), __webpack_require__(2728), __webpack_require__(3480), __webpack_require__(6282), __webpack_require__(8785)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, ENV_1, AnJsflScript_1, bootstrap_1) {
     "use strict";
     // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    var globalThis = __webpack_require__(9272)();
     if (!ENV_1.isFlash) {
         throw new Error("JSFL Error: This script must run inside Adobe Animate/Flash.");
     }
-    var $keys = __webpack_require__(3418);
-    var globalThis = __webpack_require__(9272)();
-    var bootstrap = function () {
-        try {
-            var scriptPaths = $keys(config_1.SCRIPT_LOAD_QUEUE).map(function (key) {
-                return config_1.SCRIPT_LOAD_QUEUE[key];
-            });
-            importFlashScripts_1.importFlashScripts.apply(void 0, scriptPaths);
-        }
-        catch (e) {
-            var errorMessage = e.message;
-            fl.trace("[Bootstrap] CRITICAL ERROR: Initialization failed.");
-            fl.trace("[Bootstrap] Details: ".concat(errorMessage));
-            throw e;
-        }
-    };
     if (!globalThis.AnJsflScript) {
         globalThis.AnJsflScript = AnJsflScript_1.AnJsflScript;
-        bootstrap();
+        (0, bootstrap_1.bootstrap)();
     }
     module.exports = AnJsflScript_1.AnJsflScript;
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
+/***/ 7949:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+/*! https://mths.be/includes v2.0.0 by @mathias */
+
+
+
+var implementation = __webpack_require__(2088);
+
+module.exports = function getPolyfill() {
+	return String.prototype.includes || implementation;
+};
 
 
 /***/ }),
@@ -2610,6 +2762,32 @@ module.exports = function ToPrimitive(input) {
 
 /***/ }),
 
+/***/ 8785:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(2015), __webpack_require__(9889)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, Tips_1, settings_1) {
+    "use strict";
+    // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    var $includes = __webpack_require__(5796);
+    var dom = fl.getDocumentDOM();
+    if (!dom) {
+        (0, Tips_1.alertMessage)("failed!");
+        throw new Error("Loading failed!");
+    }
+    var $ProjectFileDir$ = settings_1.folders.AnJsflScript;
+    var IS_INCLUDE = $includes($ProjectFileDir$, "AnJsflScript");
+    if (!IS_INCLUDE) {
+        (0, Tips_1.alertMessage)("loading might be not allowed!");
+    }
+    else {
+        (0, Tips_1.alertMessage)("loading success!");
+    }
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
 /***/ 8863:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
@@ -2642,7 +2820,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     "use strict";
     // Object.defineProperty(exports, "__esModule", ({ value: true }));
     exports.isFlash = exports.isNode = exports.isWebWorker = exports.isBrowser = void 0;
-    exports.isBrowser = !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document), exports.isWebWorker = !exports.isBrowser && typeof importScripts !== 'undefined', exports.isNode = !exports.isBrowser && !exports.isWebWorker && !!(typeof process !== 'undefined' && process.release && process.release.name === 'node'), exports.isFlash = !exports.isBrowser && !exports.isNode && !exports.isWebWorker && (typeof window !== "undefined" && typeof fl !== "undefined");
+    exports.isBrowser = !!(typeof window !== "undefined" &&
+        typeof navigator !== "undefined" &&
+        window.document), exports.isWebWorker = !exports.isBrowser && typeof importScripts !== "undefined", exports.isNode = !exports.isBrowser &&
+        !exports.isWebWorker &&
+        !!(typeof process !== "undefined" &&
+            process.release &&
+            process.release.name === "node"), exports.isFlash = !exports.isBrowser &&
+        !exports.isNode &&
+        !exports.isWebWorker &&
+        typeof window !== "undefined" &&
+        typeof fl !== "undefined";
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
@@ -2777,10 +2965,11 @@ module.exports = function shimStartsWith() {
 /***/ 9889:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(5290), __webpack_require__(3314)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, AnJsflScript_1, cwd_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(3314)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, cwd_1) {
     "use strict";
     var _a;
     // Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.folders = exports.app = void 0;
     var VERSION_MAP = {
         "9": "CS3",
         "10": "CS4",
@@ -2810,7 +2999,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         VERSION_NUMBER = parseInt(versionMatch[1], 10);
         VERSION_NAME = (_a = VERSION_MAP[String(VERSION_NUMBER)]) !== null && _a !== void 0 ? _a : "Unknown";
     }
-    AnJsflScript_1.AnJsflScript.app = {
+    exports.app = {
         platform: PLATFORM_CODE,
         version: VERSION_NUMBER,
         name: VERSION_NAME,
@@ -2820,11 +3009,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         }
     };
     var cwd = (0, cwd_1.getcwd)();
-    AnJsflScript_1.AnJsflScript.folders = {
+    exports.folders = {
         AnJsflScript: cwd,
         Log: "".concat(cwd, "config/Log/"),
         flash: fl.configURI,
         swf: "".concat(fl.configURI, "WindowSWF/"),
+        commands: "".concat(fl.configURI, "Commands/"),
         "@xjsfl/XUL": "".concat(cwd, "packages/xjsfl/XUL/")
     };
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),

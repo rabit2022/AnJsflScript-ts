@@ -8,27 +8,6 @@
  */
 
 (function () {
-
-    require(["@anjsfl-ts/Tips"], function (Tips) {
-        const {alertMessage} = Tips;// 显示提示信息
-
-        const dom = fl.getDocumentDOM();
-        if (!dom) {
-            alertMessage("failed!");
-            return;
-        }
-
-        // window.AnJsflScript?.$ProjectFileDir$?.includes("AnJsflScript")
-        var _a, _b;
-        var IS_INCLUDE = ((_b = (_a = window.AnJsflScript) === null || _a === void 0 ? void 0 : _a.$ProjectFileDir$) === null || _b === void 0 ? void 0 : _b.indexOf("AnJsflScript")) !== -1;
-        if (!IS_INCLUDE) {
-            alertMessage("loading might be not allowed!");
-            // return;
-        } else {
-            alertMessage("loading success!");
-        }
-    });
-
     // 导入shims, 避免其他模块依赖时报错
     require([
         "es5-shim", // es5,es2009

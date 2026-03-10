@@ -11,44 +11,30 @@
 return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 186:
+/***/ 221:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(703), __webpack_require__(194), __webpack_require__(845), __webpack_require__(976)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, ItemCheck, SymbolCheck, Common, ShapeChecker) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(843)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, ItemCheck) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
-    exports.Element = void 0;
+    exports.Item = void 0;
     ItemCheck = tslib_1.__importStar(ItemCheck);
-    SymbolCheck = tslib_1.__importStar(SymbolCheck);
-    Common = tslib_1.__importStar(Common);
-    ShapeChecker = tslib_1.__importStar(ShapeChecker);
-    var Element;
-    (function (Element) {
-        Element.IsBitmapItem = ItemCheck.IsBitmapItem;
-        Element.IsGraphicItem = ItemCheck.IsGraphicItem;
-        Element.IsSymbolItem = ItemCheck.IsSymbolItem;
-        Element.IsBitmapInstance = SymbolCheck.IsBitmapInstance;
-        Element.IsGraphicSymbol = SymbolCheck.IsGraphicSymbol;
-        Element.IsSymbolInstance = SymbolCheck.IsSymbolInstance;
-        Element.IsSymbol = Common.IsSymbol;
-        Element.IsBitmap = Common.IsBitmap;
-        Element.IsGraphic = Common.IsGraphic;
-        Element.IsGroup = ShapeChecker.IsGroup;
-        Element.IsShape = ShapeChecker.IsShape;
-        Element.IsDrawingObject = ShapeChecker.IsDrawingObject;
-        Element.IsOvalObject = ShapeChecker.IsOvalObject;
-        Element.IsRectangleObject = ShapeChecker.IsRectangleObject;
-    })(Element || (exports.Element = Element = {}));
+    var Item;
+    (function (Item) {
+        Item.IsBitmapItem = ItemCheck.IsBitmapItem;
+        Item.IsGraphicItem = ItemCheck.IsGraphicItem;
+        Item.IsSymbolItem = ItemCheck.IsSymbolItem;
+    })(Item || (exports.Item = Item = {}));
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ }),
 
-/***/ 194:
+/***/ 244:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(773), __webpack_require__(976)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, _, ShapeChecker_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(773), __webpack_require__(856)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, _, Shape_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
     exports.IsSymbolInstance = IsSymbolInstance;
@@ -60,16 +46,40 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         var IsSymbolInstance = (element === null || element === void 0 ? void 0 : element.elementType) === "instance" &&
             (element === null || element === void 0 ? void 0 : element.instanceType) === "symbol" &&
             _.includes(SymbolTypeArr, element === null || element === void 0 ? void 0 : element.symbolType);
-        return (!(0, ShapeChecker_1.IsGroup)(element) && IsSymbolInstance);
+        return (!(0, Shape_1.IsGroup)(element) && IsSymbolInstance);
     }
     function IsBitmapInstance(element) {
         var InstanceIsBitmap = element.elementType === "instance" &&
             element.instanceType === "bitmap";
-        return !(0, ShapeChecker_1.IsGroup)(element) && (InstanceIsBitmap);
+        return !(0, Shape_1.IsGroup)(element) && (InstanceIsBitmap);
     }
     function IsGraphicSymbol(element) {
         var SymbolTypeIsGraphic = element.symbolType === "graphic";
         return IsSymbolInstance(element) && SymbolTypeIsGraphic;
+    }
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
+/***/ 405:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(843), __webpack_require__(244)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, ItemChecker_1, Instance_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.IsSymbol = IsSymbol;
+    exports.IsBitmap = IsBitmap;
+    exports.IsGraphic = IsGraphic;
+    function IsSymbol(element) {
+        return (0, Instance_1.IsSymbolInstance)(element) || (0, ItemChecker_1.IsSymbolItem)(element);
+    }
+    function IsBitmap(element) {
+        return (0, Instance_1.IsBitmapInstance)(element) || (0, ItemChecker_1.IsBitmapItem)(element);
+    }
+    function IsGraphic(element) {
+        return (0, Instance_1.IsGraphicSymbol)(element) || (0, ItemChecker_1.IsGraphicItem)(element);
     }
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -88,20 +98,76 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__652__;
 /***/ 701:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(186)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, ElementCheck_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(762), __webpack_require__(221), __webpack_require__(702)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, Element_1, Item_1, Symbol_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
-    tslib_1.__exportStar(ElementCheck_1, exports);
+    tslib_1.__exportStar(Element_1, exports);
+    tslib_1.__exportStar(Item_1, exports);
+    tslib_1.__exportStar(Symbol_1, exports);
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ }),
 
-/***/ 703:
+/***/ 702:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(773), __webpack_require__(194)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, _, SymbolCheck_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(405)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, Common) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.Symbol = void 0;
+    Common = tslib_1.__importStar(Common);
+    var Symbol;
+    (function (Symbol) {
+        Symbol.IsSymbol = Common.IsSymbol;
+        Symbol.IsBitmap = Common.IsBitmap;
+        Symbol.IsGraphic = Common.IsGraphic;
+    })(Symbol || (exports.Symbol = Symbol = {}));
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
+/***/ 762:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(244), __webpack_require__(856)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, SymbolCheck, ShapeChecker) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.Element = void 0;
+    SymbolCheck = tslib_1.__importStar(SymbolCheck);
+    ShapeChecker = tslib_1.__importStar(ShapeChecker);
+    var Element;
+    (function (Element) {
+        Element.IsBitmapInstance = SymbolCheck.IsBitmapInstance;
+        Element.IsGraphicSymbol = SymbolCheck.IsGraphicSymbol;
+        Element.IsSymbolInstance = SymbolCheck.IsSymbolInstance;
+        Element.IsGroup = ShapeChecker.IsGroup;
+        Element.IsShape = ShapeChecker.IsShape;
+        Element.IsDrawingObject = ShapeChecker.IsDrawingObject;
+        Element.IsOvalObject = ShapeChecker.IsOvalObject;
+        Element.IsRectangleObject = ShapeChecker.IsRectangleObject;
+    })(Element || (exports.Element = Element = {}));
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
+/***/ 773:
+/***/ (function(module) {
+
+"use strict";
+module.exports = __WEBPACK_EXTERNAL_MODULE__773__;
+
+/***/ }),
+
+/***/ 843:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(773)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, _) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
     exports.IsSymbolItem = IsSymbolItem;
@@ -119,7 +185,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     }
     function IsGraphicItem(element) {
         var SymbolTypeIsGraphic = element.symbolType === "graphic";
-        return (0, SymbolCheck_1.IsSymbolInstance)(element) && SymbolTypeIsGraphic;
+        return IsSymbolItem(element) && SymbolTypeIsGraphic;
     }
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -127,39 +193,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 773:
-/***/ (function(module) {
-
-"use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__773__;
-
-/***/ }),
-
-/***/ 845:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(703), __webpack_require__(194)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, ItemCheck_1, SymbolCheck_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", ({ value: true }));
-    exports.IsSymbol = IsSymbol;
-    exports.IsBitmap = IsBitmap;
-    exports.IsGraphic = IsGraphic;
-    function IsSymbol(element) {
-        return (0, SymbolCheck_1.IsSymbolInstance)(element) || (0, ItemCheck_1.IsSymbolItem)(element);
-    }
-    function IsBitmap(element) {
-        return (0, SymbolCheck_1.IsBitmapInstance)(element) || (0, ItemCheck_1.IsBitmapItem)(element);
-    }
-    function IsGraphic(element) {
-        return (0, SymbolCheck_1.IsGraphicSymbol)(element) || (0, ItemCheck_1.IsGraphicItem)(element);
-    }
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ }),
-
-/***/ 976:
+/***/ 856:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
