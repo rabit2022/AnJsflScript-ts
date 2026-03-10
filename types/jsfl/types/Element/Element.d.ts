@@ -340,4 +340,7 @@ interface FlashElement {
      * fl.getDocumentDOM().getTimeline().layers[0].frames[0].elements[2].setTransformationPoint({x: 100, y:200});
      */
     setTransformationPoint(transformationPoint: { x: number; y: number }): void;
+
+
+
 }

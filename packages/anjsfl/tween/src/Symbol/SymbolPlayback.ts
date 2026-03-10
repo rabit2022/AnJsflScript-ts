@@ -6,11 +6,7 @@
  * @project: AnJsflScript
  * @description: 符号元素播放模式控制工具
  */
-import { IsSymbol } from "./check/checker";
 
-// 定义元素类型（根据JSFL文档）
-type FLSymbolElement = any;
-type FLDocumentDOM = any;
 
 /**
  * 播放模式枚举
@@ -39,10 +35,10 @@ export class SymbolPlayback {
      */
     static setMode(
         mode: PlaybackMode,
-        elements?: FLSymbolElement | FLSymbolElement[]
+        elements?: FlashElement | FlashElement[]
     ): void {
         if (!elements) {
-            const doc: FLDocumentDOM = fl.getDocumentDOM();
+            const doc: FlashDocument = fl.getDocumentDOM()!;
             doc.setElementProperty("loop", mode);
             return;
         }
@@ -61,15 +57,15 @@ export class SymbolPlayback {
      * @param element 符号元素
      * @returns 播放模式或null（如果不是符号或未设置）
      */
-    static getMode(element: FLSymbolElement): PlaybackMode | null {
-        return IsSymbol(element) && element.loop ? element.loop : null;
+    static getMode(element: SymbolInstance): string | null {
+        return element.loop ?? null;
     }
 
     /**
      * 设置循环播放模式
      * @param elements 符号元素或元素数组（可选）
      */
-    static setLoop(elements?: FLSymbolElement | FLSymbolElement[]): void {
+    static setLoop(elements?: FlashElement | FlashElement[]): void {
         this.setMode(PlaybackMode.LOOP, elements);
     }
 
@@ -77,7 +73,7 @@ export class SymbolPlayback {
      * 设置播放一次模式
      * @param elements 符号元素或元素数组（可选）
      */
-    static setPlayOnce(elements?: FLSymbolElement | FLSymbolElement[]): void {
+    static setPlayOnce(elements?: FlashElement | FlashElement[]): void {
         this.setMode(PlaybackMode.PLAY_ONCE, elements);
     }
 
@@ -85,7 +81,7 @@ export class SymbolPlayback {
      * 设置单帧播放模式
      * @param elements 符号元素或元素数组（可选）
      */
-    static setSingleFrame(elements?: FLSymbolElement | FLSymbolElement[]): void {
+    static setSingleFrame(elements?: FlashElement | FlashElement[]): void {
         this.setMode(PlaybackMode.SINGLE_FRAME, elements);
     }
 
@@ -93,7 +89,7 @@ export class SymbolPlayback {
      * 设置循环倒序播放模式
      * @param elements 符号元素或元素数组（可选）
      */
-    static setLoopReverse(elements?: FLSymbolElement | FLSymbolElement[]): void {
+    static setLoopReverse(elements?: FlashElement | FlashElement[]): void {
         this.setMode(PlaybackMode.LOOP_REVERSE, elements);
     }
 
@@ -101,7 +97,7 @@ export class SymbolPlayback {
      * 设置播放一次倒序模式
      * @param elements 符号元素或元素数组（可选）
      */
-    static setPlayOnceReverse(elements?: FLSymbolElement | FLSymbolElement[]): void {
+    static setPlayOnceReverse(elements?: FlashElement | FlashElement[]): void {
         this.setMode(PlaybackMode.PLAY_ONCE_REVERSE, elements);
     }
 }

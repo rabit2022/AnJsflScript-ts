@@ -5,12 +5,14 @@
  * @date: 2026/1/25 21:10
  * @project: AnJsflScript-ts
  * @description:
- */ function getRate() {
-    var doc = fl.getDocumentDOM(); //文档
+ */
 
-    const frameRate = doc!.frameRate; //帧率
-    return frameRate;
-}
+// function document.frameRate {
+//     var doc = fl.getDocumentDOM(); //文档
+//
+//     const frameRate = doc!.frameRate; //帧率
+//     return frameRate;
+// }
 
 export const JSFLNumerics = {
     // --------------------------------------------------------------------------------
@@ -42,13 +44,13 @@ export const JSFLNumerics = {
          * 不同时间维度的帧率
          */
         frameRate: {
-            FPS: getRate(), // 每秒帧数（Frames Per Second）
-            FPM: getRate() * 60, // 每分钟帧数（Frames Per Minute）
-            FPH: getRate() * 60 * 60, // 每小时帧数（Frames Per Hour）
-            FPD: getRate() * 60 * 60 * 24, // 每天帧数（Frames Per Day）
-            FPW: getRate() * 60 * 60 * 24 * 7, // 每周帧数（Frames Per Week）
-            FPMonth: getRate() * 60 * 60 * 24 * 30, // 每月帧数（Frames Per Month，假设每月30天）
-            FPY: getRate() * 60 * 60 * 24 * 365 // 每年帧数（Frames Per Year）
+            FPS: document.frameRate, // 每秒帧数（Frames Per Second）
+            FPM: document.frameRate * 60, // 每分钟帧数（Frames Per Minute）
+            FPH: document.frameRate * 60 * 60, // 每小时帧数（Frames Per Hour）
+            FPD: document.frameRate * 60 * 60 * 24, // 每天帧数（Frames Per Day）
+            FPW: document.frameRate * 60 * 60 * 24 * 7, // 每周帧数（Frames Per Week）
+            FPMonth: document.frameRate * 60 * 60 * 24 * 30, // 每月帧数（Frames Per Month，假设每月30天）
+            FPY: document.frameRate * 60 * 60 * 24 * 365 // 每年帧数（Frames Per Year）
         },
         /**
          * 为了方便使用，定义了一些常用的帧列表

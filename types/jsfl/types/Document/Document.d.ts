@@ -1059,7 +1059,7 @@ interface FlashDocument {
      * fl.getDocumentDOM().setElementProperty("height", 50);
      * ```
      */
-    setElementProperty(property: string, value: number): void;
+    setElementProperty(property: string, value: any): void;
 
     /**
      * Sets the specified textAttrs property of the selected text items to the specified value.
