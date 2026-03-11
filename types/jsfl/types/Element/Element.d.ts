@@ -13,7 +13,7 @@ interface FlashElement {
      * // Select an object and run this script.
      * fl.trace("Depth of selected object: " + fl.getDocumentDOM().selection[0].depth);
      */
-    readonly depth: number;
+    depth: number;
 
     /**
      * Read-only; a string that represents the type of the specified element.
@@ -31,7 +31,7 @@ interface FlashElement {
      *   fl.trace("Element "+ x + " Name = " + elt.name + " Type = " + elt.elementType + " location = " + elt.left + ", " + elt.top + " Depth = " + elt.depth);
      * }
      */
-    readonly elementType: "shape" | "text" | "tlfText" | "instance" | "shapeObj";
+    elementType: "shape" | "text" | "tlfText" | "instance" | "shapeObj";
 
     /**
      * A float value that specifies the height of the element in pixels.
@@ -49,7 +49,7 @@ interface FlashElement {
      * @example
      * var theLayer = element.layer;
      */
-    readonly layer: Layer;
+    layer: Layer;
 
     /**
      * Read-only; a float value that represents the left side of the element.
@@ -64,7 +64,7 @@ interface FlashElement {
      * fl.getDocumentDOM().moveSelectionBy({x:100, y:0});
      * fl.trace("Left (after) = " + sel.left);
      */
-    readonly left: number;
+    left: number;
 
     /**
      * A Boolean value: true if the element is locked; false otherwise.
@@ -170,7 +170,7 @@ interface FlashElement {
      * fl.getDocumentDOM().moveSelectionBy({x:0, y:100});
      * fl.trace("Top (after) = " + sel.top);
      */
-    readonly top: number;
+    top: number;
 
     /**
      * A floating-point number that specifies the x value of the selected element’s transformation point,
@@ -342,5 +342,6 @@ interface FlashElement {
     setTransformationPoint(transformationPoint: { x: number; y: number }): void;
 
 
+    [key: string]: any;
 
 }

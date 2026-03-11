@@ -10,7 +10,7 @@
 /**
  * 图层列表类，提供类似Python列表的操作方法
  */
-class LayerList {
+export class LayerList {
     private _timeline: Timeline;
     private _mode: "selected" | "all";
 
@@ -20,7 +20,7 @@ class LayerList {
      * @param mode 图层模式：'selected' 仅选中的图层，'all' 所有图层
      */
     constructor(timeline?: Timeline, mode: "selected" | "all" = "all") {
-        const doc = fl.getDocumentDOM();
+        const doc = fl.getDocumentDOM()!;
         this._timeline = timeline || doc.getTimeline();
         this._mode = mode;
     }
@@ -145,11 +145,8 @@ class LayerList {
 }
 /**
  * 交换图层
- * @param {Timeline} timeline 时间轴
- * @param {Number} layerIndex1 图层索引1
- * @param {Number} layerIndex2 图层索引2
  */
-function swapLayers(timeline, layerIndex1, layerIndex2) {
+function swapLayers(timeline:Timeline, layerIndex1:number, layerIndex2:number) {
     var layers = timeline.layers; // 获取所有图层
 
     if (
@@ -179,4 +176,3 @@ function swapLayers(timeline, layerIndex1, layerIndex2) {
     );
 }
 
-export default LayerList;

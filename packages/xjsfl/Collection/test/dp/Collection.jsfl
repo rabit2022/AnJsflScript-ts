@@ -18,14 +18,14 @@
 	 */
 
 	xjsfl.init(this, ['Class', 'Output', 'Utils']);
-		
+
 	Collection =
 	{
 
 			elements:[],
-	
+
 			className:'Collection',
-	
+
 			/**
 			 * Collection Constructor
 			 * @constructor
@@ -38,11 +38,11 @@
 				this.elements = [];
 				this.add(elements);//elements = elements instanceof Array ? elements : [];
 			},
-	
-	
+
+
 		// --------------------------------------------------------------------------------
 		// # Standard methods
-			
+
 			/**
 			 * Calls a function on each element in the collection in forward order (although internally, it's in reverse)
 			 * @param	{Function}		callback	A callback function to fire on each iteraction
@@ -56,7 +56,7 @@
 				{
 					throw new TypeError('TypeError: parameter "params" must be an Array in Collection.each()');
 				}
-	
+
 				params	= [null, null, this.elements].concat(params || []);
 				scope	= scope || this;
 				var i	= 0;
@@ -69,7 +69,7 @@
 				}
 				return this;
 			},
-	
+
 			/**
 			 * Calls a function on each element in the collection in reverse (native) order
 			 * @param	{Function}		callback	A callback function to fire on each iteraction
@@ -83,7 +83,7 @@
 				{
 					throw new TypeError('TypeError: parameter "params" must be an Array in Collection.reach()');
 				}
-	
+
 				params	= [null, null, this.elements].concat(params || []);
 				scope	= scope || this;
 				var i	= this.elements.length - 1, j = 0;
@@ -96,7 +96,7 @@
 				}
 				return this;
 			},
-	
+
 			/**
 			 * Returns the first index at which a given element can be found in the array, or -1 if it is not present
 			 * @param	{Object}		element		Element to locate in the array
@@ -107,7 +107,7 @@
 			{
 				return this.elements.indexOf(element, fromIndex);
 			},
-			
+
 			/**
 			 * Gets an element from the collection
 			 * @param	{Number}		index		Gets the nth object in the collection
@@ -117,7 +117,7 @@
 			{
 				return this.elements[index];
 			},
-			
+
 			/**
 			 * Finds and returns elements (by name, or other property) within the collection
 			 * @param	{String}		value		A String (wildcards allowed) name or property value
@@ -130,17 +130,17 @@
 			{
 				// parameters
 					property		= property || 'name';
-					
+
 				// variables
 					var elements	= [];
 					var i			= -1;
-					
+
 				// determine value
 					if(typeof value === 'string' && value.indexOf('*') !== -1)
 					{
 						value = Utils.makeWildcard(value, true);
 					}
-				
+
 				// attempt to find the elements with properties matching the value
 					if(value instanceof RegExp)
 					{
@@ -162,14 +162,14 @@
 							}
 						}
 					}
-					
+
 				// return
 					return elements;
 			},
-	
+
 		// --------------------------------------------------------------------------------
 		// # Manipulation methods
-		
+
 			/**
 			 * Adds elements to the collection
 			 * @param	{Array}			elements	An Array of elements
@@ -187,7 +187,7 @@
 				{
 					elements = [elements];
 				}
-	
+
 				if(elements instanceof Array)
 				{
 					for(var i = 0; i < elements.length; i++)
@@ -198,10 +198,10 @@
 						}
 					}
 				}
-	
+
 				return this;
 			},
-	
+
 			/**
 			 * Removes elements from the collection
 			 * @param	{Array}			elementsOrValue	An Array of elements
@@ -214,7 +214,7 @@
 			remove:function(elementsOrValue, property)
 			{
 				var elements;
-				
+
 				if( ! Utils.isArray(elementsOrValue) )
 				{
 					elements = this.find(elementsOrValue);
@@ -223,7 +223,7 @@
 				{
 					elements = elementsOrValue;
 				}
-				
+
 				if(elements && Utils.isArray(elements))
 				{
 					for (var i = this.elements.length - 1; i >= 0; i--)
@@ -236,7 +236,7 @@
 				}
 				return this;
 			},
-	
+
 			/**
 			 * Filters the collection using a callback function
 			 * @param	{Function}		callback	A callback function to test each element of the array, of the format function(element, index, elements)
@@ -249,11 +249,11 @@
 				this.elements = this.elements.filter(callback, thisObject || this)
 				return this;
 			},
-			
+
 		// --------------------------------------------------------------------------------
 		// # Editing functions
-			
-	
+
+
 			/**
 			 * Modifies a particular attribute on all items in the collection
 			 * @param	{Object}		prop		An object containing name:value pairs of attribute to modify
@@ -281,7 +281,7 @@
 				}
 				return this;
 			},
-	
+
 			/**
 			 * A chainable utility function, that allows an external callback function to be called a single time
 			 * @param	{Function}		callback	Function to call
@@ -294,7 +294,7 @@
 				callback.apply(this, params);
 				return this;
 			},
-	
+
 			/**
 			 * A chainable utility function, that allows an external callback function to be called a single time
 			 * @param	{Function}		callback	Function to call
@@ -307,7 +307,7 @@
 				callback.apply(scope || this, params);
 				return this;
 			},
-			
+
 			/**
 			 * A chainable utility function, to invoke existing named methods on collection elements
 			 * @param	{String}		name		The name of the method to call
@@ -326,7 +326,7 @@
 
 		// --------------------------------------------------------------------------------
 		// # Utility methods
-	
+
 			/**
 			 * Sort the internal elements
 			 * @returns	{Collection}				The original Collection object
@@ -336,7 +336,7 @@
 				this.elements.sort();
 				return this;
 			},
-	
+
 			/**
 			 * Utility function to list the contents of the collection
 			 * @param	{String}		label		An optional label to add to the inspect() output
@@ -347,7 +347,7 @@
 				Output.inspect(this.elements, label || this.toString(), 1);
 				return this;
 			},
-	
+
 			/**
 			 * Return a string representation of the collection
 			 * @returns	{String}					A string representation of the collection

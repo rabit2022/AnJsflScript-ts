@@ -6,5 +6,16 @@
  * @project: AnJsflScript-ts
  * @description:
  */
+import * as console from "node:console";
 
 // nodejs TypeScript file test1.ts
+const set = new Set();
+set.add(1);
+set.add(2);
+set.add(0);
+
+console.log(set)
+
+set.forEach(function (set,i,sets) {
+    console.log(set,i,sets);
+})

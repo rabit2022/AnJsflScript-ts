@@ -1,3 +1,4 @@
+
 /**
  * Represents a document in Adobe Animate/Flash.
  */
@@ -909,18 +910,7 @@ interface FlashDocument {
      * fl.getDocumentDOM().rotateSelection(45, "bottom left");
      * ```
      */
-    rotateSelection(
-        angle: number,
-        rotationPoint?:
-            | 'top right'
-            | 'top left'
-            | 'bottom right'
-            | 'bottom left'
-            | 'top center'
-            | 'right center'
-            | 'bottom center'
-            | 'left center'
-    ): void;
+    rotateSelection(angle: number, rotationPoint?:Corner): void;
 
     /**
      * Saves the document in its default location.
@@ -979,7 +969,7 @@ interface FlashDocument {
      * fl.getDocumentDOM().scaleSelection(1, 1.90, 'top center');
      * ```
      */
-    scaleSelection(xScale: number, yScale: number, whichCorner?: string): void;
+    scaleSelection(xScale: number, yScale: number, whichCorner?: Corner): void;
 
     /**
      * Selects all items on the Stage. This method is equivalent to pressing Control+A (Windows) or Command+A (Macintosh) or selecting Edit >Select All.

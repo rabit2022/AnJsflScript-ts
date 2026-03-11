@@ -10,7 +10,5 @@ npx babel out/packAll.js --out-file out/packAll.jsfl
 
  */
 
-// module.exports = require("micromatch")
-
-// @ts-nocheck
-var IS_INCLUDE = window.AnJsflScript?.$ProjectFileDir$?.indexOf("AnJsflScript") !== -1;
+module.exports = require("rxjs")
+// export * from "./esm";
