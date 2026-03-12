@@ -8,5 +8,10 @@
  */
 
 export * from "./Element";
+export * from "./Filter";
+export * from "./Frame";
 export * from "./Item";
+export * from "./KeyFrame";
+export * from "./Layer";
+export * from "./sound";
 export * from "./Symbol";

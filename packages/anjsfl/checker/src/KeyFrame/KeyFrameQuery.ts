@@ -7,14 +7,17 @@
  * @description:
  */
 
-import { FrameRange } from "./SAT";
+import {SAT, SAT_T} from "@anjsfl/sat";
+
+const {FrameRange} = SAT;
+type  T_FrameRange = SAT_T.T_FrameRange;
 
 /**
  * 获取当前时间轴选中的帧范围
  */
-export function getSelectedFrameRanges(timeline: Timeline): FrameRange[] {
+export function getSelectedFrameRanges(timeline: Timeline): T_FrameRange[] {
     const selectedFrames = timeline.getSelectedFrames();
-    const ranges: FrameRange[] = [];
+    const ranges: T_FrameRange[] = [];
 
     for (let i = 0; i < selectedFrames.length; i += 3) {
         ranges.push(
@@ -32,7 +35,7 @@ export function getSelectedFrameRanges(timeline: Timeline): FrameRange[] {
 /**
  * 获取图层中的所有关键帧起始索引
  */
-export function extractKeyFrameIndexes(layer: Layer): number[] {
+export function getKeyFrames(layer: Layer): number[] {
     const frames = layer.frames;
     const keyFrameIndexes: number[] = [];
 
@@ -46,21 +49,21 @@ export function extractKeyFrameIndexes(layer: Layer): number[] {
 }
 
 /**
- * 获取当前图层的关键帧范围列表
+ * 获取指定图层的关键帧范围列表
  */
 export function getKeyFrameRangesOfLayer(
     layers: Layer[],
-    currentLayer: number
-): FrameRange[] | null {
-    const layerIndex = currentLayer;
+    currentLayer: number | Layer
+): T_FrameRange[] {
+    const layerIndex = typeof currentLayer === "number" ? currentLayer : layers.indexOf(currentLayer);
     const layer = typeof currentLayer === "number" ? layers[currentLayer] : currentLayer;
 
-    const keyFrameIndexes = extractKeyFrameIndexes(layer);
+    const keyFrameIndexes = getKeyFrames(layer);
 
     // 补上最后一段区间
     keyFrameIndexes.push(layer.frameCount);
 
-    const ranges: FrameRange[] = [];
+    const ranges: T_FrameRange[] = [];
 
     for (let i = 0; i < keyFrameIndexes.length - 1; i++) {
         ranges.push(
@@ -68,7 +71,7 @@ export function getKeyFrameRangesOfLayer(
         );
     }
 
-    return ranges.length ? ranges : null;
+    return ranges.length ? ranges : [];
 }
 
 /**
@@ -76,9 +79,9 @@ export function getKeyFrameRangesOfLayer(
  * （只判断选中范围起始帧所在区间）
  */
 export function findKeyFrameRangeBySelection(
-    selectedRange: FrameRange,
-    keyFrameRanges: FrameRange[]
-): FrameRange | null {
+    selectedRange: T_FrameRange,
+    keyFrameRanges: T_FrameRange[]
+): T_FrameRange | null {
     for (const range of keyFrameRanges) {
         if (range.contain(selectedRange)) {
             return range;
