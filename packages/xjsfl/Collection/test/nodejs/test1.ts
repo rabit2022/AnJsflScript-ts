@@ -14,8 +14,8 @@ set.add(1);
 set.add(2);
 set.add(0);
 
-console.log(set)
+console.log(set);
 
-set.forEach(function (set,i,sets) {
-    console.log(set,i,sets);
-})
+set.forEach(function (set, i, sets) {
+    console.log(set, i, sets);
+});

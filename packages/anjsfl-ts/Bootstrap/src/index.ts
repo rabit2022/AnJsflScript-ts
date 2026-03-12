@@ -7,17 +7,16 @@
  * @description:
  */
 
-import {isFlash} from "./ENV";
+import { isFlash } from "./ENV";
 // --- 安全获取 fl 数据 ---
 import "./FirstRun";
 import "./Settings";
 import "./Tips";
 
-import {AnJsflScript} from "./AnJsflScript";
-import {bootstrap} from "./bootstrap";
+import { AnJsflScript } from "./AnJsflScript";
+import { bootstrap } from "./bootstrap";
 
 const globalThis = require("globalthis")();
-
 
 if (!isFlash) {
     throw new Error("JSFL Error: This script must run inside Adobe Animate/Flash.");

@@ -63,6 +63,7 @@
     //  "H:\project\js\AnJsflScript-ts\third\utils"
     "@types/linq": "2.2.33",
     "@types/lodash": "4.17.23",
+    "lodash": "4.17.23",
     "store-js": "2.0.4",
     //    "H:\project\js\AnJsflScript-ts\third\checker"
     // skip

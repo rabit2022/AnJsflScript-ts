@@ -1,3 +1,12 @@
+/**
+ * @file: init_module_name.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/12 23:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 /*
 修改模块名字
 建立模块名字变量：MODULE_NAME，在当前文件中手动修改

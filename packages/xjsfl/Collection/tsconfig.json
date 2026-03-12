@@ -14,6 +14,10 @@
 //    "esModuleInterop": true,
 //    "allowSyntheticDefaultImports": true,
 
+    "importHelpers": true,
+
+    // iterator
+    "downlevelIteration": true,
 
     // 允许 TypeScript 将项目作为依赖进行增量编译
     "composite": true,

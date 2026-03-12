@@ -7,7 +7,6 @@
  * @description: 符号元素播放模式控制工具
  */
 
-
 /**
  * 播放模式枚举
  */
@@ -33,10 +32,7 @@ export class SymbolPlayback {
      * @param mode 播放模式
      * @param elements 符号元素或元素数组（可选，为空时设置文档默认）
      */
-    static setMode(
-        mode: PlaybackMode,
-        elements?: FlashElement | FlashElement[]
-    ): void {
+    static setMode(mode: PlaybackMode, elements?: FlashElement | FlashElement[]): void {
         if (!elements) {
             const doc: FlashDocument = fl.getDocumentDOM()!;
             doc.setElementProperty("loop", mode);

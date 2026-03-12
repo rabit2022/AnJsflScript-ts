@@ -1,3 +1,12 @@
+/**
+ * @file: findPackage.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/12 23:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import path from "path";
 // import * as fs_promise from "fs/promises";
 import * as fs from "fs";

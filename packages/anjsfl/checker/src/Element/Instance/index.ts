@@ -8,8 +8,7 @@
  */
 
 import * as _ from "lodash";
-import {IsGroup} from "../Shape";
-
+import { IsGroup } from "../Shape";
 
 const SymbolTypeArr = ["movie clip", "graphic", "button"];
 
@@ -17,7 +16,7 @@ const SymbolTypeArr = ["movie clip", "graphic", "button"];
  * 判断是否是 元件
  */
 export function IsSymbolInstance(
-    element: FlashElement | Instance | SymbolInstance,
+    element: FlashElement | Instance | SymbolInstance
 ): element is SymbolInstance {
     const IsSymbolInstance =
         // "shape" | "text" | "tlfText" | "instance" | "shapeObj"
@@ -33,21 +32,22 @@ export function IsSymbolInstance(
     );
 }
 
-
 /**
  * 判断是否是 位图
  */
-export function IsBitmapInstance(element: FlashElement | Instance | BitmapInstance): element is BitmapInstance {
+export function IsBitmapInstance(
+    element: FlashElement | Instance | BitmapInstance
+): element is BitmapInstance {
     var InstanceIsBitmap =
         (element as FlashElement).elementType === "instance" &&
         (element as Instance).instanceType === "bitmap";
 
-    return !IsGroup(element) && (InstanceIsBitmap);
+    return !IsGroup(element) && InstanceIsBitmap;
 }
 
-
-export function IsGraphicSymbol(element: FlashElement | Instance | SymbolInstance): element is SymbolInstance {
+export function IsGraphicSymbol(
+    element: FlashElement | Instance | SymbolInstance
+): element is SymbolInstance {
     var SymbolTypeIsGraphic = (element as SymbolInstance).symbolType === "graphic";
     return IsSymbolInstance(element) && SymbolTypeIsGraphic;
 }
-

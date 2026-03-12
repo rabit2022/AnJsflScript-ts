@@ -146,7 +146,7 @@ export class LayerList {
 /**
  * 交换图层
  */
-function swapLayers(timeline:Timeline, layerIndex1:number, layerIndex2:number) {
+function swapLayers(timeline: Timeline, layerIndex1: number, layerIndex2: number) {
     var layers = timeline.layers; // 获取所有图层
 
     if (
@@ -175,4 +175,3 @@ function swapLayers(timeline:Timeline, layerIndex1:number, layerIndex2:number) {
         `layerUtil.js:图层${layerIndex1}(${layers[layerIndex1].name})和图层${layerIndex2}(${layers[layerIndex2].name})交换成功。`
     );
 }
-

@@ -200,4 +200,8 @@ interface Library {
     updateItem(namePath?: string): boolean;
 
 
+    /**
+     * @since Flash MX 2004
+     */
+    expandFolder(bExpand:boolean, bRecurseNestedParents?:boolean, namePath?: string): boolean;
 }

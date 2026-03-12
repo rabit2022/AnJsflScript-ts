@@ -15,9 +15,10 @@ declare const document: FlashDocument;
 
 declare const FLfile: FLfile;
 
-declare type Document = FlashDocument;
+// declare type Document = FlashDocument;
+// declare type Element = FlashElement;
 
-declare type Element = FlashElement;
+
 
 // @ts-ignore
 declare const window : globalThis;

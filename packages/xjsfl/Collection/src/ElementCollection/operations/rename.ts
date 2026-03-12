@@ -6,7 +6,7 @@
  * @project: AnJsflScript-ts
  * @description:
  */
-import {ElementCollection} from "../core/ElementCollection";
+import { ElementCollection } from "../core/ElementCollection";
 
 export type RenameCallback = (
     element: Element,
@@ -41,16 +41,29 @@ export function createRenameCallback(
     };
 }
 
-export function rename(this: ElementCollection,callback: RenameCallback): ElementCollection;
-export function rename(this: ElementCollection,base: string, padding?: number, startIndex?: number, separator?: string): ElementCollection;
+export function rename(
+    this: ElementCollection,
+    callback: RenameCallback
+): ElementCollection;
+export function rename(
+    this: ElementCollection,
+    base: string,
+    padding?: number,
+    startIndex?: number,
+    separator?: string
+): ElementCollection;
 
-
-export function rename(this: ElementCollection,base: string | RenameCallback, padding?: number, startIndex?: number, separator?: string) {
+export function rename(
+    this: ElementCollection,
+    base: string | RenameCallback,
+    padding?: number,
+    startIndex?: number,
+    separator?: string
+) {
     const callback =
-        typeof base === 'function' ?
-            base :
-            createRenameCallback(base, padding, startIndex, separator);
-
+        typeof base === "function"
+            ? base
+            : createRenameCallback(base, padding, startIndex, separator);
 
     const self_elements = this.toArray();
     self_elements.forEach((el, index, elements) => {

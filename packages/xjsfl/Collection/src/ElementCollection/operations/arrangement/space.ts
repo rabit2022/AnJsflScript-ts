@@ -6,12 +6,12 @@
  * @project: AnJsflScript-ts
  * @description:
  */
-import {ElementCollection} from "../../core/ElementCollection";
-import {OrderableProp} from "../order";
+import { ElementCollection } from "../../core/ElementCollection";
+import { OrderableProp } from "../order";
 
-type SpaceDirection = 'horizontal' | 'vertical';
+type SpaceDirection = "horizontal" | "vertical";
 
-interface SpaceOptions {
+export interface SpaceOptions {
     direction?: SpaceDirection;
 
     /**
@@ -43,36 +43,30 @@ export function space(
     // ----------------------------
     // 参数归一化
     // ----------------------------
-    let direction: SpaceDirection = 'horizontal';
+    let direction: SpaceDirection = "horizontal";
     let gap: number | undefined;
     let useDocumentBounds = false;
 
-    if (typeof options === 'string') {
+    if (typeof options === "string") {
         direction = options;
-        if (typeof secondary === 'number') gap = secondary;
-        if (typeof secondary === 'boolean') useDocumentBounds = secondary;
-    } else if (typeof options === 'number') {
+        if (typeof secondary === "number") gap = secondary;
+        if (typeof secondary === "boolean") useDocumentBounds = secondary;
+    } else if (typeof options === "number") {
         gap = options;
     } else {
-        ({
-            direction = 'horizontal',
-            gap,
-            useDocumentBounds = false,
-        } = options);
+        ({ direction = "horizontal", gap, useDocumentBounds = false } = options);
     }
 
     // ----------------------------
     // 自定义 spacing（固定间距）
     // ----------------------------
-    if (typeof gap === 'number') {
-
+    if (typeof gap === "number") {
         // 先排序
-        this.orderBy(direction === 'horizontal' ? 'left' : 'top' as OrderableProp);
+        this.orderBy(direction === "horizontal" ? "left" : ("top" as OrderableProp));
 
         spaceWithGap(direction, gap);
         return this;
     }
-
 
     // ----------------------------
     // JSFL 原生 spacing
@@ -87,19 +81,13 @@ export function space(
     return this;
 }
 
-
-function spaceWithGap(
-    direction: SpaceDirection,
-    gap: number
-): void {
-
-
+function spaceWithGap(direction: SpaceDirection, gap: number): void {
     let cursor = 0;
 
     for (let i = 0; i < self_elements.length; i++) {
         const el = self_elements[i];
 
-        if (direction === 'horizontal') {
+        if (direction === "horizontal") {
             const offset = el.x - el.left;
 
             if (i === 0) {
@@ -122,16 +110,3 @@ function spaceWithGap(
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

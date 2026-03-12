@@ -87,7 +87,7 @@ export class Selector {
      * static helpers
      * --------------------------------------------------------- */
 
-    static override toString(): string {
+    static toString(): string {
         return "[class Selector]";
     }
 

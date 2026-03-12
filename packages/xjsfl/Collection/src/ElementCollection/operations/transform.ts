@@ -1,12 +1,15 @@
-import {ElementCollection} from "../core/ElementCollection"
+/**
+ * @file: transform.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/12 23:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
-export function move(
-    this: ElementCollection,
-    x = 0,
-    y = 0,
-    relative = false
-) {
+import { ElementCollection } from "../core/ElementCollection";
 
+export function move(this: ElementCollection, x = 0, y = 0, relative = false) {
     const self_elements = this.toArray();
 
     if (relative) {
@@ -20,10 +23,9 @@ export function move(
         this._deselect();
 
         // loop
-        for(let element of self_elements)
-        {
-            element.x	= (element.left - bounds.left) + (element.x - element.left) + x;
-            element.y	= (element.top - bounds.top) + (element.y - element.top) + y;
+        for (let element of self_elements) {
+            element.x = element.left - bounds.left + (element.x - element.left) + x;
+            element.y = element.top - bounds.top + (element.y - element.top) + y;
         }
 
         // reselect
@@ -35,30 +37,19 @@ export function move(
     return this;
 }
 
-export function rotate(
-    this: ElementCollection,
-    angle: number,
-    corner?: Corner
-) {
-
+export function rotate(this: ElementCollection, angle: number, corner?: Corner) {
     this.select();
-    this.dom.rotateSelection(angle, corner)
+    this.dom.rotateSelection(angle, corner);
 
-    return this
+    return this;
 }
 
-export function scale(
-    this: ElementCollection,
-    x = 1,
-    y = 1,
-    corner?: Corner
-) {
-
+export function scale(this: ElementCollection, x = 1, y = 1, corner?: Corner) {
     this.select();
 
-    this.dom.scaleSelection(x, y, corner)
+    this.dom.scaleSelection(x, y, corner);
 
-    return this
+    return this;
 }
 
 export function resetTransform(this: ElementCollection) {
@@ -69,19 +60,16 @@ export function resetTransform(this: ElementCollection) {
     return this;
 }
 
-
 /**
  * Centers the transform points of the elements
  * @param donnotrun Set transform point to center (true) or keep original (false)
  * @returns The current ElementCollection instance
  */
-export function centerTransformPoint(this: ElementCollection,donnotrun: boolean = true) {
-
-    if (!donnotrun) return this
+export function centerTransformPoint(this: ElementCollection, donnotrun: boolean = true) {
+    if (!donnotrun) return this;
 
     const center = (e: FlashElement) => {
-
-        const mat = e.matrix
+        const mat = e.matrix;
 
         // 临时去掉 skew / rotation
         const tempMatrix = {
@@ -91,22 +79,22 @@ export function centerTransformPoint(this: ElementCollection,donnotrun: boolean 
             d: mat.d,
             tx: mat.tx,
             ty: mat.ty
-        }
+        };
 
         // 应用临时 matrix
-        e.matrix = tempMatrix
+        e.matrix = tempMatrix;
 
         // 设置中心 transform point
         e.setTransformationPoint({
             x: (e.width / 2) * (1 / e.scaleX),
             y: (e.height / 2) * (1 / e.scaleY)
-        })
+        });
 
         // 恢复原 matrix
-        e.matrix = mat
-    }
+        e.matrix = mat;
+    };
 
-    this.each(center)
+    this.each(center);
 
-    return this
+    return this;
 }

@@ -1,9 +1,17 @@
-import {makeWildcard} from "../ElementCollection/utils/elementUtils";
+/**
+ * @file: Collection.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/12 23:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+import { makeWildcard } from "../ElementCollection/utils/elementUtils";
 
 type Callback<T> = (element: T, index: number, elements: T[]) => void;
 
 export class Collection<T extends Record<string, any>> extends Set<T> {
-
     constructor(elements?: T[] | T) {
         super();
         if (elements) {
@@ -17,7 +25,7 @@ export class Collection<T extends Record<string, any>> extends Set<T> {
 
     addMany(elements: T[] | T): this {
         if (Array.isArray(elements)) {
-            elements.forEach(e => this.add(e));
+            elements.forEach((e) => this.add(e));
         } else {
             this.add(elements);
         }
@@ -84,18 +92,18 @@ export class Collection<T extends Record<string, any>> extends Set<T> {
         }
 
         if (value instanceof RegExp) {
-            return arr.filter(e => value.test(String(e[property])));
+            return arr.filter((e) => value.test(String(e[property])));
         }
 
-        return arr.filter(e => e[property] === value);
+        return arr.filter((e) => e[property] === value);
     }
 
     remove(elementsOrValue: T[] | any, property = "name"): this {
         if (Array.isArray(elementsOrValue)) {
-            elementsOrValue.forEach(e => this.delete(e));
+            elementsOrValue.forEach((e) => this.delete(e));
         } else {
             const found = this.find(elementsOrValue, property);
-            found.forEach(e => this.delete(e));
+            found.forEach((e) => this.delete(e));
         }
 
         return this;
@@ -106,24 +114,25 @@ export class Collection<T extends Record<string, any>> extends Set<T> {
         const filtered = arr.filter(callback);
 
         this.clear();
-        filtered.forEach(e => this.add(e));
+        filtered.forEach((e) => this.add(e));
 
         return this;
     }
 
-
-    attr<K extends keyof T>(prop: K, value: T[K]): this
-    attr<K extends keyof T>(prop: K, value: (el: T, index: number, arr: T[]) => T[K]): this
+    attr<K extends keyof T>(prop: K, value: T[K]): this;
+    attr<K extends keyof T>(
+        prop: K,
+        value: (el: T, index: number, arr: T[]) => T[K]
+    ): this;
     attr<K extends keyof T>(
         prop: K,
         value: T[K] | ((el: T, index: number, arr: T[]) => T[K])
     ): this {
-
         const arr = this.toArray();
 
         const fn =
             typeof value === "function"
-                ? value as (el: T, index: number, arr: T[]) => T[K]
+                ? (value as (el: T, index: number, arr: T[]) => T[K])
                 : () => value;
 
         arr.forEach((el, i) => {
@@ -133,9 +142,8 @@ export class Collection<T extends Record<string, any>> extends Set<T> {
         return this;
     }
 
-
     invoke(name: string, ...params: any[]): this {
-        this.forEach(el => {
+        this.forEach((el) => {
             const fn = el[name];
             if (typeof fn === "function") {
                 fn.apply(el, params);
@@ -148,7 +156,7 @@ export class Collection<T extends Record<string, any>> extends Set<T> {
         const arr = this.toArray().sort(compareFn);
 
         this.clear();
-        arr.forEach(e => this.add(e));
+        arr.forEach((e) => this.add(e));
 
         return this;
     }
@@ -162,8 +170,7 @@ export class Collection<T extends Record<string, any>> extends Set<T> {
         return `[object Collection length=${this.size}]`;
     }
 
-    static toString = function()
-    {
-        return '[class Collection]';
-    }
+    static toString = function () {
+        return "[class Collection]";
+    };
 }

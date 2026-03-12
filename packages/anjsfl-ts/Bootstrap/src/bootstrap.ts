@@ -1,5 +1,14 @@
-import {SCRIPT_LOAD_QUEUE} from "./FirstRun/config";
-import {importFlashScripts} from "./FirstRun/importFlashScripts";
+/**
+ * @file: bootstrap.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/12 23:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+import { SCRIPT_LOAD_QUEUE } from "./FirstRun/config";
+import { importFlashScripts } from "./FirstRun/importFlashScripts";
 
 const $keys = require("object-keys");
 
@@ -20,4 +29,4 @@ export function bootstrap() {
         // 抛出错误停止后续所有操作
         throw e;
     }
-};
+}

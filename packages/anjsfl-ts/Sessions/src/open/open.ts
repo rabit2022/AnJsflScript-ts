@@ -1,5 +1,14 @@
-import * as fs from 'fs';
-import * as path from 'path';
+/**
+ * @file: open.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/12 23:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+import * as fs from "fs";
+import * as path from "path";
 import { FileObject, OpenMode } from "./types";
 
 /**
@@ -24,12 +33,8 @@ export class FileHandle implements FileObject {
      * @param mode 打开模式 (默认 'r')
      * @param encoding 编码 (默认 'utf-8', 仅支持 utf-8)
      */
-    constructor(
-        filePath: string,
-        mode: OpenMode = 'r',
-        encoding: string = 'utf-8'
-    ) {
-        if (encoding.toLowerCase() !== 'utf-8') {
+    constructor(filePath: string, mode: OpenMode = "r", encoding: string = "utf-8") {
+        if (encoding.toLowerCase() !== "utf-8") {
             throw new Error("暂不支持非 utf-8 编码的文件");
         }
 
@@ -65,11 +70,11 @@ export class FileHandle implements FileObject {
 
         // 懒加载内容
         if (this.fileContentCache === undefined) {
-            if (this.mode === 'r' || this.mode === 'a') {
+            if (this.mode === "r" || this.mode === "a") {
                 try {
-                    this.fileContentCache = fs.readFileSync(this.absolutePath, 'utf-8');
+                    this.fileContentCache = fs.readFileSync(this.absolutePath, "utf-8");
                 } catch (err: any) {
-                    if (err.code === 'ENOENT') {
+                    if (err.code === "ENOENT") {
                         throw new Error(`File not found: ${this.absolutePath}`);
                     }
                     throw err;
@@ -117,40 +122,42 @@ export class FileHandle implements FileObject {
     public write(text: string): boolean {
         this.checkClosed();
 
-        if (!['w', 'a', 'x'].includes(this.mode)) {
-            throw new Error(`Invalid mode for writing: ${this.mode}. Use 'w', 'a', or 'x'.`);
+        if (!["w", "a", "x"].includes(this.mode)) {
+            throw new Error(
+                `Invalid mode for writing: ${this.mode}. Use 'w', 'a', or 'x'.`
+            );
         }
 
-        let flag: string = 'w';
-        if (this.mode === 'a') {
-            flag = 'a';
-        } else if (this.mode === 'x') {
+        let flag: string = "w";
+        if (this.mode === "a") {
+            flag = "a";
+        } else if (this.mode === "x") {
             // 根据需求，'x' 暂时等同于 'w' (覆盖)
-            flag = 'w';
+            flag = "w";
             // 若需严格独占创建，改为: flag = 'wx';
         }
 
         try {
             fs.writeFileSync(this.absolutePath, text, {
-                encoding: 'utf-8',
+                encoding: "utf-8",
                 flag: flag as fs.OpenMode as string
             });
 
             // 更新缓存策略
-            if (this.mode === 'w' || this.mode === 'x') {
+            if (this.mode === "w" || this.mode === "x") {
                 this.fileContentCache = text;
                 this.fileLinesCache = undefined;
                 this.readLineIndex = 0;
-            } else if (this.mode === 'a') {
+            } else if (this.mode === "a") {
                 // 追加后重新读取全量以保持一致性
-                this.fileContentCache = fs.readFileSync(this.absolutePath, 'utf-8');
+                this.fileContentCache = fs.readFileSync(this.absolutePath, "utf-8");
                 this.fileLinesCache = undefined;
                 this.readLineIndex = 0;
             }
 
             return true;
         } catch (err: any) {
-            if (err.code === 'EEXIST' && flag === 'wx') {
+            if (err.code === "EEXIST" && flag === "wx") {
                 throw new Error(`File already exists: ${this.absolutePath}`);
             }
             throw err;
@@ -177,4 +184,3 @@ export class FileHandle implements FileObject {
         this.close();
     }
 }
-

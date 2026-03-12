@@ -1,10 +1,18 @@
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/12 23:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 // const {alertMessage} = Tips;// 显示提示信息
 
-import {alertMessage} from "./Tips";
-import {folders} from "../Settings/settings";
+import { alertMessage } from "./Tips";
+import { folders } from "../Settings/settings";
 
 const $includes = require("string.prototype.includes");
-
 
 const dom = fl.getDocumentDOM();
 if (!dom) {
@@ -25,5 +33,3 @@ if (!IS_INCLUDE) {
 } else {
     alertMessage("loading success!");
 }
-
-

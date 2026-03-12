@@ -9,10 +9,9 @@
 
 // lodash
 // import * as _ from "lodash";
-import {includes as _includes, startsWith as _startsWith} from "lodash";
-import {BufferEncoding, WriteFileOptions} from "./WriteFileOptions";
-import {PathOrFileDescriptor} from "./Path";
-
+import { includes as _includes, startsWith as _startsWith } from "lodash";
+import { BufferEncoding, WriteFileOptions } from "./WriteFileOptions";
+import { PathOrFileDescriptor } from "./Path";
 
 // --- 辅助函数 ---
 function toFileURI(path: string): string {
@@ -61,11 +60,10 @@ export function readFileSync(path: string, encoding?: BufferEncoding): string {
     return content; // FLfile.read 始终返回 UTF-8 字符串
 }
 
-
 function writeFileSync(
     file: PathOrFileDescriptor,
     data: string,
-    options?: WriteFileOptions,
+    options?: WriteFileOptions
 ): void {
     if ((options as any)?.flag === "a") {
         appendFileSync(file, data, options);
@@ -94,7 +92,7 @@ function writeFileSync(
 export function appendFileSync(
     file: PathOrFileDescriptor,
     data: string,
-    _options?: WriteFileOptions,
+    _options?: WriteFileOptions
 ): void {
     const uri = toFileURI(file);
     const strData = data;

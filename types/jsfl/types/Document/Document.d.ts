@@ -1384,7 +1384,7 @@ interface FlashDocument {
      * // ... (more complex examples)
      * ```
      */
-    selection: Element[];
+    selection: FlashElement[];
 
     /**
      * *Dropped in Adobe Animate.*

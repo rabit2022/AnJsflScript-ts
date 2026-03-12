@@ -10,5 +10,5 @@ npx babel out/packAll.js --out-file out/packAll.jsfl
 
  */
 
-module.exports = require("rxjs")
+module.exports = require("rxjs");
 // export * from "./esm";

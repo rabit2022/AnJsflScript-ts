@@ -9,4 +9,4 @@
 
 import fs from "fs";
 
-fs.writeFileSync()
+fs.writeFileSync();

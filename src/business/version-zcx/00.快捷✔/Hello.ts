@@ -7,6 +7,6 @@
  * @description:
  */
 
-function IsGroup(element:any) {
+function IsGroup(element: any) {
     return element?.isGroup ?? false;
 }

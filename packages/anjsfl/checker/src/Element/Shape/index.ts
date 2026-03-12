@@ -1,4 +1,11 @@
-
+/**
+ * @file: index.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/12 23:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
 /**
  * 判断是否是 组
@@ -9,27 +16,30 @@ export function IsGroup(element: FlashElement | Shape): boolean {
 /**
  * 判断是否是 形状
  */
-export function IsShape(element:FlashElement|Shape):element is Shape {
-    var isShape =  element.elementType === "shape";
+export function IsShape(element: FlashElement | Shape): element is Shape {
+    var isShape = element.elementType === "shape";
     return isShape;
 }
-
 
 /**
  * 判断是否是 绘制对象
  */
-export function IsDrawingObject(element:FlashElement|Shape):element is Shape {
+export function IsDrawingObject(element: FlashElement | Shape): element is Shape {
     return (
         !IsGroup(element) &&
-        (element.elementType === "shapeObj" && (element as Shape).isDrawingObject)
+        element.elementType === "shapeObj" &&
+        (element as Shape).isDrawingObject
     );
 }
 
-export function IsOvalObject(element:FlashElement|Shape|OvalObject):element is OvalObject {
+export function IsOvalObject(
+    element: FlashElement | Shape | OvalObject
+): element is OvalObject {
     return !IsGroup(element) && (element as Shape).isOvalObject;
 }
 
-export function IsRectangleObject(element:FlashElement|Shape|RectangleObject):element is RectangleObject {
+export function IsRectangleObject(
+    element: FlashElement | Shape | RectangleObject
+): element is RectangleObject {
     return !IsGroup(element) && (element as Shape).isRectangleObject;
 }
-

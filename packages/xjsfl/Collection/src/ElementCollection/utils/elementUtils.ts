@@ -1,4 +1,13 @@
 /**
+ * @file: elementUtils.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/12 23:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+/**
  * 将字符串中的正则表达式特殊字符进行转义。
  *
  * 作用：
@@ -19,7 +28,7 @@
  * @returns 转义后的字符串，可安全用于 RegExp 构造
  */
 export function rxEscape(value: string): string {
-    return String(value).replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&")
+    return String(value).replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
 }
 
 /**
@@ -49,73 +58,55 @@ export function rxEscape(value: string): string {
  * @param exactMatch 是否要求完全匹配（默认 false）
  * @returns 转换后的 RegExp 对象
  */
-export function makeWildcard(
-    value: string,
-    exactMatch: boolean = false
-): RegExp {
-
-    let str = rxEscape(value).replace(/\\\*/g, ".*?")
+export function makeWildcard(value: string, exactMatch: boolean = false): RegExp {
+    let str = rxEscape(value).replace(/\\\*/g, ".*?");
 
     if (exactMatch) {
-        str = `^${str}$`
+        str = `^${str}$`;
     }
 
-    return new RegExp(str)
+    return new RegExp(str);
 }
 
-
-export function getExtremeValues<
-    T extends Record<string, any>,
-    K extends keyof T
->(
+export function getExtremeValues<T extends Record<string, any>, K extends keyof T>(
     elements: readonly T[],
     prop: K,
     returnElement = false
 ): [T[K] | T | undefined, T[K] | T | undefined] {
-
     if (elements.length === 0) {
-        return [undefined, undefined]
+        return [undefined, undefined];
     }
 
-    let minEl = elements[0]
-    let maxEl = elements[0]
+    let minEl = elements[0];
+    let maxEl = elements[0];
 
-    let minVal = elements[0][prop]
-    let maxVal = elements[0][prop]
+    let minVal = elements[0][prop];
+    let maxVal = elements[0][prop];
 
     for (let i = 1; i < elements.length; i++) {
-        const el = elements[i]
-        const value = el[prop]
+        const el = elements[i];
+        const value = el[prop];
 
         if (value > maxVal) {
-            maxVal = value
-            maxEl = el
+            maxVal = value;
+            maxEl = el;
         } else if (value < minVal) {
-            minVal = value
-            minEl = el
+            minVal = value;
+            minEl = el;
         }
     }
 
-    return returnElement
-        ? [minEl, maxEl]
-        : [minVal, maxVal]
+    return returnElement ? [minEl, maxEl] : [minVal, maxVal];
 }
 
-
-export function sortOn<T>(
-    arr: T[],
-    prop: keyof T,
-    asc = true
-) {
-
+export function sortOn<T>(arr: T[], prop: keyof T, asc = true) {
     return arr.sort((a, b) => {
+        const av = a[prop] as any;
+        const bv = b[prop] as any;
 
-        const av = a[prop] as any
-        const bv = b[prop] as any
+        if (av < bv) return asc ? -1 : 1;
+        if (av > bv) return asc ? 1 : -1;
 
-        if (av < bv) return asc ? -1 : 1
-        if (av > bv) return asc ? 1 : -1
-
-        return 0
-    })
+        return 0;
+    });
 }

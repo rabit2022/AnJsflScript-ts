@@ -1,7 +1,15 @@
+/**
+ * @file: types.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/12 23:39
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
 // --- 类型定义 ---
 
-export type OpenMode = 'r' | 'w' | 'a' | 'x';
+export type OpenMode = "r" | "w" | "a" | "x";
 
 /**
  * 文件对象接口

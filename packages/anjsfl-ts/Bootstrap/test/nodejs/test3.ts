@@ -15,10 +15,7 @@
 // const a = "hello world";
 // console.log(startswith(a, "he"));
 
-
 // const includes = require("string.prototype.includes");
 import includes = require("string.prototype.includes");
-
-
 
 console.log(includes("hello", "hell"));

@@ -2,19 +2,27 @@
   "compilerOptions": {
     "module": "AMD",
 
-    "noImplicitAny": false, // ❌ 强烈不建议！整个项目失去隐式 any 保护
-
     "strict": true,
     "noEmitOnError": false,
     "removeComments": true,
-    //    "outFile": "./dist/Events.js", // JSFL 通常是一个文件，所以用 outFile 合并
+
+    // node import
+    "moduleResolution": "node",
 
 
-    "rootDir": "src",
+    // default 报错
+//    // es import
+//    "esModuleInterop": true,
+//    "allowSyntheticDefaultImports": true,
+
+
+    // 允许 TypeScript 将项目作为依赖进行增量编译
+    "composite": true,
+    "declaration": true,
+
+    "rootDir": "./src",
     "outDir": "./dist",
-    "types": [
-      "jest"
-    ],
+    "types": ["node"],
     "target": "es5",
     "lib": [
       "es5",
@@ -24,9 +32,11 @@
   "include": [
     "src",
 
+    // region TYPES
     // jsfl
     "../../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
     "../../../types/myShim/*.d.ts"
+// endregion TYPES
   ]
 }
