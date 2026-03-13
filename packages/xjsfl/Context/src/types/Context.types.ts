@@ -9,7 +9,7 @@
 
 // Context.ts
 
-import { Context } from "./Context";
+import { Context } from "../Context";
 
 export type DOMInput = Context | boolean | number | string | FlashDocument;
 
@@ -28,3 +28,4 @@ export type LayerInput = Context | boolean | number | string | Layer;
 export type FrameInput = Context | boolean | number | string | RegExp | Frame;
 
 export type ElementInput = Context | boolean | number | string | FlashElement;
+

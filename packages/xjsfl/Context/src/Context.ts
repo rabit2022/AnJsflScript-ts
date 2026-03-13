@@ -8,17 +8,9 @@
  */
 
 // Context.ts
-import {
-    DOMInput,
-    ElementInput,
-    FrameInput,
-    LayerInput,
-    TimelineInput
-} from "./Context.types";
-import * as _ from "lodash";
-import { from } from "./from";
-
-const trace = (msg: any) => fl.trace(msg);
+import {DOMInput, ElementInput, FrameInput, LayerInput, TimelineInput} from "./types/Context.types";
+import {ContextType, SelectionMode} from "./types/select.types";
+import {from} from "./factory";
 
 export class Context {
     dom: FlashDocument | null = null;
@@ -27,7 +19,7 @@ export class Context {
     layer: Layer | null = null;
     frame: Frame | null = null;
     element: FlashElement | null = null;
-    context = "";
+    context: ContextType = "dom";
 
     constructor(
         dom?: DOMInput,
@@ -86,9 +78,9 @@ export class Context {
 
     // ------------------------------------------------
     // DOM
-    setDOM(value: DOMInput): this {
+    setDOM(value: DOMInput = true): this {
         let dom: FlashDocument;
-        if (value === true || value === undefined) {
+        if (value === true) {
             dom = fl.getDocumentDOM()!;
         } else if (value instanceof Context) {
             dom = value.dom!;
@@ -115,11 +107,11 @@ export class Context {
 
     // ------------------------------------------------
     // Timeline
-    setTimeline(value: TimelineInput): this {
+    setTimeline(value: TimelineInput = true): this {
         if (!this.dom) this.setDOM(true);
         let timeline: Timeline | undefined;
         let item: LibraryItem | undefined;
-        if (value === true || value === undefined) {
+        if (value === true) {
             timeline = this.dom!.getTimeline();
         } else if (value instanceof Timeline) {
             timeline = value;
@@ -147,21 +139,17 @@ export class Context {
 
     // ------------------------------------------------
     // Layer
-    setLayer(value: LayerInput): this {
+    setLayer(value: LayerInput = true): this {
         if (!this.timeline) this.setTimeline(true);
         let layer: Layer | undefined;
-        if (value === true || value === undefined) {
+        if (value === true) {
             layer = this.timeline!.layers[this.timeline!.currentLayer];
         } else if (typeof value === "number") {
             layer = this.timeline!.layers[value];
         } else if (typeof value === "string") {
             const indexs = this.timeline!.findLayerIndex(value);
             if (!indexs || indexs.length === 0) {
-                throw new ReferenceError(
-                    'ReferenceError: "' +
-                        value +
-                        '" is not a valid layer in Context.setLayer()'
-                );
+                throw new ReferenceError(`ReferenceError: "${value}" is not a valid layer in Context.setLayer()`);
             }
 
             let index = indexs[0];
@@ -182,12 +170,12 @@ export class Context {
 
     // ------------------------------------------------
     // Frame
-    setFrame(value?: FrameInput): this {
+    setFrame(value: FrameInput = true): this {
         if (!this.layer) throw new Error("Context has no layer");
         let frame: Frame | undefined;
         if (typeof value === "number") {
             frame = this.layer.frames[value];
-        } else if (value === true || value === undefined) {
+        } else if (value === true) {
             frame = this.layer.frames[this.timeline!.currentFrame];
         } else if (value instanceof Frame) {
             frame = value;
@@ -196,6 +184,22 @@ export class Context {
             frame = this.keyframes[index];
         } else if (value instanceof Context) {
             frame = value.frame!;
+        } else if (typeof value === 'string') {
+            let layers = this.timeline!.layers;
+
+            for (let _layer of layers) {
+                for (let _frame of _layer.frames) {
+
+                    if (_frame.name === value) {
+                        this.layer = _layer;
+                        frame = _frame;
+                        break;
+                    }
+                }
+                if (frame) {
+                    break;
+                }
+            }
         }
 
         if (frame) {
@@ -237,8 +241,8 @@ export class Context {
             this.element = this.frame.elements[value];
         } else if (typeof value === "string") {
             this.element = this.frame.elements.find(
-                (e: any) => e.name === value
-            ) as FlashElement;
+                (e: FlashElement) => e.name === value
+            )!;
         } else if (value instanceof Context) {
             this.element = value.element!;
         } else {
@@ -272,141 +276,183 @@ export class Context {
         }
 
         // check timeline
-        if (this.timeline !== undefined && this.timeline !== null) {
-            // change timelines
-            if (timeline !== this.timeline) {
-                if (this.item) {
-                    this.dom?.library.editItem(this.item.name);
-                } else {
-                    this.dom?.editScene(0);
-                }
-            }
-
-            // layer and frame
-            if (this.layer && this.timeline) {
-                // goto layer
-                this.timeline.currentLayer = this.layerIndex;
-
-                // frame
-                if (this.frame) {
-                    // goto frame
-                    this.timeline.currentFrame = this.frame.startFrame;
-                }
+        if (this.timeline === undefined || this.timeline === null) return this;
+        // change timelines
+        if (timeline !== this.timeline) {
+            if (this.item) {
+                this.dom?.library.editItem(this.item.name);
+            } else {
+                this.dom?.editScene(0);
             }
         }
+
+
+        if (this.layer === undefined || this.layer === null) return this;
+        // goto layer
+        this.timeline.currentLayer = this.layerIndex;
+
+
+        if (this.frame === undefined || this.frame === null) return this;
+        // goto frame
+        this.timeline.currentFrame = this.frame.startFrame;
 
         return this;
     }
 
-    select(addToSelection: boolean = false): this {
-        this.goto();
+
+    /**
+     * Select current context
+     */
+    select(mode: SelectionMode = SelectionMode.Replace): this {
+
+        this.goto()
 
         switch (this.context) {
-            case "layer":
-                this.selectLayer(addToSelection);
+            case 'layer':
+                this.selectLayer(mode);
                 break;
-
-            case "frame":
-            case "keyframe":
-                this.selectFrame(addToSelection);
+            case 'frame':
+            case 'keyframe':
+                this.selectFrame(mode);
                 break;
-
-            case "element":
-                this.selectElement(addToSelection);
+            case 'element':
+                this.selectElement(mode);
                 break;
         }
 
-        return this;
+        return this
     }
 
-    selectLayer(addToSelection: boolean = false): this {
-        if (!this.timeline || !this.layer) {
-            return this;
-        }
+    /**
+     * Select layer
+     */
+    private selectLayer(mode: SelectionMode): this {
 
-        const timeline = this.timeline;
-        const currentFrame = timeline.currentFrame;
+        if (!this.timeline || !this.layer) return this
 
-        // deselect everything
-        if (!addToSelection) {
-            const currentLayer = timeline.currentLayer;
+        const timeline = this.timeline
+        const currentFrame = timeline.currentFrame
+        const layerIndex = this.layerIndex
 
-            timeline.currentLayer = 0;
-            timeline.setSelectedFrames(0, 0);
+        switch (mode) {
 
-            if (timeline.getSelectedFrames().length > 0) {
-                timeline.setSelectedFrames(0, 0, false);
-            }
+            case SelectionMode.Clear: {
 
-            timeline.currentLayer = currentLayer;
-        } else {
-            const layerIndex = this.layerIndex;
-            if (layerIndex === -1) return this;
+                const currentLayer = timeline.currentLayer
 
-            const selectedLayers = timeline.getSelectedLayers();
-            trace("selectedLayers 2:" + selectedLayers);
+                // deselect - HACK: bReplace is actually a toggle, so we need to check the toggled state
+                timeline.currentLayer = 0
+                timeline.setSelectedFrames(0, 0)
 
-            if (!_.includes(selectedLayers, layerIndex)) {
-                trace("Selecting > " + layerIndex);
-                timeline.setSelectedLayers(layerIndex, false);
-            } else {
-                trace("NOT Selecting > " + layerIndex);
-
-                const selectedFrames = timeline.getSelectedFrames();
-
-                if (selectedFrames[0] === 0 && selectedFrames[1] === 0) {
-                    trace("OK, SELECTING!");
-                    timeline.setSelectedLayers(layerIndex, true);
+                if (timeline.getSelectedFrames().length > 0) {
+                    timeline.setSelectedFrames(0, 0, false)
                 }
 
-                trace("Sel frames > " + timeline.getSelectedFrames());
+                // reset current layer and frame
+                timeline.currentLayer = currentLayer
+                break
+            }
+
+            case SelectionMode.Add: {
+
+                if (layerIndex !== -1) {
+
+                    const selectedLayers = timeline.getSelectedLayers()
+
+                    if (!selectedLayers.includes(layerIndex)) {
+                        timeline.setSelectedLayers(layerIndex, false)
+                    }
+
+                }
+
+                break
+            }
+
+            case SelectionMode.Replace: {
+
+                if (layerIndex !== -1) {
+                    timeline.setSelectedLayers(layerIndex, true)
+                }
+
+                break
             }
         }
-        timeline.currentFrame = currentFrame;
-        return this;
+
+        timeline.currentFrame = currentFrame
+
+        return this
     }
 
-    selectFrame(addToSelection: boolean = false): this {
-        if (!this.timeline || !this.layer || !this.frame) {
-            return this;
-        }
+    /**
+     * Select frame
+     */
+    private selectFrame(mode: SelectionMode): this {
 
-        const timeline = this.timeline;
+        if (!this.timeline || !this.layer || !this.frame) return this
 
-        // deselect everything
-        if (!addToSelection) {
-            timeline.setSelectedFrames(0, 0);
-        } else {
-            const layerIndex = Number(timeline.findLayerIndex(this.layer.name) || -1);
+        const timeline = this.timeline
 
-            if (layerIndex !== -1) {
-                timeline.currentLayer = layerIndex;
-                timeline.setSelectedFrames(
-                    this.frame.startFrame,
-                    this.frame.startFrame + this.frame.duration,
-                    !addToSelection
-                );
-                timeline.currentFrame = this.frame.startFrame;
+        switch (mode) {
+
+            case SelectionMode.Clear:
+
+                timeline.setSelectedFrames(0, 0)
+                break
+
+            case SelectionMode.Add:
+            case SelectionMode.Replace: {
+
+                const layerIndex = Number(
+                    timeline.findLayerIndex(this.layer.name) ?? -1
+                )
+
+                if (layerIndex !== -1) {
+
+                    timeline.currentLayer = layerIndex
+
+                    const replace = mode === SelectionMode.Replace
+
+                    timeline.setSelectedFrames(
+                        this.frame.startFrame,
+                        this.frame.startFrame + this.frame.duration,
+                        replace
+                    )
+
+                    timeline.currentFrame = this.frame.startFrame
+
+                }
+
+                break
             }
         }
-        return this;
+
+        return this
     }
 
-    selectElement(addToSelection: boolean = false): this {
-        if (!this.element || !this.dom) {
-            return this;
+    /**
+     * Select element
+     */
+    private selectElement(mode: SelectionMode): this {
+
+        if (!this.element || !this.dom) return this
+
+        switch (mode) {
+
+            case SelectionMode.Clear:
+                this.dom.selectNone()
+                break
+
+            case SelectionMode.Replace:
+                this.dom.selectNone()
+                this.dom.selection = [this.element]
+                break
+
+            case SelectionMode.Add:
+                this.dom.selection = [this.element]
+                break
         }
 
-        if (!addToSelection) {
-            this.dom.selectNone();
-            this.dom.selection = [this.element];
-        } else {
-            let origionSelection = this.dom.selection;
-            this.dom.selection = [this.element, ...origionSelection];
-        }
-
-        // this.dom.selection = [this.element]
-        return this;
+        return this
     }
 
     // ------------------------------------------------
@@ -428,12 +474,14 @@ export class Context {
             }
         }
 
-        return `[object Context${this.dom ? ` dom="${this.dom.name}"` : ""}${
+        return `[object Context${
+            this.dom ? ` dom="${this.dom.name}"` : ""
+        }${
             this.timeline ? ` timeline="${this.timeline.name}"` : ""
-        }${this.layer ? ` layer[${this.layerIndex}]="${this.layer.name}"` : ""}${
-            this.frame
-                ? ` keyframe[${this.keyframes.indexOf(this.frame)}]=${this.frame.startFrame}`
-                : ""
+        }${
+            this.layer ? ` layer[${this.layerIndex}]="${this.layer.name}"` : ""
+        }${
+            this.frame ? ` keyframe[${this.keyframes.indexOf(this.frame)}]=${this.frame.startFrame}` : ""
         }${this.element ? ` element="${elementString}"` : ""}]`;
     }
 
