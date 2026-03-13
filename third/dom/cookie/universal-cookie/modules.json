@@ -1,4 +1,4 @@
 {
   "@third/universal-cookie": "./universal-cookie.jsfl",
-  "@polyfill/cookie":"./document-cookie.jsfl"
+  "@polyfill/cookie":"./config.jsfl"
 }

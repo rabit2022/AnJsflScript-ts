@@ -9,8 +9,7 @@
 
 (function () {
     // 导入shims, 避免其他模块依赖时报错
-    require([
-        "es5-shim", // es5,es2009
+    require(["es5-shim", // es5,es2009
         "es5-sham",
 
         "json3",// es5,es2009
@@ -29,8 +28,7 @@
     ]);
 
     // dom 相关
-    require([
-        "console",// loglevel 依赖 console
+    require(["console",// loglevel 依赖 console
 
         // debug
         "console.stack", "console.table"]);
@@ -45,4 +43,9 @@
         // 禁用log
         log.setDefaultLevel(log.levels.ERROR);
     });
+
+    // Promise的实现
+    require(["@dom/setTimeout"], function (__setTimeout__) {
+        window.AnJsflScript.__setTimeout__ = __setTimeout__;
+    })
 })();

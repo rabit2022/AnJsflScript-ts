@@ -11,7 +11,6 @@
     "noEmit": false ,     // ✅ 需要生成 .js 文件运行
 
 
-    "importHelpers": true,       // 👈 关键！启用从 tslib 导入 helpers
 
     // 解析相对路径
     "moduleResolution": "node",

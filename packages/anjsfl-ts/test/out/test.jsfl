@@ -1,20 +1,20 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("tslib"), require("@anjsfl/sat"));
+		module.exports = factory(require("_exports"), require("tslib"));
 	else if(typeof define === 'function' && define.amd)
-		require(["tslib", "@anjsfl/sat"], factory);
+		define(["_exports", "tslib"], factory);
 	else if(typeof exports === 'object')
-		exports["test"] = factory(require("tslib"), require("@anjsfl/sat"));
+		exports["test"] = factory(require("_exports"), require("tslib"));
 	else
-		root["test"] = factory(root["tslib"], root["@anjsfl/sat"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__957__) {
+		root["test"] = factory(root["_exports"], root["tslib"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE__388__, __WEBPACK_EXTERNAL_MODULE__652__) {
 return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 142:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(957)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(388)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1) {
     "use strict";
     var e_1, _a;
     Object.defineProperty(exports, "__esModule", ({ value: true }));
@@ -83,6 +83,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 
 /***/ }),
 
+/***/ 388:
+/***/ (function(module) {
+
+"use strict";
+module.exports = __WEBPACK_EXTERNAL_MODULE__388__;
+
+/***/ }),
+
 /***/ 652:
 /***/ (function(module) {
 
@@ -100,14 +108,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
-
-/***/ }),
-
-/***/ 957:
-/***/ (function(module) {
-
-"use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__957__;
 
 /***/ })
 

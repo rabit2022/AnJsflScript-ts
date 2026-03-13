@@ -17,6 +17,7 @@
 
 
     "downlevelIteration": true,
+    "importHelpers": true,       // 👈 关键！启用从 tslib 导入 helpers
 
 
     // 允许 TypeScript 将项目作为依赖进行增量编译

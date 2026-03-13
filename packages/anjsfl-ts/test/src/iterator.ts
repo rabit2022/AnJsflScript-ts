@@ -1,4 +1,4 @@
-import "@anjsfl/sat";
+import "_exports";
 
 
 class MyUtils {

@@ -14,11 +14,7 @@
 
   // region polyfill
   // 导入setTimeout
-  var setTimeout = undefined;
-  require(["@dom/setTimeout"],function (d) {
-    const {setTimeout:setTimeout_} = d;
-    setTimeout = setTimeout_;
-  });
+  const {setTimeout} = window.AnJsflScript.__setTimeout__;
   // endregion polyfill
 
 
