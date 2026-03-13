@@ -7,9 +7,9 @@
     else if (typeof define === 'function' && define.amd)
         define([], factory);
     else if (typeof exports === 'object')
-        exports["packAll"] = factory();
+        exports["xregexp"] = factory();
     else
-        root["packAll"] = factory();
+        root["xregexp"] = factory();
 })(this, function () {
     return /******/ (function () {
         /******/ var __webpack_modules__ = ({
@@ -2852,11 +2852,11 @@
                 "use strict";
                 /*
                 
-                npx browserify ./src/entry.js -o out/packAll.js
-                npx babel out/packAll.js --out-file out/packAll.jsfl
+                npx browserify ./src/entry.js -o out/xregexp.js
+                npx babel out/xregexp.js --out-file out/xregexp.jsfl
                 
                 // webpack
-                // npx babel out/packAll.js --out-file out/packAll.jsfl
+                // npx babel out/xregexp.js --out-file out/xregexp.jsfl
                 // node ./tools/iife/wrap-iife.js
                 
                 

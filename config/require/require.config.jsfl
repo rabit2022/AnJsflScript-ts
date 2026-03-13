@@ -20,8 +20,9 @@ require.config({
         "tslib": "third/types/tslib/tslib",
         "oxide.ts": "third/types/oxide.ts/oxide.ts",
         "requirejs": "third/require/requirejs/require-js",
-        "AnJsflScript-ts": "third/nodejs/assert/assert",
+        "AnJsflScript-ts": "packages/dom/@console/config",
         "micromatch": "third/regex/micromatch/micromatch",
+        "@formatjs/intl": "third/polyfill/intl-formatjs/Intl-format",
         "es8-shim": "third/polyfill/es8/es8-shim/es8-shim",
         "es7-shim": "third/polyfill/es7/es7-shim/es7-shim",
         "typedarray": "third/polyfill/es6/typedarray/typedarray",
@@ -45,7 +46,6 @@ require.config({
         "stackframe": "third/console/stack/stackframe/stackframe",
         "error-stack-parser": "third/console/stack/error-stack-parser/error-stack-parser",
         "progress": "third/console/progress/progress",
-        "loglevel": "third/console/loglevel/loglevel",
         "cli-table3": "third/console/cli-table3/cli-table3",
         "chroma-js": "third/color/chroma.js/chroma-js",
         "@third/luxon": "third/time/luxon/luxon",
@@ -68,6 +68,8 @@ require.config({
         "@polyfill/cookie": "third/dom/cookie/universal-cookie/config",
         "atob": "third/dom/base-64/atob",
         "base-64": "third/dom/base-64/base-64",
+        "@third/loglevel": "third/console/loglevel/loglevel",
+        "loglevel": "third/console/loglevel/config",
         "Hello2": "src/lib/out/Hello2",
         "@xjsfl/UI": "packages/xjsfl/UI/out/UI",
         "@xjsfl/super": "packages/xjsfl/super/out/super",
@@ -97,7 +99,8 @@ require.config({
         "@xjsfl/XUL/XULControl": "packages/xjsfl/XUL/src/XULControl",
         "@xjsfl/XUL/XULEvent": "packages/xjsfl/XUL/src/XULEvent",
         "@xjsfl/XUL/Utils": "packages/xjsfl/XUL/src/Utils",
-        "@xjsfl/XUL/xjsfl": "packages/xjsfl/XUL/src/xjsfl"
+        "@xjsfl/XUL/xjsfl": "packages/xjsfl/XUL/src/xjsfl",
+        "@polyfill/console": "packages/dom/@console/config"
     },
 // endregion REQUIRE MODULES PATHS
 

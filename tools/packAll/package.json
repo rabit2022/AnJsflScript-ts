@@ -40,8 +40,10 @@
     "webpack-cli": "6.0.1"
   },
   "dependencies": {
+    "": "link:/",
     "@babel/plugin-transform-runtime": "7.29.0",
     "@babel/runtime-corejs3": "7.29.0",
+    "@formatjs/intl-getcanonicallocales": "3.2.1",
     "core-js": "3.48.0",
     "open": "11.0.0",
     "path-browserify": "1.0.1",
