@@ -27,10 +27,10 @@ if (isJsfl) {
 
     // JSFL 环境：通常使用绝对路径或特殊目录（如 documents）
     Paths = {
-        currentText: `${Root}/Errors/human error.txt`,
-        allText: `${Root}/Errors/human all errors.txt`,
-        currentJson: `${Root}/Errors/error.json`,
-        allJson: `${Root}/Errors/all errors.json`,
+        currentText: `${Root}Errors/human error.txt`,
+        allText: `${Root}Errors/human all errors.txt`,
+        currentJson: `${Root}Errors/error.json`,
+        allJson: `${Root}Errors/all errors.json`,
     };
 } else if (typeof process !== 'undefined' && process.versions?.node) {
     // Node.js 环境

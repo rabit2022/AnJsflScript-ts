@@ -10,5 +10,5 @@ npx babel out/packAll.js --out-file out/packAll.jsfl
 
  */
 
-module.exports = require("path-browserify");
+module.exports = require("xregexp/src/index.js");
 // export * from "./esm";

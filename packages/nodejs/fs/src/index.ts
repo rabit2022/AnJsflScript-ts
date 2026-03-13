@@ -60,7 +60,7 @@ export function readFileSync(path: string, encoding?: BufferEncoding): string {
     return content; // FLfile.read 始终返回 UTF-8 字符串
 }
 
-function writeFileSync(
+export function writeFileSync(
     file: PathOrFileDescriptor,
     data: string,
     options?: WriteFileOptions

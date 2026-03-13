@@ -1,0 +1,4 @@
+{
+  "@third/xregexp": "./xregexp.jsfl",
+  "xregexp": "./config.jsfl"
+}

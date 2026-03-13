@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["error-stack-parser", "console.table", "fs", "path-browserify"], factory);
 	else if(typeof exports === 'object')
-		exports["stack"] = factory(require("error-stack-parser"), require("console.table"), require("fs"), require("path-browserify"));
+		exports["console.stack"] = factory(require("error-stack-parser"), require("console.table"), require("fs"), require("path-browserify"));
 	else
-		root["stack"] = factory(root["error-stack-parser"], root["console.table"], root["fs"], root["path-browserify"]);
+		root["console.stack"] = factory(root["error-stack-parser"], root["console.table"], root["fs"], root["path-browserify"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE__417__, __WEBPACK_EXTERNAL_MODULE__615__, __WEBPACK_EXTERNAL_MODULE__947__, __WEBPACK_EXTERNAL_MODULE__248__) {
 return /******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
@@ -177,10 +177,10 @@ var Paths;
 if (isJsfl) {
     var Root = AnJsflScript.folders.Log;
     Paths = {
-        currentText: "".concat(Root, "/Errors/human error.txt"),
-        allText: "".concat(Root, "/Errors/human all errors.txt"),
-        currentJson: "".concat(Root, "/Errors/error.json"),
-        allJson: "".concat(Root, "/Errors/all errors.json"),
+        currentText: "".concat(Root, "Errors/human error.txt"),
+        allText: "".concat(Root, "Errors/human all errors.txt"),
+        currentJson: "".concat(Root, "Errors/error.json"),
+        allJson: "".concat(Root, "Errors/all errors.json"),
     };
 }
 else if (typeof process !== 'undefined' && ((_a = process.versions) === null || _a === void 0 ? void 0 : _a.node)) {

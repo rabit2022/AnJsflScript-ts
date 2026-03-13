@@ -9,25 +9,28 @@ const glob = require('glob'); // 👈 用于匹配 test 下所有 .ts 文件
 // 👇 新增：用于替换 define -> require
 class ReplaceDefineWithRequire {
     apply(compiler) {
-        compiler.hooks.emit.tapAsync('ReplaceDefineWithRequire', (compilation, callback) => {
-            for (const filename in compilation.assets) {
-                if (filename.endsWith('.jsfl')) {
-                    const asset = compilation.assets[filename];
-                    let code = asset.source();
+        compiler.hooks.emit.tapAsync(
+            "ReplaceDefineWithRequire",
+            (compilation, callback) => {
+                for (const filename in compilation.assets) {
+                    if (filename.endsWith(".jsfl")) {
+                        const asset = compilation.assets[filename];
+                        let code = asset.source();
 
+                        // ✅ 只替换文件开头的 define（最安全）
+                        // code = code.replace(/^define\(/, "require(");
+                        code = code.replace(/define\(/, "require(");
 
-                    // ✅ 只替换文件开头的 define（最安全）
-                    code = code.replace(/^define\(/, 'require(');
-
-                    // 更新 asset
-                    compilation.assets[filename] = {
-                        source: () => code,
-                        size: () => code.length
-                    };
+                        // 更新 asset
+                        compilation.assets[filename] = {
+                            source: () => code,
+                            size: () => code.length,
+                        };
+                    }
                 }
-            }
-            callback();
-        });
+                callback();
+            },
+        );
     }
 }
 
@@ -65,8 +68,10 @@ module.exports = {
 
         // 👇 关键：输出为 AMD 模块（RequireJS 可消费）
         library: {
-            type: 'amd'
-        }
+            type: 'umd'
+        },
+        globalObject: 'this', // 👈 关键！告诉 Webpack 使用 `this` 而不是 `self`/`window`
+
     },
 
     resolve: {

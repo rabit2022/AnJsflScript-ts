@@ -9,25 +9,28 @@ const glob = require('glob'); // 👈 用于匹配 test 下所有 .ts 文件
 // 👇 新增：用于替换 define -> require
 class ReplaceDefineWithRequire {
     apply(compiler) {
-        compiler.hooks.emit.tapAsync('ReplaceDefineWithRequire', (compilation, callback) => {
-            for (const filename in compilation.assets) {
-                if (filename.endsWith('.jsfl')) {
-                    const asset = compilation.assets[filename];
-                    let code = asset.source();
+        compiler.hooks.emit.tapAsync(
+            "ReplaceDefineWithRequire",
+            (compilation, callback) => {
+                for (const filename in compilation.assets) {
+                    if (filename.endsWith(".jsfl")) {
+                        const asset = compilation.assets[filename];
+                        let code = asset.source();
 
+                        // ✅ 只替换文件开头的 define（最安全）
+                        // code = code.replace(/^define\(/, "require(");
+                        code = code.replace(/define\(/, "require(");
 
-                    // ✅ 只替换文件开头的 define（最安全）
-                    code = code.replace(/^define\(/, 'require(');
-
-                    // 更新 asset
-                    compilation.assets[filename] = {
-                        source: () => code,
-                        size: () => code.length
-                    };
+                        // 更新 asset
+                        compilation.assets[filename] = {
+                            source: () => code,
+                            size: () => code.length,
+                        };
+                    }
                 }
-            }
-            callback();
-        });
+                callback();
+            },
+        );
     }
 }
 
@@ -65,8 +68,10 @@ module.exports = {
 
         // 👇 关键：输出为 AMD 模块（RequireJS 可消费）
         library: {
-            type: 'amd'
-        }
+            type: 'umd'
+        },
+        globalObject: 'this', // 👈 关键！告诉 Webpack 使用 `this` 而不是 `self`/`window`
+
     },
 
     resolve: {
@@ -119,7 +124,7 @@ module.exports = {
     externals: [
         {"path": "path-browserify"},
         // region EXCLUDE_MODULE_NAME
-"lodash","linq","tslib","oxide.ts","requirejs","AnJsflScript-ts","picomatch","micromatch","es8-shim","es7-shim","typedarray","symbol-es6","intl","harmony-reflect","es6-promise","es6-collections","superjson","json5","json3","jsbi","es10-shim","util","path-browserify","eventemitter3","seedrandom","random-js","chance","store-js","stackframe","error-stack-parser","progress","loglevel","cli-table3","chroma-js","@third/luxon","luxon","_exports","es6-sham","es6-shim","es5-sham","es5-shim","@third/universal-cookie","@polyfill/cookie","atob","base-64","Tips","@xjsfl/UI","@xjsfl/super","@xjsfl/Selector","@xjsfl/Events","Context","@xjsfl/Constants","@xjafl/Collection","@polyfills/symbol-dispose","overload-js","@nodejs/__filename","url","process","fs","assert","@dom/setTimeout","console.table","console.stack","console","@anjsfl-ts/EditSession","@anjsfl/validation","@anjsfl/sat","@anjsfl/random","@anjsfl/parser","@anjsfl/more-element","@anjsfl/Context","@xjsfl/XUL","@xjsfl/XUL/XML","@xjsfl/XUL/XUL","@xjsfl/XUL/XULControl","@xjsfl/XUL/XULEvent","@xjsfl/XUL/Utils","@xjsfl/XUL/xjsfl",
+"lodash","linq","tslib","oxide.ts","requirejs","AnJsflScript-ts","xregexp","micromatch","es8-shim","es7-shim","typedarray","symbol-es6","intl","harmony-reflect","es6-promise","es6-collections","json5","json3","@polyfill/symbol-dispose","jsbi","es10-shim","util","path-browserify","eventemitter3","seedrandom","random-js","chance","store-js","stackframe","error-stack-parser","progress","loglevel","cli-table3","chroma-js","@third/luxon","luxon","@third/date-fns","date-fns","_exports","es6-sham","es6-shim","@third/superjson","superjson","es5-sham","es5-shim","assert","@third/fast-xml-parser","fast-xml-parser","@third/universal-cookie","@polyfill/cookie","atob","base-64","Hello2","@xjsfl/UI","@xjsfl/super","@xjsfl/Events","@xjsfl/Context","@xjsfl/Constants","@xjafl/Collection","@nodejs/__filename","process","fs","child_process","@dom/setTimeout","console.table","console.stack","console","@anjsfl-ts/Sessions","@anjsfl-ts/dev","@anjsfl/validation","@anjsfl/sat","@anjsfl/random","@anjsfl/parser","@anjsfl/more-element","@anjsfl/checker","@xjsfl/XUL","@xjsfl/XUL/XML","@xjsfl/XUL/XUL","@xjsfl/XUL/XULControl","@xjsfl/XUL/XULEvent","@xjsfl/XUL/Utils","@xjsfl/XUL/xjsfl",
 // endregion EXCLUDE_MODULE_NAME
 
     ],

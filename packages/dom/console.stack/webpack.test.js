@@ -33,7 +33,7 @@ class ReplaceDefineWithRequire {
 
 
 // 使用 ** 递归，并打印调试信息
-const tsFiles = glob.sync('test/flash/*.ts', {
+const tsFiles = glob.sync('test/flash/ts/*.ts', {
     cwd: __dirname,      // 以项目根为基准
     absolute: true,      // 返回绝对路径
     ignore: ['**/node_modules/**']
@@ -115,8 +115,15 @@ module.exports = {
     },
 
 
-    // 👇 关键：将 lodash 标记为外部依赖（不打包）
-    externals:["lodash",'console.stack'],
+    // 关键：不打包任何外部依赖（JSFL 无 npm）
+    externals: [
+        {"path": "path-browserify"},
+        // region EXCLUDE_MODULE_NAME
+"lodash","linq","tslib","oxide.ts","requirejs","AnJsflScript-ts","xregexp","micromatch","es8-shim","es7-shim","typedarray","symbol-es6","intl","harmony-reflect","es6-promise","es6-collections","json5","json3","@polyfill/symbol-dispose","jsbi","es10-shim","util","path-browserify","eventemitter3","seedrandom","random-js","chance","store-js","stackframe","error-stack-parser","progress","loglevel","cli-table3","chroma-js","@third/luxon","luxon","@third/date-fns","date-fns","_exports","es6-sham","es6-shim","@third/superjson","superjson","es5-sham","es5-shim","assert","@third/fast-xml-parser","fast-xml-parser","@third/universal-cookie","@polyfill/cookie","atob","base-64","Hello2","@xjsfl/UI","@xjsfl/super","@xjsfl/Events","@xjsfl/Context","@xjsfl/Constants","@xjafl/Collection","@nodejs/__filename","process","fs","child_process","@dom/setTimeout","console.table","console.stack","console","@anjsfl-ts/Sessions","@anjsfl-ts/dev","@anjsfl/validation","@anjsfl/sat","@anjsfl/random","@anjsfl/parser","@anjsfl/more-element","@anjsfl/checker","@xjsfl/XUL","@xjsfl/XUL/XML","@xjsfl/XUL/XUL","@xjsfl/XUL/XULControl","@xjsfl/XUL/XULEvent","@xjsfl/XUL/Utils","@xjsfl/XUL/xjsfl",
+// endregion EXCLUDE_MODULE_NAME
+
+    ],
+
     target: ['web', 'es5'],
     stats: {
         modules: false,

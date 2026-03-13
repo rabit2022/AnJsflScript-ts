@@ -99,7 +99,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   rmSync: function() { return /* binding */ rmSync; },
 /* harmony export */   rmdirSync: function() { return /* binding */ rmdirSync; },
 /* harmony export */   statSync: function() { return /* binding */ statSync; },
-/* harmony export */   unlinkSync: function() { return /* binding */ unlinkSync; }
+/* harmony export */   unlinkSync: function() { return /* binding */ unlinkSync; },
+/* harmony export */   writeFileSync: function() { return /* binding */ writeFileSync; }
 /* harmony export */ });
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(773);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
