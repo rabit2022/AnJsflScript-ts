@@ -1,3 +1,3 @@
-import {Console} from "./console.types";
+import { Console } from "./console.types";
 
-export const EnhancedConsole  = {} as Console;
+export const EnhancedConsole = {} as Console;

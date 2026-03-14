@@ -8,8 +8,8 @@
  */
 
 // setupConsole.ts
-import {CustomTable, tableToString} from "./table";
-import {EnhancedConsole} from "../global/console";
+import { CustomTable, tableToString } from "./table";
+import { EnhancedConsole } from "../global/console";
 
 // 创建自定义 console 实例
 export const customTable = new CustomTable(1);
@@ -21,5 +21,4 @@ export function table(...args: Parameters<typeof customTable.table>) {
 
 EnhancedConsole.table = table;
 
-
-export {tableToString};
+export { tableToString };

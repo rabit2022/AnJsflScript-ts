@@ -7,15 +7,14 @@
  * @description:
  */
 
-import {StackTracer} from "./api/stackTracer";
-import {EnhancedConsole} from "../global/console";
+import { StackTracer } from "./api/stackTracer";
+import { EnhancedConsole } from "../global/console";
 
 export const stackTracer = new StackTracer();
 
 export function stack(...args: Parameters<typeof stackTracer.trace>) {
     // const stackTracer = new StackTracer();
     return stackTracer.trace(...args);
-};
+}
 
 EnhancedConsole.stack = stack;
-

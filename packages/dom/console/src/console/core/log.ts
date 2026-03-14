@@ -2,13 +2,11 @@
 // 日志方法
 // ========================================================================
 
-import {writeToLog} from "../utils/writeToLog";
-import {LogLevel} from "../constant";
-import {Paths} from "../config/paths";
-
+import { writeToLog } from "../utils/writeToLog";
+import { LogLevel } from "../constant";
+import { Paths } from "../config/paths";
 
 const trace = fl.trace;
-
 
 /**
  * 格式化消息（支持多参数）

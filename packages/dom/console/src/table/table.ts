@@ -6,7 +6,7 @@
  * @project: AnJsflScript-ts
  * @description:
  */
-import {log} from "../console";
+import { log } from "../console";
 
 // import Table from "cli-table3";
 const Table = require("cli-table3");

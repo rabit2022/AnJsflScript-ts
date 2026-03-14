@@ -7,10 +7,10 @@
  * @description:
  */
 
-import {SAT, SAT_T} from "@anjsfl/sat";
+import { SAT, SAT_T } from "@anjsfl/sat";
 
-const {FrameRange} = SAT;
-type  T_FrameRange = SAT_T.T_FrameRange;
+const { FrameRange } = SAT;
+type T_FrameRange = SAT_T.T_FrameRange;
 
 /**
  * 获取当前时间轴选中的帧范围
@@ -55,7 +55,8 @@ export function getKeyFrameRangesOfLayer(
     layers: Layer[],
     currentLayer: number | Layer
 ): T_FrameRange[] {
-    const layerIndex = typeof currentLayer === "number" ? currentLayer : layers.indexOf(currentLayer);
+    const layerIndex =
+        typeof currentLayer === "number" ? currentLayer : layers.indexOf(currentLayer);
     const layer = typeof currentLayer === "number" ? layers[currentLayer] : currentLayer;
 
     const keyFrameIndexes = getKeyFrames(layer);

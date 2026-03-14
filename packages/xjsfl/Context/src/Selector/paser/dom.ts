@@ -1,17 +1,16 @@
-import {DomSelector} from "../types";
-import {isUrl} from "../Util/isPathOrUrl";
+import { DomSelector } from "../types";
+import { isUrl } from "../Util/isPathOrUrl";
 import * as path from "path";
-import {pathToFileURL} from "url";
-
+import { pathToFileURL } from "url";
 
 export function parseDom(v: string): DomSelector {
-    v = v.trim()
+    v = v.trim();
 
     if (v) {
         if (!isUrl(v)) {
             // path
 
-            let url = v
+            let url = v;
 
             // 判断是否是绝对路径
             if (!path.isAbsolute(v)) {
@@ -28,17 +27,15 @@ export function parseDom(v: string): DomSelector {
             return {
                 type: "url",
                 value: url
-            }
+            };
         }
     }
 
     return {
         type: "name",
         value: v
-    }
-
+    };
 }
-
 
 // console.log(parseDom('file:///c|path/to.fla'))
 // console.log(parseDom('/path/to/item'))

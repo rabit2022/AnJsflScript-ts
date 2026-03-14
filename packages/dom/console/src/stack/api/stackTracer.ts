@@ -11,7 +11,7 @@ import { Options, SaveData } from "../types";
 import { parseStack } from "../core/parser";
 import { formatFrames } from "../core/formatter";
 import { HistoryStore } from "../storage/historyStore";
-import {log} from "../../console";
+import { log } from "../../console";
 
 export class StackTracer {
     private historyStore = new HistoryStore();

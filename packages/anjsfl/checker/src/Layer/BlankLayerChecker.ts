@@ -1,11 +1,11 @@
-import {Frame} from "../Frame";
+import { Frame } from "../Frame";
 import IsFrameBlank = Frame.IsFrameBlank;
-import {getKeyFrameRangesOfLayer} from "../KeyFrame/KeyFrameQuery";
-import {hasSound} from "../sound/SoundChecker";
-import {SAT, SAT_T} from "@anjsfl/sat";
+import { getKeyFrameRangesOfLayer } from "../KeyFrame/KeyFrameQuery";
+import { hasSound } from "../sound/SoundChecker";
+import { SAT, SAT_T } from "@anjsfl/sat";
 
-const {FrameRange} = SAT;
-type  T_FrameRange = SAT_T.T_FrameRange;
+const { FrameRange } = SAT;
+type T_FrameRange = SAT_T.T_FrameRange;
 
 /**
  * 检查图层是否为空

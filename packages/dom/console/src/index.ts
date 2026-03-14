@@ -3,7 +3,7 @@ import "./table";
 import "./stack";
 import "./inspect";
 import "./json";
-import {EnhancedConsole} from "./global/console";
+import { EnhancedConsole } from "./global/console";
 
 if (typeof window.console === "undefined") {
     window.console = EnhancedConsole;
@@ -11,5 +11,5 @@ if (typeof window.console === "undefined") {
 
 // import * as console from "console";
 export * from "./console";
-export {table} from "./table";
-export {stack} from "./stack";
+export { table } from "./table";
+export { stack } from "./stack";

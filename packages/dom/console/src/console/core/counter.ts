@@ -1,5 +1,5 @@
-import {info, warn} from "./log";
-import {resetTimers} from "./timer";
+import { info, warn } from "./log";
+import { resetTimers } from "./timer";
 
 let counters: Record<string, number> = {};
 
@@ -24,7 +24,7 @@ export function countReset(label: string = "default"): void {
  * 获取所有计数器
  */
 export function getCounters(): Record<string, number> {
-    return {...counters};
+    return { ...counters };
 }
 
 /**

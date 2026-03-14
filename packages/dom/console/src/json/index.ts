@@ -7,9 +7,8 @@
  * @description:
  */
 
-
-import {EnhancedConsole} from "../global/console";
-import {json} from "./json";
+import { EnhancedConsole } from "../global/console";
+import { json } from "./json";
 
 // @ts-ignore
 EnhancedConsole.json = json;

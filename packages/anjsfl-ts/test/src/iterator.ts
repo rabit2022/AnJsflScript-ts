@@ -1,6 +1,5 @@
 import "_exports";
 
-
 class MyUtils {
     // 静态生成器方法
     static *numbers(list?: number[]): Generator<number> {

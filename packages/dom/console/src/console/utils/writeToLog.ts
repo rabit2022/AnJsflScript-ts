@@ -1,15 +1,13 @@
-import {fileURLToPath} from "url";
+import { fileURLToPath } from "url";
 import * as path from "path";
-import {LogLevel} from "../constant";
-import {Paths} from "../config/paths";
-import {ensureDir} from "./ensureDir";
-import {center} from "./string";
+import { LogLevel } from "../constant";
+import { Paths } from "../config/paths";
+import { ensureDir } from "./ensureDir";
+import { center } from "./string";
 import * as _ from "lodash";
 
-
 // 辅助函数：获取补零后的字符串 (利用原生 padStart)
-const pad = (num: number, length: number) => _.padStart(String(num), length, '0');
-
+const pad = (num: number, length: number) => _.padStart(String(num), length, "0");
 
 /**
  * 写入日志到文件
@@ -26,7 +24,8 @@ export function writeToLog(
     // 时间：YYYY-MM-DD HH:mm:ss.SSS
     const now = new Date();
 
-    const asctime = `${now.getFullYear()}-${pad(now.getMonth() + 1, 2)}-${pad(now.getDate(), 2)} ` +
+    const asctime =
+        `${now.getFullYear()}-${pad(now.getMonth() + 1, 2)}-${pad(now.getDate(), 2)} ` +
         `${pad(now.getHours(), 2)}:${pad(now.getMinutes(), 2)}:${pad(now.getSeconds(), 2)}.` +
         `${pad(now.getMilliseconds(), 3)}`;
 
@@ -42,7 +41,6 @@ export function writeToLog(
         p2 = fileURLToPath(baseDir);
 
     const short_path = path.relative(p2, p1);
-
 
     // 构建日志行
     const logLine = `${asctime} | ${levelname} | ${short_path} | ${message}`;

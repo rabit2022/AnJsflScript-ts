@@ -7,10 +7,9 @@
  * @description:
  */
 
-import {shorthandString} from "../Selector/types";
-import {Context} from "../Context";
-import {parseContextPath} from "../Selector";
-
+import { shorthandString } from "../Selector/types";
+import { Context } from "../Context";
+import { parseContextPath } from "../Selector";
 
 /**
  * Creates a context from a supplied element
@@ -125,5 +124,4 @@ function fromString(value: shorthandString): Context {
     }
 
     return ctx;
-
 }

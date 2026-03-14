@@ -7,12 +7,8 @@
  * @description:
  */
 
-
-import {inspect} from "./inspect";
-import {EnhancedConsole} from "../global/console";
+import { inspect } from "./inspect";
+import { EnhancedConsole } from "../global/console";
 
 // @ts-ignore
 EnhancedConsole.inspect = inspect;
-
-
-

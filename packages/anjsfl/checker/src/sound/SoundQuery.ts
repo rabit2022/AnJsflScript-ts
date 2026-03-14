@@ -6,8 +6,8 @@
  * @project: AnJsflScript
  * @description:
  */
-import * as  path from "path";
-import {fileURLToPath} from "url";
+import * as path from "path";
+import { fileURLToPath } from "url";
 
 const DEFAULT_KBPS = 320;
 

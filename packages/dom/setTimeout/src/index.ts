@@ -9,18 +9,20 @@
  * @description:
  */
 
+import { clearAllTimers, clearTimeout, setTimeout } from "./setTimeout";
+import { clearInterval, setInterval } from "./setInterval";
 
-import {clearAllTimers, clearTimeout, setTimeout} from "./setTimeout";
-import {clearInterval, setInterval} from "./setInterval";
-
-const __setTimeout__ = {setTimeout, clearTimeout, clearAllTimers, setInterval, clearInterval};
-
+const __setTimeout__ = {
+    setTimeout,
+    clearTimeout,
+    clearAllTimers,
+    setInterval,
+    clearInterval
+};
 
 window.AnJsflScript.__setTimeout__ = __setTimeout__;
 
-
-
-export {clearAllTimers, clearTimeout, setTimeout} from "./setTimeout";
-export {clearInterval, setInterval} from "./setInterval";
+export { clearAllTimers, clearTimeout, setTimeout } from "./setTimeout";
+export { clearInterval, setInterval } from "./setInterval";
 
 // export default __setTimeout__;

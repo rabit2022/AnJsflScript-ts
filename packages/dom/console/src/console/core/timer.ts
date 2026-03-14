@@ -1,4 +1,4 @@
-import {info, warn} from "./log";
+import { info, warn } from "./log";
 
 let timers: Record<string, number> = {};
 
@@ -29,7 +29,7 @@ export function timeEnd(label: string = "default"): void {
  * 获取所有计时器
  */
 export function getTimers(): Record<string, number> {
-    return {...timers};
+    return { ...timers };
 }
 
 /**

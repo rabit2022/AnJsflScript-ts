@@ -1,6 +1,5 @@
 import * as util from "util";
-import {error, log} from "../console";
-
+import { error, log } from "../console";
 
 /**
  * 封装 util.inspect，自动打印并返回格式化字符串

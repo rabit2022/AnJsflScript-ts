@@ -1,4 +1,4 @@
-import {error, log} from "../console";
+import { error, log } from "../console";
 
 /**
  * 封装 JSON.stringify，自动打印并返回 JSON 字符串

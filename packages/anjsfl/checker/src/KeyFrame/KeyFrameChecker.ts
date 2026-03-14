@@ -4,7 +4,7 @@
  * @param frameIndex 帧索引
  * @return {boolean} 关键帧返回true，否则返回false
  */
-export function IsKeyFrame(layer:Layer, frameIndex:number):boolean {
+export function IsKeyFrame(layer: Layer, frameIndex: number): boolean {
     var frame = layer.frames[frameIndex];
     return frame.startFrame === frameIndex;
 }

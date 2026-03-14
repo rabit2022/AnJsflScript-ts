@@ -7,4 +7,4 @@
  * @description:
  */
 
-import "./iterator"
+import "./iterator";

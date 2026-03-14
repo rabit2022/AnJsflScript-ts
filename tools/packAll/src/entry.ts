@@ -5,7 +5,6 @@ npx babel out/url.js --out-file out/url.jsfl
 
  */
 
-
 /**
  * @file: index.ts
  * @author: 穹的兔兔
@@ -27,10 +26,10 @@ function fileURLToPath(url: string | URL): string {
         typeof url === "object" && url?.href ? (url as URL).href : (url as string);
 
     // H:\project\js\AnJsflScript-ts\
-    const uri= FLfile.uriToPlatformPath(urlString);
+    const uri = FLfile.uriToPlatformPath(urlString);
 
     // H:/project/js/AnJsflScript-ts/
-    return uri.replace(/\\/g, '/');
+    return uri.replace(/\\/g, "/");
 }
 
 function pathToFileURL(path: string): URL {
