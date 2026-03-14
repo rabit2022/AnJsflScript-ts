@@ -20,7 +20,7 @@ require.config({
         "tslib": "third/types/tslib/tslib",
         "oxide.ts": "third/types/oxide.ts/oxide.ts",
         "requirejs": "third/require/requirejs/require-js",
-        "AnJsflScript-ts": "packages/dom/@console/config",
+        "AnJsflScript-ts": "third/nodejs/assert/assert",
         "micromatch": "third/regex/micromatch/micromatch",
         "@formatjs/intl": "third/polyfill/intl-formatjs/Intl-format",
         "es8-shim": "third/polyfill/es8/es8-shim/es8-shim",
@@ -83,7 +83,7 @@ require.config({
         "fs": "packages/nodejs/fs/out/fs",
         "child_process": "packages/nodejs/child-process/out/child_process",
         "@dom/setTimeout": "packages/dom/setTimeout/out/setTimeout",
-        "console": "packages/dom/console.stack/out/console",
+        "console": "packages/dom/console/out/console",
         "@anjsfl-ts/Sessions": "packages/anjsfl-ts/Sessions/out/@anjsfl-ts/Sessions",
         "@anjsfl-ts/dev": "packages/anjsfl-ts/dev/out/@anjsfl-ts/dev",
         "@anjsfl/validation": "packages/anjsfl/validation/out/validation",
@@ -98,8 +98,7 @@ require.config({
         "@xjsfl/XUL/XULControl": "packages/xjsfl/XUL/src/XULControl",
         "@xjsfl/XUL/XULEvent": "packages/xjsfl/XUL/src/XULEvent",
         "@xjsfl/XUL/Utils": "packages/xjsfl/XUL/src/Utils",
-        "@xjsfl/XUL/xjsfl": "packages/xjsfl/XUL/src/xjsfl",
-        "@dom/console": "packages/dom/@console/config"
+        "@xjsfl/XUL/xjsfl": "packages/xjsfl/XUL/src/xjsfl"
     },
 // endregion REQUIRE MODULES PATHS
 

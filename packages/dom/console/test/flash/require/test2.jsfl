@@ -1,9 +1,5 @@
-// iife file test3.jsfl
-(function () {
-
-    // console.stack("Hello world")
-    // console.error("Hello world")
-
+// requirejs modules file test2.js
+require([], function () {
 
     new Promise(function (resolve, reject) {
         AnJsflScript.__setTimeout__.
@@ -20,4 +16,4 @@
         .catch(function (err) {
             console.error(err);
         });
-})();
+});
