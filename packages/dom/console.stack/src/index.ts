@@ -1,6 +1,8 @@
 import "./console";
 import "./table";
 import "./stack";
+import "./inspect";
+import "./json";
 import {EnhancedConsole} from "./global/console";
 
 if (typeof window.console === "undefined") {

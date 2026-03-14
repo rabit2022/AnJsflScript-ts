@@ -1,16 +1,23 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("tslib"), require("url"), require("path-browserify"), require("fs"), require("lodash"), require("cli-table3"), require("error-stack-parser"));
+		module.exports = factory(require("tslib"), require("url"), require("path-browserify"), require("fs"), require("lodash"), require("cli-table3"), require("error-stack-parser"), require("util"));
 	else if(typeof define === 'function' && define.amd)
-		define(["tslib", "url", "path-browserify", "fs", "lodash", "cli-table3", "error-stack-parser"], factory);
+		define(["tslib", "url", "path-browserify", "fs", "lodash", "cli-table3", "error-stack-parser", "util"], factory);
 	else if(typeof exports === 'object')
-		exports["console"] = factory(require("tslib"), require("url"), require("path-browserify"), require("fs"), require("lodash"), require("cli-table3"), require("error-stack-parser"));
+		exports["console"] = factory(require("tslib"), require("url"), require("path-browserify"), require("fs"), require("lodash"), require("cli-table3"), require("error-stack-parser"), require("util"));
 	else
-		root["console"] = factory(root["tslib"], root["url"], root["path-browserify"], root["fs"], root["lodash"], root["cli-table3"], root["error-stack-parser"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__917__, __WEBPACK_EXTERNAL_MODULE__248__, __WEBPACK_EXTERNAL_MODULE__947__, __WEBPACK_EXTERNAL_MODULE__773__, __WEBPACK_EXTERNAL_MODULE__420__, __WEBPACK_EXTERNAL_MODULE__417__) {
+		root["console"] = factory(root["tslib"], root["url"], root["path-browserify"], root["fs"], root["lodash"], root["cli-table3"], root["error-stack-parser"], root["util"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__917__, __WEBPACK_EXTERNAL_MODULE__248__, __WEBPACK_EXTERNAL_MODULE__947__, __WEBPACK_EXTERNAL_MODULE__773__, __WEBPACK_EXTERNAL_MODULE__420__, __WEBPACK_EXTERNAL_MODULE__417__, __WEBPACK_EXTERNAL_MODULE__24__) {
 return /******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
+
+/***/ 24:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__24__;
+
+/***/ }),
 
 /***/ 248:
 /***/ (function(module) {
@@ -880,7 +887,64 @@ function stack() {
 ;
 EnhancedConsole.stack = stack;
 
+// EXTERNAL MODULE: external "util"
+var external_util_ = __webpack_require__(24);
+;// ./src/inspect/inspect.ts
+
+
+function inspect() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+    }
+    var resultStr;
+    try {
+        resultStr = external_util_.inspect.apply(external_util_, args);
+    }
+    catch (e) {
+        var errorMessage = e instanceof Error ? e.message : String(e);
+        resultStr = "[Error inspecting object]: ".concat(errorMessage);
+        error(resultStr);
+        return resultStr;
+    }
+    log(resultStr);
+    return resultStr;
+}
+
+;// ./src/inspect/index.ts
+
+
+EnhancedConsole.inspect = inspect;
+
+;// ./src/json/json.ts
+
+function json() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+    }
+    var jsonStr;
+    try {
+        jsonStr = JSON.stringify.apply(JSON, args);
+    }
+    catch (e) {
+        var errorMessage = e instanceof Error ? e.message : String(e);
+        jsonStr = "[Error stringifying object]: ".concat(errorMessage);
+        error(jsonStr);
+        return jsonStr;
+    }
+    log(jsonStr);
+    return jsonStr;
+}
+
+;// ./src/json/index.ts
+
+
+EnhancedConsole.json = json;
+
 ;// ./src/index.ts
+
+
 
 
 
