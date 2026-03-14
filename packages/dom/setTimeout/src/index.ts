@@ -1,3 +1,5 @@
+// @ts-ignore
+
 /**
  * @file: index.ts
  * @author: 穹的兔兔
@@ -7,5 +9,18 @@
  * @description:
  */
 
-export { setTimeout, clearTimeout, clearAllTimers } from "./setTimeout";
-export { setInterval, clearInterval } from "./setInterval";
+
+import {clearAllTimers, clearTimeout, setTimeout} from "./setTimeout";
+import {clearInterval, setInterval} from "./setInterval";
+
+const __setTimeout__ = {setTimeout, clearTimeout, clearAllTimers, setInterval, clearInterval};
+
+
+window.AnJsflScript.__setTimeout__ = __setTimeout__;
+
+
+
+export {clearAllTimers, clearTimeout, setTimeout} from "./setTimeout";
+export {clearInterval, setInterval} from "./setInterval";
+
+// export default __setTimeout__;

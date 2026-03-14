@@ -7,8 +7,9 @@
  * @description:
  */
 
-import { tableToString } from "console.table";
+// import { tableToString } from "console.table";
 import { ConsoleStackFrame } from "../types";
+import {tableToString} from "../../table";
 
 export function formatFrames(
     frames: ConsoleStackFrame[],

@@ -1,5 +1,6 @@
 === ECMAScript 特性支持情况 ===
-letConst: ✅ 支持
+let: ✅ 支持
+const: ✅ 支持
 letTDZ: ✅ 支持
 constRedef: ✅ 支持
 destructuring: ✅ 支持
@@ -58,7 +59,8 @@ moduleExport: ❌ 不支持
 moduleImport: ❌ 不支持
 
 === 中文版支持情况 ===
-let 和 const 命令: ✅
+let 命令: ✅
+const 命令: ✅
 let命令的暂时性死区: ✅
 不允许再次用const声明同一变量: ✅
 解构赋值: ✅

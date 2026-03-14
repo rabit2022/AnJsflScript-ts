@@ -61,6 +61,7 @@ require.config({
         "superjson": "third/polyfill/es5/json/superjson/config",
         "es5-sham": "third/polyfill/es5/es5-shim/es5-sham",
         "es5-shim": "third/polyfill/es5/es5-shim/es5-shim",
+        "url": "third/nodejs/url/url",
         "assert": "third/nodejs/assert/assert",
         "@third/fast-xml-parser": "third/dom/xml/fast-xml-parser/fast-xml-parser",
         "fast-xml-parser": "third/dom/xml/fast-xml-parser/config",
@@ -82,9 +83,7 @@ require.config({
         "fs": "packages/nodejs/fs/out/fs",
         "child_process": "packages/nodejs/child-process/out/child_process",
         "@dom/setTimeout": "packages/dom/setTimeout/out/setTimeout",
-        "console.table": "packages/dom/console.table/out/console-table",
-        "console.stack": "packages/dom/console.stack/out/console.stack",
-        "console": "packages/dom/console/out/console",
+        "console": "packages/dom/console.stack/out/console",
         "@anjsfl-ts/Sessions": "packages/anjsfl-ts/Sessions/out/@anjsfl-ts/Sessions",
         "@anjsfl-ts/dev": "packages/anjsfl-ts/dev/out/@anjsfl-ts/dev",
         "@anjsfl/validation": "packages/anjsfl/validation/out/validation",
@@ -100,7 +99,7 @@ require.config({
         "@xjsfl/XUL/XULEvent": "packages/xjsfl/XUL/src/XULEvent",
         "@xjsfl/XUL/Utils": "packages/xjsfl/XUL/src/Utils",
         "@xjsfl/XUL/xjsfl": "packages/xjsfl/XUL/src/xjsfl",
-        "@polyfill/console": "packages/dom/@console/config"
+        "@dom/console": "packages/dom/@console/config"
     },
 // endregion REQUIRE MODULES PATHS
 

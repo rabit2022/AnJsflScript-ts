@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "module": "amd",
-
+    "module": "commonjs",
 
     "strict": true,
     "noEmitOnError": false,

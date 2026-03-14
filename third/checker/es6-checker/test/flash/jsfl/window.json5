@@ -1,0 +1,480 @@
+{
+  flash: {
+    appName: 'Adobe Animate',
+    appVersion: '24.0',
+    tools: {},
+    drawingLayer: {},
+    Math: {}
+  },
+  fl: {
+    appName: 'Adobe Animate',
+    appVersion: '24.0',
+    tools: {},
+    drawingLayer: {},
+    Math: {}
+  },
+  App: {
+    appName: 'Adobe Animate',
+    appVersion: '24.0',
+    tools: {},
+    drawingLayer: {},
+    Math: {}
+  },
+  app: {
+    appName: 'Adobe Animate',
+    appVersion: '24.0',
+    tools: {},
+    drawingLayer: {},
+    Math: {}
+  },
+  animate: {
+    appName: 'Adobe Animate',
+    appVersion: '24.0',
+    tools: {},
+    drawingLayer: {},
+    Math: {}
+  },
+  an: {
+    appName: 'Adobe Animate',
+    appVersion: '24.0',
+    tools: {},
+    drawingLayer: {},
+    Math: {}
+  },
+  window: [
+    "Circular"
+  ],
+  document: {
+    cookie: [
+      "Getter/Setter"
+    ]
+  },
+  setTimeout: "undefined",
+  AnJsflScript: {
+    importFlashScripts: [
+      "Function"
+    ],
+    app: {
+      platform: 'win',
+      version: 24,
+      name: 'Animate 2024',
+      os: [
+        "Object"
+      ]
+    },
+    folders: {
+      AnJsflScript: 'file:///H|/project/js/AnJsflScript-ts/',
+      Log: 'file:///H|/project/js/AnJsflScript-ts/config/Log/',
+      flash: 'file:///C|/Users/admin/AppData/Local/Adobe/Animate%202024/zh_CN/Configuration/',
+      swf: 'file:///C|/Users/admin/AppData/Local/Adobe/Animate%202024/zh_CN/Configuration/WindowSWF/',
+      commands: 'file:///C|/Users/admin/AppData/Local/Adobe/Animate%202024/zh_CN/Configuration/Commands/',
+      '@xjsfl/XUL': 'file:///H|/project/js/AnJsflScript-ts/packages/xjsfl/XUL/'
+    },
+    __setTimeout__: {
+      '@@_____3_____': 'Module',
+      __esModule: true,
+      clearAllTimers: [
+        "Getter"
+      ],
+      clearInterval: [
+        "Getter"
+      ],
+      clearTimeout: [
+        "Getter"
+      ],
+      setInterval: [
+        "Getter"
+      ],
+      setTimeout: [
+        "Getter"
+      ]
+    }
+  },
+  requirejs: {
+    // ["Function"],
+    config: [
+      "Function"
+    ],
+    nextTick: [
+      "Function"
+    ],
+    version: '2.3.7',
+    jsExtRegExp: "/^\/|: |\?|\.js$/",
+    isBrowser: false,
+    s: {
+      contexts: [
+        "Object"
+      ],
+      newContext: [
+        //        "Function" : newContext
+      ]
+    },
+    toUrl: [
+      "Function"
+    ],
+    undef: [
+      "Function"
+    ],
+    defined: [
+      "Function"
+    ],
+    specified: [
+      "Function"
+    ],
+    onError: [
+      //      "Function" : defaultOnError
+    ],
+    createNode: [
+      "Function"
+    ],
+    load: [
+      "Function"
+    ],
+    exec: [
+      "Function"
+    ]
+  },
+  require: {
+    //["Function"]
+    config: [
+      "Function"
+    ],
+    nextTick: [
+      "Function"
+    ],
+    version: '2.3.7',
+    jsExtRegExp: "/^\/|: |\?|\.js$/",
+    isBrowser: false,
+    s: {
+      contexts: [
+        "Object"
+      ],
+      newContext: [
+        //    "Function": newContext
+      ]
+    },
+    toUrl: [
+      "Function"
+    ],
+    undef: [
+      "Function"
+    ],
+    defined: [
+      "Function"
+    ],
+    specified: [
+      "Function"
+    ],
+    onError: [
+      //      "Function" : defaultOnError
+    ],
+    createNode: [
+      "Function"
+    ],
+    load: [
+      "Function"
+    ],
+    exec: [
+      "Function"
+    ]
+  },
+  define: {
+    //["Function"] 
+    amd: {
+      jQuery: true
+    }
+  },
+  Date: {
+    //["Function": Date]
+    now: [
+      //  "Function": now
+    ],
+    UTC: [
+      //  "Function": UTC
+    ],
+    parse: [
+      //  "Function": parse
+    ]
+  },
+  parseInt: [
+    //    "Function" : parseInt
+  ],
+  JSON3: {
+    noConflict: [
+      "Function"
+    ],
+    stringify: [
+      "Function"
+    ],
+    parse: [
+      "Function"
+    ],
+    runInContext: [
+      //      "Function" : runInContext
+    ]
+  },
+  JSON: {
+    parse: [
+      "Function"
+    ],
+    stringify: {
+      //["Function" : stringify]
+      "toString": [
+        "Function"
+      ]
+    }
+  },
+  ES6: {
+    isSymbol: [
+      "Function"
+    ],
+    instanceOf: [
+      "Function"
+    ],
+    forOf: [
+      "Function"
+    ],
+    spreadOperator: [
+      //  "Function": spreadOperator
+    ]
+  },
+  Symbol: {
+    //["Function": Symbol]
+    for: [
+      "Function"
+    ],
+    keyFor: [
+      "Function"
+    ],
+    hasInstance: {
+      _description: 'Symbol.hasInstance',
+      _isSymbol: true,
+      _id: 0
+    },
+    isConcatSpreadable: {
+      _description: 'Symbol.isConcatSpreadable',
+      _isSymbol: true,
+      _id: 1
+    },
+    iterator: {
+      _description: 'Symbol.iterator',
+      _isSymbol: true,
+      _id: 2
+    },
+    toStringTag: {
+      _description: 'Symbol.toStringTag',
+      _isSymbol: true,
+      _id: 3
+    },
+    search: {
+      _description: 'Symbol.search',
+      _isSymbol: true,
+      _id: 5
+    },
+    replace: {
+      _description: 'Symbol.replace',
+      _isSymbol: true,
+      _id: 6
+    },
+    split: {
+      _description: 'Symbol.split',
+      _isSymbol: true,
+      _id: 7
+    },
+    match: {
+      _description: 'Symbol.match',
+      _isSymbol: true,
+      _id: 8
+    }
+  },
+  Reflect: {
+    apply: [
+      //  "Function": apply
+    ],
+    construct: [
+      //  "Function": construct
+    ],
+    deleteProperty: [
+      //  "Function": deleteProperty
+    ],
+    has: [
+      //  "Function": has
+    ],
+    ownKeys: [
+      //  "Function": ownKeys
+    ],
+    isExtensible: [
+      //  "Function": isExtensible
+    ],
+    preventExtensions: [
+      //      "Function" : preventExtensions
+    ],
+    defineProperty: {
+      //["Function" : defineProperty] 
+      toString: [
+        "Function"
+      ]
+    },
+    getOwnPropertyDescriptor: [
+      //      "Function" : getOwnPropertyDescriptor
+    ],
+    get: [
+      //      "Function" : get
+    ],
+    set: [
+      //      "Function" : set
+    ],
+    getPrototypeOf: [
+      //      "Function" : getPrototypeOf
+    ],
+    setPrototypeOf: [
+      //      "Function" : setPrototypeOf
+    ]
+  },
+  Number: {
+    //["Function" : Number]
+    toString: [
+      "Function"
+    ],
+    "NaN": NaN,
+    MAX_VALUE: 1.7976931348623157e+308,
+    MIN_VALUE: 5e-324,
+    NEGATIVE_INFINITY: -Infinity,
+    POSITIVE_INFINITY: Infinity,
+    MAX_SAFE_INTEGER: 9007199254740991,
+    MIN_SAFE_INTEGER: -9007199254740991,
+    EPSILON: 2.220446049250313e-16,
+    parseInt: [
+      //      "Function" : parseInt
+    ],
+    parseFloat: [
+      //      "Function" : parseFloat
+    ],
+    isFinite: [
+      //      "Function" : isFinite
+    ],
+    isInteger: [
+      //      "Function" : isInteger
+    ],
+    isSafeInteger: [
+      //      "Function" : isSafeInteger
+    ],
+    isNaN: [
+      //      "Function" : isNaN
+    ]
+  },
+  RegExp: {
+    //["Function" : RegExp]
+    toString: [
+      "Function"
+    ],
+    input: [
+      "Getter/Setter"
+    ],
+    multiline: [
+      "Getter/Setter"
+    ],
+    lastMatch: [
+      "Getter/Setter"
+    ],
+    lastParen: [
+      "Getter/Setter"
+    ],
+    leftContext: [
+      "Getter/Setter"
+    ],
+    rightContext: [
+      "Getter/Setter"
+    ],
+    '$1': [
+      "Getter/Setter"
+    ],
+    '$2': [
+      "Getter/Setter"
+    ],
+    '$3': [
+      "Getter/Setter"
+    ],
+    '$4': [
+      "Getter/Setter"
+    ],
+    '$5': [
+      "Getter/Setter"
+    ],
+    '$6': [
+      "Getter/Setter"
+    ],
+    '$7': [
+      "Getter/Setter"
+    ],
+    '$8': [
+      "Getter/Setter"
+    ],
+    '$9': [
+      "Getter/Setter"
+    ],
+    '$_': [
+      "Getter"
+    ],
+    '$&': [
+      "Getter"
+    ],
+    '$+': [
+      "Getter"
+    ],
+    '$`': [
+      "Getter"
+    ],
+    '$\'': [
+      "Getter"
+    ],
+    '@@species': [
+      "Getter"
+    ]
+  },
+  Map: {
+    //["Function" : Map]
+    '@@species': [
+      "Getter"
+    ]
+  },
+  Set: {
+    //["Function": Set]
+    '@@species': [
+      "Getter"
+    ]
+  },
+  process: {
+    '@@_____3_____': 'Module',
+    __esModule: true,
+    cwd: [
+      "Getter"
+    ],
+    exit: [
+      "Getter"
+    ],
+    exitCode: [
+      "Getter"
+    ],
+    off: [
+      "Getter"
+    ],
+    on: [
+      "Getter"
+    ],
+    once: [
+      "Getter"
+    ],
+    platform: [
+      "Getter"
+    ]
+  },
+  console: 1,
+  __filename: [
+    "Getter"
+  ],
+  __dirname: [
+    "Getter"
+  ]
+}
+

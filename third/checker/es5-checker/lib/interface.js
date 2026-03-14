@@ -1,48 +1,97 @@
-// es5-interface.js - 导出所有 ES5 特性键名
+// -interface.js - 导出所有  特性键名
 var Supports = function() {
   // Array
-  this.es5ArrayIsArray = 'es5ArrayIsArray';
-  this.es5ArrayEvery = 'es5ArrayEvery';
-  this.es5ArrayFilter = 'es5ArrayFilter';
-  this.es5ArrayForEach = 'es5ArrayForEach';
-  this.es5ArrayIndexOf = 'es5ArrayIndexOf';
-  this.es5ArrayLastIndexOf = 'es5ArrayLastIndexOf';
-  this.es5ArrayMap = 'es5ArrayMap';
-  this.es5ArraySome = 'es5ArraySome';
-  this.es5ArrayReduce = 'es5ArrayReduce';
-  this.es5ArrayReduceRight = 'es5ArrayReduceRight';
+  this.ArrayIsArray = 'ArrayIsArray';
+  this.ArrayEvery = 'ArrayEvery';
+  this.ArrayFilter = 'ArrayFilter';
+  this.ArrayForEach = 'ArrayForEach';
+  this.ArrayIndexOf = 'ArrayIndexOf';
+  this.ArrayLastIndexOf = 'ArrayLastIndexOf';
+  this.ArrayMap = 'ArrayMap';
+  this.ArraySome = 'ArraySome';
+  this.ArrayReduce = 'ArrayReduce';
+  this.ArrayReduceRight = 'ArrayReduceRight';
 
   // Object
-  this.es5ObjectKeys = 'es5ObjectKeys';
+  this.ObjectKeys = 'ObjectKeys';
 
   // Function
-  this.es5FunctionBind = 'es5FunctionBind';
+  this.FunctionBind = 'FunctionBind';
 
   // String
-  this.es5StringTrim = 'es5StringTrim';
+  this.StringTrim = 'StringTrim';
 
   // Date
-  this.es5DateNow = 'es5DateNow';
-  this.es5DateToISOString = 'es5DateToISOString';
-  this.es5DateToJSON = 'es5DateToJSON';
-  this.es5DateParseISO = 'es5DateParseISO';
+  this.DateNow = 'DateNow';
+  this.DateToISOString = 'DateToISOString';
+  this.DateToJSON = 'DateToJSON';
+  this.DateParseISO = 'DateParseISO';
 
   // Number
-  this.es5NumberToFixed = 'es5NumberToFixed';
-  this.es5NumberToPrecision = 'es5NumberToPrecision';
-  this.es5NumberToExponential = 'es5NumberToExponential';
+  this.NumberToFixed = 'NumberToFixed';
+  this.NumberToPrecision = 'NumberToPrecision';
+  this.NumberToExponential = 'NumberToExponential';
 
   // Global
-  this.es5ParseInt = 'es5ParseInt';
-  this.es5ParseFloat = 'es5ParseFloat';
+  this.ParseInt = 'ParseInt';
+  this.ParseFloat = 'ParseFloat';
 
   // Error
-  this.es5ErrorToString = 'es5ErrorToString';
-  this.es5ErrorName = 'es5ErrorName';
-  this.es5ErrorMessage = 'es5ErrorMessage';
+  this.ErrorToString = 'ErrorToString';
+  this.ErrorName = 'ErrorName';
+  this.ErrorMessage = 'ErrorMessage';
 
   // RegExp
-  this.es5RegExpToString = 'es5RegExpToString';
+  this.RegExpToString = 'RegExpToString';
+
+
+  // --- Object Creation & Prototype (Shams) ---
+
+  // Doc: "For the case of simply 'begetting' an object... should work fine."
+  // Warning: "The second argument... will probably fail either silently or with extreme prejudice."
+  this.ObjectCreate = 'ObjectCreate';
+
+  // Doc: "Returns 'undefined' in some cases... uses __proto__... or constructor.prototype"
+  // Warning: "If your object was created like this [Foo.prototype = {}], it won't work."
+  this.ObjectGetPrototypeOf = 'ObjectGetPrototypeOf';
+
+  // Doc: "This method uses Object.keys, so it will not be accurate on legacy engines."
+  this.ObjectGetOwnPropertyNames = 'ObjectGetOwnPropertyNames';
+
+  // --- Property Descriptors (Shams) ---
+
+  // Warning: "Behavior does not conform to ES5... should probably not be used."
+  this.ObjectGetOwnPropertyDescriptor = 'ObjectGetOwnPropertyDescriptor';
+
+  // Warning: "IE8 only works on DOM objects... silently fail to set attributes/accessors."
+  this.ObjectDefineProperty = 'ObjectDefineProperty';
+
+  // Doc: "This uses the Object.defineProperty shim."
+  this.ObjectDefineProperties = 'ObjectDefineProperties';
+
+  // --- Object State Inspection ---
+
+  // Doc: "Returns 'false' in all legacy engines... conveniently guaranteed to be accurate."
+  this.ObjectIsSealed = 'ObjectIsSealed';
+
+  // Doc: "Returns 'false' in all legacy engines... conveniently guaranteed to be accurate."
+  this.ObjectIsFrozen = 'ObjectIsFrozen';
+
+  // Doc: "Works like a charm..."
+  this.ObjectIsExtensible = 'ObjectIsExtensible';
+
+  // --- Object State Modification (Security Shams) ---
+
+  // Doc: "Silently fails on all legacy engines."
+  this.ObjectSeal = 'ObjectSeal';
+
+  // Doc: "Silently fails on all legacy engines."
+  this.ObjectFreeze = 'ObjectFreeze';
+
+  // Doc: "Silently fails on all legacy engines."
+  this.ObjectPreventExtensions = 'ObjectPreventExtensions';
 };
 
 module.exports = new Supports();
+
+

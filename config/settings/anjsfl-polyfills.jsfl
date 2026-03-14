@@ -8,6 +8,7 @@
  */
 
 (function () {
+
     // 导入shims, 避免其他模块依赖时报错
     require(["es5-shim", // es5,es2009
         "es5-sham",
@@ -18,10 +19,9 @@
         // Set iterator need Symbol,sometimes babel translate code might be use [Symbol.Iterator] function to adjust it.
         "symbol-es6",
 
-
         // @nodejs/url need es6
         "es6-shim", // es6,es2015
-        "es6-sham",
+        "es6-sham"
 
         // luxon need es7,export by config.jsfl
         // "es7-shim", // es7,es2016   es8,es2017
@@ -33,12 +33,13 @@
     })
 
     // 禁用log
-    require(["loglevel"], function (log) {
+    require(["console", "loglevel"], function (console, log) {
         log.setDefaultLevel(log.levels.ERROR);
     });
 
-    // Promise的实现
-    require(["@dom/setTimeout"], function (__setTimeout__) {
-        window.AnJsflScript.__setTimeout__ = __setTimeout__;
-    })
+    require([
+        // Promise的实现
+        "@dom/setTimeout", "es6-promise"
+    ]);
+
 })();

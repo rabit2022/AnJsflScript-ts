@@ -1,4 +1,4 @@
-define(["require", "exports", "tslib", "_exports"], function (require, exports, tslib_1) {
+require(["require", "_exports", "tslib", "_exports"], function (require, exports, tslib_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     (function webpackUniversalModuleDefinition(root, factory) {

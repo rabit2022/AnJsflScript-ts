@@ -129,7 +129,7 @@ var TaskQueue = (function () {
 
 ;// ./src/date_format.ts
 function padZero(num) {
-    return num < 10 ? '0' + num : '' + num;
+    return num < 10 ? "0" + num : "" + num;
 }
 function formatLocalDateTime(date) {
     var year = date.getFullYear();
@@ -191,13 +191,13 @@ var EventListenerManager = (function () {
                     _this.interval = 10000;
                 }
             }
-            if (_this.interval === 0 || (now - _this.lastExecutionTime) >= _this.interval) {
+            if (_this.interval === 0 || now - _this.lastExecutionTime >= _this.interval) {
                 _this.lastExecutionTime = now;
                 executeTasks(_this.taskQueue);
             }
         };
     };
-    EventListenerManager.MOUSE_MOVE = 'mouseMove';
+    EventListenerManager.MOUSE_MOVE = "mouseMove";
     return EventListenerManager;
 }());
 
@@ -206,7 +206,7 @@ var THRESHOLD = 10;
 var _currentTaskIndex = 0;
 function executeTasks(taskQueue) {
     var now = Date.now();
-    var tasks = taskQueue['tasks'];
+    var tasks = taskQueue["tasks"];
     var taskCount = tasks.length;
     if (taskCount <= THRESHOLD) {
         var tasksToRemove = [];
@@ -250,19 +250,18 @@ function invokeTask(task) {
     try {
         var now = Date.now();
         var elapsed = now - task.startTimeRecord;
-        external_loglevel_.log('[Timer] 触发回调:', JSON.stringify({
+        external_loglevel_.log("[Timer] 触发回调:", JSON.stringify({
             taskId: task.id,
             注册时间: formatLocalDateTime(new Date(task.startTimeRecord)),
             当前时间: formatLocalDateTime(new Date(now)),
             延迟设定: "".concat(task.delay, "ms"),
             实际耗时: "".concat(elapsed, "ms"),
-            超时: elapsed - task.delay,
+            超时: elapsed - task.delay
         }));
-
         task.callback.apply(task, task.args);
     }
     catch (error) {
-        external_loglevel_.error('[Timer] 回调执行错误', error);
+        external_loglevel_.error("[Timer] 回调执行错误", error);
     }
 }
 
@@ -322,6 +321,10 @@ function setInterval_clearInterval(timerId) {
 }
 
 ;// ./src/index.ts
+
+
+var __setTimeout__ = { setTimeout: setTimeout_setTimeout, clearTimeout: setTimeout_clearTimeout, clearAllTimers: clearAllTimers, setInterval: setInterval_setInterval, clearInterval: setInterval_clearInterval };
+window.AnJsflScript.__setTimeout__ = __setTimeout__;
 
 
 

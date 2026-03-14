@@ -8,6 +8,6 @@
  */
 
 // loglevel依赖 document.cookie
-define(["@polyfill/console", "@polyfill/cookie", "@third/loglevel"], function (console, cookie, log) {
+define(["console", "@polyfill/cookie", "@third/loglevel"], function (console, cookie, log) {
     return log;
 });

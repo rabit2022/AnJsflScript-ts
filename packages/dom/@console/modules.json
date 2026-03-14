@@ -1,3 +1,3 @@
 {
-  "@polyfill/console": "./config.jsfl"
+  "@dom/console": "./config.jsfl"
 }

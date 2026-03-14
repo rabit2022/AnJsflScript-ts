@@ -1,8 +1,18 @@
 var mapper = {
-  letConst: {
-    cn: 'let 和 const 命令',
-    en: 'let and const',
-    example: 'let a;\nconst b = 2;'
+  // letConst: {
+  //   cn: 'let 和 const 命令',
+  //   en: 'let and const',
+  //   example: 'let a;\nconst b = 2;'
+  // },
+  let: {
+    cn: 'let 命令',
+    en: 'let',
+    example: 'let a;'
+  },
+  const: {
+    cn: 'const 命令',
+    en: 'const',
+    example: 'const b = 2;'
   },
   defaultParameter: {
     cn: '函数的默认参数',

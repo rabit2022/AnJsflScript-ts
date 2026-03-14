@@ -7,10 +7,7 @@
  * @description:
  */
 
-// paths.ts
-
-// 判断是否在 JSFL 环境（Adobe Animate）
-const isJsfl = typeof AnJsflScript !== 'undefined' || typeof fl !== 'undefined';
+import {isFlash, isNode} from "../../ENV";
 
 // 定义基础路径结构
 interface PathsType {
@@ -22,7 +19,7 @@ interface PathsType {
 
 let Paths: PathsType;
 
-if (isJsfl) {
+if (isFlash) {
     let Root = AnJsflScript.folders.Log;
 
     // JSFL 环境：通常使用绝对路径或特殊目录（如 documents）
@@ -32,7 +29,7 @@ if (isJsfl) {
         currentJson: `${Root}Errors/error.json`,
         allJson: `${Root}Errors/all errors.json`,
     };
-} else if (typeof process !== 'undefined' && process.versions?.node) {
+} else if (isNode) {
     // Node.js 环境
     Paths = {
         currentText: './logs/human error.txt',

@@ -1,17 +1,13 @@
-/**
- * @file: index.ts
- * @author: 穹的兔兔
- * @email: 3101829204@qq.com
- * @date: 2026/2/8 23:32
- * @project: AnJsflScript-ts
- * @description:
- */
+import "./console";
+import "./table";
+import "./stack";
+import {EnhancedConsole} from "./global/console";
 
-import { StackTracer } from "./api/stackTracer";
+if (typeof window.console === "undefined") {
+    window.console = EnhancedConsole;
+}
 
-export const stackTracer = new StackTracer();
-
-(console as any).stack = (...args: Parameters<typeof stackTracer.trace>) => {
-    const stackTracer = new StackTracer();
-    return stackTracer.trace(...args);
-};
+// import * as console from "console";
+export * from "./console";
+export {table} from "./table";
+export {stack} from "./stack";

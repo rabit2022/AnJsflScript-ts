@@ -119,7 +119,6 @@ define(function () {
 
             for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
                 var path;
-                console.log(i)
                 if (i >= 0) path = arguments[i];
                 else {
                     if (cwd === undefined) cwd = process.cwd();

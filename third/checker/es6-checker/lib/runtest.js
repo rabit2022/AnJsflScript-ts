@@ -41,8 +41,14 @@ function tryReturn(code) {
   }
 }
 
+// function runIt(code) {
+//   return (new Function(code))();
+// }
 function runIt(code) {
-  return (new Function(code))();
+  // 创建一个接受 context 参数的函数
+  const func = new Function('global', code);
+  const context = typeof globalThis !== "undefined" ? globalThis:  window;
+  return func(context); // 传入当前的 Symbol
 }
 
 module.exports =  runTest;

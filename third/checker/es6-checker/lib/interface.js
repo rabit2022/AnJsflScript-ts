@@ -1,6 +1,8 @@
 var Supports = function(){
   // Variables
-  this.letConst = 'letConst';
+  // this.letConst = 'letConst';
+  this.let = 'let';
+  this.const = 'const';
   this.letTDZ = 'letTDZ';
   this.constRedef = 'constRedef';
   this.destructuring = 'destructuring';

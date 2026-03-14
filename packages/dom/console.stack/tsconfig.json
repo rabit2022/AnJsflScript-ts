@@ -8,6 +8,8 @@
 
     "moduleResolution": "node",
 
+    "importHelpers": true,
+
 //    // import fs from 'fs';
 //    "esModuleInterop": true,
 //    "allowSyntheticDefaultImports": true,
