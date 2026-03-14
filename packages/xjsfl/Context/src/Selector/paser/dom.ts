@@ -1,3 +1,12 @@
+/**
+ * @file: dom.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/15 0:13
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import { DomSelector } from "../types";
 import { isUrl } from "../Util/isPathOrUrl";
 import * as path from "path";

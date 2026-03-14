@@ -1,3 +1,12 @@
+/**
+ * @file: console.types.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/15 0:13
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/console) */
 export interface Console {
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/console/assert_static) */

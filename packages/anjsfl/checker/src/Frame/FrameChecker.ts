@@ -1,4 +1,13 @@
 /**
+ * @file: FrameChecker.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/15 0:13
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+/**
  * 检查帧是否为空
  * @see https://github.com/hufang360/FlashTool
  */
