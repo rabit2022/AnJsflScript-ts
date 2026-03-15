@@ -28,9 +28,7 @@
     ]);
 
     // path-browserify need process global variable
-    require(['process', "@nodejs/__filename"], function (process) {
-        window.process = process;
-    })
+    require(['process', "@nodejs/__filename"])
 
     // 禁用log
     require(["console", "loglevel"], function (console, log) {

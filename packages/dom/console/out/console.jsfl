@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("tslib"), require("url"), require("path-browserify"), require("fs"), require("lodash"), require("cli-table3"), require("error-stack-parser"), require("util"));
+		module.exports = factory(require("tslib"), require("path-browserify"), require("fs"), require("lodash"), require("@anjsfl-ts/dev"), require("url"), require("cli-table3"), require("error-stack-parser"), require("util"));
 	else if(typeof define === 'function' && define.amd)
-		define(["tslib", "url", "path-browserify", "fs", "lodash", "cli-table3", "error-stack-parser", "util"], factory);
+		define(["tslib", "path-browserify", "fs", "lodash", "@anjsfl-ts/dev", "url", "cli-table3", "error-stack-parser", "util"], factory);
 	else if(typeof exports === 'object')
-		exports["console"] = factory(require("tslib"), require("url"), require("path-browserify"), require("fs"), require("lodash"), require("cli-table3"), require("error-stack-parser"), require("util"));
+		exports["console"] = factory(require("tslib"), require("path-browserify"), require("fs"), require("lodash"), require("@anjsfl-ts/dev"), require("url"), require("cli-table3"), require("error-stack-parser"), require("util"));
 	else
-		root["console"] = factory(root["tslib"], root["url"], root["path-browserify"], root["fs"], root["lodash"], root["cli-table3"], root["error-stack-parser"], root["util"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__917__, __WEBPACK_EXTERNAL_MODULE__248__, __WEBPACK_EXTERNAL_MODULE__947__, __WEBPACK_EXTERNAL_MODULE__773__, __WEBPACK_EXTERNAL_MODULE__420__, __WEBPACK_EXTERNAL_MODULE__417__, __WEBPACK_EXTERNAL_MODULE__24__) {
+		root["console"] = factory(root["tslib"], root["path-browserify"], root["fs"], root["lodash"], root["@anjsfl-ts/dev"], root["url"], root["cli-table3"], root["error-stack-parser"], root["util"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__248__, __WEBPACK_EXTERNAL_MODULE__947__, __WEBPACK_EXTERNAL_MODULE__773__, __WEBPACK_EXTERNAL_MODULE__664__, __WEBPACK_EXTERNAL_MODULE__917__, __WEBPACK_EXTERNAL_MODULE__420__, __WEBPACK_EXTERNAL_MODULE__417__, __WEBPACK_EXTERNAL_MODULE__24__) {
 return /******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
@@ -44,6 +44,13 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__420__;
 /***/ (function(module) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE__652__;
+
+/***/ }),
+
+/***/ 664:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__664__;
 
 /***/ }),
 
@@ -158,10 +165,6 @@ function assert(expression, message) {
 
 // EXTERNAL MODULE: external "tslib"
 var external_tslib_ = __webpack_require__(652);
-// EXTERNAL MODULE: external "url"
-var external_url_ = __webpack_require__(917);
-// EXTERNAL MODULE: external "path-browserify"
-var external_path_browserify_ = __webpack_require__(248);
 ;// ./src/console/constant/index.ts
 var LogLevel;
 (function (LogLevel) {
@@ -174,48 +177,8 @@ var LogLevel;
     LogLevel["FILE"] = "FILE";
 })(LogLevel || (LogLevel = {}));
 
-;// ./src/ENV/index.ts
-var isBrowser = !!(typeof window !== "undefined" &&
-    typeof navigator !== "undefined" &&
-    window.document), isWebWorker = !isBrowser && typeof importScripts !== "undefined", isNode = !isBrowser &&
-    !isWebWorker &&
-    !!(typeof process !== "undefined" &&
-        process.release &&
-        process.release.name === "node"), isFlash = !isBrowser &&
-    !isNode &&
-    !isWebWorker &&
-    typeof window !== "undefined" &&
-    typeof fl !== "undefined";
-
-;// ./src/console/config/paths.ts
-
-var Paths;
-if (isFlash) {
-    var Root = AnJsflScript.folders.Log;
-    Paths = {
-        LOG_FOLDER: Root,
-        MAIN_LOG: "".concat(Root, "main.log"),
-        FILE_LOG: "".concat(Root, "file.log")
-    };
-}
-else if (isNode) {
-    var Root = "./logs/";
-    Paths = {
-        LOG_FOLDER: Root,
-        MAIN_LOG: "".concat(Root, "main.log"),
-        FILE_LOG: "".concat(Root, "file.log")
-    };
-}
-else {
-    var Root = "./logs/";
-    Paths = {
-        LOG_FOLDER: Root,
-        MAIN_LOG: "".concat(Root, "main.log"),
-        FILE_LOG: "".concat(Root, "file.log")
-    };
-}
-
-
+// EXTERNAL MODULE: external "path-browserify"
+var external_path_browserify_ = __webpack_require__(248);
 // EXTERNAL MODULE: external "fs"
 var external_fs_ = __webpack_require__(947);
 ;// ./src/console/utils/ensureDir.ts
@@ -243,6 +206,55 @@ function center(str, totalLength, padChar) {
     return external_lodash_.padEnd(external_lodash_.padStart(str, length + leftPadding, padChar), totalLength, padChar);
 }
 
+// EXTERNAL MODULE: external "@anjsfl-ts/dev"
+var dev_ = __webpack_require__(664);
+;// ./src/config/config.ts
+
+var Root = "";
+if (dev_.isFlash) {
+    Root = AnJsflScript.folders.Log;
+}
+else if (dev_.isNode) {
+    Root = "./";
+}
+else {
+    Root = "./";
+}
+var Paths = {
+    LOG_FOLDER: Root,
+    MAIN_LOG: "".concat(Root, "logs/main.log"),
+    FILE_LOG: "".concat(Root, "logs/file.log"),
+    currentText: "".concat(Root, "Errors/human error.txt"),
+    allText: "".concat(Root, "Errors/human all errors.txt"),
+    currentJson: "".concat(Root, "Errors/error.json"),
+    allJson: "".concat(Root, "Errors/all errors.json"),
+};
+
+;// ./src/config/index.ts
+
+
+// EXTERNAL MODULE: external "url"
+var external_url_ = __webpack_require__(917);
+;// ./src/console/utils/relative.ts
+
+
+
+function getRecordPath() {
+    var scriptURI = "";
+    var baseDir = "";
+    if (dev_.isFlash) {
+        scriptURI = fl.scriptURI;
+        baseDir = AnJsflScript.folders.AnJsflScript;
+    }
+    else {
+        scriptURI = "file:///H|/project/js/AnJsflScript-ts/packages/dom/console/test/flash/require/test3.jsfl";
+        baseDir = "file:///H|/project/js/AnJsflScript-ts/";
+    }
+    var p1 = (0,external_url_.fileURLToPath)(scriptURI).replace(/\\/g, "/"), p2 = (0,external_url_.fileURLToPath)(baseDir).replace(/\\/g, "/");
+    var short_path = external_path_browserify_.relative(p2, p1);
+    return short_path;
+}
+
 ;// ./src/console/utils/writeToLog.ts
 
 
@@ -250,8 +262,7 @@ function center(str, totalLength, padChar) {
 
 
 
-
-var pad = function (num, length) { return external_lodash_.padStart(String(num), length, '0'); };
+var pad = function (num, length) { return external_lodash_.padStart(String(num), length, "0"); };
 function writeToLog(message, type, level) {
     if (type === void 0) { type = LogLevel.INFO; }
     if (level === void 0) { level = 0; }
@@ -262,10 +273,7 @@ function writeToLog(message, type, level) {
         "".concat(pad(now.getHours(), 2), ":").concat(pad(now.getMinutes(), 2), ":").concat(pad(now.getSeconds(), 2), ".") +
         "".concat(pad(now.getMilliseconds(), 3));
     var levelname = center(logType.toUpperCase(), 8);
-    var scriptURI = fl.scriptURI;
-    var baseDir = AnJsflScript.folders.AnJsflScript;
-    var p1 = (0,external_url_.fileURLToPath)(scriptURI), p2 = (0,external_url_.fileURLToPath)(baseDir);
-    var short_path = external_path_browserify_.relative(p2, p1);
+    var short_path = getRecordPath();
     var logLine = "".concat(asctime, " | ").concat(levelname, " | ").concat(short_path, " | ").concat(message);
     ensureDir(Paths.MAIN_LOG);
     FLfile.write(Paths.MAIN_LOG, logLine + "\n", "append");
@@ -336,11 +344,10 @@ function file() {
     var msg = formatMessage(arguments);
     writeToLog(msg, LogLevel.FILE);
 }
-function clear(type) {
+function clear() {
     fl.outputPanel.clear();
-    var name = type === LogLevel.FILE ? "file" : "main";
-    FLfile.remove("".concat(Paths.LOG_FOLDER, "/").concat(name, ".log"));
-    trace(name + ".log reset");
+    FLfile.remove("".concat(Paths.LOG_FOLDER));
+    trace("".concat(Paths.LOG_FOLDER, " reset"));
 }
 
 ;// ./src/console/core/counter.ts
@@ -460,8 +467,7 @@ EnhancedConsole.time = time;
 EnhancedConsole.timeEnd = timeEnd;
 
 
-;// ./src/table/table.ts
-
+;// ./src/table/tableToString.ts
 
 var Table = __webpack_require__(420);
 function formatValue(value) {
@@ -598,21 +604,37 @@ function tableToString(data, columns) {
     }
     return String(data);
 }
+
+;// ./src/table/table.ts
+
+
 var CustomTable = (function () {
     function CustomTable(indentLevel, indentStr) {
         if (indentLevel === void 0) { indentLevel = 0; }
         if (indentStr === void 0) { indentStr = " "; }
+        this.logToFile = true;
         this._indentLevel = indentLevel;
         this._indentStr = indentStr;
     }
-    CustomTable.prototype.table = function (data, columns) {
-        var output = tableToString(data, columns);
+    CustomTable.prototype.table = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        var table = tableToString.apply(void 0, args);
         var indent = this._indentStr.repeat(this._indentLevel);
-        var indented = output
+        var message = table
             .split("\n")
             .map(function (line) { return (line ? indent + line : ""); })
             .join("\n");
-        log("\n".concat(indented));
+        var record = {
+            id: Date.now(),
+            timestamp: new Date().toISOString(),
+            message: message,
+            count: 1
+        };
+        var output = "\nStack Trace:\n".concat(JSON.stringify(record, null, 2), "\n\n").concat(message, "\n\n\n    ");
+        log(output);
     };
     return CustomTable;
 }());
@@ -683,36 +705,6 @@ function formatFrames(frames, format) {
     }
 }
 
-;// ./src/stack/config/paths.ts
-
-var paths_Paths;
-if (isFlash) {
-    var paths_Root = AnJsflScript.folders.Log;
-    paths_Paths = {
-        currentText: "".concat(paths_Root, "Errors/human error.txt"),
-        allText: "".concat(paths_Root, "Errors/human all errors.txt"),
-        currentJson: "".concat(paths_Root, "Errors/error.json"),
-        allJson: "".concat(paths_Root, "Errors/all errors.json"),
-    };
-}
-else if (isNode) {
-    paths_Paths = {
-        currentText: './logs/human error.txt',
-        allText: './logs/human all errors.txt',
-        currentJson: './logs/error.json',
-        allJson: './logs/all errors.json'
-    };
-}
-else {
-    paths_Paths = {
-        currentText: '/logs/human error.txt',
-        allText: '/logs/human all errors.txt',
-        currentJson: '/logs/error.json',
-        allJson: '/logs/all errors.json'
-    };
-}
-
-
 ;// ./src/stack/storage/fileStore.ts
 
 
@@ -720,36 +712,36 @@ else {
 var FileStore = (function () {
     function FileStore() {
     }
-    FileStore.prototype.readCurrent = function () {
-        return this.readJson(paths_Paths.currentJson);
+    FileStore.prototype.readCurrentJson = function () {
+        return this.readJson(Paths.currentJson);
     };
-    FileStore.prototype.readAll = function () {
+    FileStore.prototype.readAllJson = function () {
         var _a;
-        return (_a = this.readJson(paths_Paths.allJson)) !== null && _a !== void 0 ? _a : [];
+        return (_a = this.readJson(Paths.allJson)) !== null && _a !== void 0 ? _a : [];
     };
-    FileStore.prototype.writeCurrent = function (data) {
-        this.writeJson(paths_Paths.currentJson, data);
+    FileStore.prototype.writeCurrentJson = function (data) {
+        this.writeJson(Paths.currentJson, data);
     };
-    FileStore.prototype.writeAll = function (list) {
+    FileStore.prototype.writeAllJson = function (list) {
         var limited = list.slice(-1000);
-        this.writeJson(paths_Paths.allJson, limited);
+        this.writeJson(Paths.allJson, limited);
     };
     FileStore.prototype.writeCurrentText = function (text) {
-        this.ensureDir(paths_Paths.currentText);
-        external_fs_.writeFileSync(paths_Paths.currentText, text, "utf8");
+        this.ensureDir(Paths.currentText);
+        external_fs_.writeFileSync(Paths.currentText, text, "utf8");
     };
     FileStore.prototype.appendAllText = function (text) {
-        this.ensureDir(paths_Paths.allText);
-        external_fs_.appendFileSync(paths_Paths.allText, text + "\n", "utf8");
+        this.ensureDir(Paths.allText);
+        external_fs_.appendFileSync(Paths.allText, text + "\n", "utf8");
     };
     FileStore.prototype.readCurrentText = function () {
-        return this.readText(paths_Paths.currentText);
+        return this.readText(Paths.currentText);
     };
     FileStore.prototype.readAllText = function () {
-        return this.readText(paths_Paths.allText);
+        return this.readText(Paths.allText);
     };
     FileStore.prototype.clear = function () {
-        Object.values(paths_Paths).forEach(function (file) {
+        Object.values(Paths).forEach(function (file) {
             if (external_fs_.existsSync(file)) {
                 external_fs_.unlinkSync(file);
             }
@@ -799,9 +791,9 @@ var HistoryStore = (function () {
     }
     HistoryStore.prototype.save = function (record, output) {
         var store = new FileStore();
-        store.writeCurrent(record);
+        store.writeCurrentJson(record);
         store.writeCurrentText(output);
-        var all = store.readAll();
+        var all = store.readAllJson();
         var exist = all.find(function (r) {
             return r.message === record.message &&
                 JSON.stringify(r.frames) === JSON.stringify(record.frames);
@@ -813,11 +805,11 @@ var HistoryStore = (function () {
         else {
             all.push(record);
         }
-        store.writeAll(all);
+        store.writeAllJson(all);
         store.appendAllText(output);
     };
     HistoryStore.prototype.clear = function () {
-        Object.values(paths_Paths).forEach(function (p) {
+        Object.values(Paths).forEach(function (p) {
             if (external_fs_.existsSync(p))
                 external_fs_.unlinkSync(p);
         });
@@ -884,7 +876,6 @@ function stack() {
     }
     return stackTracer.trace.apply(stackTracer, args);
 }
-;
 EnhancedConsole.stack = stack;
 
 // EXTERNAL MODULE: external "util"

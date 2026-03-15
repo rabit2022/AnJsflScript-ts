@@ -9,17 +9,17 @@
 
 import * as fs from "fs";
 import { SaveData } from "../types";
-import { Paths } from "../config/paths";
 import { FileStore } from "./fileStore";
+import { Paths } from "../../config";
 
 export class HistoryStore {
     save(record: SaveData, output: string) {
         const store = new FileStore();
 
-        store.writeCurrent(record);
+        store.writeCurrentJson(record);
         store.writeCurrentText(output);
 
-        let all = store.readAll();
+        let all = store.readAllJson();
 
         const exist = all.find(
             (r) =>
@@ -34,7 +34,7 @@ export class HistoryStore {
             all.push(record);
         }
 
-        store.writeAll(all);
+        store.writeAllJson(all);
         store.appendAllText(output);
     }
 

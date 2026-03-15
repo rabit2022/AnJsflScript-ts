@@ -10,28 +10,28 @@
 // src/storage/fileStore.ts
 
 import * as fs from "fs";
-import * as path from "path-browserify";
-import { Paths } from "../config/paths";
+import * as path from "path";
 import { SaveData } from "../types";
+import { Paths } from "../../config";
 
 export class FileStore {
     /* =======================
      * JSON
      * ======================= */
 
-    readCurrent(): SaveData | null {
+    readCurrentJson(): SaveData | null {
         return this.readJson<SaveData>(Paths.currentJson);
     }
 
-    readAll(): SaveData[] {
+    readAllJson(): SaveData[] {
         return this.readJson<SaveData[]>(Paths.allJson) ?? [];
     }
 
-    writeCurrent(data: SaveData): void {
+    writeCurrentJson(data: SaveData): void {
         this.writeJson(Paths.currentJson, data);
     }
 
-    writeAll(list: SaveData[]): void {
+    writeAllJson(list: SaveData[]): void {
         // 防止无限增长
         const limited = list.slice(-1000);
         this.writeJson(Paths.allJson, limited);

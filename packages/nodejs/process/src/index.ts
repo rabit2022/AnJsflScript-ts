@@ -7,6 +7,16 @@
  * @description:
  */
 
-export * from "./cwd";
-export * from "./exit";
-export * from "./platform";
+import "./cwd";
+import "./exit";
+import "./platform";
+
+import { process } from "./global";
+
+if (typeof window.process === "undefined") {
+    window.process = process;
+}
+
+export { cwd } from "./cwd";
+export { exit } from "./exit";
+export { platform } from "./platform";

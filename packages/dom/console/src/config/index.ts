@@ -7,10 +7,4 @@
  * @description:
  */
 
-import { platform } from "./platform";
-import { process } from "../global";
-
-// @ts-ignore
-process.platform = platform;
-
-export { platform };
+export {Paths} from "./config";

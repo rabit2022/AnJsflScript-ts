@@ -2,37 +2,14 @@
  * @file: index.ts
  * @author: 穹的兔兔
  * @email: 3101829204@qq.com
- * @date: 2026/2/8 23:32
+ * @date: 2026/3/15 13:53
  * @project: AnJsflScript-ts
  * @description:
  */
 
-import { createRuntime } from "./runtime";
-import { exitInner } from "./exit";
-import { onceExit, onExit } from "./handlers";
+import { exit } from "./core";
+import { process } from "../global";
 
-/**
- * 模块私有 runtime
- * 等价于 Node 的 process 单例
- */
-const rt = createRuntime();
+process.exit = exit;
 
-export function exit(code?: number) {
-    return exitInner(rt, code);
-}
-
-export function on(event: "beforeExit" | "exit", fn: (code: number) => void) {
-    return onExit(rt, event, fn);
-}
-
-export function once(event: "beforeExit" | "exit", fn: (code: number) => void) {
-    return onceExit(rt, event, fn);
-}
-
-export function off(event: "beforeExit" | "exit", fn: (code: number) => void) {
-    const list = rt.handlers[event];
-    const i = list.indexOf(fn);
-    if (i >= 0) list.splice(i, 1);
-}
-
-export { exitCode } from "./runtime";
+export { exit };

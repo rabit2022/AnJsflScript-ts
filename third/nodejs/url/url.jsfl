@@ -4044,7 +4044,7 @@ function fileURLToPath(url) {
     // H:\project\js\AnJsflScript-ts\
     var uri = FLfile.uriToPlatformPath(urlString);
     // H:/project/js/AnJsflScript-ts/
-    return uri.replace(/\\/g, '/');
+    return uri;
 }
 function pathToFileURL(path) {
     // file:///H|/project/js/AnJsflScript-ts/

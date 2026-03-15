@@ -1,0 +1,83 @@
+//{
+//  global: [Circular *1],
+//  clearImmediate: [Function: clearImmediate],
+//  setImmediate: [Function: setImmediate] {
+//[Symbol(nodejs.util.promisify.custom)]: [Getter]
+//},
+//clearInterval: [Function: clearInterval],
+//clearTimeout: [Function: clearTimeout],
+//setInterval: [Function: setInterval],
+//setTimeout: [Function: setTimeout] {
+//[Symbol(nodejs.util.promisify.custom)]: [Getter]
+//},
+//queueMicrotask: [Function: queueMicrotask],
+//structuredClone: [Function: structuredClone],
+//atob: [Getter/Setter],
+//btoa: [Function: btoa],
+//performance: [Getter/Setter],
+//fetch: [Function: fetch],
+//crypto: [Getter]
+//}
+
+
+//
+//[
+//  {
+//    "global": "0",
+//    "performance": "1",
+//    "crypto": "2"
+//  },
+//  {
+//    "nodeTiming": "3",
+//    "timeOrigin": 1773553544108.969,
+//    "eventLoopUtilization": "4"
+//  },
+//  {},
+//  {
+//    "name": "5",
+//    "entryType": "5",
+//    "startTime": 0,
+//    "duration": 862.7935,
+//    "nodeStart": 0.3946000002324581,
+//    "v8Start": 2.9956999998539686,
+//    "bootstrapComplete": 12.073200000450015,
+//    "environment": 7.631699999794364,
+//    "loopStart": 16.918500000610948,
+//    "loopExit": -1,
+//    "idleTime": 329.159
+//  },
+//  {
+//    "idle": 329.159,
+//    "active": 516.652400000006,
+//    "utilization": 0.6108364110486124
+//  },
+//  "node"
+//]
+
+
+
+{
+  "global": "[Circular ~]",
+  "performance": {
+    "nodeTiming": {
+      "name": "node",
+      "entryType": "node",
+      "startTime": 0,
+      "duration": 945.5792,
+      "nodeStart": 0.3409000001847744,
+      "v8Start": 2.783900000154972,
+      "bootstrapComplete": 11.287800000049174,
+      "environment": 6.906600000336766,
+      "loopStart": 15.839200000278652,
+      "loopExit": -1,
+      "idleTime": 333.3025
+    },
+    "timeOrigin": 1773553715870.38,
+    "eventLoopUtilization": {
+      "idle": 333.3025,
+      "active": 596.3243999995664,
+      "utilization": 0.6414663775325827
+    }
+  },
+  "crypto": {}
+}

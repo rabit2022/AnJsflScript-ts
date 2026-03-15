@@ -7,13 +7,12 @@
  * @description:
  */
 
-import { fileURLToPath } from "url";
-import * as path from "path";
 import { LogLevel } from "../constant";
-import { Paths } from "../config/paths";
 import { ensureDir } from "./ensureDir";
 import { center } from "./string";
 import * as _ from "lodash";
+import { Paths } from "../../config";
+import {getRecordPath} from "./relative";
 
 // 辅助函数：获取补零后的字符串 (利用原生 padStart)
 const pad = (num: number, length: number) => _.padStart(String(num), length, "0");
@@ -41,15 +40,8 @@ export function writeToLog(
     // 日志级别（中间 8 字符）
     const levelname = center(logType.toUpperCase(), 8);
 
-    // 文件信息（JSFL 无法获取行号/函数名，使用占位）
-    // NOTE:fl.addEventListener注册的函数，调用打印时 fl.scriptURI = unknown
-    var scriptURI = fl.scriptURI;
-    var baseDir = AnJsflScript.folders.AnJsflScript;
+    const short_path = getRecordPath();
 
-    var p1 = fileURLToPath(scriptURI),
-        p2 = fileURLToPath(baseDir);
-
-    const short_path = path.relative(p2, p1);
 
     // 构建日志行
     const logLine = `${asctime} | ${levelname} | ${short_path} | ${message}`;

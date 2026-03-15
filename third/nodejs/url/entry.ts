@@ -38,7 +38,8 @@ function fileURLToPath(url: string | URL): string {
     const uri= FLfile.uriToPlatformPath(urlString);
 
     // H:/project/js/AnJsflScript-ts/
-    return uri.replace(/\\/g, '/');
+    // return uri.replace(/\\/g, '/');
+    return uri;
 }
 
 function pathToFileURL(path: string): URL {

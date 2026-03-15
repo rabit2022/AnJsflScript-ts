@@ -13,7 +13,7 @@
 
 import { writeToLog } from "../utils/writeToLog";
 import { LogLevel } from "../constant";
-import { Paths } from "../config/paths";
+import { Paths } from "../../config";
 
 const trace = fl.trace;
 
@@ -59,10 +59,10 @@ export function file(...args: any[]): void {
     writeToLog(msg, LogLevel.FILE);
 }
 
-export function clear(type?: string): void {
+export function clear(): void {
     // @ts-ignore
     fl.outputPanel.clear();
-    const name = type === LogLevel.FILE ? "file" : "main";
-    FLfile.remove(`${Paths.LOG_FOLDER}/${name}.log`);
-    trace(name + ".log reset");
+    // const name = type === LogLevel.FILE ? "file" : "main";
+    FLfile.remove(`${Paths.LOG_FOLDER}`);
+    trace(`${Paths.LOG_FOLDER} reset`);
 }

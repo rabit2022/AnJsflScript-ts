@@ -51,14 +51,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.d(__webpack_exports__, {
   cwd: function() { return /* reexport */ cwd; },
   exit: function() { return /* reexport */ exit; },
-  exitCode: function() { return /* reexport */ exitCode; },
-  off: function() { return /* reexport */ off; },
-  on: function() { return /* reexport */ on; },
-  once: function() { return /* reexport */ once; },
   platform: function() { return /* reexport */ platform; }
 });
 
-;// ./src/cwd/index.ts
+;// ./src/cwd/cwd.ts
 function cwd() {
     if (fl.scriptURI) {
         var scriptPath = FLfile.uriToPlatformPath(fl.scriptURI);
@@ -71,23 +67,32 @@ function cwd() {
     throw new Error("Could not find script uri");
 }
 
-;// ./src/exit/runtime.ts
+;// ./src/global/process.ts
+var process = {};
+
+;// ./src/cwd/index.ts
+
+
+process.cwd = cwd;
+
+
+;// ./src/exit/core/runtime.ts
 function createRuntime() {
     return {
         exited: false,
         handlers: {
             beforeExit: [],
-            exit: [],
-        },
+            exit: []
+        }
     };
 }
 var exitCode = 0;
 
-;// ./src/exit/exit.ts
+;// ./src/exit/core/exit.ts
 
 function trace(msg) {
     try {
-        if (typeof fl !== 'undefined' && fl.trace) {
+        if (typeof fl !== "undefined" && fl.trace) {
             fl.trace(msg);
         }
     }
@@ -95,9 +100,9 @@ function trace(msg) {
 }
 function exitInner(rt, code) {
     if (rt.exited) {
-        throw new Error('Process already exited');
+        throw new Error("Process already exited");
     }
-    var finalCode = typeof code === 'number' ? code : exitCode;
+    var finalCode = typeof code === "number" ? code : exitCode;
     rt.exited = true;
     if (finalCode !== 0) {
         trace("Process exited with code ".concat(finalCode));
@@ -119,28 +124,7 @@ function exitInner(rt, code) {
     throw new Error("Process.exit(".concat(finalCode, ")"));
 }
 
-;// ./src/exit/handlers.ts
-function onExit(rt, event, listener) {
-    rt.handlers[event].push(listener);
-    return {
-        off: function () {
-            var list = rt.handlers[event];
-            var i = list.indexOf(listener);
-            if (i >= 0)
-                list.splice(i, 1);
-        },
-    };
-}
-function onceExit(rt, event, listener) {
-    var wrapper = function (code) {
-        off();
-        listener(code);
-    };
-    var off = onExit(rt, event, wrapper).off;
-    return { off: off };
-}
-
-;// ./src/exit/index.ts
+;// ./src/exit/core/index.ts
 
 
 
@@ -162,10 +146,19 @@ function off(event, fn) {
 }
 
 
-;// ./src/platform/index.ts
+;// ./src/global/index.ts
+
+
+;// ./src/exit/index.ts
+
+
+process.exit = exit;
+
+
+;// ./src/platform/platform.ts
 var WIN = "win32", MAC = "darwin", LINUX = "linux", UNKNOWN = "unknown";
 var platform = (function () {
-    if (typeof AnJsflScript !== 'undefined' && AnJsflScript.app) {
+    if (typeof AnJsflScript !== "undefined" && AnJsflScript.app) {
         var currentOS = AnJsflScript.app.os;
         if (currentOS.win) {
             return WIN;
@@ -177,7 +170,20 @@ var platform = (function () {
     return UNKNOWN;
 })();
 
+;// ./src/platform/index.ts
+
+
+process.platform = platform;
+
+
 ;// ./src/index.ts
+
+
+
+
+if (typeof window.process === "undefined") {
+    window.process = process;
+}
 
 
 

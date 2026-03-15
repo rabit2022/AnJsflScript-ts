@@ -7,4 +7,6 @@
  * @description:
  */
 
-import "./iterator";
+import * as process from "node:process";
+
+process.platform;
