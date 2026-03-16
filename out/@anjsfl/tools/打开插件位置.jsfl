@@ -2,7 +2,7 @@
  * @file: 打开插件位置.jsfl
  * @author: 穹的兔兔
  * @email: 3101829204@qq.com
- * @date: 2026/3/9 23:17
+ * @date: 2026/3/16 13:18
  * @project: AnJsflScript-ts
  * @description:
  */
@@ -10,9 +10,8 @@
 // 这个文件由脚本 @anjsfl\tools\打开插件位置.ts 自动生成，任何手动修改都将会被覆盖.
 
 (function(){
-require(["require", "_exports", "tslib", "child_process", "url", "process"], function (require, exports, tslib_1, child_process_1, url_1, process) {
+require(["require", "_exports", "child_process", "url", "process"], function (require, exports, child_process_1, url_1, process) {
     "use strict";
-    process = tslib_1.__importStar(process);
     var PluginPath = AnJsflScript.folders.swf;
     PluginPath = (0, url_1.fileURLToPath)(PluginPath);
     try {

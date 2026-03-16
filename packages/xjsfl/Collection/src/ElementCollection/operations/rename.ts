@@ -6,12 +6,13 @@
  * @project: AnJsflScript-ts
  * @description:
  */
-import { ElementCollection } from "../core/ElementCollection";
+import {ElementCollection} from "../core/ElementCollection";
+import * as _ from "lodash";
 
 export type RenameCallback = (
-    element: Element,
+    element: FlashElement,
     index: number,
-    elements: Element[]
+    elements: FlashElement[]
 ) => string;
 
 export function createRenameCallback(
@@ -27,15 +28,19 @@ export function createRenameCallback(
         const padLength = numPart.length;
         const start = Number.isNaN(Number(numPart)) ? 1 : parseInt(numPart, 10);
 
-        return (_, index) => name + (index + start).toString().padStart(padLength, "0");
+        // return (_, index) => name + (index + start).toString().padStart(padLength, "0");
+        return (_element: any, index: number) =>
+            name + _.padStart(String(index + start), padLength, "0");
+
     }
 
     // 2️⃣ normal string mode
     const resolvedBaseName = (baseName || "clip") + separator;
 
-    return (_, index) => {
+    return (_element, index) => {
         const num = index + startIndex;
-        const suffix = padding > 0 ? num.toString().padStart(padding, "0") : String(num);
+        // const suffix = padding > 0 ? num.toString().padStart(padding, "0") : String(num);
+        const suffix = padding > 0 ? _.padStart(num.toString(), padding, "0") : String(num);
 
         return resolvedBaseName + suffix;
     };

@@ -7,35 +7,20 @@
  * @description:
  */
 
-import { ElementCollection } from "../core/ElementCollection";
+import {ElementCollection} from "../core/ElementCollection";
+import {
+    AttrSetter,
+    AttrValue,
+    ColorProp,
+    NonFunctionKeys,
+    NumberKeys,
+    TwoDMap,
+    TwoDProp,
+    ValueFn,
+    XY
+} from "./attributes.types";
 
-type XY = { x: number; y: number };
-
-type ValueFn<T, R> = (el: T, index: number, arr: T[]) => R;
-
-type AttrSetter<T> = T | ValueFn<FlashElement, T>;
-
-type NonFunctionKeys<T> = {
-    [K in keyof T]: T[K] extends Function ? never : K;
-}[keyof T];
-
-type NumberKeys<T> = {
-    [K in keyof T]: T[K] extends number ? K : never;
-}[keyof T];
-
-type AttrValue = number | string | XY | [number, number];
-
-const TwoDMap = {
-    pos: ["x", "y"],
-    position: ["x", "y"],
-    size: ["width", "height"],
-    scale: ["scaleX", "scaleY"]
-} as const;
-
-type TwoDProp = keyof typeof TwoDMap;
-
-type ColorProp = "tint" | "alpha" | "brightness";
-
+import * as _ from "lodash";
 // export function attr<K extends NonFunctionKeys<FlashElement>>(
 //     this: ElementCollection,
 //     prop: K,
@@ -51,7 +36,7 @@ export function attr(this: ElementCollection, prop: unknown, value?: unknown) {
     const elements = this.toArray();
 
     if (typeof prop === "object" && prop !== null) {
-        for (const [k, v] of Object.entries(prop)) {
+        for (const [k, v] of _.entries(prop)) {
             // @ts-ignore
             this.attr(k as NonFunctionKeys<FlashElement>, v as AttrSetter<any>);
         }

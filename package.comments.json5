@@ -37,6 +37,7 @@
     // 生成package,json文件，方便注释
     "preinstall": "pnpm add -w json5 && tsx ./tools/project/src/package/sync-package.ts && npx only-allow pnpm ",
     "update-package-json": "tsx ./tools/project/src/package/sync-package.ts",
+    "pnpm install": "pnpm install",
 
 
     // ts编译 jsfl，
@@ -161,6 +162,7 @@
     "@xjsfl/Events": "workspace:*",
     "@xjsfl/super": "workspace:*",
     "@xjsfl/XUL": "workspace:*",
+    "@xjafl/Collection": "workspace:*",
 
 
 //    "H:\project\js\AnJsflScript-ts\packages\anjsfl"

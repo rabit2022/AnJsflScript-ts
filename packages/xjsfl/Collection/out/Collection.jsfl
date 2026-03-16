@@ -91,7 +91,8 @@ __webpack_require__.d(__webpack_exports__, {
   ElementCollection: function() { return /* reexport */ ElementCollection; },
   ItemCollection: function() { return /* reexport */ ItemCollection; },
   Iterators: function() { return /* reexport */ Iterators; },
-  LayerList: function() { return /* reexport */ LayerList; }
+  LayerList: function() { return /* reexport */ LayerList; },
+  Walker: function() { return /* reexport */ Walker; }
 });
 
 // EXTERNAL MODULE: external "tslib"
@@ -192,8 +193,7 @@ function duplicate(add) {
     name = name || "Item";
     num = num === 0 ? 1 : num + 1;
     new ElementCollection(elements, this.dom).rename(name, pad, num);
-    var new_elements = add
-        ? (0,external_tslib_.__spreadArray)((0,external_tslib_.__spreadArray)([], (0,external_tslib_.__read)(self_elements), false), (0,external_tslib_.__read)(elements), false) : elements;
+    var new_elements = add ? (0,external_tslib_.__spreadArray)((0,external_tslib_.__spreadArray)([], (0,external_tslib_.__read)(self_elements), false), (0,external_tslib_.__read)(elements), false) : elements;
     this.clear();
     this.addMany(new_elements);
     this.refresh();
@@ -239,8 +239,8 @@ function move(x, y, relative) {
         try {
             for (var self_elements_2 = (0,external_tslib_.__values)(self_elements), self_elements_2_1 = self_elements_2.next(); !self_elements_2_1.done; self_elements_2_1 = self_elements_2.next()) {
                 var element = self_elements_2_1.value;
-                element.x = (element.left - bounds.left) + (element.x - element.left) + x;
-                element.y = (element.top - bounds.top) + (element.y - element.top) + y;
+                element.x = element.left - bounds.left + (element.x - element.left) + x;
+                element.y = element.top - bounds.top + (element.y - element.top) + y;
             }
         }
         catch (e_2_1) { e_2 = { error: e_2_1 }; }
@@ -390,9 +390,7 @@ function setColorProperty(prop, value) {
     }
 }
 function setNormalProperty(elements, prop, value) {
-    var fn = typeof value === "function"
-        ? value
-        : function () { return value; };
+    var fn = typeof value === "function" ? value : function () { return value; };
     elements.forEach(function (el, i) {
         el[prop] = fn(el, i, elements);
     });
@@ -419,9 +417,9 @@ function createRenameCallback(baseName, padding, startIndex, separator) {
     };
 }
 function rename(base, padding, startIndex, separator) {
-    var callback = typeof base === 'function' ?
-        base :
-        createRenameCallback(base, padding, startIndex, separator);
+    var callback = typeof base === "function"
+        ? base
+        : createRenameCallback(base, padding, startIndex, separator);
     var self_elements = this.toArray();
     self_elements.forEach(function (el, index, elements) {
         el.name = callback(el, index, elements);
@@ -444,15 +442,15 @@ function randomValue(a, b, round) {
     return round ? Math.round(value) : value;
 }
 function randomizeValue(value, modifier) {
-    if (typeof value !== 'number')
+    if (typeof value !== "number")
         return value;
     if (modifier === undefined) {
         return value * Math.random();
     }
-    if (typeof modifier === 'number') {
+    if (typeof modifier === "number") {
         return value + modifier * Math.random();
     }
-    if (typeof modifier === 'string') {
+    if (typeof modifier === "string") {
         var matches = modifier.match(/([+\-*/])?(\d+(\.\d+)?)(%)?/);
         if (!matches)
             return value;
@@ -460,24 +458,24 @@ function randomizeValue(value, modifier) {
         var offset = parseFloat(matches[2]);
         var percent = matches[4];
         if (percent) {
-            if (sign === '+' || sign === '-') {
+            if (sign === "+" || sign === "-") {
                 offset = value * (offset / 100);
             }
-            else if (sign === '*' || sign === '/') {
+            else if (sign === "*" || sign === "/") {
                 offset = offset / 100;
             }
         }
         switch (sign) {
-            case '+':
+            case "+":
                 return value + offset * Math.random();
-            case '-':
+            case "-":
                 return value - offset * Math.random();
-            case '*':
+            case "*":
                 return value * offset * Math.random();
-            case '/':
-                return value / offset * Math.random();
+            case "/":
+                return (value / offset) * Math.random();
             default:
-                return value + (offset * Math.random()) - offset / 2;
+                return value + offset * Math.random() - offset / 2;
         }
     }
     return value;
@@ -491,7 +489,7 @@ var self_ref;
 function randomize(prop, modifier) {
     self_ref = this;
     self_elements = this.toArray();
-    if (typeof prop === 'object') {
+    if (typeof prop === "object") {
         randomizeObject(prop);
         return this;
     }
@@ -511,14 +509,22 @@ function randomizeObject(props) {
 }
 function isSingleProperty(prop) {
     var set = new Set([
-        'x', 'y', 'width', 'height', 'rotation',
-        'scaleX', 'scaleY', 'transformX', 'transformY',
-        'skewX', 'skewY'
+        "x",
+        "y",
+        "width",
+        "height",
+        "rotation",
+        "scaleX",
+        "scaleY",
+        "transformX",
+        "transformY",
+        "skewX",
+        "skewY"
     ]);
     return set.has(prop);
 }
 function isCompoundProperty(prop) {
-    var set = new Set(['pos', 'position', 'scale', 'size']);
+    var set = new Set(["pos", "position", "scale", "size"]);
     return set.has(prop);
 }
 function randomizeSingleProperty(prop, modifier) {
@@ -542,22 +548,20 @@ function randomizeSingleProperty(prop, modifier) {
     }
 }
 function randomizeCompoundProperty(prop, modifier) {
-    if (prop === 'pos')
-        prop = 'position';
+    if (prop === "pos")
+        prop = "position";
     switch (prop) {
-        case 'position':
+        case "position":
             randomizePosition(modifier);
             break;
-        case 'scale':
-        case 'size':
+        case "scale":
+        case "size":
             randomizeScaleOrSize(prop, modifier);
             break;
     }
 }
 function randomizePosition(modifier) {
-    var values = Array.isArray(modifier)
-        ? modifier
-        : [modifier, modifier];
+    var values = Array.isArray(modifier) ? modifier : [modifier, modifier];
     randomize.call(self_ref, {
         x: values[0],
         y: values[1]
@@ -566,8 +570,8 @@ function randomizePosition(modifier) {
 function randomizeScaleOrSize(prop, modifier) {
     var e_2, _a;
     var attrs = {
-        scale: ['scaleX', 'scaleY'],
-        size: ['width', 'height']
+        scale: ["scaleX", "scaleY"],
+        size: ["width", "height"]
     };
     var _b = (0,external_tslib_.__read)(attrs[prop], 2), px = _b[0], py = _b[1];
     try {
@@ -578,7 +582,7 @@ function randomizeScaleOrSize(prop, modifier) {
                 values[0] = randomizeValue(element[px], modifier[0]);
                 values[1] = randomizeValue(element[py], modifier[1]);
             }
-            else if (typeof modifier === 'string') {
+            else if (typeof modifier === "string") {
                 var value = randomizeValue(element[px], modifier);
                 values = [value, value];
             }
@@ -606,17 +610,17 @@ function orderBy(prop, reverseOrder) {
     var e_1, _a;
     if (reverseOrder === void 0) { reverseOrder = false; }
     var cmp;
-    if (typeof prop === 'function') {
+    if (typeof prop === "function") {
         cmp = prop;
     }
-    else if (prop === 'random') {
+    else if (prop === "random") {
         cmp = function () { return (Math.random() > 0.5 ? 1 : -1); };
     }
     else {
         cmp = createPropertyComparator(prop);
     }
     if (!cmp) {
-        console.warn('Invalid property to sort by');
+        console.warn("Invalid property to sort by");
         return this;
     }
     this._deselect(false);
@@ -627,7 +631,7 @@ function orderBy(prop, reverseOrder) {
         for (var arr_1 = (0,external_tslib_.__values)(arr), arr_1_1 = arr_1.next(); !arr_1_1.done; arr_1_1 = arr_1.next()) {
             var element = arr_1_1.value;
             this.dom.selection = [element];
-            this.dom.arrange(reverseOrder ? 'back' : 'front');
+            this.dom.arrange(reverseOrder ? "back" : "front");
         }
     }
     catch (e_1_1) { e_1 = { error: e_1_1 }; }
@@ -655,7 +659,7 @@ function createPropertyComparator(prop) {
 }
 function getOrderValue(element, prop) {
     switch (prop) {
-        case 'size':
+        case "size":
             return element.width * element.height;
         default:
             return element[prop];
@@ -668,10 +672,8 @@ function align(options) {
     var e_1, _a;
     if (!this.size)
         return this;
-    var opts = typeof options === 'string'
-        ? { mode: options }
-        : options !== null && options !== void 0 ? options : {};
-    var _b = opts.mode, mode = _b === void 0 ? 'center' : _b, _c = opts.useDocumentBounds, useDocumentBounds = _c === void 0 ? false : _c;
+    var opts = typeof options === "string" ? { mode: options } : (options !== null && options !== void 0 ? options : {});
+    var _b = opts.mode, mode = _b === void 0 ? "center" : _b, _c = opts.useDocumentBounds, useDocumentBounds = _c === void 0 ? false : _c;
     this._deselect(false);
     this.dom.selectNone();
     var commands = resolveAlignCommands(mode);
@@ -693,13 +695,13 @@ function align(options) {
 }
 function resolveAlignCommands(prop) {
     var map = {
-        center: ['vertical center', 'horizontal center'],
-        horizontal: ['horizontal center'],
-        vertical: ['vertical center'],
-        'top left': ['top', 'left'],
-        'top right': ['top', 'right'],
-        'bottom left': ['bottom', 'left'],
-        'bottom right': ['bottom', 'right'],
+        center: ["vertical center", "horizontal center"],
+        horizontal: ["horizontal center"],
+        vertical: ["vertical center"],
+        "top left": ["top", "left"],
+        "top right": ["top", "right"],
+        "bottom left": ["bottom", "left"],
+        "bottom right": ["bottom", "right"]
     };
     if (prop in map) {
         return map[prop];
@@ -715,12 +717,10 @@ function distribute(options, toStage) {
     if (!this.size) {
         return this;
     }
-    var opts = typeof options === 'string' || Array.isArray(options)
+    var opts = typeof options === "string" || Array.isArray(options)
         ? { props: options, toStage: toStage }
         : options;
-    var propsArray = Array.isArray(opts.props)
-        ? opts.props
-        : [opts.props];
+    var propsArray = Array.isArray(opts.props) ? opts.props : [opts.props];
     this._deselect(false);
     try {
         for (var propsArray_1 = (0,external_tslib_.__values)(propsArray), propsArray_1_1 = propsArray_1.next(); !propsArray_1_1.done; propsArray_1_1 = propsArray_1.next()) {
@@ -743,14 +743,14 @@ function distribute(options, toStage) {
 }
 function resolveDistributeCommand(prop) {
     switch (prop) {
-        case 'horizontal':
-            return 'horizontal center';
-        case 'vertical':
-            return 'vertical center';
-        case 'left':
-        case 'right':
-        case 'top':
-        case 'bottom':
+        case "horizontal":
+            return "horizontal center";
+        case "vertical":
+            return "vertical center";
+        case "left":
+        case "right":
+        case "top":
+        case "bottom":
             return "".concat(prop, " edge");
         default:
             return null;
@@ -794,7 +794,7 @@ function toGrid(precision, rounding) {
 }
 function normalizePrecision(precision) {
     var p;
-    if (typeof precision === 'number') {
+    if (typeof precision === "number") {
         p = { x: precision, y: precision };
     }
     else if (Array.isArray(precision)) {
@@ -884,9 +884,7 @@ function getExtremeValues(elements, prop, returnElement) {
             minEl = el;
         }
     }
-    return returnElement
-        ? [minEl, maxEl]
-        : [minVal, maxVal];
+    return returnElement ? [minEl, maxEl] : [minVal, maxVal];
 }
 function sortOn(arr, prop, asc) {
     if (asc === void 0) { asc = true; }
@@ -911,15 +909,15 @@ function match(prop, element) {
         return this;
     }
     var target;
-    if (typeof element === 'boolean') {
-        var _a = (0,external_tslib_.__read)(getExtremeValues(self_elements, 'width', true), 2), minWidthEl = _a[0], maxWidthEl = _a[1];
-        var _b = (0,external_tslib_.__read)(getExtremeValues(self_elements, 'height', true), 2), minHeightEl = _b[0], maxHeightEl = _b[1];
+    if (typeof element === "boolean") {
+        var _a = (0,external_tslib_.__read)(getExtremeValues(self_elements, "width", true), 2), minWidthEl = _a[0], maxWidthEl = _a[1];
+        var _b = (0,external_tslib_.__read)(getExtremeValues(self_elements, "height", true), 2), minHeightEl = _b[0], maxHeightEl = _b[1];
         target = {
             width: element ? maxWidthEl.width : minWidthEl.width,
             height: element ? maxHeightEl.height : minHeightEl.height
         };
     }
-    else if (typeof element === 'string' || typeof element === 'number') {
+    else if (typeof element === "string" || typeof element === "number") {
         var new_elements = this.find(element);
         target = new_elements[0];
     }
@@ -928,15 +926,15 @@ function match(prop, element) {
     }
     if (target && target instanceof Element) {
         switch (prop) {
-            case 'width':
-                this.attr.call('width', target.width);
+            case "width":
+                this.attr.call("width", target.width);
                 break;
-            case 'height':
-                this.attr('height', target.height);
+            case "height":
+                this.attr("height", target.height);
                 break;
-            case 'size':
-                this.attr.call('width', target.width);
-                this.attr('height', target.height);
+            case "size":
+                this.attr.call("width", target.width);
+                this.attr("height", target.height);
                 break;
             default:
                 throw new Error("Unknown target element \"".concat(prop, "\""));
@@ -954,24 +952,24 @@ function space(options, secondary) {
     if (!space_self_elements.length) {
         return this;
     }
-    var direction = 'horizontal';
+    var direction = "horizontal";
     var gap;
     var useDocumentBounds = false;
-    if (typeof options === 'string') {
+    if (typeof options === "string") {
         direction = options;
-        if (typeof secondary === 'number')
+        if (typeof secondary === "number")
             gap = secondary;
-        if (typeof secondary === 'boolean')
+        if (typeof secondary === "boolean")
             useDocumentBounds = secondary;
     }
-    else if (typeof options === 'number') {
+    else if (typeof options === "number") {
         gap = options;
     }
     else {
-        (_a = options.direction, direction = _a === void 0 ? 'horizontal' : _a, gap = options.gap, _b = options.useDocumentBounds, useDocumentBounds = _b === void 0 ? false : _b);
+        (_a = options.direction, direction = _a === void 0 ? "horizontal" : _a, gap = options.gap, _b = options.useDocumentBounds, useDocumentBounds = _b === void 0 ? false : _b);
     }
-    if (typeof gap === 'number') {
-        this.orderBy(direction === 'horizontal' ? 'left' : 'top');
+    if (typeof gap === "number") {
+        this.orderBy(direction === "horizontal" ? "left" : "top");
         spaceWithGap(direction, gap);
         return this;
     }
@@ -986,7 +984,7 @@ function spaceWithGap(direction, gap) {
     var cursor = 0;
     for (var i = 0; i < space_self_elements.length; i++) {
         var el = space_self_elements[i];
-        if (direction === 'horizontal') {
+        if (direction === "horizontal") {
             var offset = el.x - el.left;
             if (i === 0) {
                 cursor = el.x - offset;
@@ -1131,7 +1129,7 @@ var Collection = (function (_super) {
         return "[object Collection length=".concat(this.size, "]");
     };
     Collection.toString = function () {
-        return '[class Collection]';
+        return "[class Collection]";
     };
     return Collection;
 }(Set));
@@ -1142,9 +1140,9 @@ function rename_rename(base, padding, startIndex, separator) {
     if (padding === void 0) { padding = true; }
     if (startIndex === void 0) { startIndex = 1; }
     if (separator === void 0) { separator = "_"; }
-    var callback = typeof base === 'function' ?
-        base :
-        rename_createRenameCallback(base, padding, startIndex, separator);
+    var callback = typeof base === "function"
+        ? base
+        : rename_createRenameCallback(base, padding, startIndex, separator);
     this.each(function (el, index, all) {
         el.name = callback(el, index, all);
     });
@@ -1156,14 +1154,12 @@ function rename_createRenameCallback(baseName, padding, startIndex, separator) {
     if (separator === void 0) { separator = "_"; }
     return function (_item, index, all) {
         var num = index + startIndex;
-        var padLength = padding ?
-            String(all.length).length :
-            typeof padding === 'number' ?
-                padding :
-                0;
-        var suffix = padLength > 0 ?
-            String(num).padStart(padLength, '0') :
-            String(num);
+        var padLength = padding
+            ? String(all.length).length
+            : typeof padding === "number"
+                ? padding
+                : 0;
+        var suffix = padLength > 0 ? String(num).padStart(padLength, "0") : String(num);
         return "".concat(baseName).concat(separator).concat(suffix);
     };
 }
@@ -1242,9 +1238,7 @@ var ItemCollection = (function (_super) {
         if (replace === void 0) { replace = false; }
         if (expand === void 0) { expand = true; }
         var lib = this.Library;
-        path = path
-            .replace(/[:()\[\]*+]/g, "")
-            .replace(/(^\/+|\/+$)/g, "");
+        path = path.replace(/[:()\[\]*+]/g, "").replace(/(^\/+|\/+$)/g, "");
         if (!lib.itemExists(path)) {
             lib.addNewItem("folder", path);
         }
@@ -1299,7 +1293,7 @@ var ItemCollection = (function (_super) {
         return this;
     };
     ItemCollection.toString = function () {
-        return '[class ItemCollection]';
+        return "[class ItemCollection]";
     };
     return ItemCollection;
 }(Collection));
@@ -1349,7 +1343,7 @@ var ElementCollection = (function (_super) {
         _this.orderBy = orderBy.bind(_this);
         _this.dom = dom || UI.$dom;
         if (!_this.dom) {
-            throw new Error('ElementCollection requires that a document be open before instantiation');
+            throw new Error("ElementCollection requires that a document be open before instantiation");
         }
         return _this;
     }
@@ -1483,6 +1477,7 @@ function swapLayers(timeline, layerIndex1, layerIndex2) {
 ;// ./src/Iterators/iter/Iterators.ts
 
 
+
 var Iterators = (function () {
     function Iterators() {
     }
@@ -1493,6 +1488,8 @@ var Iterators = (function () {
             switch (_b.label) {
                 case 0:
                     documents = docs !== null && docs !== void 0 ? docs : fl.documents;
+                    if (!documents || documents.length === 0)
+                        return [2];
                     _b.label = 1;
                 case 1:
                     _b.trys.push([1, 6, 7, 8]);
@@ -1501,7 +1498,7 @@ var Iterators = (function () {
                 case 2:
                     if (!!documents_1_1.done) return [3, 5];
                     dom = documents_1_1.value;
-                    return [4, new Context_.Context({ dom: dom })];
+                    return [4, new Context_.Context(dom)];
                 case 3:
                     _b.sent();
                     _b.label = 4;
@@ -1530,7 +1527,9 @@ var Iterators = (function () {
         return (0,external_tslib_.__generator)(this, function (_c) {
             switch (_c.label) {
                 case 0:
-                    dom = (_b = context === null || context === void 0 ? void 0 : context.dom) !== null && _b !== void 0 ? _b : fl.getDocumentDOM();
+                    dom = (_b = context === null || context === void 0 ? void 0 : context.dom) !== null && _b !== void 0 ? _b : UI.$dom;
+                    if (!dom || !dom.library)
+                        return [2];
                     items = dom.library.items;
                     _c.label = 1;
                 case 1:
@@ -1542,7 +1541,7 @@ var Iterators = (function () {
                     item = items_1_1.value;
                     if (!item.timeline)
                         return [3, 4];
-                    return [4, new Context_.Context((0,external_tslib_.__assign)((0,external_tslib_.__assign)({}, context), { dom: dom, item: item, timeline: item.timeline }))];
+                    return [4, new Context_.Context(dom, item.timeline)];
                 case 3:
                     _c.sent();
                     _c.label = 4;
@@ -1565,7 +1564,7 @@ var Iterators = (function () {
         });
     };
     Iterators.layers = function (context) {
-        var _a, _b, layer, e_3_1;
+        var _a, _b, layer, dom, timeline, e_3_1;
         var e_3, _c;
         return (0,external_tslib_.__generator)(this, function (_d) {
             switch (_d.label) {
@@ -1580,7 +1579,8 @@ var Iterators = (function () {
                 case 2:
                     if (!!_b.done) return [3, 5];
                     layer = _b.value;
-                    return [4, new Context_.Context((0,external_tslib_.__assign)((0,external_tslib_.__assign)({}, context), { layer: layer }))];
+                    dom = context.dom, timeline = context.timeline;
+                    return [4, new Context_.Context(dom, timeline, layer)];
                 case 3:
                     _d.sent();
                     _d.label = 4;
@@ -1603,7 +1603,7 @@ var Iterators = (function () {
         });
     };
     Iterators.frames = function (context) {
-        var frames, i;
+        var frames, i, dom, timeline, layer;
         return (0,external_tslib_.__generator)(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -1616,7 +1616,8 @@ var Iterators = (function () {
                     if (!(i < frames.length)) return [3, 4];
                     if (i !== frames[i].startFrame)
                         return [3, 3];
-                    return [4, new Context_.Context((0,external_tslib_.__assign)((0,external_tslib_.__assign)({}, context), { frame: frames[i] }))];
+                    dom = context.dom, timeline = context.timeline, layer = context.layer;
+                    return [4, new Context_.Context(dom, timeline, layer, frames[i])];
                 case 2:
                     _a.sent();
                     _a.label = 3;
@@ -1628,7 +1629,7 @@ var Iterators = (function () {
         });
     };
     Iterators.elements = function (context) {
-        var _a, _b, element, e_4_1;
+        var _a, _b, element, dom, timeline, layer, frame, e_4_1;
         var e_4, _c;
         return (0,external_tslib_.__generator)(this, function (_d) {
             switch (_d.label) {
@@ -1643,7 +1644,8 @@ var Iterators = (function () {
                 case 2:
                     if (!!_b.done) return [3, 5];
                     element = _b.value;
-                    return [4, new Context_.Context((0,external_tslib_.__assign)((0,external_tslib_.__assign)({}, context), { element: element }))];
+                    dom = context.dom, timeline = context.timeline, layer = context.layer, frame = context.frame;
+                    return [4, new Context_.Context(dom, timeline, layer, frame, element)];
                 case 3:
                     _d.sent();
                     _d.label = 4;
@@ -1665,14 +1667,24 @@ var Iterators = (function () {
             }
         });
     };
-    Iterators.walkElements = function () {
-        var _a, _b, doc, _c, _d, item, _e, _f, layer, _g, _h, frame, _j, _k, el, e_5_1, e_6_1, e_7_1, e_8_1, e_9_1;
-        var e_9, _l, e_8, _m, e_7, _o, e_6, _p, e_5, _q;
+    return Iterators;
+}());
+
+
+;// ./src/Iterators/iter/Walker.ts
+
+
+var Walker = (function () {
+    function Walker() {
+    }
+    Walker.walkElements = function () {
+        var _a, _b, doc, _c, _d, item, _e, _f, layer, _g, _h, frame, _j, _k, elCtx, el, e_1_1, e_2_1, e_3_1, e_4_1, e_5_1;
+        var e_5, _l, e_4, _m, e_3, _o, e_2, _p, e_1, _q;
         return (0,external_tslib_.__generator)(this, function (_r) {
             switch (_r.label) {
                 case 0:
                     _r.trys.push([0, 29, 30, 31]);
-                    _a = (0,external_tslib_.__values)(this.documents()), _b = _a.next();
+                    _a = (0,external_tslib_.__values)(Iterators.documents()), _b = _a.next();
                     _r.label = 1;
                 case 1:
                     if (!!_b.done) return [3, 28];
@@ -1680,7 +1692,7 @@ var Iterators = (function () {
                     _r.label = 2;
                 case 2:
                     _r.trys.push([2, 25, 26, 27]);
-                    _c = (e_8 = void 0, (0,external_tslib_.__values)(this.items(doc))), _d = _c.next();
+                    _c = (e_4 = void 0, (0,external_tslib_.__values)(Iterators.items(doc))), _d = _c.next();
                     _r.label = 3;
                 case 3:
                     if (!!_d.done) return [3, 24];
@@ -1688,7 +1700,7 @@ var Iterators = (function () {
                     _r.label = 4;
                 case 4:
                     _r.trys.push([4, 21, 22, 23]);
-                    _e = (e_7 = void 0, (0,external_tslib_.__values)(this.layers(item))), _f = _e.next();
+                    _e = (e_3 = void 0, (0,external_tslib_.__values)(Iterators.layers(item))), _f = _e.next();
                     _r.label = 5;
                 case 5:
                     if (!!_f.done) return [3, 20];
@@ -1696,7 +1708,7 @@ var Iterators = (function () {
                     _r.label = 6;
                 case 6:
                     _r.trys.push([6, 17, 18, 19]);
-                    _g = (e_6 = void 0, (0,external_tslib_.__values)(this.frames(layer))), _h = _g.next();
+                    _g = (e_2 = void 0, (0,external_tslib_.__values)(Iterators.frames(layer))), _h = _g.next();
                     _r.label = 7;
                 case 7:
                     if (!!_h.done) return [3, 16];
@@ -1704,11 +1716,12 @@ var Iterators = (function () {
                     _r.label = 8;
                 case 8:
                     _r.trys.push([8, 13, 14, 15]);
-                    _j = (e_5 = void 0, (0,external_tslib_.__values)(this.elements(frame))), _k = _j.next();
+                    _j = (e_1 = void 0, (0,external_tslib_.__values)(Iterators.elements(frame))), _k = _j.next();
                     _r.label = 9;
                 case 9:
                     if (!!_k.done) return [3, 12];
-                    el = _k.value;
+                    elCtx = _k.value;
+                    el = elCtx.element;
                     return [4, el];
                 case 10:
                     _r.sent();
@@ -1718,83 +1731,83 @@ var Iterators = (function () {
                     return [3, 9];
                 case 12: return [3, 15];
                 case 13:
-                    e_5_1 = _r.sent();
-                    e_5 = { error: e_5_1 };
+                    e_1_1 = _r.sent();
+                    e_1 = { error: e_1_1 };
                     return [3, 15];
                 case 14:
                     try {
                         if (_k && !_k.done && (_q = _j.return)) _q.call(_j);
                     }
-                    finally { if (e_5) throw e_5.error; }
+                    finally { if (e_1) throw e_1.error; }
                     return [7];
                 case 15:
                     _h = _g.next();
                     return [3, 7];
                 case 16: return [3, 19];
                 case 17:
-                    e_6_1 = _r.sent();
-                    e_6 = { error: e_6_1 };
+                    e_2_1 = _r.sent();
+                    e_2 = { error: e_2_1 };
                     return [3, 19];
                 case 18:
                     try {
                         if (_h && !_h.done && (_p = _g.return)) _p.call(_g);
                     }
-                    finally { if (e_6) throw e_6.error; }
+                    finally { if (e_2) throw e_2.error; }
                     return [7];
                 case 19:
                     _f = _e.next();
                     return [3, 5];
                 case 20: return [3, 23];
                 case 21:
-                    e_7_1 = _r.sent();
-                    e_7 = { error: e_7_1 };
+                    e_3_1 = _r.sent();
+                    e_3 = { error: e_3_1 };
                     return [3, 23];
                 case 22:
                     try {
                         if (_f && !_f.done && (_o = _e.return)) _o.call(_e);
                     }
-                    finally { if (e_7) throw e_7.error; }
+                    finally { if (e_3) throw e_3.error; }
                     return [7];
                 case 23:
                     _d = _c.next();
                     return [3, 3];
                 case 24: return [3, 27];
                 case 25:
-                    e_8_1 = _r.sent();
-                    e_8 = { error: e_8_1 };
+                    e_4_1 = _r.sent();
+                    e_4 = { error: e_4_1 };
                     return [3, 27];
                 case 26:
                     try {
                         if (_d && !_d.done && (_m = _c.return)) _m.call(_c);
                     }
-                    finally { if (e_8) throw e_8.error; }
+                    finally { if (e_4) throw e_4.error; }
                     return [7];
                 case 27:
                     _b = _a.next();
                     return [3, 1];
                 case 28: return [3, 31];
                 case 29:
-                    e_9_1 = _r.sent();
-                    e_9 = { error: e_9_1 };
+                    e_5_1 = _r.sent();
+                    e_5 = { error: e_5_1 };
                     return [3, 31];
                 case 30:
                     try {
                         if (_b && !_b.done && (_l = _a.return)) _l.call(_a);
                     }
-                    finally { if (e_9) throw e_9.error; }
+                    finally { if (e_5) throw e_5.error; }
                     return [7];
                 case 31: return [2];
             }
         });
     };
-    Iterators.walkFrames = function () {
-        var _a, _b, doc, _c, _d, item, _e, _f, layer, _g, _h, frame, e_10_1, e_11_1, e_12_1, e_13_1;
-        var e_13, _j, e_12, _k, e_11, _l, e_10, _m;
+    Walker.walkFrames = function () {
+        var _a, _b, doc, _c, _d, item, _e, _f, layer, _g, _h, frameCtx, frame, e_6_1, e_7_1, e_8_1, e_9_1;
+        var e_9, _j, e_8, _k, e_7, _l, e_6, _m;
         return (0,external_tslib_.__generator)(this, function (_o) {
             switch (_o.label) {
                 case 0:
                     _o.trys.push([0, 23, 24, 25]);
-                    _a = (0,external_tslib_.__values)(this.documents()), _b = _a.next();
+                    _a = (0,external_tslib_.__values)(Iterators.documents()), _b = _a.next();
                     _o.label = 1;
                 case 1:
                     if (!!_b.done) return [3, 22];
@@ -1802,7 +1815,7 @@ var Iterators = (function () {
                     _o.label = 2;
                 case 2:
                     _o.trys.push([2, 19, 20, 21]);
-                    _c = (e_12 = void 0, (0,external_tslib_.__values)(this.items(doc))), _d = _c.next();
+                    _c = (e_8 = void 0, (0,external_tslib_.__values)(Iterators.items(doc))), _d = _c.next();
                     _o.label = 3;
                 case 3:
                     if (!!_d.done) return [3, 18];
@@ -1810,7 +1823,7 @@ var Iterators = (function () {
                     _o.label = 4;
                 case 4:
                     _o.trys.push([4, 15, 16, 17]);
-                    _e = (e_11 = void 0, (0,external_tslib_.__values)(this.layers(item))), _f = _e.next();
+                    _e = (e_7 = void 0, (0,external_tslib_.__values)(Iterators.layers(item))), _f = _e.next();
                     _o.label = 5;
                 case 5:
                     if (!!_f.done) return [3, 14];
@@ -1818,11 +1831,12 @@ var Iterators = (function () {
                     _o.label = 6;
                 case 6:
                     _o.trys.push([6, 11, 12, 13]);
-                    _g = (e_10 = void 0, (0,external_tslib_.__values)(this.frames(layer))), _h = _g.next();
+                    _g = (e_6 = void 0, (0,external_tslib_.__values)(Iterators.frames(layer))), _h = _g.next();
                     _o.label = 7;
                 case 7:
                     if (!!_h.done) return [3, 10];
-                    frame = _h.value;
+                    frameCtx = _h.value;
+                    frame = frameCtx.frame;
                     return [4, frame];
                 case 8:
                     _o.sent();
@@ -1832,69 +1846,69 @@ var Iterators = (function () {
                     return [3, 7];
                 case 10: return [3, 13];
                 case 11:
-                    e_10_1 = _o.sent();
-                    e_10 = { error: e_10_1 };
+                    e_6_1 = _o.sent();
+                    e_6 = { error: e_6_1 };
                     return [3, 13];
                 case 12:
                     try {
                         if (_h && !_h.done && (_m = _g.return)) _m.call(_g);
                     }
-                    finally { if (e_10) throw e_10.error; }
+                    finally { if (e_6) throw e_6.error; }
                     return [7];
                 case 13:
                     _f = _e.next();
                     return [3, 5];
                 case 14: return [3, 17];
                 case 15:
-                    e_11_1 = _o.sent();
-                    e_11 = { error: e_11_1 };
+                    e_7_1 = _o.sent();
+                    e_7 = { error: e_7_1 };
                     return [3, 17];
                 case 16:
                     try {
                         if (_f && !_f.done && (_l = _e.return)) _l.call(_e);
                     }
-                    finally { if (e_11) throw e_11.error; }
+                    finally { if (e_7) throw e_7.error; }
                     return [7];
                 case 17:
                     _d = _c.next();
                     return [3, 3];
                 case 18: return [3, 21];
                 case 19:
-                    e_12_1 = _o.sent();
-                    e_12 = { error: e_12_1 };
+                    e_8_1 = _o.sent();
+                    e_8 = { error: e_8_1 };
                     return [3, 21];
                 case 20:
                     try {
                         if (_d && !_d.done && (_k = _c.return)) _k.call(_c);
                     }
-                    finally { if (e_12) throw e_12.error; }
+                    finally { if (e_8) throw e_8.error; }
                     return [7];
                 case 21:
                     _b = _a.next();
                     return [3, 1];
                 case 22: return [3, 25];
                 case 23:
-                    e_13_1 = _o.sent();
-                    e_13 = { error: e_13_1 };
+                    e_9_1 = _o.sent();
+                    e_9 = { error: e_9_1 };
                     return [3, 25];
                 case 24:
                     try {
                         if (_b && !_b.done && (_j = _a.return)) _j.call(_a);
                     }
-                    finally { if (e_13) throw e_13.error; }
+                    finally { if (e_9) throw e_9.error; }
                     return [7];
                 case 25: return [2];
             }
         });
     };
-    Iterators.walkLayers = function () {
-        var _a, _b, doc, _c, _d, item, _e, _f, layer, e_14_1, e_15_1, e_16_1;
-        var e_16, _g, e_15, _h, e_14, _j;
+    Walker.walkLayers = function () {
+        var _a, _b, doc, _c, _d, item, _e, _f, layerCtx, layer, e_10_1, e_11_1, e_12_1;
+        var e_12, _g, e_11, _h, e_10, _j;
         return (0,external_tslib_.__generator)(this, function (_k) {
             switch (_k.label) {
                 case 0:
                     _k.trys.push([0, 17, 18, 19]);
-                    _a = (0,external_tslib_.__values)(this.documents()), _b = _a.next();
+                    _a = (0,external_tslib_.__values)(Iterators.documents()), _b = _a.next();
                     _k.label = 1;
                 case 1:
                     if (!!_b.done) return [3, 16];
@@ -1902,7 +1916,7 @@ var Iterators = (function () {
                     _k.label = 2;
                 case 2:
                     _k.trys.push([2, 13, 14, 15]);
-                    _c = (e_15 = void 0, (0,external_tslib_.__values)(this.items(doc))), _d = _c.next();
+                    _c = (e_11 = void 0, (0,external_tslib_.__values)(Iterators.items(doc))), _d = _c.next();
                     _k.label = 3;
                 case 3:
                     if (!!_d.done) return [3, 12];
@@ -1910,11 +1924,12 @@ var Iterators = (function () {
                     _k.label = 4;
                 case 4:
                     _k.trys.push([4, 9, 10, 11]);
-                    _e = (e_14 = void 0, (0,external_tslib_.__values)(this.layers(item))), _f = _e.next();
+                    _e = (e_10 = void 0, (0,external_tslib_.__values)(Iterators.layers(item))), _f = _e.next();
                     _k.label = 5;
                 case 5:
                     if (!!_f.done) return [3, 8];
-                    layer = _f.value;
+                    layerCtx = _f.value;
+                    layer = layerCtx.layer;
                     return [4, layer];
                 case 6:
                     _k.sent();
@@ -1924,55 +1939,55 @@ var Iterators = (function () {
                     return [3, 5];
                 case 8: return [3, 11];
                 case 9:
-                    e_14_1 = _k.sent();
-                    e_14 = { error: e_14_1 };
+                    e_10_1 = _k.sent();
+                    e_10 = { error: e_10_1 };
                     return [3, 11];
                 case 10:
                     try {
                         if (_f && !_f.done && (_j = _e.return)) _j.call(_e);
                     }
-                    finally { if (e_14) throw e_14.error; }
+                    finally { if (e_10) throw e_10.error; }
                     return [7];
                 case 11:
                     _d = _c.next();
                     return [3, 3];
                 case 12: return [3, 15];
                 case 13:
-                    e_15_1 = _k.sent();
-                    e_15 = { error: e_15_1 };
+                    e_11_1 = _k.sent();
+                    e_11 = { error: e_11_1 };
                     return [3, 15];
                 case 14:
                     try {
                         if (_d && !_d.done && (_h = _c.return)) _h.call(_c);
                     }
-                    finally { if (e_15) throw e_15.error; }
+                    finally { if (e_11) throw e_11.error; }
                     return [7];
                 case 15:
                     _b = _a.next();
                     return [3, 1];
                 case 16: return [3, 19];
                 case 17:
-                    e_16_1 = _k.sent();
-                    e_16 = { error: e_16_1 };
+                    e_12_1 = _k.sent();
+                    e_12 = { error: e_12_1 };
                     return [3, 19];
                 case 18:
                     try {
                         if (_b && !_b.done && (_g = _a.return)) _g.call(_a);
                     }
-                    finally { if (e_16) throw e_16.error; }
+                    finally { if (e_12) throw e_12.error; }
                     return [7];
                 case 19: return [2];
             }
         });
     };
-    Iterators.walkItems = function () {
-        var _a, _b, doc, _c, _d, item, e_17_1, e_18_1;
-        var e_18, _e, e_17, _f;
+    Walker.walkItems = function () {
+        var _a, _b, doc, _c, _d, itemCtx, item, e_13_1, e_14_1;
+        var e_14, _e, e_13, _f;
         return (0,external_tslib_.__generator)(this, function (_g) {
             switch (_g.label) {
                 case 0:
                     _g.trys.push([0, 11, 12, 13]);
-                    _a = (0,external_tslib_.__values)(this.documents()), _b = _a.next();
+                    _a = (0,external_tslib_.__values)(Iterators.documents()), _b = _a.next();
                     _g.label = 1;
                 case 1:
                     if (!!_b.done) return [3, 10];
@@ -1980,11 +1995,12 @@ var Iterators = (function () {
                     _g.label = 2;
                 case 2:
                     _g.trys.push([2, 7, 8, 9]);
-                    _c = (e_17 = void 0, (0,external_tslib_.__values)(this.items(doc))), _d = _c.next();
+                    _c = (e_13 = void 0, (0,external_tslib_.__values)(Iterators.items(doc))), _d = _c.next();
                     _g.label = 3;
                 case 3:
                     if (!!_d.done) return [3, 6];
-                    item = _d.value;
+                    itemCtx = _d.value;
+                    item = itemCtx.item;
                     return [4, item];
                 case 4:
                     _g.sent();
@@ -1994,45 +2010,46 @@ var Iterators = (function () {
                     return [3, 3];
                 case 6: return [3, 9];
                 case 7:
-                    e_17_1 = _g.sent();
-                    e_17 = { error: e_17_1 };
+                    e_13_1 = _g.sent();
+                    e_13 = { error: e_13_1 };
                     return [3, 9];
                 case 8:
                     try {
                         if (_d && !_d.done && (_f = _c.return)) _f.call(_c);
                     }
-                    finally { if (e_17) throw e_17.error; }
+                    finally { if (e_13) throw e_13.error; }
                     return [7];
                 case 9:
                     _b = _a.next();
                     return [3, 1];
                 case 10: return [3, 13];
                 case 11:
-                    e_18_1 = _g.sent();
-                    e_18 = { error: e_18_1 };
+                    e_14_1 = _g.sent();
+                    e_14 = { error: e_14_1 };
                     return [3, 13];
                 case 12:
                     try {
                         if (_b && !_b.done && (_e = _a.return)) _e.call(_a);
                     }
-                    finally { if (e_18) throw e_18.error; }
+                    finally { if (e_14) throw e_14.error; }
                     return [7];
                 case 13: return [2];
             }
         });
     };
-    Iterators.walkDocs = function () {
-        var _a, _b, doc, e_19_1;
-        var e_19, _c;
+    Walker.walkDocs = function () {
+        var _a, _b, docCtx, doc, e_15_1;
+        var e_15, _c;
         return (0,external_tslib_.__generator)(this, function (_d) {
             switch (_d.label) {
                 case 0:
                     _d.trys.push([0, 5, 6, 7]);
-                    _a = (0,external_tslib_.__values)(this.documents()), _b = _a.next();
+                    _a = (0,external_tslib_.__values)(Iterators.documents()), _b = _a.next();
                     _d.label = 1;
                 case 1:
                     if (!!_b.done) return [3, 4];
-                    doc = _b.value;
+                    docCtx = _b.value;
+                    doc = docCtx.dom;
                     return [4, doc];
                 case 2:
                     _d.sent();
@@ -2042,24 +2059,25 @@ var Iterators = (function () {
                     return [3, 1];
                 case 4: return [3, 7];
                 case 5:
-                    e_19_1 = _d.sent();
-                    e_19 = { error: e_19_1 };
+                    e_15_1 = _d.sent();
+                    e_15 = { error: e_15_1 };
                     return [3, 7];
                 case 6:
                     try {
                         if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
                     }
-                    finally { if (e_19) throw e_19.error; }
+                    finally { if (e_15) throw e_15.error; }
                     return [7];
                 case 7: return [2];
             }
         });
     };
-    return Iterators;
+    return Walker;
 }());
 
 
 ;// ./src/Iterators/index.ts
+
 
 
 ;// ./src/index.ts

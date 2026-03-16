@@ -8,12 +8,13 @@
 
 
     // 防止生成helper,导致报错
-    "importHelpers": false,
+//    "importHelpers": false,
 
     "paths": [],
 
     "types": [
-      "jest"
+//      "jest"
+      "node"
     ],
     "target": "es5",
     "lib": [

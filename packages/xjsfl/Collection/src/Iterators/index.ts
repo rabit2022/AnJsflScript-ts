@@ -8,3 +8,4 @@
  */
 
 export { Iterators } from "./iter/Iterators";
+export { Walker } from "./iter/Walker";

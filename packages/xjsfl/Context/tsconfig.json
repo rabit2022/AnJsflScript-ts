@@ -22,7 +22,9 @@
 
     "rootDir": "./src",
     "outDir": "./dist",
-    "types": ["node"],
+    "types": [
+//      "node"
+    ],
     "target": "es5",
     "lib": [
       "es5",

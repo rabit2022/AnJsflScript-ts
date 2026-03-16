@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("path-browserify"), require("tslib"), require("url"));
+		module.exports = factory(require("path-browserify"), require("tslib"), require("lodash"), require("url"));
 	else if(typeof define === 'function' && define.amd)
-		define(["path-browserify", "tslib", "url"], factory);
+		define(["path-browserify", "tslib", "lodash", "url"], factory);
 	else if(typeof exports === 'object')
-		exports["@xjsfl/Context"] = factory(require("path-browserify"), require("tslib"), require("url"));
+		exports["@xjsfl/Context"] = factory(require("path-browserify"), require("tslib"), require("lodash"), require("url"));
 	else
-		root["@xjsfl/Context"] = factory(root["path-browserify"], root["tslib"], root["url"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE__248__, __WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__917__) {
+		root["@xjsfl/Context"] = factory(root["path-browserify"], root["tslib"], root["lodash"], root["url"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE__248__, __WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__773__, __WEBPACK_EXTERNAL_MODULE__917__) {
 return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -146,10 +146,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         return /\.[a-zA-Z0-9]+$/.test(str);
     }
     function isPathOrUrl(str) {
-        return (isUrl(str) ||
-            isWindowsPath(str) ||
-            isUnixPath(str) ||
-            isFile(str));
+        return isUrl(str) || isWindowsPath(str) || isUnixPath(str) || isFile(str);
     }
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -194,10 +191,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /***/ 197:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(33), __webpack_require__(51)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, select_types_1, factory_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(33), __webpack_require__(51), __webpack_require__(773)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, select_types_1, factory_1, _) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
     exports.Context = void 0;
+    _ = tslib_1.__importStar(_);
     var Context = (function () {
         function Context(dom, timeline, layer, frame, element) {
             this.dom = null;
@@ -378,7 +376,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
             else if (value instanceof Context) {
                 frame = value.frame;
             }
-            else if (typeof value === 'string') {
+            else if (typeof value === "string") {
                 var layers = this.timeline.layers;
                 for (var _i = 0, layers_1 = layers; _i < layers_1.length; _i++) {
                     var _layer = layers_1[_i];
@@ -475,14 +473,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
             if (mode === void 0) { mode = select_types_1.SelectionMode.Replace; }
             this.goto();
             switch (this.context) {
-                case 'layer':
+                case "layer":
                     this.selectLayer(mode);
                     break;
-                case 'frame':
-                case 'keyframe':
+                case "frame":
+                case "keyframe":
                     this.selectFrame(mode);
                     break;
-                case 'element':
+                case "element":
                     this.selectElement(mode);
                     break;
             }
@@ -508,7 +506,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                 case select_types_1.SelectionMode.Add: {
                     if (layerIndex !== -1) {
                         var selectedLayers = timeline.getSelectedLayers();
-                        if (!selectedLayers.includes(layerIndex)) {
+                        if (!_.includes(selectedLayers, layerIndex)) {
                             timeline.setSelectedLayers(layerIndex, false);
                         }
                     }
@@ -580,7 +578,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                     elementString = "<".concat(this.element.elementType, ">");
                 }
             }
-            return "[object Context".concat(this.dom ? " dom=\"".concat(this.dom.name, "\"") : "").concat(this.timeline ? " timeline=\"".concat(this.timeline.name, "\"") : "").concat(this.layer ? " layer[".concat(this.layerIndex, "]=\"").concat(this.layer.name, "\"") : "").concat(this.frame ? " keyframe[".concat(this.keyframes.indexOf(this.frame), "]=").concat(this.frame.startFrame) : "").concat(this.element ? " element=\"".concat(elementString, "\"") : "", "]");
+            return "[object Context".concat(this.dom ? " dom=\"".concat(this.dom.name, "\"") : "").concat(this.timeline ? " timeline=\"".concat(this.timeline.name, "\"") : "").concat(this.layer ? " layer[".concat(this.layerIndex, "]=\"").concat(this.layer.name, "\"") : "").concat(this.frame
+                ? " keyframe[".concat(this.keyframes.indexOf(this.frame), "]=").concat(this.frame.startFrame)
+                : "").concat(this.element ? " element=\"".concat(elementString, "\"") : "", "]");
         };
         Context.toString = function () {
             return "[class Context]";
@@ -818,6 +818,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
+
+/***/ }),
+
+/***/ 773:
+/***/ (function(module) {
+
+"use strict";
+module.exports = __WEBPACK_EXTERNAL_MODULE__773__;
 
 /***/ }),
 

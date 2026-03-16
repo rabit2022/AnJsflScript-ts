@@ -6,7 +6,6 @@
  * @project: AnJsflScript-ts
  * @description:
  */
-import * as console from "node:console";
 
 // nodejs TypeScript file test1.ts
 const set = new Set();

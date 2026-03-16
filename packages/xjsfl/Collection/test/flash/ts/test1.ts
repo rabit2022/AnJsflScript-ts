@@ -8,3 +8,8 @@
  */
 
 // flash TypeScript file test1.ts
+import {Walker} from "@xjafl/Collection";
+
+for (const walker of Walker.walkElements()) {
+    console.log((walker as SymbolInstance)?.libraryItem.name ?? walker.name);
+}

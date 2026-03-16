@@ -11,7 +11,7 @@
 
 import { Context } from "../Context";
 
-export type DOMInput = Context | boolean | number | string | FlashDocument;
+export type DOMInput = Context | boolean | number | string | FlashDocument| null;
 
 export type TimelineInput =
     | Context
@@ -23,7 +23,7 @@ export type TimelineInput =
     | Timeline
     | null;
 
-export type LayerInput = Context | boolean | number | string | Layer;
+export type LayerInput = Context | boolean | number | string | Layer| null;
 
 export type FrameInput = Context | boolean | number | string | RegExp | Frame;
 

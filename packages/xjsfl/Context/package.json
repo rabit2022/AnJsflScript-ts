@@ -4,8 +4,7 @@
   "description": "",
   "declaration": true,
   "declarationMap": true,
-  "main": "src/Context.jsfl",
-  "types": "src/Context.d.ts",
+  "main": "src/index.ts",
   "files": [
     "dist"
   ],

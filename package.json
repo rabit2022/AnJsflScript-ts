@@ -27,6 +27,7 @@
     "generate_config": "tsx ./tools/project/src/require/generate_config.ts",
     "preinstall": "pnpm add -w json5 && tsx ./tools/project/src/package/sync-package.ts && npx only-allow pnpm ",
     "update-package-json": "tsx ./tools/project/src/package/sync-package.ts",
+    "pnpm install": "pnpm install",
     "build": "npx tsc && tsx ./tools/project/src/typescript/build_all.ts",
     "clean": "npx tsc --build --clean && tsx ./tools/project/clean/CleanAll.ts",
     "addHeaders": "tsx ./tools/project/src/headers/addFileHeader.ts"
@@ -76,6 +77,7 @@
     "@xjsfl/Events": "workspace:*",
     "@xjsfl/super": "workspace:*",
     "@xjsfl/XUL": "workspace:*",
+    "@xjafl/Collection": "workspace:*",
     "@anjsfl/validation": "workspace:*",
     "@anjsfl/parser": "workspace:*",
     "@anjsfl/tween": "workspace:*",

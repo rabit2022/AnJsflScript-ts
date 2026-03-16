@@ -9,6 +9,8 @@
     // node import
     "moduleResolution": "node",
 
+
+
     // default 报错
 //    // es import
 //    "esModuleInterop": true,
@@ -25,12 +27,18 @@
 
     "rootDir": "./src",
     "outDir": "./dist",
-    "types": ["node"],
+    "types": [
+      // node 导致 接口检查失效
+//      "node"
+    ],
     "target": "es5",
     "lib": [
       "es5",
       "es6"
-    ]
+    ],
+    "skipLibCheck": false,
+
+
   },
   "include": [
     "src",

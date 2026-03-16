@@ -17,6 +17,7 @@ import {
 } from "./types/Context.types";
 import { ContextType, SelectionMode } from "./types/select.types";
 import { from } from "./factory";
+import * as _ from "lodash";
 
 export class Context {
     dom: FlashDocument | null = null;
@@ -357,7 +358,7 @@ export class Context {
                 if (layerIndex !== -1) {
                     const selectedLayers = timeline.getSelectedLayers();
 
-                    if (!selectedLayers.includes(layerIndex)) {
+                    if (!_.includes(selectedLayers,layerIndex)) {
                         timeline.setSelectedLayers(layerIndex, false);
                     }
                 }

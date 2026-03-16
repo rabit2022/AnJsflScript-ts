@@ -11,4 +11,4 @@ export { ElementCollection } from "./ElementCollection";
 export { ItemCollection } from "./ItemCollection";
 export { LayerList } from "./LayerList";
 
-export { Iterators } from "./Iterators";
+export { Iterators,Walker } from "./Iterators";
