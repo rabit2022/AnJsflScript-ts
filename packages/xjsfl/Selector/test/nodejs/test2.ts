@@ -1,0 +1,1 @@
+// nodejs TypeScript file test2.ts
