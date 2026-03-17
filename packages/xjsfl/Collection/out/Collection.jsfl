@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("tslib"), require("@xjsfl/Context"));
+		module.exports = factory(require("tslib"), require("lodash"), require("@xjsfl/Context"));
 	else if(typeof define === 'function' && define.amd)
-		define(["tslib", "@xjsfl/Context"], factory);
+		define(["tslib", "lodash", "@xjsfl/Context"], factory);
 	else if(typeof exports === 'object')
-		exports["Collection"] = factory(require("tslib"), require("@xjsfl/Context"));
+		exports["Collection"] = factory(require("tslib"), require("lodash"), require("@xjsfl/Context"));
 	else
-		root["Collection"] = factory(root["tslib"], root["@xjsfl/Context"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__761__) {
+		root["Collection"] = factory(root["tslib"], root["lodash"], root["@xjsfl/Context"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__773__, __WEBPACK_EXTERNAL_MODULE__761__) {
 return /******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
@@ -23,6 +23,13 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__652__;
 /***/ (function(module) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE__761__;
+
+/***/ }),
+
+/***/ 773:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__773__;
 
 /***/ })
 
@@ -92,6 +99,7 @@ __webpack_require__.d(__webpack_exports__, {
   ItemCollection: function() { return /* reexport */ ItemCollection; },
   Iterators: function() { return /* reexport */ Iterators; },
   LayerList: function() { return /* reexport */ LayerList; },
+  SelectorIterators: function() { return /* reexport */ Iterators_Iterators; },
   Walker: function() { return /* reexport */ Walker; }
 });
 
@@ -299,20 +307,26 @@ function centerTransformPoint(donnotrun) {
     return this;
 }
 
-;// ./src/ElementCollection/operations/attributes.ts
-
+;// ./src/ElementCollection/operations/attributes.types.ts
 var TwoDMap = {
     pos: ["x", "y"],
     position: ["x", "y"],
     size: ["width", "height"],
     scale: ["scaleX", "scaleY"]
 };
+
+// EXTERNAL MODULE: external "lodash"
+var external_lodash_ = __webpack_require__(773);
+;// ./src/ElementCollection/operations/attributes.ts
+
+
+
 function attr(prop, value) {
     var e_1, _a;
     var elements = this.toArray();
     if (typeof prop === "object" && prop !== null) {
         try {
-            for (var _b = (0,external_tslib_.__values)(Object.entries(prop)), _c = _b.next(); !_c.done; _c = _b.next()) {
+            for (var _b = (0,external_tslib_.__values)(external_lodash_.entries(prop)), _c = _b.next(); !_c.done; _c = _b.next()) {
                 var _d = (0,external_tslib_.__read)(_c.value, 2), k = _d[0], v = _d[1];
                 this.attr(k, v);
             }
@@ -398,6 +412,7 @@ function setNormalProperty(elements, prop, value) {
 
 ;// ./src/ElementCollection/operations/rename.ts
 
+
 function createRenameCallback(baseName, padding, startIndex, separator) {
     if (padding === void 0) { padding = 0; }
     if (startIndex === void 0) { startIndex = 1; }
@@ -407,12 +422,14 @@ function createRenameCallback(baseName, padding, startIndex, separator) {
         var _a = (0,external_tslib_.__read)(patternMatch, 3), name_1 = _a[1], numPart = _a[2];
         var padLength_1 = numPart.length;
         var start_1 = Number.isNaN(Number(numPart)) ? 1 : parseInt(numPart, 10);
-        return function (_, index) { return name_1 + (index + start_1).toString().padStart(padLength_1, "0"); };
+        return function (_element, index) {
+            return name_1 + external_lodash_.padStart(String(index + start_1), padLength_1, "0");
+        };
     }
     var resolvedBaseName = (baseName || "clip") + separator;
-    return function (_, index) {
+    return function (_element, index) {
         var num = index + startIndex;
-        var suffix = padding > 0 ? num.toString().padStart(padding, "0") : String(num);
+        var suffix = padding > 0 ? external_lodash_.padStart(num.toString(), padding, "0") : String(num);
         return resolvedBaseName + suffix;
     };
 }
@@ -1136,6 +1153,7 @@ var Collection = (function (_super) {
 
 
 ;// ./src/ItemCollection/operators/rename.ts
+
 function rename_rename(base, padding, startIndex, separator) {
     if (padding === void 0) { padding = true; }
     if (startIndex === void 0) { startIndex = 1; }
@@ -1159,7 +1177,7 @@ function rename_createRenameCallback(baseName, padding, startIndex, separator) {
             : typeof padding === "number"
                 ? padding
                 : 0;
-        var suffix = padLength > 0 ? String(num).padStart(padLength, "0") : String(num);
+        var suffix = padLength > 0 ? external_lodash_.padStart(String(num), padLength, "0") : String(num);
         return "".concat(baseName).concat(separator).concat(suffix);
     };
 }
@@ -1176,13 +1194,13 @@ var Context_ = __webpack_require__(761);
 var ItemCollection = (function (_super) {
     (0,external_tslib_.__extends)(ItemCollection, _super);
     function ItemCollection(elements, dom) {
-        if (dom === void 0) { dom = UI.$dom; }
         var _this = _super.call(this, elements instanceof Array ? elements : [elements]) || this;
         _this.rename = rename_rename.bind(_this);
-        if (!dom) {
-            throw new Error("ItemCollection requires an open document");
+        _this.dom = dom || UI.$dom;
+        if (!_this.dom) {
+            throw new Error("ElementCollection requires that a document be open before instantiation");
         }
-        _this.library = dom.library;
+        _this.library = _this.dom.library;
         return _this;
     }
     Object.defineProperty(ItemCollection.prototype, "Library", {
@@ -2076,7 +2094,175 @@ var Walker = (function () {
 }());
 
 
+;// ./src/Iterators/origion/Iterators.ts
+
+var Iterators_Iterators = (function () {
+    function Iterators() {
+    }
+    Iterators.documents = function (documents, documentCallback, itemCallback, layerCallback, frameCallback, elementCallback) {
+        var documents1 = [];
+        if (documents == null || documents === true) {
+            documents1 = fl.documents;
+        }
+        for (var i = 0; i < documents1.length; i++) {
+            var context = new Context_.Context(documents1[i]);
+            if (documentCallback) {
+                var result = documentCallback(documents1[i], i, documents1, context);
+                if (result === true)
+                    return true;
+                if (result === false)
+                    continue;
+            }
+            if (itemCallback || layerCallback || frameCallback || elementCallback) {
+                if (this.items(context, itemCallback, layerCallback, frameCallback, elementCallback)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+    Iterators.items = function (context, itemCallback, layerCallback, frameCallback, elementCallback) {
+        var items;
+        var ctx;
+        if (context == null || context === true) {
+            ctx = Context_.Context.create(true, false, false, false);
+            items = ctx.dom.library.items;
+        }
+        else if (context instanceof Context_.Context && context.dom) {
+            ctx = context.clone();
+            items = ctx.dom.library.items;
+        }
+        else if (Array.isArray(context)) {
+            items = context;
+            ctx = Context_.Context.create(true, false, false, false);
+        }
+        else {
+            throw new TypeError("Invalid context for Iterators.items");
+        }
+        items.sort(function (a, b) { return a.name.localeCompare(b.name); });
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (!item.timeline)
+                continue;
+            ctx = ctx.setTimeline(item);
+            if (itemCallback) {
+                var result = itemCallback(item, i, items, ctx.clone());
+                if (result === true)
+                    return true;
+                if (result === false)
+                    continue;
+            }
+            if (item.timeline &&
+                (layerCallback || frameCallback || elementCallback)) {
+                if (this.layers(ctx, layerCallback, frameCallback, elementCallback)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+    Iterators.layers = function (context, layerCallback, frameCallback, elementCallback) {
+        var ctx;
+        if (context instanceof Context_.Context && context.timeline) {
+            ctx = context.clone();
+        }
+        else if (context !== undefined) {
+            ctx = new Context_.Context(true, context, false, false, false);
+        }
+        else {
+            ctx = new Context_.Context(true, true, false, false, false);
+        }
+        if (!ctx.timeline) {
+            throw new ReferenceError("Iterators.layers: no timeline");
+        }
+        var update = function () {
+            ctx.timeline.getSelectedLayers();
+        };
+        for (var i = 0; i < ctx.timeline.layers.length; i++) {
+            ctx.setLayer(i);
+            var layer = ctx.timeline.layers[i];
+            if (layerCallback) {
+                var result = layerCallback(layer, i, ctx.timeline.layers, ctx.clone());
+                if (result === true) {
+                    update();
+                    return true;
+                }
+                if (result === false)
+                    continue;
+            }
+            if (frameCallback || elementCallback) {
+                if (this.frames(ctx, frameCallback, elementCallback)) {
+                    update();
+                    return true;
+                }
+            }
+        }
+        update();
+        return false;
+    };
+    Iterators.frames = function (context, frameCallback, elementCallback) {
+        var ctx;
+        if (context instanceof Context_.Context && context.layer) {
+            ctx = context.clone();
+        }
+        else {
+            ctx = new Context_.Context(false, false, context, false, false);
+        }
+        if (!ctx.layer) {
+            throw new ReferenceError("Iterators.frames: no layer");
+        }
+        var frames = ctx.layer.frames;
+        for (var i = 0; i < frames.length; i++) {
+            var frame = frames[i];
+            if (i === frame.startFrame) {
+                ctx.setFrame(i);
+                if (frameCallback) {
+                    var result = frameCallback(frame, i, frames, ctx.clone());
+                    if (result === true)
+                        return true;
+                    if (result === false)
+                        continue;
+                }
+                if (elementCallback) {
+                    if (this.elements(ctx, elementCallback)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    };
+    Iterators.elements = function (context, elementCallback) {
+        var ctx;
+        if (context instanceof Context_.Context && context.frame) {
+            ctx = context.clone();
+        }
+        else {
+            ctx = new Context_.Context(false, false, false, context, false);
+        }
+        if (!ctx.frame) {
+            throw new ReferenceError("Iterators.elements: no frame");
+        }
+        var elements = ctx.frame.elements;
+        for (var i = 0; i < elements.length; i++) {
+            ctx.setElement(i);
+            if (elementCallback) {
+                var result = elementCallback(elements[i], i, elements, ctx);
+                if (result === true)
+                    return true;
+            }
+        }
+        return false;
+    };
+    Iterators.toString = function () {
+        return "[class Iterators]";
+    };
+    return Iterators;
+}());
+
+
 ;// ./src/Iterators/index.ts
+
 
 
 

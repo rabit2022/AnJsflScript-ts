@@ -19,5 +19,8 @@
     "esModuleInterop": true,//运行时
     "allowSyntheticDefaultImports": true,//类型检查
 
+    "types": [
+            "node"
+    ]
   }
 }

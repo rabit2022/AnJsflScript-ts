@@ -92,6 +92,16 @@
     //    "H:\project\js\AnJsflScript-ts\third\polyfill"
     // skip all
 
+//    H:\project\js\AnJsflScript-ts\third\regex
+
+    // 支持通配符 *
+    "@types/micromatch": "4.0.10",
+    "micromatch": "4.0.8",
+
+    // 支持正则带注释
+    "@types/xregexp": "4.4.0",
+    "xregexp": "5.1.2",
+
     //    "H:\project\js\AnJsflScript-ts\third\require"
     // requirejs  skip
     // requirejs是ts转译后的模块，完全的跳过他

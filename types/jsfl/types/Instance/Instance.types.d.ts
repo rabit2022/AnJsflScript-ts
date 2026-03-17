@@ -1,0 +1,6 @@
+type FlashInstanceType = 'symbol'
+| 'bitmap'
+| 'embedded video'
+| 'linked video'
+| 'video'
+| 'compiled clip'

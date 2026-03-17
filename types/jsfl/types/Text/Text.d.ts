@@ -267,7 +267,7 @@ interface Text extends FlashElement {
      * @example
      * fl.getDocumentDOM().selection[0].textType = "input";
      */
-    textType: "static" | "dynamic" | "input";
+    textType: TextType;
 
     /**
      * Boolean: draws text using device fonts if true.

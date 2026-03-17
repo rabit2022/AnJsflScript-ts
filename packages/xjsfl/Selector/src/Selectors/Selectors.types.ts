@@ -6,14 +6,17 @@
  * @project: AnJsflScript-ts
  * @description:
  */
-export type ScopeName = "Library" | "Document" | "Timeline" | "Layer";
+export type ScopeInName = "Library" | "Document" | "Timeline" | "Layer";
+export type ScopeOutName = "Layer" | "Item" | "Element" | "Frame";
 
-export const scopeTypeMap: Record<ScopeName, string> = {
+export const scopeTypeMap: Record<ScopeInName,ScopeOutName> = {
     Library: "Item",
     Document: "Element",
     Timeline: "Layer",
     Layer: "Frame",
 };
+
+export type ScopeFunc = "item"|"element";
 
 
 export type Scope = Library | FlashDocument | Timeline | Layer | Frame;

@@ -157,19 +157,7 @@ interface LibraryItem //extends SymbolItem, FolderItem, FontItem, SoundItem, Vid
      * fl.trace(fl.getDocumentDOM().library.items[0].itemType);
      * ```
      */
-    readonly itemType:
-        | "undefined"
-        | "component"
-        | "movie clip"
-        | "graphic"
-        | "button"
-        | "folder"
-        | "font"
-        | "sound"
-        | "bitmap"
-        | "compiled clip"
-        | "screen"
-        | "video";
+    readonly itemType:ItemType;
 
     /**
      * A string that specifies the ActionScript 3.0 class associated with the symbol.

@@ -7,3 +7,7 @@ declare class SymbolItem {}
 declare class SymbolInstance {}
 declare class Frame {}
 declare class Layer {}
+
+
+declare class LibraryItem {}
+declare class FolderItem {}

@@ -17,15 +17,19 @@ import { ElementCollection } from "../../ElementCollection";
 
 export class ItemCollection extends Collection<LibraryItem> {
     private readonly library: Library;
+    dom: FlashDocument;
 
-    constructor(elements: LibraryItem[] | LibraryItem, dom: FlashDocument = UI.$dom) {
+    constructor(elements: LibraryItem[] | LibraryItem, dom?: FlashDocument) {
         super(elements instanceof Array ? elements : [elements]);
 
-        if (!dom) {
-            throw new Error("ItemCollection requires an open document");
+        this.dom = dom || UI.$dom;
+        if (!this.dom) {
+            throw new Error(
+                "ElementCollection requires that a document be open before instantiation"
+            );
         }
 
-        this.library = dom.library;
+        this.library = this.dom.library;
     }
 
     get Library() {

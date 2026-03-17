@@ -7,11 +7,20 @@
  * @description:
  */
 
-/* -----------------------------------------------------------
- * Selector (TypeScript rewrite, no external deps)
- * -----------------------------------------------------------
- * Holds selector rules and parameters to test items/elements
- * --------------------------------------------------------- */
+// ------------------------------------------------------------------------------------------------------------------------
+//
+//  ██████       ██              ██
+//  ██           ██              ██
+//  ██     █████ ██ █████ █████ █████ █████ ████
+//  ██████ ██ ██ ██ ██ ██ ██     ██   ██ ██ ██
+//      ██ █████ ██ █████ ██     ██   ██ ██ ██
+//      ██ ██    ██ ██    ██     ██   ██ ██ ██
+//  ██████ █████ ██ █████ █████  ████ █████ ██
+//
+// ------------------------------------------------------------------------------------------------------------------------
+// Selector
+
+import {ComboKeys, CoreKeys} from "../Selectors/utils/matchResult.types";
 
 /** Range 结构 */
 interface SelectorRange {
@@ -33,10 +42,10 @@ export class Selector {
     object: string = "";
 
     /** 子类型（combo / filter 等） */
-    type: string = "";
+    type?: CoreKeys | "type" | 'pseudo';
 
     /** selector 名称 */
-    name: string = "";
+    name: string ="";
 
     /** 实际执行的测试方法 */
     method: SelectorMethod | null = null;
@@ -57,13 +66,14 @@ export class Selector {
     /**
      * 过滤列表
      */
-    filter<T>(items: T[], scope: any): T[] {
+    filter<T>(items: T[]): T[] {
         if (!this.method || !this.params) return [];
 
         // items 永远作为第一个参数
         this.params[0] = items;
 
-        const results = this.method.apply(scope, this.params);
+        // const results = this.method.apply(scope, this.params);
+        const results = this.method(...this.params);
         // return Selector.toUniqueArray(results);
         return Array.from(new Set(results));
     }
@@ -71,11 +81,12 @@ export class Selector {
     /**
      * 测试单个元素
      */
-    test(item: any, scope: any): boolean {
+    test(item: any): boolean {
         if (!this.method || !this.params) return false;
 
         this.params[0] = item;
-        const state = Boolean(this.method.apply(scope, this.params));
+        // const state = Boolean(this.method.apply(scope, this.params));
+        const state = Boolean(this.method(...this.params));
         return this.keep ? state : !state;
     }
 

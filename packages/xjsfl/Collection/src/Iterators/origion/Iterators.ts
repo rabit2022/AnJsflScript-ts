@@ -104,7 +104,7 @@ export class Iterators {
 
     static layers(
         context: Context | Timeline | Layer[] | boolean,
-        layerCallback?: LayerCallback,
+        layerCallback?: LayerCallback|null,
         frameCallback?: FrameCallback,
         elementCallback?: ElementCallback
     ): boolean {

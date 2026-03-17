@@ -1,0 +1,12 @@
+type ItemType = "undefined"
+    | "component"
+    | "movie clip"
+    | "graphic"
+    | "button"
+    | "folder"
+    | "font"
+    | "sound"
+    | "bitmap"
+    | "compiled clip"
+    | "screen"
+    | "video";

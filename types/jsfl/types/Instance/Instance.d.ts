@@ -33,13 +33,7 @@ interface Instance extends FlashElement {
      *   fl.trace("This instance type is " + type);
      * }
      */
-    readonly instanceType:
-        | 'symbol'
-        | 'bitmap'
-        | 'embedded video'
-        | 'linked video'
-        | 'video'
-        | 'compiled clip';
+    readonly instanceType:FlashInstanceType;
 
     /**
      * The LibraryItem used to instantiate this instance.
@@ -56,7 +50,7 @@ interface Instance extends FlashElement {
      *   }
      * }
      */
-    libraryItem: LibraryItem;
+    libraryItem: SymbolItem;
 }
 
 

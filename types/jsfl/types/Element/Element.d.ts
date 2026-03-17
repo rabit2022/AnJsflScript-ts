@@ -31,7 +31,7 @@ interface FlashElement {
      *   fl.trace("Element "+ x + " Name = " + elt.name + " Type = " + elt.elementType + " location = " + elt.left + ", " + elt.top + " Depth = " + elt.depth);
      * }
      */
-    elementType: "shape" | "text" | "tlfText" | "instance" | "shapeObj";
+    elementType: ElementType;
 
     /**
      * A float value that specifies the height of the element in pixels.

@@ -44,7 +44,7 @@ export class ElementCollection extends Collection<FlashElement> {
         // 1. 提取所有非 undefined 的 libraryItem
         const items = this.toArray()
             .map((el) => (el as Instance).libraryItem)
-            .filter((item): item is LibraryItem => item !== undefined);
+            .filter((item) => item !== undefined);
 
         // 2. 按引用去重（如果 Item 是对象，通常按引用去重）
         const uniqueItems = Array.from(new Set(items));
