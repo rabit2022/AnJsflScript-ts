@@ -1,3 +1,12 @@
+/**
+ * @file: init.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 import { fixTsConfigPaths } from "./init/init_tsconfig_types";
 import { set_module_name } from "./init/init_module_name";
 import { exclude_require_config } from "./exclude_packages/exclude_require_config";

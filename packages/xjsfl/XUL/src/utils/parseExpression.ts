@@ -1,4 +1,13 @@
 /**
+ * @file: parseExpression.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+/**
  * Parses a compound CSS (or CSS-like) expression into individual segments,
  * splitting by a delimiter while respecting nested structures.
  *
@@ -58,7 +67,6 @@ export function parseExpression(
 
     // Iterate through each character in the expression
     for (const ch of expression) {
-
         // If we encounter a delimiter at the top level,
         // finalize the current buffer and start a new segment
         if (isDelimiter(ch) && depth === 0) {
@@ -87,9 +95,6 @@ export function parseExpression(
 
     return result;
 }
-
-
-
 
 // const selectors = parseExpression(
 //     ":not(body[attr=hello]),hello,[dave=1,ian=2]"

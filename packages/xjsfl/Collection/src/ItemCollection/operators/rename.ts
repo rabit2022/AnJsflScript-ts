@@ -61,7 +61,8 @@ function createRenameCallback(
               ? padding
               : 0;
 
-        const suffix = padLength > 0 ? _.padStart(String(num),padLength, "0") : String(num);
+        const suffix =
+            padLength > 0 ? _.padStart(String(num), padLength, "0") : String(num);
 
         return `${baseName}${separator}${suffix}`;
     };

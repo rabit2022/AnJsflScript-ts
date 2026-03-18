@@ -1,17 +1,24 @@
-// XUL 类型来自项目环境
-import {parseValue} from "./utils";
-import {processCompoundElements} from "@xjsfl/XULControl_constructor";
-import {XULElementItem} from "./XULControl.types";
+/**
+ * @file: XULControl.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
+// XUL 类型来自项目环境
+import { parseValue } from "./utils";
+import { processCompoundElements } from "@xjsfl/XULControl_constructor";
+import { XULElementItem } from "./XULControl.types";
 
 // Main Class --------------------------------------------------
 export class XULControl {
+    public id: string; /*The node id attribute of the control*/
+    public type: string; /*The XML node type of the control*/
 
-    public id: string;/*The node id attribute of the control*/
-    public type: string;/*The XML node type of the control*/
-
-    public enumerable: boolean;/*enumerated for a value from XUL.values*/
-    public compound: boolean;/*复合控件*/
+    public enumerable: boolean; /*enumerated for a value from XUL.values*/
+    public compound: boolean; /*复合控件*/
     public elements: XULElementItem[] = [];
 
     private _xml: XML;
@@ -63,7 +70,9 @@ export class XULControl {
                 const arr: any[] = [];
                 if (this.elements) {
                     for (let element of this.elements) {
-                        const state = open ? fl.xmlui.get(element.id) : settings[element.id];
+                        const state = open
+                            ? fl.xmlui.get(element.id)
+                            : settings[element.id];
                         if (state === "true") {
                             arr.push(element.value);
                         }
@@ -104,7 +113,6 @@ export class XULControl {
     }
 
     set value(value: any) {
-
         switch (this.type) {
             case "checkboxgroup":
                 if (this.elements) {
@@ -148,7 +156,7 @@ export class XULControl {
     get values() {
         if (!this.elements) return [];
 
-        return this.elements.map(e => e.value);
+        return this.elements.map((e) => e.value);
     }
 
     set values(values: Object[] | string[]) {
@@ -156,19 +164,17 @@ export class XULControl {
 
         const elements: XULElementItem[] = [];
 
-
         for (const v of values) {
             if (typeof v === "object") {
                 for (const label in v) {
                     if (Object.prototype.hasOwnProperty.call(v, label)) {
-                        elements.push({label, value: (v as any)[label], id: ""});
+                        elements.push({ label, value: (v as any)[label], id: "" });
                     }
                 }
             } else {
-                elements.push({label: v, value: v, id: ""});
+                elements.push({ label: v, value: v, id: "" });
             }
         }
-
 
         fl.xmlui.setControlItemElements(this.id, elements);
 
@@ -206,11 +212,11 @@ export class XULControl {
             case "checkbox":
                 fl.xmlui.set(this.id, value || false);
                 break;
-            case 'choosefile':
-            case 'colorchip':
-            case 'popupslider':
-            case 'textbox':
-            case 'targetlist':
+            case "choosefile":
+            case "colorchip":
+            case "popupslider":
+            case "textbox":
+            case "targetlist":
             default:
                 fl.xmlui.set(this.id, value || "");
         }
@@ -238,4 +244,3 @@ export class XULControl {
         return `[object XULControl id="${this.id}" type="${this.type}" value="${this.value}"]`;
     }
 }
-

@@ -1,3 +1,11 @@
+/**
+ * @file: ItemSelector.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
 // ------------------------------------------------------------------------------------------------------------------------
 //
@@ -14,10 +22,9 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // Item Selector
 
-import {ElementCollection, ItemCollection} from "@xjafl/Collection"
-import {Selectors} from "../Selectors";
-import {Context} from "@xjsfl/Context";
-
+import { ElementCollection, ItemCollection } from "@xjafl/Collection";
+import { Selectors } from "../Selectors";
+import { Context } from "@xjsfl/Context";
 
 function resolveParams(
     expression: string | null,
@@ -37,11 +44,12 @@ function resolveParams(
     const library = documentRef.library;
     let items: LibraryItem[] = library.items;
 
-
     // 🧩 解析 elements
     if (elements instanceof LibraryItem) {
         if (elements && elements instanceof FolderItem) {
-            items = library.items.filter(element => element.name.startsWith(`${elements.name}/`));
+            items = library.items.filter((element) =>
+                element.name.startsWith(`${elements.name}/`)
+            );
         }
     } else if (elements instanceof ElementCollection) {
         items = elements.items.toArray();
@@ -53,17 +61,12 @@ function resolveParams(
         items = elements;
     }
 
-    return {expression, items, dom: documentRef, library}
-
+    return { expression, items, dom: documentRef, library };
 }
 
-
-export function $$(
-    ...args: Parameters<typeof resolveParams>
-) {
+export function $$(...args: Parameters<typeof resolveParams>) {
     // 👉 在这里做老逻辑解析
-    const {expression, items, dom, library} = resolveParams(...args);
-
+    const { expression, items, dom, library } = resolveParams(...args);
 
     // 🧪 如果没有 expression → 直接返回
     if (items && !expression) {
@@ -71,11 +74,7 @@ export function $$(
     }
 
     // 🔍 执行选择器过滤
-    const filteredItems = Selectors.select(
-        expression!,
-        items,
-        library
-    );
+    const filteredItems = Selectors.select(expression!, items, library);
 
     return new ItemCollection(filteredItems, dom);
 }

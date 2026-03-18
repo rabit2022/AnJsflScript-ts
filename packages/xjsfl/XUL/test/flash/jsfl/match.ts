@@ -1,3 +1,12 @@
+/**
+ * @file: match.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 type MatchResult = string[] | Record<string, any>;
 
 export function match(
@@ -60,19 +69,10 @@ export function match(
     return matchesGlobal.length ? matchesGlobal : null;
 }
 
+export function combine(keys: string[] | string, values: any[]): Record<string, any> {
+    const keyArr = typeof keys === "string" ? keys.trim().split(/\s*,\s*/g) : keys;
 
-export function combine(
-    keys: string[] | string,
-    values: any[]
-): Record<string, any> {
-    const keyArr =
-        typeof keys === "string"
-            ? keys.trim().split(/\s*,\s*/g)
-            : keys;
-
-    return Object.fromEntries(
-        keyArr.map((key, i) => [key, values[i]])
-    );
+    return Object.fromEntries(keyArr.map((key, i) => [key, values[i]]));
 }
 
 export function toArray(
@@ -97,7 +97,6 @@ export function toArray(
     }
 }
 
-
 // export function toArray1(
 //     value: string,
 // ): string[] {
@@ -112,7 +111,6 @@ export function toArray(
 //
 // console.log(toArray1("a,b,c,d"))
 
-
 // const str = "apple banana orange";
 // const rx = /\w+/g;
 //
@@ -120,14 +118,12 @@ export function toArray(
 //
 // console.log(result);
 
-
 // const str = "John:25, Mike:30";
 // const rx = /(\w+):(\d+)/g;
 //
 // const result = match(str, rx);
 //
 // console.log(result);
-
 
 // const str = "John:25, Mike:30";
 // const rx = /(\w+):(\d+)/g;
@@ -136,7 +132,6 @@ export function toArray(
 //
 // console.log(result);
 
-
 // const str = "cat bat rat";
 // const rx = /(\w+)at/g;
 //
@@ -144,14 +139,12 @@ export function toArray(
 //
 // console.log(result);
 
-
 // const url = "https://test.com?id=123&name=tom&age=20";
 // const rx = /[?&](\w+)=([^&]+)/g;
 //
 // const result = match(url, rx, ["key", "value"]);
 //
 // console.log(result);
-
 
 // const logs = `
 // [INFO] 2025-01-01 Start

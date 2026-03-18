@@ -9,24 +9,18 @@
 export type ScopeInName = "Library" | "Document" | "Timeline" | "Layer";
 export type ScopeOutName = "Layer" | "Item" | "Element" | "Frame";
 
-export const scopeTypeMap: Record<ScopeInName,ScopeOutName> = {
+export const scopeTypeMap: Record<ScopeInName, ScopeOutName> = {
     Library: "Item",
     Document: "Element",
     Timeline: "Layer",
-    Layer: "Frame",
+    Layer: "Frame"
 };
 
-export type ScopeFunc = "item"|"element";
-
+export type ScopeFunc = "item" | "element";
 
 export type Scope = Library | FlashDocument | Timeline | Layer | Frame;
 
-export type SelectorType =
-    | "combo"
-    | "filter"
-    | "type"
-    | "find"
-    | "pseudo";
+export type SelectorType = "combo" | "filter" | "type" | "find" | "pseudo";
 
 // export interface SelectorInstance {
 //     pattern: string;

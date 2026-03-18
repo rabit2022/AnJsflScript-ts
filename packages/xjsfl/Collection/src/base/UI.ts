@@ -8,7 +8,7 @@
  */
 
 export class UI {
-    static get $dom() :FlashDocument{
+    static get $dom(): FlashDocument {
         return fl.getDocumentDOM()!;
     }
 
@@ -20,7 +20,7 @@ export class UI {
         return UI.$dom.library;
     }
 
-    static get $selection():FlashElement[] {
+    static get $selection(): FlashElement[] {
         return UI.$dom.selection;
     }
 

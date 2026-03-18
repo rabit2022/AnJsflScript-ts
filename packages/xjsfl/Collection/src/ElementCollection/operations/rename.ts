@@ -6,7 +6,7 @@
  * @project: AnJsflScript-ts
  * @description:
  */
-import {ElementCollection} from "../core/ElementCollection";
+import { ElementCollection } from "../core/ElementCollection";
 import * as _ from "lodash";
 
 export type RenameCallback = (
@@ -31,7 +31,6 @@ export function createRenameCallback(
         // return (_, index) => name + (index + start).toString().padStart(padLength, "0");
         return (_element: any, index: number) =>
             name + _.padStart(String(index + start), padLength, "0");
-
     }
 
     // 2️⃣ normal string mode
@@ -40,7 +39,8 @@ export function createRenameCallback(
     return (_element, index) => {
         const num = index + startIndex;
         // const suffix = padding > 0 ? num.toString().padStart(padding, "0") : String(num);
-        const suffix = padding > 0 ? _.padStart(num.toString(), padding, "0") : String(num);
+        const suffix =
+            padding > 0 ? _.padStart(num.toString(), padding, "0") : String(num);
 
         return resolvedBaseName + suffix;
     };

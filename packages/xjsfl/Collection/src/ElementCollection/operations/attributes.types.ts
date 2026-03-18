@@ -7,7 +7,6 @@
  * @description:
  */
 
-
 export type XY = { x: number; y: number };
 
 export type ValueFn<T, R> = (el: T, index: number, arr: T[]) => R;
@@ -34,4 +33,3 @@ export const TwoDMap = {
 export type TwoDProp = keyof typeof TwoDMap;
 
 export type ColorProp = "tint" | "alpha" | "brightness";
-

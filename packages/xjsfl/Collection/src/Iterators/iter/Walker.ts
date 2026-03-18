@@ -1,18 +1,26 @@
-import {Iterators} from "./Iterators";
+/**
+ * @file: Walker.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+import { Iterators } from "./Iterators";
 
 export class Walker {
-
     /**
      * 不是选中的elements
      * 而是每一个文档的----items的内部(item as SymbolItem).timeline----layers----所有element,实用性比较差
      */
-    static* walkElements() {
+    static *walkElements() {
         for (const doc of Iterators.documents()) {
             for (const item of Iterators.items(doc)) {
                 for (const layer of Iterators.layers(item)) {
                     for (const frame of Iterators.frames(layer)) {
                         for (const elCtx of Iterators.elements(frame)) {
-                            const el = elCtx.element!
+                            const el = elCtx.element!;
                             yield el;
                         }
                     }
@@ -21,12 +29,12 @@ export class Walker {
         }
     }
 
-    static* walkFrames() {
+    static *walkFrames() {
         for (const doc of Iterators.documents()) {
             for (const item of Iterators.items(doc)) {
                 for (const layer of Iterators.layers(item)) {
                     for (const frameCtx of Iterators.frames(layer)) {
-                        const frame = frameCtx.frame!
+                        const frame = frameCtx.frame!;
                         yield frame;
                     }
                 }
@@ -34,7 +42,7 @@ export class Walker {
         }
     }
 
-    static* walkLayers() {
+    static *walkLayers() {
         for (const doc of Iterators.documents()) {
             for (const item of Iterators.items(doc)) {
                 for (const layerCtx of Iterators.layers(item)) {
@@ -45,7 +53,7 @@ export class Walker {
         }
     }
 
-    static* walkItems() {
+    static *walkItems() {
         for (const doc of Iterators.documents()) {
             for (const itemCtx of Iterators.items(doc)) {
                 const item = itemCtx.item!;
@@ -54,14 +62,13 @@ export class Walker {
         }
     }
 
-    static* walkDocs() {
+    static *walkDocs() {
         for (const docCtx of Iterators.documents()) {
             const doc = docCtx.dom!;
             yield doc;
         }
     }
 }
-
 
 /*
 for (const docCtx of Iterators.documents()) {

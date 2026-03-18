@@ -12,7 +12,7 @@ import { ensureDir } from "./ensureDir";
 import { center } from "./string";
 import * as _ from "lodash";
 import { Paths } from "../../config";
-import {getRecordPath} from "./relative";
+import { getRecordPath } from "./relative";
 
 // 辅助函数：获取补零后的字符串 (利用原生 padStart)
 const pad = (num: number, length: number) => _.padStart(String(num), length, "0");
@@ -41,7 +41,6 @@ export function writeToLog(
     const levelname = center(logType.toUpperCase(), 8);
 
     const short_path = getRecordPath();
-
 
     // 构建日志行
     const logLine = `${asctime} | ${levelname} | ${short_path} | ${message}`;

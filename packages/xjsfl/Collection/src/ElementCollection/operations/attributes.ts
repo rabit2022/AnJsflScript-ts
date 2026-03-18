@@ -7,7 +7,7 @@
  * @description:
  */
 
-import {ElementCollection} from "../core/ElementCollection";
+import { ElementCollection } from "../core/ElementCollection";
 import {
     AttrSetter,
     AttrValue,

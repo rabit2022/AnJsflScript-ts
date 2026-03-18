@@ -1,3 +1,11 @@
+/**
+ * @file: Core.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
 // ------------------------------------------------------------------------------------------------------------------------
 //
@@ -12,21 +20,20 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // # Core Tests
 
-import {Range} from "./Core.types";
-import {attribute as _attribute} from "./core/attribures";
-import {nth as _nth} from "./core/nth";
-import {Selectors} from "../Selectors";
-import {ScopeOutName} from "../Selectors.types";
-
+import { Range } from "./Core.types";
+import { attribute as _attribute } from "./core/attribures";
+import { nth as _nth } from "./core/nth";
+import { Selectors } from "../Selectors";
+import { ScopeOutName } from "../Selectors.types";
 
 export namespace Core {
     export namespace filter {
         export const attribute = _attribute;
     }
 
-// =========================
-// MATH
-// =========================
+    // =========================
+    // MATH
+    // =========================
     export namespace math {
         export function range(str: string, range: Range): boolean {
             const value = parseFloat(str);
@@ -34,9 +41,9 @@ export namespace Core {
         }
     }
 
-// =========================
-// FIND
-// =========================
+    // =========================
+    // FIND
+    // =========================
     export namespace find {
         export function first<T>(items: T[]): T[] {
             return items.length ? [items.shift() as T] : [];
@@ -47,11 +54,11 @@ export namespace Core {
         }
 
         export function even<T>(items: T[]): T[] {
-            return Core.combo.nth(items, 'even');
+            return Core.combo.nth(items, "even");
         }
 
         export function odd<T>(items: T[]): T[] {
-            return Core.combo.nth(items, 'odd');
+            return Core.combo.nth(items, "odd");
         }
 
         export function random<T>(items: T[], amount = 0.5): T[] {
@@ -60,14 +67,12 @@ export namespace Core {
     }
 
     export namespace pseudo {
-        export function Empty(){
-
-        }
+        export function Empty() {}
     }
 
-// =========================
-// COMBO
-// =========================
+    // =========================
+    // COMBO
+    // =========================
     export namespace combo {
         export function not<T>(items: T[], expression: string, type: ScopeOutName): T[] {
             const selectors = Selectors.parse(expression, type);
@@ -80,11 +85,11 @@ export namespace Core {
         }
 
         export function contains(): never {
-            throw new ReferenceError(':contains() not implemented');
+            throw new ReferenceError(":contains() not implemented");
         }
 
         export function has(): never {
-            throw new ReferenceError(':has() not implemented');
+            throw new ReferenceError(":has() not implemented");
         }
 
         export function random<T>(items: T[], expression: string): T[] {
@@ -95,5 +100,3 @@ export namespace Core {
         export const nth = _nth;
     }
 }
-
-

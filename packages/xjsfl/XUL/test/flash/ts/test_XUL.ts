@@ -7,7 +7,7 @@
  * @description:
  */
 
-import {XUL} from "@xjsfl/XUL";
+import { XUL } from "@xjsfl/XUL";
 
 XUL.factory()
     .setTitle("Dialog with initilize event")

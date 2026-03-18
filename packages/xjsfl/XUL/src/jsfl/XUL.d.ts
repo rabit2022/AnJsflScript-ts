@@ -7,7 +7,6 @@
  * @description:
  */ // @ts-nocheck
 
-
 interface TextboxAttr {
     value: string;
     maxlength: number;
@@ -390,7 +389,7 @@ interface XUL {
     saveAs(pathOrURI: string | URI): XUL;
 
     // save as
-    uri:string;
+    uri: string;
 
     show(onAccept?: Function, onCancel?: Function): XUL;
 
@@ -400,8 +399,6 @@ interface XUL {
     toString(): string;
 }
 
-declare module "@xjsfl/XUL"{
-    export class XUL implements XUL{
-
-    }
+declare module "@xjsfl/XUL" {
+    export class XUL implements XUL {}
 }

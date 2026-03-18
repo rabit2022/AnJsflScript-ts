@@ -1,3 +1,11 @@
+/**
+ * @file: Core.types.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
 export type Range = {
     min: number;
@@ -8,15 +16,4 @@ export type CustomCallbacks<T> = {
     [key: string]: (item: T) => any;
 };
 
-export type Operand =
-    | '='
-    | '!='
-    | '^='
-    | '$='
-    | '*='
-    | '>'
-    | '>='
-    | '<'
-    | '<='
-    | '';
-
+export type Operand = "=" | "!=" | "^=" | "$=" | "*=" | ">" | ">=" | "<" | "<=" | "";

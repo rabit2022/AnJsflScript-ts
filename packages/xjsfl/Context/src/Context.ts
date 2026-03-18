@@ -358,7 +358,7 @@ export class Context {
                 if (layerIndex !== -1) {
                     const selectedLayers = timeline.getSelectedLayers();
 
-                    if (!_.includes(selectedLayers,layerIndex)) {
+                    if (!_.includes(selectedLayers, layerIndex)) {
                         timeline.setSelectedLayers(layerIndex, false);
                     }
                 }

@@ -1,3 +1,12 @@
+/**
+ * @file: XML.d.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 declare global {
     /**
      * E4X XML node
@@ -16,12 +25,7 @@ declare global {
         /**
          * Set value on node via path
          */
-        set(
-            path: string,
-            value: any,
-            append?: boolean | number,
-            debug?: boolean
-        ): XML;
+        set(path: string, value: any, append?: boolean | number, debug?: boolean): XML;
 
         /**
          * Remove node(s) or attribute(s)
@@ -38,7 +42,6 @@ declare global {
          */
         prettyPrint(useSystemNewline?: boolean): string;
     }
-
 }
 
-export {}
+export {};

@@ -1,4 +1,11 @@
-
+/**
+ * @file: item.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
 
 // ------------------------------------------------------------------------------------------------------------------------
 //
@@ -13,28 +20,25 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // # Item Tests
 
-
-import {Selectors} from "../Selectors";
-import {Core} from "../core/Core";
-import {UI} from "../../base/UI";
-import {ITEM_filter_type, ITEM_ItemType, ITEM_VideoType} from "./item.types";
-import * as _ from 'lodash';
-import {TIMELINE} from "./timeline";
+import { Selectors } from "../Selectors";
+import { Core } from "../core/Core";
+import { UI } from "../../base/UI";
+import { ITEM_filter_type, ITEM_ItemType, ITEM_VideoType } from "./item.types";
+import * as _ from "lodash";
+import { TIMELINE } from "./timeline";
 
 export namespace ITEM {
-
     // =========================
     // REGISTER
     // =========================
     export function register(pattern: string, callback: Function) {
-        return Selectors.register(pattern, callback, 'item');
+        return Selectors.register(pattern, callback, "item");
     }
 
     // =========================
     // FILTER
     // =========================
     export namespace filter {
-
         export function name(item: LibraryItem, rx: RegExp, range?: any): boolean {
             const itemName = UI.getItemName(item);
             const matches = itemName.match(rx);
@@ -48,7 +52,11 @@ export namespace ITEM {
             return false;
         }
 
-        export function path(item: LibraryItem|FlashElement, rx: RegExp, range?: any): boolean {
+        export function path(
+            item: LibraryItem | FlashElement,
+            rx: RegExp,
+            range?: any
+        ): boolean {
             const matches = item.name.match(rx);
 
             if (matches) {
@@ -66,50 +74,46 @@ export namespace ITEM {
 
         export function Class(item: LibraryItem, rxClass: RegExp): boolean {
             if (item.linkageClassName) {
-                const cls = item.linkageClassName.split('.').pop()!;
+                const cls = item.linkageClassName.split(".").pop()!;
                 return rxClass.test(cls);
             }
             return false;
         }
 
         export function type(item: LibraryItem, type: ITEM_filter_type): boolean {
-            const itemType = item.itemType.replace(/ /g, '');
+            const itemType = item.itemType.replace(/ /g, "");
 
-            if (type === 'symbol') {
+            if (type === "symbol") {
                 return /movieclip|graphic|button/.test(itemType);
             }
 
-            if (
-                itemType === 'video' &&
-                /video|linkedvideo|embeddedvideo/.test(type)
-            ) {
-                return type === 'video' ? true :
-                    // "embedded video" | "video"
-                    (item as VideoItem).videoType.replace(/ /g, '') === type;
+            if (itemType === "video" && /video|linkedvideo|embeddedvideo/.test(type)) {
+                return type === "video"
+                    ? true
+                    : // "embedded video" | "video"
+                      (item as VideoItem).videoType.replace(/ /g, "") === type;
             }
 
             return itemType === type;
         }
-
     }
 
     // =========================
     // FIND（⚠️ 重点：去 this）
     // =========================
     export namespace find {
-
         export function parent(items: LibraryItem[]): LibraryItem[] {
             const paths: string[] = [];
 
             for (const item of items) {
-                if (item.name.includes('/')) {
-                    const parent = item.name.replace(/\/[^/]+$/, '');
+                if (item.name.includes("/")) {
+                    const parent = item.name.replace(/\/[^/]+$/, "");
                     paths.push(parent);
                 }
             }
 
             // const unique = Utils.toUniqueArray(paths);
-            const unique =Array.from(new Set(paths));
+            const unique = Array.from(new Set(paths));
 
             const result: LibraryItem[] = [];
 
@@ -128,12 +132,12 @@ export namespace ITEM {
             const result: LibraryItem[] = [];
 
             for (const parent of parents) {
-                if (parent.itemType !== 'folder') continue;
+                if (parent.itemType !== "folder") continue;
 
                 for (const item of UI.$library.items) {
                     if (item !== parent && item.name.startsWith(parent.name)) {
                         const path = item.name.slice(parent.name.length + 1);
-                        if (!path.includes('/')) {
+                        if (!path.includes("/")) {
                             result.push(item);
                         }
                     }
@@ -147,7 +151,7 @@ export namespace ITEM {
             const result: LibraryItem[] = [];
 
             for (const parent of parents) {
-                if (parent.itemType !== 'folder') continue;
+                if (parent.itemType !== "folder") continue;
 
                 for (const item of UI.$library.items) {
                     if (item !== parent && item.name.startsWith(parent.name)) {
@@ -159,21 +163,19 @@ export namespace ITEM {
             return result;
         }
 
-        export function selected(items: LibraryItem[] ): LibraryItem[] {
+        export function selected(items: LibraryItem[]): LibraryItem[] {
             const selected = UI.$library.getSelectedItems() || [];
             // return Utils.diff(items, selected, 0);
 
             // 交集
             return _.intersection(items, selected);
         }
-
     }
 
     // =========================
     // PSEUDO
     // =========================
     export namespace pseudo {
-
         export function exported(item: LibraryItem): boolean {
             return item.linkageExportForAS === true;
         }
@@ -183,12 +185,12 @@ export namespace ITEM {
         }
 
         export function empty(item: LibraryItem): boolean {
-            if (item.itemType === 'folder') {
+            if (item.itemType === "folder") {
                 const children = ITEM.find.children([item]);
                 return children.length === 0;
             }
 
-            if (ITEM.filter.type(item, 'symbol')) {
+            if (ITEM.filter.type(item, "symbol")) {
                 return TIMELINE.pseudo.empty((item as SymbolItem).timeline);
             }
 
@@ -196,33 +198,32 @@ export namespace ITEM {
         }
 
         export function animated(item: LibraryItem): boolean {
-            if (ITEM.filter.type(item, 'symbol')) {
+            if (ITEM.filter.type(item, "symbol")) {
                 return TIMELINE.pseudo.animated((item as SymbolItem).timeline);
             }
             return false;
         }
 
         export function keyframed(item: LibraryItem): boolean {
-            if (ITEM.filter.type(item, 'symbol')) {
+            if (ITEM.filter.type(item, "symbol")) {
                 return TIMELINE.pseudo.keyframed((item as SymbolItem).timeline);
             }
             return false;
         }
 
         export function scripted(item: LibraryItem): boolean {
-            if (ITEM.filter.type(item, 'symbol')) {
+            if (ITEM.filter.type(item, "symbol")) {
                 return TIMELINE.pseudo.scripted((item as SymbolItem).timeline);
             }
             return false;
         }
 
         export function audible(item: LibraryItem): boolean {
-            if (ITEM.filter.type(item, 'symbol')) {
+            if (ITEM.filter.type(item, "symbol")) {
                 return TIMELINE.pseudo.audible((item as SymbolItem).timeline);
             }
             return false;
         }
-
     }
 
     // =========================
@@ -230,10 +231,6 @@ export namespace ITEM {
     // =========================
     export namespace custom {
         // extension point
-        export function Empty(){
-
-        }
+        export function Empty() {}
     }
-
 }
-

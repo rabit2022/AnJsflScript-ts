@@ -1,9 +1,15 @@
-import {BASEURI} from "./uri";
+/**
+ * @file: ui.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+import { BASEURI } from "./uri";
 
 type XmlSettings = Record<string, any>;
-
-
-
 
 export class XjsflUI {
     private static dialogs: XUL[] = [];
@@ -25,10 +31,7 @@ export class XjsflUI {
         const xml = xul.xml
             .prettyPrint()
             .replace(/{xulid}/g, String(xul.id))
-            .replace(
-                /xjsfl\.ui\.handleEvent\(0,/g,
-                `xjsfl.ui.handleEvent(${xul.id},`
-            );
+            .replace(/xjsfl\.ui\.handleEvent\(0,/g, `xjsfl.ui.handleEvent(${xul.id},`);
 
         // resolve uri
         const uri = xul.uri || BASEURI + "core/ui/dialog.xul";

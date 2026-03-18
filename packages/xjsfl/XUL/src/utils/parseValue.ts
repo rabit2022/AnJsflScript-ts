@@ -1,3 +1,12 @@
+/**
+ * @file: parseValue.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 export function parseValue(value: any, trim: boolean = true): any {
     if (value == null) return value;
 
@@ -26,18 +35,21 @@ export function parseValue(value: any, trim: boolean = true): any {
     }
 
     // XML
-    if(/^<(\w+)\b[\s\S]*(<\/\1>|\/>)$/.test(value))
-    {
-        let xml:XML|XMLList|string;
-        try { xml = new XML(value); } // attempt to create XML
-        catch(err)
-        {
-            try { xml = new XMLList(value); } // fall back to XMLList
-            catch(err) { xml = value; } // fall back to text
-        };
-        return xml
+    if (/^<(\w+)\b[\s\S]*(<\/\1>|\/>)$/.test(value)) {
+        let xml: XML | XMLList | string;
+        try {
+            xml = new XML(value);
+        } catch (err) {
+            // attempt to create XML
+            try {
+                xml = new XMLList(value);
+            } catch (err) {
+                // fall back to XMLList
+                xml = value;
+            } // fall back to text
+        }
+        return xml;
     }
-
 
     // JSON（优先尝试，替代 eval）
     if (/^[\[{]/.test(str)) {

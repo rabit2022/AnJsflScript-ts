@@ -1,9 +1,20 @@
+/**
+ * @file: processAttributeValue.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 // 假设 result 是一个包含 attribute_value 和 attribute_operand 的对象
 // 如果 result 来自正则匹配数组，可能需要先定义接口或类型断言
-import {Selector} from "../../Selector/Selector";
+import { Selector } from "../../Selector/Selector";
 
-
-export function processAttributeValue(attValue: string, selector: Selector): string | number | RegExp {
+export function processAttributeValue(
+    attValue: string,
+    selector: Selector
+): string | number | RegExp {
     // 2. 尝试解析为数字
     const val = parseFloat(attValue);
 

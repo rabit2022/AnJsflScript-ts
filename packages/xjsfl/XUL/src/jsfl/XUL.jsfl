@@ -26,7 +26,7 @@
 
 define([
 	"@xjsfl/prepare/XUL"
-],function (PREPARE) {
+], function (PREPARE) {
 	const {XULControl,XULEvent,XjsflUI, XjsflFile,parseValue, parseExpression,BASEURI} = PREPARE;
 
 	// parseExpression

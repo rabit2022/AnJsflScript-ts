@@ -1,4 +1,13 @@
-import {CustomCallbacks, Operand, Range} from "../Core.types";
+/**
+ * @file: attribures.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
+import { CustomCallbacks, Operand, Range } from "../Core.types";
 
 import * as _ from "lodash";
 
@@ -10,7 +19,7 @@ export function attribute<T extends Record<string, any>>(
     range?: Range,
     custom: CustomCallbacks<T> = {}
 ): boolean {
-    const {prop, callbackUsed} = resolveProp(item, name, custom);
+    const { prop, callbackUsed } = resolveProp(item, name, custom);
 
     // 无操作符
     if (!operand) {
@@ -18,7 +27,7 @@ export function attribute<T extends Record<string, any>>(
     }
 
     // 数值比较
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
         // 范围判断
         if (range) {
             return inRange(prop, range);
@@ -42,17 +51,16 @@ export function attribute<T extends Record<string, any>>(
     return compareString(str, operand, String(value));
 }
 
-
 function resolveProp<T extends Record<string, any>>(
     item: T,
     name: string,
     custom: CustomCallbacks<T>
 ): { prop: any; callbackUsed: boolean } {
     // 深层属性
-    if (name.includes('.')) {
+    if (name.includes(".")) {
         return {
             prop: _.get(item, name),
-            callbackUsed: false,
+            callbackUsed: false
         };
     }
 
@@ -60,7 +68,7 @@ function resolveProp<T extends Record<string, any>>(
     if (name in item) {
         return {
             prop: (item as any)[name],
-            callbackUsed: false,
+            callbackUsed: false
         };
     }
 
@@ -74,27 +82,23 @@ function resolveProp<T extends Record<string, any>>(
 
     return {
         prop: callback(item),
-        callbackUsed: true,
+        callbackUsed: true
     };
 }
 
-function compareNumber(
-    prop: number,
-    operand: Operand,
-    value: number
-): boolean {
+function compareNumber(prop: number, operand: Operand, value: number): boolean {
     switch (operand) {
-        case '=':
+        case "=":
             return prop == value;
-        case '!=':
+        case "!=":
             return prop != value;
-        case '<':
+        case "<":
             return prop < value;
-        case '<=':
+        case "<=":
             return prop <= value;
-        case '>':
+        case ">":
             return prop > value;
-        case '>=':
+        case ">=":
             return prop >= value;
         default:
             return false;
@@ -105,15 +109,11 @@ function inRange(prop: number, range: Range): boolean {
     return prop >= range.min && prop <= range.max;
 }
 
-function compareRegex(
-    prop: string,
-    operand: Operand,
-    regex: RegExp
-): boolean {
+function compareRegex(prop: string, operand: Operand, regex: RegExp): boolean {
     switch (operand) {
-        case '=':
+        case "=":
             return regex.test(prop);
-        case '!=':
+        case "!=":
             return !regex.test(prop);
         default:
             return false;
@@ -121,23 +121,19 @@ function compareRegex(
 }
 
 function isPatternMatchOperator(op: Operand) {
-    return op === '^=' || op === '$=' || op === '*=';
+    return op === "^=" || op === "$=" || op === "*=";
 }
 
-function comparePattern(
-    prop: string,
-    operand: Operand,
-    value: string
-): boolean {
+function comparePattern(prop: string, operand: Operand, value: string): boolean {
     let pattern = "";
     switch (operand) {
-        case '^=':
+        case "^=":
             pattern = `^${value}`;
             break;
-        case '$=':
+        case "$=":
             pattern = `${value}$`;
             break;
-        case '*=':
+        case "*=":
             pattern = value;
             break;
         default:
@@ -147,15 +143,11 @@ function comparePattern(
     return new RegExp(pattern).test(prop);
 }
 
-function compareString(
-    prop: string,
-    operand: Operand,
-    value: string
-): boolean {
+function compareString(prop: string, operand: Operand, value: string): boolean {
     switch (operand) {
-        case '=':
+        case "=":
             return prop === value;
-        case '!=':
+        case "!=":
             return prop !== value;
         default:
             return false;

@@ -20,7 +20,7 @@
 // ------------------------------------------------------------------------------------------------------------------------
 // Selector
 
-import {ComboKeys, CoreKeys} from "../Selectors/utils/matchResult.types";
+import { ComboKeys, CoreKeys } from "../Selectors/utils/matchResult.types";
 
 /** Range 结构 */
 interface SelectorRange {
@@ -42,10 +42,10 @@ export class Selector {
     object: string = "";
 
     /** 子类型（combo / filter 等） */
-    type?: CoreKeys | "type" | 'pseudo';
+    type?: CoreKeys | "type" | "pseudo";
 
     /** selector 名称 */
-    name: string ="";
+    name: string = "";
 
     /** 实际执行的测试方法 */
     method: SelectorMethod | null = null;

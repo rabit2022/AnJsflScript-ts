@@ -1,3 +1,12 @@
+/**
+ * @file: XULControl.ts
+ * @author: 穹的兔兔
+ * @email: 3101829204@qq.com
+ * @date: 2026/3/18 23:03
+ * @project: AnJsflScript-ts
+ * @description:
+ */
+
 // // XUL 类型来自项目环境
 // import {parseValue} from "./utils";
 // import {processCompoundElements} from "./XUL/XULControl_constructor";

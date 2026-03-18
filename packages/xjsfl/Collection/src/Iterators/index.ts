@@ -10,4 +10,4 @@
 export { Iterators } from "./iter/Iterators";
 export { Walker } from "./iter/Walker";
 
-export {Iterators as SelectorIterators} from "./origion/Iterators"
+export { Iterators as SelectorIterators } from "./origion/Iterators";
