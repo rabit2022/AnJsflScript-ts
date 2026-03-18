@@ -6,25 +6,54 @@
     "noEmitOnError": false,
     "removeComments": true,
 
+    // node import
+    "moduleResolution": "node",
+
+
+
+    // default 报错
+//    // es import
+//    "esModuleInterop": true,
+//    "allowSyntheticDefaultImports": true,
+
+    "importHelpers": true,
+
+    // iterator
+    "downlevelIteration": true,
+
     // 允许 TypeScript 将项目作为依赖进行增量编译
     "composite": true,
     "declaration": true,
 
-    "rootDir": "src",
+//    "rootDir": "./src",
     "outDir": "./dist",
-    "types": [],
+    "types": [
+      // node 导致 接口检查失效
+//      "node"
+    ],
     "target": "es5",
     "lib": [
       "es5",
       "es6"
-    ]
+    ],
+    "skipLibCheck": false,
+
+    "baseUrl": ".",
+    "paths": {
+       "@xjsfl/XULControl_constructor": ["./src/XULControl/XULControl_constructor.jsfl"]
+    }
+
   },
   "include": [
     "src",
 
+    "../../../types/XML/E4X.d.ts",
+
+    // region TYPES
     // jsfl
     "../../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
     "../../../types/myShim/*.d.ts"
+// endregion TYPES
   ]
 }

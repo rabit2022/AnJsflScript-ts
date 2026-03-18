@@ -21,20 +21,16 @@
 	// xjsfl.init(this, ['Utils', 'URI', 'File', 'XML', 'String', 'XULControl', 'XULEvent', 'JSFLInterface']);
 
 // 'Utils', 'XML', 'XULControl', 'XULEvent'
-//  'URI', 'File', 'String'  暂时忽略，报错是在修改
-//  'JSFLInterface' 没有用到
-define([
-	"@xjsfl/XUL/Utils",
-	"@xjsfl/XUL/XULControl",
-	"@xjsfl/XUL/XULEvent",
-	"@xjsfl/XUL/XML",
-	"@xjsfl/XUL/xjsfl"
+//  'URI', 'File'   暂时忽略，报错是在修改
+//  'JSFLInterface','String' 没有用到
 
-],function (Utils,XULControl,XULEvent,_,xjsfl) {
-	function loadTemplate() {
-		
-	}
-	
+define([
+	"@xjsfl/prepare/XUL"
+],function (PREPARE) {
+	const {XULControl,XULEvent,XjsflUI, XjsflFile,parseValue, parseExpression,BASEURI} = PREPARE;
+
+	// parseExpression
+	// parseValue
 
 	// --------------------------------------------------------------------------------
 	// constructor
@@ -54,7 +50,7 @@ define([
 			//TODO Add functionality for basic arithmetic to be performed inside textboxes
 
 			// public properties
-				this.xml		= xjsfl.file.load('xul/dialog.xul', 'template', true);
+				this.xml		= XjsflFile.load('xul/dialog.xul', 'template', true);
 				this.controls	= {};
 				this.settings	= {};
 				this.flashData	= null;
@@ -67,7 +63,7 @@ define([
 				this.id			= -1;
 
 			// load controls
-				var xml			= xjsfl.file.load('xul/controls.xul', 'template', true);
+				var xml			= XjsflFile.load('xul/controls.xul', 'template', true);
 				// console.log(xml)
 				for each(var node in xml.grid.rows.*)
 				{
@@ -181,7 +177,7 @@ define([
 				}
 
 			// show
-				if(xul && Utils.getKeys(xul.controls).length > 0)
+				if(xul && Object.keys(xul.controls).length > 0)
 				{
 					xul.show(accept, cancel);
 					if(xul.settings && xul.settings.dismiss === 'accept')
@@ -426,7 +422,7 @@ define([
 									}
 									else
 									{
-										if(Utils.isArray(values))
+										if(Array.isArray(values))
 										{
 											item.@value		= value;
 											item.@label		= value;
@@ -551,7 +547,7 @@ define([
 						//TODO Add xml:<xml attr="value"> functionality
 
 						// variables
-							var controls	= Utils.parseExpression(str);
+							var controls	= parseExpression(str);
 							var rxControl	= /(\||\w*:)?([^=]*)=?(.*)/
 							var rxObj		= /([^:,]+):([^,]+)/;
 							
@@ -735,11 +731,11 @@ define([
 											break;
 
 											case 'columns':
-												this.setColumns(Utils.parseValue(value));
+												this.setColumns(parseValue(value));
 											break;
 
 									default:
-										xjsfl.debug.error('XUL.add(): Undefined control type "' +control+ '"');
+										console.error('XUL.add(): Undefined control type "' +control+ '"');
 									}
 									
 								// output
@@ -860,7 +856,8 @@ define([
 									attributes.format = 'string';
 									if(!isNaN(parseInt(attributes.value)))
 									{
-										attributes.value = '#' + Utils.pad(parseInt(value).toString(16).toUpperCase());
+										attributes.value = '#' + parseInt(value).toString(16).toUpperCase().padStart(6, "0");
+
 									}
 									else
 									{
@@ -1231,7 +1228,9 @@ define([
 							
 						// src must be a relative path (NOT absolute URI) such as path/to/file.swf or ../file.swf
 							var uri			= URI.toURI(uriOrPath, 1);
-							var src			= URI.pathTo(xjsfl.uri + 'core/ui/', uri);
+
+
+							var src			= URI.pathTo(BASEURI + 'core/ui/', uri);
 							xml..flash.@src	= src;
 
 						// add control and set XML
@@ -1381,7 +1380,7 @@ define([
 				 */
 				setColumns:function(columns)
 				{
-					if(Utils.isArray(columns))
+					if(Array.isArray(columns))
 					{
 						this.columns = columns;
 					}
@@ -1454,8 +1453,8 @@ define([
 								types	= types.replace(/click/g, 'command');
 
 							// convert ids and types to Arrays
-								ids		= Utils.toArray(ids);
-								types	= Utils.toArray(types);
+								ids		= ids.trim().split(/\s*,\s*/g);
+								types	= types.trim().split(/\s*,\s*/g);
 
 							// add events
 								for each(var id in ids)
@@ -1587,7 +1586,7 @@ define([
 				load:function(pathOrURI)
 				{
 					// get URI
-						var xml = xjsfl.file.load(pathOrURI);
+						var xml = XjsflFile.load(pathOrURI);
 
 					// grab nodes
 						if(xml.name() == 'dialog')
@@ -1676,7 +1675,7 @@ define([
 						// show panel
 							this.open		= true;
 							this.accepted	= false;
-							this.settings	= xjsfl.ui.show(this);
+							this.settings	= XjsflUI.show(this);
 							this.open		= false;
 
 					// --------------------------------------------------------------------------------
@@ -1692,7 +1691,7 @@ define([
 						// get control values and convert to array for callbacks
 							if(onAccept || onCancel)
 							{
-								var args = Utils.getValues(this.values);
+								var args = Object.values(this.values);
 							}
 
 						// test for validation
@@ -1879,7 +1878,7 @@ define([
 				 */
 				toString:function()
 				{
-					return '[object XUL id="' +this.id+ '" title="' +(this.xml ? String(this.xml.@title).trim() : '')+ '" controls:' +Utils.getKeys(this.controls).length+ ']';
+					return '[object XUL id="' +this.id+ '" title="' +(this.xml ? String(this.xml.@title).trim() : '')+ '" controls:' +Object.keys(this.controls).length+ ']';
 				}
 		}
 

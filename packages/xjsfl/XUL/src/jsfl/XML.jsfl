@@ -17,12 +17,41 @@
 	 * @instance	xml
 	 */
 
-define(['@xjsfl/XUL/Utils'],function(Utils){
-(function xml()
-{
-	// includes
-	// 	xjsfl.init(this, ['Utils']);
 
+define([],function(){
+
+	// Util.match  --> matchAll
+
+	/**
+	 * Combines keys and values into an object.
+	 * @param {string[]|string} keys - A single string with comma-separated keys or an array of keys.
+	 * @param {any[]} values - An array of values.
+	 * @returns {Object}
+	 */
+	function combine(keys, values) {
+		// 1. 处理 keys 参数，将其统一转换为数组
+		var keyArr;
+		if (typeof keys === "string") {
+			// 去除首尾空格并按逗号分割（支持逗号周围的空格）
+			keyArr = keys.replace(/^\s+|\s+$/g, '').split(/\s*,\s*/);
+		} else {
+			keyArr = keys;
+		}
+
+		// 2. 手动构建对象 (替代 Object.fromEntries)
+		var result = {};
+		for (var i = 0; i < keyArr.length; i++) {
+			// 防止 values 数组越界，如果 values[i] 不存在则设为 undefined
+			result[keyArr[i]] = values[i];
+		}
+
+		return result;
+	}
+
+
+
+	(function xml()
+{
 	// --------------------------------------------------------------------------------
 	// RegExps
 	
@@ -106,7 +135,15 @@ define(['@xjsfl/XUL/Utils'],function(Utils){
 				
 			// process
 				var parent		= this;
-				var pathMatches	= Utils.match(path, rxPath, null, true);
+				// var pathMatches	= Utils.match(path, rxPath, null, true);
+			// [
+			// 	["match", "group1", ..., index]
+			// ]
+			const pathMatches = Array.from(path.matchAll(rxPath), m => {
+				const matchArray = Array.from(m);
+				const index = m.index ?? -1;
+				return [...matchArray, index];
+			});
 				
 				while(pathMatches.length)
 				{
@@ -125,7 +162,7 @@ define(['@xjsfl/XUL/Utils'],function(Utils){
 						var currentPath	= path.substr(0, matchIndex + pathMatch[0].length);
 						if(debug)
 						{
-							inspect(Utils.combine('match,operator,node,index,filter,attribute,matchIndex', pathMatch), '\nXML > processing path "' + currentPath + '"');
+							console.inspect(combine('match,operator,node,index,filter,attribute,matchIndex', pathMatch), '\nXML > processing path "' + currentPath + '"');
 						}
 						
 					// grab elements
@@ -235,7 +272,14 @@ define(['@xjsfl/XUL/Utils'],function(Utils){
 			// process
 				var child;
 				var parent		= this;
-				var pathMatches	= Utils.match(path, rxPath, null, true);
+				// var pathMatches	= Utils.match(path, rxPath, null, true);
+			const pathMatches = Array.from(path.matchAll(rxPath), m => {
+				const matchArray = Array.from(m);
+				const index = m.index ?? -1;
+				return [...matchArray, index];
+			});
+
+
 				while(pathMatches.length)
 				{
 					// current match segment
@@ -253,7 +297,7 @@ define(['@xjsfl/XUL/Utils'],function(Utils){
 						var currentPath	= path.substr(0, matchIndex + pathMatch[0].length);
 						if(debug)
 						{
-							inspect(Utils.combine('match,operator,node,index,filter,attribute,matchIndex', pathMatch), '\nXML > processing path "' + currentPath + '"');
+							console.inspect(combine('match,operator,node,index,filter,attribute,matchIndex', pathMatch), '\nXML > processing path "' + currentPath + '"');
 						}
 						
 					// grab elements

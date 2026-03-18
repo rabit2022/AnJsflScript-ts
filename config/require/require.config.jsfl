@@ -75,6 +75,7 @@ require.config({
         "Hello2": "src/lib/out/Hello2",
         "@xjsfl/UI": "packages/xjsfl/UI/out/UI",
         "@xjsfl/super": "packages/xjsfl/super/out/super",
+        "@xjsfl/Selector": "packages/xjsfl/Selector/out/Selector",
         "@xjsfl/Events": "packages/xjsfl/Events/out/Events",
         "@xjsfl/Context": "packages/xjsfl/Context/out/@xjsfl/Context",
         "@xjsfl/Constants": "packages/xjsfl/Constants/out/Constants",
@@ -93,13 +94,11 @@ require.config({
         "@anjsfl/parser": "packages/anjsfl/parser/out/parser",
         "@anjsfl/more-element": "packages/anjsfl/MoreElement/out/more-element",
         "@anjsfl/checker": "packages/anjsfl/checker/out/@anjsfl/checker",
-        "@xjsfl/XUL": "packages/xjsfl/XUL/src/XUL",
-        "@xjsfl/XUL/XML": "packages/xjsfl/XUL/src/XML",
-        "@xjsfl/XUL/XUL": "packages/xjsfl/XUL/src/XUL",
-        "@xjsfl/XUL/XULControl": "packages/xjsfl/XUL/src/XULControl",
-        "@xjsfl/XUL/XULEvent": "packages/xjsfl/XUL/src/XULEvent",
-        "@xjsfl/XUL/Utils": "packages/xjsfl/XUL/src/Utils",
-        "@xjsfl/XUL/xjsfl": "packages/xjsfl/XUL/src/xjsfl"
+        "@xjsfl/XUL": "packages/xjsfl/XUL/src/jsfl/config",
+        "@xjsfl/XULControl_constructor": "packages/xjsfl/XUL/src/XULControl/XULControl_constructor",
+        "@xjsfl/prepare/XUL": "packages/xjsfl/XUL/out/@xjsfl/XUL",
+        "@xjsfl/third/XML": "packages/xjsfl/XUL/src/jsfl/XML",
+        "@xjsfl/third/XUL": "packages/xjsfl/XUL/src/jsfl/XUL"
     },
 // endregion REQUIRE MODULES PATHS
 

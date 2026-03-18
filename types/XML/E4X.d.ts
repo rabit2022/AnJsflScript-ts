@@ -50,11 +50,39 @@ declare class QName {
     localName: string;
 }
 
+
+type E4XNodeKind =
+    | "element"
+    | "attribute"
+    | "text"
+    | "comment"
+    | "processing-instruction";
+
+
+interface E4XNodeLike {
+    nodeKind(): string;
+    parent(): XML | undefined;
+}
+
+interface E4XNode extends E4XNodeLike {
+    nodeKind(): E4XNodeKind;
+
+    name(): QName | null;
+    localName(): string | null;
+
+    parent(): XML | undefined;
+
+    toString(): string;
+    toXMLString(): string;
+}
+
+interface E4XNodeList extends Array<E4XNode> {}
+
 /**
  * 表示 XML 数据的类。
  * XML 类提供了对 XML 数据的操作，包括属性访问、子节点操作、命名空间管理等。
  */
-declare class XML {
+declare class XML implements E4XNode {
     /**
      * 创建一个新的 XML 对象。
      * @param value XML 数据的初始值，可以是字符串、XML 对象或 XMLList 对象。
@@ -296,7 +324,7 @@ declare class XML {
      * const xml = new XML("<root/>");
      * const nodeKind = xml.nodeKind();
      */
-    nodeKind(): string;
+    nodeKind(): E4XNodeKind;
 
     /**
      * 将此 XML 对象及其所有后代节点规范化。
@@ -453,7 +481,7 @@ declare class XML {
      * const xml = new XML("<root/>");
      * const domNode = xml.domNode();
      */
-    domNode?(): Node | undefined;
+    domNode?(): E4XNode | undefined;
 
     /**
      * 返回此 XML 对象的 W3C DOM NodeList 表示形式。
@@ -462,7 +490,7 @@ declare class XML {
      * const xml = new XML("<root/>");
      * const domNodeList = xml.domNodeList();
      */
-    domNodeList?(): NodeList | undefined;
+    domNodeList?(): E4XNodeList | undefined;
 
     /**
      * 使用 XPath 表达式评估此 XML 对象。
@@ -695,7 +723,7 @@ declare class XMLList extends Array<XML> {
      * const xmlList = new XMLList("<root/>");
      * const domNode = xmlList.domNode();
      */
-    domNode?(): Node | undefined;
+    domNode?(): E4XNode | undefined;
 
     /**
      * 返回此 XMLList 对象的 W3C DOM NodeList 表示形式。
@@ -704,7 +732,7 @@ declare class XMLList extends Array<XML> {
      * const xmlList = new XMLList("<root/>");
      * const domNodeList = xmlList.domNodeList();
      */
-    domNodeList?(): NodeList | undefined;
+    domNodeList?(): E4XNodeList | undefined;
 
     /**
      * 使用 XPath 表达式评估此 XMLList 对象。
@@ -716,7 +744,7 @@ declare class XMLList extends Array<XML> {
      */
     xpath?(XPathExpression: string): XMLList | TypeError;
 }
-
+//
 // // 全局对象扩展
 // declare global {
 //     /**
@@ -726,7 +754,7 @@ declare class XMLList extends Array<XML> {
 //      * @example
 //      * const xml = new XML("<root><child/></root>");
 //      */
-//    declare const XML: {
+//     const XML: {
 //         new(value?: string | XML | XMLList): XML;
 //         (value?: string | XML | XMLList): XML;
 //         prototype: XML;
@@ -773,3 +801,5 @@ declare class XMLList extends Array<XML> {
 //         prototype: QName;
 //     };
 // }
+//
+// export {}
