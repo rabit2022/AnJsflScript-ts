@@ -15,8 +15,8 @@ import { Result, Ok, Err } from "oxide.ts";
  * @returns Ok(doc) 如果有效，Err(message) 如果无效
  */
 export function CheckDocument(
-    doc: Document | null | undefined
-): Result<Document, string> {
+    doc: FlashDocument | null | undefined
+): Result<FlashDocument, string> {
     if (!doc) {
         return Err("文档对象无效，请检查传入参数");
     }

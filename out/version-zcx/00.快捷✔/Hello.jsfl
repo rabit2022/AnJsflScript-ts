@@ -2,7 +2,7 @@
  * @file: Hello.jsfl
  * @author: 穹的兔兔
  * @email: 3101829204@qq.com
- * @date: 2026/3/16 13:18
+ * @date: 2026/3/19 0:47
  * @project: AnJsflScript-ts
  * @description:
  */
@@ -11,11 +11,9 @@
 
 (function(){
 "use strict";
-// function IsGroup(element) {
-//     var _a;
-//     return (_a = element === null || element === void 0 ? void 0 : element.isGroup) !== null && _a !== void 0 ? _a : false;
-// }
-
-    console.log("hello world");
+function IsGroup(element) {
+    var _a;
+    return (_a = element === null || element === void 0 ? void 0 : element.isGroup) !== null && _a !== void 0 ? _a : false;
+}
 
 })();

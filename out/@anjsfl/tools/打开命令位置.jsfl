@@ -2,7 +2,7 @@
  * @file: 打开命令位置.jsfl
  * @author: 穹的兔兔
  * @email: 3101829204@qq.com
- * @date: 2026/3/16 13:18
+ * @date: 2026/3/19 0:47
  * @project: AnJsflScript-ts
  * @description:
  */

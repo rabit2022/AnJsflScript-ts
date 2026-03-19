@@ -19,7 +19,7 @@ class ReplaceDefineWithRequire {
             let code = asset.source();
 
             // ✅ 只替换文件开头的 define（最安全）
-            code = code.replace(/^define\(/, "require(");
+            code = code.replace(/define\(/, "require(");
 
             // 更新 asset
             compilation.assets[filename] = {
@@ -79,7 +79,7 @@ module.exports = {
 
     // filename: MODULE_NAME + '.jsfl', // 输出为 .jsfl 文件
     // library: MODULE_NAME,  // 暴露为全局变量 Validation（可选）
-    libraryTarget: "amd", // 使用 var 暴露（适合 JSFL）
+    libraryTarget: "umd", // 使用 var 暴露（适合 JSFL）
     clean: true, // 每次构建清空 dist
 
     globalObject: "this", // 👈 关键！告诉 Webpack 使用 `this` 而不是 `self`/`window`
@@ -132,7 +132,7 @@ module.exports = {
   externals: [
     { path: "path-browserify" },
     // region EXCLUDE_MODULE_NAME
-    "store-js", "lodash", "linq", "oxide.ts", "requirejs", "AnJsflScript-ts", "es7-shim", "typedarray", "symbol-es6", "intl", "harmony-reflect", "es6-promise", "es6-collections", "json5", "json3", "util", "path-browserify", "eventemitter3", "seedrandom", "random-js", "chance", "stackframe", "error-stack-parser", "progress", "loglevel", "cli-table3", "chroma-js", "@third/luxon", "luxon", "_exports", "es6-sham", "es6-shim", "es5-sham", "es5-shim", "@third/universal-cookie", "@polyfill/cookie", "Tips", "@xjsfl/UI", "@xjsfl/super", "@xjsfl/Selector", "@xjsfl/Events", "Context", "@xjsfl/Constants", "@xjafl/Collection", "@polyfills/symbol-dispose", "overload-js", "@nodejs/__filename", "url", "process", "fs", "assert", "@dom/setTimeout", "console.table", "console.stack", "console", "@anjsfl-ts/EditSession", "@anjsfl/validation", "@anjsfl/sat", "@anjsfl/random", "@anjsfl/parser", "@anjsfl/more-element", "@anjsfl/Context", "@xjsfl/XUL", "@xjsfl/XUL/XML", "@xjsfl/XUL/XUL", "@xjsfl/XUL/XULControl", "@xjsfl/XUL/XULEvent", "@xjsfl/XUL/Utils", "@xjsfl/XUL/xjsfl",
+"lodash","linq","tslib","oxide.ts","requirejs","AnJsflScript-ts","micromatch","@formatjs/intl","es8-shim","es7-shim","typedarray","symbol-es6","intl","harmony-reflect","es6-promise","es6-collections","json5","json3","@polyfill/symbol-dispose","jsbi","es10-shim","util","path-browserify","eventemitter3","seedrandom","random-js","chance","store-js","stackframe","error-stack-parser","progress","cli-table3","chroma-js","@third/luxon","luxon","@third/date-fns","date-fns","_exports","@third/xregexp","xregexp","es6-sham","es6-shim","@third/superjson","superjson","es5-sham","es5-shim","url","assert","@third/fast-xml-parser","fast-xml-parser","@third/universal-cookie","@polyfill/cookie","atob","base-64","@third/loglevel","loglevel","Hello2","@xjsfl/UI","@xjsfl/super","@xjsfl/Selector","@xjsfl/Events","@xjsfl/Context","@xjsfl/Constants","@xjafl/Collection","@nodejs/__filename","process","fs","child_process","@dom/setTimeout","console","@anjsfl-ts/Sessions","@anjsfl-ts/dev","@anjsfl/validation","@anjsfl/sat","@anjsfl/random","@anjsfl/parser","@anjsfl/more-element","@anjsfl/checker","@xjsfl/XUL","@xjsfl/XULControl_constructor","@xjsfl/prepare/XUL","@xjsfl/third/XML","@xjsfl/third/XUL",
     // endregion EXCLUDE_MODULE_NAME
   ],
   // 禁用 Node.js 注入
