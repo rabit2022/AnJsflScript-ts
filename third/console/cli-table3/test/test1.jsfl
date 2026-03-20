@@ -12,5 +12,8 @@ require(["cli-table3"], function (Table) {
     );
 
     console.log(table.toString());
+    console.log(table.width);
+
+
 
 });

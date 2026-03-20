@@ -31,24 +31,12 @@
     "@types/jest": "30.0.0",
     "@types/node": "25.0.7",
     "jest": "30.2.0",
+    "ts-jest": "29.4.6",
     "strip-json-comments": "3.1.0",
     "terser-webpack-plugin": "5.3.16",
-    "ts-jest": "29.4.6",
-    "ts-loader": "9.5.4",
-    "typescript": "5.9.3",
     "webpack": "5.104.1",
-    "webpack-cli": "6.0.1"
-  },
-  "dependencies": {
-    "": "link:/",
-    "@babel/plugin-transform-runtime": "7.29.0",
-    "@babel/runtime-corejs3": "7.29.0",
-    "@formatjs/intl-getcanonicallocales": "3.2.1",
-    "core-js": "3.48.0",
-    "open": "11.0.0",
-    "path-browserify": "1.0.1",
-    "rxjs": "7.8.2",
-    "string.prototype.includes": "2.0.1",
-    "xregexp": "5.1.2"
+    "webpack-cli": "6.0.1",
+    "ts-loader": "9.5.4",
+    "typescript": "5.9.3"
   }
 }

@@ -36,6 +36,7 @@ PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 /* global global, define, Symbol, Reflect, Promise, SuppressedError, Iterator */
 var __extends;
+var _wrapNativeSuper;
 var __assign;
 var __rest;
 var __decorate;
@@ -102,6 +103,18 @@ var __rewriteRelativeImportExtension;
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
+
+    // 当继承Array时，可以正常工作
+    function _wrapNativeSuper(t) {
+        function __wrapNativeSuper(t) { var r = "function" == typeof Map ? new Map() : void 0; return _wrapNativeSuper = function _wrapNativeSuper(t) { if (null === t || !_isNativeFunction(t)) return t; if ("function" != typeof t) throw new TypeError("Super expression must either be null or a function"); if (void 0 !== r) { if (r.has(t)) return r.get(t); r.set(t, Wrapper); } function Wrapper() { return _construct(t, arguments, _getPrototypeOf(this).constructor); } return Wrapper.prototype = Object.create(t.prototype, { constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 } }), _setPrototypeOf(Wrapper, t); }, _wrapNativeSuper(t); }
+        function _construct(t, e, r) { if (_isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments); var o = [null]; o.push.apply(o, e); var p = new (t.bind.apply(t, o))(); return r && _setPrototypeOf(p, r.prototype), p; }
+        function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+        function _isNativeFunction(t) { try { return -1 !== Function.toString.call(t).indexOf("[native code]"); } catch (n) { return "function" == typeof t; } }
+        function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+        function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+        return __wrapNativeSuper(t);
+    }
+
 
     __assign = Object.assign || function (t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -500,6 +513,7 @@ var __rewriteRelativeImportExtension;
     };
 
     exporter("__extends", __extends);
+    exporter("_wrapNativeSuper", _wrapNativeSuper);
     exporter("__assign", __assign);
     exporter("__rest", __rest);
     exporter("__decorate", __decorate);
@@ -535,6 +549,7 @@ var __rewriteRelativeImportExtension;
 
 0 && (module.exports = {
     __extends: __extends,
+    _wrapNativeSuper:_wrapNativeSuper,
     __assign: __assign,
     __rest: __rest,
     __decorate: __decorate,
