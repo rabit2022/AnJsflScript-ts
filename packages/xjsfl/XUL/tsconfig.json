@@ -29,7 +29,7 @@
     "outDir": "./dist",
     "types": [
       // node 导致 接口检查失效
-//      "node"
+      "node"
     ],
     "target": "es5",
     "lib": [

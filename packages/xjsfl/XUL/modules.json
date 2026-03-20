@@ -3,5 +3,5 @@
   "@xjsfl/XULControl_constructor": "./src/XULControl/XULControl_constructor.jsfl",
   "@xjsfl/prepare/XUL": "./out/@xjsfl/XUL.jsfl",
   "@xjsfl/third/XML": "./src/jsfl/XML.jsfl",
-  "@xjsfl/third/XUL": "./src/jsfl/XUL.jsfl"
+  "@xjsfl/third/XUL": "./src/jsfl/XUL_Final.jsfl"
 }

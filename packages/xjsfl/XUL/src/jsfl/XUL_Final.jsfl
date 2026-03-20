@@ -1461,6 +1461,7 @@ define([
 								{
 									for each(var type in types)
 									{
+										// console.log(type);
 										// check types are valid
 											if( ! /^command|change|setfocus|create$/.test(type))
 											{

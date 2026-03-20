@@ -98,7 +98,7 @@ require.config({
         "@xjsfl/XULControl_constructor": "packages/xjsfl/XUL/src/XULControl/XULControl_constructor",
         "@xjsfl/prepare/XUL": "packages/xjsfl/XUL/out/@xjsfl/XUL",
         "@xjsfl/third/XML": "packages/xjsfl/XUL/src/jsfl/XML",
-        "@xjsfl/third/XUL": "packages/xjsfl/XUL/src/jsfl/XUL"
+        "@xjsfl/third/XUL": "packages/xjsfl/XUL/src/jsfl/XUL_Final"
     },
 // endregion REQUIRE MODULES PATHS
 

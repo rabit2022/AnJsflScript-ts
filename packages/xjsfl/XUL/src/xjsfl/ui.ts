@@ -8,6 +8,7 @@
  */
 
 import { BASEURI } from "./uri";
+import {ensureUriExists} from "./ensureUriExists";
 
 type XmlSettings = Record<string, any>;
 
@@ -34,13 +35,15 @@ export class XjsflUI {
             .replace(/xjsfl\.ui\.handleEvent\(0,/g, `xjsfl.ui.handleEvent(${xul.id},`);
 
         // resolve uri
-        const uri = xul.uri || BASEURI + "core/ui/dialog.xul";
+        const uri = xul.uri || `${BASEURI}core/ui/dialog.xul`;
 
-        // ensure writable
-        if (FLfile.exists(uri)) {
-            FLfile.setAttributes(uri, "W");
-        }
+        ensureUriExists(uri);
 
+        // // ensure writable
+        // if (FLfile.exists(uri)) {
+        //     FLfile.setAttributes(uri, "W");
+        // }
+        //
         // write file
         FLfile.write(uri, xml);
 

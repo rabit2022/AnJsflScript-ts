@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("path-browserify"), require("tslib"), require("@xjsfl/XULControl_constructor"), require("url"));
+		module.exports = factory(require("path-browserify"), require("tslib"), require("@xjsfl/XULControl_constructor"), require("url"), require("fs"));
 	else if(typeof define === 'function' && define.amd)
-		define(["path-browserify", "tslib", "@xjsfl/XULControl_constructor", "url"], factory);
+		define(["path-browserify", "tslib", "@xjsfl/XULControl_constructor", "url", "fs"], factory);
 	else if(typeof exports === 'object')
-		exports["@xjsfl/XUL"] = factory(require("path-browserify"), require("tslib"), require("@xjsfl/XULControl_constructor"), require("url"));
+		exports["@xjsfl/XUL"] = factory(require("path-browserify"), require("tslib"), require("@xjsfl/XULControl_constructor"), require("url"), require("fs"));
 	else
-		root["@xjsfl/XUL"] = factory(root["path-browserify"], root["tslib"], root["@xjsfl/XULControl_constructor"], root["url"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE__248__, __WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__847__, __WEBPACK_EXTERNAL_MODULE__917__) {
+		root["@xjsfl/XUL"] = factory(root["path-browserify"], root["tslib"], root["@xjsfl/XULControl_constructor"], root["url"], root["fs"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE__248__, __WEBPACK_EXTERNAL_MODULE__652__, __WEBPACK_EXTERNAL_MODULE__847__, __WEBPACK_EXTERNAL_MODULE__917__, __WEBPACK_EXTERNAL_MODULE__947__) {
 return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -115,7 +115,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                             try {
                                 for (var _b = tslib_1.__values(this.elements), _c = _b.next(); !_c.done; _c = _b.next()) {
                                     var element = _c.value;
-                                    var state = open ? fl.xmlui.get(element.id) : settings[element.id];
+                                    var state = open
+                                        ? fl.xmlui.get(element.id)
+                                        : settings[element.id];
                                     if (state === "true") {
                                         arr.push(element.value);
                                     }
@@ -289,11 +291,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                 case "checkbox":
                     fl.xmlui.set(this.id, value || false);
                     break;
-                case 'choosefile':
-                case 'colorchip':
-                case 'popupslider':
-                case 'textbox':
-                case 'targetlist':
+                case "choosefile":
+                case "colorchip":
+                case "popupslider":
+                case "textbox":
+                case "targetlist":
                 default:
                     fl.xmlui.set(this.id, value || "");
             }
@@ -319,6 +321,31 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         return XULControl;
     }());
     exports.XULControl = XULControl;
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
+/***/ 160:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(652), __webpack_require__(947), __webpack_require__(248), __webpack_require__(917)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, tslib_1, fs, path, url_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.ensureUriExists = ensureUriExists;
+    fs = tslib_1.__importStar(fs);
+    path = tslib_1.__importStar(path);
+    function ensureUriExists(uri) {
+        var filePath = (0, url_1.fileURLToPath)(uri).replace(/\\/g, "/");
+        var dir = path.dirname(filePath);
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+        if (!fs.existsSync(filePath)) {
+            fs.writeFileSync(filePath, '');
+        }
+    }
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
@@ -441,7 +468,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                     xml = value;
                 }
             }
-            ;
             return xml;
         }
         if (/^[\[{]/.test(str)) {
@@ -466,7 +492,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /***/ 720:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(490)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, uri_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(490), __webpack_require__(160)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, uri_1, ensureUriExists_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
     exports.XjsflUI = void 0;
@@ -484,10 +510,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                 .prettyPrint()
                 .replace(/{xulid}/g, String(xul.id))
                 .replace(/xjsfl\.ui\.handleEvent\(0,/g, "xjsfl.ui.handleEvent(".concat(xul.id, ","));
-            var uri = xul.uri || uri_1.BASEURI + "core/ui/dialog.xul";
-            if (FLfile.exists(uri)) {
-                FLfile.setAttributes(uri, "W");
-            }
+            var uri = xul.uri || "".concat(uri_1.BASEURI, "core/ui/dialog.xul");
+            (0, ensureUriExists_1.ensureUriExists)(uri);
             FLfile.write(uri, xml);
             XjsflUI.dialogs.push(xul);
             console.log("Showing XUL dialog \"".concat((_a = xul.title) !== null && _a !== void 0 ? _a : "", "\""));
@@ -573,6 +597,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 
 /***/ }),
 
+/***/ 947:
+/***/ (function(module) {
+
+"use strict";
+module.exports = __WEBPACK_EXTERNAL_MODULE__947__;
+
+/***/ }),
+
 /***/ 971:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -588,7 +620,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
             this.xmlui = xmlui;
         }
         XULEvent.prototype.toString = function () {
-            var controlId = this.control ? " control=\"".concat(this.control.id, "\"") : '';
+            var controlId = this.control ? " control=\"".concat(this.control.id, "\"") : "";
             return "[object XULEvent type=\"".concat(this.type, "\"").concat(controlId, " xul=\"").concat(this.xul.id, "\"]");
         };
         return XULEvent;
