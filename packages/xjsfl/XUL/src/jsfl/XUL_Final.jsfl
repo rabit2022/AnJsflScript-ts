@@ -62,9 +62,10 @@ define([
 				this.error		= null;
 				this.id			= -1;
 
+				console.log(this.xml)
+
 			// load controls
 				var xml			= XjsflFile.load('xul/controls.xul', 'template', true);
-				// console.log(xml)
 				for each(var node in xml.grid.rows.*)
 				{
 					XUL.templates[node.@template.toString()] = node.copy();
@@ -366,6 +367,7 @@ define([
 								this._addEvents(id, events);
 							}
 
+							// console.log(xml)
 						// set control
 							this.controls[id] = new XULControl(id, type, this, xml);
 							if(user !== true)

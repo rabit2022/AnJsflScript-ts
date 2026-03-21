@@ -58,21 +58,11 @@ define([], function () {
      */
     function processCompoundElements(xml,type) {
         // grab XML child nodes
-        /**
-         * @type {XML}
-         */
         var elements;
         switch(type)
         {
             case 'radiogroup':
                 elements = xml..radio;
-                // console.log(typeof elements);
-                /*
-<radio label="2" value="2" acceskey=""/>
-<radio label="2" value="2" acceskey=""/>
-<radio label="3" value="3" acceskey=""/>
-
- */
                 break;
             case 'checkboxgroup':
                 elements = xml..checkbox;
@@ -90,16 +80,6 @@ define([], function () {
         var this_elements = [];
         for each(var element in elements)
         {
-            /**
-             * @type {XML}
-             */
-            element;
-            /*
-⚡admin LOG ❯❯ <radio label="2" value="2" acceskey=""/>
-⚡admin LOG ❯❯ <radio label="2" value="2" acceskey=""/>
-⚡admin LOG ❯❯ <radio label="3" value="3" acceskey=""/>
-             */
-            // console.log(element.toXMLString(),element.@id);
             var value = parseValue(String(element.@value));
             // this_elements[value] = {id:element.@id, label:element.@label, value:value};
             this_elements .push({id:element.@id, label:element.@label, value:value});

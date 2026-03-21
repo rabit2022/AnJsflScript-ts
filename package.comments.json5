@@ -120,12 +120,8 @@
     //    "H:\project\js\AnJsflScript-ts\packages\nodejs"
     "@types/node": "25.0.7",
     //    "H:\project\js\AnJsflScript-ts\packages\polyfills"
+    "json5": "2.2.3",
 
-
-
-    // 通配符
-    //    "@types/micromatch": "4.0.10",
-    //    "micromatch": "4.0.8",
 
     // =================================================================================
     // 代码质量

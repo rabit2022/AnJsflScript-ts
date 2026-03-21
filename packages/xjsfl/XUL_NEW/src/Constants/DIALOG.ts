@@ -1,0 +1,33 @@
+import * as console from "node:console";
+
+export const DIALOG = `<dialog id="dialog" title="" buttons="accept,cancel">
+
+    <content>
+
+        <grid>
+
+            <columns id="columns">
+                <column flex="1"/>
+                <column flex="2"/>
+            </columns>
+
+            <rows id="controls">
+
+            </rows>
+
+        </grid>
+
+    </content>
+
+    <script>
+        <![CDATA[
+            if(window.xjsfl)
+            {
+            xjsfl.ui.handleEvent({xulid}, 'initialize');
+            }
+        ]]>
+    </script>
+
+</dialog>
+`;
+
