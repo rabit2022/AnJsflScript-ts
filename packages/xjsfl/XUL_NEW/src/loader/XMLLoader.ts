@@ -1,25 +1,36 @@
 import * as fs from 'fs';
-import {toPath} from "../Checker/IsPath";
-import {XML} from "../paser/XMLPaser";
+import {isValidPath, toPath} from "../Checker/IsPath";
+import {XMLObject} from "../paser/XMLPaser";
+import {isFileUri} from "../Checker/IsURL";
 
 
-export class XMLLoader {
-    public paser: XML;
+export class XMLLoader extends XMLObject {
+    constructor(pathOrURIOrXML: string) {
+        let finalPath = pathOrURIOrXML;
+        if (isFileUri(pathOrURIOrXML)) {
+            finalPath = toPath(pathOrURIOrXML);
+        }
 
-    get root() {
-        return this.paser.json;
-    }
+        let xmlStr = "";
+        if (isValidPath(finalPath)) {
+            xmlStr = fs.readFileSync(finalPath, 'utf-8');
+        } else {
+            xmlStr = pathOrURIOrXML;
+        }
 
-    constructor(pathOrURI: string) {
-        let path = toPath(pathOrURI);
-        const xmlStr = fs.readFileSync(path, 'utf-8');
-
-        this.paser = new XML(xmlStr);
+        super(xmlStr);
     }
 
     name(): string {
-        return Object.keys(this.root)[0];
+        return Object.keys(this.json)[0];
+    }
+
+    children() {
+        let key = Object.keys(this.json)[0];
+        return this.json[key];
     }
 }
 
 
+// const loader = new XMLLoader("H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL_NEW\\assets\\templates\\xul\\dialog.xul");
+// console.log(JSON.stringify(loader.root));

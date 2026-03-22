@@ -42,12 +42,12 @@ export class XMLModify {
 }
 
 
-const loader = new XMLLoader("H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL_NEW\\assets\\templates\\xul\\dialog.xul");
-console.log(loader.root);
-
-
-
-const deleter = new XMLModify(loader.root,'$..content[@id]');
-deleter.set('controls')
-
-console.log(loader.root);
+// const loader = new XMLLoader("H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL_NEW\\assets\\templates\\xul\\dialog.xul");
+// console.log(loader.root);
+//
+//
+//
+// const deleter = new XMLModify(loader.root,'$..content[@id]');
+// deleter.set('controls')
+//
+// console.log(loader.root);

@@ -1,33 +1,24 @@
-import * as console from "node:console";
 
-export const DIALOG = `<dialog id="dialog" title="" buttons="accept,cancel">
 
-    <content>
+export const DIALOG = {
+    "dialog": {
+        "content": {
+            // "grid": {
+            //     "columns": {
+            //         "column": [{"@flex": 1}, {"@flex": 2}],
+            //         "@id": "columns"
+            //     }, "rows": {"@id": "controls"}
+            // }
+            "@id": 'controls'
+        },
+        "script": "if(window.xjsfl){xjsfl.ui.handleEvent({xulid}, 'initialize');}",
+        "@id": "dialog",
+        "@title": "",
+        "@buttons": "accept,cancel"
+    }
+}
 
-        <grid>
 
-            <columns id="columns">
-                <column flex="1"/>
-                <column flex="2"/>
-            </columns>
 
-            <rows id="controls">
-
-            </rows>
-
-        </grid>
-
-    </content>
-
-    <script>
-        <![CDATA[
-            if(window.xjsfl)
-            {
-            xjsfl.ui.handleEvent({xulid}, 'initialize');
-            }
-        ]]>
-    </script>
-
-</dialog>
-`;
-
+// DIALOG.dialog.content["@id"] = "dialog";
+// console.log(DIALOG);

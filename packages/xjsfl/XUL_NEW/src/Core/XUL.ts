@@ -1,14 +1,15 @@
 import {DIALOG} from "../Constants/DIALOG";
-import {XML} from "../paser/XMLPaser";
+import {XMLObject} from "../paser/XMLPaser";
 import {TEMPLATES} from "../Constants/Templates";
 import {parseFunction} from "../paser/Function";
 import {isFileUri} from "../Checker/IsURL";
 import {XMLLoader} from "../loader/XMLLoader";
 import {XULControl} from "../XULControl";
+import {parseUserXML} from "../paser/UserXML";
 
 export class XUL {
     // public
-    public xml = new XML(DIALOG);
+    public xml = DIALOG;
     public controls: Record<string, XULControl> = {}
     public settings = {};
     public flashData = null;
@@ -55,7 +56,7 @@ export class XUL {
 
     setTitle(title: string = 'xJSFL') {
         if (this.xml) {
-            const dialogNode = this.xml.json.dialog;
+            const dialogNode = this.xml.dialog;
 
             dialogNode["@title"] = ' ' + title;
             this.title = title;
@@ -113,10 +114,10 @@ export class XUL {
     load(pathOrURI: string): this {
         const xml = new XMLLoader(pathOrURI);
 
-        let dialog = xml.root.dialog;
+        let root = xml.json;
         // grab nodes
         if (xml.name() === 'dialog') {
-            const title = dialog["@title"];
+            const title = root.dialog["@title"];
 
             if (title.length()) {
                 this.setTitle(title);
@@ -125,7 +126,7 @@ export class XUL {
 
 
         // var nodes = xml.root.*;
-        var nodes = xml;
+        var nodes = xml.build();
 
         // set nodes
         this.setXML(nodes);
@@ -157,22 +158,16 @@ export class XUL {
     /**
      * Replace the standard XML dialog template
      */
-    setXML(xml: string): this {
+    setXML(xml:string): this {
         // variables
         this.controls = {};
         this.events = {};
         this.settings = {};
 
 
-        // update content
-        // delete this.xml..content.*;
-        delete this.xml.json.dialog.content;
-        // this.xml..content.@id	= 'controls'
-        this.xml.json.dialog.content["@id"] = 'controls';
-
         // xml
-        var nodes = new XMLList(xml);
-        this.content = this._parseUserXML(nodes);
+        var nodes = xml;
+        this.content = parseUserXML(nodes);
 
         // add new controls
         return this;
