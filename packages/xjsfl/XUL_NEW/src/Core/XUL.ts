@@ -1,14 +1,15 @@
 import {DIALOG} from "../Constants/DIALOG";
-import {Paser} from "../paser/XMLPaser";
+import {XML} from "../paser/XMLPaser";
 import {TEMPLATES} from "../Constants/Templates";
-import * as console from "node:console";
 import {parseFunction} from "../paser/Function";
-// import {XMLPaser} from "../paser/XMLPaser";
+import {isFileUri} from "../Checker/IsURL";
+import {XMLLoader} from "../loader/XMLLoader";
+import {XULControl} from "../XULControl";
 
 export class XUL {
     // public
-    public xml = new Paser(DIALOG);
-    public controls = {};
+    public xml = new XML(DIALOG);
+    public controls: Record<string, XULControl> = {}
     public settings = {};
     public flashData = null;
 
@@ -21,20 +22,21 @@ export class XUL {
     private id = -1;
 
     // template
-    private content=	'';
-    private separator=	'</rows></grid><separator /><grid><columns><column flex="1" /><column flex="2" /></columns><rows>';
+    private content = '';
+    private separator = '</rows></grid><separator /><grid><columns><column flex="1" /><column flex="2" /></columns><rows>';
 
     // properties
     public title = 'xJSFL';
     // private error=		null;
 
     // flags
-    private built=		false;
-    private open=		false;
-    private accepted=	false;
+    private built = false;
+    private open = false;
+    private accepted = false;
 
     static templates = TEMPLATES;
-    constructor(title: string='xJSFL') {
+
+    constructor(title: string = 'xJSFL') {
         //TODO Allow a file: uri to be passed into the constructor
 
         //TODO Consider making XUL driver-based, so basic controls are constructed using the core, but can be wrapped with additional markup using driver-based methods
@@ -51,7 +53,7 @@ export class XUL {
         return this;
     }
 
-    setTitle(title:string='xJSFL') {
+    setTitle(title: string = 'xJSFL') {
         if (this.xml) {
             const dialogNode = this.xml.json.dialog;
 
@@ -61,8 +63,7 @@ export class XUL {
         return this;
     }
 
-    static factory(props:Function)
-    {
+    static factory(props: Function | string): XUL {
         /*
             Arguments:
             String, accept, fail	- get controls, labels and values from string @see XUL.add()
@@ -73,16 +74,13 @@ export class XUL {
 
         var xul = new XUL();
 
-        if(xul.xml && props)
-        {
-            // if props is a function, set the dialog title to the function name, and create textfields per function argument
-            if(typeof props == 'function')
-            {
+        if (xul.xml && props) {
+            if (typeof props == 'function') {
                 let FUNCTION = props;
 
                 // parse and assign controls
                 let functionInfo = parseFunction(FUNCTION);
-                for (const param of functionInfo.params){
+                for (const param of functionInfo.params) {
                     xul.addTextbox(param);
                 }
 
@@ -90,83 +88,63 @@ export class XUL {
                 xul.setTitle('Dialog for "' + FUNCTION.name + '"');
             }
 
-            // // props is XML, use set XML
-            // else if(typeof props == 'xml')
-            // {
-            //     xul.setXML(props);
-            // }
-            // props is URI, load XML
-            else if(props instanceof URI)
-            {
-                xul.load(props);
-            }
-
+                // // props is XML, use set XML
+                // else if(typeof props == 'xml')
+                // {
+                //     xul.setXML(props);
+                // }
             // props is a string, load XML if is a URI, or use shorthand notation to create controls
-            else if(typeof props == 'string')
-            {
-                if(URI.isURI(props))
-                {
+            else if (typeof props == 'string') {
+                if (isFileUri(props)) {
                     xul.load(props);
-                }
-                else
-                {
+                } else {
                     xul.add(props);
                 }
             }
-
-            // return
-            return xul;
         }
 
-        // return
         return xul;
     }
 
 
     /**
      * Loads a dialog in from an external file
-     * @param	{String}	pathOrURI	A valid path or URI
-     * @param	{URI}		pathOrURI	A URI instance
-     * @returns	{XUL}					The XUL dialog
      */
-    load(pathOrURI)
-{
-    // get URI
-    var xml = XjsflFile.load(pathOrURI);
+    load(pathOrURI: string): this {
+        const xml = new XMLLoader(pathOrURI);
 
-    // grab nodes
-    if(xml.name() == 'dialog')
-        {
-            var title = xml.@title;
-            if(title.length())
-        {
-            this.setTitle(title);
+        let dialog = xml.root.dialog;
+        // grab nodes
+        if (xml.name() === 'dialog') {
+            const title = dialog["@title"];
+
+            if (title.length()) {
+                this.setTitle(title);
+            }
         }
-    }
-    var nodes = xml.*;
 
-    // set nodes
-    this.setXML(nodes);
-    return this;
-},
+
+        // var nodes = xml.root.*;
+        var nodes = xml;
+
+        // set nodes
+        this.setXML(nodes);
+        return this;
+    }
+
     /**
      * @type {Object} The values of the dialog controls parsed into their correct data types
      */
-    get values()
-    {
+    get values() {
         // return null if a settings object doesn't exist (the user cancelled)
-        if( ! this.settings )
-        {
+        if (!this.settings) {
             return null;
         }
 
         // if not, grab values
-        var values = {};
-        for(var id in this.controls)
-        {
-            var control = this.controls[id];
-            if(control.enumerable)
-            {
+        var values: Record<string, any> = {};
+        for (const [id, control] of Object.entries(this.controls)) {
+            if (control.enumerable) {
                 values[id] = control.value;
             }
         }
@@ -176,10 +154,33 @@ export class XUL {
     }
 
 
+    /**
+     * Replace the standard XML dialog template
+     */
+    setXML(xml: string): this {
+        // variables
+        this.controls = {};
+        this.events = {};
+        this.settings = {};
+
+
+        // update content
+        // delete this.xml..content.*;
+        delete this.xml.json.dialog.content;
+        // this.xml..content.@id	= 'controls'
+        this.xml.json.dialog.content["@id"] = 'controls';
+
+        // xml
+        var nodes = new XMLList(xml);
+        this.content = this._parseUserXML(nodes);
+
+        // add new controls
+        return this;
+    }
+
     toString(): string {
         return '[class XUL]';
     }
-
 }
 
 

@@ -1,7 +1,7 @@
 import {XMLBuilder, XMLParser,XMLValidator} from "fast-xml-parser";
 
 
-export class Paser {
+export class XML {
     public json:any;
 
     constructor(xml: string) {

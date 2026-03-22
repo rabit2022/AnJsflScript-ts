@@ -37,23 +37,16 @@
       "es6"
     ],
     "skipLibCheck": false,
-
-    "baseUrl": ".",
-    "paths": {
-       "@xjsfl/XULControl_constructor": ["./src/XULControl/XULControl_constructor.jsfl"]
-    }
-
   },
   "include": [
     "src",
-
-//    "../../../types/XML/E4X.d.ts",
+    //    "../../../types/XML/E4X.d.ts",
 
     // region TYPES
     // jsfl
     "../../../types/jsfl/types/**/*.d.ts",
     // 全局的 类型定义文件
     "../../../types/myShim/*.d.ts"
-// endregion TYPES
+    // endregion TYPES,
   ]
 }

@@ -11,6 +11,7 @@
 // import { parseValue } from "./utils";
 // import { processCompoundElements } from "@xjsfl/XULControl_constructor";
 import { XULElementItem } from "./XULControl.types";
+import {XUL} from "./Core/XUL";
 
 // Main Class --------------------------------------------------
 export class XULControl {
@@ -22,7 +23,7 @@ export class XULControl {
     public elements: XULElementItem[] = [];
 
     private _xml: XML;
-    private _xul: XUL;
+    private _xul: XUL ;
 
     constructor(id: string, type: string, xul: XUL, xml: XML) {
         this.id = id;
