@@ -108,10 +108,11 @@
 
 
 export const TEMPLATES = {
+    // simpleControl
     "label": {"row": {"label": {"@value": "Label", "@align": ""}, "@template": "label"}},
     "textbox": {
         "row": {
-            "label": {"@value": "Textbox:"},
+            "label": {"@value": "Textbox:","@width": 100},
             "textbox": {
                 "@class": "control",
                 "@id": "textbox",
@@ -212,15 +213,17 @@ export const TEMPLATES = {
             "@template": "choosefile"
         }
     },
+
+    //  compoundControl
     "listbox": {
         "row": {
             "label": {"@value": "Listbox:"},
             "listbox": {
-                "listitem": [{"@label": "Item 1", "@value": 1, "@selected": ""}, {
-                    "@label": "Item 2",
-                    "@value": 2,
-                    "@selected": ""
-                }, {"@label": "Item 3", "@value": 3, "@selected": ""}],
+                "listitem": [
+                    // {"@label": "Item 1", "@value": 1, "@selected": ""},
+                    // {"@label": "Item 2", "@value": 2, "@selected": ""},
+                    // {"@label": "Item 3", "@value": 3, "@selected": ""}
+                ],
                 "@class": "control",
                 "@id": "listbox",
                 "@width": "",
@@ -307,6 +310,11 @@ export const TEMPLATES = {
             "@template": "checkboxgroup"
         }
     },
+
+    // children
+    "listitem":{"@label": "Item 1", "@value": 1, "@selected": ""},
+
+    // spacer
     "separator": {},
     "spacer": {"row": {"spacer": "", "label": "", "@template": "spacer"}},
     "property": {},

@@ -1,0 +1,25 @@
+<dialog id="dialog" title=" Compound control values" buttons="accept,cancel">
+    <content>
+        <grid>
+            <columns id="columns">
+                <column flex="1"/>
+                <column flex="2"/>
+            </columns>
+            <rows id="controls">
+                <row template="textbox">
+                    <label value="用户名" width="100"/>
+                    <textbox class="control" id="username" value="admin" maxlength="" prompt="" size=""
+                             multiline="false" width="" flex="1"/>
+                </row>
+                <row template="textbox">
+                    <label value="密码" width="100"/>
+                    <textbox class="control" id="password" value="" maxlength="20" prompt="" size="" multiline="false"
+                             width="" flex="1"/>
+                </row>
+            </rows>
+        </grid>
+    </content>
+    <script>
+        if(window.xjsfl){xjsfl.ui.handleEvent({xulid}, 'initialize');}
+    </script>
+</dialog>

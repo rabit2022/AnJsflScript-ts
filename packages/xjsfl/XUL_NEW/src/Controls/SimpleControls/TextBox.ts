@@ -1,0 +1,9 @@
+import {SimpleControls} from "../SimpleControls";
+import {TextBoxAttributes} from "./types/TextBox.types";
+
+export class TextBox extends SimpleControls {
+    constructor(id: string, label: string, attributes: TextBoxAttributes = {}) {
+        super("textbox", id, label, attributes);
+    }
+
+}

@@ -23,9 +23,9 @@ export class XMLSelector {
 }
 
 
-//
+
 // const loader = new XMLLoader("H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL_NEW\\core\\ui\\dialog.xul");
-// // console.log(loader.root);
+// // console.log(loader.JSON);
 //
-// const selector = new XMLSelector(loader.json,"$..radiogroup")
-// console.log(selector.select().length);
+// const selector = new XMLSelector(loader.JSON,"$..row")
+// console.log(selector.select());

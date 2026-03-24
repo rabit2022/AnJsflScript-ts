@@ -62,7 +62,7 @@ define([
 				this.error		= null;
 				this.id			= -1;
 
-				console.log(this.xml)
+				// console.log(this.xml)
 
 			// load controls
 				var xml			= XjsflFile.load('xul/controls.xul', 'template', true);
@@ -397,6 +397,9 @@ define([
 						// grab the first item in the list to use as a template for the others
 							var items			= parent.*;
 							var itemTemplate	= items[0].copy();
+							// console.log("items",items);
+							// console.log("itemTemplate",itemTemplate.toXMLString())
+						// // itemTemplate <listitem label="Item 1" value="1" selected=""/>;
 
 						// delete old child nodes
 							while(items.length())

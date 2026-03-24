@@ -2,7 +2,14 @@ import {XMLBuilder, XMLParser,XMLValidator} from "fast-xml-parser";
 
 
 export class XMLObject {
-    public json:any;
+    private json:any;
+
+    get JSON():any {
+        return this.json;
+    }
+    set JSON(value:any) {
+        this.json = value;
+    }
 
     constructor(xml: string) {
 

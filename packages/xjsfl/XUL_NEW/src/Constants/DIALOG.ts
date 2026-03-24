@@ -1,14 +1,17 @@
-
-
 export const DIALOG = {
     "dialog": {
         "content": {
-            // "grid": {
-            //     "columns": {
-            //         "column": [{"@flex": 1}, {"@flex": 2}],
-            //         "@id": "columns"
-            //     }, "rows": {"@id": "controls"}
-            // }
+            "grid": {
+                "columns": {
+                    "column": [{"@flex": 1}, {"@flex": 2}],
+                    "@id": "columns"
+                },
+                "rows": {
+                    "row": [],
+                    "@id": "controls"
+                }
+                //"row": {"@id": "controls"}
+            },
             "@id": 'controls'
         },
         "script": "if(window.xjsfl){xjsfl.ui.handleEvent({xulid}, 'initialize');}",
@@ -17,7 +20,6 @@ export const DIALOG = {
         "@buttons": "accept,cancel"
     }
 }
-
 
 
 // DIALOG.dialog.content["@id"] = "dialog";

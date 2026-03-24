@@ -1,11 +1,10 @@
 import {DIALOG} from "../Constants/DIALOG";
-import {XMLObject} from "../paser/XMLPaser";
-import {TEMPLATES} from "../Constants/Templates";
-import {parseFunction} from "../paser/Function";
-import {isFileUri} from "../Checker/IsURL";
 import {XMLLoader} from "../loader/XMLLoader";
 import {XULControl} from "../XULControl";
-import {parseUserXML} from "../paser/UserXML";
+import {TEMPLATES} from "../Constants/Templates";
+import {parseFunction} from "../utils/paser/Function";
+import {isFileUri} from "../utils/Checker/IsURL";
+
 
 export class XUL {
     // public
@@ -134,7 +133,7 @@ export class XUL {
     }
 
     /**
-     * @type {Object} The values of the dialog controls parsed into their correct data types
+     * The values of the dialog controls parsed into their correct data types
      */
     get values() {
         // return null if a settings object doesn't exist (the user cancelled)
@@ -143,7 +142,7 @@ export class XUL {
         }
 
         // if not, grab values
-        var values: Record<string, any> = {};
+        const values: Record<string, any> = {};
         for (const [id, control] of Object.entries(this.controls)) {
             if (control.enumerable) {
                 values[id] = control.value;
