@@ -62,8 +62,11 @@ define([
 				this.error		= null;
 				this.id			= -1;
 
+<<<<<<< HEAD
 				// console.log(this.xml)
 
+=======
+>>>>>>> main
 			// load controls
 				var xml			= XjsflFile.load('xul/controls.xul', 'template', true);
 				for each(var node in xml.grid.rows.*)
@@ -367,7 +370,6 @@ define([
 								this._addEvents(id, events);
 							}
 
-							// console.log(xml)
 						// set control
 							this.controls[id] = new XULControl(id, type, this, xml);
 							if(user !== true)
@@ -1466,7 +1468,6 @@ define([
 								{
 									for each(var type in types)
 									{
-										// console.log(type);
 										// check types are valid
 											if( ! /^command|change|setfocus|create$/.test(type))
 											{
