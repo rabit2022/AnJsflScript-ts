@@ -15,3 +15,9 @@ export type ValueItem =
 };
 
 export type ValuesType = ValueItem[] | Record<string, ValueItem>;
+
+
+export interface SelectedItem {
+    selected: boolean;
+    [key: string]: any; // ⭐ 允许扩展字段
+}

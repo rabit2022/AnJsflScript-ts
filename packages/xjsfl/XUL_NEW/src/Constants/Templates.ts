@@ -181,21 +181,7 @@ export const TEMPLATES = {
             "@template": "button"
         }
     },
-    "targetlist": {
-        "row": {
-            "label": {"@value": "Targetlist:"},
-            "targetlist": {
-                "@id": "targetlist",
-                "@class": "",
-                "@width": 300,
-                "@height": "",
-                "@flex": 1,
-                "@pathtype": "absolute"
-            },
-            "property": {"@id": "targetlist"},
-            "@template": "targetlist"
-        }
-    },
+
     "choosefile": {
         "row": {
             "label": {"@value": "Choose File:", "@align": "", "@control": ""},
@@ -215,6 +201,21 @@ export const TEMPLATES = {
     },
 
     //  compoundControl
+    "targetlist": {
+        "row": {
+            "label": {"@value": "Targetlist:"},
+            "targetlist": {
+                "@id": "targetlist",
+                "@class": "",
+                "@width": 300,
+                "@height": "",
+                "@flex": 1,
+                "@pathtype": "absolute"
+            },
+            "property": {"@id": "targetlist"},
+            "@template": "targetlist"
+        }
+    },
     "listbox": {
         "row": {
             "label": {"@value": "Listbox:"},
@@ -239,15 +240,11 @@ export const TEMPLATES = {
             "label": {"@value": "Menu List:"},
             "menulist": {
                 "menupop": {
-                    "menuitem": [{
-                        "@label": "Item 1",
-                        "@value": 1,
-                        "@selected": ""
-                    }, {"@label": "Item2", "@value": 2, "@selected": ""}, {
-                        "@label": "Item 3",
-                        "@value": 3,
-                        "@selected": ""
-                    }], "@class": "control", "@id": "menupop"
+                    "menuitem": [
+                        // {"@label": "Item 1", "@value": 1, "@selected": ""},
+                        // {"@label": "Item2", "@value": 2, "@selected": ""},
+                        // {"@label": "Item 3", "@value": 3, "@selected": ""}
+                    ], "@class": "control", "@id": "menupop"
                 },
                 "@class": "control",
                 "@id": "menulist",
@@ -265,17 +262,9 @@ export const TEMPLATES = {
         "row": {
             "label": {"@value": "Radio Group:"},
             "radiogroup": {
-                "radio": [{
-                    "@label": "Radio 1",
-                    "@selected": "",
-                    "@value": 1,
-                    "@acceskey": ""
-                }, {"@label": "Radio 2", "@selected": "", "@value": 2, "@acceskey": ""}, {
-                    "@label": "Radio 3",
-                    "@selected": "",
-                    "@value": 3,
-                    "@acceskey": ""
-                }], "@class": "control", "@id": "radiogroup", "@tabindex": "", "@groupbox": true
+                "radio": [
+                    // {"@label": "Radio 1", "@selected": "", "@value": 1, "@acceskey": ""}, {"@label": "Radio 2", "@selected": "", "@value": 2, "@acceskey": ""}, {"@label": "Radio 3", "@selected": "", "@value": 3, "@acceskey": ""}
+                ], "@class": "control", "@id": "radiogroup", "@tabindex": "", "@groupbox": true
             },
             "@template": "radiogroup"
         }
@@ -284,35 +273,13 @@ export const TEMPLATES = {
         "row": {
             "label": {"@value": "Checkbox Group:"},
             "vbox": {
-                "checkbox": [{
-                    "@class": "control",
-                    "@id": "checkbox[0]",
-                    "@label": "Checkbox 1",
-                    "@checked": true,
-                    "@tabindex": "",
-                    "@acceskey": ""
-                }, {
-                    "@class": "control",
-                    "@id": "checkbox[1]",
-                    "@label": "Checkbox 2",
-                    "@checked": true,
-                    "@tabindex": "",
-                    "@acceskey": ""
-                }, {
-                    "@class": "control",
-                    "@id": "checkbox[2]",
-                    "@label": "Checkbox 3",
-                    "@checked": true,
-                    "@tabindex": "",
-                    "@acceskey": ""
-                }], "@class": "control", "@groupbox": true
+                "checkbox": [
+                    // {"@class": "control", "@id": "checkbox[0]", "@label": "Checkbox 1", "@checked": true, "@tabindex": "", "@acceskey": ""}, {"@class": "control", "@id": "checkbox[1]", "@label": "Checkbox 2", "@checked": true, "@tabindex": "", "@acceskey": ""}, {"@class": "control", "@id": "checkbox[2]", "@label": "Checkbox 3", "@checked": true, "@tabindex": "", "@acceskey": ""}
+                ], "@class": "control", "@groupbox": true
             },
             "@template": "checkboxgroup"
         }
     },
-
-    // children
-    "listitem":{"@label": "Item 1", "@value": 1, "@selected": ""},
 
     // spacer
     "separator": {},
