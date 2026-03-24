@@ -9,7 +9,7 @@
 
 // main.ts
 import * as path from "path";
-import { findNearestPackageJson, findRepoRoot } from "./nodejs/findPackage";
+import {findNearestPackageJson, findRepoRoot} from "./nodejs/findPackage";
 
 // export const $ProjectFileDir$ = path.resolve(__filename, "../../../../");
 export const $ProjectFileDir$ = findRepoRoot(__dirname);

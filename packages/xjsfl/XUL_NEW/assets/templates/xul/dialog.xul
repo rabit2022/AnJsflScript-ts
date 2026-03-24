@@ -1,29 +1,29 @@
 <dialog id="dialog" title="" buttons="accept,cancel">
 
-	<content>
+    <content>
 
-		<grid>
+        <grid>
 
-			<columns id="columns">
-				<column flex="1" />
-				<column flex="2" />
-			</columns>
+            <columns id="columns">
+                <column flex="1"/>
+                <column flex="2"/>
+            </columns>
 
-			<rows id="controls">
+            <rows id="controls">
 
-			</rows>
+            </rows>
 
-		</grid>
+        </grid>
 
-	</content>
+    </content>
 
-	<script>
-		<![CDATA[
+    <script>
+        <![CDATA[
 			if(window.xjsfl)
 			{
 				xjsfl.ui.handleEvent({xulid}, 'initialize');
 			}
 		]]>
-	</script>
+    </script>
 
 </dialog>

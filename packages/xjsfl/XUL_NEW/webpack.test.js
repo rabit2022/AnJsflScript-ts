@@ -4,8 +4,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const glob = require('glob'); // 👈 用于匹配 test 下所有 .ts 文件
 
 
-
-
 // 👇 新增：用于替换 define -> require
 class ReplaceDefineWithRequire {
     apply(compiler) {
@@ -124,7 +122,7 @@ module.exports = {
     externals: [
         {"path": "path-browserify"},
         // region EXCLUDE_MODULE_NAME
-"lodash","linq","tslib","oxide.ts","requirejs","AnJsflScript-ts","micromatch","@formatjs/intl","es8-shim","es7-shim","typedarray","symbol-es6","intl","harmony-reflect","es6-promise","es6-collections","json5","json3","@polyfill/symbol-dispose","jsbi","es10-shim","util","path-browserify","eventemitter3","seedrandom","random-js","chance","store-js","stackframe","error-stack-parser","progress","cli-table3","chroma-js","@third/luxon","luxon","@third/date-fns","date-fns","_exports","@third/xregexp","xregexp","es6-sham","es6-shim","@third/superjson","superjson","es5-sham","es5-shim","url","assert","@third/fast-xml-parser","fast-xml-parser","@third/universal-cookie","@polyfill/cookie","atob","base-64","@third/loglevel","loglevel","Hello2","@xjsfl/UI","@xjsfl/super","@xjsfl/Events","@xjsfl/Context","@xjsfl/Constants","@xjafl/Collection","@nodejs/__filename","process","fs","child_process","@dom/setTimeout","console","@anjsfl-ts/Sessions","@anjsfl-ts/dev","@anjsfl/validation","@anjsfl/sat","@anjsfl/random","@anjsfl/parser","@anjsfl/more-element","@anjsfl/checker","@xjsfl/XUL","@xjsfl/XUL/XML","@xjsfl/XUL/XUL","@xjsfl/XUL/XULControl","@xjsfl/XUL/XULEvent","@xjsfl/XUL/Utils","@xjsfl/XUL/xjsfl",
+        "lodash", "linq", "tslib", "oxide.ts", "requirejs", "AnJsflScript-ts", "micromatch", "@formatjs/intl", "es8-shim", "es7-shim", "typedarray", "symbol-es6", "intl", "harmony-reflect", "es6-promise", "es6-collections", "json5", "json3", "@polyfill/symbol-dispose", "jsbi", "es10-shim", "util", "path-browserify", "eventemitter3", "seedrandom", "random-js", "chance", "store-js", "stackframe", "error-stack-parser", "progress", "cli-table3", "chroma-js", "@third/luxon", "luxon", "@third/date-fns", "date-fns", "_exports", "@third/xregexp", "xregexp", "es6-sham", "es6-shim", "@third/superjson", "superjson", "es5-sham", "es5-shim", "url", "assert", "@third/fast-xml-parser", "fast-xml-parser", "@third/universal-cookie", "@polyfill/cookie", "atob", "base-64", "@third/loglevel", "loglevel", "Hello2", "@xjsfl/UI", "@xjsfl/super", "@xjsfl/Events", "@xjsfl/Context", "@xjsfl/Constants", "@xjafl/Collection", "@nodejs/__filename", "process", "fs", "child_process", "@dom/setTimeout", "console", "@anjsfl-ts/Sessions", "@anjsfl-ts/dev", "@anjsfl/validation", "@anjsfl/sat", "@anjsfl/random", "@anjsfl/parser", "@anjsfl/more-element", "@anjsfl/checker", "@xjsfl/XUL", "@xjsfl/XUL/XML", "@xjsfl/XUL/XUL", "@xjsfl/XUL/XULControl", "@xjsfl/XUL/XULEvent", "@xjsfl/XUL/Utils", "@xjsfl/XUL/xjsfl",
 // endregion EXCLUDE_MODULE_NAME
 
     ],

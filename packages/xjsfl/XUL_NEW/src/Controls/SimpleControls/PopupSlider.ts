@@ -1,11 +1,10 @@
 import {SimpleControls} from "../SimpleControls";
-import {Attrs} from "../SimpleControls.types";
 import {PopupSliderAttributes, RangeTuple} from "./types/PopupSlider.types";
 import {TEMPLATES} from "../../Constants/Templates";
 
 export class PopupSlider extends SimpleControls {
-    constructor(id: string, label: string,  values:RangeTuple =[0,0,100],attributes: PopupSliderAttributes = {}) {
-        super("popupslider", id,label, attributes);
+    constructor(id: string, label: string, values: RangeTuple = [0, 0, 100], attributes: PopupSliderAttributes = {}) {
+        super("popupslider", id, label, attributes);
 
         const JSON = this.json as typeof TEMPLATES["popupslider"];
 
@@ -17,5 +16,5 @@ export class PopupSlider extends SimpleControls {
 }
 
 
-const slider = new PopupSlider("id","label",[3,5,100],{flex:100})
+const slider = new PopupSlider("id", "label", [3, 5, 100], {flex: 100})
 console.log(slider.toJSON())

@@ -107,12 +107,14 @@
 // }
 
 
+import {XMLLoader} from "../io/loader/XMLLoader";
+
 export const TEMPLATES = {
     // simpleControl
     "label": {"row": {"label": {"@value": "Label", "@align": ""}, "@template": "label"}},
     "textbox": {
         "row": {
-            "label": {"@value": "Textbox:","@width": 100},
+            "label": {"@value": "Textbox:", "@width": 100},
             "textbox": {
                 "@class": "control",
                 "@id": "textbox",
@@ -282,9 +284,16 @@ export const TEMPLATES = {
     },
 
     // spacer
-    "separator": {},
+    "separator": {
+        "@template": "separator"
+    },
     "spacer": {"row": {"spacer": "", "label": "", "@template": "spacer"}},
-    "property": {},
+    "property": {
+        "property": {
+            "@template": "property",
+            "@id": "property"
+        }
+    },
     "flash": {
         "element": {
             "flash": {
@@ -298,3 +307,6 @@ export const TEMPLATES = {
     }
 }
 
+const loder = new XMLLoader("H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL_NEW\\assets\\templates\\xul\\controls.xul", "path");
+console.log(loder.JSON)
+console.log(JSON.stringify(loder.JSON, null, 2));

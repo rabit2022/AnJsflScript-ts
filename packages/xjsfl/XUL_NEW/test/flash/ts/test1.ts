@@ -29,22 +29,22 @@ let json = {
                         "@template": "textbox"
                     },
                         {
-                        "label": {"@value": "Text00001 :", "@width": 100},
-                        "textbox": {
-                            "@class": "control",
-                            "@id": "text00001",
-                            "@value": "",
-                            "@maxlength": "",
-                            "@prompt": "kb,b,",
-                            "@size": "",
-                            "@multiline": false,
-                            "@width": 180,
-                            "@flex": 1,
-                            "@oncreate": "if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'text00001');",
-                            "@onchange": "if(window.xjsfl)xjsfl.ui.handleEvent('0', 'change', 'text00001');"
-                        },
-                        "@template": "textbox"
-                    }],
+                            "label": {"@value": "Text00001 :", "@width": 100},
+                            "textbox": {
+                                "@class": "control",
+                                "@id": "text00001",
+                                "@value": "",
+                                "@maxlength": "",
+                                "@prompt": "kb,b,",
+                                "@size": "",
+                                "@multiline": false,
+                                "@width": 180,
+                                "@flex": 1,
+                                "@oncreate": "if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'text00001');",
+                                "@onchange": "if(window.xjsfl)xjsfl.ui.handleEvent('0', 'change', 'text00001');"
+                            },
+                            "@template": "textbox"
+                        }],
                     "@id": "controls"
                 }
             }

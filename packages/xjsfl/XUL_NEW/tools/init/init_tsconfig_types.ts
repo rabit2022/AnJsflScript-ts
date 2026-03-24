@@ -7,7 +7,10 @@
  * @description:
  */
 
-import { CURRENT_PROJECT, TS_CONFIG, TS_CONFIG_TEST } from "../ProjectFileDir";
+import {CURRENT_PROJECT, TS_CONFIG, TS_CONFIG_TEST} from "../ProjectFileDir";
+import path from "path";
+import fs from "fs/promises";
+import {findRepoRoot} from "../nodejs/findPackage"; // 假设上述代码已导出函数
 
 `
 
@@ -31,10 +34,6 @@ region中间的部分，正则匹配到，修改为正确的路径
 
 `;
 
-
-import path from "path";
-import fs from "fs/promises";
-import {findNearestPackageJson, findRepoRoot} from "../nodejs/findPackage"; // 假设上述代码已导出函数
 
 /**
  * 任务：自动修改 tsconfig 中的类型声明路径
@@ -67,7 +66,7 @@ export async function fixTsConfigPaths() {
         console.log(`🔗 计算出的 Shim 路径: ${shimPath}`);
 
         // 4. 定义要修改的文件列表
-        const configFiles = [TS_CONFIG,TS_CONFIG_TEST];
+        const configFiles = [TS_CONFIG, TS_CONFIG_TEST];
         // console.log(`🔗 configFiles: ${JSON.stringify(configFiles)}`);
 
         // 正则表达式：匹配 // region TYPES 和 // endregion TYPES 之间的内容

@@ -62,11 +62,7 @@ define([
 				this.error		= null;
 				this.id			= -1;
 
-<<<<<<< HEAD
-				// console.log(this.xml)
 
-=======
->>>>>>> main
 			// load controls
 				var xml			= XjsflFile.load('xul/controls.xul', 'template', true);
 				for each(var node in xml.grid.rows.*)

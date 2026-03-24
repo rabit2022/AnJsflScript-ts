@@ -25,7 +25,7 @@ export function findNearestPackageJson(
             fs.accessSync(pkgPath); // 检查是否存在
             const content = fs.readFileSync(pkgPath, "utf-8");
             const pkg = JSON.parse(content);
-            return { dir: current, pkg };
+            return {dir: current, pkg};
         } catch {
             // 无法读取或不存在，继续向上
         }

@@ -1,7 +1,4 @@
-import * as _ from 'lodash';
 import {JSONPath} from 'jsonpath-plus';
-import {XMLLoader} from "./XMLLoader";
-import * as console from "node:console";
 
 
 export class XMLSelector {
@@ -21,7 +18,6 @@ export class XMLSelector {
         return this.pathsToDelete;
     }
 }
-
 
 
 // const loader = new XMLLoader("H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL_NEW\\core\\ui\\dialog.xul");

@@ -1,4 +1,3 @@
-import {XMLBuilder} from "fast-xml-parser";
 import {DIALOG} from "../../Constants/DIALOG";
 import {Copy} from "../../utils/copy/deepCopy";
 import {XMLSelector} from "../loader/XMLSelector";

@@ -1,6 +1,6 @@
 import {URL} from 'url';
 
-export function isFileUri(str:string) {
+export function isFileUri(str: string) {
     if (!str || typeof str !== 'string') return false;
 
     try {

@@ -1,13 +1,13 @@
 import {Width} from "../../SimpleControls.types";
 
-export interface TextBoxAttributes extends Width{
+export interface TextBoxAttributes extends Width {
     value?: string;
     maxlength?: number;
     prompt?: string;
     size?: number;
     multiline?: boolean;
     width?: number;
-    flex?:number;
+    flex?: number;
 }
 
 

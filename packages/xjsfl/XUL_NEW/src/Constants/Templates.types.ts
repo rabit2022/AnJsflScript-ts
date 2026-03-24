@@ -1,4 +1,4 @@
-export type compoundControl = "radiogroup" | "checkboxgroup" | "menulist" | "listbox"|"targetlist";
+export type compoundControl = "radiogroup" | "checkboxgroup" | "menulist" | "listbox";
 
 export type simpleControl =
     "label"

@@ -18,6 +18,7 @@ export function toPath(pathOrUri: string) {
 }
 
 import isValidPath = require('is-valid-path');
+
 export {isValidPath};
 
 // console.log(isValidPath('foo/bar'));

@@ -1,6 +1,5 @@
-
 export type Attrs = Record<string, any>;
 
-export interface Width{
+export interface Width {
     width?: number;
 }

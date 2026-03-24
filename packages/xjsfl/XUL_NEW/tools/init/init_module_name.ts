@@ -22,8 +22,7 @@ region中间的部分，正则匹配到，修改为正确的MODULE_NAME
 
 import fs from "fs";
 import path from "path";
-import { findNearestPackageJson } from "../nodejs/findPackage";
-import { CURRENT_PROJECT, WEBPACK_CONFIG_FILE } from "../ProjectFileDir";
+import {CURRENT_PROJECT, WEBPACK_CONFIG_FILE} from "../ProjectFileDir";
 
 // // 获取当前脚本所在目录
 // const __filename = fileURLToPath(import.meta.url);

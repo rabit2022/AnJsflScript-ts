@@ -7,9 +7,9 @@
  * @description:
  */
 
-import { fixTsConfigPaths } from "./init/init_tsconfig_types";
-import { set_module_name } from "./init/init_module_name";
-import { exclude_require_config } from "./exclude_packages/exclude_require_config";
+import {fixTsConfigPaths} from "./init/init_tsconfig_types";
+import {set_module_name} from "./init/init_module_name";
+import {exclude_require_config} from "./exclude_packages/exclude_require_config";
 
 // ========== 配置区 ==========
 const MODULE_NAME = "@xjsfl/XUL"; // ←←← 手动修改这里！

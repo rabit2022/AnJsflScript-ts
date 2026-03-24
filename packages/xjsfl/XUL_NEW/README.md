@@ -13,11 +13,14 @@ the structure and file management features of PHP frameworks such as Kohana, to 
 
 I have not actively worked on xJSFL for many years now, so as of January 2022 I am mothballing the project.
 
-The original **xjsfl.com** website has been moved to static hosting at [xjsfl.vercel.app](https://xjsfl.vercel.app), which means that the search, site comments and forum no longer work, but the documentation **is still accessible**.
+The original **xjsfl.com** website has been moved to static hosting at [xjsfl.vercel.app](https://xjsfl.vercel.app),
+which means that the search, site comments and forum no longer work, but the documentation **is still accessible**.
 
-I have also made the [xJSFL Komodo Extension](https://github.com/davestewart/xjsfl-komodo-extension) public for the first time. The code is so old now, I suspect it won't run, but maybe someone would want to pick it up.
+I have also made the [xJSFL Komodo Extension](https://github.com/davestewart/xjsfl-komodo-extension) public for the
+first time. The code is so old now, I suspect it won't run, but maybe someone would want to pick it up.
 
-I think the only other thing to make public would be the original [Snippets](https://xjsfl.vercel.app/feature/snippets-panel) source code, which I can do [on request](issues).
+I think the only other thing to make public would be the
+original [Snippets](https://xjsfl.vercel.app/feature/snippets-panel) source code, which I can do [on request](issues).
 
 **However, I will not be providing any support or input into the project from now on.**
 

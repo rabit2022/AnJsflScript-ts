@@ -1,41 +1,23 @@
-import {SimpleControls} from "./SimpleControls";
-import {compoundControl, simpleControl} from "../Constants/Templates.types";
+import {compoundControl} from "../Constants/Templates.types";
 import {Attrs} from "./SimpleControls.types";
-import {ListitemAttributes, SelectedItem, ValuesType} from "./CompoundControls/Listbox.types";
-import {TEMPLATES} from "../Constants/Templates";
+import {ListitemAttributes, SelectedItem, ValuesType} from "./CompoundControls/types/Listbox.types";
 import {JSONPath} from "jsonpath-plus";
 import {makeId} from "../utils/id/ID";
-import {Copy} from "../utils/copy/deepCopy";
 import {ChildrenMap} from "./CompoundControls.types";
-import {XMLBuild} from "../io/loader/XMLBuild";
 
-export class CompoundControls{
+import * as _ from "lodash";
+import {BaseSettings} from "./BaseSettings";
 
-    protected readonly json;
-
-    public settings: Record<string, any> = {};
-
-    private type:compoundControl;
-    constructor(type: compoundControl, id: string | null, label: string, attributes: Attrs = {},values : Attrs = {}) {
-
+export class CompoundControls extends BaseSettings {
+    constructor(type: compoundControl, id: string | null, label: string, attributes: Attrs = {}, values: ValuesType = {}) {
         id = id || makeId(label);
+
+        super(type, id);
+
         this.type = type;
 
-        const template = TEMPLATES[type];
-        if (!template) {
-            throw new Error(`Template not found: ${type}`);
-        }
-
-        const copy = Copy.deepCopy(template);
-        // const row = copy.row;
-        //
-        // const listbox = row.listbox;
-
-        this.json = copy;
-
         this.addChildren(id, values);
-        this.setAttributes(type,id,label, attributes);
-
+        this.setAttributes(type, id, label, attributes);
     }
 
 
@@ -43,10 +25,10 @@ export class CompoundControls{
      * 获取 content.row 容器
      */
     getChildrenContainer(): any[] {
-        const row = this.json.row;
+        // const row = this.json.row;
         // return row.listbox.listitem;
-        let children = ChildrenMap[this.type];
-        return row[this.type][children];
+        let children = ChildrenMap[this.type as compoundControl];
+        return _.get(this.json, children);
     }
 
     addChildren(id: string, values: ValuesType = {}, selected?: string) {
@@ -101,78 +83,16 @@ export class CompoundControls{
         });
     }
 
-    setAttributes(type: compoundControl, id: string, label: string, attributes: Attrs,) {
-        const row = this.json.row;
 
-        // label
-        if (row.label) {
-            row.label["@value"] = label ? label + " : " : " ";
-        }
-
-        // 找控件节点
-        const controlKey = Object.keys(row).find(
-            (k) => k !== "label" && !k.startsWith("@"),
-        );
-
-        if (!controlKey) {
-            throw new Error(`Invalid template: ${type}`);
-        }
-
-        const control = (row as any)[controlKey];
-
-        // id
-        control["@id"] = id;
-
-        // attributes
-        Object.keys(attributes).forEach((key) => {
-            if (/^(value|checked)$/.test(key)) {
-                // need to add / set values using JavaScript (rather than in XML) or else the field will always show initial values when being re-shown
-                this.settings[id] = attributes[key];
-            } else {
-                control[`@${key}`] = attributes[key];
-            }
+    setSettings() {
+        const selected: SelectedItem[] = JSONPath({
+            path: "$..*[?(@['@selected'] == true || @['@selected'] == 'true')]",
+            json: this.json,
+            resultType: "value",
         });
-
-        // // width
-        // if(attributes && attributes.width > this.columns[1])
-        // {
-        //     this.columns[1] = attributes.width;
-        // }
-
-        // target list
-        switch (type) {
-            case "targetlist":
-                var property = (this.json as (typeof TEMPLATES)["targetlist"]).row
-                    .property;
-                property["@id"] = id;
-                break;
-
-            case "radiogroup":
-            case "menulist":
-            case "listbox":
-                // var selected		= xml..*.(function(element){return element.@selected && element.@selected == 'true';});
-                // this.settings[id]	= selected.@value;
-                //trace('>>' + selected.toXMLString())
-                const selected: SelectedItem[] = JSONPath({
-                    path: "$..*[?(@['@selected'] == true || @['@selected'] == 'true')]",
-                    json: this.json,
-                    resultType: "value",
-                });
-                if (selected.length > 0) {
-                    let onlyOne = selected[0];
-                    this.settings[id] = onlyOne["@value"];
-                }
-
-                break;
+        if (selected.length > 0) {
+            let onlyOne = selected[0];
+            this.settings[this.id] = onlyOne["@value"];
         }
-    }
-
-    toJSON() {
-        return this.json;
-    }
-
-    toXMLString(): string {
-        const builder = new XMLBuild(this.json);
-        return builder.build();
     }
 }

@@ -1,15 +1,8 @@
-import {XMLBuilder, XMLParser,XMLValidator} from "fast-xml-parser";
+import {XMLBuilder, XMLParser} from "fast-xml-parser";
 
 
 export class XMLObject {
-    private json:any;
-
-    get JSON():any {
-        return this.json;
-    }
-    set JSON(value:any) {
-        this.json = value;
-    }
+    private json: any;
 
     constructor(xml: string) {
 
@@ -27,6 +20,13 @@ export class XMLObject {
         this.json = jObj;
     }
 
+    get JSON(): any {
+        return this.json;
+    }
+
+    set JSON(value: any) {
+        this.json = value;
+    }
 
     build() {
 // 如果你要还原回 XML，Builder 也需要知道属性前缀的配置，否则它可能无法识别 @ 开头的键作为属性

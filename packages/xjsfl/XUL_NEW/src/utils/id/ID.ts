@@ -8,7 +8,7 @@
  * @param id - 原始输入字符串
  * @returns 清洗后的纯小写字母数字字符串
  */
-export function makeId(id:string) {
+export function makeId(id: string) {
     // 步骤 1: 分割与截取
     // 正则 /[^\d\w ]/ 匹配任何 "非数字"、"非单词字符(字母/数字/下划线)" 且 "非空格" 的字符。
     // 常见的分隔符如: -, ., /, !, @, # 等。

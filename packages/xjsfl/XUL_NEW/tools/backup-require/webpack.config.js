@@ -8,7 +8,6 @@ const MODULE_NAME = "自动保存";
 // endregion MODULE_NAME
 
 
-
 // 👇 新增：用于替换 define -> require
 class ReplaceDefineWithRequire {
     apply(compiler) {
@@ -94,7 +93,7 @@ module.exports = {
     externals: [
         {"path": "path-browserify"},
         // region EXCLUDE_MODULE_NAME
-        "store-js","lodash","linq","oxide.ts","requirejs","AnJsflScript-ts","xpath","xmldom","fast-xml-parser","json3","es7-shim","typedarray","symbol-es6","intl","harmony-reflect","es6-promise","es6-collections","util","path-browserify","rxjs","eventemitter3","stackframe","error-stack-parser","progress","loglevel","cli-table3","chroma-js","@third/luxon","luxon","_exports","@third/Intl","@third/intl-locale-data","Intl","es6-sham","es6-shim","es5-sham","es5-shim","@third/universal-cookie","@polyfill/cookie","Tips","@xjsfl/UI","@xjsfl/super","@xjsfl/Events","Context","@xjsfl/Constants","setTimeout","overload-js","@nodejs/__filename","url","process","fs","assert","console.table","console.stack","console","@anjsfl/validation","@anjsfl/sat","@anjsfl/random","@anjsfl/more-element","@anjsfl/Context","@xjsfl/XUL","@xjsfl/XUL/XML","@xjsfl/XUL/XUL","@xjsfl/XUL/XULControl","@xjsfl/XUL/XULEvent","@xjsfl/XUL/Utils","@xjsfl/XUL/xjsfl",
+        "store-js", "lodash", "linq", "oxide.ts", "requirejs", "AnJsflScript-ts", "xpath", "xmldom", "fast-xml-parser", "json3", "es7-shim", "typedarray", "symbol-es6", "intl", "harmony-reflect", "es6-promise", "es6-collections", "util", "path-browserify", "rxjs", "eventemitter3", "stackframe", "error-stack-parser", "progress", "loglevel", "cli-table3", "chroma-js", "@third/luxon", "luxon", "_exports", "@third/Intl", "@third/intl-locale-data", "Intl", "es6-sham", "es6-shim", "es5-sham", "es5-shim", "@third/universal-cookie", "@polyfill/cookie", "Tips", "@xjsfl/UI", "@xjsfl/super", "@xjsfl/Events", "Context", "@xjsfl/Constants", "setTimeout", "overload-js", "@nodejs/__filename", "url", "process", "fs", "assert", "console.table", "console.stack", "console", "@anjsfl/validation", "@anjsfl/sat", "@anjsfl/random", "@anjsfl/more-element", "@anjsfl/Context", "@xjsfl/XUL", "@xjsfl/XUL/XML", "@xjsfl/XUL/XUL", "@xjsfl/XUL/XULControl", "@xjsfl/XUL/XULEvent", "@xjsfl/XUL/Utils", "@xjsfl/XUL/xjsfl",
 // endregion EXCLUDE_MODULE_NAME
     ],
     // 禁用 Node.js 注入

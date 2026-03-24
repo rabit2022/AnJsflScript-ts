@@ -7,7 +7,9 @@
  * @description:
  */
 
-import { CUR_OUT } from "../ProjectFileDir";
+import {CUR_OUT} from "../ProjectFileDir";
+import * as fs from "fs";
+import * as path from "path";
 
 `
 在第一个加载，并且没有导入es5shim的权宜之计
@@ -17,9 +19,6 @@ import { CUR_OUT } from "../ProjectFileDir";
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 `;
-
-import * as fs from "fs";
-import * as path from "path";
 
 // 配置项
 // const TARGET_DIR = path.join(__dirname, 'CUR_OUT');
@@ -38,7 +37,7 @@ function getAllJsflFiles(dir: string, ext: string): string[] {
     let results: string[] = [];
 
     // 读取目录内容，withFileTypes: true 可以区分文件和文件夹而不需要额外 stat
-    const list = fs.readdirSync(dir, { withFileTypes: true });
+    const list = fs.readdirSync(dir, {withFileTypes: true});
 
     for (const entry of list) {
         const fullPath = path.join(dir, entry.name);

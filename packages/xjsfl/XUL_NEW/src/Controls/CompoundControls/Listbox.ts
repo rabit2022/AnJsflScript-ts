@@ -1,21 +1,22 @@
-import { CompoundControls } from "../CompoundControls";
-import { Attrs } from "../SimpleControls.types";
+import {CompoundControls} from "../CompoundControls";
+import {ListboxAttributes, ValuesType} from "./types/Listbox.types";
 
 export class Listbox extends CompoundControls {
-  constructor(
-    id: string | null,
-    label: string,
-    attributes: Attrs = {},
-    values: Attrs = {},
-  ) {
-    super("listbox", id, label, attributes, values);
-  }
+    constructor(
+        id: string | null,
+        label: string,
+        attributes: ListboxAttributes = {},
+        values: ValuesType = {},
+    ) {
+        super("listbox", id, label, attributes, values);
+        this.setSettings();
+    }
 }
 
 
 // const listbox = new Listbox("id0","label0",{flex:100},[1,2,5,8])
 // // console.log(listbox.toJSON())
-// // console.log(JSON.stringify(listbox.toJSON()));
+// console.log(JSON.stringify(listbox.toJSON()));
 // console.log(listbox.settings);
 
 // const data={

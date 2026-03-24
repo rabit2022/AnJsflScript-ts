@@ -1,20 +1,20 @@
-import {XMLBuilder, XMLParser,XMLValidator} from "fast-xml-parser";
+import {XMLBuilder} from "fast-xml-parser";
 
 
 export class XMLBuild {
-    private json:any;
+    private json: any;
 
-    get JSON():any {
-        return this.json;
-    }
-    set JSON(value:any) {
-        this.json = value;
-    }
-
-    constructor(json:any) {
+    constructor(json: any) {
         this.json = json
     }
 
+    get JSON(): any {
+        return this.json;
+    }
+
+    set JSON(value: any) {
+        this.json = value;
+    }
 
     build() {
 // 如果你要还原回 XML，Builder 也需要知道属性前缀的配置，否则它可能无法识别 @ 开头的键作为属性

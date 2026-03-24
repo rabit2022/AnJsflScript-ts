@@ -7,34 +7,28 @@ import {isFileUri} from "../utils/Checker/IsURL";
 
 
 export class XUL {
+    static templates = TEMPLATES;
     // public
     public xml = DIALOG;
     public controls: Record<string, XULControl> = {}
     public settings = {};
     public flashData = null;
-
-
+    // properties
+    public title = 'xJSFL';
     // private
     private events = {};
     private rules = {};
     private columns = [100, 180]
     private error = null;
     private id = -1;
-
     // template
     private content = '';
-    private separator = '</rows></grid><separator /><grid><columns><column flex="1" /><column flex="2" /></columns><rows>';
-
-    // properties
-    public title = 'xJSFL';
     // private error=		null;
-
+    private separator = '</rows></grid><separator /><grid><columns><column flex="1" /><column flex="2" /></columns><rows>';
     // flags
     private built = false;
     private open = false;
     private accepted = false;
-
-    static templates = TEMPLATES;
 
     constructor(title: string = 'xJSFL') {
         //TODO Allow a file: uri to be passed into the constructor
@@ -53,14 +47,25 @@ export class XUL {
         return this;
     }
 
-    setTitle(title: string = 'xJSFL') {
-        if (this.xml) {
-            const dialogNode = this.xml.dialog;
-
-            dialogNode["@title"] = ' ' + title;
-            this.title = title;
+    /**
+     * The values of the dialog controls parsed into their correct data types
+     */
+    get values() {
+        // return null if a settings object doesn't exist (the user cancelled)
+        if (!this.settings) {
+            return null;
         }
-        return this;
+
+        // if not, grab values
+        const values: Record<string, any> = {};
+        for (const [id, control] of Object.entries(this.controls)) {
+            if (control.enumerable) {
+                values[id] = control.value;
+            }
+        }
+
+        // return
+        return values;
     }
 
     static factory(props: Function | string): XUL {
@@ -106,6 +111,15 @@ export class XUL {
         return xul;
     }
 
+    setTitle(title: string = 'xJSFL') {
+        if (this.xml) {
+            const dialogNode = this.xml.dialog;
+
+            dialogNode["@title"] = ' ' + title;
+            this.title = title;
+        }
+        return this;
+    }
 
     /**
      * Loads a dialog in from an external file
@@ -133,31 +147,9 @@ export class XUL {
     }
 
     /**
-     * The values of the dialog controls parsed into their correct data types
-     */
-    get values() {
-        // return null if a settings object doesn't exist (the user cancelled)
-        if (!this.settings) {
-            return null;
-        }
-
-        // if not, grab values
-        const values: Record<string, any> = {};
-        for (const [id, control] of Object.entries(this.controls)) {
-            if (control.enumerable) {
-                values[id] = control.value;
-            }
-        }
-
-        // return
-        return values;
-    }
-
-
-    /**
      * Replace the standard XML dialog template
      */
-    setXML(xml:string): this {
+    setXML(xml: string): this {
         // variables
         this.controls = {};
         this.events = {};

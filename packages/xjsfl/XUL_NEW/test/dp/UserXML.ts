@@ -1,11 +1,10 @@
 import {XMLLoader} from "../loader/XMLLoader";
-import * as console from "node:console";
 import {XMLSelector} from "../loader/XMLSelector";
 
 /**
  * Parse user-supplied XML so that XULControls are created
  */
-export function parseUserXML(xml:string):string {
+export function parseUserXML(xml: string): string {
     xml = `<temp>${xml}</temp>`;
     const loader = new XMLLoader(xml);
 

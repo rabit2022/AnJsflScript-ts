@@ -7,7 +7,9 @@
  * @description:
  */
 
-import { CURRENT_PROJECT } from "../ProjectFileDir";
+import {CURRENT_PROJECT} from "../ProjectFileDir";
+import * as fs from "fs";
+import * as path from "path";
 
 `
 生成文件，在以下目录
@@ -41,9 +43,6 @@ test/nodejs/*.ts
 test1,test2    -->    test3
 `;
 
-import * as fs from "fs";
-import * as path from "path";
-
 /**
  * 1. 确保所有目标目录存在
  */
@@ -57,7 +56,7 @@ function ensureDirectories() {
 
     Object.values(directories).forEach((dir) => {
         if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
+            fs.mkdirSync(dir, {recursive: true});
         }
     });
 
@@ -99,7 +98,7 @@ function determineNextIndex(directories: { [key: string]: string }): number {
  * @param filesToCreate 文件路径和内容的数组
  */
 function createFiles(filesToCreate: Array<{ path: string; content: string }>) {
-    filesToCreate.forEach(({ path: filePath, content }) => {
+    filesToCreate.forEach(({path: filePath, content}) => {
         try {
             fs.writeFileSync(filePath, content, "utf-8");
             console.log(`✅ 创建成功: ${filePath}`);

@@ -1,5 +1,4 @@
 import {SimpleControls} from "../SimpleControls";
-import {Attrs} from "../SimpleControls.types";
 import {TEMPLATES} from "../../Constants/Templates";
 import {CheckboxAttributes} from "./types/Checkbox.types";
 

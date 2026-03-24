@@ -1,6 +1,5 @@
 import * as _ from 'lodash';
 import {JSONPath} from 'jsonpath-plus';
-import {XMLLoader} from "./XMLLoader";
 import * as console from "node:console";
 
 
