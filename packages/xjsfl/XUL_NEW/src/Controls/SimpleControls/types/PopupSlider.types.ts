@@ -1,4 +1,4 @@
-import {Width} from "../../SimpleControls.types";
+import {Width} from "../../Base/SimpleControls.types";
 
 export type RangeTuple = [defaultVal: number, minVal: number, maxVal: number];
 

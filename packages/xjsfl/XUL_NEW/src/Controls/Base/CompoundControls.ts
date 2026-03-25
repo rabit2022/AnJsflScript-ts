@@ -1,16 +1,16 @@
-import {compoundControl} from "../Constants/Templates.types";
+import {compoundControl} from "../../Constants/Templates.types";
 import {Attrs} from "./SimpleControls.types";
-import {ListitemAttributes, SelectedItem, ValuesType} from "./CompoundControls/types/Listbox.types";
+import {ListitemAttributes, SelectedItem, ValuesType} from "../CompoundControls/types/Listbox.types";
 import {JSONPath} from "jsonpath-plus";
-import {makeId} from "../utils/id/ID";
 import {ChildrenMap} from "./CompoundControls.types";
 
 import * as _ from "lodash";
 import {BaseSettings} from "./BaseSettings";
+import {IdGenerator} from "../../utils/id/uniqueID";
 
 export class CompoundControls extends BaseSettings {
     constructor(type: compoundControl, id: string | null, label: string, attributes: Attrs = {}, values: ValuesType = {}) {
-        id = id || makeId(label);
+        id = id || IdGenerator.generate(label);
 
         super(type, id);
 

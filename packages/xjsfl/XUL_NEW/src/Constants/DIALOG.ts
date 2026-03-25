@@ -17,7 +17,9 @@ export const DIALOG = {
         "script": "if(window.xjsfl){xjsfl.ui.handleEvent({xulid}, 'initialize');}",
         "@id": "dialog",
         "@title": "",
-        "@buttons": "accept,cancel"
+        "@buttons": "accept,cancel",
+        "@width": 100,
+        "@height": 200,
     }
 }
 

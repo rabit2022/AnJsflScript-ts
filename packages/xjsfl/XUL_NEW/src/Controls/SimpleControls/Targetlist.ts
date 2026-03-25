@@ -1,4 +1,4 @@
-import {SimpleControls} from "../SimpleControls";
+import {SimpleControls} from "../Base/SimpleControls";
 import {TargetlistAttributes} from "./types/Targetlist.types";
 import {TEMPLATES} from "../../Constants/Templates";
 

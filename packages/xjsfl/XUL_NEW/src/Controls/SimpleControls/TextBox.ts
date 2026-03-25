@@ -1,4 +1,4 @@
-import {SimpleControls} from "../SimpleControls";
+import {SimpleControls} from "../Base/SimpleControls";
 import {TextBoxAttributes} from "./types/TextBox.types";
 
 export class TextBox extends SimpleControls {

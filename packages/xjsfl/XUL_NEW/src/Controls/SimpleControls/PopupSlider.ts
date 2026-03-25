@@ -1,4 +1,4 @@
-import {SimpleControls} from "../SimpleControls";
+import {SimpleControls} from "../Base/SimpleControls";
 import {PopupSliderAttributes, RangeTuple} from "./types/PopupSlider.types";
 import {TEMPLATES} from "../../Constants/Templates";
 
@@ -16,5 +16,5 @@ export class PopupSlider extends SimpleControls {
 }
 
 
-const slider = new PopupSlider("id", "label", [3, 5, 100], {flex: 100})
-console.log(slider.toJSON())
+// const slider = new PopupSlider("id", "label", [3, 5, 100], {flex: 100})
+// console.log(slider.toJSON())

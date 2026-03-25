@@ -1,4 +1,4 @@
-import {SimpleControls} from "../SimpleControls";
+import {SimpleControls} from "../Base/SimpleControls";
 import {ButtonAttributes} from "./types/Button.types";
 import {TEMPLATES} from "../../Constants/Templates";
 

@@ -1,4 +1,4 @@
-import {SimpleControls} from "../SimpleControls";
+import {SimpleControls} from "../Base/SimpleControls";
 import {TEMPLATES} from "../../Constants/Templates";
 import {ColorAttributes} from "./types/Colorchip.types";
 

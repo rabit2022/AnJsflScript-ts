@@ -1,7 +1,7 @@
 import {XMLBuilder} from "fast-xml-parser";
 
 
-export class XMLBuild {
+export class XMLBuilderr {
     private json: any;
 
     constructor(json: any) {

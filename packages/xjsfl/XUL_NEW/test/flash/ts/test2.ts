@@ -1,4 +1,4 @@
-import {SimpleControls} from "../../../src/Controls/SimpleControls";
+import {SimpleControls} from "../../../src/Controls/Base/SimpleControls";
 import {XULBuilder} from "../../../src/io/builder/XULBuilder";
 
 const builder = new XULBuilder("dialog1", "登录");

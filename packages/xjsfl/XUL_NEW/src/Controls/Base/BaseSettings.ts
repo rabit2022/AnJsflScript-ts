@@ -1,11 +1,11 @@
 import {BaseControl} from "./BaseControl";
-import {compoundControl, simpleControl} from "../Constants/Templates.types";
+import {AllControls, compoundControl, simpleControl} from "../../Constants/Templates.types";
 import {Attrs} from "./SimpleControls.types";
 
 export class BaseSettings extends BaseControl{
     public settings: Record<string, any> = {};
 
-    constructor(type: simpleControl | compoundControl | "property", id: string) {
+    constructor(type: AllControls, id: string) {
         super(type,id);
     }
 

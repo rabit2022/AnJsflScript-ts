@@ -36,9 +36,6 @@ export class XMLObject {
         };
         const builder = new XMLBuilder(builderOptions);
 
-        // jObj.dialog["@width"] = 100;
-        // jObj.dialog["@height"] = 200;
-
         const xmlContent = builder.build(this.json);
         // console.log(xmlContent);
         return xmlContent;

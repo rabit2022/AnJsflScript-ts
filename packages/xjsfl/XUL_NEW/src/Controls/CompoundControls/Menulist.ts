@@ -1,4 +1,4 @@
-import {CompoundControls} from "../CompoundControls";
+import {CompoundControls} from "../Base/CompoundControls";
 import {MenulistAttributes} from "./types/Menulist.types";
 import {ValuesType} from "./types/Listbox.types";
 

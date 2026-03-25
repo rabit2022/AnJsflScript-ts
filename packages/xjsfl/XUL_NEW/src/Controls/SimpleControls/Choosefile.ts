@@ -1,4 +1,4 @@
-import {SimpleControls} from "../SimpleControls";
+import {SimpleControls} from "../Base/SimpleControls";
 import {ChoosefileAttributes} from "./types/Choosefile.types";
 
 export class Choosefile extends SimpleControls {

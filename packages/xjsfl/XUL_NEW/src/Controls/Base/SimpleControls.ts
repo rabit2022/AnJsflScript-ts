@@ -1,13 +1,13 @@
-import {simpleControl} from "../Constants/Templates.types";
+import {simpleControl} from "../../Constants/Templates.types";
 import {Attrs} from "./SimpleControls.types";
-import {makeId} from "../utils/id/ID";
 import {BaseSettings} from "./BaseSettings";
+import {IdGenerator} from "../../utils/id/uniqueID";
 
 
 export class SimpleControls extends BaseSettings {
 
     constructor(type: simpleControl, id: string | null, label: string = "", attributes: Attrs = {}) {
-        id = id || makeId(label);
+        id = id || IdGenerator.generate(label);
         super(type, id);
 
         this.setAttributes(type, id, label, attributes);

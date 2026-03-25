@@ -1,19 +1,21 @@
 import {DIALOG} from "../../Constants/DIALOG";
 import {Copy} from "../../utils/copy/deepCopy";
 import {XMLSelector} from "../loader/XMLSelector";
-import {XMLBuild} from "../loader/XMLBuild";
+import {XMLBuilderr} from "../loader/XMLBuilderr";
+import {BaseDialog} from "./BaseDialog";
 
 
-export class XULBuilder {
-    private readonly json;
+export class XULBuilder extends BaseDialog{
+    private title: string;
 
     constructor(id: string, title: string) {
-        this.json = Copy.deepCopy(DIALOG);
+        super(id);
 
         const dialog = this.json.dialog;
 
         dialog["@id"] = id;
         dialog["@title"] = title;
+        this.title = title;
     }
 
     /**
@@ -24,7 +26,6 @@ export class XULBuilder {
         // return content;
 
         const selector = new XMLSelector(this.json, "$..row")
-        // console.log(selector.select());
         return selector.select()[0];
     }
 
@@ -36,18 +37,20 @@ export class XULBuilder {
         return this;
     }
 
-    /**
-     * 输出 JSON
-     */
-    toJSON() {
-        return this.json;
+
+    setSize(width: number, height: number) {
+        const dialog = this.json.dialog;
+        dialog["@width"] = width;
+        dialog["@height"] = height;
     }
 
-    /**
-     * 输出 XML
-     */
-    toXMLString(): string {
-        const builder = new XMLBuild(this.json);
-        return builder.build();
+    setTitle(title: string) {
+        const dialog = this.json.dialog;
+        dialog["@title"] = " "+title;
+        this.title			= title;
+    }
+    setButtons(buttonName: string) {
+        const dialog = this.json.dialog;
+        dialog["@buttons"] = buttonName;
     }
 }

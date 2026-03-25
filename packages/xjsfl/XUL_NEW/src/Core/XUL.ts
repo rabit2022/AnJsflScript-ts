@@ -1,9 +1,10 @@
 import {DIALOG} from "../Constants/DIALOG";
-import {XMLLoader} from "../loader/XMLLoader";
-import {XULControl} from "../XULControl";
 import {TEMPLATES} from "../Constants/Templates";
-import {parseFunction} from "../utils/paser/Function";
 import {isFileUri} from "../utils/Checker/IsURL";
+import {XULControl} from "./XULControl";
+import {parseFunction} from "../utils/paser/parseFunction";
+import {XMLLoader} from "../io/loader/XMLLoader";
+import {parseUserXML} from "../utils/paser/parseUserXML";
 
 
 export class XUL {

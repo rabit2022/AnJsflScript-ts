@@ -1,4 +1,4 @@
-import {CompoundControls} from "../CompoundControls";
+import {CompoundControls} from "../Base/CompoundControls";
 import {ValuesType} from "./types/Listbox.types";
 import {CheckboxgroupAttributes} from "./types/Checkboxgroup.types";
 

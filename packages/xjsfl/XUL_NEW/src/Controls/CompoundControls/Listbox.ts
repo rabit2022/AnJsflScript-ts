@@ -1,4 +1,4 @@
-import {CompoundControls} from "../CompoundControls";
+import {CompoundControls} from "../Base/CompoundControls";
 import {ListboxAttributes, ValuesType} from "./types/Listbox.types";
 
 export class Listbox extends CompoundControls {

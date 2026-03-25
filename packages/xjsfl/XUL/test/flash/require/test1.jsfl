@@ -30,12 +30,22 @@ require(["@xjsfl/XUL"], function (XUL) {
 
     var xul = XUL.factory()
         .setTitle('Compound control values')
+        .setFlash("path/to/aa.swf",100,200,{"data0:":100},["property1","p2","p3"])
+
+
+        // .addScript(click)
+        // .addLabel("label0000","id1")
+        // .addXML("<property template=\"property\" id = \'idddd\'/>")
+        // .addSeparator()
+        // .addProperty("hello")
 
         // .addTextbox("Text00000",null,{prompt:"kb,b,"})
+        // .addSpacer()
+        // .addTextbox("Text00001",null,{prompt:"kb,b,"})
         // .addExpression("Text00000",null,{label:"label0000"})
         // .addRadiogroup('Radio', null, [2,2,3])
         // .addListbox('Listbox', null, [4,5,6])
-        .addDropdown('Dropdown', null, [7,8,9])
+        // .addDropdown('Dropdown', null, [7,8,9])
         // .addButton('See values', 'button', null, {click:click});
 
     var settings = xul.show();

@@ -111,10 +111,9 @@ import {XMLLoader} from "../io/loader/XMLLoader";
 
 export const TEMPLATES = {
     // simpleControl
-    "label": {"row": {"label": {"@value": "Label", "@align": ""}, "@template": "label"}},
     "textbox": {
         "row": {
-            "label": {"@value": "Textbox:", "@width": 100},
+            "label": {"@value": "Textbox:"},
             "textbox": {
                 "@class": "control",
                 "@id": "textbox",
@@ -183,7 +182,6 @@ export const TEMPLATES = {
             "@template": "button"
         }
     },
-
     "choosefile": {
         "row": {
             "label": {"@value": "Choose File:", "@align": "", "@control": ""},
@@ -284,16 +282,18 @@ export const TEMPLATES = {
     },
 
     // spacer
-    "separator": {
-        "@template": "separator"
-    },
+    "separator": {row: {separator: '', '@template': 'separator'}},
     "spacer": {"row": {"spacer": "", "label": "", "@template": "spacer"}},
-    "property": {
-        "property": {
-            "@template": "property",
-            "@id": "property"
+    "property": {"row": {"property": {"@template": "property", "@id": "property"}}},
+    "label": {"row": {"label": {"@value": "Label", "@align": "","@width":100}, "@template": "label"}},
+    "script":{
+        "row": {
+            "script": "function EMPTY() {}"
         }
     },
+
+
+    // flash
     "flash": {
         "element": {
             "flash": {
@@ -303,10 +303,30 @@ export const TEMPLATES = {
                 "@width": 250,
                 "@height": 100
             }, "@template": "flash"
-        }
-    }
+        },
+        "row": [
+            // {"property": {"@template": "property", "@id": "property1", "@oncreate": "if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'property1');"}}
+        ]
+    },
+
+    // custom
+    "custom":{}
 }
 
-const loder = new XMLLoader("H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL_NEW\\assets\\templates\\xul\\controls.xul", "path");
-console.log(loder.JSON)
-console.log(JSON.stringify(loder.JSON, null, 2));
+
+// let xml = `\t\t<element template="flash">
+// \t\t\t<flash class="control" id="flash" src="path/to/aa.swf" width="100" height="200" oncreate="if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'flash');"/>
+// \t\t</element>
+// \t\t<row>
+// \t\t\t<property template="property" id="property1" oncreate="if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'property1');"/>
+// \t\t</row>
+// \t\t<row>
+// \t\t\t<property template="property" id="p2" oncreate="if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'p2');"/>
+// \t\t</row>
+// \t\t<row>
+// \t\t\t<property template="property" id="p3" oncreate="if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'p3');"/>
+// \t\t</row>`;
+// let loder = new XMLLoader(xml, "xml");
+// // const loder = new XMLLoader("H:\\project\\js\\AnJsflScript-ts\\packages\\xjsfl\\XUL_NEW\\assets\\templates\\xul\\controls.xul", "path");
+// console.log(loder.JSON)
+// console.log(JSON.stringify(loder.JSONll, 2));

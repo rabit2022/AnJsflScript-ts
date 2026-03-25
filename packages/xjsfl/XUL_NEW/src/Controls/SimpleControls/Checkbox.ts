@@ -1,8 +1,8 @@
-import {SimpleControls} from "../SimpleControls";
+import {SimpleControls} from "../Base/SimpleControls";
 import {TEMPLATES} from "../../Constants/Templates";
 import {CheckboxAttributes} from "./types/Checkbox.types";
 
-export class TextBox extends SimpleControls {
+export class Checkbox extends SimpleControls {
     constructor(id: string, label: string, attributes: CheckboxAttributes = {}) {
         let newLabel = '';
         super("checkbox", id, newLabel, attributes);

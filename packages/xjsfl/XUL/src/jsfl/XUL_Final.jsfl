@@ -395,9 +395,6 @@ define([
 						// grab the first item in the list to use as a template for the others
 							var items			= parent.*;
 							var itemTemplate	= items[0].copy();
-							// console.log("items",items);
-							// console.log("itemTemplate",itemTemplate.toXMLString())
-						// // itemTemplate <listitem label="Item 1" value="1" selected=""/>;
 
 						// delete old child nodes
 							while(items.length())
@@ -1098,6 +1095,8 @@ define([
 								xml = this._parseUserXML(xml);
 							}
 
+							// console.log(xml.toXMLString())
+
 						// handle non-row XML
 							if(xml[0].name() != 'row')
 							{
@@ -1175,9 +1174,13 @@ define([
 					{
 						// build xml
 							var xml				= XUL.templates.label.copy();
+							console.log(this.columns)
 							var sum				= 0; this.columns.forEach( function(e){sum += e} );
+							console.log(sum)
 							xml.label.@width	= sum;
 							xml.label.@value	= label;
+
+							console.log(xml.toXMLString());
 
 						// add xml
 							this.addXML(xml);
@@ -1229,11 +1232,12 @@ define([
 						// build xml
 							var xml			= XUL.templates.flash.copy();
 							
-						// src must be a relative path (NOT absolute URI) such as path/to/file.swf or ../file.swf
-							var uri			= URI.toURI(uriOrPath, 1);
-
-
-							var src			= URI.pathTo(BASEURI + 'core/ui/', uri);
+						// // src must be a relative path (NOT absolute URI) such as path/to/file.swf or ../file.swf
+						// 	var uri			= URI.toURI(uriOrPath, 1);
+						//
+						//
+						// 	var src			= URI.pathTo(BASEURI + 'core/ui/', uri);
+						var src = uriOrPath;
 							xml..flash.@src	= src;
 
 						// add control and set XML
@@ -1251,8 +1255,10 @@ define([
 							}
 
 						// properties
-							for each(var property in properties)
+						// 	for each(var property in properties)
+						for (var i = 0;i < properties.length;i++)
 							{
+								var property = properties[i];
 								this.addProperty(property); // TODO check if we need to first set() the property to have it work
 							}
 
