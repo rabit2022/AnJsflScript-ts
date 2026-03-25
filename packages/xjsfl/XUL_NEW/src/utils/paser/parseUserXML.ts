@@ -1,7 +1,7 @@
 import {XMLLoader} from "../../io/loader/XMLLoader";
 import {AllControls, SIMPLE_CONTROL_NAMES} from "../../Constants/Templates.types";
 import {XMLSelector} from "../../io/loader/XMLSelector";
-import {Factory} from "../../Controls/Factory/Factory";
+import {ControlFactory} from "../../Controls/Factory/ControlFactory";
 
 /**
  * Parse user-supplied XML so that XULControls are created
@@ -58,7 +58,7 @@ export function parseUserXML(xml: any):any {
                     value
                 };
 
-                const factory = new Factory(type as AllControls, id, "", attributes);
+                const factory = new ControlFactory(type as AllControls, id, "", attributes);
                 // console.log(factory.control?.toXMLString());
                 resXml = factory.control?.toJSON();
             }

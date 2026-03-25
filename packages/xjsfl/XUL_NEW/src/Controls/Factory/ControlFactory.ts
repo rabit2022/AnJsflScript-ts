@@ -11,7 +11,7 @@ import {BaseControl} from "../Base/BaseControl";
 import {CompoundControls} from "../Base/CompoundControls";
 import {Property} from "../spacer/Property";
 
-export class Factory {
+export class ControlFactory {
     public control: BaseControl | undefined;
     constructor(type: AllControls, id: string | null, label: string = "", attributes: Attrs = {}, values: ValuesType = {}) {
         // console.log(type)
