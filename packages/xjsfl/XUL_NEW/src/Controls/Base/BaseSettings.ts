@@ -1,6 +1,8 @@
 import {BaseControl} from "./BaseControl";
 import {AllControls, compoundControl, simpleControl} from "../../Constants/Templates.types";
 import {Attrs} from "./SimpleControls.types";
+import {ColumnsManager} from "../../Constants/ColumnsManager";
+import {TEMPLATES} from "../../Constants/Templates";
 
 export class BaseSettings extends BaseControl{
     public settings: Record<string, any> = {};
@@ -9,7 +11,7 @@ export class BaseSettings extends BaseControl{
         super(type,id);
     }
 
-    setAttributes(type:  simpleControl | compoundControl , id: string, label: string, attributes: Attrs) {
+    setAttributes(type:  simpleControl | compoundControl |"flash", id: string, label: string, attributes: Attrs) {
         const row = (this.json as any).row;
 
 
@@ -18,16 +20,7 @@ export class BaseSettings extends BaseControl{
             row.label["@value"] = label ? label + ' : ' : ' ';
         }
 
-        // 找控件节点
-        const controlKey = Object.keys(row).find(
-            k => k !== "label" && !k.startsWith("@")
-        );
-
-        if (!controlKey) {
-            throw new Error(`Invalid template: ${type}`);
-        }
-
-        const control = (row as any)[controlKey];
+        const control = this.controlNode;
 
         // id
         control["@id"] = id;
@@ -43,12 +36,41 @@ export class BaseSettings extends BaseControl{
         });
 
 
-        // // width
-        // if(attributes && attributes.width > this.columns[1])
-        // {
-        //     this.columns[1] = attributes.width;
-        // }
+        // width
+        if(attributes?.width > ColumnsManager.controlWidth)
+        {
+            // this.columns[1] = attributes.width;
+            ColumnsManager.controlWidth = attributes.width;
+        }
 
+    }
+
+    setLabelWidth(labelWidth: number) {
+        const row = (this.json as any).row;
+        let label = row.label;
+        if (label) {
+            label["@width"] = labelWidth;
+        }
+    }
+
+    setControlWidth(controlWidth: number) {
+        let control = this.controlNode;
+        control["@width"] = controlWidth;
+    }
+
+    get controlNode(){
+        const row = (this.json as any).row;
+        // 找控件节点
+        const controlKey = Object.keys(row).find(
+            k => k !== "label" && !k.startsWith("@")
+        );
+
+        if (!controlKey) {
+            throw new Error(`Invalid template: ${this._type}`);
+        }
+
+        const control = (row as any)[controlKey];
+        return control;
     }
 
 }

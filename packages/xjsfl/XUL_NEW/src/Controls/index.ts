@@ -5,6 +5,6 @@ export {Button, Checkbox, Choosefile, Colorchip, TextBox, PopupSlider, Targetlis
 export {Radiogroup, Checkboxgroup, Menulist, Listbox} from "./CompoundControls";
 
 // 导出 spacer 及其他基础组件
-export {Spacer, XML, Separator, Script, Property, Label} from "./spacer";
+export {Spacer, Separator, Script, Property, Label} from "./spacer";
 
-export {Flash} from "./flash/Flash"
+export {Flash, XML} from "./custom";

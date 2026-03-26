@@ -20,6 +20,7 @@ export class XMLLoader extends XMLObject {
             case "xml":
                 xmlStr = pathOrXML
                 break;
+
             default:
                 throw new Error("Unknown type '" + type + "'");
         }

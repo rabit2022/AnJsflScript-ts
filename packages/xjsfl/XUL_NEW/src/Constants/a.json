@@ -1,0 +1,66 @@
+{
+  "dialog": {
+    "content": {
+      "grid": [
+        {
+          "columns": {
+            "column": [
+              {
+                "@flex": 1
+              },
+              {
+                "@flex": 2
+              }
+            ],
+            "@id": "columns"
+          },
+          "rows": {
+            "row": {
+              "label": {
+                "@value": "label0000",
+                "@align": "",
+                "@width": 100
+              },
+              "@template": "label"
+            },
+            "@id": "controls"
+          }
+        },
+        {
+          "columns": {
+            "column": [
+              {
+                "@flex": 1
+              },
+              {
+                "@flex": 2
+              }
+            ]
+          },
+          "rows": {
+            "row": {
+              "property": {
+                "@template": "property",
+                "@id": "idddd",
+                "@oncreate": "if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'idddd');"
+              }
+            }
+          }
+        }
+      ],
+      "separator": ""
+    },
+
+
+
+
+    "script": "if(window.xjsfl)\n        {\n        xjsfl.ui.handleEvent(0, 'initialize');\n        }",
+    "property": {
+      "@id": "xulid",
+      "@value": 0
+    },
+    "@id": "dialog",
+    "@title": "Compound control values",
+    "@buttons": "accept,cancel"
+  }
+}

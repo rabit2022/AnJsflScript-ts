@@ -1,17 +1,22 @@
-<dialog id="dialog" title=" Compound control values" buttons="accept,cancel" width="100" height="200">
-	<content id="controls">
-		<element template="flash">
-			<flash class="control" id="flash" src="path/to/aa.swf" width="100" height="200" oncreate="if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'flash');"/>
-		</element>
-		<row>
-			<property template="property" id="property1" oncreate="if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'property1');"/>
-		</row>
-		<row>
-			<property template="property" id="p2" oncreate="if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'p2');"/>
-		</row>
-		<row>
-			<property template="property" id="p3" oncreate="if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'p3');"/>
-		</row>
+<dialog id="dialog" title=" Compound control values" buttons="accept,cancel">
+	<content>
+		<grid>
+			<columns id="columns">
+				<column flex="1"/>
+				<column flex="2"/>
+			</columns>
+			<rows id="controls">
+				<row>
+					<script>function click(event) {console.log("CLICK: " + event);console.json(event.xul.controls);}</script>
+				</row>
+				<row template="label">
+					<label value="label0000" align="" width="100"/>
+				</row>
+				<row>
+					<property template="property" id="idddd" oncreate="if(window.xjsfl)xjsfl.ui.handleEvent('0', 'create', 'idddd');"/>
+				</row>
+			</rows>
+		</grid>
 	</content>
 	<script>if(window.xjsfl)
 			{

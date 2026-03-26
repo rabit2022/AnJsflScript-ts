@@ -2,10 +2,10 @@ import {TEMPLATES} from "../../Constants/Templates";
 import {Property} from "../spacer/Property";
 import {BaseControl} from "../Base/BaseControl";
 import {Attrs} from "../Base/SimpleControls.types";
+import {ColumnsManager} from "../../Constants/ColumnsManager";
+import {BaseSettings} from "../Base/BaseSettings";
 
-export class Flash extends BaseControl {
-    private settings: any;
-
+export class Flash extends BaseSettings {
     constructor(relativeSwf: string, width: number, height: number, properties: string[]) {
         super("flash", "flash");
 
@@ -67,12 +67,38 @@ export class Flash extends BaseControl {
         });
 
 
-        // // width
-        // if(attributes && attributes.width > this.columns[1])
-        // {
-        //     this.columns[1] = attributes.width;
-        // }
+        // width
+        if(attributes?.width > ColumnsManager.controlWidth)
+        {
+            // this.columns[1] = attributes.width;
+            ColumnsManager.controlWidth = attributes.width;
+        }
 
+    }
+
+    setLabelWidth(labelWidth: number) {
+
+    }
+
+    setControlWidth(controlWidth: number) {
+        let control = this.controlNode;
+        control["@width"] = controlWidth;
+    }
+
+    get controlNode(){
+        const row = (this.json as typeof TEMPLATES["flash"]).element;
+
+        // 找控件节点
+        const controlKey = Object.keys(row).find(
+            k => k !== "label" && !k.startsWith("@")
+        );
+
+        if (!controlKey) {
+            throw new Error(`Invalid template: ${this._type}`);
+        }
+
+        const control = (row as any)[controlKey];
+        return control;
     }
 }
 

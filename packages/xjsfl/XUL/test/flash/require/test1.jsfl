@@ -30,12 +30,11 @@ require(["@xjsfl/XUL"], function (XUL) {
 
     var xul = XUL.factory()
         .setTitle('Compound control values')
-        .setFlash("path/to/aa.swf",100,200,{"data0:":100},["property1","p2","p3"])
-
-
-        // .addScript(click)
-        // .addLabel("label0000","id1")
-        // .addXML("<property template=\"property\" id = \'idddd\'/>")
+        // .setFlash("path/to/aa.swf",100,200,{"data0:":100},["property1","p2","p3"])
+        .addScript(click)
+        .addLabel("label0000","id1")
+        .addSeparator()
+        .addXML("<property template=\"property\" id = \'idddd\'/>")
         // .addSeparator()
         // .addProperty("hello")
 

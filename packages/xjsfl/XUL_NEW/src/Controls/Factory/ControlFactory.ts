@@ -2,7 +2,7 @@ import {
     AllControls,
     COMPOUND_CONTROL_NAMES, compoundControl,
     PROPERTY_CONTROL_NAME,
-    SIMPLE_CONTROL_NAMES, simpleControl
+    SIMPLE_CONTROL_NAMES, simpleControl, SPACER_CONTROL_NAMES, spacerControl
 } from "../../Constants/Templates.types";
 import {Attrs} from "../Base/SimpleControls.types";
 import {ValuesType} from "../CompoundControls/types/Listbox.types";
@@ -21,9 +21,9 @@ export class ControlFactory {
         } else if (COMPOUND_CONTROL_NAMES.includes(type)) {
             // console.log("compound control " + type);
             this.control = new CompoundControls(type as compoundControl,id,label,attributes,values);
-        } else if (PROPERTY_CONTROL_NAME.includes(type)) {
+        } else if (SPACER_CONTROL_NAMES.includes(type)) {
             // console.log("compound control " + type);
-            this.control = new Property(id!);
+            this.control = new BaseControl(type as spacerControl,id!)
         }
     }
 }

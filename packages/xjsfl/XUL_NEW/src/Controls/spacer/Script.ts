@@ -1,7 +1,8 @@
 import {TEMPLATES} from "../../Constants/Templates";
 import {BaseControl} from "../Base/BaseControl";
+import {SpacerControls} from "../Base/SpacerControls";
 
-export class Script extends BaseControl {
+export class Script extends SpacerControls {
     constructor(script: Function) {
         super("script", "script");
 

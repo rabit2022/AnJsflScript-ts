@@ -1,9 +1,8 @@
-import {TEMPLATES} from "../../Constants/Templates";
-import {BaseControl} from "../Base/BaseControl";
+import {SpacerControls} from "../Base/SpacerControls";
 
-export class Separator extends BaseControl {
+export class Separator extends SpacerControls {
     constructor() {
-        super("separator","separator");
+        super("separator", "separator");
     }
 
 }

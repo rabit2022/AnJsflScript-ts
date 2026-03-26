@@ -1,4 +1,5 @@
 export const DIALOG = {
+    '?xml': { '@version': 1 },
     "dialog": {
         "content": {
             "grid": {
@@ -15,6 +16,7 @@ export const DIALOG = {
             "@id": 'controls'
         },
         "script": "if(window.xjsfl){xjsfl.ui.handleEvent({xulid}, 'initialize');}",
+        "property": { '@id': 'xulid', '@value': 0 },
         "@id": "dialog",
         "@title": "",
         "@buttons": "accept,cancel",

@@ -1,27 +1,31 @@
-import {DIALOG} from "../../Constants/DIALOG";
-import {Copy} from "../../utils/copy/deepCopy";
 import {XMLSelector} from "../loader/XMLSelector";
-import {XMLBuilderr} from "../loader/XMLBuilderr";
 import {BaseDialog} from "./BaseDialog";
+import {BaseControl} from "../../Controls/Base/BaseControl";
+import {BaseSettings} from "../../Controls/Base/BaseSettings";
+import {ColumnsManager} from "../../Constants/ColumnsManager";
+import {Label} from "../../Controls";
+import {XMLBuilderr} from "../loader/XMLBuilderr";
 
 
-export class XULBuilder extends BaseDialog{
-    private title: string;
+export class XULBuilder extends BaseDialog {
+    private title: string = 'xJSFL';
+    private controls: BaseControl[] = [];
+    private static xulid: number = 0;
 
-    constructor(id: string, title: string) {
+    constructor(id: string, title: string = 'xJSFL') {
         super(id);
 
         const dialog = this.json.dialog;
-
         dialog["@id"] = id;
-        dialog["@title"] = title;
-        this.title = title;
+        this.setTitle(title);
+
+        XULBuilder.xulid++;
     }
 
     /**
      * 获取 content.row 容器
      */
-    getContentContainer(): any[] {
+    private getContentContainer(): any[] {
         // const content = this.json.dialog.content.grid.rows.row;
         // return content;
 
@@ -32,9 +36,17 @@ export class XULBuilder extends BaseDialog{
     /**
      * 添加控件
      */
-    add(controlJson: { "row": any }) {
+    private add(controlJson: { "row": any }) {
         this.getContentContainer().push(controlJson.row);
         return this;
+    }
+
+    addControl(control: BaseControl) {
+        this.controls.push(control);
+    }
+
+    addControls(controls: BaseControl[]) {
+        this.controls.push(...controls);
     }
 
 
@@ -46,11 +58,61 @@ export class XULBuilder extends BaseDialog{
 
     setTitle(title: string) {
         const dialog = this.json.dialog;
-        dialog["@title"] = " "+title;
-        this.title			= title;
+        dialog["@title"] = " " + title;
+        this.title = title;
     }
+
     setButtons(buttonName: string) {
         const dialog = this.json.dialog;
         dialog["@buttons"] = buttonName;
+    }
+
+    setProperties(props: Record<string, any>): this {
+        // 直接解构出 [key, value]
+        for (const [key, value] of Object.entries(props)) {
+            switch (key) {
+                case 'title':
+                    this.setTitle(value);
+                    break;
+                default:
+                    throw new Error(`Unknown property '${key}'`);
+            }
+        }
+        return this;
+    }
+
+    setWidth() {
+        // set column widths
+        for (const control of this.controls) {
+            if (["compound", "simple"].includes(control.CLASS)) {
+                (control as BaseSettings).setLabelWidth(ColumnsManager.labelWidth);
+                (control as BaseSettings).setControlWidth(ColumnsManager.controlWidth);
+            } else if (control.CLASS === "spacer") {
+                if (control.type === "label") {
+                    (control as Label).setLabelWidth(ColumnsManager.labelWidth);
+                }
+            } else {
+
+            }
+
+        }
+    }
+
+    build() {
+        // set width
+        this.setWidth()
+
+        // add control json
+        for (const control of this.controls) {
+            this.add(control.toJSON() as { "row": any; });
+        }
+
+        // add xulid, so we can test for existance of dialog boxes in future
+        this.json.dialog.property["@value"] = XULBuilder.xulid;
+
+        // replace separator control
+
+        const builder = new XMLBuilderr(this.json);
+        return builder.build();
     }
 }
