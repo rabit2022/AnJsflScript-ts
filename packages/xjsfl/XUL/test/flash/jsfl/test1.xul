@@ -20,8 +20,12 @@
 <!--                </columns>-->
 <!--                <rows>-->
 
-                    <separator/>
+<!--                    <separator/>-->
 
+<!--                <row template="expression">-->
+<!--                    <label value="Expression:" />-->
+<!--                    <expression class="control" id="expression" value="3+2" prompt="eeeeee" size="" flex="" />-->
+<!--                </row>-->
 
 
                     <row template="label">

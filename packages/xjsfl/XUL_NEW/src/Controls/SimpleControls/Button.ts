@@ -3,7 +3,7 @@ import {ButtonAttributes} from "./types/Button.types";
 import {TEMPLATES} from "../../Constants/Templates";
 
 export class Button extends SimpleControls {
-    constructor(id: string, label: string, attributes: ButtonAttributes = {}) {
+    constructor(id: string, label?: string, attributes: ButtonAttributes = {}) {
         let newLabel = '';
         super("button", id, newLabel, attributes);
 

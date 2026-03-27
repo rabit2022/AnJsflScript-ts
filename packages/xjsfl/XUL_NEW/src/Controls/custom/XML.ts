@@ -4,10 +4,10 @@ import {BaseControl} from "../Base/BaseControl";
 
 export class XML extends BaseControl {
     constructor(xml: string) {
-        super("custom", "xml");
         const loader = new XMLLoader(xml, "xml");
-        // @ts-ignore
-        this.json = parseUserXML(loader.JSON);
+        let json = parseUserXML(loader.toJSON());
+
+        super("custom", "xml", json);
     }
 }
 

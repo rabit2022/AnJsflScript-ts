@@ -1,30 +1,7 @@
-export const DIALOG = {
-    '?xml': { '@version': 1 },
-    "dialog": {
-        "content": {
-            "grid": {
-                "columns": {
-                    "column": [{"@flex": 1}, {"@flex": 2}],
-                    "@id": "columns"
-                },
-                "rows": {
-                    "row": [],
-                    "@id": "controls"
-                }
-                //"row": {"@id": "controls"}
-            },
-            "@id": 'controls'
-        },
-        "script": "if(window.xjsfl){xjsfl.ui.handleEvent({xulid}, 'initialize');}",
-        "property": { '@id': 'xulid', '@value': 0 },
-        "@id": "dialog",
-        "@title": "",
-        "@buttons": "accept,cancel",
-        "@width": 100,
-        "@height": 200,
-    }
-}
+import DIALOG from "../../assets/templates/json/DIALOG.json";
 
+// console.log(DIALOG);
+export {DIALOG};
 
 // DIALOG.dialog.content["@id"] = "dialog";
 // console.log(DIALOG);

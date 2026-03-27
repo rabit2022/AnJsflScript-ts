@@ -8,8 +8,8 @@
  */
 
 // XUL 类型来自项目环境
-import { XULElementItem } from "./XULControl.types";
-import {XUL} from "./XUL";
+import {XULElementItem} from "./XULControl.types";
+import {XUL} from "./XUL/XUL";
 
 // Main Class --------------------------------------------------
 export class XULControl {
@@ -42,14 +42,6 @@ export class XULControl {
     // --------------------------
     // Getters / Setters
     // --------------------------
-
-    getXUL() {
-        return this._xul;
-    }
-
-    getXML() {
-        return this._xml;
-    }
 
     get rawValue(): string {
         const settings = this._xul.settings;
@@ -133,25 +125,23 @@ export class XULControl {
         }
     }
 
-    // visible
-    set visible(state: boolean) {
-        fl.xmlui.setVisible(this.id, state);
-    }
-
     get visible(): boolean {
         return fl.xmlui.getVisible(this.id);
     }
 
-    // enabled
-    set enabled(state: boolean) {
-        fl.xmlui.setEnabled(this.id, state);
+    // visible
+    set visible(state: boolean) {
+        fl.xmlui.setVisible(this.id, state);
     }
 
     get enabled(): boolean {
         return fl.xmlui.getEnabled(this.id);
     }
 
-    // compound related --------------------------------------------------
+    // enabled
+    set enabled(state: boolean) {
+        fl.xmlui.setEnabled(this.id, state);
+    }
 
     get values() {
         if (!this.elements) return [];
@@ -168,11 +158,11 @@ export class XULControl {
             if (typeof v === "object") {
                 for (const label in v) {
                     if (Object.prototype.hasOwnProperty.call(v, label)) {
-                        elements.push({ label, value: (v as any)[label], id: "" });
+                        elements.push({label, value: (v as any)[label], id: ""});
                     }
                 }
             } else {
-                elements.push({ label: v, value: v, id: "" });
+                elements.push({label: v, value: v, id: ""});
             }
         }
 
@@ -182,15 +172,25 @@ export class XULControl {
         this.selectedIndex = 0;
     }
 
+    // compound related --------------------------------------------------
+
+    get selectedIndex(): number {
+        if (!this.compound) return -1;
+        return this.values.indexOf(this.value);
+    }
+
     set selectedIndex(index: number) {
         if (this.compound) {
             this.value = this.values[index];
         }
     }
 
-    get selectedIndex(): number {
-        if (!this.compound) return -1;
-        return this.values.indexOf(this.value);
+    getXUL() {
+        return this._xul;
+    }
+
+    getXML() {
+        return this._xml;
     }
 
     // validation ---------------------------------------------------------

@@ -1,10 +1,7 @@
-import {DIALOG} from "../Constants/DIALOG";
-import {TEMPLATES} from "../Constants/Templates";
-import {isFileUri} from "../utils/Checker/IsURL";
-import {XULControl} from "./XULControl";
-import {parseFunction} from "../utils/paser/parseFunction";
-import {XMLLoader} from "../io/loader/XMLLoader";
-import {parseUserXML} from "../utils/paser/parseUserXML";
+import {DIALOG} from "../../Constants/DIALOG";
+import {TEMPLATES} from "../../Constants/Templates";
+import {XULControl} from "../XULControl";
+import {XMLLoader} from "../../io/loader/XMLLoader";
 
 
 export class XUL {
@@ -68,43 +65,8 @@ export class XUL {
         return values;
     }
 
-    static factory(props: Function | string): XUL {
-        /*
-            Arguments:
-            String, accept, fail	- get controls, labels and values from string @see XUL.add()
-            accept, fail			- build controls from function params
-            Object, accept, fail	- build controls from object (not yet implemented)
-            //TODO implement building from Object
-        */
-
-        var xul = new XUL();
-
-        if (xul.xml && props) {
-            if (typeof props == 'function') {
-                let FUNCTION = props;
-
-                // parse and assign controls
-                let functionInfo = parseFunction(FUNCTION);
-                for (const param of functionInfo.params) {
-                    xul.addTextbox(param);
-                }
-
-                // title
-                xul.setTitle('Dialog for "' + FUNCTION.name + '"');
-            }
-            // props is a string, load XML if is a URI, or use shorthand notation to create controls
-            else if (typeof props == 'string') {
-                if (isFileUri(props)) {
-                    xul.load(props);
-                } else {
-                    xul.add(props);
-                }
-            } else {
-                throw new Error("Unable to parse XUL format." + typeof props);
-            }
-        }
-
-        return xul;
+    static toString(): string {
+        return '[class XUL]';
     }
 
     /**
@@ -135,10 +97,6 @@ export class XUL {
     toString() {
         // return '[object XUL id="' +this.id+ '" title="' +(this.xml ? String(this.xml.@title).trim() : '')+ '" controls:' +Object.keys(this.controls).length+ ']';
         return "[object XUL]"
-    }
-
-    static toString(): string {
-        return '[class XUL]';
     }
 }
 

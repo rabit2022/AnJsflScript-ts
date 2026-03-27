@@ -1,13 +1,17 @@
 import {TEMPLATES} from "../../Constants/Templates";
 import {Property} from "../spacer/Property";
-import {BaseControl} from "../Base/BaseControl";
 import {Attrs} from "../Base/SimpleControls.types";
 import {ColumnsManager} from "../../Constants/ColumnsManager";
 import {BaseSettings} from "../Base/BaseSettings";
+import {getJsonFromTemplate} from "../../utils/paser/getJson";
 
 export class Flash extends BaseSettings {
+    private flashData: any;
+
     constructor(relativeSwf: string, width: number, height: number, properties: string[]) {
-        super("flash", "flash");
+
+        let json_ = getJsonFromTemplate("flash");
+        super("flash", "flash", json_);
 
         // src
         let json = this.json as typeof TEMPLATES["flash"];
@@ -26,7 +30,21 @@ export class Flash extends BaseSettings {
 
     }
 
-    private flashData: any;
+    get controlNode() {
+        const row = (this.json as typeof TEMPLATES["flash"]).element;
+
+        // 找控件节点
+        const controlKey = Object.keys(row).find(
+            k => k !== "label" && !k.startsWith("@")
+        );
+
+        if (!controlKey) {
+            throw new Error(`Invalid template: ${this.type}`);
+        }
+
+        const control = (row as any)[controlKey];
+        return control;
+    }
 
     setFlashData(data: any) {
         this.flashData = data;
@@ -68,8 +86,7 @@ export class Flash extends BaseSettings {
 
 
         // width
-        if(attributes?.width > ColumnsManager.controlWidth)
-        {
+        if (attributes?.width > ColumnsManager.controlWidth) {
             // this.columns[1] = attributes.width;
             ColumnsManager.controlWidth = attributes.width;
         }
@@ -83,22 +100,6 @@ export class Flash extends BaseSettings {
     setControlWidth(controlWidth: number) {
         let control = this.controlNode;
         control["@width"] = controlWidth;
-    }
-
-    get controlNode(){
-        const row = (this.json as typeof TEMPLATES["flash"]).element;
-
-        // 找控件节点
-        const controlKey = Object.keys(row).find(
-            k => k !== "label" && !k.startsWith("@")
-        );
-
-        if (!controlKey) {
-            throw new Error(`Invalid template: ${this._type}`);
-        }
-
-        const control = (row as any)[controlKey];
-        return control;
     }
 }
 

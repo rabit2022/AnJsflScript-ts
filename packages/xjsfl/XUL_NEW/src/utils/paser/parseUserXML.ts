@@ -1,4 +1,3 @@
-import {XMLLoader} from "../../io/loader/XMLLoader";
 import {AllControls, SIMPLE_CONTROL_NAMES} from "../../Constants/Templates.types";
 import {XMLSelector} from "../../io/loader/XMLSelector";
 import {ControlFactory} from "../../Controls/Factory/ControlFactory";
@@ -6,7 +5,7 @@ import {ControlFactory} from "../../Controls/Factory/ControlFactory";
 /**
  * Parse user-supplied XML so that XULControls are created
  */
-export function parseUserXML(xml: any):any {
+export function parseUserXML(xml: any): any {
     // add xml under a temp root node, so we can find any top-level control nodes passed in
     // xml = new XML('<temp>' + xml.toXMLString() + '</temp>');
     let tempXml = {

@@ -3,7 +3,7 @@ import {TEMPLATES} from "../../Constants/Templates";
 import {ColorAttributes} from "./types/Colorchip.types";
 
 export class Colorchip extends SimpleControls {
-    constructor(id: string, label: string, attributes: ColorAttributes = {}) {
+    constructor(id: string, label?: string|null, attributes: ColorAttributes = {}) {
 
         normalizeColorValue(attributes);
         super("colorchip", id, label, attributes);

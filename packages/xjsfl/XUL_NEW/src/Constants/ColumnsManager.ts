@@ -6,6 +6,7 @@ export class ColumnsManager {
     static get columns(): number[] {
         return this._columns;
     }
+
     //
     // // 3. 定义公共静态访问器 (Setter)
     // // 注意：这里保留了 Array.isArray 检查，如果不需要检查可以进一步简化
@@ -25,12 +26,12 @@ export class ColumnsManager {
         this._columns[0] = width;
     }
 
-    static set controlWidth(value: number) {
-        this._columns[1] = value;
-    }
-
     static get controlWidth() {
         return this._columns[1];
+    }
+
+    static set controlWidth(value: number) {
+        this._columns[1] = value;
     }
 
 }

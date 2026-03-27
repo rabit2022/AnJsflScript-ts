@@ -1,5 +1,5 @@
-export { Spacer } from "./Spacer";
-export { Separator } from "./Separator";
-export { Script } from "./Script";
-export { Property } from "./Property";
-export { Label } from "./Label";
+export {Spacer} from "./Spacer";
+export {Separator} from "./Separator";
+export {Script} from "./Script";
+export {Property} from "./Property";
+export {Label} from "./Label";

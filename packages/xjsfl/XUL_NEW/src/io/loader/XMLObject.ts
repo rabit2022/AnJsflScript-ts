@@ -1,4 +1,5 @@
 import {XMLBuilder, XMLParser} from "fast-xml-parser";
+import {XMLBuilderr} from "./XMLBuilderr";
 
 
 export class XMLObject {
@@ -26,6 +27,15 @@ export class XMLObject {
 
     set JSON(value: any) {
         this.json = value;
+    }
+
+    toJSON() {
+        return this.json;
+    }
+
+    toXMLString(): string {
+        const builder = new XMLBuilderr(this.json);
+        return builder.build();
     }
 
     build() {

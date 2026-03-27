@@ -11,6 +11,9 @@
     //    "esModuleInterop": true,
     //    "allowSyntheticDefaultImports": true,
 
+    // json
+    "resolveJsonModule": true,
+
     "importHelpers": true,
     // iterator
     "downlevelIteration": true,

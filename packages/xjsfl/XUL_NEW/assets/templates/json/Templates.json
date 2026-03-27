@@ -1,0 +1,249 @@
+{
+  "textbox": {
+    "row": {
+      "label": {
+        "@value": "Textbox:"
+      },
+      "textbox": {
+        "@class": "control",
+        "@id": "textbox",
+        "@value": "",
+        "@maxlength": "",
+        "@prompt": "",
+        "@size": "",
+        "@multiline": false,
+        "@width": "",
+        "@flex": 1
+      },
+      "@template": "textbox"
+    }
+  },
+  "colorchip": {
+    "row": {
+      "label": {
+        "@value": "Colorchip:"
+      },
+      "colorchip": {
+        "@class": "control",
+        "@id": "colorchip",
+        "@color": "",
+        "@format": "hex",
+        "@width": 100
+      },
+      "@template": "colorchip"
+    }
+  },
+  "popupslider": {
+    "row": {
+      "label": {
+        "@value": "Popupslider:"
+      },
+      "popupslider": {
+        "@class": "control",
+        "@id": "popupslider",
+        "@value": "",
+        "@minvalue": 0,
+        "@maxvalue": 100,
+        "@orientation": "horz",
+        "@tabindex": "",
+        "@width": 60,
+        "@flex": ""
+      },
+      "@template": "popupslider"
+    }
+  },
+  "checkbox": {
+    "row": {
+      "label": {
+        "@value": "Checkbox:"
+      },
+      "checkbox": {
+        "@class": "control",
+        "@id": "checkbox",
+        "@label": "Checkbox",
+        "@checked": true,
+        "@tabindex": "",
+        "@acceskey": ""
+      },
+      "@template": "checkbox"
+    }
+  },
+  "button": {
+    "row": {
+      "label": {
+        "@value": "Button:",
+        "@align": "",
+        "@control": ""
+      },
+      "button": {
+        "@class": "control",
+        "@id": "button",
+        "@label": "Button",
+        "@width": "",
+        "@flex": 1,
+        "@tabindex": "",
+        "@acceskey": "",
+        "@oncommand": ""
+      },
+      "@template": "button"
+    }
+  },
+  "choosefile": {
+    "row": {
+      "label": {
+        "@value": "Choose File:",
+        "@align": "",
+        "@control": ""
+      },
+      "choosefile": {
+        "@id": "choosefile",
+        "@literal": false,
+        "@pathtype": "",
+        "@required": "",
+        "@size": "",
+        "@type": "",
+        "@width": "",
+        "@flex": 1,
+        "@tabindex": ""
+      },
+      "@template": "choosefile"
+    }
+  },
+  "targetlist": {
+    "row": {
+      "label": {
+        "@value": "Targetlist:"
+      },
+      "targetlist": {
+        "@id": "targetlist",
+        "@class": "",
+        "@width": 300,
+        "@height": "",
+        "@flex": 1,
+        "@pathtype": "absolute"
+      },
+      "property": {
+        "@id": "targetlist"
+      },
+      "@template": "targetlist"
+    }
+  },
+  "listbox": {
+    "row": {
+      "label": {
+        "@value": "Listbox:"
+      },
+      "listbox": {
+        "listitem": [],
+        "@class": "control",
+        "@id": "listbox",
+        "@width": "",
+        "@flex": 1,
+        "@rows": 6,
+        "@tabindex": ""
+      },
+      "@template": "listbox"
+    }
+  },
+  "menulist": {
+    "row": {
+      "label": {
+        "@value": "Menu List:"
+      },
+      "menulist": {
+        "menupop": {
+          "menuitem": [],
+          "@class": "control",
+          "@id": "menupop"
+        },
+        "@class": "control",
+        "@id": "menulist",
+        "@editable": "",
+        "@width": "",
+        "@flex": 1,
+        "@tabindex": "",
+        "@oncreate": "",
+        "@onsetfocus": ""
+      },
+      "@template": "menulist"
+    }
+  },
+  "radiogroup": {
+    "row": {
+      "label": {
+        "@value": "Radio Group:"
+      },
+      "radiogroup": {
+        "radio": [],
+        "@class": "control",
+        "@id": "radiogroup",
+        "@tabindex": "",
+        "@groupbox": true
+      },
+      "@template": "radiogroup"
+    }
+  },
+  "checkboxgroup": {
+    "row": {
+      "label": {
+        "@value": "Checkbox Group:"
+      },
+      "vbox": {
+        "checkbox": [],
+        "@class": "control",
+        "@groupbox": true
+      },
+      "@template": "checkboxgroup"
+    }
+  },
+  "separator": {
+    "row": {
+      "separator": "",
+      "@template": "separator"
+    }
+  },
+  "spacer": {
+    "row": {
+      "spacer": "",
+      "label": "",
+      "@template": "spacer"
+    }
+  },
+  "property": {
+    "row": {
+      "property": {
+        "@template": "property",
+        "@id": "property"
+      }
+    }
+  },
+  "label": {
+    "row": {
+      "label": {
+        "@value": "Label",
+        "@align": "",
+        "@width": 100
+      },
+      "@template": "label"
+    }
+  },
+  "script": {
+    "row": {
+      "script": "function EMPTY() {}"
+    }
+  },
+  "flash": {
+    "element": {
+      "flash": {
+        "@class": "control",
+        "@id": "flash",
+        "@src": "assets/flash.swf",
+        "@width": 250,
+        "@height": 100
+      },
+      "@template": "flash"
+    },
+    "row": []
+  },
+  "custom": {}
+}

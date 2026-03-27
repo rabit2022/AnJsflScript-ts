@@ -1,23 +1,14 @@
-import {DIALOG} from "../../Constants/DIALOG";
-import {Copy} from "../../utils/copy/deepCopy";
 import {XMLBuilderr} from "../loader/XMLBuilderr";
+import {IdGenerator} from "../../utils/id/uniqueID";
 
 
 export class BaseDialog {
     protected readonly json;
     protected id: string;
 
-    constructor( id: string) {
-
-        this.id = id;
-
-        const template = DIALOG;
-        if (!template) {
-            throw new Error(`Dialog not found`);
-        }
-
-        const copy = Copy.deepCopy(template);
-        this.json = copy;
+    constructor(id: string, json: any) {
+        this.json = json;
+        this.id = IdGenerator.generate(id);
     }
 
 

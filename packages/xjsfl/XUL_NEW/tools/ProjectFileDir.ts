@@ -77,3 +77,8 @@ export const CUR_DIST = path.resolve(CURRENT_PROJECT, "dist");
 
 export const CUR_DIST_INDEXJS_FILE = path.resolve(CUR_DIST, "index.js");
 export const CUR_DIST_INDEXJSFL_FILE = path.resolve(CUR_DIST, "index.jsfl");
+
+
+export const CUR_ASSETS = path.resolve(CURRENT_PROJECT, "assets");
+
+// console.log(CUR_ASSETS)

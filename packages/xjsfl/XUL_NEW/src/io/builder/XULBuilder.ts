@@ -5,40 +5,28 @@ import {BaseSettings} from "../../Controls/Base/BaseSettings";
 import {ColumnsManager} from "../../Constants/ColumnsManager";
 import {Label} from "../../Controls";
 import {XMLBuilderr} from "../loader/XMLBuilderr";
+import {DIALOG} from "../../Constants/DIALOG";
+import {Copy} from "../../utils/copy/deepCopy";
+import {getJsonFromDialog} from "../../utils/paser/getJson";
+import {IFileHandler} from "./FileHandler";
+import {XMLSaver} from "../loader/XMLSaver";
 
 
-export class XULBuilder extends BaseDialog {
+export class XULBuilder extends BaseDialog implements IFileHandler{
+    private static xulid: number = 0;
     private title: string = 'xJSFL';
     private controls: BaseControl[] = [];
-    private static xulid: number = 0;
 
     constructor(id: string, title: string = 'xJSFL') {
-        super(id);
+        const copy = getJsonFromDialog();
+        // this.json = copy;
+        super(id, copy);
 
         const dialog = this.json.dialog;
         dialog["@id"] = id;
         this.setTitle(title);
 
         XULBuilder.xulid++;
-    }
-
-    /**
-     * 获取 content.row 容器
-     */
-    private getContentContainer(): any[] {
-        // const content = this.json.dialog.content.grid.rows.row;
-        // return content;
-
-        const selector = new XMLSelector(this.json, "$..row")
-        return selector.select()[0];
-    }
-
-    /**
-     * 添加控件
-     */
-    private add(controlJson: { "row": any }) {
-        this.getContentContainer().push(controlJson.row);
-        return this;
     }
 
     addControl(control: BaseControl) {
@@ -48,7 +36,6 @@ export class XULBuilder extends BaseDialog {
     addControls(controls: BaseControl[]) {
         this.controls.push(...controls);
     }
-
 
     setSize(width: number, height: number) {
         const dialog = this.json.dialog;
@@ -114,5 +101,29 @@ export class XULBuilder extends BaseDialog {
 
         const builder = new XMLBuilderr(this.json);
         return builder.build();
+    }
+
+    /**
+     * 获取 content.row 容器
+     */
+    private getContentContainer(): any[] {
+        // const content = this.json.dialog.content.grid.rows.row;
+        // return content;
+
+        const selector = new XMLSelector(this.json, "$..row")
+        return selector.select()[0];
+    }
+
+    /**
+     * 添加控件
+     */
+    private add(controlJson: { "row": any }) {
+        this.getContentContainer().push(controlJson.row);
+        return this;
+    }
+
+    save(pathOrUri: string): void {
+        const saver = new XMLSaver(pathOrUri);
+        saver.save(this.toXMLString())
     }
 }

@@ -8,15 +8,17 @@ import {CLASS_TYPE} from "./BaseControl.types";
 import * as _ from "lodash";
 import {BaseSettings} from "./BaseSettings";
 import {IdGenerator} from "../../utils/id/uniqueID";
+import {getJsonFromTemplate} from "../../utils/paser/getJson";
 
 export class CompoundControls extends BaseSettings {
 
-    protected CLASS_TYPE:CLASS_TYPE = "compound";
+    protected CLASS_TYPE: CLASS_TYPE = "compound";
 
     constructor(type: compoundControl, id: string | null, label: string, attributes: Attrs = {}, values: ValuesType = {}) {
         id = id || IdGenerator.generate(label);
 
-        super(type, id);
+        let json = getJsonFromTemplate(type);
+        super(type, id, json);
 
         this._type = type;
 

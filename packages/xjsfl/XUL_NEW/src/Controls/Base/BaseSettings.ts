@@ -2,16 +2,30 @@ import {BaseControl} from "./BaseControl";
 import {AllControls, compoundControl, simpleControl} from "../../Constants/Templates.types";
 import {Attrs} from "./SimpleControls.types";
 import {ColumnsManager} from "../../Constants/ColumnsManager";
-import {TEMPLATES} from "../../Constants/Templates";
 
-export class BaseSettings extends BaseControl{
+export class BaseSettings extends BaseControl {
     public settings: Record<string, any> = {};
 
-    constructor(type: AllControls, id: string) {
-        super(type,id);
+    constructor(type: AllControls, id: string, json: any) {
+        super(type, id, json);
     }
 
-    setAttributes(type:  simpleControl | compoundControl |"flash", id: string, label: string, attributes: Attrs) {
+    get controlNode() {
+        const row = (this.json as any).row;
+        // 找控件节点
+        const controlKey = Object.keys(row).find(
+            k => k !== "label" && !k.startsWith("@")
+        );
+
+        if (!controlKey) {
+            throw new Error(`Invalid template: ${this.type}`);
+        }
+
+        const control = (row as any)[controlKey];
+        return control;
+    }
+
+    setAttributes(type: simpleControl | compoundControl | "flash", id: string, label: string, attributes: Attrs) {
         const row = (this.json as any).row;
 
 
@@ -37,8 +51,7 @@ export class BaseSettings extends BaseControl{
 
 
         // width
-        if(attributes?.width > ColumnsManager.controlWidth)
-        {
+        if (attributes?.width > ColumnsManager.controlWidth) {
             // this.columns[1] = attributes.width;
             ColumnsManager.controlWidth = attributes.width;
         }
@@ -56,21 +69,6 @@ export class BaseSettings extends BaseControl{
     setControlWidth(controlWidth: number) {
         let control = this.controlNode;
         control["@width"] = controlWidth;
-    }
-
-    get controlNode(){
-        const row = (this.json as any).row;
-        // 找控件节点
-        const controlKey = Object.keys(row).find(
-            k => k !== "label" && !k.startsWith("@")
-        );
-
-        if (!controlKey) {
-            throw new Error(`Invalid template: ${this._type}`);
-        }
-
-        const control = (row as any)[controlKey];
-        return control;
     }
 
 }

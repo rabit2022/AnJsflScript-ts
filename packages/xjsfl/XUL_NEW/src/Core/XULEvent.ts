@@ -7,8 +7,8 @@
  * @description:
  */
 
-import { XULControl } from "./XULControl";
-import {XUL} from "./XUL";
+import {XULControl} from "./XULControl";
+import {XUL} from "./XUL/XUL";
 
 /**
  * A XUL Event class to pass parameters to event callbacks
