@@ -132,24 +132,6 @@ export class XUL {
         return this;
     }
 
-    /**
-     * Replace the standard XML dialog template
-     */
-    setXML(xml: string): this {
-        // variables
-        this.controls = {};
-        this.events = {};
-        this.settings = {};
-
-
-        // xml
-        var nodes = xml;
-        this.content = parseUserXML(nodes);
-
-        // add new controls
-        return this;
-    }
-
     toString() {
         // return '[object XUL id="' +this.id+ '" title="' +(this.xml ? String(this.xml.@title).trim() : '')+ '" controls:' +Object.keys(this.controls).length+ ']';
         return "[object XUL]"
