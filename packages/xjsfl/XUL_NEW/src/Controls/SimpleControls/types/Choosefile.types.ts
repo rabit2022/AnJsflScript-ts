@@ -1,6 +1,6 @@
-import {Width} from "../../Base/SimpleControls.types";
+import {HasValue, HasWidth} from "../../Base/SimpleControls.types";
 
-export interface ChoosefileAttributes extends Width {
+export interface ChoosefileAttributes extends HasWidth,HasValue {
     literal?: boolean;
     pathtype?: string;
     required?: boolean;

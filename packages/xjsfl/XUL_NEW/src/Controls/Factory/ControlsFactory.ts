@@ -1,10 +1,11 @@
 import {BaseControl} from "../Base/BaseControl";
 import {parseExpression} from "../../utils/paser/parseExpression";
 import {ControlFactory} from "./ControlFactory";
-import {Button, Checkbox, Colorchip, PopupSlider, Targetlist, Textbox} from "../SimpleControls";
+import {Button, Checkbox, Choosefile, Colorchip, PopupSlider, Targetlist, Textbox} from "../SimpleControls";
 import {Flash, XML} from "../custom";
 import {Checkboxgroup, Listbox, Menulist, Radiogroup} from "../CompoundControls";
 import {Label, Property, Separator, Spacer} from "../spacer";
+import {HasValue} from "../Base/SimpleControls.types";
 
 
 export class ControlsFactory {
@@ -30,7 +31,7 @@ export class ControlsFactory {
                     break;
 
                 case 'checkbox':
-                    control = new Checkbox(label, null, {checked:value});
+                    control = new Checkbox(label, null, {checked:Boolean(value)});
                     break;
 
                 case 'color':
@@ -46,16 +47,17 @@ export class ControlsFactory {
                 case 'choosefile':
                 case 'openfile':
                 case 'file':
-                    this.addFile(label, null);
+                    control = new Choosefile(label, null);
                     break;
 
                 case 'savefile':
                 case 'save':
-                    this.addFile(label, null, {value:'', type:'save'});
+                    control = new Choosefile(label, null, {value:'', type:'save'});
                     break;
 
                 case 'flash':
-                    control = new Flash(label, control, value);
+                    // this.setFlash(label, control, value);
+                    control = new Flash(label,[value as string]);
                     break;
 
                 case 'value':
@@ -63,7 +65,7 @@ export class ControlsFactory {
                 case 'numeric':
                 case 'slider':
                 case 'popupslider':
-                    control = new PopupSlider(label, null, value);
+                    control = new PopupSlider(label, null, value[0] as HasValue);
                     break;
 
                 case 'targetlist':
@@ -73,40 +75,40 @@ export class ControlsFactory {
                 case 'text':
                 case 'textbox':
                 case 'textfield':
-                    control = new Textbox(label, null, {value:value});
+                    control = new Textbox(label, null, {value:value as string});
                     break;
 
                 case 'textarea':
-                    control = new Textbox(label, null, {value:value, multiline:true});
+                    control = new Textbox(label, null, {value:value as string, multiline:true});
                     break;
 
                 // compound controls
 
                 case 'checkboxgroup':
                 case 'checkboxes':
-                    control = new Checkboxgroup(label, null, value);
+                    control = new Checkboxgroup(label, null, value[0] as HasValue);
                     break;
 
                 case 'radiogroup':
                 case 'radios':
                 case 'radio':
-                    control = new Radiogroup(label, null, value);
+                    control = new Radiogroup(label, null, value[0] as HasValue);
                     break;
 
                 case 'list':
                 case 'listbox':
-                    control = new Listbox(label, null, value);
+                    control = new Listbox(label, null, value[0] as HasValue);
                     break;
 
                 case 'menulist':
                 case 'dropdown':
-                    control = new Menulist(label, null, value);
+                    control = new Menulist(label, null,value[0] as HasValue);
                     break;
 
                 // other
 
                 case 'xml':
-                    control = new XML(value);
+                    control = new XML(value as string);
                     break;
 
                 case 'label':
@@ -114,7 +116,7 @@ export class ControlsFactory {
                     break;
 
                 case 'property':
-                    control = new Property(value);
+                    control = new Property(value as string);
                     break;
 
                 case 'spacer':
@@ -182,7 +184,9 @@ const parseControls = (str: string): ParsedControl[] => {
         // 原逻辑：matches[1] 是前缀(如 'w:'), matches[2] 是 label, matches[3] 是 value
         let type = matches[1] ? matches[1].trim().replace(':', '') : '';
         let label = matches[2].trim();
-        let value: any = matches[3].trim();
+        let value = matches[3].trim();
+
+        let finalValue :any = value;
 
         // 默认类型处理
         if (type === '') {
@@ -224,14 +228,14 @@ const parseControls = (str: string): ParsedControl[] => {
                 type = 'dropdown';
             }
 
-            value = parsedValues;
+            finalValue = parsedValues;
         }
 
         // 推入结果集
         result.push({
             type,
             label,
-            value
+            value: finalValue
         });
     }
 

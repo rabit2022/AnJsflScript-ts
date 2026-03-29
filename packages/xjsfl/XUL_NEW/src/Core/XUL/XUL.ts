@@ -1,7 +1,7 @@
 import {DIALOG} from "../../Constants/DIALOG";
 import {TEMPLATES} from "../../Constants/Templates";
 import {XULControl} from "../XULControl";
-import {XMLLoader} from "../../io/loader/XMLLoader";
+import {XULEventBus} from "../../events/XULEventBus";
 
 
 export class XUL {
@@ -10,18 +10,13 @@ export class XUL {
     public xml = DIALOG;
     public controls: Record<string, XULControl> = {}
     public settings = {};
-    public flashData = null;
-    // properties
-    public title = 'xJSFL';
+
     // private
-    private events = {};
+    // private events = {};
+    private events = new XULEventBus();
     private rules = {};
-    private columns = [100, 180]
-    private error = null;
-    private id = -1;
-    // template
-    private content = '';
-    private separator = '</rows></grid><separator /><grid><columns><column flex="1" /><column flex="2" /></columns><rows>';
+
+
     // flags
     private built = false;
     private open = false;
@@ -67,31 +62,6 @@ export class XUL {
 
     static toString(): string {
         return '[class XUL]';
-    }
-
-    /**
-     * Loads a dialog in from an external file
-     */
-    load(pathOrURI: string): this {
-        const xml = new XMLLoader(pathOrURI, "url");
-
-        let root = xml.JSON;
-        // grab nodes
-        if (xml.name() === 'dialog') {
-            const title = root.dialog["@title"];
-
-            if (title.length()) {
-                this.setTitle(title);
-            }
-        }
-
-
-        // var nodes = xml.root.*;
-        var nodes = xml.build();
-
-        // set nodes
-        this.setXML(nodes);
-        return this;
     }
 
     toString() {

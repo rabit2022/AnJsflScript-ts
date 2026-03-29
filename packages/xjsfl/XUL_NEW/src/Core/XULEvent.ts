@@ -51,7 +51,7 @@ export class XULEvent {
     /**
      * Returns a string representation of the event
      */
-    public toString(): string {
+    toString(): string {
         const controlId = this.control ? ` control="${this.control.id}"` : "";
         return `[object XULEvent type="${this.type}"${controlId} xul="${this.xul.id}"]`;
     }

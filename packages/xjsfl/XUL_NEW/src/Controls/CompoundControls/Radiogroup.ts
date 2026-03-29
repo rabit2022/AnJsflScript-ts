@@ -5,7 +5,7 @@ import {RadiogroupAttributes} from "./types/Radiogroup.types";
 export class Radiogroup extends CompoundControls {
     constructor(
         id: string | null,
-        label: string,
+        label: string| null,
         attributes: RadiogroupAttributes = {},
         values: ValuesType = {},
     ) {

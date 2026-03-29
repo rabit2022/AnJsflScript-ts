@@ -7,6 +7,18 @@
  * @description:
  */
 
-export { XjsflFile } from "./file";
-export { XjsflUI } from "./ui";
-export { BASEURI } from "./uri";
+// export { XjsflFile } from "./file";
+// export { XjsflUI } from "./ui";
+// export { BASEURI } from "./uri";
+
+
+import {xjsfl} from "./xjsfl";
+import {XjsflUI} from "./ui";
+import {XjsflFile} from "./file";
+import {BASEURI} from "./uri";
+
+xjsfl.ui = XjsflUI;
+xjsfl.file = XjsflFile;
+xjsfl.uri = BASEURI;
+
+export {xjsfl};

@@ -3,7 +3,7 @@ import {ColumnsManager} from "../../Constants/ColumnsManager";
 import {SpacerControls} from "../Base/SpacerControls";
 
 export class Label extends SpacerControls {
-    constructor(label: string, id: string) {
+    constructor(label: string, id: string|null) {
         super("label", id);
 
         const sum = ColumnsManager.columns.reduce((a, b) => a + b, 0);

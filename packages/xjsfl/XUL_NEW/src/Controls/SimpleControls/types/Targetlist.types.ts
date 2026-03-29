@@ -1,7 +1,7 @@
-import {Width} from "../../Base/SimpleControls.types";
+import {HasValue, HasWidth} from "../../Base/SimpleControls.types";
 
 
-export interface TargetlistAttributes extends Width {
+export interface TargetlistAttributes extends HasWidth,HasValue {
     height?: number;
     flex?: number;
     pathtype?: "absolute";

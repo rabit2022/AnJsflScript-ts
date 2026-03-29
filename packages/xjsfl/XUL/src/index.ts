@@ -7,9 +7,9 @@
  * @description:
  */
 
-export { XULControl } from "./XULControl";
-export { XULEvent } from "./XULEvent";
-export { XjsflUI, XjsflFile, BASEURI } from "./xjsfl";
-export { parseValue, parseExpression } from "./utils";
+export {XULControl} from "./XULControl";
+export {XULEvent} from "./XULEvent";
+export {parseValue, parseExpression} from "./utils";
+export {xjsfl} from "./xjsfl";
 
 // XULControl,XULEvent,XjsflUI, XjsflFile,parseValue, parseExpression,BASEURI

@@ -14,7 +14,8 @@ export class CompoundControls extends BaseSettings {
 
     protected CLASS_TYPE: CLASS_TYPE = "compound";
 
-    constructor(type: compoundControl, id: string | null, label: string, attributes: Attrs = {}, values: ValuesType = {}) {
+    constructor(type: compoundControl, id: string | null, label: string|null, attributes: Attrs = {}, values: ValuesType = {}) {
+        label = label || type;
         id = id || IdGenerator.generate(label);
 
         let json = getJsonFromTemplate(type);

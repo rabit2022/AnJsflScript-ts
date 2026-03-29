@@ -1,6 +1,6 @@
-import {Width} from "../../Base/SimpleControls.types";
+import {HasValue, HasWidth} from "../../Base/SimpleControls.types";
 
-export interface MenulistAttributes extends Width {
+export interface MenulistAttributes extends HasWidth,HasValue{
     editable?: boolean;
     flex?: number;
     tabindex?: number;

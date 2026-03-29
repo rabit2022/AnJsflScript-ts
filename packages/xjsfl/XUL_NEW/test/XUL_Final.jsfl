@@ -466,7 +466,7 @@
 						// show panel
 							this.open		= true;
 							this.accepted	= false;
-							this.settings	= XjsflUI.show(this);
+							this.settings	= xjsfl.ui.show(this);
 							this.open		= false;
 
 					// --------------------------------------------------------------------------------

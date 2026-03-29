@@ -1,6 +1,6 @@
-import {Width} from "../../Base/SimpleControls.types";
+import {HasWidth} from "../../Base/SimpleControls.types";
 
-export interface ButtonAttributes extends Width {
+export interface ButtonAttributes extends HasWidth {
     // label: string;
     flex?: number;
     tabindex?: number;

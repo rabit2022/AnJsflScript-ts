@@ -1,4 +1,4 @@
-import {Width} from "../../Base/SimpleControls.types";
+import {HasValue, HasWidth} from "../../Base/SimpleControls.types";
 
 export interface ListitemAttributes {
     "@id"?: string;
@@ -24,7 +24,7 @@ export interface SelectedItem {
     [key: string]: any; // ⭐ 允许扩展字段
 }
 
-export interface ListboxAttributes extends Width {
+export interface ListboxAttributes extends HasWidth,HasValue {
     flex?: number;
     rows?: number;
     tabindex?: number;

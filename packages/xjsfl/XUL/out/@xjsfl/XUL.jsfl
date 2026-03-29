@@ -360,6 +360,20 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__248__;
 
 /***/ }),
 
+/***/ 413:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", ({ value: true }));
+    exports.xjsfl = void 0;
+    exports.xjsfl = {};
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
 /***/ 490:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -548,13 +562,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /***/ 800:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(580), __webpack_require__(720), __webpack_require__(490)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, file_1, ui_1, uri_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(413), __webpack_require__(720), __webpack_require__(580), __webpack_require__(490)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, xjsfl_1, ui_1, file_1, uri_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
-    exports.BASEURI = exports.XjsflUI = exports.XjsflFile = void 0;
-    Object.defineProperty(exports, "XjsflFile", ({ enumerable: true, get: function () { return file_1.XjsflFile; } }));
-    Object.defineProperty(exports, "XjsflUI", ({ enumerable: true, get: function () { return ui_1.XjsflUI; } }));
-    Object.defineProperty(exports, "BASEURI", ({ enumerable: true, get: function () { return uri_1.BASEURI; } }));
+    exports.xjsfl = void 0;
+    Object.defineProperty(exports, "xjsfl", ({ enumerable: true, get: function () { return xjsfl_1.xjsfl; } }));
+    xjsfl_1.xjsfl.ui = ui_1.XjsflUI;
+    xjsfl_1.xjsfl.file = file_1.XjsflFile;
+    xjsfl_1.xjsfl.uri = uri_1.BASEURI;
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
@@ -580,17 +595,15 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__917__;
 /***/ 946:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(138), __webpack_require__(971), __webpack_require__(800), __webpack_require__(976)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, XULControl_1, XULEvent_1, xjsfl_1, utils_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(138), __webpack_require__(971), __webpack_require__(976), __webpack_require__(800)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (require, exports, XULControl_1, XULEvent_1, utils_1, xjsfl_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", ({ value: true }));
-    exports.parseExpression = exports.parseValue = exports.BASEURI = exports.XjsflFile = exports.XjsflUI = exports.XULEvent = exports.XULControl = void 0;
+    exports.xjsfl = exports.parseExpression = exports.parseValue = exports.XULEvent = exports.XULControl = void 0;
     Object.defineProperty(exports, "XULControl", ({ enumerable: true, get: function () { return XULControl_1.XULControl; } }));
     Object.defineProperty(exports, "XULEvent", ({ enumerable: true, get: function () { return XULEvent_1.XULEvent; } }));
-    Object.defineProperty(exports, "XjsflUI", ({ enumerable: true, get: function () { return xjsfl_1.XjsflUI; } }));
-    Object.defineProperty(exports, "XjsflFile", ({ enumerable: true, get: function () { return xjsfl_1.XjsflFile; } }));
-    Object.defineProperty(exports, "BASEURI", ({ enumerable: true, get: function () { return xjsfl_1.BASEURI; } }));
     Object.defineProperty(exports, "parseValue", ({ enumerable: true, get: function () { return utils_1.parseValue; } }));
     Object.defineProperty(exports, "parseExpression", ({ enumerable: true, get: function () { return utils_1.parseExpression; } }));
+    Object.defineProperty(exports, "xjsfl", ({ enumerable: true, get: function () { return xjsfl_1.xjsfl; } }));
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 

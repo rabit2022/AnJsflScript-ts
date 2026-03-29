@@ -4,7 +4,7 @@ import {ListboxAttributes, ValuesType} from "./types/Listbox.types";
 export class Listbox extends CompoundControls {
     constructor(
         id: string | null,
-        label: string,
+        label: string| null,
         attributes: ListboxAttributes = {},
         values: ValuesType = {},
     ) {

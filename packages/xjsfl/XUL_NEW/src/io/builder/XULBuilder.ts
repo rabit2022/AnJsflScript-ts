@@ -3,7 +3,7 @@ import {BaseDialog} from "./BaseDialog";
 import {BaseControl} from "../../Controls/Base/BaseControl";
 import {BaseSettings} from "../../Controls/Base/BaseSettings";
 import {ColumnsManager} from "../../Constants/ColumnsManager";
-import {Label} from "../../Controls";
+import {Label, Separator} from "../../Controls";
 import {XMLBuilderr} from "../loader/XMLBuilderr";
 import {DIALOG} from "../../Constants/DIALOG";
 import {Copy} from "../../utils/copy/deepCopy";
@@ -86,6 +86,9 @@ export class XULBuilder extends BaseDialog implements IFileHandler{
     }
 
     build() {
+        // todo:add handlers to controls
+
+
         // set width
         this.setWidth()
 
@@ -97,10 +100,14 @@ export class XULBuilder extends BaseDialog implements IFileHandler{
         // add xulid, so we can test for existance of dialog boxes in future
         this.json.dialog.property["@value"] = XULBuilder.xulid;
 
-        // replace separator control
 
+        // build
         const builder = new XMLBuilderr(this.json);
-        return builder.build();
+        const xml = builder.build();
+
+        // replace separator control
+        const separatedXml = Separator.replace(xml);
+        return separatedXml;
     }
 
     /**

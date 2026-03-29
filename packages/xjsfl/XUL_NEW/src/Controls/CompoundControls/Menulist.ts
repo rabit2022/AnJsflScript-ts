@@ -5,7 +5,7 @@ import {ValuesType} from "./types/Listbox.types";
 export class Menulist extends CompoundControls {
     constructor(
         id: string | null,
-        label: string,
+        label: string| null,
         attributes: MenulistAttributes = {},
         values: ValuesType = {},
     ) {

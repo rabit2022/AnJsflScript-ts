@@ -1,8 +1,7 @@
-import {Width} from "../../Base/SimpleControls.types";
+import {HasChecked, HasWidth} from "../../Base/SimpleControls.types";
 
-export interface CheckboxAttributes extends Width {
+export interface CheckboxAttributes extends HasWidth,HasChecked {
     // label?: string;
-    checked?: boolean;
     tabindex?: number;
     accesskey?: string;
 }

@@ -8,7 +8,7 @@ import {getJsonFromTemplate} from "../../utils/paser/getJson";
 export class Flash extends BaseSettings {
     private flashData: any;
 
-    constructor(relativeSwf: string, width: number, height: number, properties: string[]) {
+    constructor(relativeSwf: string, properties: string[], width?: number, height?: number) {
 
         let json_ = getJsonFromTemplate("flash");
         super("flash", "flash", json_);
@@ -18,14 +18,15 @@ export class Flash extends BaseSettings {
         let flash = json.element.flash;
         flash["@src"] = relativeSwf;
 
-        let attributes = {width, height};
-        this.setAttributes("flash", this.id, "", attributes)
+        if (width && height) {
+            let attributes = {width, height};
+            this.setAttributes("flash", this.id, "", attributes)
+        }
 
         let container = json.row as any[];
-        for (const property in attributes) {
+        for (const property of properties) {
             let control = new Property(property);
             container.push((control.toJSON() as any).row);
-
         }
 
     }

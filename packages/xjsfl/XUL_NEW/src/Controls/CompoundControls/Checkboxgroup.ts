@@ -5,10 +5,10 @@ import {CheckboxgroupAttributes} from "./types/Checkboxgroup.types";
 export class Checkboxgroup extends CompoundControls {
     constructor(
         id: string | null,
-        label: string,
+        label: string|null,
         attributes: CheckboxgroupAttributes = {},
         values: ValuesType = {},
     ) {
-        super("checkboxgroup", id, label, attributes, values);
+        super("checkboxgroup", id, label!, attributes, values);
     }
 }

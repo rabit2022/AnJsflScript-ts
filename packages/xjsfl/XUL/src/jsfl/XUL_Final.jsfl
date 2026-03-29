@@ -24,10 +24,12 @@
 //  'URI', 'File'   暂时忽略，报错是在修改
 //  'JSFLInterface','String' 没有用到
 
+import {xjsfl} from "../xjsfl/xjsfl";
+
 define([
 	"@xjsfl/prepare/XUL"
 ], function (PREPARE) {
-	const {XULControl,XULEvent,XjsflUI, XjsflFile,parseValue, parseExpression,BASEURI} = PREPARE;
+	const {XULControl,XULEvent,xjsfl,parseValue, parseExpression} = PREPARE;
 
 	// parseExpression
 	// parseValue
@@ -50,7 +52,7 @@ define([
 			//TODO Add functionality for basic arithmetic to be performed inside textboxes
 
 			// public properties
-				this.xml		= XjsflFile.load('xul/dialog.xul', 'template', true);
+				this.xml		= xjsfl.file.load('xul/dialog.xul', 'template', true);
 				this.controls	= {};
 				this.settings	= {};
 				this.flashData	= null;
@@ -64,7 +66,7 @@ define([
 
 
 			// load controls
-				var xml			= XjsflFile.load('xul/controls.xul', 'template', true);
+				var xml			= xjsfl.file.load('xul/controls.xul', 'template', true);
 				for each(var node in xml.grid.rows.*)
 				{
 					XUL.templates[node.@template.toString()] = node.copy();
@@ -1139,7 +1141,6 @@ define([
 							{
 								xml.@label = label;
 							}
-						console.log(xml.toXMLString());
 
 						// add xml
 							this.addXML(xml);
@@ -1237,7 +1238,7 @@ define([
 						// 	var uri			= URI.toURI(uriOrPath, 1);
 						//
 						//
-						// 	var src			= URI.pathTo(BASEURI + 'core/ui/', uri);
+						// 	var src			= URI.pathTo(xjsfl.uri + 'core/ui/', uri);
 						var src = uriOrPath;
 							xml..flash.@src	= src;
 
@@ -1596,7 +1597,7 @@ define([
 				load:function(pathOrURI)
 				{
 					// get URI
-						var xml = XjsflFile.load(pathOrURI);
+						var xml = xjsfl.file.load(pathOrURI);
 
 					// grab nodes
 						if(xml.name() == 'dialog')
@@ -1685,7 +1686,7 @@ define([
 						// show panel
 							this.open		= true;
 							this.accepted	= false;
-							this.settings	= XjsflUI.show(this);
+							this.settings	= xjsfl.ui.show(this);
 							this.open		= false;
 
 					// --------------------------------------------------------------------------------
@@ -1845,7 +1846,6 @@ define([
 							control.@width = this.columns[1];
 						}
 
-						console.log(this.separator)
 					// replace separators
 						var str		= this.xml.toXMLString().replace(/<row template="separator"\/>/g, this.separator);
 						this.xml	= new XML(str);

@@ -1,6 +1,6 @@
-import {Width} from "../../Base/SimpleControls.types";
+import {HasValue, HasWidth} from "../../Base/SimpleControls.types";
 
-export interface TextBoxAttributes extends Width {
+export interface TextBoxAttributes extends HasWidth,HasValue {
     value?: string;
     maxlength?: number;
     prompt?: string;

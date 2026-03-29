@@ -1,5 +1,5 @@
-import {Width} from "../../Base/SimpleControls.types";
+import {HasLabel, HasValue, HasWidth} from "../../Base/SimpleControls.types";
 
-export interface CheckboxgroupAttributes extends Width {
+export interface CheckboxgroupAttributes extends HasWidth,HasValue {
     groupbox?: boolean;
 }
